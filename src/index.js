@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import GlobalApp from './components/GlobalApp';
+
 import './custom.scss';
 import './index.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<GlobalApp />, document.getElementById('root'));
 
