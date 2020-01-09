@@ -1,11 +1,24 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './containers/Home';
+import GetStarted from './components/GetStarted';
+import { FlowLayout } from './context/Layouts';
+
+const RouteWrapper = ({
+  component: Component,
+  layout: Layout,
+  ...rest
+}) => (
+  <Route {...rest} render={(props) => 
+    <Layout {...props}>
+      <Component {...props} />
+    </Layout>
+  } />
+);
 
 const Routes = () => {
   return (
     <Switch>
-      <Route path='/' exact component={Home} />
+      <RouteWrapper path='/' layout={FlowLayout} component={GetStarted} />
     </Switch>
   );
 };

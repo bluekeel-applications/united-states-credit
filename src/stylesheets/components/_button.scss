@@ -1,3 +1,26 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the button component.
 // -----------------------------------------------------------------------------
+.flow-button {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    min-width: 275px;
+    min-height: 75px;
+    padding: 0 10px;
+    color: $white;
+    font-size: 26px;
+    border-radius: 75px;
+}
+
+.flow-button-icon {
+    font-size: 40px;
+}
+
+.icon__left {
+    flex-flow: row nowrap;
+}
+
+.icon__right {
+    flex-flow: row-reverse nowrap;
+}

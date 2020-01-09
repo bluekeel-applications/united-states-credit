@@ -1,3 +1,11 @@
+.get-started-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 400px;
+}
+
 .start-title-text {
     color: $text-primary;
 
@@ -11,5 +19,25 @@
 
     @include respond-to('small') {
         font-size: 1.35rem;
+    }
+}
+
+.get-started-info-container {
+    color: $mid-grey;
+    text-align: justify;
+    font-weight: 300;
+    padding: 0 15px;
+    line-height: 1.15;
+
+    @include respond-to('large') {
+        font-size: 24px;
+    }
+
+    @include respond-to('medium') {
+        font-size: 20px;
+    }
+
+    @include respond-to('small') {
+        font-size: 16px;
     }
 }
