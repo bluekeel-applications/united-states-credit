@@ -3,7 +3,7 @@ import React, { createContext, useReducer } from 'react';
 import { 
     initialAppState,
     appStateReducer
-} from './reducers';
+} from './reducers/appReducer';
 
 const AppContext = createContext();
 

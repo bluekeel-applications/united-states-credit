@@ -1,12 +1,11 @@
 import React from 'react';
-import Drawer from '../Drawer';
-import Header from '../Header';
+import Routes from '../Routes';
+import Drawer from './Drawer';
+import Header from './Header';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import flagLeft from '../../assets/images/flag_left.png';
-import flagRight from '../../assets/images/flag_right.png';
-
-import './App.css';
+import flagLeft from '../assets/images/flag_left.png';
+import flagRight from '../assets/images/flag_right.png';
 
 function App() {
   return (
@@ -23,7 +22,7 @@ function App() {
           <img src={flagLeft} alt='flagLeft' height='auto' />
         </Col>
         <Col lg='8' md='10'>
-          Content
+          <Routes />
         </Col>
         <Col className={'d-sm-none d-md-block flag-col'} >
           <img src={flagRight} alt='flagRight' height='auto' />
