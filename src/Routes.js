@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import GetStarted from './components/GetStarted';
 import Verticals from './components/Verticals';
+import CreditCards from './components/CreditCards';
 import { FlowLayout } from './context/Layouts';
 
 const RouteWrapper = ({
@@ -21,6 +22,7 @@ const Routes = () => {
     <Switch>
       <Route path='/' exact component={GetStarted} />
       <RouteWrapper path='/verticals' layout={FlowLayout} component={Verticals} />
+      <RouteWrapper path='/credit_cards' layout={FlowLayout} component={CreditCards} />
     </Switch>
   );
 };

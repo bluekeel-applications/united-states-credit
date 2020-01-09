@@ -3,20 +3,21 @@ import { AppContext } from '../context';
 
 import FlowPage from './FlowPage';
 
-const Verticals = () => {
+const CreditCards = () => {
     const { dispatchApp } = useContext(AppContext);
+
     const handleFlowClick = (choice) => {
-        dispatchApp({ type: 'VERTICAL_PICKED', payload: choice });
+        dispatchApp({ type: 'CC_TYPE_PICKED', payload: choice });
     };
 
     return (
         <div className='flow-container'>
-            <FlowPage 
-                page={'verticals'}
+            <FlowPage
+                page={'credit_cards'}
                 handleClick={handleFlowClick}
             />
         </div>
     )
 };
 
-export default Verticals;
+export default CreditCards;

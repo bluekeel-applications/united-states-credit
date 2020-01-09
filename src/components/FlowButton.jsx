@@ -8,7 +8,7 @@ const FlowButton = ({
     color
 }) => (
     <Fade big opposite>
-        <button className={`flow-button icon__${icon.length > 0 ? icon[0] : 'hidden'} bg__${color}`}>
+            <button className={`flow-button icon__${icon.length > 0 ? icon[0] : 'hidden'} bg__${color} ${text === 'Get Started' ? 'is_start' : null}`}>
             {icon.length > 0 && (<FontAwesomeIcon
                 icon={[icon[1], icon[2]]}
                 className='flow-button-icon'
