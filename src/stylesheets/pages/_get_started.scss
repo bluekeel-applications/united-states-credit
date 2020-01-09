@@ -1,0 +1,15 @@
+.start-title-text {
+    color: $text-primary;
+
+    @include respond-to('large') {
+        font-size: 2.4rem;
+    }
+
+    @include respond-to('medium') {
+        font-size: 1.7rem;
+    }
+
+    @include respond-to('small') {
+        font-size: 1.35rem;
+    }
+}
