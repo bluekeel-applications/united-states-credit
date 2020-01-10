@@ -1,7 +1,40 @@
 import {library} from "@fortawesome/fontawesome-svg-core";
 
 import {
-    faBars, faArrowAltRight, faCreditCard, faHandHoldingUsd, faHomeHeart, faCar, faPercent, faDollarSign, faMoneyBillWave, faGift, faGraduationCap, faPlaneDeparture, faChartLine, faBriefcase, faExchange
+    faBars,
+    faArrowAltRight,
+    faCreditCard,
+    faHandHoldingUsd,
+    faHomeHeart,
+    faCar,
+    faPercent,
+    faDollarSign,
+    faMoneyBillWave,
+    faGift,
+    faPlaneDeparture,
+    faChartLine,
+    faBriefcase,
+    faExchange,
+    faTruckPickup,
+    faTruckMonster,
+    faShuttleVan,
+    faUserGraduate,
+    faBalanceScaleRight,
+    faLightbulbDollar,
+    faMoneyCheckEditAlt,
+    faShoppingCart,
+    faHandsUsd,
+    faSearchDollar,
+    faLandmarkAlt,
+    faGopuram,
+    faSortSizeDown,
+    faFileInvoiceDollar,
+    faSackDollar,
+    faCars,
+    faDonate,
+    faHeartRate,
+    faCoin,
+    faCoins
 } from '@fortawesome/pro-light-svg-icons';
 
 function initFontAwesome() {
@@ -16,11 +49,30 @@ function initFontAwesome() {
         faDollarSign,
         faMoneyBillWave,
         faGift,
-        faGraduationCap,
+        faUserGraduate,
         faPlaneDeparture,
         faChartLine,
         faBriefcase,
-        faExchange
+        faExchange,
+        faCars,
+        faTruckPickup,
+        faTruckMonster,
+        faShuttleVan,
+        faBalanceScaleRight,
+        faLightbulbDollar,
+        faMoneyCheckEditAlt,
+        faShoppingCart,
+        faHandsUsd,
+        faSearchDollar,
+        faLandmarkAlt,
+        faGopuram,
+        faDonate,
+        faSortSizeDown,
+        faHeartRate,
+        faFileInvoiceDollar,
+        faCoin,
+        faCoins,
+        faSackDollar
     );
 }
 

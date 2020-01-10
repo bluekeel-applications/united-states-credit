@@ -3,24 +3,24 @@ import { AppContext } from '../context';
 import { useHistory } from 'react-router-dom';
 import FlowPage from './FlowPage';
 
-const Verticals = () => {
+const HomeLoans = () => {
     const { dispatchApp } = useContext(AppContext);
     let history = useHistory();
-
-    const handleVerticalClick = (e, choice) => {
+    
+    const handleFlowClick = (e, choice) => {
         e.preventDefault();
-        dispatchApp({ type: 'VERTICAL_PICKED', payload: choice });
-        history.push('/' + choice);
+        dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: choice });
+        history.push('/offers');
     };
 
     return (
         <div className='flow-container'>
-            <FlowPage 
-                page={'verticals'}
-                handleClick={handleVerticalClick}
+            <FlowPage
+                page={'home_loans'}
+                handleClick={handleFlowClick}
             />
         </div>
     )
 };
 
-export default Verticals;
+export default HomeLoans;

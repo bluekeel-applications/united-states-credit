@@ -11,7 +11,7 @@
     font-size: 24px;
     min-width: 350px;
     min-height: 85px;
-    padding-left: 20px;
+    padding-left: 30px;
 }
 
 .flow-button-icon {
@@ -31,4 +31,20 @@
     justify-content: center;
     margin: 35px 0;
     font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.button-link:hover,
+.button-link:active,
+.button-link:link,
+.button-link:visited {
+    text-decoration: none;
+}
+
+.optin__button {
+    min-width: 350px;
+    min-height: 90px;
+    border-radius: 75px;
+    font-size: 24px;
+    margin: 5px;
 }

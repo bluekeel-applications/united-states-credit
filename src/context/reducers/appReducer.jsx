@@ -32,6 +32,42 @@ const appStateReducer = (state, action) => {
                 ...state,
                 showDrawer: false
             };        
+// Flow Selections
+        case 'VERTICAL_PICKED':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    vertical: action.payload
+                }
+            };
+
+        case 'LOAN_TYPE_PICKED':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    loan_type: action.payload
+                }
+            };
+
+        case 'DEBT_TYPE_PICKED':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    debt_type: action.payload
+                }
+            };
+
+        case 'DEBT_AMOUNT_PICKED':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    debt_amount: action.payload
+                }
+            };
 
         case 'RESET':
             return initialAppState;        

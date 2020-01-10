@@ -1,0 +1,25 @@
+.optin-container {
+    border-bottom: solid 1px $light-grey;
+    min-width: 100%;
+    padding: 30px 10px 0 10px;
+}
+
+.optin-header-text {
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.checking-optin-row {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2vh 0;
+}
+
+.row2 {
+    @include respond-to('large') {
+        justify-content: center;
+    }
+}

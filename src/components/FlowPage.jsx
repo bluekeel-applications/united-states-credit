@@ -28,8 +28,13 @@ const FlowPage = ({page, handleClick}) => {
                     <span className='flow-title-text'>{locals.titleText}</span>
                     <div className='flow-button-container'>
                         {locals.buttons.map((button, i) => (
-                            <Link to={'/'+ button.value} >
-                                <FlowButton icon={button.icon} text={button.text} color={button.color} onClick={() => handleClick(button.value)} />
+                            <Link 
+                                key={`button__${button.value}__${i}`} 
+                                to={'/'+ button.value} 
+                                className='button-link' 
+                                onClick={(e) => handleClick(e, button.value)}
+                            >
+                                <FlowButton icon={button.icon} text={button.text} color={button.color} />
                             </Link>
                         ))}                                            
                     </div>

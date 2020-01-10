@@ -18,6 +18,10 @@ const Drawer = () => {
     const closeDrawer = () => {
         dispatchApp({ type: 'HIDE_DRAWER' });
     };
+    
+    const jumpToVertical = (vertical) => {
+        dispatchApp({ type: 'VERTICAL_PICKED', payload: vertical });
+    };
 
     return (        
         appState.showDrawer ? (
@@ -26,24 +30,48 @@ const Drawer = () => {
                     <Col onClick={closeDrawer} />
                     <Col xs={12} md={2} className='drawer-container'>                            
                         <Nav className='flex-column'>
-                            <LinkContainer to='/'>
-                                <NavItem>Start your visual credit search</NavItem>
+                            <LinkContainer 
+                                to='/verticals' 
+                                className='drawer-list-item'
+                            >
+                                <NavItem>Start Visual Credit Search</NavItem>
                             </LinkContainer>
-                            <LinkContainer to='/'>
+                            <LinkContainer 
+                                to='/personal_loans' 
+                                className='drawer-list-item' 
+                                onClick={() => jumpToVertical('personal_loans')}
+                            >
                                 <NavItem>Find a Loan</NavItem>
                             </LinkContainer>
-                            <LinkContainer to='/'>
+                            <LinkContainer 
+                                to='/credit_cards' 
+                                className='drawer-list-item'
+                                onClick={() => jumpToVertical('credit_cards')}
+                            >
                                 <NavItem>Find a Credit Card</NavItem>
                             </LinkContainer>
-                            <LinkContainer to='/'>
+                            <a 
+                                href='https://unitedstatescredit.blog/category/reviews/'
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='drawer-list-item'
+                            >
                                 <NavItem>Customer Reviews</NavItem>
-                            </LinkContainer>
-                            <LinkContainer to='/'>
-                                <NavItem>Our Credit Blog</NavItem>
-                            </LinkContainer>
-                            <LinkContainer to='/'>
+                            </a>
+                            <a 
+                                href='https://unitedstatescredit.blog/'
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='drawer-list-item'
+                            >
+                                <NavItem>Blog</NavItem>
+                            </a>
+                            {/* <LinkContainer 
+                                to='/' 
+                                className='drawer-list-item'
+                            >
                                 <NavItem>Contact Us</NavItem>
-                            </LinkContainer>                                
+                            </LinkContainer>                                 */}
                         </Nav>                                
                     </Col>
                 </Row>
