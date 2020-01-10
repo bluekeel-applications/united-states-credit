@@ -69,6 +69,24 @@ const appStateReducer = (state, action) => {
                 }
             };
 
+        case 'CHECKING_OPT_IN':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    checking_optin: true
+                }
+            };
+
+        case 'CHECKING_OPT_OUT':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    checking_optin: false
+                }
+            };
+
         case 'RESET':
             return initialAppState;        
 
