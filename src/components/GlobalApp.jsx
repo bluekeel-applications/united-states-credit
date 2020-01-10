@@ -8,11 +8,11 @@ import initFontAwesome from '../utils/initFontAwesome';
 initFontAwesome();
 
 const GlobalApp = () => (
-  <Router>
-    <AppContextProvider>
+  <AppContextProvider>
+    <Router>
       <App />
-    </AppContextProvider>
-  </Router>
+    </Router>
+  </AppContextProvider>
 );
 
 

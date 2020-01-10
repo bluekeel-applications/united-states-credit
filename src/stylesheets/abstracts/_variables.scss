@@ -11,17 +11,14 @@ $text-font-stack: aktiv-grotesk, sans-serif !default;
 /// @type List
 $code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
 
-/// Copy text color
 /// @type Color
 $text-color: rgb(34, 34, 34) !default;
 
-/// Main brand color
+/// @type Color
+$white: #fff !default;
+
 /// @type Color
 $text-primary: #092c7e !default;
-
-/// Secondary brand color
-/// @type Color
-$text-secondary: #f80000 !default;
 
 /// Light grey
 /// @type Color
@@ -29,13 +26,21 @@ $light-grey: #777777 !default;
 
 /// Medium grey
 /// @type Color
-$mid-grey: rgb(153, 153, 153) !default;
+$mid-grey: #696969 !default;
 
 /// Dark grey
 /// @type Color
 $dark-grey: rgb(68, 68, 68) !default;
 
-
+/// ButtonColor Collection:
+/// @type Color
+$light-blue: #64c3e4 !default;
+/// @type Color
+$medium-blue: #2670c5 !default;
+/// @type Color
+$dark-blue: #092c7e !default;
+/// @type Color
+$red: #f80000 !default;
 
 /// Container's maximum width
 /// @type Length
@@ -47,8 +52,8 @@ $max-width: 1180px !default;
 /// @prop {Map} values - Values are actual breakpoints expressed in pixels
 $breakpoints: (
   'small': (max-width: 600px),
-  'medium': (max-width: 1100px),
-  'large': (min-width: 1101px),
+  'medium': (max-width: 1000px),
+  'large': (min-width: 1201px),
 ) !default;
 
 

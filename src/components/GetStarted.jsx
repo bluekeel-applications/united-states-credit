@@ -1,22 +1,13 @@
-// eslint-disable-next-line
-import React, { useContext } from 'react';
-// import { AppContext } from '../../context';
-// import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import FlowButton from './FlowButton';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+const GetStarted = () => (
+    <div className='content-container'>
+        <span className='start-title-text'>FIND THE RIGHT CREDIT FOR YOU</span>
+        <Link to='/verticals' className='button-link'><FlowButton icon={['right', 'fal', 'arrow-alt-right']} text='Get Started' color='blue' /></Link>
+    </div>
+);
 
-const Header = () => {
-    // const { appState, dispatchApp } = useContext(AppContext);
 
-    // const handleButtonClick = () => {
-    //     console.log('clicked start button!')
-    // };
-
-    return (
-        <div>
-            <span className='start-title-text'>FIND THE RIGHT CREDIT FOR YOU</span>  
-        </div>
-    )
-};
-
-export default Header;
+export default GetStarted;

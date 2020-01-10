@@ -32,6 +32,78 @@ const appStateReducer = (state, action) => {
                 ...state,
                 showDrawer: false
             };        
+// Flow Selections
+        case 'VERTICAL_PICKED':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    vertical: action.payload
+                }
+            };
+
+        case 'LOAN_TYPE_PICKED':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    loan_type: action.payload
+                }
+            };
+
+        case 'DEBT_TYPE_PICKED':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    debt_type: action.payload
+                }
+            };
+
+        case 'DEBT_AMOUNT_PICKED':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    debt_amount: action.payload
+                }
+            };
+
+        case 'CHECKING_OPT_IN':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    checking_optin: true
+                }
+            };
+
+        case 'CHECKING_OPT_OUT':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    checking_optin: false
+                }
+            };
+
+        case 'DEBT_OPT_IN':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    debt_optin: true
+                }
+            };
+
+        case 'DEBT_OPT_OUT':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    debt_optin: false
+                }
+            };
 
         case 'RESET':
             return initialAppState;        

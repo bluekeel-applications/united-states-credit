@@ -53,3 +53,30 @@
   position: absolute;
   width: 1px;
 }
+
+/** 
+ * Choose a button background color based on className
+*/
+.bg__light_blue {
+  background-color: $light-blue;
+  color: $white;
+}
+.bg__blue {
+  background-color: $medium-blue;
+  color: $white;
+}
+.bg__dark_blue {
+  background-color: $dark-blue;
+  color: $white;
+}
+.bg__red {
+  background-color: $red;
+  color: $white;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

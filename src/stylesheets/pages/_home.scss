@@ -4,4 +4,8 @@
 .Home {
     padding: 40px 0;
     text-align: center;
+
+    @include respond-to('small') {
+        padding: 0;
+    }
 }

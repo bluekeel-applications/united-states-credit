@@ -1,0 +1,126 @@
+.optin-container {
+    border-bottom: solid 1px $light-grey;
+    min-width: 100%;
+    padding: 30px 10px 0 10px;
+}
+
+.email-optin-container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    border-bottom: solid 1px $light-grey;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.optin-header-text {
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.optin-row {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2vh 0;
+}
+
+.row2 {
+    @include respond-to('large') {
+        justify-content: center;
+    }
+}
+
+.row3 {
+    text-align: left;
+    line-height: 1.2;
+}
+
+.article-heading {
+    min-width: 100%;
+    font-size: 1.7rem;
+    padding-bottom: 20px;
+}
+
+.debt-article-heading {
+    min-width: 100%;
+    font-size: 1.4rem;
+    padding-bottom: 20px;
+}
+
+.article-sub-heading {
+    margin: 1em 0;
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+.article-content {
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+.sub {
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.article-content-item {
+    margin-bottom: 20px;
+}
+
+.email-optin-card {
+    margin: 50px;
+    max-width: 550px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px 0 #888;
+}
+
+.email-optin-text {
+    text-align: left;
+    font-weight: 300;
+    font-size: 1.3rem;
+}
+
+.email-form-container {
+    min-width: 280px;
+}
+
+.optin-input-field {
+    width: 80%;
+    line-height: 30px;
+    border: 1px solid #2c9dc5;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.3rem;
+    margin: 0 10%;
+}
+
+.email-terms-container {
+    width: 75%;
+    font-size: 12px;
+    margin: 15px auto;
+    text-align: justify;
+}
+
+.email_terms_box {
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.email_terms_text {
+    display: inline;
+    font-weight: 400;
+}
+
+.email_terms_links {
+    text-decoration: underline;
+}
+
+.email_submit-button {
+    
+}
