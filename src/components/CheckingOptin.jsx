@@ -32,13 +32,13 @@ const CheckingOptin = () => {
 
     return (
         <Container className='optin-container' fluid>
-            <Row className='checking-optin-row row1'>
+            <Row className='optin-row row1'>
                 <Col className='optin-header-text'>
                     <b>Banks are paying $100s</b> to new checking customers.<br />
                     Would you like to see free checking account options?
                 </Col>
             </Row>
-            <Row className='checking-optin-row row2'>
+            <Row className='optin-row row2'>
                 <OptinButton 
                     color='blue' 
                     value='Yes' 
@@ -50,7 +50,7 @@ const CheckingOptin = () => {
                     handleClick={opt_OUT}
                 />
             </Row>
-            <Row className='checking-optin-row  row3'>
+            <Row className='optin-row  row3'>
                 <Col sm='12' md='4'>
                     <div className='article-heading'>Why do you need a checking account?</div>
                     <div className='article-content'>

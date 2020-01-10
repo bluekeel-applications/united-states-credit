@@ -87,6 +87,24 @@ const appStateReducer = (state, action) => {
                 }
             };
 
+        case 'DEBT_OPT_IN':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    debt_optin: true
+                }
+            };
+
+        case 'DEBT_OPT_OUT':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    debt_optin: false
+                }
+            };
+
         case 'RESET':
             return initialAppState;        
 

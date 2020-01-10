@@ -1,9 +1,10 @@
 import React from 'react';
 
-const OptinButton = ({color, value, handleClick}) => (
+const OptinButton = ({color, value, handleClick, isEmail, disabled}) => (
     <button 
-        className={`optin__button bg__${color}`}
+        className={`${isEmail ? 'optin__button_email' : 'optin__button'} bg__${color}`}
         onClick={(e) => handleClick(e)}
+        disabled={disabled}
     >
         {value}
     </button>
