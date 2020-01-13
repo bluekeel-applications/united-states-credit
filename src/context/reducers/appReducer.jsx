@@ -1,4 +1,5 @@
 const initialAppState = {
+    loadingOffers: false,
     showDrawer: false,
     captured: {
         eid: null,
@@ -10,12 +11,13 @@ const initialAppState = {
     flowState: {
         vertical: null,
         loan_type: null,
-        debt_type: null,
-        debt_amount: null,
+        debt_type: 'N/A',
+        debt_amount: 'N/A',
         checking_optin: false,
         debt_optin: false,
         email_optin: false
-    }
+    },
+    offers: null
 };
 
 const appStateReducer = (state, action) => {
@@ -103,6 +105,24 @@ const appStateReducer = (state, action) => {
                     ...state.flowState,
                     debt_optin: false
                 }
+            };
+
+        case 'FETCH_OFFERS':
+            return {
+                ...state,
+                loadingOffers: true
+            };
+
+        case 'FETCH_OFFERS_SUCCESS':
+            return {
+                ...state,
+                loadingOffers: false,
+                offers: action.payload
+            };
+
+        case 'FETCH_OFFERS_FAILURE':
+            return {
+                ...state
             };
 
         case 'RESET':

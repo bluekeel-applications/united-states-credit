@@ -11,8 +11,9 @@ import DebtTypes from './components/DebtTypes';
 import CheckingOptin from './components/CheckingOptin';
 import DebtOptin from './components/DebtOptin';
 import EmailOptin from './components/EmailOptin';
+import Offers from './components/Offers';
 
-import { FlowLayout } from './context/Layouts';
+import { USCLayout } from './context/Layouts';
 
 const RouteWrapper = ({
   component: Component,
@@ -31,19 +32,19 @@ const Routes = () => {
 
   return (
     <Switch>
-      {/* <Route path='/' exact component={GetStarted} /> */}
       <Route path='/' exact component={GetStarted} />
-      <RouteWrapper path='/verticals' layout={FlowLayout} component={Verticals} />
-      <RouteWrapper path='/credit_cards' layout={FlowLayout} component={CreditCards} />
-      <RouteWrapper path='/auto_loans' layout={FlowLayout} component={AutoLoans} />
-      <RouteWrapper path='/auto_loans' layout={FlowLayout} component={AutoLoans} />
-      <RouteWrapper path='/personal_loans' layout={FlowLayout} component={PersonalLoans} />
-      <RouteWrapper path='/home_loans' layout={FlowLayout} component={HomeLoans} />
-      <RouteWrapper path='/debt_types' layout={FlowLayout} component={DebtTypes} />
-      <RouteWrapper path='/debt_amounts' layout={FlowLayout} component={DebtAmounts} />
-      <RouteWrapper path='/checking_optin' layout={FlowLayout} component={CheckingOptin} />
-      <RouteWrapper path='/debt_optin' layout={FlowLayout} component={DebtOptin} />
-      <RouteWrapper path='/email_optin' layout={FlowLayout} component={EmailOptin} />
+      <RouteWrapper path='/verticals' layout={USCLayout} component={Verticals} />
+      <RouteWrapper path='/credit_cards' layout={USCLayout} component={CreditCards} />
+      <RouteWrapper path='/auto_loans' layout={USCLayout} component={AutoLoans} />
+      <RouteWrapper path='/auto_loans' layout={USCLayout} component={AutoLoans} />
+      <RouteWrapper path='/personal_loans' layout={USCLayout} component={PersonalLoans} />
+      <RouteWrapper path='/home_loans' layout={USCLayout} component={HomeLoans} />
+      <RouteWrapper path='/debt_types' layout={USCLayout} component={DebtTypes} />
+      <RouteWrapper path='/debt_amounts' layout={USCLayout} component={DebtAmounts} />
+      <RouteWrapper path='/checking_optin' layout={USCLayout} component={CheckingOptin} />
+      <RouteWrapper path='/debt_optin' layout={USCLayout} component={DebtOptin} />
+      <RouteWrapper path='/email_optin' layout={USCLayout} component={EmailOptin} />
+      <RouteWrapper path='/offers' layout={USCLayout} component={Offers} />
     </Switch>
   );
 };

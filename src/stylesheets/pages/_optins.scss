@@ -78,12 +78,17 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 25px 0 #888;
+
+    @include respond-to('small') {
+        margin: 25px 10px 50px 10px;
+    };
 }
 
 .email-optin-text {
     text-align: left;
     font-weight: 300;
     font-size: 1.3rem;
+    margin-bottom: 20px;
 }
 
 .email-form-container {
@@ -97,7 +102,11 @@
     border-radius: 5px;
     padding: 10px;
     font-size: 1.3rem;
-    margin: 0 10%;
+    margin: 0 10% 2% 10%;
+    @include respond-to('small') {
+        width: 100%;
+        margin: 0;
+    };
 }
 
 .email-terms-container {
@@ -105,6 +114,10 @@
     font-size: 12px;
     margin: 15px auto;
     text-align: justify;
+    @include respond-to('small') {
+        width: 100%;
+        margin: 15px 0;
+    };
 }
 
 .email_terms_box {
@@ -121,6 +134,43 @@
     text-decoration: underline;
 }
 
+.email-button-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 30%;
+
+    @include respond-to('small') {
+        padding: 0;
+    };
+}
+
 .email_submit-button {
-    
+    margin: 3%;
+    border-radius: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.next-button-icon {
+    font-size: 1.6rem;
+    margin-left: 10%;
+}
+
+.button-text {
+    font-size: 1.2rem;
+}
+
+.input-error {
+    color: red;
+}
+
+.no-thanks {
+    background-color: transparent;
+    color: $light-grey;
+    text-decoration: underline;
+    font-weight: 400;
+    margin-bottom: 3%;
 }

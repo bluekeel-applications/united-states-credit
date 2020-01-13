@@ -34,7 +34,8 @@ import {
     faDonate,
     faHeartRate,
     faCoin,
-    faCoins
+    faCoins,
+    faAngleDoubleRight
 } from '@fortawesome/pro-light-svg-icons';
 
 function initFontAwesome() {
@@ -72,7 +73,8 @@ function initFontAwesome() {
         faFileInvoiceDollar,
         faCoin,
         faCoins,
-        faSackDollar
+        faSackDollar,
+        faAngleDoubleRight
     );
 }
 

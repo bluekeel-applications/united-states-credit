@@ -1,9 +1,10 @@
 import React from 'react';
 
-const FlowLayout = ({ children }) =>
+const USCLayout = ({ children }) =>                              
     <div className='Home'>
         {children}
-    </div>;
+    </div>               
+
 
 const OfferLayout = ({ children }) =>
     <div>
@@ -11,4 +12,4 @@ const OfferLayout = ({ children }) =>
         {children}
     </div>;
 
-export { FlowLayout, OfferLayout };
+export { USCLayout, OfferLayout };
