@@ -17,7 +17,10 @@ const initialAppState = {
         debt_optin: false,
         email_optin: false
     },
-    offers: null
+    program_id: null,
+    click_count: 0,
+    offers: null,
+    email: null
 };
 
 const appStateReducer = (state, action) => {
@@ -106,6 +109,16 @@ const appStateReducer = (state, action) => {
                     debt_optin: false
                 }
             };
+        
+        case 'EMAIL_OPT_IN':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    email_optin: true
+                },
+                email: action.payload
+            };
 
         case 'FETCH_OFFERS':
             return {
@@ -116,8 +129,9 @@ const appStateReducer = (state, action) => {
         case 'FETCH_OFFERS_SUCCESS':
             return {
                 ...state,
-                loadingOffers: false,
-                offers: action.payload
+                click_count: action.payload.click_count,
+                program_id: action.payload._id,
+                offers: action.payload.endpoints
             };
 
         case 'FETCH_OFFERS_FAILURE':

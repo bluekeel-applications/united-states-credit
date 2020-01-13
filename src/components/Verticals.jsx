@@ -10,7 +10,7 @@ const Verticals = () => {
     const handleVerticalClick = (e, choice) => {
         e.preventDefault();
         dispatchApp({ type: 'VERTICAL_PICKED', payload: choice });
-        history.push('/' + choice);
+        history.push('/' + choice)
     };
 
     return (

@@ -32,7 +32,7 @@ const Routes = () => {
 
   return (
     <Switch>
-      <Route path='/' exact component={GetStarted} />
+      <Route path='/' exact layout={USCLayout} component={GetStarted} />
       <RouteWrapper path='/verticals' layout={USCLayout} component={Verticals} />
       <RouteWrapper path='/credit_cards' layout={USCLayout} component={CreditCards} />
       <RouteWrapper path='/auto_loans' layout={USCLayout} component={AutoLoans} />
@@ -40,7 +40,7 @@ const Routes = () => {
       <RouteWrapper path='/personal_loans' layout={USCLayout} component={PersonalLoans} />
       <RouteWrapper path='/home_loans' layout={USCLayout} component={HomeLoans} />
       <RouteWrapper path='/debt_types' layout={USCLayout} component={DebtTypes} />
-      <RouteWrapper path='/debt_amounts' layout={USCLayout} component={DebtAmounts} />
+      <RouteWrapper path='/debt_amount' layout={USCLayout} component={DebtAmounts} />
       <RouteWrapper path='/checking_optin' layout={USCLayout} component={CheckingOptin} />
       <RouteWrapper path='/debt_optin' layout={USCLayout} component={DebtOptin} />
       <RouteWrapper path='/email_optin' layout={USCLayout} component={EmailOptin} />

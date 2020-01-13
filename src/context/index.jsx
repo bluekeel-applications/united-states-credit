@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useState } from 'react';
 
 import { 
     initialAppState,
@@ -8,12 +8,16 @@ import {
 const AppContext = createContext();
 
 function AppContextProvider({ children }) {
+    // Container Height
+    const [contentHeight, setContentHeight] = useState(0);
     // Application State Management
     const [appState, dispatchApp] = useReducer(appStateReducer, initialAppState);
     
     const defaultContext = {
         appState, 
-        dispatchApp
+        dispatchApp,
+        contentHeight, 
+        setContentHeight
     };
 
     return (

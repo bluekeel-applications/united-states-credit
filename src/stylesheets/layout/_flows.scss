@@ -50,7 +50,7 @@
 .accordion__content {
     overflow: hidden;
     min-width: 100%;
-    transition: max-height 1s ease;
+    transition: min-height 0.8s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
