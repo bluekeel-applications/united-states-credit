@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { AppContext } from '../context';
+import React, { useState, useEffect, useRef } from 'react';
 import Zoom from 'react-reveal/Zoom';
 import { Link } from 'react-router-dom';
 import FlowButton from './FlowButton';

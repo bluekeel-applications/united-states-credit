@@ -1,3 +1,5 @@
+import { addToClickCount } from '../../utils/helpers';
+
 const initialAppState = {
     loadingOffers: false,
     showDrawer: false,
@@ -20,6 +22,7 @@ const initialAppState = {
     program_id: null,
     click_count: 0,
     offers: null,
+    link: null,
     email: null
 };
 
@@ -127,16 +130,24 @@ const appStateReducer = (state, action) => {
             };
 
         case 'FETCH_OFFERS_SUCCESS':
+            const { click_count, _id } = action.payload;
+            addToClickCount(1, _id);
             return {
                 ...state,
-                click_count: action.payload.click_count,
-                program_id: action.payload._id,
-                offers: action.payload.endpoints
+                click_count: click_count,
+                program_id: _id
             };
 
         case 'FETCH_OFFERS_FAILURE':
             return {
                 ...state
+            };
+
+        case 'SELECTED_OFFER':
+            return {
+                ...state,
+                link: action.payload,
+                loadingOffers: false
             };
 
         case 'RESET':
