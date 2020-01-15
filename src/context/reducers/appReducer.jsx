@@ -131,7 +131,7 @@ const appStateReducer = (state, action) => {
 
         case 'FETCH_OFFERS_SUCCESS':
             const { click_count, _id } = action.payload;
-            addToClickCount(1, _id);
+            addToClickCount(_id);
             return {
                 ...state,
                 click_count: click_count,

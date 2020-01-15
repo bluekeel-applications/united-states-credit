@@ -3,7 +3,6 @@ const apiBaseUrl = 'https://programs.bluekeel-api.com/prod/api/';
 
 export const getOfferList = async(req) => {
     try {
-        console.log('req:', req);
         const res = await axios({
             method: 'post',
             headers: {
@@ -33,10 +32,26 @@ export const getOfferList = async(req) => {
     }
 };
 
-//TODO
-export const addToClickCount = (num, id) => {
-    console.log('num:', num);
-    console.log('id:', id);
+export const addToClickCount = async(id) => {
+    try {
+        const res = await axios({
+            method: 'put',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: apiBaseUrl + 'program/add_click/' + id
+        });
+
+        if (res.status !== 200) {
+            throw new Error('Error adding to click count.');
+        };
+        return res.data;
+        
+    } catch (e) {
+        console.error('Error:', e);
+        return e;
+    }
 };
 
 const range = (start, end) => {
