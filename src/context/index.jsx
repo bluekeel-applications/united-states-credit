@@ -4,6 +4,10 @@ import {
     initialAppState,
     appStateReducer
 } from './reducers/appReducer';
+import { 
+    initialTrackingState,
+    trackingStateReducer
+} from './reducers/trackingReducer';
 
 const AppContext = createContext();
 
@@ -12,10 +16,13 @@ function AppContextProvider({ children }) {
     const [contentHeight, setContentHeight] = useState(0);
     // Application State Management
     const [appState, dispatchApp] = useReducer(appStateReducer, initialAppState);
+    const [trackingState, dispatchTracking] = useReducer(trackingStateReducer, initialTrackingState);
     
     const defaultContext = {
         appState, 
         dispatchApp,
+        trackingState, 
+        dispatchTracking,
         contentHeight, 
         setContentHeight
     };

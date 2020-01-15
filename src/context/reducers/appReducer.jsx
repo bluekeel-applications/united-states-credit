@@ -1,4 +1,4 @@
-import { addToClickCount } from '../../utils/helpers';
+import { addToClickCount } from '../../utils/middleware';
 
 const initialAppState = {
     loadingOffers: false,

@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import { getOfferList, selectFromMultiple } from '../../utils/helpers';
+import { selectFromMultiple } from '../../utils/helpers';
+import { getOfferList } from '../../utils/middleware';
 import FourButton from './FourButton';
 import OneButton from './OneButton';
 import MNet from './MNet';

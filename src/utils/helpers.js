@@ -1,59 +1,3 @@
-import axios from 'axios';
-const apiBaseUrl = 'https://programs.bluekeel-api.com/prod/api/';
-
-export const getOfferList = async(req) => {
-    try {
-        const res = await axios({
-            method: 'post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            url: apiBaseUrl + 'program/offers',
-            data: req
-        });
-
-        if (res.status !== 200) {
-            throw new Error('Error fetching offers.');
-        };
-
-        if (res.data && res.data.length > 0) {
-            return res.data;
-        };
-
-        return [{
-            click_count: 0,
-            endpoints: []
-        }];
-        
-    } catch (e) {
-        console.error('Error:', e);
-        return e;
-    }
-};
-
-export const addToClickCount = async(id) => {
-    try {
-        const res = await axios({
-            method: 'put',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            url: apiBaseUrl + 'program/add_click/' + id
-        });
-
-        if (res.status !== 200) {
-            throw new Error('Error adding to click count.');
-        };
-        return res.data;
-        
-    } catch (e) {
-        console.error('Error:', e);
-        return e;
-    }
-};
-
 const range = (start, end) => {
     return (new Array(end - start + 1)).fill(undefined).map((_, i) => i + start);
 };
@@ -85,3 +29,42 @@ export const selectFromMultiple = (count, endpoints) => {
     return endpoints[activeIndex];
 };
 
+export const setCookie = (cname, cvalue, exdays) => {
+    let d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = 'expires='+ d.toUTCString();
+    document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
+};
+
+export const getCookie = (cname) => {
+    let name = cname + '=';
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return '';
+};
+
+export const checkCookie = (cname) => {
+    let cookie = getCookie(cname);
+    if (cookie && cookie !== '') {
+        return true
+    } 
+    return false;
+};
+
+export const setCookies = (tracking) => {
+    setCookie('oid', tracking.oid, 3);
+    setCookie('pid', tracking.pid, 3);
+    setCookie('sid', tracking.sid, 3);
+    setCookie('uid', tracking.uid, 3);
+    setCookie('eid', tracking.eid, 3);
+    setCookie('hsid', tracking.hsid, 3);
+};
