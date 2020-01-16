@@ -29,8 +29,8 @@ export const getOfferList = async(req) => {
         }];
         
     } catch (e) {
-        console.error('Error:', e);
-        return e;
+        console.error('Error caught in fetch:', e);
+        return [{status: 'failed', message: e}];
     }
 };
 
@@ -52,7 +52,7 @@ export const addToClickCount = async(id) => {
         
     } catch (e) {
         console.error('Error:', e);
-        return e;
+        return [{status: 'failed', message: e}];
     }
 };
 

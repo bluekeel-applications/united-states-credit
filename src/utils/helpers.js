@@ -1,8 +1,11 @@
+// import useApp from '../hooks/useApp';
+
+// Endpoint selection tools
 const range = (start, end) => {
     return (new Array(end - start + 1)).fill(undefined).map((_, i) => i + start);
 };
 
-export const selectFromMultiple = (count, endpoints) => {
+const selectFromMultiple = (count, endpoints) => {
     let usageTotal = 0;
     let activeIndex;
     
@@ -29,6 +32,36 @@ export const selectFromMultiple = (count, endpoints) => {
     return endpoints[activeIndex];
 };
 
+export const handleOfferChoice = (response, dispatchApp) => {
+  if(response.endpoints && response.endpoints.length > 0) {
+      let clicks = response.click_count;
+      let num = clicks.toString();        
+      let digitLength = num.length;
+      if(digitLength > 2) {
+          clicks = num.substring(digitLength - 2, digitLength);
+      }
+      let amount = response.endpoints.length === 1 ? 'single' : 'multiple';
+
+      if(response)
+      switch(amount) {
+          case 'single':
+              dispatchApp({ type: 'SELECTED_OFFER', payload: response.endpoints[0].url});
+              return;
+          case 'multiple':
+              const activeOffer = selectFromMultiple(clicks, response.endpoints);
+              dispatchApp({ type: 'SELECTED_OFFER', payload: activeOffer.url});
+              return;
+          default:
+              throw new Error(`Not supported action ${amount}`);
+      }
+      
+  } else {
+      dispatchApp({ type: 'SELECTED_OFFER', payload: 'https://unitedstatescredit.blog/'});
+      return;
+  }
+};
+
+// Cookie Tools
 export const setCookie = (cname, cvalue, exdays) => {
     let d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));

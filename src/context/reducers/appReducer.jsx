@@ -131,11 +131,12 @@ const appStateReducer = (state, action) => {
 
         case 'FETCH_OFFERS_SUCCESS':
             const { click_count, _id } = action.payload;
-            addToClickCount(_id);
+            if(!!_id) { addToClickCount(_id); }
+            
             return {
                 ...state,
-                click_count: click_count,
-                program_id: _id
+                click_count: click_count || 0,
+                program_id: _id || 'Unknown PID'
             };
 
         case 'FETCH_OFFERS_FAILURE':

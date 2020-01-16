@@ -1,46 +1,19 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import { selectFromMultiple } from '../../utils/helpers';
+import { handleOfferChoice } from '../../utils/helpers';
 import { getOfferList } from '../../utils/middleware';
 import FourButton from './FourButton';
 import OneButton from './OneButton';
 import MNet from './MNet';
 import Wall from './Wall';
+import Zoom from 'react-reveal/Zoom';
 
 const Offers = () => {
     const { appState, dispatchApp } = useContext(AppContext);
 
     const componentIsMounted = useRef(true);
     let history = useHistory();
-
-    const handleOfferChoice = (response) => {
-        let clicks = response.click_count;
-        let num = clicks.toString();        
-        let digitLength = num.length;
-        if(digitLength > 2) {
-            clicks = num.substring(digitLength - 2, digitLength);
-        }
-        if(response.endpoints.length > 0) {
-            let amount = response.endpoints.length === 1 ? 'single' : 'multiple';
-
-            switch(amount) {
-                case 'single':
-                    dispatchApp({ type: 'SELECTED_OFFER', payload: response.endpoints[0].url});
-                    return;
-                case 'multiple':
-                    const activeOffer = selectFromMultiple(clicks, response.endpoints);
-                    dispatchApp({ type: 'SELECTED_OFFER', payload: activeOffer.url});
-                    return;
-                default:
-                    throw new Error(`Not supported action ${amount}`);
-            }
-            
-        } else {
-            dispatchApp({ type: 'SELECTED_OFFER', payload: 'https://unitedstatescredit.blog/'});
-            return;
-        }
-    };
 
     let isEnd = appState.flowState.vertical && appState.flowState.loan_type;
 
@@ -49,11 +22,16 @@ const Offers = () => {
             if (componentIsMounted.current && isEnd) {
                 dispatchApp({ type: 'FETCH_OFFERS' });
                 const res = await getOfferList(appState.flowState);
-                if(res && res.length > 0) {
+                if(res && res.length > 0 && res[0].status === 'failed') {
+                    console.log('retrying: fetch offers...')
+                    fetchOfferList();
+                }
+                if(res && res.length > 0 && !res[0].status) {
+                    console.log('res:', res)
                     dispatchApp({ type: 'FETCH_OFFERS_SUCCESS', payload: res[0] });
-                    handleOfferChoice(res[0]);        
+                    handleOfferChoice(res[0], dispatchApp);        
                 };
-                return;
+                return res;
             };
             // If user is here without vertical or loantype; send home;
             history.push('/');
@@ -91,9 +69,11 @@ const Offers = () => {
     };
 
     return (
-        <div className='offers-container'>
-            {appState.loadingOffers ? (<div>Loading</div>) : (<div>{isEnd && appState.link && (showOffers())}</div>)}
-        </div>
+        <Zoom>
+            <div className='offers-container'>
+                {appState.loadingOffers ? (<div>Loading</div>) : (<div>{isEnd && appState.link && (showOffers())}</div>)}
+            </div>
+        </Zoom>
     )
 };
 
