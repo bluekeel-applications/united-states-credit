@@ -44,35 +44,37 @@ const Offers = () => {
     }, []);
 
     const showOffers = () => {
-        const offerUrl = new URL(appState.link);
-        const vendorType = offerUrl.searchParams.get('type') || null;
-        let vendor = offerUrl.searchParams.get('vendor') || null;
-        switch(vendor) {
-            case 'mnet':
-                return (
-                    <MNet type={vendorType} />
-                )
-            case 'four':
-                return (
-                    <FourButton />
-                )
-            case 'single':
-                return (
-                    <OneButton />
-                )
-            default:
-                return (
-                    <Wall />
-                )
-                
+        // const offerUrl = new URL(appState.link);
+        // let vendor = offerUrl.searchParams.get('vendor') || null;
+        const vendor = appState.offer_page;
+        if(!!vendor) {
+            switch(vendor) {
+                case 'mnet':
+                    return (
+                        <MNet />
+                    )
+                case 'four':
+                    return (
+                        <FourButton />
+                    )
+                case 'single':
+                    return (
+                        <OneButton />
+                    )
+                default:
+                    return (
+                        <Wall />
+                    )
+                    
+            }
         }
     };
 
     return (
         <Zoom>
-            <div className='offers-container'>
+            <>
                 {appState.loadingOffers ? (<div>Loading</div>) : (<div>{isEnd && appState.link && (showOffers())}</div>)}
-            </div>
+            </>
         </Zoom>
     )
 };

@@ -25,9 +25,13 @@ export const getOfferList = async(req) => {
 
         return [{
             click_count: 0,
-            endpoints: []
+            endpoints: [{
+                url: 'https://unitedstatescredit.blog/',
+                offer_page: 'wall',
+                four_button: ['N/A', 'N/A', 'N/A', 'N/A']
+            }]
         }];
-        
+
     } catch (e) {
         console.error('Error caught in fetch:', e);
         return [{status: 'failed', message: e}];

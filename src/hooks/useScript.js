@@ -17,7 +17,7 @@ const useScript = url => {
     })();    
 
     return () => {
-      document.body.removeChild(sct);
+      document.removeChild(sct);
     }
   }, [url]);
 };

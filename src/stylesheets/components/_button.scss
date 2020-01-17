@@ -64,3 +64,36 @@
     border-radius: 10px;
     font-size: 1.1rem;
 }
+
+.offer__button_single {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+    background-color: $medium-blue;
+    font-size: 24px;
+    border-radius: 90px;
+    color: $white;
+    margin-top: 25px;
+}
+
+.offer__button_single-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 50px 20px 0;
+}
+
+// .offer__button_single-title {}
+
+.offer__button_single-subtitle {
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+
+.offer-button-icon {
+    font-size: 2.2rem;
+    margin: 10px 20px 10px 50px;
+}

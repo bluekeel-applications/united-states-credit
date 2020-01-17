@@ -41,22 +41,38 @@ export const handleOfferChoice = (response, dispatchApp) => {
           clicks = num.substring(digitLength - 2, digitLength);
       }
       let amount = response.endpoints.length === 1 ? 'single' : 'multiple';
-
-      if(response)
+  
       switch(amount) {
           case 'single':
-              dispatchApp({ type: 'SELECTED_OFFER', payload: response.endpoints[0].url});
+              const data = {
+                link: response.endpoints[0].url,
+                offer_page: response.endpoints[0].offer_page || 'wall',
+                four_button: response.endpoints[0].four_button || []
+              };
+              dispatchApp({ type: 'SELECTED_OFFER', payload: data });
               return;
           case 'multiple':
               const activeOffer = selectFromMultiple(clicks, response.endpoints);
-              dispatchApp({ type: 'SELECTED_OFFER', payload: activeOffer.url});
+              if(!!activeOffer) {
+                const data = {
+                  link: activeOffer.url,
+                  offer_page: activeOffer.offer_page || 'wall',
+                  four_button: activeOffer.four_button || []
+                };
+                dispatchApp({ type: 'SELECTED_OFFER', payload: data});
+              }
               return;
           default:
               throw new Error(`Not supported action ${amount}`);
       }
       
   } else {
-      dispatchApp({ type: 'SELECTED_OFFER', payload: 'https://unitedstatescredit.blog/'});
+      let data = {
+        link: 'https://unitedstatescredit.blog/',
+        offer_page: 'wall',
+        four_button: []
+      };
+      dispatchApp({ type: 'SELECTED_OFFER', payload: data});
       return;
   }
 };

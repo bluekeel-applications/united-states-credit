@@ -1,9 +1,17 @@
 import React from 'react';
+import OfferButton from '../OfferButton';
 
 const OneButton = () => {
+    const handleButtonClick = () => {
+        console.log('Button clicked')
+    };
+
     return(
-        <div>
-            One Button
+        <div className='offer-page__main-1'>
+            <span className='offer-header-text'>
+                Multiple sponsored results could be available that suit your needs.
+            </span>
+            <OfferButton isSingle handleClick={handleButtonClick} />
         </div>
     )
 };
