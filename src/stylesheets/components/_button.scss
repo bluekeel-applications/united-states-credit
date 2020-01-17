@@ -97,3 +97,57 @@
     font-size: 2.2rem;
     margin: 10px 20px 10px 50px;
 }
+
+.offer__button_multi {
+    margin: 10px;
+    min-width: calc(50% - 100px);
+    min-height: 65px;
+    border-radius: 8px;
+    color: $white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+
+    @include respond-to('small') {
+        width: calc(100vw - 50px);
+    }
+}
+
+.four-button_group {
+    margin: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.button_multi-left {
+    height: 65px;
+    width:50px;
+    background-color: $button-shade;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.button_multi-right {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-weight: 400;
+    padding: 0 10px;
+}
+
+.offer-multi_button-icon {
+    font-size: 2.2rem;
+    padding: 5px;
+}
+

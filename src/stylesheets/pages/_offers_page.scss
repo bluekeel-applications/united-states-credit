@@ -20,7 +20,22 @@
 
 .offer-page__main-1 {
     width: max-content;
-    min-height: 250px;
+    min-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    @include respond-to('small') {
+        width: auto;
+        min-height: 100vh;
+        padding-top: 50px;
+    }
+}
+
+.offer-page__main-multi {
+    width: fit-content;
+    min-height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
