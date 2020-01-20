@@ -1,11 +1,25 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../context';
+import React, { useContext, useEffect, useRef } from 'react';
+import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import FlowPage from './FlowPage';
+import FlowPage from '../FlowPage';
+import Breadcrumbs from '../Breadcrumbs';
 
 const PersonalLoans = () => {
+    const page_value = 'personal_loans';
+    const page_crumb = 'Personal Loan';
     const { dispatchApp } = useContext(AppContext);
     let history = useHistory();
+
+    const componentIsMounted = useRef(true);
+
+    useEffect(() => {
+            if (componentIsMounted.current) {
+                dispatchApp({ type: 'VERTICAL_PICKED', payload: { value: page_value, crumb: page_crumb }});                
+            };
+        // Clean-up Function
+        return () => {componentIsMounted.current = false};
+        // eslint-disable-next-line
+    }, []);
 
     const handleFlowClick = (e, choice) => {
         e.preventDefault();
@@ -25,12 +39,15 @@ const PersonalLoans = () => {
     };
 
     return (
+        <>
+        <Breadcrumbs />
         <div className='flow-container'>
             <FlowPage
-                page={'personal_loans'}
+                page={page_value}
                 handleClick={handleFlowClick}
             />
         </div>
+        </>
     )
 };
 

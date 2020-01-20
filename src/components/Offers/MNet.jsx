@@ -6,15 +6,14 @@ const MNet = () => {
     useScript('//csearchclub-a.akamaihd.net/dsi.js?cid=8CU7INKUC');
 
     useEffect(() => {
-        if(componentIsMounted) {            
+        if(componentIsMounted.current) {            
             window._mNHandle.queue.push(function () { 
                 window._mNDetails.loadTag('857097420', '600x250', '857097420')
             })
         }
       
-        return () => {
-            componentIsMounted(false);
-        }
+        // Clean-up Function
+        return () => {componentIsMounted.current = false};
         // eslint-disable-next-line
       }, []);
     

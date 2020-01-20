@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../context';
-import OptinButton from './OptinButton';
+import { AppContext } from '../../context';
+import OptinButton from '../OptinButton';
 import { useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import Zoom from 'react-reveal/Zoom';

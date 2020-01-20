@@ -1,16 +1,16 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import GetStarted from './components/GetStarted';
-import Verticals from './components/Verticals';
-import CreditCards from './components/CreditCards';
-import AutoLoans from './components/AutoLoans';
-import HomeLoans from './components/HomeLoans';
-import PersonalLoans from './components/PersonalLoans';
-import DebtAmounts from './components/DebtAmounts';
-import DebtTypes from './components/DebtTypes';
-import CheckingOptin from './components/CheckingOptin';
-import DebtOptin from './components/DebtOptin';
-import EmailOptin from './components/EmailOptin';
+import GetStarted from './components/Pages/GetStarted';
+import Verticals from './components/Pages/Verticals';
+import CreditCards from './components/Pages/CreditCards';
+import AutoLoans from './components/Pages/AutoLoans';
+import HomeLoans from './components/Pages/HomeLoans';
+import PersonalLoans from './components/Pages/PersonalLoans';
+import DebtAmounts from './components/Pages/DebtAmounts';
+import DebtTypes from './components/Pages/DebtTypes';
+import CheckingOptin from './components/Pages/CheckingOptin';
+import DebtOptin from './components/Pages/DebtOptin';
+import EmailOptin from './components/Pages/EmailOptin';
 import Offers from './components/Offers';
 
 import { USCLayout } from './context/Layouts';

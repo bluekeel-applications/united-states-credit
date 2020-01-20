@@ -8,7 +8,7 @@ import {
     initialTrackingState,
     trackingStateReducer
 } from './reducers/trackingReducer';
-
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
 const AppContext = createContext();
 
 function AppContextProvider({ children }) {
@@ -24,7 +24,8 @@ function AppContextProvider({ children }) {
         trackingState, 
         dispatchTracking,
         contentHeight, 
-        setContentHeight
+        setContentHeight,
+        CORS_PROXY
     };
 
     return (

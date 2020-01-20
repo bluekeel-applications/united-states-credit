@@ -11,9 +11,8 @@ const useApp = () => {
                 
             })();    
         }
-        return () => {
-            componentIsMounted(false);
-        }
+        // Clean-up Function
+        return () => {componentIsMounted.current = false};
     }, []);
     return [dispatchApp];
     };

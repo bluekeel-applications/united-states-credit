@@ -10,12 +10,10 @@ const USCLayout = ({ children }) => {
         if (componentIsMounted.current) {
             setContentHeight(content.current.scrollHeight);                               
         };     
-
-        return () => {
-            componentIsMounted.current = false
-        };
+        // Clean-up Function
+        return () => {componentIsMounted.current = false};
         // eslint-disable-next-line
-    }, [contentHeight]);
+    }, [window.location.pathname]);
 
     return (
         <div 

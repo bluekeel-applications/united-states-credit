@@ -1,4 +1,5 @@
 import { addToClickCount } from '../../utils/middleware';
+import { getPrettyVertical, getPrettyDebtType, getPrettyDebtAmount, getPrettyLoanType } from '../../utils/helpers';
 
 const initialAppState = {
     loadingOffers: false,
@@ -18,6 +19,12 @@ const initialAppState = {
         checking_optin: false,
         debt_optin: false,
         email_optin: false
+    },
+    breadcrumbs: {
+        vertical: null,
+        loan_type: null,
+        debt_type: null,
+        debt_amount: null
     },
     program_id: null,
     click_count: 0,
@@ -47,8 +54,12 @@ const appStateReducer = (state, action) => {
             return {
                 ...state,
                 flowState: {
-                    ...state.flowState,
-                    vertical: action.payload
+                    ...initialAppState.flowState,
+                    vertical: action.payload.value
+                },
+                breadcrumbs:{
+                    ...initialAppState.breadcrumbs,
+                    vertical: getPrettyVertical(action.payload.value)
                 }
             };
 
@@ -58,6 +69,12 @@ const appStateReducer = (state, action) => {
                 flowState: {
                     ...state.flowState,
                     loan_type: action.payload
+                },
+                breadcrumbs:{
+                    ...state.breadcrumbs,
+                    loan_type: getPrettyLoanType(action.payload),
+                    debt_type: null,
+                    debt_amount: null
                 }
             };
 
@@ -67,6 +84,11 @@ const appStateReducer = (state, action) => {
                 flowState: {
                     ...state.flowState,
                     debt_type: action.payload
+                },
+                breadcrumbs:{
+                    ...state.breadcrumbs,
+                    debt_type: getPrettyDebtType(action.payload),
+                    debt_amount: null
                 }
             };
 
@@ -76,6 +98,10 @@ const appStateReducer = (state, action) => {
                 flowState: {
                     ...state.flowState,
                     debt_amount: action.payload
+                },
+                breadcrumbs:{
+                    ...state.breadcrumbs,
+                    debt_amount: getPrettyDebtAmount(action.payload)
                 }
             };
 
@@ -133,8 +159,22 @@ const appStateReducer = (state, action) => {
 
         case 'FETCH_OFFERS_SUCCESS':
             const { click_count, _id } = action.payload;
-            if(!!_id) { addToClickCount(_id); }
-            
+            const addToCCount = async() => {
+                if(!!_id) { 
+                    const res = await addToClickCount(_id); 
+                    if(res && res.status === 'failed') {
+                        console.warn('Error trying to add to click count:', res[0].message,  '...trying again');
+                        addToCCount();
+                        return;
+                    }
+                    if(res && !res.status) {
+                        console.log('Successfully added +1 to the click count');
+                        return;
+                    }
+                    console.log('something else happened:', res);
+                }
+            };
+            addToCCount();
             return {
                 ...state,
                 click_count: click_count || 0,

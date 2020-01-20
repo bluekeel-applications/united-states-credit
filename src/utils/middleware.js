@@ -56,7 +56,7 @@ export const addToClickCount = async(id) => {
         
     } catch (e) {
         console.error('Error:', e);
-        return [{status: 'failed', message: e}];
+        return {status: 'failed', message: e};
     }
 };
 

@@ -13,9 +13,8 @@ const FlowPage = ({page, handleClick}) => {
             setPageData(FLOW_DATA[page]);                             
         };
 
-        return () => {
-            componentIsMounted.current = false
-        };
+        // Clean-up Function
+        return () => {componentIsMounted.current = false};
         // eslint-disable-next-line
     }, []);
 

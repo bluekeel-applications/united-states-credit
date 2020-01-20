@@ -1,15 +1,12 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../context';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import FlowPage from './FlowPage';
+import FlowPage from '../FlowPage';
 
 const Verticals = () => {
-    const { dispatchApp } = useContext(AppContext);
     let history = useHistory();
 
     const handleVerticalClick = (e, choice) => {
         e.preventDefault();
-        dispatchApp({ type: 'VERTICAL_PICKED', payload: choice });
         history.push('/' + choice)
     };
 

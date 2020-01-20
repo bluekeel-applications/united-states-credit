@@ -117,3 +117,63 @@ export const setCookies = (tracking) => {
     setCookie('eid', tracking.eid, 3);
     setCookie('hsid', tracking.hsid, 3);
 };
+
+export const getPrettyVertical = (value) => {
+    switch(value) {
+      case 'personal_loans':
+        return 'Personal Loan'
+      case 'home_loans':
+        return 'Home Loan'
+      case 'auto_loans':
+        return 'Auto Loan'
+      case 'credit_cards':
+        return 'Credit Card'
+      default:
+        return 'Who farted?'
+    }
+}
+
+export const getPrettyDebtType = (value) => {
+  switch(value) {
+      case 'personal_loans':
+        return 'Personal Loan'
+      case 'home_loans':
+        return 'Home Loan'
+      case 'auto_loans':
+        return 'Auto Loan'
+      case 'credit_cards':
+        return 'Credit Card'
+      default:
+        return 'Who farted?'
+    }
+};
+
+export const getPrettyDebtAmount = (value) => {
+  switch(value) {
+      case 'personal_loans':
+        return 'Personal Loan'
+      case 'home_loans':
+        return 'Home Loan'
+      case 'auto_loans':
+        return 'Auto Loan'
+      case 'credit_cards':
+        return 'Credit Card'
+      default:
+        return 'Who farted?'
+    }
+};
+
+export const getPrettyLoanType = (value) => {
+  switch(value) {
+      case 'personal_loans':
+        return 'Personal Loan'
+      case 'home_loans':
+        return 'Home Loan'
+      case 'auto_loans':
+        return 'Auto Loan'
+      case 'credit_cards':
+        return 'Credit Card'
+      default:
+        return 'Who farted?'
+    }
+};

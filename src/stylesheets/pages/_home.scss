@@ -2,7 +2,6 @@
 // This file contains styles that are specific to the home page.
 // -----------------------------------------------------------------------------
 .Home {
-    padding: 40px 0;
     text-align: center;
 
     @include respond-to('small') {

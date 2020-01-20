@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import FlowButton from './FlowButton';
+import FlowButton from '../FlowButton';
 import Zoom from 'react-reveal/Zoom';
 
 const GetStarted = () => (

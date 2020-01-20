@@ -1,0 +1,11 @@
+.breadcrumb-container {
+    height: 50px;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+    font-size: 1.1rem;
+    background-image: linear-gradient(to right, $white, $white, rgba(182, 211, 223, 0.5), $white, $white);
+    color: $text-breadcrumbs;
+}

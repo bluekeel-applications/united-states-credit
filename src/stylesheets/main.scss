@@ -20,6 +20,7 @@
 
 // 4. Layout-related sections
 @import
+  'layout/rss_feed',
   'layout/header',
   'layout/drawer',
   'layout/flows',
@@ -27,6 +28,7 @@
 
 // 5. Components
 @import
+  'components/breadcrumbs',
   'components/navbar',
   'components/side_column',
   'components/button';

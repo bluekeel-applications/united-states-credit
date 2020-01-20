@@ -37,9 +37,8 @@ const Offers = () => {
             history.push('/');
         }
         fetchOfferList();
-        return () => {
-            componentIsMounted.current = false
-        };
+        // Clean-up Function
+        return () => {componentIsMounted.current = false};
         // eslint-disable-next-line
     }, []);
 

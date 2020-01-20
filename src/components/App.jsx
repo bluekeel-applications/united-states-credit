@@ -3,7 +3,7 @@ import { AppContext } from '../context';
 import Routes from '../Routes';
 import Drawer from './Drawer';
 import NavbarTop from './NavbarTop';
-import ContentTop from './ContentTop';
+import Feed from './Feed';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import { getOrganicHSID } from '../utils/middleware';
@@ -41,9 +41,8 @@ const App = () => {
         };
     }
     setTracking();
-    return () => {
-        componentIsMounted.current = false
-    };
+    // Clean-up Function
+    return () => {componentIsMounted.current = false};
       // eslint-disable-next-line
   }, []);
 
@@ -56,7 +55,7 @@ const App = () => {
         </Col>
         <Col lg='8' md='10'>
           <Routes />
-          <ContentTop className='content-container' />
+          <Feed />
         </Col>
         <Col className={'d-sm-none d-md-block flag-col'} >
           <img src={flagRight} alt='flagRight' height='auto' />

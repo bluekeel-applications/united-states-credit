@@ -1,26 +1,26 @@
 import React, { useContext } from 'react';
-import { AppContext } from '../context';
+import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import FlowPage from './FlowPage';
+import FlowPage from '../FlowPage';
 
-const AutoLoans = () => {
+const DebtTypes = () => {
     const { dispatchApp } = useContext(AppContext);
     let history = useHistory();
 
     const handleFlowClick = (e, choice) => {
         e.preventDefault();
-        dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: choice });
-        history.push('/offers');
+        dispatchApp({ type: 'DEBT_TYPE_PICKED', payload: choice });
+        history.push('/debt_amount');        
     };
 
     return (
         <div className='flow-container'>
             <FlowPage
-                page={'auto_loans'}
+                page={'debt_types'}
                 handleClick={handleFlowClick}
             />
         </div>
     )
 };
 
-export default AutoLoans;
+export default DebtTypes;
