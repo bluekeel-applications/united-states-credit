@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Fade from 'react-reveal/Fade';
 const mockFeatured = [
     {
         title: 'Earn $100s by Opening up an Online Checking Account',
@@ -24,26 +24,32 @@ const mockFeatured = [
 ];
 
 const FeaturedRow = () => (
-    <div className='feed-row featured-row-container'>
-        <div className='featured-article-container'>
-            <div className='featured-article-title'>Earn $100s by Opening up an Online Checking Account</div>
-            <img className='featured-article-img' src={`https://i2.wp.com/unitedstatescredit.blog/wp-content/uploads/2018/06/online_banking.jpg?fit=1200%2C736&amp;ssl=1`} alt='featured-article-img' />
-        </div>
-        <div className='featured-article-list'>
-            {mockFeatured.map((article, i) => (
-                <div key={`featured-article-list-item-${i}`} className='featured-article-list-item'>
-                    <div className='article-title'>{article.title}</div>
-                    <div className='keyword-link-container bottom-border'>
-                        {article.categories.map((category, j) => (
-                            <a className='category-item' href={`https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/`}>
-                                <span key={`category-item-${j}`}>{category}</span>
-                            </a>
-                        ))}
-                    </div>
+    <Fade bottom>
+        <div className='feed-row featured-row-container'>
+            <Fade left>
+                <div className='featured-article-container'>
+                    <div className='featured-article-title'>Earn $100s by Opening up an Online Checking Account</div>
+                    <img className='featured-article-img' src={`https://i2.wp.com/unitedstatescredit.blog/wp-content/uploads/2018/06/online_banking.jpg?fit=1200%2C736&amp;ssl=1`} alt='featured-article-img' />
                 </div>
-            ))}
+            </Fade>
+            <div className='featured-article-list'>
+                {mockFeatured.map((article, i) => (
+                    <Fade right>
+                        <div key={`featured-article-list-item-${i}`} className='featured-article-list-item'>
+                            <div className='article-title'>{article.title}</div>
+                            <div className='keyword-link-container bottom-border'>
+                                {article.categories.map((category, j) => (
+                                    <a className='category-item' href={`https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/`}>
+                                        <span key={`category-item-${j}`}>{category}</span>
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                    </Fade>
+                ))}
+            </div>
         </div>
-    </div>
+    </Fade>
 );
 
 export default FeaturedRow;

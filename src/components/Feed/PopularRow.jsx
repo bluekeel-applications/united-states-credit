@@ -2,7 +2,7 @@ import React from 'react';
 
 const LatestRow = () => (
     <div className='feed-row latest-row-container'>
-        LatestRow
+        <div className='bottom-border row-title'>Popular</div>
     </div>
 );
 

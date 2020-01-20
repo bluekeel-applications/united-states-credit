@@ -1,5 +1,5 @@
 import { useEffect, useContext, useRef } from 'react';
-import { AppContext } from '../context';
+import { AppContext } from '../../context';
 
 import Parser from 'rss-parser';
 

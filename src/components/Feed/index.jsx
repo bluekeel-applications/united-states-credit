@@ -5,16 +5,19 @@ import FeaturedRow from './FeaturedRow';
 import InfoRow from './InfoRow';
 import LatestRow from './LatestRow';
 import PopularRow from './PopularRow';
+import Fade from 'react-reveal/Fade';
 
 const Feed = () => (
-    <div className='feed-container'>
-        <ContentTop />
-        <FeaturedRow />
-        <InfoRow />
-        <EditorialRow />
-        <LatestRow />
-        <PopularRow />
-    </div>
+    <Fade bottom>
+        <div className='feed-container'>
+            <ContentTop />
+            <FeaturedRow />
+            <InfoRow />
+            <EditorialRow />
+            <LatestRow />
+            <PopularRow />
+        </div>
+    </Fade>
 );
 
 export default Feed;
