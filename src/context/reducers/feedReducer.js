@@ -1,7 +1,7 @@
 import { getCachedObject, isObjectCached, setCachedObject } from '../../utils/helpers';
 
 const initialFeedState = {
-    loadingFeed: false,
+    loadingFeed: true,
     featured: null,
     tips: isObjectCached('tips') ? getCachedObject('tips') : null,
     credit: isObjectCached('credit') ? getCachedObject('credit') : null,

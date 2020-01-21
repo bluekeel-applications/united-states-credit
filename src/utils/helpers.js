@@ -143,7 +143,7 @@ export const getPrettyVertical = (value) => {
       case 'credit_cards':
         return 'Credit Card'
       default:
-        return 'Who farted?'
+        return null
     }
 }
 
@@ -158,7 +158,7 @@ export const getPrettyDebtType = (value) => {
       case 'credit_cards':
         return 'Credit Card'
       default:
-        return 'Who farted?'
+        return null
     }
 };
 
@@ -173,7 +173,7 @@ export const getPrettyDebtAmount = (value) => {
       case 'credit_cards':
         return 'Credit Card'
       default:
-        return 'Who farted?'
+        return null
     }
 };
 
@@ -188,6 +188,6 @@ export const getPrettyLoanType = (value) => {
       case 'credit_cards':
         return 'Credit Card'
       default:
-        return 'Who farted?'
+        return null
     }
 };

@@ -15,9 +15,13 @@ const Header = () => {
         })
     };
 
+    const clearSearch = () => {
+        dispatchApp({ type: 'RESTART_SEARCH' });
+    };
+
     return (
         <>
-            <Link className='header-logo-group' to='/'>
+            <Link className='header-logo-group' to='/' onClick={clearSearch}>
                 <img src={logo} alt='text-logo' height={40} className='header-logo-icon'/>
                 <img src={logoText} alt='text-logo' height={40} className='header-text-logo'/>
             </Link>

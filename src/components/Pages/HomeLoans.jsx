@@ -5,6 +5,7 @@ import FlowPage from '../FlowPage';
 
 const HomeLoans = () => {
     const page_value = 'home_loans';
+    const page_crumb = 'Home Loans';
     const { dispatchApp } = useContext(AppContext);
     let history = useHistory();
     
@@ -12,16 +13,16 @@ const HomeLoans = () => {
 
     useEffect(() => {
             if (componentIsMounted.current) {
-                dispatchApp({ type: 'VERTICAL_PICKED', payload: page_value });                
+                dispatchApp({ type: 'VERTICAL_PICKED', payload: { value: page_value, crumb: page_crumb } });                
             };
         // Clean-up Function
         return () => {componentIsMounted.current = false};
         // eslint-disable-next-line
     }, []);
 
-    const handleFlowClick = (e, choice) => {
+    const handleFlowClick = (e, choice, texts) => {
         e.preventDefault();
-        dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: choice });
+        dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: choice, crumb: texts } });
         history.push('/offers');
     };
 

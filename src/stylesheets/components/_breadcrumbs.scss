@@ -1,11 +1,40 @@
 .breadcrumb-container {
     height: 50px;
     min-width: 100%;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     font-weight: 300;
     font-size: 1.1rem;
     background-image: linear-gradient(to right, $white, $white, rgba(182, 211, 223, 0.5), $white, $white);
     color: $text-breadcrumbs;
+}
+
+.crumb-container {
+    height: 25px;
+    border: 1px solid $text-breadcrumbs;
+    color: $text-breadcrumbs;
+    border-radius: 25px;
+    padding: 0 7px;
+    font-weight: 400;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.crumb-container:hover {
+    color: $white;
+    background-color: $button-blue;
+}
+
+.crumb-box {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
 }

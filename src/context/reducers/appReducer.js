@@ -59,7 +59,7 @@ const appStateReducer = (state, action) => {
                 },
                 breadcrumbs:{
                     ...initialAppState.breadcrumbs,
-                    vertical: getPrettyVertical(action.payload.value)
+                    vertical: action.payload.crumb
                 }
             };
 
@@ -68,11 +68,11 @@ const appStateReducer = (state, action) => {
                 ...state,
                 flowState: {
                     ...state.flowState,
-                    loan_type: action.payload
+                    loan_type: action.payload.value
                 },
                 breadcrumbs:{
                     ...state.breadcrumbs,
-                    loan_type: getPrettyLoanType(action.payload),
+                    loan_type: action.payload.crumb,
                     debt_type: null,
                     debt_amount: null
                 }
@@ -196,8 +196,23 @@ const appStateReducer = (state, action) => {
                 loadingOffers: false
             };
 
-        case 'RESET':
-            return initialAppState;        
+        case 'RESTART_SEARCH':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    vertical: null,
+                    loan_type: null,
+                    debt_type: 'N/A',
+                    debt_amount: 'N/A'
+                },
+                breadcrumbs: {
+                    vertical: null,
+                    loan_type: null,
+                    debt_type: null,
+                    debt_amount: null
+                }
+            };        
 
         default:
             throw new Error(`Not supported action ${action.type}`);

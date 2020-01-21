@@ -11,7 +11,7 @@ import { getCookie } from '../utils/helpers';
 
 import flagLeft from '../assets/images/flag_left.png';
 import flagRight from '../assets/images/flag_right.png';
-
+import Breadcrumbs from './Breadcrumbs';
 const App = () => {
   const { dispatchTracking } = useContext(AppContext);
   const componentIsMounted = useRef(true);
@@ -54,6 +54,7 @@ const App = () => {
           <img src={flagLeft} alt='flagLeft' height='auto' />
         </Col>
         <Col lg='8' md='10'>
+          <Breadcrumbs />
           <Routes />
           <Feed />
         </Col>

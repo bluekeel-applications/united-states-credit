@@ -7,7 +7,6 @@ import InfoRow from './InfoRow';
 import LatestRow from './LatestRow';
 import PopularRow from './PopularRow';
 import Fade from 'react-reveal/Fade';
-import { getCachedObject, isObjectCached } from '../../utils/helpers';
 import { 
     fetchFeatured,
     fetchTips,
@@ -19,38 +18,40 @@ import {
 const Feed = () => {
     const componentIsMounted = useRef(true);
     const { feedState, dispatchFeed } = useContext(AppContext);
-
-    const getFeeds = async() => {
-        dispatchFeed({ type: 'FETCH_FEED_INIT' });
-        // Featured Feed
-        let featured = await fetchFeatured();
-        dispatchFeed({ type: 'FETCHED_FEATURED_FEED', payload: featured });
-        // Editorial Feed
-        let tips = isObjectCached('tips') ? getCachedObject('tips') : await fetchTips();
-        dispatchFeed({ type: 'FETCHED_TIPS_FEED', payload: tips });
-        // Info Feed
-        let credit = isObjectCached('credit') ? getCachedObject('credit') : await fetchCredit();
-        dispatchFeed({ type: 'FETCHED_CREDIT_FEED', payload: credit });
-        // Latest Feed
-        let reviews = isObjectCached('reviews') ? getCachedObject('reviews') : await fetchReviews();
-        dispatchFeed({ type: 'FETCHED_REVIEW_FEED', payload: reviews });
-        // Popular Feed
-        let feed = isObjectCached('feed') ? getCachedObject('feed') : await fetchFeed();
-        dispatchFeed({ type: 'FETCHED_FEED', payload: feed });
-        await dispatchFeed({ type: 'FETCH_FEED_SUCCESS' });
-    }
-
-    useEffect(() => {
+    const { featured, tips, credit, reviews, feed, loadingFeed } = feedState;
+    useEffect(() => {  
+        const fetchFeeds = async(y) => {
+            const featuredData = await fetchFeatured();
+            dispatchFeed({ type: 'FETCHED_FEATURED_FEED', payload: featuredData });
+            const tipsData = await fetchTips();
+            dispatchFeed({ type: 'FETCHED_TIPS_FEED', payload: tipsData });
+            const creditData = await fetchCredit();
+            dispatchFeed({ type: 'FETCHED_CREDIT_FEED', payload: creditData });
+            const reviewsData = await fetchReviews();
+            dispatchFeed({ type: 'FETCHED_REVIEW_FEED', payload: reviewsData });
+            const feedData = await fetchFeed();
+            dispatchFeed({ type: 'FETCHED_FEED', payload: feedData });            
+        } 
         if(componentIsMounted.current) {
-            getFeeds();
-        }
+            fetchFeeds();
+        };
         // Clean-up Function
         return () => {componentIsMounted.current = false};
         // eslint-disable-next-line
-    }, [])
+    }, [featured, tips, credit, reviews, feed])
+
+    if(featured && tips && credit && reviews && feed && loadingFeed) {
+        dispatchFeed({ type: 'FETCH_FEED_SUCCESS' });
+    };
+
+    if(loadingFeed) {
+        return (
+            <div>Loading</div>
+        )
+    };
 
     return (
-        feedState.loadingFeed ? (<div>Loading</div>) : (
+        feedState.feed.length > 0 && (
             <Fade bottom>
                 <div className='feed-container'>
                     <ContentTop />

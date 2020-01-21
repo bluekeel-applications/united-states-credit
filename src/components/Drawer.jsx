@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import { AppContext } from '../context';
 import { LinkContainer } from "react-router-bootstrap";
 import { Container, Row, Col, Nav, NavItem } from "react-bootstrap";
+import { useHistory } from 'react-router-dom';
 
 const Drawer = () => {
     const { appState, dispatchApp } = useContext(AppContext);
+    let history = useHistory();
 
     const backdropStyle = {
         position: 'fixed',
@@ -20,7 +22,7 @@ const Drawer = () => {
     };
     
     const jumpToVertical = (vertical) => {
-        dispatchApp({ type: 'VERTICAL_PICKED', payload: vertical });
+        history.push('/'+ vertical);
     };
 
     return (        

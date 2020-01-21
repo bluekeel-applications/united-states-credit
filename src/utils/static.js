@@ -1,6 +1,6 @@
 export const FLOW_DATA = {
     verticals: {
-        titleText: 'I am interested in:',
+        titleText: 'You are interested in finding:',
         buttons: [
             {
                 icon: ['left', 'fal', 'credit-card'],
@@ -29,7 +29,7 @@ export const FLOW_DATA = {
         ]
     },
     credit_cards: {
-        titleText: 'Choose a type of Credit Card:',
+        titleText: 'Choose your ideal type of Credit Card:',
         buttons: [
             {
                 icon: ['left', 'fal', 'percent'],
@@ -45,7 +45,7 @@ export const FLOW_DATA = {
             },
             {
                 icon: ['left', 'fal', 'gift'],
-                text: 'Rewards',
+                text: 'Reward',
                 color: 'red',
                 value: 'rewards'
             },
@@ -94,72 +94,83 @@ export const FLOW_DATA = {
                 icon: ['left', 'fal', 'cars'],
                 text: 'Car',
                 color: 'blue',
-                value: 'car'
+                value: 'car',
+                crumb: ''
             },
             {
                 icon: ['left', 'fal', 'truck-monster'],
                 text: 'SUV',
                 color: 'light_blue',
-                value: 'suv'
+                value: 'suv',
+                crumb: ''
             },
             {
                 icon: ['left', 'fal', 'truck-pickup'],
                 text: 'Truck',
                 color: 'red',
-                value: 'truck'
+                value: 'truck',
+                crumb: ''
             },
             {
                 icon: ['left', 'fal', 'shuttle-van'],
                 text: 'Van/Minivan',
                 color: 'dark_blue',
-                value: 'van'
+                value: 'van',
+                crumb: ''
             },
             {
                 icon: ['left', 'fal', 'balance-scale-right'],
                 text: 'Not Sure',
                 color: 'blue',
-                value: 'not_sure'
+                value: 'not_sure',
+                crumb: ''
             },
         ]
     },
     personal_loans: {
-        titleText: 'Why I am seeking a Personal Loan:',
+        titleText: 'Why you are seeking a Personal Loan:',
         buttons: [
             {
                 icon: ['left', 'fal', 'lightbulb-dollar'],
                 text: 'Debt Consolidation',
                 color: 'blue',
-                value: 'debt_consolidation'
+                value: 'debt_consolidation',
+                crumb: ''
             },
             {
                 icon: ['left', 'fal', 'money-check-edit-alt'],
                 text: 'Pay Bills',
                 color: 'light_blue',
-                value: 'pay_bills'
+                value: 'pay_bills',
+                crumb: ''
             },
             {
                 icon: ['left', 'fal', 'shopping-cart'],
                 text: 'Make a Purchase',
                 color: 'red',
-                value: 'make_purchase'
+                value: 'make_purchase',
+                crumb: ''
             },
             {
                 icon: ['left', 'fal', 'hands-usd'],
                 text: 'Emergency Cash',
                 color: 'dark_blue',
-                value: 'emergency_cash'
+                value: 'emergency_cash',
+                crumb: ''
             },
             {
                 icon: ['left', 'fal', 'landmark-alt'],
                 text: 'Pay Taxes',
                 color: 'blue',
-                value: 'pay_taxes'
+                value: 'pay_taxes',
+                crumb: ''
             },
             {
                 icon: ['left', 'fal', 'search-dollar'],
                 text: 'Other',
                 color: 'light_blue',
-                value: 'other'
+                value: 'other',
+                crumb: ''
             },
         ]
     },
@@ -170,25 +181,29 @@ export const FLOW_DATA = {
                 icon: ['left', 'fal', 'sort-size-down'],
                 text: 'Refinance',
                 color: 'blue',
-                value: 'refinance'
+                value: 'refinance',
+                crumb: ''
             },
             {
                 icon: ['left', 'fal', 'donate'],
                 text: 'Lease to Own',
                 color: 'light_blue',
-                value: 'lease_to_own'
+                value: 'lease_to_own',
+                crumb: ''
             },
             {
                 icon: ['left', 'fal', 'gopuram'],
                 text: 'HELOC',
                 color: 'red',
-                value: 'heloc'
+                value: 'heloc',
+                crumb: ''
             },
             {
                 icon: ['left', 'fal', 'shopping-cart'],
                 text: 'Purchase',
                 color: 'dark_blue',
-                value: 'purchase'
+                value: 'purchase',
+                crumb: ''
             },
         ]
     },

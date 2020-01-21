@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../FlowPage';
-import Breadcrumbs from '../Breadcrumbs';
 
 const PersonalLoans = () => {
     const page_value = 'personal_loans';
@@ -21,9 +20,9 @@ const PersonalLoans = () => {
         // eslint-disable-next-line
     }, []);
 
-    const handleFlowClick = (e, choice) => {
+    const handleFlowClick = (e, choice, texts) => {
         e.preventDefault();
-        dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: choice });
+        dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: choice, crumb: texts } });
         switch(choice) {
             case 'debt_consolidation':
                 history.push('/debt_types');
@@ -38,16 +37,13 @@ const PersonalLoans = () => {
         }
     };
 
-    return (
-        <>
-        <Breadcrumbs />
+    return (        
         <div className='flow-container'>
             <FlowPage
                 page={page_value}
                 handleClick={handleFlowClick}
             />
         </div>
-        </>
     )
 };
 
