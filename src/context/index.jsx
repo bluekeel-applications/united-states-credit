@@ -1,14 +1,9 @@
 import React, { createContext, useReducer, useState } from 'react';
 
-import { 
-    initialAppState,
-    appStateReducer
-} from './reducers/appReducer';
-import { 
-    initialTrackingState,
-    trackingStateReducer
-} from './reducers/trackingReducer';
-const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
+import { initialAppState, appStateReducer } from './reducers/appReducer';
+import { initialTrackingState, trackingStateReducer } from './reducers/trackingReducer';
+import { initialFeedState, feedStateReducer } from './reducers/feedReducer';
+
 const AppContext = createContext();
 
 function AppContextProvider({ children }) {
@@ -17,15 +12,17 @@ function AppContextProvider({ children }) {
     // Application State Management
     const [appState, dispatchApp] = useReducer(appStateReducer, initialAppState);
     const [trackingState, dispatchTracking] = useReducer(trackingStateReducer, initialTrackingState);
+    const [feedState, dispatchFeed] = useReducer(feedStateReducer, initialFeedState);
     
     const defaultContext = {
         appState, 
         dispatchApp,
         trackingState, 
         dispatchTracking,
+        feedState, 
+        dispatchFeed,
         contentHeight, 
-        setContentHeight,
-        CORS_PROXY
+        setContentHeight
     };
 
     return (

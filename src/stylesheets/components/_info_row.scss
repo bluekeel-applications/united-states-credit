@@ -74,3 +74,10 @@
 .row-column-item-categories {
     line-height: 0.6em;
 }
+
+.small-column-categories {
+    display: flex;
+    flex-wrap: wrap;
+    width: unset;
+    justify-content: space-evenly;
+}

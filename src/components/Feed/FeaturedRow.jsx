@@ -1,55 +1,74 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../context';
 import Fade from 'react-reveal/Fade';
-const mockFeatured = [
-    {
-        title: 'Earn $100s by Opening up an Online Checking Account',
-        categories: [],
-        link: 'https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/'
-    },
-    {
-        title: '2019 Top Loans for Less Than Perfect Credit',
-        categories: [],
-        link: 'https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/'
-    },
-    {
-        title: 'Common Credit Terms Defined',
-        categories: [ "Best of", "Credit Level", "Find a Loan", "Find Credit", "Our Favorites" ],
-        link: 'https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/'
-    },
-    {
-        title: '2019 Top Loans for Less Than Perfect Credit',
-        categories: [ "Credit Basics", "Credit Level", "Find a Loan", "Find Credit", "Our Favorites" ],
-        link: 'https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/'
-    },
-];
+import { getSrcFromHtml } from '../../utils/feedTools';
 
-const FeaturedRow = () => (
-    <Fade bottom>
-        <div className='feed-row featured-row-container'>
-            <Fade left>
-                <div className='featured-article-container'>
-                    <div className='featured-article-title'>Earn $100s by Opening up an Online Checking Account</div>
-                    <img className='featured-article-img' src={`https://i2.wp.com/unitedstatescredit.blog/wp-content/uploads/2018/06/online_banking.jpg?fit=1200%2C736&amp;ssl=1`} alt='featured-article-img' />
-                </div>
-            </Fade>
-            <div className='featured-article-list'>
-                {mockFeatured.map((article, i) => (
-                    <Fade right>
-                        <div key={`featured-article-list-item-${i}`} className='featured-article-list-item'>
-                            <div className='article-title'>{article.title}</div>
+const FeaturedRow = () => {
+    const { feedState } = useContext(AppContext);
+    const feed = feedState.featured;
+    const articles = feedState.feed;
+
+    const handleLinkClick = (linkout, e) => {
+        e.preventDefault();
+        window.open(linkout, '_blank');
+    };
+
+    const buildArticleList = () => {
+        let featuredList = [];
+        for(let i = 10; i < 14; i++) {
+            console.log('article:', articles[i])
+            let currentObj = {
+                title: articles[i].title,
+                categories: articles[i].categories,
+                link: articles[i].link,
+                content: articles[i].contentSnippet
+            }
+            featuredList.push(currentObj);
+        }
+
+        return (
+            articles.length > 0 && (
+                featuredList.map((article, i) => (
+                    <Fade right key={`featured-article-list-item-${i}`}>
+                        <div className='featured-article-list-item' onClick={(e) => handleLinkClick(article.link, e)}>
+                            <div className='article-title title-hover'>{article.title}</div>
                             <div className='keyword-link-container bottom-border'>
                                 {article.categories.map((category, j) => (
-                                    <a className='category-item' href={`https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/`}>
-                                        <span key={`category-item-${j}`}>{category}</span>
-                                    </a>
+                                    <div className='keyword-link'>
+                                        <a 
+                                            className='category-item' 
+                                            href={article.link}
+                                            key={`category-item-${j}`}
+                                        >
+                                            <span>{category}</span>
+                                        </a>
+                                    </div>
                                 ))}
                             </div>
                         </div>
                     </Fade>
-                ))}
-            </div>
-        </div>
-    </Fade>
-);
+                ))
+            )
+        )
+    }
+
+    return (
+        !feedState.loadingFeed && feed && (
+            <Fade bottom>
+                <div className='feed-row featured-row-container'>
+                    <Fade left>
+                        <div className='featured-article-container' onClick={(e) => handleLinkClick(feed.link, e)}>
+                            <div className='featured-article-title title-hover'>{feed.title}</div>
+                            <img className='featured-article-img' src={getSrcFromHtml(feed.snippet)} alt='featured-article-img' />
+                        </div>
+                    </Fade>
+                    <div className='featured-article-list'>
+                        {articles.length > 0 && (buildArticleList())}
+                    </div>
+                </div>
+            </Fade>
+        )
+    );
+};
 
 export default FeaturedRow;

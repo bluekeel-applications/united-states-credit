@@ -1,122 +1,167 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../context';
 import { Zoom, Fade } from 'react-reveal';
-const mockReviews = [
-    {
-        title: '2019 Top Loans for Less Than Perfect Credit',
-        categories: [],
-        link: 'https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/',
-        image: 'https://i1.wp.com/unitedstatescredit.blog/wp-content/uploads/2018/06/USA-Loan.jpg?fit=1200%2C676&ssl=1'
-    },
-    {
-        title: 'Common Credit Terms Defined',
-        categories: [ "Best of", "Credit Level", "Find a Loan", "Find Credit", "Our Favorites" ],
-        link: 'https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/',
-        image: 'https://i2.wp.com/unitedstatescredit.blog/wp-content/uploads/2018/07/credit-card-smaller.jpg?fit=1200%2C1036&ssl=1'
-    }
-];
-const mockCredit = [
-    
-    {
-        title: '2019 Top Loans for Less Than Perfect Credit',
-        categories: [ "Credit Basics", "Credit Level", "Find a Loan", "Find Credit", "Our Favorites" ],
-        link: 'https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/',
-        image: 'https://i1.wp.com/unitedstatescredit.blog/wp-content/uploads/2018/06/USA-Loan.jpg?fit=1200%2C676&ssl=1'
-    },
-    {
-        title: '2019 Top Loans for Less Than Perfect Credit',
-        categories: [],
-        link: 'https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/',
-        image: 'https://i1.wp.com/unitedstatescredit.blog/wp-content/uploads/2018/09/did_you_know.jpg?fit=1200%2C800&ssl=1'
-    }
-];
-const mockTips = [
-    {
-        title: 'Common Credit Terms Defined',
-        categories: [ "Best of", "Credit Level", "Find a Loan", "Find Credit", "Our Favorites" ],
-        link: 'https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/',
-        image: 'https://i0.wp.com/unitedstatescredit.blog/wp-content/uploads/2018/06/credit_maze.jpg?fit=1200%2C900&ssl=1'
-    },
-    {
-        title: '2019 Top Loans for Less Than Perfect Credit',
-        categories: [ "Credit Basics", "Credit Level", "Find a Loan", "Find Credit", "Our Favorites" ],
-        link: 'https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/',
-        image: 'https://i1.wp.com/unitedstatescredit.blog/wp-content/uploads/2018/06/USA-Loan.jpg?fit=1200%2C676&ssl=1'
-    }
-];
-const InfoRow = () => (
-    <Fade bottom>
-        <div className='feed-row info-row-container'>
-            <div className='bottom-border row-title'>Knowledge Base</div>
-            <div className='row-column-container'>
-                <div className='row-column'>
-                    <div className='row-column-title'>Reviews</div>
-                    <div className='right-border row-column-item-container'>
-                        {mockReviews.map((review, i) => (
-                            <Zoom key={`row-column-item-${i}`}>
-                                <div className='row-column-item'>
-                                    <img src={review.image} className='row-column-item-image' alt='img' />
-                                    <div className='row-column-item-content'>
-                                        <div className='row-column-item-title'>{review.title}</div>
-                                        <div className='row-column-item-categories'>
-                                            {review.categories.map((category, j) => (
-                                                <a key={`category-item-${j}`} className='category-item' href={review.link}>
-                                                    <span>{category}</span>
-                                                </a>
-                                            ))}
-                                        </div>
+import { getSrcFromHtml } from '../../utils/feedTools';
+
+const InfoRow = () => {
+    const { feedState } = useContext(AppContext);
+    const reviews = feedState.reviews;
+    const credits = feedState.credit;
+    const tips = feedState.tips;
+
+    const handleLinkClick = (linkout, e) => {
+        e.preventDefault();
+        window.open(linkout, '_blank');
+    };
+
+    const buildReviewList = () => {
+        let reviewList = [];
+        for(let i = 0; i < 2; i++) {
+            let currentObj = {
+                title: reviews[i].title,
+                categories: reviews[i].categories,
+                link: reviews[i].link,
+                text: reviews[i].contentSnippet,
+                html: reviews[i].content
+            }
+            reviewList.push(currentObj);
+        }
+        return reviewList;
+    };
+
+    const buildCreditList = () => {
+        let creditList = [];
+        for(let i = 6; i < 8; i++) {
+            let currentObj = {
+                title: credits[i].title,
+                categories: credits[i].categories,
+                link: credits[i].link,
+                text: credits[i].contentSnippet,
+                html: credits[i].content
+            }
+            creditList.push(currentObj);
+        }
+        return creditList;
+    };
+
+    const buildTipList = () => {
+        let tipList = [];
+        for(let i = 0; i < 2; i++) {
+            let currentObj = {
+                title: tips[i].title,
+                categories: tips[i].categories,
+                link: tips[i].link,
+                text: tips[i].contentSnippet,
+                html: tips[i].content
+            }
+            tipList.push(currentObj);
+        }
+        return tipList;
+    };
+
+    const renderReviews = () => {
+        const reviewList = buildReviewList();
+        return (
+            reviewList.map((review, i) => (
+                <Zoom key={`row-column-item-${i}`}>
+                    <div className='row-column-item'>
+                        <img src={getSrcFromHtml(review.html)} className='row-column-item-image' alt='img' />
+                        <div className='row-column-item-content'>
+                            <div className='row-column-item-title title-hover' onClick={(e) => handleLinkClick(review.link, e)}>{review.title}</div>
+                            <div className='keyword-link-container small-column-categories'>
+                                {review.categories.map((category, j) => (
+                                    <div className='keyword-link'>
+                                        <a key={`category-item-${j}`} className='category-item' href={review.link}>
+                                            <span>{category}</span>
+                                        </a>
                                     </div>
-                                </div>
-                            </Zoom>
-                        ))}
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div className='row-column'>
-                    <div className='row-column-title'>Find Credit</div>
-                    <div className='right-border row-column-item-container'>
-                        {mockCredit.map((review, k) => (
-                            <Zoom key={`row-column-item-${k}`}>
-                                <div className='row-column-item'>
-                                    <img src={review.image} className='row-column-item-image' alt='img' />
-                                    <div className='row-column-item-content'>
-                                        <div className='row-column-item-title'>{review.title}</div>
-                                        <div className='row-column-item-categories'>
-                                            {review.categories.map((category, l) => (
-                                                <a className='category-item' href={review.link}>
-                                                    <span key={`category-item-${l}`}>{category}</span>
-                                                </a>
-                                            ))}
-                                        </div>
+                </Zoom>
+            ))
+        )
+    };
+
+    const renderCredit = () => {
+        const creditList = buildCreditList();
+        return (
+            creditList.map((credit, i) => (
+                <Zoom key={`row-column-item-${i}`}>
+                    <div className='row-column-item'>
+                        <img src={getSrcFromHtml(credit.html)} className='row-column-item-image' alt='img' />
+                        <div className='row-column-item-content'>
+                            <div className='row-column-item-title title-hover' onClick={(e) => handleLinkClick(credit.link, e)}>{credit.title}</div>
+                            <div className='keyword-link-container small-column-categories'>
+                                {credit.categories.map((category, j) => (
+                                    <div className='keyword-link'>
+                                        <a key={`category-item-${j}`} className='category-item' href={credit.link}>
+                                            <span>{category}</span>
+                                        </a>
                                     </div>
-                                </div>
-                            </Zoom>
-                            ))}
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div className='row-column'>
-                    <div className='row-column-title'>Credit Tips</div>
-                    <div className='row-column-item-container'>
-                        {mockTips.map((review, m) => (
-                            <Zoom key={`row-column-item-${m}`}>
-                                <div className='row-column-item'>
-                                    <img src={review.image} className='row-column-item-image' alt='img' />
-                                    <div className='row-column-item-content'>
-                                        <div className='row-column-item-title'>{review.title}</div>
-                                        <div className='row-column-item-categories'>
-                                            {review.categories.map((category, n) => (
-                                                <a className='category-item' href={review.link}>
-                                                    <span key={`category-item-${n}`}>{category}</span>
-                                                </a>
-                                            ))}
-                                        </div>
+                </Zoom>
+            ))
+        )
+    };
+
+    const renderTips = () => {
+        const tipList = buildTipList();
+        return (
+            tipList.map((tip, i) => (
+                <Zoom key={`row-column-item-${i}`}>
+                    <div className='row-column-item'>
+                        <img src={getSrcFromHtml(tip.html)} className='row-column-item-image' alt='img' />
+                        <div className='row-column-item-content'>
+                            <div className='row-column-item-title title-hover' onClick={(e) => handleLinkClick(tip.link, e)}>{tip.title}</div>
+                            <div className='keyword-link-container small-column-categories'>
+                                {tip.categories.map((category, j) => (
+                                    <div className='keyword-link'>
+                                        <a key={`category-item-${j}`} className='category-item' href={tip.link}>
+                                            <span>{category}</span>
+                                        </a>
                                     </div>
-                                </div>
-                            </Zoom>
-                            ))}
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </Zoom>
+            ))
+        )
+    };
+
+
+    return (
+        <Fade bottom>
+            <div className='feed-row info-row-container'>
+                <div className='bottom-border row-title'>Knowledge Base</div>
+                <div className='row-column-container'>
+                    <div className='row-column'>
+                        <div className='row-column-title'>Reviews</div>
+                        <div className='right-border row-column-item-container'>
+                            {renderReviews()}
+                        </div>
+                    </div>
+                    <div className='row-column'>
+                        <div className='row-column-title'>Find Credit</div>
+                        <div className='right-border row-column-item-container'>
+                            {renderCredit()}
+                        </div>
+                    </div>
+                    <div className='row-column'>
+                        <div className='row-column-title'>Credit Tips</div>
+                        <div className='row-column-item-container'>
+                            {renderTips()}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </Fade>
-);
+        </Fade>
+    )
+};
 
 export default InfoRow;

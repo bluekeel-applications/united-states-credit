@@ -28,7 +28,7 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     @include respond-to('small') {
         width: 100%;
         padding: 10px 0;
@@ -39,11 +39,6 @@
     justify-content: flex-start;
 }
 
-.category-item {
-    padding-right: 5px;
-    color: $mid-grey;
-}
-
 .text-column {
     display: flex;
     flex-direction: column;
@@ -52,7 +47,7 @@
     align-items: center;
     color: $mid-grey;
     font-weight: 300;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     line-height: 1.25em;
     @include respond-to('small') {
        font-size: 1.2rem;

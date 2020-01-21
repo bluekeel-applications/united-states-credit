@@ -1,6 +1,6 @@
 export const FLOW_DATA = {
     verticals: {
-        titleText: 'Select an option below:',
+        titleText: 'I am interested in:',
         buttons: [
             {
                 icon: ['left', 'fal', 'credit-card'],
@@ -29,7 +29,7 @@ export const FLOW_DATA = {
         ]
     },
     credit_cards: {
-        titleText: 'Select a Card Type:',
+        titleText: 'Choose a type of Credit Card:',
         buttons: [
             {
                 icon: ['left', 'fal', 'percent'],
@@ -88,7 +88,7 @@ export const FLOW_DATA = {
         ]
     },
     auto_loans: {
-        titleText: 'Select Car Type:',
+        titleText: 'Select your desired type of Automobile:',
         buttons: [
             {
                 icon: ['left', 'fal', 'cars'],
@@ -123,7 +123,7 @@ export const FLOW_DATA = {
         ]
     },
     personal_loans: {
-        titleText: 'Select Loan Purpose:',
+        titleText: 'Why I am seeking a Personal Loan:',
         buttons: [
             {
                 icon: ['left', 'fal', 'lightbulb-dollar'],
@@ -164,7 +164,7 @@ export const FLOW_DATA = {
         ]
     },
     home_loans: {
-        titleText: 'Select Loan Type:',
+        titleText: 'Select a type of Home Loan:',
         buttons: [
             {
                 icon: ['left', 'fal', 'sort-size-down'],
@@ -193,7 +193,7 @@ export const FLOW_DATA = {
         ]
     },
     debt_types: {
-        titleText: 'Select Primary Debt Type:',
+        titleText: 'Your primary type of Debt is:',
         buttons: [
             {
                 icon: ['left', 'fal', 'credit-card'],
@@ -234,7 +234,7 @@ export const FLOW_DATA = {
         ]
     },
     debt_amounts: {
-        titleText: 'Select Your Debt Amount:',
+        titleText: 'Your total Amount of Debt is:',
         buttons: [
             {
                 icon: ['left', 'fal', 'coin'],

@@ -117,6 +117,20 @@ export const setCookies = (tracking) => {
     setCookie('eid', tracking.eid, 3);
     setCookie('hsid', tracking.hsid, 3);
 };
+// Local Storage Tools
+export const getCachedObject = (key) => {
+    const item = localStorage.getItem(key);
+    return JSON.parse(item);
+};
+
+export const isObjectCached = (key) => {
+    return !!localStorage.getItem(key);
+};
+
+export const setCachedObject = (key, obj) => {
+    localStorage.setItem(key, JSON.stringify(obj));
+};
+
 
 export const getPrettyVertical = (value) => {
     switch(value) {

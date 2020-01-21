@@ -53,3 +53,17 @@
     border-right: 1px solid rgba(126, 124, 124, 0.25);
     line-height: 1.4em;
 }
+
+.keyword-link {
+    line-height: 1;
+    padding: 0 5px 5px 5px;
+    border-right: 1px solid rgba(126, 124, 124, 0.25);
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.key-left {
+    border-right: unset;
+    border-left: 1px solid rgba(126, 124, 124, 0.25);
+}
