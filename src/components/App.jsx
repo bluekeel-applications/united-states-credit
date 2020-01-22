@@ -4,6 +4,7 @@ import Routes from '../Routes';
 import Drawer from './Drawer';
 import NavbarTop from './NavbarTop';
 import Feed from './Feed';
+import Footer from './Footer';
 import { Container, Row, Col } from 'react-bootstrap';
 
 import { getOrganicHSID } from '../utils/middleware';
@@ -62,6 +63,7 @@ const App = () => {
           <img src={flagRight} alt='flagRight' height='auto' />
         </Col>
       </Row>
+      <Footer />
       <Drawer />
     </Container>
   );

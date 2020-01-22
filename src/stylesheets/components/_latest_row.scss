@@ -50,6 +50,11 @@
     font-size: 1.2rem;
     line-height: 1.25em;
     @include respond-to('small') {
-       font-size: 1.2rem;
+       font-size: 1rem;
+       padding: 0 10px;
     }
+}
+
+.image-column {
+    max-height: fit-content;
 }
