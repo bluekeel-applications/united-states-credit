@@ -7,6 +7,9 @@
 
 .choose-container {
     margin: 25px;
+    @include respond-to('small') {
+        margin: 10px 25px 25px 25px;
+    }
 }
 
 .flow-page-container {
@@ -23,9 +26,11 @@
     align-items: center;
     justify-content: center;
     margin-top: 20px;
-
-    @include respond-to('medium') {
+    padding: 0 10%;
+    @include respond-to('small') {
         min-width: 350px;
+        padding: 10px;
+        margin-top: 0;
     }
 }
 

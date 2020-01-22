@@ -36,7 +36,9 @@ import {
     faCoin,
     faCoins,
     faAngleDoubleRight,
-    faChevronDoubleRight
+    faChevronDoubleRight,
+    faThumbsUp,
+    faBlog
 } from '@fortawesome/pro-light-svg-icons';
 
 function initFontAwesome() {
@@ -76,7 +78,9 @@ function initFontAwesome() {
         faCoins,
         faSackDollar,
         faAngleDoubleRight,
-        faChevronDoubleRight
+        faChevronDoubleRight,
+        faThumbsUp,
+        faBlog
     );
 }
 

@@ -5,7 +5,7 @@ import FlowPage from '../FlowPage';
 
 const PersonalLoans = () => {
     const page_value = 'personal_loans';
-    const page_crumb = 'Personal Loan';
+    const page_crumb = 'Personal Loans';
     const { dispatchApp } = useContext(AppContext);
     let history = useHistory();
 

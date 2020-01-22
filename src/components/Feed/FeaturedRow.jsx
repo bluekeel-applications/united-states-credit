@@ -16,7 +16,6 @@ const FeaturedRow = () => {
     const buildArticleList = () => {
         let featuredList = [];
         for(let i = 10; i < 14; i++) {
-            console.log('article:', articles[i])
             let currentObj = {
                 title: articles[i].title,
                 categories: articles[i].categories,

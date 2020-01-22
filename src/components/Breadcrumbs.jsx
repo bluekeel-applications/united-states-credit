@@ -13,7 +13,7 @@ const Breadcrumbs = () => {
     const renderVertical = () => (
         <div className='crumb-box'>
             <b className='breadcrumb-key'>FIND:</b>
-            <Crumb text={`${verticalCrumb}s`} path='verticals' />
+            <Crumb text={verticalCrumb} path='verticals' />
         </div>
     );
     

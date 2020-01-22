@@ -9,14 +9,17 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import { getOrganicHSID } from '../utils/middleware';
 import { getCookie } from '../utils/helpers';
-
+import useGeoLocation from '../hooks/useGeoLocation';
 import flagLeft from '../assets/images/flag_left.png';
 import flagRight from '../assets/images/flag_right.png';
 import Breadcrumbs from './Breadcrumbs';
+
 const App = () => {
   const { dispatchTracking } = useContext(AppContext);
   const componentIsMounted = useRef(true);
-
+  // Find the user's location onload
+  useGeoLocation();
+  
   useEffect(() => {
     const setTracking = async () => {
         if (componentIsMounted.current) {

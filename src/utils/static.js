@@ -1,6 +1,6 @@
 export const FLOW_DATA = {
     verticals: {
-        titleText: 'You are interested in finding:',
+        titleText: 'Search for:',
         buttons: [
             {
                 icon: ['left', 'fal', 'credit-card'],
@@ -29,7 +29,7 @@ export const FLOW_DATA = {
         ]
     },
     credit_cards: {
-        titleText: 'Choose your ideal type of Credit Card:',
+        titleText: 'Select a type of Credit Card:',
         buttons: [
             {
                 icon: ['left', 'fal', 'percent'],
@@ -128,7 +128,7 @@ export const FLOW_DATA = {
         ]
     },
     personal_loans: {
-        titleText: 'Why you are seeking a Personal Loan:',
+        titleText: 'Select a Loan Purpose:',
         buttons: [
             {
                 icon: ['left', 'fal', 'lightbulb-dollar'],
@@ -139,7 +139,7 @@ export const FLOW_DATA = {
             },
             {
                 icon: ['left', 'fal', 'money-check-edit-alt'],
-                text: 'Pay Bills',
+                text: 'Paying Bills',
                 color: 'light_blue',
                 value: 'pay_bills',
                 crumb: ''
@@ -160,14 +160,14 @@ export const FLOW_DATA = {
             },
             {
                 icon: ['left', 'fal', 'landmark-alt'],
-                text: 'Pay Taxes',
+                text: 'Paying Taxes',
                 color: 'blue',
                 value: 'pay_taxes',
                 crumb: ''
             },
             {
                 icon: ['left', 'fal', 'search-dollar'],
-                text: 'Other',
+                text: 'Other Reasons',
                 color: 'light_blue',
                 value: 'other',
                 crumb: ''

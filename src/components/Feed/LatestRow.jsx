@@ -40,7 +40,7 @@ const LatestRow = () => {
                         </div>
                     </div>
                     <div className='latest-item-column text-column'>{trimSnippet(article.text)}</div>
-                    <div className='latest-item-column image-column'><img  clasName='latest-image' src={getSrcFromHtml(article.html)} alt={`list-${i}`} /></div>
+                    <div className='latest-item-column image-column'><img  className='latest-image' src={getSrcFromHtml(article.html)} alt={`list-${i}`} /></div>
                 </div>
             ))
         )

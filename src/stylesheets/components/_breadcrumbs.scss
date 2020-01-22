@@ -8,12 +8,13 @@
     font-weight: 300;
     font-size: 1.1rem;
     background-image: rgba(182, 211, 223, 0.4); /* fallback for old browsers */
-    background-image: -webkit-radial-gradient(farthest-side at 50% 40%,rgba(182, 211, 223, 0.4) 70%, rgba(255,255,255,0.01));
-    background-image: radial-gradient(farthest-side at 50% 40%,rgba(182, 211, 223, 0.4) 70%, rgba(255,255,255,0.01));
+    background-image: -webkit-radial-gradient(farthest-side at 50% 30%,rgba(182, 211, 223, 0.4) 70%, rgba(255,255,255,0.01));
+    background-image: radial-gradient(farthest-side at 50% 30%,rgba(182, 211, 223, 0.4) 70%, rgba(255,255,255,0.01));
     color: $text-breadcrumbs;
     padding: 0 0 10px 0;
     @include respond-to('small') {
-        padding: 10px 0 0 0;
+        padding: 0;
+        min-height: 75px;
     }
 }
 .breadcrumb-row {

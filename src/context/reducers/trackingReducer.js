@@ -1,4 +1,4 @@
-import { getCookie, checkCookie, setCookies } from '../../utils/helpers';
+import { getCookie, checkCookie, setCookies, setCookie } from '../../utils/helpers';
 
 const initialTrackingState = {
     oid: checkCookie('oid') ? getCookie('oid') : null,
@@ -6,7 +6,8 @@ const initialTrackingState = {
     eid: checkCookie('eid') ? getCookie('eid') : null,
     sid: checkCookie('sid') ? getCookie('sid') : null,
     uid: checkCookie('uid') ? getCookie('uid') : null,
-    hsid: checkCookie('hsid') ? getCookie('hsid') : null
+    hsid: checkCookie('hsid') ? getCookie('hsid') : null,
+    location: checkCookie('state') ? getCookie('state') : null
 };
 
 const trackingStateReducer = (state, action) => {
@@ -24,6 +25,13 @@ const trackingStateReducer = (state, action) => {
             return {
                 ...state,
                 ...tracking
+            };        
+        
+        case 'LOCATION_FOUND':
+            setCookie('state', action.payload, 3);
+            return {
+                ...state,
+                location: action.payload
             };        
 
         case 'RESET':

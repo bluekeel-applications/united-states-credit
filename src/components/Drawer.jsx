@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context';
-import { LinkContainer } from "react-router-bootstrap";
-import { Container, Row, Col, Nav, NavItem } from "react-bootstrap";
-import { useHistory } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Container, Row, Col, Nav, NavItem } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Drawer = () => {
     const { appState, dispatchApp } = useContext(AppContext);
-    let history = useHistory();
 
     const backdropStyle = {
         position: 'fixed',
@@ -17,12 +16,14 @@ const Drawer = () => {
         backgroundColor: 'rgba(0, 0, 0, 0.75)'
     };
 
-    const closeDrawer = () => {
+    const handleLinkOutClick = (url, e) => {
+        e.preventDefault();
+        window.open(url, '_blank');
         dispatchApp({ type: 'HIDE_DRAWER' });
     };
-    
-    const jumpToVertical = (vertical) => {
-        history.push('/'+ vertical);
+
+    const closeDrawer = () => {
+        dispatchApp({ type: 'HIDE_DRAWER' });
     };
 
     return (        
@@ -30,50 +31,68 @@ const Drawer = () => {
             <Container style={backdropStyle} fluid>
                 <Row>
                     <Col onClick={closeDrawer} />
-                    <Col xs={12} md={2} className='drawer-container'>                            
+                    <Col xs={10} md={2} className='drawer-container'>                            
                         <Nav className='flex-column'>
                             <LinkContainer 
                                 to='/verticals' 
                                 className='drawer-list-item'
+                                onClick={closeDrawer}
                             >
-                                <NavItem>Start Visual Credit Search</NavItem>
+                                <NavItem>
+                                <FontAwesomeIcon
+                                    icon={['fal', 'search-dollar']}
+                                    className='drawer-button-icon'
+                                />
+                                    Start a Visual Credit Search
+                                </NavItem>
                             </LinkContainer>
                             <LinkContainer 
                                 to='/personal_loans' 
                                 className='drawer-list-item' 
-                                onClick={() => jumpToVertical('personal_loans')}
+                                onClick={closeDrawer}
                             >
-                                <NavItem>Find a Loan</NavItem>
+                                <NavItem>
+                                <FontAwesomeIcon
+                                    icon={['fal', 'hand-holding-usd']}
+                                    className='drawer-button-icon'
+                                />   
+                                    Find a Loan
+                                </NavItem>
                             </LinkContainer>
                             <LinkContainer 
                                 to='/credit_cards' 
                                 className='drawer-list-item'
-                                onClick={() => jumpToVertical('credit_cards')}
+                                onClick={closeDrawer}
                             >
-                                <NavItem>Find a Credit Card</NavItem>
+                                <NavItem>
+                                <FontAwesomeIcon
+                                    icon={['fal', 'credit-card']}
+                                    className='drawer-button-icon'
+                                />
+                                    Find a Credit Card
+                                </NavItem>
                             </LinkContainer>
-                            <a 
-                                href='https://unitedstatescredit.blog/category/reviews/'
-                                target='_blank'
-                                rel='noopener noreferrer'
+                            
+                            <NavItem 
+                                onClick={(e) => handleLinkOutClick('https://unitedstatescredit.blog/category/reviews/', e)} 
                                 className='drawer-list-item'
                             >
-                                <NavItem>Customer Reviews</NavItem>
-                            </a>
-                            <a 
-                                href='https://unitedstatescredit.blog/'
-                                target='_blank'
-                                rel='noopener noreferrer'
+                                <FontAwesomeIcon
+                                    icon={['fal', 'thumbs-up']}
+                                    className='drawer-button-icon'
+                                />
+                                Customer Reviews
+                            </NavItem>
+                            <NavItem 
+                                onClick={(e) => handleLinkOutClick('https://unitedstatescredit.blog/', e)}
                                 className='drawer-list-item'
                             >
-                                <NavItem>Blog</NavItem>
-                            </a>
-                            {/* <LinkContainer 
-                                to='/' 
-                                className='drawer-list-item'
-                            >
-                                <NavItem>Contact Us</NavItem>
-                            </LinkContainer>                                 */}
+                                <FontAwesomeIcon
+                                    icon={['fal', 'blog']}
+                                    className='drawer-button-icon'
+                                />
+                                Blog
+                            </NavItem>                            
                         </Nav>                                
                     </Col>
                 </Row>
