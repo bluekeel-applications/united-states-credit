@@ -1,4 +1,4 @@
-import React, { useContext, memo } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import Fade from 'react-reveal/Fade';
 import { getSrcFromHtml } from '../../utils/feedTools';

@@ -212,25 +212,25 @@ export const FLOW_DATA = {
         buttons: [
             {
                 icon: ['left', 'fal', 'credit-card'],
-                text: 'Credit Card',
+                text: 'Credit Cards',
                 color: 'blue',
                 value: 'credit_card'
             },
             {
                 icon: ['left', 'fal', 'hand-holding-usd'],
-                text: 'Personal Loan',
+                text: 'Personal Loans',
                 color: 'light_blue',
                 value: 'personal_loan'
             },
             {
                 icon: ['left', 'fal', 'heart-rate'],
-                text: 'Medical',
+                text: 'Medical Bills',
                 color: 'red',
                 value: 'medical'
             },
             {
                 icon: ['left', 'fal', 'user-graduate'],
-                text: 'Student Loan',
+                text: 'Student Loans',
                 color: 'dark_blue',
                 value: 'student_loan'
             },
@@ -242,7 +242,7 @@ export const FLOW_DATA = {
             },
             {
                 icon: ['left', 'fal', 'file-invoice-dollar'],
-                text: 'Other',
+                text: 'Other Debts',
                 color: 'light_blue',
                 value: 'other'
             },

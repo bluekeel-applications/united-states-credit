@@ -1,5 +1,4 @@
 import { addToClickCount } from '../../utils/middleware';
-import { getPrettyVertical, getPrettyDebtType, getPrettyDebtAmount, getPrettyLoanType } from '../../utils/helpers';
 
 const initialAppState = {
     loadingOffers: false,
@@ -83,11 +82,11 @@ const appStateReducer = (state, action) => {
                 ...state,
                 flowState: {
                     ...state.flowState,
-                    debt_type: action.payload
+                    debt_type: action.payload.value
                 },
                 breadcrumbs:{
                     ...state.breadcrumbs,
-                    debt_type: getPrettyDebtType(action.payload),
+                    debt_type: action.payload.crumb,
                     debt_amount: null
                 }
             };
@@ -97,11 +96,11 @@ const appStateReducer = (state, action) => {
                 ...state,
                 flowState: {
                     ...state.flowState,
-                    debt_amount: action.payload
+                    debt_amount: action.payload.value
                 },
                 breadcrumbs:{
                     ...state.breadcrumbs,
-                    debt_amount: getPrettyDebtAmount(action.payload)
+                    debt_amount: action.payload.crumb
                 }
             };
 

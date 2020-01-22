@@ -7,9 +7,9 @@ const DebtTypes = () => {
     const { dispatchApp } = useContext(AppContext);
     let history = useHistory();
 
-    const handleFlowClick = (e, choice) => {
+    const handleFlowClick = (e, choice, texts) => {
         e.preventDefault();
-        dispatchApp({ type: 'DEBT_TYPE_PICKED', payload: choice });
+        dispatchApp({ type: 'DEBT_TYPE_PICKED', payload: { value: choice, crumb: texts } });
         history.push('/debt_amount');        
     };
 

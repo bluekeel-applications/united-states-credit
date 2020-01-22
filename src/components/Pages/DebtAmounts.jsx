@@ -7,9 +7,9 @@ const DebtAmounts = () => {
     const { dispatchApp } = useContext(AppContext);
     let history = useHistory();
 
-    const handleFlowClick = (e, choice) => {
+    const handleFlowClick = (e, choice, texts) => {
         e.preventDefault();
-        dispatchApp({ type: 'DEBT_AMOUNT_PICKED', payload: choice });
+        dispatchApp({ type: 'DEBT_AMOUNT_PICKED', payload: { value: choice, crumb: texts } });
         history.push('/email_optin');
     };
 

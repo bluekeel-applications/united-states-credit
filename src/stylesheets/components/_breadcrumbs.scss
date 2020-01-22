@@ -1,13 +1,35 @@
 .breadcrumb-container {
-    height: 50px;
+    min-height: 100px;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+    font-size: 1.1rem;
+    background-image: rgba(182, 211, 223, 0.4); /* fallback for old browsers */
+    background-image: -webkit-radial-gradient(farthest-side at 50% 40%,rgba(182, 211, 223, 0.4) 70%, rgba(255,255,255,0.01));
+    background-image: radial-gradient(farthest-side at 50% 40%,rgba(182, 211, 223, 0.4) 70%, rgba(255,255,255,0.01));
+    color: $text-breadcrumbs;
+    padding: 0 0 10px 0;
+    @include respond-to('small') {
+        padding: 10px 0 0 0;
+    }
+}
+.breadcrumb-row {
+    height: 30px;
     min-width: 100%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-weight: 300;
     font-size: 1.1rem;
-    background-image: linear-gradient(to right, $white, $white, rgba(182, 211, 223, 0.5), $white, $white);
     color: $text-breadcrumbs;
+    @include respond-to('small') {
+        display: flex;
+        flex-flow: row wrap;
+        height: unset;
+    }
 }
 
 .crumb-container {
@@ -37,4 +59,9 @@
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.breadcrumb-key {
+    font-weight: 600;
+    text-decoration: dashed;
 }
