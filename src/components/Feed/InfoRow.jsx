@@ -70,8 +70,8 @@ const InfoRow = () => {
                             <div className='row-column-item-title title-hover' onClick={(e) => handleLinkClick(review.link, e)}>{review.title}</div>
                             <div className='keyword-link-container small-column-categories'>
                                 {review.categories.map((category, j) => (
-                                    <div className='keyword-link'>
-                                        <a key={`category-item-${j}`} className='category-item' href={review.link}>
+                                    <div className='keyword-link' key={`category-item-${j}`}>
+                                        <a className='category-item' href={review.link}>
                                             <span>{category}</span>
                                         </a>
                                     </div>
@@ -95,8 +95,8 @@ const InfoRow = () => {
                             <div className='row-column-item-title title-hover' onClick={(e) => handleLinkClick(credit.link, e)}>{credit.title}</div>
                             <div className='keyword-link-container small-column-categories'>
                                 {credit.categories.map((category, j) => (
-                                    <div className='keyword-link'>
-                                        <a key={`category-item-${j}`} className='category-item' href={credit.link}>
+                                    <div className='keyword-link' key={`category-item-${j}`}>
+                                        <a className='category-item' href={credit.link}>
                                             <span>{category}</span>
                                         </a>
                                     </div>
@@ -120,8 +120,8 @@ const InfoRow = () => {
                             <div className='row-column-item-title title-hover' onClick={(e) => handleLinkClick(tip.link, e)}>{tip.title}</div>
                             <div className='keyword-link-container small-column-categories'>
                                 {tip.categories.map((category, j) => (
-                                    <div className='keyword-link'>
-                                        <a key={`category-item-${j}`} className='category-item' href={tip.link}>
+                                    <div className='keyword-link' key={`category-item-${j}`}>
+                                        <a className='category-item' href={tip.link}>
                                             <span>{category}</span>
                                         </a>
                                     </div>

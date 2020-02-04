@@ -35,14 +35,14 @@ const EditorialRow = () => {
 
         return(
             editorialList.map((article, i) => (
-                <Fade right>
-                    <div key={`featured-article-list-item-${i}`} className='editorial-article-list-item' onClick={(e) => handleLinkClick(article.link, e)}>
+                <Fade right key={`featured-article-list-item-${i}`}>
+                    <div className='editorial-article-list-item' onClick={(e) => handleLinkClick(article.link, e)}>
                         <div className='article-title title-hover'>{article.title}</div>
                         <div className='keyword-link-container bottom-border'>
                             {article.categories.map((category, j) => (
-                                <div className='keyword-link'>
+                                <div className='keyword-link' key={`category-item-${j}`}>
                                     <a className='category-item' href={`https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/`}>
-                                        <span key={`category-item-${j}`}>{category}</span>
+                                        <span>{category}</span>
                                     </a>
                                 </div>
                             ))}

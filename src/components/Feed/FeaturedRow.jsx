@@ -33,11 +33,10 @@ const FeaturedRow = () => {
                             <div className='article-title title-hover'>{article.title}</div>
                             <div className='keyword-link-container bottom-border'>
                                 {article.categories.map((category, j) => (
-                                    <div className='keyword-link'>
+                                    <div className='keyword-link' key={`category-item-${j}`}>
                                         <a 
                                             className='category-item' 
                                             href={article.link}
-                                            key={`category-item-${j}`}
                                         >
                                             <span>{category}</span>
                                         </a>

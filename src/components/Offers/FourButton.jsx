@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import OfferButton from '../OfferButton';
+import { flattenString } from '../../utils/helpers';
 
 const FourButton = () => {
-    const { appState } = useContext(AppContext);
+    const { appState, dispatchTracking } = useContext(AppContext);
 
     const handleButtonClick = (keywords, e) => {
         e.preventDefault();
-        console.log('Button clicked:', keywords);
+        dispatchTracking({ type: 'KEYWORD_SELECTED', payload: flattenString(keywords) });
     };
 
     const render4ButtonGroup = () => (

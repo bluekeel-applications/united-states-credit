@@ -52,3 +52,11 @@
     font-weight: 400;
     font-size: 1.5rem;
 }
+
+.offer-container {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}

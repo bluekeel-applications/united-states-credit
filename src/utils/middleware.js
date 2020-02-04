@@ -19,21 +19,9 @@ export const getOfferList = async(req) => {
             throw new Error('Error fetching offers.');
         };
 
-        if (res.data && res.data.length > 0) {
-            return res.data;
-        };
-
-        return [{
-            click_count: 0,
-            endpoints: [{
-                url: 'https://unitedstatescredit.blog/',
-                offer_page: 'wall',
-                four_button: ['N/A', 'N/A', 'N/A', 'N/A']
-            }]
-        }];
+        return res.data
 
     } catch (e) {
-        console.error('Error caught in fetch:', e);
         return [{status: 'failed', message: e}];
     }
 };
@@ -55,7 +43,6 @@ export const addToClickCount = async(id) => {
         return res.data;
         
     } catch (e) {
-        console.error('Error:', e);
         return {status: 'failed', message: e};
     }
 };
@@ -91,8 +78,7 @@ export const getOrganicHSID = async(payload) => {
         setCookie('hsid', res.data, 3);
         return res.data;
     } catch(err) {
-        console.error('Error:', err);
-        return err;
+        return {status: 'failed', message: err};
     }
 };
 
@@ -112,7 +98,6 @@ export const getUserLocation = async() => {
         }
         return res.data;
     } catch(err) {
-        console.error('Error:', err);
-        return err;
+        return {status: 'failed', message: err};
     }
 };

@@ -24,7 +24,7 @@ const DebtOptin = () => {
             <Container className='optin-container' fluid>
                 <Row className='optin-row row1'>
                     <Col className='optin-header-text'>
-                        Would you like a loan to consolidate debt <b><em>OR</em></b> for any other purpose?
+                        Would you like a loan to consolidate debt <b><em>and</em></b> Pay Taxes?
                     </Col>
                 </Row>
                 <Row className='optin-row row2'>
