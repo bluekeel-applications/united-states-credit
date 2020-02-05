@@ -143,19 +143,19 @@ const InfoRow = () => {
                     <div className='row-column'>
                         <div className='row-column-title'>Reviews</div>
                         <div className='right-border row-column-item-container'>
-                            {renderReviews()}
+                            {!!reviews && renderReviews()}
                         </div>
                     </div>
                     <div className='row-column'>
                         <div className='row-column-title'>Find Credit</div>
                         <div className='right-border row-column-item-container'>
-                            {renderCredit()}
+                            {!!credits && renderCredit()}
                         </div>
                     </div>
                     <div className='row-column'>
                         <div className='row-column-title'>Credit Tips</div>
                         <div className='row-column-item-container'>
-                            {renderTips()}
+                            {!!tips && renderTips()}
                         </div>
                     </div>
                 </div>

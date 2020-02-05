@@ -5,10 +5,7 @@ import { getOfferList } from '../utils/middleware';
 const useOfferFinder = () => {
 	const componentIsMounted = useRef(true);
 	const retry_count = useRef(3);
-	const [offer, setOffer] = useState(null);
-	const [error, setError] = useState(false);
 	const [clicks, setClicks] = useState(0);
-	const [isLoading, setLoading] = useState(false);
 	const { appState, trackingState, dispatchApp } = useContext(AppContext);
 	const { pid } = trackingState;
 	const flow = appState.flowState;
@@ -30,10 +27,10 @@ const useOfferFinder = () => {
 	const selectFromMultiple = (count, endpoints) => {
 		let usageTotal = 0;
 		let activeIndex;
-		
-		let usageArray = endpoints.map((endpoint, i) => {
+	// Create an array of the range values set by their usage percentage...
+		let usageArray = endpoints.map((endpoint, ix) => {
 			let endpointRange;
-			if (i === 0) { 
+			if (ix === 0) { 
 			  usageTotal += endpoint.usage;
 			  endpointRange = range(1, endpoint.usage);
 			} else {
@@ -44,94 +41,99 @@ const useOfferFinder = () => {
 			};
 			return endpointRange;
 		})
-	
-		usageArray.forEach((array, i) => {
-		  if(array.includes(count)) {
-			activeIndex = i;
-		  }
-		})
-		
+	// Then, find the index of the array item that contains the count value within its range
+		usageArray.forEach((array, inx) => {
+		// If offer usage is equal to 0%...
+			if(array.length === 0) {
+				return;
+			}
+		// If offer usage is equal to 100%...
+			if(array.length === 100) {
+				let hasRestrictions = endpoints[inx].restricted || endpoints[inx].states.length > 0 || false;
+				// If there are NO restrictions, use the offer...
+				if(!hasRestrictions) {
+					activeIndex = inx;
+					return;
+				};
+				// If restrictions apply to the user...
+				if(!!trackingState.location && endpoints[inx].states.includes(trackingState.location)) {
+					// Use the fallback
+					activeIndex = inx + 1;
+					return;
+				}
+			}
+		// Otherwise, define the index of the active endpoint offer
+			if(array.includes(count)) {
+				activeIndex = inx;
+			}
+		});
+
 		return endpoints[activeIndex];
 	};
 
 	const handleOfferChoice = (response) => {
+	// Quick check to make sure that offers exist...
 		if(response.endpoints && response.endpoints.length > 0) {
+		// Set the program click_count locally for use later
 			setClicks(response.click_count);
-			//cut off the last two digits of click count
+		// Cut off the last two digits of click count --> we only care about position out of 100
 			let num = clicks.toString();        
 			let digitLength = num.length;
+		// If there are more than 2 digits in click_count, go ahead and clip the head
 			if(digitLength > 2) {
 				setClicks(num.substring(digitLength - 2, digitLength));
 			}
-			let amount = response.endpoints.length === 1 ? 'single' : 'multiple';
-			//if single endpoint, use it...
-			switch(amount) {
-				case 'single':
-					const data = {
-					  link: response.endpoints[0].url,
-					  offer_page: response.endpoints[0].offer_page || 'wall',
-					  four_button: response.endpoints[0].four_button || []
-					};
-					dispatchApp({ type: 'SELECTED_OFFER', payload: data });
-					return data;
-			// If more than one, lets do some work to find the correct offer...
-				case 'multiple':
-					const activeOffer = selectFromMultiple(clicks, response.endpoints);
-					if(!!activeOffer) {
-					  const data = {
-						link: activeOffer.url,
-						offer_page: activeOffer.offer_page || 'wall',
-						four_button: activeOffer.four_button || []
-					  };
-					  dispatchApp({ type: 'SELECTED_OFFER', payload: data});
-					}
-					return data;
-				default:
-					throw new Error(`Not supported action ${amount}`);
-			}
 			
-		} else {
-			let data = {
-			  link: 'https://unitedstatescredit.blog/',
-			  offer_page: 'wall',
-			  four_button: []
+		// If a single offer is returned, use it...
+			if(response.endpoints.length === 1){
+				const data = {
+					link: response.endpoints[0].url,
+					offer_page: response.endpoints[0].offer_page || 'wall',
+					four_button: response.endpoints[0].four_button || [],
+					jump: response.endpoints[0].jump || null
+				};				
+				return data;
+			}
+
+		// If more than one, lets do some work to find the correct offer...
+			const activeOffer = selectFromMultiple(clicks, response.endpoints);
+			if(!!activeOffer) {
+				const data = {
+				  link: activeOffer.url,
+				  offer_page: activeOffer.offer_page || 'wall',
+				  four_button: activeOffer.four_button || [],
+				  jump: activeOffer.jump || null
+				};				
+				return data;
 			};
-			dispatchApp({ type: 'SELECTED_OFFER', payload: data});
-			return;
 		}
 	};
-
+	
+// This is a great place to put a fallback like this example if somehow everything breaks...
 	const fetchOfferList = async () => {
-		// Add a slight deplay so the user get feedback on what is happening
-		setTimeout(async () => {
-			const raw = await getOfferList(reqBody);
-			if (raw[0].status === 'failed' && retry_count.current > 0) {
-				retry_count.current--;
-				fetchOfferList();
-				return;
-			};
-			if(raw[0].status === 'failed' && retry_count.current === 0){
-				setError(raw.message)
-				return;
-			};
-			let offer_obj = handleOfferChoice(raw[0]);
-			setOffer(offer_obj);
-			setLoading(false);
-		}, 1000);
+		const raw = await getOfferList(reqBody);
+		if (raw[0].status === 'failed' && retry_count.current > 0) {
+			retry_count.current--;
+			fetchOfferList();
+			return;
+		};
+		if(raw[0].status === 'failed' && retry_count.current === 0){
+			dispatchApp({ type: 'FAILED_OFFER_SELECTION' });
+			return;
+		};
+		let offer_obj = handleOfferChoice(raw[0]);
+		dispatchApp({ type: 'SELECTED_OFFER', payload: offer_obj });
 	};
 
   	useEffect(() => {		  	
 			if(componentIsMounted.current && isEnd) { 
-				setLoading(true);
 				fetchOfferList();
 			};
 			// Clean-up Function
-			return () => {componentIsMounted.current = false};
+			return () => {componentIsMounted.current = false;};
 			// eslint-disable-next-line
-		},[reqBody, isEnd]
+		},[]
 	);
-
-  	return [offer, error, isLoading];
 }
 
 export default useOfferFinder;

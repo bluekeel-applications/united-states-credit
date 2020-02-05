@@ -50,7 +50,7 @@ const LatestRow = () => {
         <div className='feed-row latest-row-container'>
             <div className='bottom-border row-title'>The Latest</div>
             <div className='row-content-column'>
-                {buildArticleList()}
+                {!!articles && buildArticleList()}
             </div>
         </div>
     )

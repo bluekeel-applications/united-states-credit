@@ -1,15 +1,8 @@
 import { addToClickCount } from '../../utils/middleware';
 
 const initialAppState = {
-    loadingOffers: false,
+    loadingOffers: true,
     showDrawer: false,
-    captured: {
-        eid: null,
-        uid: null,
-        vendor: null,
-        deviceType: null,
-        geoLocale: null
-    },
     flowState: {
         vertical: null,
         loan_type: null,
@@ -31,6 +24,7 @@ const initialAppState = {
     link: null,
     offer_page: null,
     four_button: null,
+    jump: null,
     email: null
 };
 
@@ -186,12 +180,23 @@ const appStateReducer = (state, action) => {
             };
 
         case 'SELECTED_OFFER':
-            const { link, offer_page, four_button } = action.payload
+            const { link, offer_page, four_button, jump } = action.payload
             return {
                 ...state,
                 link,
                 offer_page,
                 four_button,
+                jump,
+                loadingOffers: false
+            };
+
+        case 'FAILED_OFFER_SELECTION':            
+            return {
+                ...state,
+                link: null,
+                offer_page: null,
+                four_button: null,
+                jump: null,
                 loadingOffers: false
             };
 

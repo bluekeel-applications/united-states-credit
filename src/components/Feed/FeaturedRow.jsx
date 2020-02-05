@@ -60,7 +60,7 @@ const FeaturedRow = () => {
                         </div>
                     </Fade>
                     <div className='featured-article-list'>
-                        {articles.length > 0 && (buildArticleList())}
+                        {articles && articles.length > 0 && (buildArticleList())}
                     </div>
                 </div>
             </Fade>
