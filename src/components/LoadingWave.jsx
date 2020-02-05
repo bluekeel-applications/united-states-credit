@@ -17,7 +17,9 @@ const LoadingWave = () => {
 	};
 	
 	return (    
-		<FadeIn>
+		<FadeIn className='wave-loading-container'>
+			<div className='wave-loading-message'>Gathering Personalized Offers...</div>
+			<div className='wave-loading-message'>... please wait</div>
 			<Lottie 
 				className='lottie-loader'
 				options={defaultOptions}

@@ -9,3 +9,17 @@
 .lottie-loader {
 	min-width: 100vw
 }
+
+.wave-loading-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-top: 50px;
+}
+
+.wave-loading-message {
+	font-size: 2rem;
+	font-weight: 300;
+	color: $text-primary;
+}

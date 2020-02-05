@@ -102,19 +102,22 @@ const useOfferFinder = () => {
 	};
 
 	const fetchOfferList = async () => {
-		const raw = await getOfferList(reqBody);
-		if (raw[0].status === 'failed' && retry_count.current > 0) {
-            retry_count.current--;
-            fetchOfferList();
-            return;
-		};
-		if(raw[0].status === 'failed' && retry_count.current === 0){
-            setError(raw.message)
-            return;
-		};
-		let offer_obj = handleOfferChoice(raw[0]);
-		setOffer(offer_obj);
-		setLoading(false);
+		// Add a slight deplay so the user get feedback on what is happening
+		setTimeout(async () => {
+			const raw = await getOfferList(reqBody);
+			if (raw[0].status === 'failed' && retry_count.current > 0) {
+				retry_count.current--;
+				fetchOfferList();
+				return;
+			};
+			if(raw[0].status === 'failed' && retry_count.current === 0){
+				setError(raw.message)
+				return;
+			};
+			let offer_obj = handleOfferChoice(raw[0]);
+			setOffer(offer_obj);
+			setLoading(false);
+		}, 1000);
 	};
 
   	useEffect(() => {		  	
