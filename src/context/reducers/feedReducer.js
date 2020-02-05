@@ -1,6 +1,10 @@
 import { getCachedObject, isObjectCached, setCachedObject } from '../../utils/helpers';
 
 const initialFeedState = {
+    loadingFeatured: true,
+    loadingTips: true,
+    loadingCredit: true,
+    loadingReviews: true,
     loadingFeed: true,
     featured: null,
     tips: isObjectCached('tips') ? getCachedObject('tips') : null,
@@ -10,61 +14,55 @@ const initialFeedState = {
 };
 
 const feedStateReducer = (state, action) => {
-    switch (action.type) {
-        case 'FETCH_FEED_INIT':
-            return {
-                ...state,
-                loadingFeed: true
-            };
+    switch (action.type) {        
 
         case 'FETCHED_FEATURED_FEED':
-            const featuredObj = {
-                title: action.payload.title,
-                link: action.payload.link,
-                categories: action.payload.categories,
-                text: action.payload.contentSnippet,
-                comments: action.payload.comments,
-                snippet: action.payload.content
-            }
-            setCachedObject('featured', featuredObj);
+            const featuredObj = action.payload.map((feature) => ({
+                    title: feature.title,
+                    link: feature.link,
+                    categories: feature.categories,
+                    text: feature.contentSnippet,
+                    comments: feature.comments,
+                    snippet: feature.content
+                }
+            ))            
             return {
                 ...state,
-                featured: featuredObj
+                featured: featuredObj,
+                loadingFeatured: false,
             };
 
         case 'FETCHED_TIPS_FEED':
             setCachedObject('tips', action.payload);
             return {
                 ...state,
-                tips: action.payload
+                tips: action.payload,
+                loadingTips: false,
             };
 
         case 'FETCHED_CREDIT_FEED':
             setCachedObject('credit', action.payload);
             return {
                 ...state,
-                credit: action.payload
+                credit: action.payload,
+                loadingCredit: false,
             };
 
         case 'FETCHED_REVIEW_FEED':
             setCachedObject('reviews', action.payload);
             return {
                 ...state,
-                reviews: action.payload
+                reviews: action.payload,
+                loadingReviews: false,
             };
 
         case 'FETCHED_FEED':
             setCachedObject('feed', action.payload);
             return {
                 ...state,
-                feed: action.payload
-            };
-             
-        case 'FETCH_FEED_SUCCESS':
-            return {
-                ...state,
+                feed: action.payload,
                 loadingFeed: false
-            };        
+            };       
 
         case 'RESET':
             return initialFeedState;        

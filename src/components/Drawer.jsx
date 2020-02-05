@@ -31,7 +31,7 @@ const Drawer = () => {
             <Container style={backdropStyle} fluid>
                 <Row>
                     <Col onClick={closeDrawer} />
-                    <Col xs={10} md={2} className='drawer-container'>                            
+                    <Col xs={10} md={3} className='drawer-container'>                            
                         <Nav className='flex-column'>
                             <LinkContainer 
                                 to='/verticals' 

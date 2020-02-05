@@ -6,83 +6,6 @@ export const buildQueryObj = (flow, pid) => ({
     debt_amount: flow.debt_amount
 });
 
-// Endpoint selection tools
-// const range = (start, end) => {
-//     return (new Array(end - start + 1)).fill(undefined).map((_, i) => i + start);
-// };
-
-// const selectFromMultiple = (count, endpoints) => {
-//     let usageTotal = 0;
-//     let activeIndex;
-    
-//     let usageArray = endpoints.map((endpoint, i) => {
-//         let endpointRange;
-//         if (i === 0) { 
-//           usageTotal += endpoint.usage;
-//           endpointRange = range(1, endpoint.usage);
-//         } else {
-//           let newStart = usageTotal +1;
-//           let end = usageTotal + endpoint.usage;
-//           endpointRange = range(newStart, end);
-//           usageTotal += endpoint.usage;
-//         };
-//         return endpointRange;
-//     })
-
-//     usageArray.forEach((array, i) => {
-//       if(array.includes(count)) {
-//         activeIndex = i;
-//       }
-//     })
-    
-//     return endpoints[activeIndex];
-// };
-
-// export const handleOfferChoice = (response, dispatchApp) => {
-//   if(response.endpoints && response.endpoints.length > 0) {
-//       let clicks = response.click_count;
-//       let num = clicks.toString();        
-//       let digitLength = num.length;
-//       if(digitLength > 2) {
-//           clicks = num.substring(digitLength - 2, digitLength);
-//       }
-//       let amount = response.endpoints.length === 1 ? 'single' : 'multiple';
-  
-//       switch(amount) {
-//           case 'single':
-//               const data = {
-//                 link: response.endpoints[0].url,
-//                 offer_page: response.endpoints[0].offer_page || 'wall',
-//                 four_button: response.endpoints[0].four_button || []
-//               };
-//               dispatchApp({ type: 'SELECTED_OFFER', payload: data });
-//               return;
-//           case 'multiple':
-//               const activeOffer = selectFromMultiple(clicks, response.endpoints);
-//               if(!!activeOffer) {
-//                 const data = {
-//                   link: activeOffer.url,
-//                   offer_page: activeOffer.offer_page || 'wall',
-//                   four_button: activeOffer.four_button || []
-//                 };
-//                 dispatchApp({ type: 'SELECTED_OFFER', payload: data});
-//               }
-//               return;
-//           default:
-//               throw new Error(`Not supported action ${amount}`);
-//       }
-      
-//   } else {
-//       let data = {
-//         link: 'https://unitedstatescredit.blog/',
-//         offer_page: 'wall',
-//         four_button: []
-//       };
-//       dispatchApp({ type: 'SELECTED_OFFER', payload: data});
-//       return;
-//   }
-// };
-
 // Cookie Tools
 export const setCookie = (cname, cvalue, exdays) => {
     let d = new Date();
@@ -126,7 +49,7 @@ export const setCookies = (tracking) => {
 // Local Storage Tools
 export const getCachedObject = (key) => {
     const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null
+    return JSON.parse(item)
 };
 
 export const isObjectCached = (key) => {

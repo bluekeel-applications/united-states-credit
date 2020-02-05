@@ -7,7 +7,7 @@ let parser = new Parser();
 export const fetchFeatured = async() => {
     try{
         const rawRes = await parser.parseURL(CORS_PROXY + 'https://unitedstatescredit.blog/category/featured/feed/');
-        return rawRes.items[0];
+        return rawRes.items;
     } catch(err) {
         console.warn('Unable to fetch feed data:', err)
         return

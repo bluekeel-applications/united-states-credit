@@ -3,6 +3,7 @@ import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
 // import { handleOfferChoice, buildQueryObj } from '../../utils/helpers';
 // import { getOfferList } from '../../utils/middleware';
+import LoadingWave from '../LoadingWave';
 import useOfferFinder from '../../hooks/useOfferFinder';
 import FourButton from './FourButton';
 import OneButton from './OneButton';
@@ -12,6 +13,7 @@ import Zoom from 'react-reveal/Zoom';
 
 const Offers = () => {
     const { appState } = useContext(AppContext);
+
     const [ offer, error, isLoading ] = useOfferFinder();
     // const componentIsMounted = useRef(true);
     let history = useHistory();
@@ -53,7 +55,7 @@ const Offers = () => {
     return (
         <Zoom>
             <div className='offer-container'>
-                {isLoading ? (<div>Loading</div>) : (<div>{!error && offer ? showOffers() : error }</div>)}
+                {isLoading ? <LoadingWave /> : (<div>{!error && offer ? showOffers() : error }</div>)}
             </div>
         </Zoom>
     )

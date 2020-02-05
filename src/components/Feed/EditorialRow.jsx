@@ -6,7 +6,6 @@ import { Fade, Zoom } from 'react-reveal';
 const EditorialRow = () => {
     const { feedState } = useContext(AppContext);
     let history = useHistory();
-
     const articles = feedState.feed;
 
     const handleLinkClick = (linkout, e) => {
@@ -65,7 +64,7 @@ const EditorialRow = () => {
                         </div>
                     </Zoom>
                     <div className='editorial-article-list'>
-                        {renderArticleList()}
+                        {!!articles && articles.length > 0 && renderArticleList()}
                     </div>
                 </div>
             </div>

@@ -5,7 +5,6 @@ import { getSrcFromHtml } from '../../utils/feedTools';
 
 const FeaturedRow = () => {
     const { feedState } = useContext(AppContext);
-    const feed = feedState.featured;
     const articles = feedState.feed;
 
     const handleLinkClick = (linkout, e) => {
@@ -50,14 +49,14 @@ const FeaturedRow = () => {
         )
     }
 
-    return (
-        !feedState.loadingFeed && feed && (
-            <Fade bottom>
+    return ( 
+        feedState.featured.map((feature, i) => (
+            <Fade key={`featured_row-${i}`} bottom>
                 <div className='feed-row featured-row-container'>
                     <Fade left>
-                        <div className='featured-article-container' onClick={(e) => handleLinkClick(feed.link, e)}>
-                            <div className='featured-article-title title-hover'>{feed.title}</div>
-                            <img className='featured-article-img' src={getSrcFromHtml(feed.snippet)} alt='featured-article-img' />
+                        <div className='featured-article-container' onClick={(e) => handleLinkClick(feature.link, e)}>
+                            <div className='featured-article-title title-hover'>{feature.title}</div>
+                            <img className='featured-article-img' src={getSrcFromHtml(feature.snippet)} alt='featured-article-img' />
                         </div>
                     </Fade>
                     <div className='featured-article-list'>
@@ -65,7 +64,7 @@ const FeaturedRow = () => {
                     </div>
                 </div>
             </Fade>
-        )
+        ))
     );
 };
 
