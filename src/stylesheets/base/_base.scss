@@ -61,3 +61,7 @@ iframe {
 button {
   border: none !important;
 }
+
+*:focus {
+  outline:none !important
+}

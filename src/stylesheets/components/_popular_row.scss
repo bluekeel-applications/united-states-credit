@@ -2,6 +2,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    @include respond-to('small') {
+        padding: 0 10px;
+    }
 }
 
 .card-text {

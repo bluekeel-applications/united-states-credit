@@ -4,6 +4,7 @@ import OptinButton from '../OptinButton';
 import { useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import Zoom from 'react-reveal/Zoom';
+import Breadcrumbs from '../Breadcrumbs';
 
 const DebtOptin = () => {
     const { dispatchApp } = useContext(AppContext);    
@@ -20,6 +21,8 @@ const DebtOptin = () => {
     };
 
     return (
+        <>
+        <Breadcrumbs />
         <Zoom>
             <Container className='optin-container' fluid>
                 <Row className='optin-row row1'>
@@ -59,6 +62,7 @@ const DebtOptin = () => {
                 </Row>
             </Container>
         </Zoom>
+        </>
     )
 };
 

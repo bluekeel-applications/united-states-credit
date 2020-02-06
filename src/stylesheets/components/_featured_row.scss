@@ -15,6 +15,7 @@
     @include respond-to('small') {
         width: 100%;
         margin-top: 25px;
+        min-height: unset;
     }
 }
 
@@ -24,7 +25,7 @@
     letter-spacing: -2px;
     line-height: 1.1em;
     @include respond-to('small') {
-        font-size: 2rem;
+        font-size: 28px;
         padding: 20px;
     }
 }
@@ -37,7 +38,7 @@
     justify-content: space-between;
     margin: 10px;
     @include respond-to('small') {
-        min-height: 100px;
+        min-height: fit-content;
         padding: 0 20px;
     }
 }
@@ -48,7 +49,8 @@
     letter-spacing: -2px;
     line-height: 1.1em;
     @include respond-to('small') {
-        font-size: 1.4rem;
+        font-size: 18px;
+        letter-spacing: -1px;
     }
 }
 
@@ -56,15 +58,21 @@
     display: inline-flex;
     flex-wrap: nowrap;
     width: 100%;
-    justify-content: flex-end;
-    margin-top: 10px;
+    justify-content: flex-start;
+    margin-top: 20px;
 }
 
 .category-item {
     font-size: 0.5rem;
     text-overflow: initial;
     font-weight: 300;
+    color: $mid-grey;
+    text-decoration: underline $light-grey;
+}
+
+.category-item:hover {
     color: $light-grey;
+    text-decoration: none;
 }
 
 .title-hover:hover {

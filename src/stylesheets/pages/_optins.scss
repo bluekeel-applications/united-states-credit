@@ -1,6 +1,10 @@
 .optin-container {
     min-width: 100%;
     padding: 30px 10px 0 10px;
+
+    @include respond-to('small') {
+        padding: 0 30px;
+    }
 }
 
 .email-optin-container {

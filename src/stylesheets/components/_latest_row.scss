@@ -5,7 +5,7 @@
     align-items: flex-start;
     margin-top: 100px;
     @include respond-to('small') {
-        padding: 0 20px; 
+        padding: 0; 
         margin-top: 25px;
     }
     min-height: max-content;
@@ -16,9 +16,9 @@
     padding: 20px 0;
     @include respond-to('small') {
         display: flex;
-        flex-direction: column;
+        flex-flow: row nowrap;
         width: 100%;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
     }
 }
@@ -31,7 +31,7 @@
     justify-content: space-evenly;
     @include respond-to('small') {
         width: 100%;
-        padding: 10px 0;
+        padding: 10px;
     }
 }
 
@@ -39,6 +39,7 @@
     justify-content: flex-start;
 }
 
+.card-text,
 .text-column {
     display: flex;
     flex-direction: column;
@@ -50,8 +51,13 @@
     font-size: 1.2rem;
     line-height: 1.25em;
     @include respond-to('small') {
-       font-size: 1rem;
-       padding: 0 10px;
+        display: none;
+    }
+}
+
+.card-text {
+    @include respond-to('small') {
+        display: flex;
     }
 }
 

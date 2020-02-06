@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 import Zoom from 'react-reveal/Zoom';
+import Breadcrumbs from '../Breadcrumbs';
 
 const EmailOptin = () => {
     const { dispatchApp } = useContext(AppContext);    
@@ -37,6 +38,8 @@ const EmailOptin = () => {
     };
 
     return (
+        <>
+        <Breadcrumbs />
         <Zoom>
             <div className='email-optin-container'>
                 <div className='email-optin-card'>
@@ -77,6 +80,7 @@ const EmailOptin = () => {
                 </div>            
             </div>
         </Zoom>
+        </>
     )
 };
 

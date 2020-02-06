@@ -31,7 +31,7 @@ const LatestRow = () => {
                         <div className='article-title title-hover'>{article.title}</div>
                         <div className='keyword-link-container tags-left bottom-border'>
                             {article.categories.map((category, j) => (
-                                <div className='keyword-link key-left' key={`category-item-${j}`}>
+                                <div className='keyword-link' key={`category-item-${j}`}>
                                     <a className='category-item' href={`https://unitedstatescredit.blog/2018/11/06/earn-100s-by-opening-up-an-online-checking-account-3/`}>
                                         <span>{category}</span>
                                     </a>

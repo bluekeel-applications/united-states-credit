@@ -16,7 +16,7 @@
 
 .flow-button-icon {
     font-size: 40px;
-    margin: 0 20px;
+    margin-right: 20px;
 }
 
 .icon__left {
@@ -28,10 +28,15 @@
 }
 
 .is_start {
-    justify-content: center;
-    margin: 35px 0;
-    font-size: 1.5rem;
+    justify-content: space-evenly;
     text-decoration: none;
+    font-size: 1.6rem;
+    // overflow: hidden;
+    text-align: center;
+
+    // @include respond-to('small') {
+    //     max-width: 50%;
+    // }
 }
 
 .button-link:hover,
@@ -39,6 +44,10 @@
 .button-link:link,
 .button-link:visited {
     text-decoration: none;
+}
+
+.button-link .is_start {
+    margin-top: 20px
 }
 
 .optin__button {

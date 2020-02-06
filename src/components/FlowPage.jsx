@@ -20,7 +20,7 @@ const FlowPage = ({page, handleClick}) => {
 
     return (
         locals && (
-            <Fade top>
+            <Fade top className='app-bg_container'>
                 <>
                     <Zoom>
                         <div className='choose-container'>

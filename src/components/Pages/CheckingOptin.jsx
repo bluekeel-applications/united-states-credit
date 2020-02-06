@@ -4,6 +4,7 @@ import OptinButton from '../OptinButton';
 import { useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import Zoom from 'react-reveal/Zoom';
+import Breadcrumbs from '../Breadcrumbs';
 
 const CheckingOptin = () => {
     const { appState, dispatchApp } = useContext(AppContext);    
@@ -13,6 +14,10 @@ const CheckingOptin = () => {
         let currently = appState.flowState.vertical;
         switch(currently) {
             case 'personal_loans':                
+                history.push('/email_optin');
+                break;            
+            
+            case 'credit_cards':                
                 history.push('/email_optin');
                 break;            
             
@@ -32,6 +37,8 @@ const CheckingOptin = () => {
     };
 
     return (
+        <>
+        <Breadcrumbs />
         <Zoom>
             <Container className='optin-container' fluid>
                 <Row className='optin-row row1'>
@@ -80,6 +87,7 @@ const CheckingOptin = () => {
                 </Row>
             </Container>
         </Zoom>
+        </>
     )
 };
 

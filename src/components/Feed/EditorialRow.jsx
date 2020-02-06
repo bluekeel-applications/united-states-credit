@@ -35,7 +35,7 @@ const EditorialRow = () => {
         return(
             editorialList.map((article, i) => (
                 <Fade right key={`featured-article-list-item-${i}`}>
-                    <div className='editorial-article-list-item' onClick={(e) => handleLinkClick(article.link, e)}>
+                    <div className='featured-article-list-item editorial-article-list-item' onClick={(e) => handleLinkClick(article.link, e)}>
                         <div className='article-title title-hover'>{article.title}</div>
                         <div className='keyword-link-container bottom-border'>
                             {article.categories.map((category, j) => (

@@ -5,14 +5,10 @@ import Drawer from './Drawer';
 import NavbarTop from './NavbarTop';
 import Feed from './Feed';
 import Footer from './Footer';
-import { Container, Row, Col } from 'react-bootstrap';
 
 import { getOrganicHSID } from '../utils/middleware';
 import { getCookie } from '../utils/helpers';
 import useGeoLocation from '../hooks/useGeoLocation';
-import flagLeft from '../assets/images/flag_left.png';
-import flagRight from '../assets/images/flag_right.png';
-import Breadcrumbs from './Breadcrumbs';
 
 const App = () => {
   const { dispatchTracking } = useContext(AppContext);
@@ -63,24 +59,15 @@ const App = () => {
   }, []);
 
   return (
-    <Container className='App' fluid style={{padding: '0px'}}>
-      <NavbarTop />
-      <Row noGutters>
-        <Col className={'d-sm-none d-md-block flag-col'} >
-          <img src={flagLeft} alt='flagLeft' height='auto' />
-        </Col>
-        <Col lg='8' md='10'>
-          <Breadcrumbs />
-          <Routes />
-          <Feed />
-        </Col>
-        <Col className={'d-sm-none d-md-block flag-col'} >
-          <img src={flagRight} alt='flagRight' height='auto' />
-        </Col>
-      </Row>
-      <Footer />
+    <div className='App app-bg_container' fluid style={{padding: '0px'}}>
+      <NavbarTop />      
+      {/* <div className='app-bg_container'> */}
+        <Routes />
+        <Feed />
+        <Footer />
+      {/* </div>       */}
       <Drawer />
-    </Container>
+    </div>
   );
 }
 

@@ -27,11 +27,11 @@ const LatestRow = () => {
 
         return (
             popularList.map((article, i) => (
-                <Card key={`article-card_${i}`} style={{ minWidth: '13rem', marginBottom: '20px' }} className='article-card' onClick={(e) => handleLinkClick(article.link, e)}>
+                <Card key={`article-card_${i}`} style={{ minWidth: '20vw', marginBottom: '20px' }} className='article-card' onClick={(e) => handleLinkClick(article.link, e)}>
                     <Card.Body className='card-body'>
                     <Card.Title className='row-column-item-title'>{article.title}</Card.Title>
                     <Card.Img variant="top" src={getSrcFromHtml(article.html)} />
-                    <Card.Text className='text-column card-text'>
+                    <Card.Text className='card-text'>
                         {trimSnippet(article.text)} 
                     </Card.Text>
                     </Card.Body>                
