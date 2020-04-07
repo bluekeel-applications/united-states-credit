@@ -12,7 +12,7 @@ const USCLayout = ({ children }) => {
             {children}
         </div>               
     )
-}                           
+};                
 
 
 const OfferLayout = ({ children }) =>

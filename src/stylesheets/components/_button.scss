@@ -42,7 +42,12 @@
 .button-link:hover,
 .button-link:active,
 .button-link:link,
-.button-link:visited {
+.button-link:visited,
+.is_start:hover,
+.is_start:active,
+.is_start:link,
+.is_start:visited,
+ {
     text-decoration: none;
 }
 
@@ -158,5 +163,22 @@
 .offer-multi_button-icon {
     font-size: 2.2rem;
     padding: 5px;
+}
+
+.is_start {
+    position: absolute;
+    top: 105px;
+    padding: 0;
+    z-index: 10001;
+    @include respond-to('small') {
+        top: 50px;
+    }
+}
+
+.is_start .sticky {
+    position: fixed;
+    top: 5px;
+    height: 40px;
+    width: 190px;
 }
 

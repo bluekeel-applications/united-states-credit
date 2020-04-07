@@ -38,7 +38,8 @@ import {
     faAngleDoubleRight,
     faChevronDoubleRight,
     faThumbsUp,
-    faBlog
+    faBlog,
+    faTimes,
 } from '@fortawesome/pro-light-svg-icons';
 
 function initFontAwesome() {
@@ -80,7 +81,8 @@ function initFontAwesome() {
         faAngleDoubleRight,
         faChevronDoubleRight,
         faThumbsUp,
-        faBlog
+        faBlog,
+        faTimes,
     );
 }
 

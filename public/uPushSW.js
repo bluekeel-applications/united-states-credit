@@ -1,0 +1,1 @@
+importScripts('https://sdk.upush.co/upushSW.js');

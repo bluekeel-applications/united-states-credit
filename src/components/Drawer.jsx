@@ -13,7 +13,8 @@ const Drawer = () => {
         height: '100vh',
         left: '0',
         top: '0',
-        backgroundColor: 'rgba(0, 0, 0, 0.75)'
+        backgroundColor: 'rgba(0, 0, 0, 0.75)',
+        zIndex: 100000
     };
 
     const handleLinkOutClick = (url, e) => {
@@ -92,6 +93,16 @@ const Drawer = () => {
                                     className='drawer-button-icon'
                                 />
                                 Blog
+                            </NavItem>                            
+                            <NavItem 
+                                onClick={closeDrawer}
+                                className='drawer-list-item'
+                            >
+                                <FontAwesomeIcon
+                                    icon={['fal', 'times']}
+                                    className='drawer-button-icon'
+                                />
+                                Close
                             </NavItem>                            
                         </Nav>                                
                     </Col>
