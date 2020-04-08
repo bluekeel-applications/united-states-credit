@@ -7,6 +7,7 @@
 
 .choose-container {
     margin: 25px;
+    min-height: 400px;
     @include respond-to('small') {
         margin: 10px 25px 25px 25px;
     }
