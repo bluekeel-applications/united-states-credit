@@ -1,6 +1,26 @@
 import { useEffect, useContext, useRef, useState } from 'react';
 import { AppContext } from '../context';
-import { getUserLocation } from '../utils/middleware';
+import axios from 'axios';
+
+const getUserLocation = async() => {
+    let geoLink = 'https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572' ;
+    try{
+        const res = await axios({
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: geoLink
+        });
+        if(res.status !== 200) {
+            throw new Error('Error getting user location.');
+        }
+        return res.data;
+    } catch(err) {
+        return {status: 'failed', message: err};
+    }
+};
 
 const useGeoLocation = () => {
     const componentIsMounted = useRef(true);
@@ -19,7 +39,7 @@ const useGeoLocation = () => {
             setError(true);
             return;
         };
-        dispatchTracking({ type: 'LOCATION_FOUND', payload: res.state})
+        dispatchTracking({ type: 'LOCATION_FOUND', payload: { state: res.state, ip_address: res.IPv4 }});
     };
 
     useEffect(() => {

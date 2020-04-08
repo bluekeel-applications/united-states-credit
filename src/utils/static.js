@@ -5,7 +5,7 @@ export const FLOW_DATA = {
             {
                 icon: ['left', 'fal', 'credit-card'],
                 text: 'Credit Cards',
-                color: 'blue',
+                color: 'hsw1',
                 value: 'credit_cards'
             },
             {
@@ -17,7 +17,7 @@ export const FLOW_DATA = {
             {
                 icon: ['left', 'fal', 'home-heart'],
                 text: 'Home Loans',
-                color: 'red',
+                color: 'hsw2',
                 value: 'home_loans'
             },
             {
@@ -34,7 +34,7 @@ export const FLOW_DATA = {
             {
                 icon: ['left', 'fal', 'percent'],
                 text: 'Low Interest',
-                color: 'blue',
+                color: 'hsw1',
                 value: 'low_interest'
             },
             {
@@ -46,7 +46,7 @@ export const FLOW_DATA = {
             {
                 icon: ['left', 'fal', 'gift'],
                 text: 'Reward',
-                color: 'red',
+                color: 'hsw2',
                 value: 'rewards'
             },
             {
@@ -70,7 +70,7 @@ export const FLOW_DATA = {
             {
                 icon: ['left', 'fal', 'briefcase'],
                 text: 'Business',
-                color: 'red',
+                color: 'hsw2',
                 value: 'business'
             },
             {
@@ -82,7 +82,7 @@ export const FLOW_DATA = {
             {
                 icon: ['left', 'fal', 'dollar-sign'],
                 text: 'Prepaid',
-                color: 'blue',
+                color: 'hsw1',
                 value: 'prepaid'
             },
         ]
@@ -100,14 +100,14 @@ export const FLOW_DATA = {
             {
                 icon: ['left', 'fal', 'truck-monster'],
                 text: 'SUV',
-                color: 'light_blue',
+                color: 'hsw1',
                 value: 'suv',
                 crumb: ''
             },
             {
                 icon: ['left', 'fal', 'truck-pickup'],
                 text: 'Truck',
-                color: 'red',
+                color: 'hsw2',
                 value: 'truck',
                 crumb: ''
             },
@@ -133,28 +133,28 @@ export const FLOW_DATA = {
             {
                 icon: ['left', 'fal', 'lightbulb-dollar'],
                 text: 'Debt Consolidation',
-                color: 'blue',
+                color: 'light_blue',
                 value: 'debt_consolidation',
                 crumb: ''
             },
             {
                 icon: ['left', 'fal', 'money-check-edit-alt'],
                 text: 'Paying Bills',
-                color: 'light_blue',
+                color: 'hsw1',
                 value: 'pay_bills',
                 crumb: ''
             },
             {
                 icon: ['left', 'fal', 'shopping-cart'],
                 text: 'Make a Purchase',
-                color: 'red',
+                color: 'dark_blue',
                 value: 'make_purchase',
                 crumb: ''
             },
             {
                 icon: ['left', 'fal', 'hands-usd'],
                 text: 'Emergency Cash',
-                color: 'dark_blue',
+                color: 'hsw2',
                 value: 'emergency_cash',
                 crumb: ''
             },
@@ -187,21 +187,21 @@ export const FLOW_DATA = {
             {
                 icon: ['left', 'fal', 'donate'],
                 text: 'Lease to Own',
-                color: 'light_blue',
+                color: 'hsw2',
                 value: 'lease_to_own',
                 crumb: ''
             },
             {
                 icon: ['left', 'fal', 'gopuram'],
                 text: 'HELOC',
-                color: 'red',
+                color: 'blue',
                 value: 'heloc',
                 crumb: ''
             },
             {
                 icon: ['left', 'fal', 'shopping-cart'],
                 text: 'Purchase',
-                color: 'dark_blue',
+                color: 'hsw1',
                 value: 'purchase',
                 crumb: ''
             },
@@ -213,7 +213,7 @@ export const FLOW_DATA = {
             {
                 icon: ['left', 'fal', 'credit-card'],
                 text: 'Credit Cards',
-                color: 'blue',
+                color: 'hsw2',
                 value: 'credit_card'
             },
             {
@@ -225,7 +225,7 @@ export const FLOW_DATA = {
             {
                 icon: ['left', 'fal', 'heart-rate'],
                 text: 'Medical Bills',
-                color: 'red',
+                color: 'hsw1',
                 value: 'medical'
             },
             {
@@ -266,7 +266,7 @@ export const FLOW_DATA = {
             {
                 icon: ['left', 'fal', 'money-bill-wave'],
                 text: '$30,000 - $50,000',
-                color: 'red',
+                color: 'hsw2',
                 value: '30000-50000'
             },
             {

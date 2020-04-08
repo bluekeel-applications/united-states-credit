@@ -73,6 +73,14 @@
   background-color: $red;
   color: $white;
 }
+.bg__hsw1 {
+  background-color: $hsw-dark;
+  color: $white;
+}
+.bg__hsw2 {
+  background-color: $hsw-light;
+  color: $white;
+}
 
 .content-container {
   display: flex;

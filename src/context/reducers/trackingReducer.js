@@ -8,6 +8,7 @@ const initialTrackingState = {
     uid: checkCookie('uid') ? getCookie('uid') : null,
     hsid: checkCookie('hsid') ? getCookie('hsid') : null,
     location: checkCookie('state') ? getCookie('state') : null,
+    ip_address: checkCookie('ip') ? getCookie('ip') : null,
     kwd: checkCookie('kwd') ? getCookie('kwd') : null,
     se: checkCookie('se') ? getCookie('se') : null,
     pacid: checkCookie('pacid') ? getCookie('pacid') : null,
@@ -37,13 +38,22 @@ const trackingStateReducer = (state, action) => {
             return {
                 ...state,
                 ...tracking
-            };        
-        
-        case 'LOCATION_FOUND':
-            setCookie('state', action.payload, 3);
+            };
+
+        case 'HSID_FOUND':
+            setCookie('hsid', action.payload, 3);
             return {
                 ...state,
-                location: action.payload
+                hsid: action.payload
+                };
+            
+        case 'LOCATION_FOUND':
+            setCookie('state', action.payload.state, 3);
+            setCookie('ip', action.payload.ip_address, 3);
+            return {
+                ...state,
+                location: action.payload.state,
+                ip_address: action.payload.ip_address,
             };        
         
         case 'KEYWORD_SELECTED':

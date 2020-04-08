@@ -38,9 +38,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy-staging": "aws s3 sync build/ s3://staging-united-states-credit --acl public-read",
-    "deploy-pch": "aws s3 sync build/ s3://pch-united-states-credit --acl public-read --delete",
-    "deploy-prod": "aws s3 sync build/ s3://united-states-credit --acl public-read",
+    "deploy-staging": "aws s3 sync build/ s3://staging-united-states-credit --profile bluekeel --acl public-read --delete",
+    "deploy-pch": "aws s3 sync build/ s3://pch-united-states-credit --profile bluekeel --acl public-read --delete",
+    "deploy-hsw": "aws s3 sync build/ s3://how-stuff-works-usc --profile bluekeel --acl public-read --delete",
+    "deploy-prod": "aws s3 sync build/ s3://united-states-credit --profile bluekeel --acl public-read --delete",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
