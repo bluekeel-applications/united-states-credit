@@ -10,3 +10,11 @@
         line-height: 1.1;
     }
 }
+
+.get-started__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10vh 0;
+}

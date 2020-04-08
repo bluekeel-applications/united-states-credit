@@ -6,8 +6,6 @@
     width: 100%;
     max-width: 1200px;
     margin-bottom: 10%;
-    position: relative;
-    top: 200px;
     @include respond-to('small') {
         padding: 0;
     }

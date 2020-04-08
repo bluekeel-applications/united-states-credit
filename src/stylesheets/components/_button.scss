@@ -46,8 +46,7 @@
 .is_start:hover,
 .is_start:active,
 .is_start:link,
-.is_start:visited,
- {
+.is_start:visited {
     text-decoration: none;
 }
 
@@ -165,20 +164,10 @@
     padding: 5px;
 }
 
-.is_start {
-    position: absolute;
-    top: 105px;
-    padding: 0;
-    z-index: 10001;
-    @include respond-to('small') {
-        top: 50px;
-    }
-}
-
-.is_start .sticky {
-    position: fixed;
-    top: 5px;
-    height: 40px;
-    width: 190px;
-}
+// .is_start .sticky {
+//     position: fixed;
+//     top: 5px;
+//     height: 40px;
+//     width: 190px;
+// }
 

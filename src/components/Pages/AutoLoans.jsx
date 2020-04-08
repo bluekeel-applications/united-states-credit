@@ -27,12 +27,10 @@ const AutoLoans = () => {
     };
 
     return (
-        <div className='flow-container'>
-            <FlowPage
-                page={page_value}
-                handleClick={handleFlowClick}
-            />
-        </div>
+        <FlowPage
+            page={page_value}
+            handleClick={handleFlowClick}
+        />
     )
 };
 

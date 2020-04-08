@@ -11,12 +11,10 @@ const Verticals = () => {
     };
 
     return (
-        <div className='flow-container'>
-            <FlowPage 
-                page={'verticals'}
-                handleClick={handleVerticalClick}
-            />
-        </div>
+        <FlowPage 
+            page={'verticals'}
+            handleClick={handleVerticalClick}
+        />
     )
 };
 

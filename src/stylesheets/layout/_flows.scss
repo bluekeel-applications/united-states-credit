@@ -5,12 +5,30 @@
     align-items: center;
 }
 
-.choose-container {
-    margin: 25px;
+.flow-content__container {
+    width: 100%;
+    display: inline-flex;
+    flex-flow: row stretch;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.flow-content__flag {
+    width: 20%;
+}
+
+.flow-content__choose-container {
+    padding: 5vh 0;
+    width: 60%;
+    margin: 0;
     min-height: 400px;
     @include respond-to('small') {
         margin: 10px 25px 25px 25px;
     }
+}
+
+.with_crumbs {
+    padding: 0 0 5vh 0;
 }
 
 .flow-page-container {

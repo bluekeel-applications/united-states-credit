@@ -37,13 +37,11 @@ const PersonalLoans = () => {
         }
     };
 
-    return (        
-        <div className='flow-container'>
-            <FlowPage
-                page={page_value}
-                handleClick={handleFlowClick}
-            />
-        </div>
+    return (
+        <FlowPage
+            page={page_value}
+            handleClick={handleFlowClick}
+        />
     )
 };
 
