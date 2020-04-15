@@ -62,7 +62,7 @@ const Offers = () => {
                 return (
                     <OneButton />
                 )
-            case 'wall':
+            case 'offer_wall':
                 return (
                     <Wall />
                 )
