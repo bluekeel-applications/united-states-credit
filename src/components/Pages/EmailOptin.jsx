@@ -1,15 +1,14 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import { AppContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from 'react-bootstrap/Button';
+import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
-import Zoom from 'react-reveal/Zoom';
-import Breadcrumbs from '../Breadcrumbs';
+import FlowPage from '../Layout/FlowPage';
 
 const EmailOptin = () => {
     const { dispatchApp } = useContext(AppContext);    
     let history = useHistory();
-    const [disabled, setReadyState] = useState(true);
+    const [disabled, setDisabledState] = useState(true);
     const [termsChecked, checkTerms] = useState(false);
     const [validEmail, setEmailReady] = useState(false);
     const [showInputError, toggleError] = useState(false);
@@ -25,22 +24,30 @@ const EmailOptin = () => {
 
     const handleSubmit = () => {
         let emailValue = email_input_el.current.value;
-        if(termsChecked && validEmail) {
+        if(!disabled) {
             dispatchApp({ type: 'EMAIL_OPT_IN', payload: emailValue });
             history.push('/offers');
+            return;
         };
         toggleError(true);
     };
 
     const toggleTerms = () => {
         checkTerms(!termsChecked);
-        setReadyState(!disabled);
     };
 
+    useEffect(() => {
+            if(validEmail && termsChecked) {
+                setDisabledState(false);
+                return;
+            };
+
+        return () => setDisabledState(true);
+        // eslint-disable-next-line
+    }, [validEmail, termsChecked])
+
     return (
-        <>
-        <Breadcrumbs />
-        <Zoom>
+        <FlowPage showCrumbs>
             <div className='email-optin-container'>
                 <div className='email-optin-card'>
                     <div className='email-optin-text'>Would you like to receive relevant credit offers from <b><em>The Card Note</em></b> and <b><em>Card Matcher</em></b> directly to your inbox?</div>                    
@@ -65,22 +72,21 @@ const EmailOptin = () => {
                                 </div>
                             </div>
                             <div className='email-button-group'>
-                                <Button block className={`email_submit-button ${!termsChecked && 'disabled'}`} onClick={handleSubmit} disabled={disabled}>
+                                <Button className={`email_submit-button ${!termsChecked && 'disabled'}`} variant='contained' color='primary' onClick={handleSubmit} disabled={disabled}>
                                     <span className='button-text' >Next</span>
                                     <FontAwesomeIcon
                                         icon={['fal', 'angle-double-right']}
                                         className='next-button-icon'
                                     />
                                 </Button>
-                                <Button variant='link' className='no-thanks' onClick={() => history.push('/offers')}>
+                                <Button className='no-thanks' onClick={() => history.push('/offers')}>
                                     No Thanks
                                 </Button>
                             </div>
                         </form>                        
                 </div>            
             </div>
-        </Zoom>
-        </>
+        </FlowPage>
     )
 };
 

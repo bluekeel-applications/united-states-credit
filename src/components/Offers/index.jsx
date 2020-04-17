@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import LoadingWave from '../LoadingWave';
-import Loading from '../Loading';
+import LoadingWave from '../Shared/LoadingWave';
+import Loading from '../Shared/Loading';
 import { useQuery } from '@apollo/react-hooks';
 import { ENDPOINT_OFFER } from '../../utils/queries';
 import FourButton from './FourButton';

@@ -3,6 +3,7 @@ import { addToClickCount } from '../../utils/middleware';
 const initialAppState = {
     loadingOffers: true,
     showDrawer: false,
+    showExpansion: true,
     flowState: {
         vertical: null,
         loan_type: null,
@@ -31,17 +32,29 @@ const initialAppState = {
 const appStateReducer = (state, action) => {
     switch (action.type) {
 
-        case 'SHOW_DRAWER':
+        // case 'SHOW_DRAWER':
+        //     return {
+        //         ...state,
+        //         showDrawer: true
+        //     };        
+
+        // case 'HIDE_DRAWER':
+        //     return {
+        //         ...state,
+        //         showDrawer: false
+        //     };
+
+        case 'SHOW_EXPANSION':
             return {
                 ...state,
-                showDrawer: true
+                showExpansion: true
             };        
 
-        case 'HIDE_DRAWER':
+        case 'HIDE_EXPANSION':
             return {
                 ...state,
-                showDrawer: false
-            };        
+                showExpansion: false
+            }; 
 // Flow Selections
         case 'VERTICAL_PICKED':
             return {

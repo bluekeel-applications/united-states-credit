@@ -57,29 +57,29 @@
 /** 
  * Choose a button background color based on className
 */
-.bg__light_blue {
-  background-color: $light-blue;
-  color: $white;
+.MuiButtonBase-root.bg__light_blue {
+  background-color: $light-blue !important;
+  color: $white !important;
 }
-.bg__blue {
-  background-color: $medium-blue;
-  color: $white;
+.MuiButtonBase-root.bg__blue {
+  background-color: $medium-blue !important;
+  color: $white !important;
 }
-.bg__dark_blue {
-  background-color: $dark-blue;
-  color: $white;
+.MuiButtonBase-root.bg__dark_blue {
+  background-color: $dark-blue !important;
+  color: $white !important;
 }
-.bg__red {
-  background-color: $red;
-  color: $white;
+.MuiButtonBase-root.bg__red {
+  background-color: $red !important;
+  color: $white !important;
 }
-.bg__hsw1 {
-  background-color: $hsw-dark;
-  color: $white;
+.MuiButtonBase-root.bg__hsw1 {
+  background-color: $hsw-dark !important;
+  color: $white !important;
 }
-.bg__hsw2 {
-  background-color: $hsw-light;
-  color: $white;
+.MuiButtonBase-root.bg__hsw2 {
+  background-color: $hsw-light !important;
+  color: $white !important;
 }
 
 .content-container {

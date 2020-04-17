@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import FlowPage from '../FlowPage';
+import FlowPage from '../Layout/FlowPage';
+import { debt_type_buttons } from './BUTTONS';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Button from '@material-ui/core/Button';
 
 const DebtTypes = () => {
     const { dispatchApp } = useContext(AppContext);
@@ -14,11 +17,25 @@ const DebtTypes = () => {
     };
 
     return (
-        <FlowPage
-            page={'debt_types'}
-            handleClick={handleFlowClick}
-            showCrumbs
-        />
+        <FlowPage showCrumbs>
+            <span className='flow-title-text'>Your primary type of Debt is:</span>
+            <div className='flow-page__button-group'>
+                {debt_type_buttons.map((button, idx) => (
+                    <Button
+                        onClick={(e) => handleFlowClick(e, button.value, button.text)} 
+                        variant='contained' 
+                        className={`flow-button bg__${button.color}`}
+                        key={`debt_type-page_button-${idx}`}
+                    >
+                        {button.icon.length > 0 && (<FontAwesomeIcon
+                            icon={[button.icon[1], button.icon[2]]}
+                            className='flow-button-icon'
+                        />)}
+                        {button.text}
+                    </Button>
+                ))}
+            </div>
+        </FlowPage>  
     )
 };
 

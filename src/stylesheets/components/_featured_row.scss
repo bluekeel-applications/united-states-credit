@@ -1,12 +1,12 @@
 .featured-article-container {
-    width: 70%;
+    width: 100%;
     @include respond-to('small') {
         width: 100%;
     }
 }
 
 .featured-article-list {
-    width: 30%;
+    width: 90%;
     min-height: inherit;
     display: flex;
     flex-direction: column;

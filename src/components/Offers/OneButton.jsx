@@ -1,5 +1,5 @@
 import React from 'react';
-import OfferButton from '../OfferButton';
+import OfferButton from '../Shared/OfferButton';
 
 const OneButton = () => {
     const handleButtonClick = () => {

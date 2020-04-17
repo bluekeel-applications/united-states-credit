@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../context';
 import Routes from '../Routes';
-import Drawer from './Drawer';
-import NavbarTop from './NavbarTop';
+import Drawer from './Layout/Drawer';
+import NavbarTop from './Layout/NavbarTop';
+import Expansion from './Layout/Expansion';
 import Feed from './Feed';
 import Footer from './Footer';
 import { checkForDeepDive } from '../utils/deepDive';
@@ -17,6 +18,7 @@ const App = () => {
 	useGeoLocation();
 	let history = useHistory();
 	const myURL = new URL(window.location.href);
+	const [showDrawer, toggleDrawer] = useState(false);
 	const { dispatchTracking, dispatchApp, trackingState } = useContext(AppContext);
 
 	let tracking = {
@@ -36,8 +38,7 @@ const App = () => {
 		VERTICAL: myURL.searchParams.get('vertical') || null,
 		TYPE: myURL.searchParams.get('type') || null,
 	};
-	checkForDeepDive(tracking.VERTICAL, tracking.TYPE, history, dispatchApp);
-
+	
 	const saveTrackingLocally = async() => {
 		const payload = {
 			hsid: tracking.hsid ? Number(tracking.hsid) : 123456,
@@ -55,6 +56,7 @@ const App = () => {
 			vertical: tracking.VERTICAL,
 			type: tracking.TYPE
 		};
+		checkForDeepDive(tracking.VERTICAL, tracking.TYPE, history, dispatchApp);
 		dispatchTracking({ type: 'USER_ARRIVED', payload });
 	};
 
@@ -91,11 +93,12 @@ const App = () => {
 
 return (
 	<div className='App app-bg_container'>
-		<NavbarTop />      
+		<NavbarTop toggleDrawer={toggleDrawer}/> 
+		<Expansion />     
 		<Routes />
 		<Feed />
 		<Footer />
-		<Drawer />
+		<Drawer show={showDrawer} toggle={toggleDrawer}/>
 	</div>
 );
 }

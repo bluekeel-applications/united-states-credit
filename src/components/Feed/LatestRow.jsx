@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import { getSrcFromHtml, trimSnippet } from '../../utils/feedTools';
+import FadeIn from 'react-fade-in';
 
 const LatestRow = () => {
     const { feedState } = useContext(AppContext);
@@ -47,12 +48,12 @@ const LatestRow = () => {
     };
 
     return (
-        <div className='feed-row latest-row-container'>
+        <FadeIn className='feed-row latest-row-container'>
             <div className='bottom-border row-title'>The Latest</div>
             <div className='row-content-column'>
                 {!!articles && buildArticleList()}
             </div>
-        </div>
+        </FadeIn>
     )
 };
 

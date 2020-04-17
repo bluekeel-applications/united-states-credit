@@ -1,11 +1,10 @@
 import React from 'react';
 import Header from './Header';
-// import { Row, Col } from 'react-bootstrap';
 
-const NavbarTop = () => {
+const NavbarTop = ({ toggleDrawer }) => {
   return (
       <div className='fixed-topbar header-container' >
-        <Header className='header-content' />
+        <Header className='header-content' toggleDrawer={toggleDrawer}/>
       </div>    
   );
 }

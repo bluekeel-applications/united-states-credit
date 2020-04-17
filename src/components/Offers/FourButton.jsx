@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
-import OfferButton from '../OfferButton';
+import OfferButton from '../Shared/OfferButton';
 import { flattenString } from '../../utils/helpers';
 
 const FourButton = () => {

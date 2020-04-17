@@ -8,8 +8,7 @@
 
 // 2. Vendors
 @import
-  'vendors/normalize',
-  'vendors/bootstrap';
+  'vendors/normalize';
 
 // 3. Base stuff
 @import
@@ -48,7 +47,3 @@
   'pages/content_feed',
   'pages/get_started',
   'pages/home';
-
-// 7. Themes
-@import
-  'themes/default';
