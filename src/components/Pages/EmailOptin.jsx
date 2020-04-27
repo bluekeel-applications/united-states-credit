@@ -26,6 +26,7 @@ const EmailOptin = () => {
         let emailValue = email_input_el.current.value;
         if(!disabled) {
             dispatchApp({ type: 'EMAIL_OPT_IN', payload: emailValue });
+            window.scrollTo(0, 0);
             history.push('/offers');
             return;
         };
@@ -47,44 +48,46 @@ const EmailOptin = () => {
     }, [validEmail, termsChecked])
 
     return (
-        <FlowPage showCrumbs>
-            <div className='email-optin-container'>
-                <div className='email-optin-card'>
-                    <div className='email-optin-text'>Would you like to receive relevant credit offers from <b><em>The Card Note</em></b> and <b><em>Card Matcher</em></b> directly to your inbox?</div>                    
-                        <form className='email-form-container'>
-                            {showInputError && (<div className='input-error'>Please enter a valid email address</div>)}
-                            <input id='email-optin-input' 
-                                className='optin-input-field'
-                                onChange={checkValidity}
-                                type='email'
-                                ref={email_input_el} 
-                                placeholder='Email Address'
-                                />
-                            <div className='email-terms-container'>
-                                <input className='email_terms_box' type='checkbox' name='email_terms' onClick={toggleTerms}/>
-                                <div className='email_terms_text'>
-                                    I hereby declare that I am a U.S. resident over the age of 18 and I agree to this site's  
-                                    <a className='email_terms_links' href='/terms' target='_blank'>
-                                        Terms &amp; Conditions
-                                    </a> and <a className='email_terms_links' href='/privacy' target='_blank'>
-                                        Privacy Policy
-                                    </a>.
-                                </div>
-                            </div>
-                            <div className='email-button-group'>
-                                <Button className={`email_submit-button ${!termsChecked && 'disabled'}`} variant='contained' color='primary' onClick={handleSubmit} disabled={disabled}>
-                                    <span className='button-text' >Next</span>
-                                    <FontAwesomeIcon
-                                        icon={['fal', 'angle-double-right']}
-                                        className='next-button-icon'
+        <FlowPage>
+            <div className='flow-content'>
+                <div className='email-optin-container'>
+                    <div className='email-optin-card'>
+                        <div className='email-optin-text'>Would you like to receive relevant credit offers from <b><em>The Card Note</em></b> and <b><em>Card Matcher</em></b> directly to your inbox?</div>                    
+                            <form className='email-form-container'>
+                                {showInputError && (<div className='input-error'>Please enter a valid email address</div>)}
+                                <input id='email-optin-input' 
+                                    className='optin-input-field'
+                                    onChange={checkValidity}
+                                    type='email'
+                                    ref={email_input_el} 
+                                    placeholder='Email Address'
                                     />
-                                </Button>
-                                <Button className='no-thanks' onClick={() => history.push('/offers')}>
-                                    No Thanks
-                                </Button>
-                            </div>
-                        </form>                        
-                </div>            
+                                <div className='email-terms-container'>
+                                    <input className='email_terms_box' type='checkbox' name='email_terms' onClick={toggleTerms}/>
+                                    <div className='email_terms_text'>
+                                        I hereby declare that I am a U.S. resident over the age of 18 and I agree to this site's  
+                                        <a className='email_terms_links' href='/terms' target='_blank'>
+                                            Terms &amp; Conditions
+                                        </a> and <a className='email_terms_links' href='/privacy' target='_blank'>
+                                            Privacy Policy
+                                        </a>.
+                                    </div>
+                                </div>
+                                <div className='email-button-group'>
+                                    <Button className={`email_submit-button ${!termsChecked && 'disabled'}`} variant='contained' color='primary' onClick={handleSubmit} disabled={disabled}>
+                                        <span className='button-text' >Next</span>
+                                        <FontAwesomeIcon
+                                            icon={['fal', 'angle-double-right']}
+                                            className='next-button-icon'
+                                        />
+                                    </Button>
+                                    <Button className='no-thanks' onClick={() => history.push('/offers')}>
+                                        No Thanks
+                                    </Button>
+                                </div>
+                            </form>                        
+                    </div>            
+                </div>
             </div>
         </FlowPage>
     )

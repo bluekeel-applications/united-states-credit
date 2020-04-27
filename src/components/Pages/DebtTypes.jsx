@@ -13,27 +13,30 @@ const DebtTypes = () => {
     const handleFlowClick = (e, choice, texts) => {
         e.preventDefault();
         dispatchApp({ type: 'DEBT_TYPE_PICKED', payload: { value: choice, crumb: texts } });
+        window.scrollTo(0, 0);
         history.push('/debt_amount');        
     };
 
     return (
-        <FlowPage showCrumbs>
-            <span className='flow-title-text'>Your primary type of Debt is:</span>
-            <div className='flow-page__button-group'>
-                {debt_type_buttons.map((button, idx) => (
-                    <Button
-                        onClick={(e) => handleFlowClick(e, button.value, button.text)} 
-                        variant='contained' 
-                        className={`flow-button bg__${button.color}`}
-                        key={`debt_type-page_button-${idx}`}
-                    >
-                        {button.icon.length > 0 && (<FontAwesomeIcon
-                            icon={[button.icon[1], button.icon[2]]}
-                            className='flow-button-icon'
-                        />)}
-                        {button.text}
-                    </Button>
-                ))}
+        <FlowPage>
+            <div className='flow-content'>
+                <span className='flow-title-text'>Your primary type of Debt is:</span>
+                <div className='flow-page__button-group'>
+                    {debt_type_buttons.map((button, idx) => (
+                        <Button
+                            onClick={(e) => handleFlowClick(e, button.value, button.text)} 
+                            variant='contained' 
+                            className={`flow-button bg__${button.color}`}
+                            key={`debt_type-page_button-${idx}`}
+                        >
+                            {button.icon.length > 0 && (<FontAwesomeIcon
+                                icon={[button.icon[1], button.icon[2]]}
+                                className='flow-button-icon'
+                            />)}
+                            {button.text}
+                        </Button>
+                    ))}
+                </div>
             </div>
         </FlowPage>  
     )

@@ -68,7 +68,7 @@ const Drawer = ({ show, toggle }) => {
                     <ListItemText primary='Blog' />
                 </ListItem>
                 <Divider />
-                <ListItem button>
+                <ListItem button onClick={() => toggle(false)}>
                     <FontAwesomeIcon
                     icon={['fal', 'times']}
                     className='drawer-button-icon'

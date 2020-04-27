@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 const ENDPOINT_OFFER = gql`
-	query FetchEndpointOffer($query: OfferQuery) {
-		fetchEndpointOffer(query: $query) {
+	query FetchEndpointOffer($queryData: OfferQuery) {
+		fetchEndpointOffer(queryData: $queryData) {
 			success
 			status
 			message

@@ -30,7 +30,7 @@
     "react-lottie": "^1.2.3",
     "react-reveal": "^1.2.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
+    "react-scripts": "^3.4.0",
     "rss-parser": "^3.7.3"
   },
   "scripts": {
@@ -39,7 +39,7 @@
     "deploy-staging": "aws s3 sync build/ s3://staging-united-states-credit --profile bluekeel --acl public-read --delete",
     "deploy-pch": "aws s3 sync build/ s3://pch-united-states-credit --profile bluekeel --acl public-read --delete",
     "deploy-hsw": "aws s3 sync build/ s3://how-stuff-works-usc --profile bluekeel --acl public-read --delete",
-    "deploy-prod": "aws s3 sync build/ s3://united-states-credit --profile bluekeel --acl public-read --delete",
+    "deploy-prod": "aws s3 sync build/ s3://united-states-credit-prod --profile bluekeel --acl public-read --delete",
     "postdeploy-prod": "aws cloudfront create-invalidation --profile bluekeel --distribution-id E32V6HHKVNQ2YA --paths \"/*\"",
     "postdeploy-staging": "aws cloudfront create-invalidation --profile bluekeel --distribution-id EWT9HYH3TWVJ4 --paths \"/*\"",
     "postdeploy-pch": "aws cloudfront create-invalidation --profile bluekeel --distribution-id EQ3SHRX8H40TA --paths \"/*\"",

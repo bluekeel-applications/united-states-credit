@@ -10,8 +10,16 @@
     border-radius: 75px;
     font-size: 24px;
     min-width: 375px;
+    max-width: 375px;
     min-height: 85px;
-    padding-left: 30px;
+    -webkit-transition: .5s all;
+    transition: .5s all;
+    // width: 100%;
+    @include respond-to('small') {
+        min-width: calc(100vw - 25px);
+        padding: 0 0 0 25px;
+        width: 100%;
+    }
 }
 
 .MuiButtonBase-root.flow-button:hover {
@@ -20,28 +28,51 @@
 
 .flow-button-icon {
     font-size: 40px;
-    margin-right: 20px;
+    min-width: 100px;
+    @include respond-to('small') {
+        min-width: 20vw;
+    }
 }
 
-.icon__left {
-    flex-flow: row nowrap;
+.nav-start-button-icon {
+    margin: 0 0 0 5px;
 }
 
-.icon__right {
-    flex-flow: row-reverse nowrap;
-}
-
-.is_start {
-    justify-content: space-evenly;
+.MuiButtonBase-root.flow-button.is_start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
     font-size: 1.6rem;
-    // overflow: hidden;
+    width: 100%;
+    max-width: 300px;
     text-align: center;
-
-    // @include respond-to('small') {
-    //     max-width: 50%;
-    // }
+    position: static;
+    z-index: 1000;
+    @include respond-to('small') {
+        // max-width: 50%;
+    }
 }
+
+.MuiButtonBase-root.nav-button {
+    -webkit-transition: .5s all;
+    transition: .5s all;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 175px;
+    font-size: 18px;
+    min-height: fit-content;
+    padding: 5px;
+    @include respond-to('small') {
+        width: 100px;
+        // min-width: 175px;
+        // font-size: 18px;
+        // min-height: fit-content;
+        // padding: 5px;
+    }
+}
+
 
 .button-link:hover,
 .button-link:active,

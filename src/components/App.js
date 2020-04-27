@@ -3,7 +3,7 @@ import { AppContext } from '../context';
 import Routes from '../Routes';
 import Drawer from './Layout/Drawer';
 import NavbarTop from './Layout/NavbarTop';
-import Expansion from './Layout/Expansion';
+// import Expansion from './Layout/Expansion';
 import Feed from './Feed';
 import Footer from './Footer';
 import { checkForDeepDive } from '../utils/deepDive';
@@ -13,9 +13,11 @@ import useGeoLocation from '../hooks/useGeoLocation';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_NEW_USER } from '../utils/mutations';
+// import usePAExtAPI from '../hooks/usePAExtAPI';
 
 const App = () => {
 	useGeoLocation();
+	// usePAExtAPI();
 	let history = useHistory();
 	const myURL = new URL(window.location.href);
 	const [showDrawer, toggleDrawer] = useState(false);
@@ -94,7 +96,7 @@ const App = () => {
 return (
 	<div className='App app-bg_container'>
 		<NavbarTop toggleDrawer={toggleDrawer}/> 
-		<Expansion />     
+		{/* <Expansion />  */}
 		<Routes />
 		<Feed />
 		<Footer />

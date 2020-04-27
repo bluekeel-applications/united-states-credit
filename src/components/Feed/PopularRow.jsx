@@ -44,7 +44,7 @@ const LatestRow = () => {
     };
 
     return (
-        <div className='feed-row latest-row-container'>
+        <div className='feed-row popular-row-container'>
             <div className='bottom-border popular-title row-title'>Popular</div>
             <div className='card-deck'>
                 {!!articles && buildCardDeck()}

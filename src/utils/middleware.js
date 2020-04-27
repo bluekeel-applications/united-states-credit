@@ -1,56 +1,11 @@
 import axios from 'axios';
 import { setCookie } from './helpers';
-const apiBaseUrl = 'https://programs.bluekeel-api.com/prod/api/';
-const corsProxy = 'https://cors-anywhere.herokuapp.com/';
-
-export const getOfferList = async(req) => {
-    console.log('query:', req);
-    try {
-        const res = await axios({
-            method: 'post',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            url: apiBaseUrl + 'program/offers',
-            data: req
-        });
-
-        if (res.status !== 200) {
-            throw new Error('Error fetching offers.');
-        };
-
-        return res.data
-
-    } catch (e) {
-        return [{status: 'failed', message: e}];
-    }
-};
-
-export const addToClickCount = async(id) => {
-    try {
-        const res = await axios({
-            method: 'put',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            url: apiBaseUrl + 'program/add_click/' + id
-        });
-
-        if (res.status !== 200) {
-            throw new Error('Error adding to click count.');
-        };
-        return res.data;
-        
-    } catch (e) {
-        return {status: 'failed', message: e};
-    }
-};
+// const apiBaseUrl = 'https://programs.bluekeel-api.com/prod/api/';
+// const corsProxy = 'https://cors-anywhere.herokuapp.com/';
 
 const buildHitStreetLink = (payload) => {
     const { OID, PID, EID, SID, UID } = payload;
-    const hitStreetLink = 'http://bkoffers.com/hitstreet/hit_count_hsid.cfm?' +
+    const hitStreetLink = 'https://bkoffers.com/hitstreet/hit_count_hsid2.cfm?' +
         'offer_id=' + OID + '&' +
         'program_id=' + PID + '&' +
         'hsid=0&' +
@@ -71,10 +26,12 @@ export const getOrganicHSID = async(payload) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            url: corsProxy + fetchLink
+            url: fetchLink
         });
         if (res.status !== 200) {
-            throw new Error('Error getting organic hsid.');
+            const backup = Date.now();
+            setCookie('hsid', backup, 3);
+            return backup;
         };
         setCookie('hsid', res.data, 3);
         return res.data;

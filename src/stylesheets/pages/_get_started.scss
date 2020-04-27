@@ -2,11 +2,11 @@
     color: $text-primary;
     font-size: 46px;
     font-weight: 800;
-    padding-top: 2vh;
+    padding: 3vh 0 20px 0;
 
     @include respond-to('small') {
-        font-size: 1.8rem;
-        padding: 20px 50px 0 50px;
+        font-size: 36px;
+        margin: 10px auto 125px;
         line-height: 1.1;
     }
 }
@@ -16,5 +16,41 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding: 10vh 0;
+    -webkit-box-shadow: unset;
+    -moz-box-shadow: unset;
+    box-shadow: unset;
+    min-height: 300px;
+    @include respond-to('small') {
+        min-height: fit-content;
+        padding: 10px 0 0 0;
+    }
+}
+
+.start-search {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -webkit-transition: 1s all,0s top;
+    transition: 1s all,0s top;
+    overflow: hidden;
+    cursor: pointer;
+    @include respond-to('small') {
+        min-height: fit-content;
+        padding: 0;
+    }
+}
+
+#nav-button {
+    position: fixed;
+    // left: 50%;
+    // -webkit-transform: translateX(-50%);
+    // -ms-transform: translateX(-50%);
+    // transform: translateX(-50%);
+    -webkit-transition: 1s all,0s top;
+    transition: 1s all,0s top;
+    top: 0;
+    z-index: 10001;
 }

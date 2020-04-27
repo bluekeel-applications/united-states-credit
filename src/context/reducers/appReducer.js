@@ -1,9 +1,9 @@
-import { addToClickCount } from '../../utils/middleware';
+// import { addToClickCount } from '../../utils/middleware';
 
 const initialAppState = {
     loadingOffers: true,
     showDrawer: false,
-    showExpansion: true,
+    showExpansion: false,
     flowState: {
         vertical: null,
         loan_type: null,
@@ -31,18 +31,6 @@ const initialAppState = {
 
 const appStateReducer = (state, action) => {
     switch (action.type) {
-
-        // case 'SHOW_DRAWER':
-        //     return {
-        //         ...state,
-        //         showDrawer: true
-        //     };        
-
-        // case 'HIDE_DRAWER':
-        //     return {
-        //         ...state,
-        //         showDrawer: false
-        //     };
 
         case 'SHOW_EXPANSION':
             return {
@@ -163,29 +151,29 @@ const appStateReducer = (state, action) => {
                 loadingOffers: true
             };
 
-        case 'FETCH_OFFERS_SUCCESS':
-            const { click_count, _id } = action.payload;
-            const addToCCount = async() => {
-                if(!!_id) { 
-                    const res = await addToClickCount(_id); 
-                    if(res && res.status === 'failed') {
-                        console.warn('Error trying to add to click count:', res[0].message,  '...trying again');
-                        addToCCount();
-                        return;
-                    }
-                    if(res && !res.status) {
-                        console.log('Successfully added +1 to the click count');
-                        return;
-                    }
-                    console.log('something else happened:', res);
-                }
-            };
-            addToCCount();
-            return {
-                ...state,
-                click_count: click_count || 0,
-                program_id: _id || 'Unknown PID'
-            };
+        // case 'FETCH_OFFERS_SUCCESS':
+        //     const { click_count, _id } = action.payload;
+        //     const addToCCount = async() => {
+        //         if(!!_id) { 
+        //             const res = await addToClickCount(_id); 
+        //             if(res && res.status === 'failed') {
+        //                 console.warn('Error trying to add to click count:', res[0].message,  '...trying again');
+        //                 addToCCount();
+        //                 return;
+        //             }
+        //             if(res && !res.status) {
+        //                 console.log('Successfully added +1 to the click count');
+        //                 return;
+        //             }
+        //             console.log('something else happened:', res);
+        //         }
+        //     };
+        //     addToCCount();
+        //     return {
+        //         ...state,
+        //         click_count: click_count || 0,
+        //         program_id: _id || 'Unknown PID'
+        //     };
 
         case 'FETCH_OFFERS_FAILURE':
             return {

@@ -1,6 +1,7 @@
 .sponsored-text {
-    font-size: 0.8rem; 
+    font-size: 1rem; 
     font-weight: 300;
+    color: #3571C4;
 }
 
 .offer-page__main {
@@ -54,9 +55,14 @@
 }
 
 .offer-container {
-    min-height: 40vh;
+    min-height: fit-content;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
+    margin-top: 5vh;
+    @include respond-to('small') {
+        margin: 0;
+        padding: 10px;
+    }
 }

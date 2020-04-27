@@ -82,7 +82,7 @@ function initFontAwesome() {
         faChevronDoubleRight,
         faThumbsUp,
         faBlog,
-        faTimes,
+        faTimes
     );
 }
 
