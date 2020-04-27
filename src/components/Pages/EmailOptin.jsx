@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../Layout/FlowPage';
+import { useMutation } from '@apollo/react-hooks';
+import { ADD_USER_EMAIL } from '../../utils/mutations.js';
 
 const EmailOptin = () => {
-    const { dispatchApp } = useContext(AppContext);    
+    const { trackingState, dispatchApp } = useContext(AppContext);    
     let history = useHistory();
     const [disabled, setDisabledState] = useState(true);
     const [termsChecked, checkTerms] = useState(false);
@@ -21,11 +23,13 @@ const EmailOptin = () => {
             setEmailReady(true);
         } else { setEmailReady(false) };
     };
+    const [addUserEmail] = useMutation(ADD_USER_EMAIL);
 
     const handleSubmit = () => {
         let emailValue = email_input_el.current.value;
         if(!disabled) {
             dispatchApp({ type: 'EMAIL_OPT_IN', payload: emailValue });
+            addUserEmail({ variables: { clickId: Number(trackingState.hsid), email: emailValue }});
             window.scrollTo(0, 0);
             history.push('/offers');
             return;

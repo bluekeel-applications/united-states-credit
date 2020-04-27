@@ -26,6 +26,19 @@ const ADD_USER_FLOW = gql`
 	}
 `;
 
+const ADD_USER_EMAIL = gql`
+	mutation AddUserEmail($clickId: Int, $email: String) {
+		addUserEmail(clickId: $clickId, email: $email){
+			success
+			status
+			message
+			body {
+				id
+			}
+		}
+	}
+`;
+
 const INSERT_COMMON_INFO = gql`
 	mutation InsertCommonInfo($visitor: CommonInfo) {
 		insertCommonInfo(visitor: $visitor){
@@ -39,5 +52,6 @@ const INSERT_COMMON_INFO = gql`
 export {
 	ADD_NEW_USER,
 	ADD_USER_FLOW,
+	ADD_USER_EMAIL,
 	INSERT_COMMON_INFO
 };
