@@ -11,7 +11,7 @@ import FourButton from './FourButton';
 import OneButton from './OneButton';
 import MNet from './MNet';
 import Wall from './Wall';
-import Zoom from 'react-reveal/Zoom';
+import FlowPage from '../Layout/FlowPage';
 import { firePixelBlueKeel, firePixelBing } from '../../utils/pixels';
 
 const Offers = () => {
@@ -83,7 +83,6 @@ const Offers = () => {
 
     const showOffers = () => {
         if(data){
-            // console.log('data:', data.fetchEndpointOffer.body);
             const EndpointOffer = data.fetchEndpointOffer.body;
             switch(EndpointOffer.offer_page) {
                 case 'mNet':
@@ -112,11 +111,11 @@ const Offers = () => {
     };
 
     return (
-        <Zoom>
-            <div className='offer-container'>
+        <FlowPage>
+            <div className='flow-content offer-container'>
                 {showOffers()}
             </div>
-        </Zoom>
+        </FlowPage>
     )
 };
 

@@ -73,6 +73,9 @@
     color: $mid-grey;
     text-decoration: underline $light-grey;
     white-space: nowrap;
+    @include respond-to('small') {
+        font-size: 0.75rem;
+    }
 }
 
 .category-item:hover {

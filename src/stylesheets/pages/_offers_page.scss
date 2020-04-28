@@ -60,7 +60,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 5vh;
     @include respond-to('small') {
         margin: 0;
         padding: 10px;

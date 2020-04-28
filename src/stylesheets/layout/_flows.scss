@@ -109,7 +109,7 @@
     width: 100%;
     padding: 2vw 25vh;
     @include respond-to('small') {
-        padding: 5vh 0;
+        padding: 2vh 0;
         width: 100vw;
     }
 }
