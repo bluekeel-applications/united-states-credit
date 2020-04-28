@@ -19,8 +19,8 @@ const GetStarted = () => {
 
     useEffect(() => {
 		const onScroll = e => {
-			setScrollTop(e.target.documentElement.scrollTop);
-			// setScrolling(e.target.documentElement.scrollTop > scrollTop);
+            setScrollTop(e.target.documentElement.scrollTop);
+			// setScrolling(e.target.documentElement.scrollTop > scrollTop);            
 		};
 		window.addEventListener('scroll', onScroll);
 
@@ -28,6 +28,8 @@ const GetStarted = () => {
     }, [scrollTop]);
     
     useEffect(() => {
+        if(scrollTop <= 100) setShowNavButton(false);
+        
 		if(scrollTop > 200) {
 			setShowNavButton(true);
 			return;

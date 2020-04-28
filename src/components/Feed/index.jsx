@@ -5,6 +5,7 @@ import FeaturedRow from './FeaturedRow';
 import InfoRow from './InfoRow';
 import LatestRow from './LatestRow';
 import PopularRow from './PopularRow';
+import Footer from './Footer';
 
 const Feed = () => (
     <div className='feed-container'>
@@ -14,6 +15,7 @@ const Feed = () => (
         <EditorialRow />
         <LatestRow />
         <PopularRow />
+        <Footer />
     </div>
 );
 

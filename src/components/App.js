@@ -5,7 +5,6 @@ import Drawer from './Layout/Drawer';
 import NavbarTop from './Layout/NavbarTop';
 // import Expansion from './Layout/Expansion';
 import Feed from './Feed';
-import Footer from './Footer';
 import { checkForDeepDive } from '../utils/deepDive';
 import { getOrganicHSID } from '../utils/middleware';
 import { getCookie } from '../utils/helpers';
@@ -99,7 +98,6 @@ return (
 		{/* <Expansion />  */}
 		<Routes />
 		<Feed />
-		<Footer />
 		<Drawer show={showDrawer} toggle={toggleDrawer}/>
 	</div>
 );

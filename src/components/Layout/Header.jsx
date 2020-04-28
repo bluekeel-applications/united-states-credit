@@ -1,18 +1,25 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../../context';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import logoText from '../../assets/icons/logo_text.png';
 import logo from '../../assets/icons/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Header = ({ toggleDrawer }) => {
+    let history = useHistory();
     const { dispatchApp } = useContext(AppContext);
     const [scrollTop, setScrollTop] = useState(0);
     const [showLogoText, setShowLogoText] = useState(true);
     const [mobile] = useState(window.innerWidth < 500);
 
-    const clearSearch = () => dispatchApp({ type: 'RESTART_SEARCH' });
+    const goHome = () => {
+        dispatchApp({ type: 'RESTART_SEARCH' });
+        window.scrollTo(0, 0);
+        setScrollTop(0);
+        setShowLogoText(true);
+        history.push('/');
+    };
 
     useEffect(() => {
 		const onScroll = e => {
@@ -34,10 +41,10 @@ const Header = ({ toggleDrawer }) => {
 
     return (
         <>
-            <Link className='header-logo-group' to='/' onClick={clearSearch}>
+            <div className='header-logo-group' onClick={goHome}>
                 <img src={logo} alt='text-logo' height={40} className='header-logo-icon'/>
                 {showLogoText && (<img src={logoText} alt='text-logo' height={40} className='header-text-logo'/>)}
-            </Link>
+            </div>
             <div className='header-menu-icon' onClick={() => toggleDrawer(true)}>
                 <FontAwesomeIcon
                     icon={['fal', 'bars']}
