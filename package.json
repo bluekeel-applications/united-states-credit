@@ -40,7 +40,7 @@
     "deploy-pch": "aws s3 sync build/ s3://pch-united-states-credit --profile bluekeel --acl public-read --delete",
     "deploy-hsw": "aws s3 sync build/ s3://how-stuff-works-usc --profile bluekeel --acl public-read --delete",
     "deploy-prod": "aws s3 sync build/ s3://united-states-credit-prod --profile bluekeel --acl public-read --delete",
-    "postdeploy-prod": "aws cloudfront create-invalidation --profile bluekeel --distribution-id E32V6HHKVNQ2YA --paths \"/*\"",
+    "postdeploy-prod": "aws cloudfront create-invalidation --profile bluekeel --distribution-id E33TUN398AQB4X --paths \"/*\"",
     "postdeploy-staging": "aws cloudfront create-invalidation --profile bluekeel --distribution-id EWT9HYH3TWVJ4 --paths \"/*\"",
     "postdeploy-pch": "aws cloudfront create-invalidation --profile bluekeel --distribution-id EQ3SHRX8H40TA --paths \"/*\"",
     "postdeploy-hsw": "aws cloudfront create-invalidation --profile bluekeel --distribution-id E3JGHR1Y4GHPXL --paths \"/*\"",

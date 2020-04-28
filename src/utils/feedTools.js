@@ -4,15 +4,15 @@ const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/'
 
 let parser = new Parser();
 
-export const fetchFeatured = async() => {
-    try{
-        const rawRes = await parser.parseURL(CORS_PROXY + 'https://unitedstatescredit.blog/category/featured/feed/');
-        return rawRes.items;
-    } catch(err) {
-        console.warn('Unable to fetch feed data:', err)
-        return
-    }
-};
+// export const fetchFeatured = async() => {
+//     try{
+//         const rawRes = await parser.parseURL(CORS_PROXY + 'https://unitedstatescredit.blog/category/featured/feed/');
+//         return rawRes.items;
+//     } catch(err) {
+//         console.warn('Unable to fetch feed data:', err)
+//         return { status: 'failed' };
+//     }
+// };
 
 export const fetchTips = async() => {
     try{
@@ -20,7 +20,7 @@ export const fetchTips = async() => {
         return rawResTips.items;
     } catch(err) {
         console.warn('Unable to fetch feed data:', err)
-        return
+        return { status: 'failed' };
     }
 };
 
@@ -30,7 +30,7 @@ export const fetchCredit = async() => {
         return rawResCredit.items;
     } catch(err) {
         console.warn('Unable to fetch feed data:', err)
-        return
+        return { status: 'failed' };
     }
 };
 export const fetchReviews = async() => {
@@ -39,7 +39,7 @@ export const fetchReviews = async() => {
         return rawResReviews.items;
     } catch(err) {
         console.warn('Unable to fetch feed data:', err)
-        return
+        return { status: 'failed' };
     }
 };
 export const fetchFeed = async() => {
@@ -48,7 +48,7 @@ export const fetchFeed = async() => {
         return rawRes.items;
     } catch(err) {
         console.warn('Unable to fetch feed data:', err)
-        return
+        return { status: 'failed' };
     }
 };
 

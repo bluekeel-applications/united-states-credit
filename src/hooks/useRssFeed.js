@@ -1,7 +1,7 @@
 import { useEffect, useContext, useRef } from 'react';
 import { AppContext } from '../context';
 import { 
-    fetchFeatured,
+    // fetchFeatured,
     fetchTips,
     fetchCredit,
     fetchReviews,
@@ -11,21 +11,21 @@ import {
 const useRssFeed = () => {
     const componentIsMounted = useRef(true);
     const { feedState, dispatchFeed } = useContext(AppContext);
-	const { featured, tips, credit, reviews, feed } = feedState;
+	const { tips, credit, reviews, feed } = feedState;
 
-	const getFeatured = async () => {
-		try{
-			const featuredData = !!featured ? featured : await fetchFeatured();
-			if(featuredData.status === 'failed') {
-				getFeatured();
-				return;
-			}
-			dispatchFeed({ type: 'FETCHED_FEATURED_FEED', payload: featuredData });
-			return;
-		} catch(err) {
-			console.warn(err);
-		};
-	};
+	// const getFeatured = async () => {
+	// 	try{
+	// 		const featuredData = !!featured ? featured : await fetchFeatured();
+	// 		if(featuredData.status === 'failed') {
+	// 			getFeatured();
+	// 			return;
+	// 		}
+	// 		dispatchFeed({ type: 'FETCHED_FEATURED_FEED', payload: featuredData });
+	// 		return;
+	// 	} catch(err) {
+	// 		console.warn(err);
+	// 	};
+	// };
 
 	const getTips = async () => {
 		try{
@@ -83,13 +83,19 @@ const useRssFeed = () => {
 		};
 	};
 	
-	const fetchFeeds = async() => {
-        const featuredData = await getFeatured();
-        const tipsData = await getTips();
-        const creditData = await getCredit();        
-        const reviewsData = await getReviews();        
-        const feedData = await getFeed();
-		await Promise.all([featuredData, tipsData, creditData, reviewsData, feedData]);
+	const fetchFeeds = () => {
+        // getFeatured();
+        getTips();
+        getCredit();        
+        getReviews();        
+        getFeed();
+		
+        // const featuredData = await getFeatured();
+        // const tipsData = await getTips();
+        // const creditData = await getCredit();        
+        // const reviewsData = await getReviews();        
+        // const feedData = await getFeed();
+		// await Promise.all([featuredData, tipsData, creditData, reviewsData, feedData]);
 	};
 
     useEffect(() => {
