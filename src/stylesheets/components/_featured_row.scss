@@ -1,18 +1,33 @@
-.featured-article-container {
+.featured-row-container {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    @include respond-to('small') {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}
+
+.featured-article-container {
+    width: 60%;
     @include respond-to('small') {
         width: 100%;
     }
 }
 
 .featured-article-list {
-    width: 90%;
+    max-width: 30%;
     min-height: inherit;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     @include respond-to('small') {
+        max-width: 100vw;
         width: 100%;
         margin-top: 25px;
         min-height: unset;

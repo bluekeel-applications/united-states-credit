@@ -64,3 +64,8 @@ export const flattenString = (string) => {
   let flatString = string.replace(' ', '_');
   return flatString.toLowerCase();
 };
+
+export const flattenLongString = (string) => {
+    const stringCleaned = string.replace(/\s/g, '_');
+  return stringCleaned.toLowerCase();
+};

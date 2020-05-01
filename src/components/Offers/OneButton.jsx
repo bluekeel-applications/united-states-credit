@@ -1,9 +1,9 @@
 import React from 'react';
 import OfferButton from '../Shared/OfferButton';
 
-const OneButton = () => {
+const OneButton = ({ offer }) => {
     const handleButtonClick = () => {
-        console.log('Button clicked')
+        console.log('Button clicked with offer:', offer);
     };
 
     return(

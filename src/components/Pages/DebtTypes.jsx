@@ -5,6 +5,7 @@ import FlowPage from '../Layout/FlowPage';
 import { debt_type_buttons } from './BUTTONS';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
+import CloseFlow from '../Shared/CloseFlow';
 
 const DebtTypes = () => {
     const { dispatchApp } = useContext(AppContext);
@@ -20,6 +21,7 @@ const DebtTypes = () => {
     return (
         <FlowPage>
             <div className='flow-content'>
+                <CloseFlow />
                 <span className='flow-title-text'>Your primary type of Debt is:</span>
                 <div className='flow-page__button-group'>
                     {debt_type_buttons.map((button, idx) => (

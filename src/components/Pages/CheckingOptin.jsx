@@ -3,6 +3,7 @@ import { AppContext } from '../../context';
 import OptinButton from '../Shared/OptinButton';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../Layout/FlowPage';
+import CloseFlow from '../Shared/CloseFlow';
 
 const CheckingOptin = () => {
     const { appState, dispatchApp } = useContext(AppContext);    
@@ -38,6 +39,7 @@ const CheckingOptin = () => {
     return (
         <FlowPage>
             <div className='flow-content'>
+                <CloseFlow />
                 <div className='optin-row row1'>
                     <h2 className='optin-header-text'>
                         <b>Banks are paying $100s</b> to new checking customers.<br />

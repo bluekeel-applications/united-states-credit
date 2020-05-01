@@ -5,6 +5,7 @@ import FlowPage from '../Layout/FlowPage';
 import { personal_loan_buttons } from './BUTTONS';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
+import CloseFlow from '../Shared/CloseFlow';
 
 const PersonalLoans = () => {
     const { dispatchApp } = useContext(AppContext);
@@ -41,6 +42,7 @@ const PersonalLoans = () => {
     return (
         <FlowPage>
             <div className='flow-content'>
+                <CloseFlow />
                 <span className='flow-title-text'>Select Loan Purpose:</span>
                 <div className='flow-page__button-group'>
                     {personal_loan_buttons.map((button, idx) => (

@@ -1,5 +1,4 @@
 import React from 'react';
-import FadeIn from 'react-fade-in';
 import { getSrcFromHtml } from '../../../utils/feedTools';
 import { useQuery } from '@apollo/react-hooks';
 import { FETCH_FEED } from '../../../utils/queries';
@@ -65,7 +64,7 @@ const FeaturedRow = () => {
     };
 
     return (
-        <FadeIn className='feed-row featured-row-container'>
+        <div className='feed-row featured-row-container'>
             {data && (
                 <>
                     <div className='featured-article-container' onClick={(e) => handleLinkClick(featured[0].link, e)}>
@@ -77,7 +76,7 @@ const FeaturedRow = () => {
                     </div>
                 </>              
             )}
-        </FadeIn>
+        </div>
     );
 };
 

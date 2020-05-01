@@ -11,7 +11,7 @@ import axios from 'axios';
 export const firePixelBlueKeel = async(hsid) => {
 	let link = 'https://www.bkoffers.com/hitstreet/pixel_fire_dynamic_new2.cfm?hsid=' + hsid;
 	try {
-		await axios({
+		const res = await axios({
 			method: 'GET',
 			headers: {
                 'Accept': 'application/json',
@@ -20,7 +20,7 @@ export const firePixelBlueKeel = async(hsid) => {
 			url: link
 		});
 		console.log('pixel fired for hsid: ', hsid);
-		return;
+		return res;
 	} catch(err) {
 		console.log('error occured in pixel fire', err.message);
 		return

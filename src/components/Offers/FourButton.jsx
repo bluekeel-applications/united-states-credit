@@ -1,27 +1,38 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../../context';
-import OfferButton from '../Shared/OfferButton';
-import { flattenString } from '../../utils/helpers';
+import React from 'react';
+import { flattenLongString } from '../../utils/helpers';
+import Button from '@material-ui/core/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const FourButton = () => {
-    const { appState, dispatchTracking } = useContext(AppContext);
+const FourButton = ({ offer }) => {
 
-    const handleButtonClick = (keywords, e) => {
+    const handleOfferClick = (keywords, e) => {
         e.preventDefault();
-        dispatchTracking({ type: 'KEYWORD_SELECTED', payload: flattenString(keywords) });
+        console.log('keyword click:', flattenLongString(keywords));
     };
 
+    const RenderIcon = () => (
+        <FontAwesomeIcon
+            icon={['fal', 'chevron-double-right']}
+            className='4_button-icon'
+        />
+    );
+
+    const test = ['1', '2', '3', '4'];
     const render4ButtonGroup = () => (
-        appState.four_button.map((button_text, i) => (
-            <OfferButton 
-                isSingle={false} 
-                text={button_text}
-                index={i}
-                handleClick={handleButtonClick}
-                className={`multi-button-${i}`}
-                key={`multi-button-${i}`}
-            />
-        ))
+        <div className='4-button-group'>
+            {test.map((button_text, idx) => (
+                <Button
+                    onClick={handleOfferClick} 
+                    variant='contained' 
+                    className={`4_button-item button-bg__${idx}`}
+                    key={`4_button-item-${idx}`}
+                    startIcon={<RenderIcon />}
+                    size='large'
+                >
+                    {button_text}
+                </Button>
+            ))}
+        </div>
     );
 
     return(

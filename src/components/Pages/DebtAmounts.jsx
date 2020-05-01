@@ -5,6 +5,7 @@ import FlowPage from '../Layout/FlowPage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import { debt_amount_buttons } from './BUTTONS';
+import CloseFlow from '../Shared/CloseFlow';
 
 const DebtAmounts = () => {
     const { dispatchApp } = useContext(AppContext);
@@ -20,6 +21,7 @@ const DebtAmounts = () => {
     return (
         <FlowPage>
             <div className='flow-content'>
+                <CloseFlow />
                 <span className='flow-title-text'>Your total Amount of Debt is:</span>
                 <div className='flow-page__button-group'>
                     {debt_amount_buttons.map((button, idx) => (

@@ -4,6 +4,7 @@ import { AppContext } from '../../context';
 import OptinButton from '../Shared/OptinButton';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../Layout/FlowPage';
+import CloseFlow from '../Shared/CloseFlow';
 
 const DebtOptin = () => {
     const { dispatchApp, appState } = useContext(AppContext);    
@@ -24,6 +25,7 @@ const DebtOptin = () => {
     return (
         <FlowPage>
             <div className='flow-content'>
+                <CloseFlow />
                 <div className='optin-row row1'>
                     <h2 className='optin-header-text'>
                         Would you like a loan to consolidate debt <b><em>and</em></b> for {appState.breadcrumbs.loan_type}?

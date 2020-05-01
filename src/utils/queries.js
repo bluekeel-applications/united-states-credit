@@ -58,6 +58,34 @@ const ENDPOINT_OFFER = gql`
 					id
 					title
 				}
+				optin {
+					type
+					title
+					optin_id
+				}
+			}
+		}
+	}
+`;
+
+const OPTIN_OFFER = gql`
+	query FetchOptinById($id: ID) {
+		fetchOptinById(id: $id) {
+			success
+			status
+			message
+			body {
+				id
+				type
+				title
+				description
+				link
+				offer_page
+				four_button
+				offers {
+					id
+					title
+				}
 			}
 		}
 	}
@@ -65,5 +93,6 @@ const ENDPOINT_OFFER = gql`
 
 export {
 	FETCH_FEED,
-	ENDPOINT_OFFER
+	ENDPOINT_OFFER,
+	OPTIN_OFFER
 };

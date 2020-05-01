@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import FlowPage from '../Layout/FlowPage';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_USER_EMAIL } from '../../utils/mutations.js';
+import CloseFlow from '../Shared/CloseFlow';
 
 const EmailOptin = () => {
     const { trackingState, dispatchApp } = useContext(AppContext);    
@@ -25,6 +26,13 @@ const EmailOptin = () => {
     };
     const [addUserEmail] = useMutation(ADD_USER_EMAIL);
 
+    const handleOptOut = () => {
+        dispatchApp({ type: 'EMAIL_OPT_OUT' });
+        window.scrollTo(0, 0);
+        history.push('/offers');
+        return;
+    };
+    
     const handleSubmit = () => {
         let emailValue = email_input_el.current.value;
         if(!disabled) {
@@ -54,6 +62,7 @@ const EmailOptin = () => {
     return (
         <FlowPage>
             <div className='flow-content'>
+                <CloseFlow />
                 <div className='email-optin-container'>
                     <div className='email-optin-card'>
                         <div className='email-optin-text'>Would you like to receive relevant credit offers from <b><em>The Card Note</em></b> and <b><em>Card Matcher</em></b> directly to your inbox?</div>                    
@@ -85,7 +94,7 @@ const EmailOptin = () => {
                                             className='next-button-icon'
                                         />
                                     </Button>
-                                    <Button className='no-thanks' onClick={() => history.push('/offers')}>
+                                    <Button className='no-thanks' onClick={handleOptOut}>
                                         No Thanks
                                     </Button>
                                 </div>

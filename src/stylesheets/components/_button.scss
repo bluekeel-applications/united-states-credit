@@ -46,7 +46,7 @@
     text-decoration: none;
     font-size: 1.6rem;
     width: 100%;
-    max-width: 300px;
+    max-width: 250px;
     text-align: center;
     position: static;
     z-index: 1000;
@@ -75,6 +75,9 @@
     }
 }
 
+.MuiButtonBase-root.4_button-item {
+    min-width: 275px;
+}
 
 .button-link:hover,
 .button-link:active,

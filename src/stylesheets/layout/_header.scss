@@ -1,22 +1,22 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the header of the site/application.
 // -----------------------------------------------------------------------------
-.header-logo-group {
-    max-width: 200px;
-    display: inline-flex;
-    align-items: center;
-}
+// .header-logo-group {
+//     max-width: 200px;
+//     display: inline-flex;
+//     align-items: center;
+// }
 
-.header-logo-icon {
-    width: 40px;
-    margin-right: 10px;
-}
+// .header-logo-icon {
+//     width: 40px;
+//     margin-right: 10px;
+// }
 
-.header-text-logo {
-    @include respond-to('small') {
-        max-height: 30px;
-    }
-}
+// .header-text-logo {
+//     @include respond-to('small') {
+//         max-height: 30px;
+//     }
+// }
 
 .header-container {
     height: 60px;
@@ -45,4 +45,11 @@
 
 .header-menu-icon:hover {
     cursor: pointer;
+}
+
+.header-logo {
+    max-width: 220px;
+}
+.header-icon {
+    max-width: 50px;
 }

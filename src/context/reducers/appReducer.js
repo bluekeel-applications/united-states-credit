@@ -9,9 +9,9 @@ const initialAppState = {
         loan_type: null,
         debt_type: 'N/A',
         debt_amount: 'N/A',
-        checking_optin: false,
-        debt_optin: false,
-        email_optin: false
+        checking_optin: null,
+        debt_optin: null,
+        email_optin: null
     },
     breadcrumbs: {
         vertical: null,
@@ -143,6 +143,15 @@ const appStateReducer = (state, action) => {
                     email_optin: true
                 },
                 email: action.payload
+            };
+        case 'EMAIL_OPT_OUT':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    email_optin: false
+                },
+                email: 'N/A'
             };
 
         case 'FETCH_OFFERS':

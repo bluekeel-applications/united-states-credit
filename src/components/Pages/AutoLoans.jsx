@@ -5,6 +5,7 @@ import FlowPage from '../Layout/FlowPage';
 import { auto_loan_buttons } from './BUTTONS';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
+import CloseFlow from '../Shared/CloseFlow';
 
 const AutoLoans = () => {
     const { dispatchApp } = useContext(AppContext);
@@ -29,6 +30,7 @@ const AutoLoans = () => {
     return (
         <FlowPage>
             <div className='flow-content'>
+                <CloseFlow />
                 <span className='flow-title-text'>Select Car Type:</span>
                 <div className='flow-page__button-group'>
                     {auto_loan_buttons.map((button, idx) => (

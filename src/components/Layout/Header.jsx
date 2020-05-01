@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-
-import logoText from '../../assets/icons/logo_text.png';
-import logo from '../../assets/icons/logo.png';
+import CardMedia from '@material-ui/core/CardMedia';
+import icon_logo from '../../assets/icons/usc_blog_logo.png';
+import full_logo from '../../assets/icons/usc_full_logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Header = ({ toggleDrawer }) => {
@@ -41,10 +41,14 @@ const Header = ({ toggleDrawer }) => {
 
     return (
         <>
-            <div className='header-logo-group' onClick={goHome}>
-                <img src={logo} alt='text-logo' height={40} className='header-logo-icon'/>
-                {showLogoText && (<img src={logoText} alt='text-logo' height={40} className='header-text-logo'/>)}
-            </div>
+            <CardMedia
+                component='img'
+                className={showLogoText ? 'header-logo' : 'header-icon'}
+                image={showLogoText ? full_logo : icon_logo}
+                height='50'
+                alt='header-logo'
+                onClick={goHome}
+            />
             <div className='header-menu-icon' onClick={() => toggleDrawer(true)}>
                 <FontAwesomeIcon
                     icon={['fal', 'bars']}
