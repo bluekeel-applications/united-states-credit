@@ -60,7 +60,7 @@ const EmailOptin = () => {
     }, [validEmail, termsChecked])
 
     return (
-        <FlowPage>
+        <FlowPage showCrumbs>
             <div className='flow-content'>
                 <CloseFlow />
                 <div className='email-optin-container'>

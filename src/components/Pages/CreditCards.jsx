@@ -28,7 +28,7 @@ const CreditCards = () => {
     };
 
     return (
-        <FlowPage>
+        <FlowPage showCrumbs>
             <div className='flow-content'>
                 <CloseFlow />
                 <span className='flow-title-text'>Select Card Type:</span>

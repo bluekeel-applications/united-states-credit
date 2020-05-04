@@ -67,8 +67,7 @@ const Offers = () => {
             await insertCommonInfo({ variables: { visitor: visit } }).catch(e => e)
         ];
 
-        const res = await Promise.all(promises);
-        console.log('tracking:', res);
+        await Promise.all(promises);
     };
 
     useEffect(() => {
@@ -94,7 +93,7 @@ const Offers = () => {
 
     const showOffers = () => {
         const EndpointOffer = data.fetchEndpointOffer.body;
-        console.log('offer-page:', EndpointOffer.offer_page);
+        console.log('offer:', EndpointOffer);
         switch(EndpointOffer.offer_page) {
             case 'mNet':
                 return (
@@ -128,7 +127,7 @@ const Offers = () => {
     };
 
     return (
-        <FlowPage>
+        <FlowPage showCrumbs showFinalCrumbs>
             <div className='flow-content offer-container'>
                 {data && showOffers()}
             </div>

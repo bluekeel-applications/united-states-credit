@@ -19,7 +19,7 @@ const DebtTypes = () => {
     };
 
     return (
-        <FlowPage>
+        <FlowPage showCrumbs>
             <div className='flow-content'>
                 <CloseFlow />
                 <span className='flow-title-text'>Your primary type of Debt is:</span>

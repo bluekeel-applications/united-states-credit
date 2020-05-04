@@ -29,8 +29,8 @@ const OfferButton = ({isSingle, handleClick, text, index}) => {
                 className='offer-button-icon'
             />
             <div className='offer__button_single-text'>
-                <span className='offer__button_single-title'>View Offers</span>
-                <span className='offer__button_single-subtitle'>Sponsored Listings</span>
+                <div className='offer__button_single-title'>View Offers</div>
+                <div className='offer__button_single-subtitle'>Sponsored Listings</div>
             </div>
         </Button>
     ) : (

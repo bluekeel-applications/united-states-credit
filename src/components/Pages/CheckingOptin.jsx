@@ -37,7 +37,7 @@ const CheckingOptin = () => {
     };
 
     return (
-        <FlowPage>
+        <FlowPage showCrumbs>
             <div className='flow-content'>
                 <CloseFlow />
                 <div className='optin-row row1'>

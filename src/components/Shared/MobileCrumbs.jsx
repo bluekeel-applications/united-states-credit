@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import Crumb from './Crumb';
 
-const Breadcrumbs = ({ final }) => {
+const MobileCrumbs = ({ final }) => {
     const { appState } = useContext(AppContext);
     const { vertical, loan_type } = appState.flowState;
     const verticalCrumb = appState.breadcrumbs.vertical;
@@ -11,7 +11,7 @@ const Breadcrumbs = ({ final }) => {
     const debtAmountCrumb = appState.breadcrumbs.debt_amount;
     
     const renderVertical = () => (
-        <div className='crumb-box'>
+        <div className='mobile-crumb-box'>
             <b className='mobile-breadcrumb-key'>{final ? 'I\'m interested in ' : 'Search:'}</b>
             <Crumb text={verticalCrumb} path='verticals' />
         </div>
@@ -22,7 +22,7 @@ const Breadcrumbs = ({ final }) => {
 
             case 'auto_loans':
                 return (
-                    <div className='crumb-box'>
+                    <div className='mobile-crumb-box'>
                         for a  
                         <Crumb text={loanTypeCrumb} path={vertical} />
                     </div>
@@ -30,7 +30,7 @@ const Breadcrumbs = ({ final }) => {
 
             case 'credit_cards':
                 return (
-                    <div className='crumb-box'>
+                    <div className='mobile-crumb-box'>
                         with   
                         <Crumb text={loanTypeCrumb} path={vertical} />
                         benefits.
@@ -39,7 +39,7 @@ const Breadcrumbs = ({ final }) => {
 
             case 'personal_loans':
                 return (
-                    <div className='crumb-box'>
+                    <div className='mobile-crumb-box'>
                         to help with 
                         <Crumb text={loanTypeCrumb} path={vertical} />
                     </div>
@@ -47,7 +47,7 @@ const Breadcrumbs = ({ final }) => {
 
             case 'home_loans':
                 return (
-                    <div className='crumb-box'>
+                    <div className='mobile-crumb-box'>
                         to  
                         <Crumb text={loanTypeCrumb} path={vertical} />
                     </div>
@@ -56,17 +56,17 @@ const Breadcrumbs = ({ final }) => {
             default:
                 return null;
         }
-    }
+    };
 
     const renderDebtType = () => (
-        <div className='crumb-box'>
+        <div className='mobile-crumb-box'>
             of your  
             <Crumb text={debtTypeCrumb} path='debt_types' />
         </div>
     );
 
     const renderDebtAmount = () => (
-        <div className='crumb-box'>
+        <div className='mobile-crumb-box'>
             totaling  
             <Crumb text={debtAmountCrumb} path='debt_amount' />
         </div>
@@ -74,13 +74,13 @@ const Breadcrumbs = ({ final }) => {
 
     return (
         vertical && (
-            <div className='breadcrumb-container'>
-                <div className='breadcrumb-row'>
-                    {renderVertical()}
+            <div className='mobile-breadcrumb-container'>
+                <div className='mobile-breadcrumb-row'>
+                    {renderVertical()}<br />
                     {loan_type && renderType()}
                 </div>
                 {debtTypeCrumb && (
-                    <div className='breadcrumb-row'>                   
+                    <div className='mobile-breadcrumb-row'>                   
                         {renderDebtType()}
                         {debtAmountCrumb && renderDebtAmount()}
                     </div>                
@@ -90,4 +90,4 @@ const Breadcrumbs = ({ final }) => {
     )
 };
 
-export default Breadcrumbs;
+export default MobileCrumbs;

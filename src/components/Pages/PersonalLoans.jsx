@@ -40,7 +40,7 @@ const PersonalLoans = () => {
     };
 
     return (
-        <FlowPage>
+        <FlowPage showCrumbs>
             <div className='flow-content'>
                 <CloseFlow />
                 <span className='flow-title-text'>Select Loan Purpose:</span>

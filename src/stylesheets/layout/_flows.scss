@@ -1,25 +1,23 @@
 .flow-content__container {
     width: 100%;
-    display: inline-flex;
-    flex-flow: row stretch;
-    justify-content: space-between;
-    align-items: flex-start;
-    height: fit-content;
     background-image: url('../../assets/images/flag_left.png'), url('../../assets/images/flag_right.png');
     background-repeat: no-repeat;
-    // background-attachment: fixed;
     background-size: 250px auto;
     background-position: left top, right top;
+
+    height: 100%;
+    min-height: fit-content;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
 
     @include respond-to('medium') {
         background-size: 150px auto;
     }
-
     @include respond-to('small') {
         background-size: 60px auto;
-        padding: 2vh 0;
-        height: 100%;
-        min-height: fit-content;
+        padding: 0;
     }
 }
 
@@ -44,9 +42,6 @@
 .flow-content__flag {
     width: 20%;
     max-width: 250px;
-    @include respond-to('small') {
-        // width: 10%;
-    }
 }
 
 .flag__right {
@@ -76,7 +71,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    // min-height: 400px;
 }
 
 .flow-page__button-group {
@@ -114,19 +108,23 @@
     box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.6);
     height: fit-content;
     width: 100%;
-    padding: 2vh 25vw;
+    padding: 0 25vw 5vh 25vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     @include respond-to('medium') {
-        padding: 2vh 15vw;
+        padding: 0 15vw 5vh 15vw;
         width: 100vw;
     }
     @include respond-to('small') {
-        padding: 2vh 0;
+        padding: 0 0 5vh 0;
         width: 100vw;
     }
+}
+
+.vertical-flow{
+    margin-top: 30px;
 }
 
 .flow-container {
@@ -140,7 +138,7 @@
     justify-content: flex-end;
     align-items: center;
     @include respond-to('small') {
-        padding: 0 5vw 10px 0;
+        padding: 0 5vw 0 0;
     }
 }
 
