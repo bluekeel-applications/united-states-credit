@@ -7,9 +7,36 @@ import OneButton from './OneButton';
 import MNet from './MNet';
 import DirectLink from './DirectLink';
 
-const OptinOffer = ({ offer_id, jump }) => {
-	const { loading, error, data } = useQuery(OPTIN_OFFER, { variables: { id: offer_id } });
-	  
+const ShowOptin = ({ data, jump }) => {
+    const optinOffer = data.fetchOptinById.body;
+    console.log('optin:', optinOffer);
+    switch(optinOffer.offer_page) {
+        case 'mNet':
+            return (
+                <MNet page={optinOffer.link} />
+            )
+        case 'four_button':
+            return (
+                <FourButton offer={optinOffer} />
+            )
+        case 'one_button':
+            return (
+                <OneButton offer={optinOffer} />
+            )
+        case 'direct_link':
+            return (
+                <DirectLink link={optinOffer.link} jump={jump} />
+            )
+        default:
+            return (
+                <Loading />
+            )
+    }
+};
+
+const OptinOffer = ({ optin_id, jump }) => {
+	const { loading, error, data } = useQuery(OPTIN_OFFER, { variables: { id: optin_id } });
+    console.log('optin_id:', optin_id);
 	if (error) {
 		return <div>Error</div>;
 	};
@@ -18,35 +45,9 @@ const OptinOffer = ({ offer_id, jump }) => {
 		return <Loading />;
 	};
 
-	const showOptin = () => {
-        const optinOffer = data.fetchOptinById.body;
-        switch(optinOffer.offer_page) {
-            case 'mNet':
-                return (
-                    <MNet page={optinOffer.link} />
-                )
-            case 'four_button':
-                return (
-                    <FourButton offer={optinOffer} />
-                )
-            case 'one_button':
-                return (
-                    <OneButton offer={optinOffer} />
-                )
-            case 'direct_link':
-                return (
-                    <DirectLink link={optinOffer.link} jump={jump} />
-                )
-            default:
-                return (
-                    <Loading />
-                )
-        }
-    };
-
     return(
         <div className='optin-offer offer-page__main-1'>
-            {data && showOptin()}
+            {data && (<ShowOptin data={data} jump={jump} />)}
         </div>
     )
 };

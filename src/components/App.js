@@ -3,7 +3,7 @@ import { AppContext } from '../context';
 import Routes from '../Routes';
 import Drawer from './Layout/Drawer';
 import NavbarTop from './Layout/NavbarTop';
-// import Expansion from './Layout/Expansion';
+import Expansion from './Layout/Expansion';
 import Feed from './Feed';
 import { checkForDeepDive } from '../utils/deepDive';
 import { getOrganicHSID } from '../utils/middleware';
@@ -95,7 +95,7 @@ const App = () => {
 return (
 	<div className='App app-bg_container'>
 		<NavbarTop toggleDrawer={toggleDrawer}/> 
-		{/* <Expansion />  */}
+		<Expansion /> 
 		<Routes />
 		<Feed />
 		<Drawer show={showDrawer} toggle={toggleDrawer}/>

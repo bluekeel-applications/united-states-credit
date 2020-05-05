@@ -45,7 +45,6 @@ const Header = ({ toggleDrawer }) => {
                 component='img'
                 className={showLogoText ? 'header-logo' : 'header-icon'}
                 image={showLogoText ? full_logo : icon_logo}
-                height='50'
                 alt='header-logo'
                 onClick={goHome}
             />

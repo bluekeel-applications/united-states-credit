@@ -1,22 +1,35 @@
 .sponsored-text {
-    font-size: 1rem; 
+    font-size: 75%;
     font-weight: 300;
     color: #3571C4;
 }
 
 .offer-page__main {
-    width: max-content;
+    width: 100vw;
+    max-width: 100vw;
     min-height: 350px;
-
+    font-size: 38px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 20vw;
     @include respond-to('small') {
-        width: auto;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: baseline;
-        padding-top: 50px;
+        // width: auto;
+        // min-height: 100vh;
+        padding: 50px 10px;
     }
+}
+
+.offer-page__mnet-header {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5vh;
+}
+
+.sponsored-text-lg {
+    font-size: 38px;
 }
 
 .offer-page__main-1 {

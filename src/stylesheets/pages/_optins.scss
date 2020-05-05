@@ -108,7 +108,7 @@
 .email-optin-text {
     text-align: left;
     font-weight: 300;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     margin-bottom: 20px;
 }
 
@@ -167,12 +167,13 @@
     };
 }
 
-.email_submit-button {
-    margin: 3%;
+.MuiButtonBase-root.email_submit-button {
+    margin: 20px 0 10px 0;
     border-radius: 10px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    min-width: 250px;
 }
 
 .next-button-icon {
@@ -188,15 +189,15 @@
     color: red;
 }
 
-.no-thanks {
+.MuiButtonBase-root.no-thanks {
     background-color: transparent;
     color: #929292;
-    text-decoration: underline;
+    // text-decoration: underline;
     font-weight: 400;
     font-size: 0.8rem;
-    margin: 3vh 0;
+    margin: 0;
 }
 
-.no-thanks:hover {
-    cursor: default;
-}
+// .MuiButtonBase-root.no-thanks:hover {
+//     cursor: default;
+// }

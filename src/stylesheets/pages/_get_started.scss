@@ -2,12 +2,13 @@
     color: $text-primary;
     font-size: 46px;
     font-weight: 800;
-    padding: 3vh 0 20px 0;
+    padding: 5vh 0 20px 0;
 
     @include respond-to('small') {
         font-size: 36px;
         margin: 10px auto 125px;
         line-height: 1.1;
+        padding: 5vh 0 20px 0;
     }
 }
 
@@ -28,7 +29,7 @@
 
 .start-search {
     position: absolute;
-    top: 180px;
+    top: 140px;
     left: 50%;
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
@@ -36,6 +37,7 @@
     -webkit-transition: 1s all,0s top;
     transition: 1s all,0s top;
     overflow: hidden;
+    // width: 100vw;
     cursor: pointer;
     @include respond-to('small') {
         min-height: fit-content;

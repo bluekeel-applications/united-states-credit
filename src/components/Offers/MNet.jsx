@@ -18,8 +18,10 @@ const MNet = ({ page }) => {
     
     return(
         <div id='857097420' className='offer-page__main'>
-            <span className='sponsored-text'>Sponsored: </span>
-            <span style={{fontSize: '1.7rem'}}>Explore the options below</span>
+            <div className='offer-page__mnet-header'>
+                <span className='sponsored-text'>Sponsored: </span>
+                <span className='sponsored-text-lg'>Explore the options below</span>
+            </div>
         </div>
     )
 };

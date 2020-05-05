@@ -1,4 +1,3 @@
-// import { addToClickCount } from '../../utils/middleware';
 
 const initialAppState = {
     loadingOffers: true,

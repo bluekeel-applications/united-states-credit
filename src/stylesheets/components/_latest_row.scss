@@ -18,13 +18,14 @@
 
 .latest-article-row {
     display: inline-flex;
-    padding: 20px;
+    padding: 10px 100px;
     @include respond-to('small') {
         display: flex;
         flex-flow: row nowrap;
         width: 100%;
         justify-content: space-between;
         align-items: center;
+        padding: 10px;
     }
 }
 

@@ -22,6 +22,7 @@ const EmailOptin = () => {
         if(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
             toggleError(false);
             setEmailReady(true);
+            checkTerms(true);
         } else { setEmailReady(false) };
     };
     const [addUserEmail] = useMutation(ADD_USER_EMAIL);
@@ -76,7 +77,7 @@ const EmailOptin = () => {
                                     placeholder='Email Address'
                                     />
                                 <div className='email-terms-container'>
-                                    <input className='email_terms_box' type='checkbox' name='email_terms' onClick={toggleTerms}/>
+                                    <input className='email_terms_box' type='checkbox' checked={termsChecked} name='email_terms' onChange={toggleTerms}/>
                                     <div className='email_terms_text'>
                                         I hereby declare that I am a U.S. resident over the age of 18 and I agree to this site's  
                                         <a className='email_terms_links' href='/terms' target='_blank'>
