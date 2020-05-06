@@ -99,12 +99,9 @@
     margin-top: 20px
 }
 
-.MuiButtonBase-root.optin__button {
-    min-width: 350px;
-    min-height: 90px;
-    border-radius: 75px;
-    font-size: 24px;
-    margin: 5px;
+.MuiButtonBase-root.optin-button.flow-button {
+    padding: 0;
+    justify-content: center;
 }
 
 .MuiButtonBase-root.email-optin-buttons {

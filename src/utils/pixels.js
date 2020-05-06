@@ -11,7 +11,7 @@ import axios from 'axios';
 export const firePixelBlueKeel = async(hsid) => {
 	let link = 'https://www.bkoffers.com/hitstreet/pixel_fire_dynamic_new2.cfm?hsid=' + hsid;
 	try {
-		const res = await axios({
+		await axios({
 			method: 'GET',
 			headers: {
                 'Accept': 'application/json',
@@ -19,11 +19,11 @@ export const firePixelBlueKeel = async(hsid) => {
 			},
 			url: link
 		});
-		console.log('pixel fired for hsid: ', hsid);
-		return res;
+		console.log('BK pixel fired for hsid: ', hsid);
+		return;
 	} catch(err) {
-		console.log('error occured in pixel fire', err.message);
-		return
+		console.log('Failed to fire BK convrsion:', err.message);
+		return;
 	}
 };
 
@@ -31,9 +31,25 @@ export const firePixelBing = (vertical) => {
 	try{
 		window.uetq = window.uetq || [];
 		window.uetq.push({ec: 'USC_search', ea: 'search', el: vertical || 'unknown', ev: .7});
+		console.log('Bing pixel fired for vertical: ', vertical);
 		return;
 	} catch (e){
 		console.warn('Failed to fire Bing conversion:', e.stack);
-		return
+		return;
+	}	
+};
+
+export const firePixelGoogle = () => {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){window.dataLayer.push(arguments);}
+	try{
+		gtag('js', new Date());
+		gtag('config', 'AW-1062401053');
+		gtag('event', 'conversion', { 'send_to': 'AW-1062401053/vd4cCM_pqXsQnejL-gM' });
+		console.log('Google conversion pixel fired.');
+		return;
+	} catch (e){
+		console.warn('Failed to fire Google conversion:', e.stack);
+		return;
 	}	
 };

@@ -15,7 +15,7 @@ import DirectLink from './DirectLink';
 import OptinOffer from './OptinOffer';
 
 import FlowPage from '../Layout/FlowPage';
-import { firePixelBlueKeel, firePixelBing } from '../../utils/pixels';
+import { firePixelBlueKeel, firePixelBing, firePixelGoogle } from '../../utils/pixels';
 
 const ShowOffers = ({ data }) => {
     console.log('offer:', data);
@@ -92,10 +92,11 @@ const Offers = () => {
         'email': appState.email || 'null'
     };
 
-    const { loading, error, data } = useQuery(ENDPOINT_OFFER, { variables: { queryData: flows } });
+    const { loading, error, data } = useQuery(ENDPOINT_OFFER, { variables: { queryData: flows, location: trackingState.location || 'N/A' } });
 
     const handleTracking = async() => {
         firePixelBing(vertical);
+        firePixelGoogle();
         const promises = [
             await firePixelBlueKeel(trackingState.hsid).catch(e => e),
             await addUserFlow({ variables: { clickId: Number(trackingState.hsid), flow: flows }}).catch(e => e),

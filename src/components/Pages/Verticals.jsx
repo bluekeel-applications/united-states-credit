@@ -16,7 +16,7 @@ const Verticals = () => {
     };
 
     return (
-        <FlowPage>
+        <FlowPage showCrumbs={false}>
             <div className='flow-content vertical-flow'>
                 <CloseFlow />
                 <span className='flow-title-text'>Select one of the options below:</span>            

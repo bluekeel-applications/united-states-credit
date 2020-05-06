@@ -13,7 +13,8 @@ const DirectLink = ({ link, jump }) => {
 			if(jump && jump !== 'N/A') {
 				window.location.href = jump;
 			} else { 
-				history.push('/');
+				history.goBack();
+				history.goBack();
 			};
         };
         return () => {componentIsMounted.current = false};

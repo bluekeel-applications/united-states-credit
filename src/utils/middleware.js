@@ -4,20 +4,19 @@ import { setCookie } from './helpers';
 // const corsProxy = 'https://cors-anywhere.herokuapp.com/';
 
 const buildHitStreetLink = (payload) => {
-    const { OID, PID, EID, SID, UID } = payload;
     const hitStreetLink = 'https://bkoffers.com/hitstreet/hit_count_hsid2.cfm?' +
-        'offer_id=' + OID + '&' +
-        'program_id=' + PID + '&' +
-        'hsid=0&' +
-        'eid=' + EID + '&' +
-        'oid=' + OID + '&' +
-        'pid=' + PID + '&' +
-        'sid=' + SID + '&' +
-        'uid=' + UID;
+        'offer_id=' + payload.OID + '&' +
+        'program_id=' + payload.PID + '&' +
+        'hsid=' + payload.HSID + '&' +
+        'eid=' + payload.EID + '&' +
+        'oid=' + payload.OID + '&' +
+        'pid=' + payload.PID + '&' +
+        'sid=' + payload.SID + '&' +
+        'uid=' + payload.UID;
     return hitStreetLink;
 };
 
-export const getOrganicHSID = async(payload) => {
+export const sendHitStreetHSID = async(payload) => {
     let fetchLink = buildHitStreetLink(payload);
     try{
         const res = await axios({
@@ -33,8 +32,12 @@ export const getOrganicHSID = async(payload) => {
             setCookie('hsid', backup, 3);
             return backup;
         };
-        setCookie('hsid', res.data, 3);
-        return res.data;
+        if(typeof res.data === 'number') {
+            setCookie('hsid', res.data, 3);
+            return res.data;
+        };
+        setCookie('hsid', payload.HSID, 3);
+        return payload.HSID;
     } catch(err) {
         return {status: 'failed', message: err};
     }

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
-import OptinButton from '../Shared/OptinButton';
+import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../Layout/FlowPage';
 import CloseFlow from '../Shared/CloseFlow';
@@ -47,20 +47,24 @@ const CheckingOptin = () => {
                     </h2>
                 </div>
                 <div className='optin-row row2'>
-                    <OptinButton 
-                        color='blue' 
-                        value='Yes' 
-                        handleClick={opt_IN}
-                    />
-                    <OptinButton 
-                        color='light_blue' 
-                        value='No' 
-                        handleClick={opt_OUT}
-                    />
+                    <Button
+                        onClick={opt_IN} 
+                        variant='contained' 
+                        className='optin-button flow-button bg__blue'
+                    >
+                        Yes
+                    </Button>
+                    <Button
+                        onClick={opt_OUT} 
+                        variant='contained' 
+                        className='optin-button flow-button bg__light_blue'
+                    >
+                        No
+                    </Button>
                 </div>
                 <div className='optin-row  row3'>
                     <div className='article-content article-content_1'>
-                        <div className='article-heading'>Why do you need a checking account?</div>
+                        <div className='article-heading'><b>Why do you need a checking account?</b></div>
                         <div className='article-content'>
                             There are many benefits a checking account can provide.  As technology and security are changing everyday so are checking accounts.  The key is knowing exactly why having a checking account is so important.  Here are just a couple quick tips.
                         </div>

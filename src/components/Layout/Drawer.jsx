@@ -15,8 +15,13 @@ const Drawer = ({ show, toggle }) => {
     const handleLinkOutClick = (url, e) => {
         e.preventDefault();
         window.open(url, '_blank');
-        toggleDrawer(false);
+        toggle(false);
     };
+
+    const handleNavClick = (route) => {
+        toggle(false);
+        history.push('/' + route);
+    }
 
     const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -28,7 +33,7 @@ const Drawer = ({ show, toggle }) => {
     const list = () => (
         <div role='presentation'>
             <List>            
-                <ListItem button onClick={() => history.push('/verticals')}>
+                <ListItem button onClick={() => handleNavClick('verticals')}>
                     <FontAwesomeIcon
                     icon={['fal', 'search-dollar']}
                     className='drawer-button-icon'
@@ -36,7 +41,7 @@ const Drawer = ({ show, toggle }) => {
                     <ListItemText primary='Start a Visual Credit Search' />
                 </ListItem>
                 <Divider />
-                <ListItem button onClick={() => history.push('/personal_loans')}>
+                <ListItem button onClick={() => handleNavClick('personal_loans')}>
                     <FontAwesomeIcon
                     icon={['fal', 'hand-holding-usd']}
                     className='drawer-button-icon'
@@ -44,7 +49,7 @@ const Drawer = ({ show, toggle }) => {
                     <ListItemText primary='Find a Loan' />
                 </ListItem>
                 <Divider />
-                <ListItem button onClick={() => history.push('/credit_cards')}>
+                <ListItem button onClick={() => handleNavClick('credit_cards')}>
                     <FontAwesomeIcon
                     icon={['fal', 'credit-card']}
                     className='drawer-button-icon'

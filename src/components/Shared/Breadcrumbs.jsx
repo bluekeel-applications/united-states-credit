@@ -9,7 +9,8 @@ const Breadcrumbs = ({ final }) => {
     const loanTypeCrumb = appState.breadcrumbs.loan_type;
     const debtTypeCrumb = appState.breadcrumbs.debt_type;
     const debtAmountCrumb = appState.breadcrumbs.debt_amount;
-    
+    const debtOptinCrumb = appState.flowState.debt_optin;
+
     const renderVertical = () => (
         <div className='crumb-box'>
             <b className='mobile-breadcrumb-key'>{final ? 'I\'m interested in ' : 'Search:'}</b>
@@ -19,7 +20,6 @@ const Breadcrumbs = ({ final }) => {
     
     const renderType = () => {
         switch(vertical) {
-
             case 'auto_loans':
                 return (
                     <div className='crumb-box'>
@@ -27,16 +27,14 @@ const Breadcrumbs = ({ final }) => {
                         <Crumb text={loanTypeCrumb} path={vertical} />
                     </div>
                 )
-
             case 'credit_cards':
                 return (
                     <div className='crumb-box'>
                         with   
                         <Crumb text={loanTypeCrumb} path={vertical} />
-                        benefits.
+                        benefits
                     </div>
                 )
-
             case 'personal_loans':
                 return (
                     <div className='crumb-box'>
@@ -44,7 +42,6 @@ const Breadcrumbs = ({ final }) => {
                         <Crumb text={loanTypeCrumb} path={vertical} />
                     </div>
                 )
-
             case 'home_loans':
                 return (
                     <div className='crumb-box'>
@@ -52,11 +49,10 @@ const Breadcrumbs = ({ final }) => {
                         <Crumb text={loanTypeCrumb} path={vertical} />
                     </div>
                 )
-
             default:
                 return null;
         }
-    }
+    };
 
     const renderDebtType = () => (
         <div className='crumb-box'>
@@ -72,19 +68,26 @@ const Breadcrumbs = ({ final }) => {
         </div>
     );
 
+    const renderDebtOptin = () => (
+        <div className='crumb-box'>
+            , and <Crumb text='Consolidate Debt' path='debt_optin' />.
+        </div>
+    );
+
     return (
         vertical && (
             <div className='breadcrumb-container'>
                 <div className='breadcrumb-row'>
                     {renderVertical()}
                     {loan_type && renderType()}
+                    {debtOptinCrumb && renderDebtOptin()}
                 </div>
                 {debtTypeCrumb && (
                     <div className='breadcrumb-row'>                   
                         {renderDebtType()}
                         {debtAmountCrumb && renderDebtAmount()}
                     </div>                
-                )}
+                )}                
             </div>
         )
     )

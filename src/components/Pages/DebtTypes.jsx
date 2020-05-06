@@ -15,7 +15,19 @@ const DebtTypes = () => {
         e.preventDefault();
         dispatchApp({ type: 'DEBT_TYPE_PICKED', payload: { value: choice, crumb: texts } });
         window.scrollTo(0, 0);
-        history.push('/debt_amount');        
+        switch(choice) {
+            case 'credit_card':
+                history.push('/debt_amount');
+                return;
+            
+            case 'personal_loan':
+                history.push('/debt_amount');
+                return;
+            
+            default:
+                history.push('/email_optin');
+                return;
+        };        
     };
 
     return (

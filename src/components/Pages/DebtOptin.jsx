@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
-// import FadeIn from 'react-fade-in';
-import OptinButton from '../Shared/OptinButton';
+import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../Layout/FlowPage';
 import CloseFlow from '../Shared/CloseFlow';
@@ -32,16 +31,20 @@ const DebtOptin = () => {
                     </h2>
                 </div>
                 <div className='optin-row row2'>
-                    <OptinButton 
-                        color='blue' 
-                        value='Yes' 
-                        handleClick={opt_IN}
-                    />
-                    <OptinButton 
-                        color='light_blue' 
-                        value='No' 
-                        handleClick={opt_OUT}
-                    />
+                    <Button
+                        onClick={opt_IN} 
+                        variant='contained' 
+                        className='optin-button flow-button bg__blue'
+                    >
+                        Yes
+                    </Button>
+                    <Button
+                        onClick={opt_OUT} 
+                        variant='contained' 
+                        className='optin-button flow-button bg__light_blue'
+                    >
+                        No
+                    </Button>
                 </div>
                 <div className='optin-row  row3'>
                     <div className='debt-article-heading'>{`Debt Consolidation & Debt Settlement`}</div>

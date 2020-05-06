@@ -99,42 +99,42 @@ export const personal_loan_buttons = [
 		text: 'Debt Consolidation',
 		color: 'blue',
 		value: 'debt_consolidation',
-		crumb: ''
+		crumb: 'Consolidating Debt'
 	},
 	{
 		icon: ['left', 'fal', 'money-check-edit-alt'],
 		text: 'Paying Bills',
 		color: 'light_blue',
 		value: 'pay_bills',
-		crumb: ''
+		crumb: 'Paying Bills'
 	},
 	{
 		icon: ['left', 'fal', 'shopping-cart'],
-		text: 'Make a Purchase',
+		text: 'Making a Purchase',
 		color: 'red',
 		value: 'make_purchase',
-		crumb: ''
+		crumb: 'Making a Purchase'
 	},
 	{
 		icon: ['left', 'fal', 'hands-usd'],
 		text: 'Emergency Cash',
 		color: 'dark_blue',
 		value: 'emergency_cash',
-		crumb: ''
+		crumb: 'Emergency Cash'
 	},
 	{
 		icon: ['left', 'fal', 'landmark-alt'],
 		text: 'Paying Taxes',
 		color: 'blue',
 		value: 'pay_taxes',
-		crumb: ''
+		crumb: 'Paying Taxes'
 	},
 	{
 		icon: ['left', 'fal', 'search-dollar'],
 		text: 'Other Reasons',
 		color: 'light_blue',
-		value: 'other',
-		crumb: ''
+		value: 'other_purpose',
+		crumb: 'Other Reasons'
 	},
 ];
 
@@ -144,28 +144,28 @@ export const home_loan_buttons = [
 		text: 'Refinance',
 		color: 'blue',
 		value: 'refinance',
-		crumb: ''
+		crumb: 'Refinance'
 	},
 	{
 		icon: ['left', 'fal', 'donate'],
 		text: 'Lease to Own',
 		color: 'light_blue',
 		value: 'lease_to_own',
-		crumb: ''
+		crumb: 'Lease to Own'
 	},
 	{
 		icon: ['left', 'fal', 'gopuram'],
 		text: 'HELOC',
 		color: 'red',
 		value: 'heloc',
-		crumb: ''
+		crumb: 'HELOC'
 	},
 	{
 		icon: ['left', 'fal', 'shopping-cart'],
 		text: 'Purchase',
 		color: 'dark_blue',
 		value: 'purchase',
-		crumb: ''
+		crumb: 'Purchase'
 	},
 ];
 

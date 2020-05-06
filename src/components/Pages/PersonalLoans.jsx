@@ -47,7 +47,7 @@ const PersonalLoans = () => {
                 <div className='flow-page__button-group'>
                     {personal_loan_buttons.map((button, idx) => (
                         <Button
-                            onClick={(e) => handleFlowClick(e, button.value, button.text)} 
+                            onClick={(e) => handleFlowClick(e, button.value, button.crumb)} 
                             variant='contained' 
                             className={`flow-button bg__${button.color}`}
                             key={`personal_loans-page_button-${idx}`}

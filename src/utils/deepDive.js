@@ -68,7 +68,7 @@ const handleTypeChoice = (type, history, dispatchApp) => {
 			history.push('/debt_optin');
 			return;
 		case 'make_purchase':
-			dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Make a Purchase' } });
+			dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Making a Purchase' } });
 			history.push('/debt_optin');
 			return;
 		case 'emergency':

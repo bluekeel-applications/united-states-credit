@@ -2,6 +2,9 @@
     font-size: 75%;
     font-weight: 300;
     color: #3571C4;
+    @include respond-to('small') {
+        font-size: 1rem;
+    }
 }
 
 .offer-page__main {
@@ -15,9 +18,7 @@
     align-items: center;
     padding: 0 20vw;
     @include respond-to('small') {
-        // width: auto;
-        // min-height: 100vh;
-        padding: 50px 10px;
+        padding: 5px 10px;
     }
 }
 
@@ -26,10 +27,16 @@
     justify-content: center;
     align-items: center;
     padding-top: 5vh;
+    @include respond-to('small') {
+        padding-top: 0;
+    }
 }
 
 .sponsored-text-lg {
     font-size: 38px;
+    @include respond-to('small') {
+        font-size: 1.25rem;
+    }
 }
 
 .offer-page__main-1 {
@@ -42,8 +49,7 @@
 
     @include respond-to('small') {
         width: auto;
-        min-height: 100vh;
-        padding-top: 50px;
+        min-height: 70vh;
     }
 }
 
@@ -80,4 +86,8 @@
         margin: 0;
         padding: 10px;
     }
+}
+
+iframe#_mN_dy_857097420 {
+    top: 20px;
 }

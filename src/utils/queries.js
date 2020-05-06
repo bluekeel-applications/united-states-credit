@@ -39,8 +39,8 @@ const FETCH_FEED = gql`
 `;
 // Offer
 const ENDPOINT_OFFER = gql`
-	query FetchEndpointOffer($queryData: OfferQuery) {
-		fetchEndpointOffer(queryData: $queryData) {
+	query FetchEndpointOffer($queryData: OfferQuery, $location: String) {
+		fetchEndpointOffer(queryData: $queryData, location: $location) {
 			success
 			status
 			message
@@ -91,8 +91,19 @@ const OPTIN_OFFER = gql`
 	}
 `;
 
+const PCH_USER = gql`
+	query FetchUserInfo {
+		fetchUserInfo {
+			success
+			status
+			message
+		}
+	}
+`;
+
 export {
 	FETCH_FEED,
 	ENDPOINT_OFFER,
-	OPTIN_OFFER
+	OPTIN_OFFER,
+	PCH_USER
 };
