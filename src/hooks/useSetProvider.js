@@ -10,7 +10,8 @@ const useSetProvider = () => {
             const locationParts = window.location.hostname.split('.');
             const subDomain = locationParts.shift();
             if(subDomain === 'pch') {
-				dispatchApp({ type: 'SET_PROVIDER', payload: 'pch' });
+                dispatchApp({ type: 'SET_PROVIDER', payload: 'pch' });
+                dispatchApp({ type: 'SHOW_EXPANSION' });
 				return;
 			};
 			dispatchApp({ type: 'SET_PROVIDER', payload: 'bluekeel' });

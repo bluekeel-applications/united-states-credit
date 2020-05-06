@@ -9,7 +9,7 @@ import { ADD_USER_EMAIL } from '../../utils/mutations.js';
 import CloseFlow from '../Shared/CloseFlow';
 
 const EmailOptin = () => {
-    const { trackingState, dispatchApp } = useContext(AppContext);    
+    const { trackingState, dispatchApp, appState } = useContext(AppContext);    
     let history = useHistory();
     const [disabled, setDisabledState] = useState(true);
     const [termsChecked, checkTerms] = useState(false);
@@ -61,9 +61,9 @@ const EmailOptin = () => {
     }, [validEmail, termsChecked])
 
     return (
-        <FlowPage showCrumbs>
-            <div className='flow-content'>
-                <CloseFlow />
+        <FlowPage showCrumbs={appState.provider !== 'pch'}>
+            <div className={`${appState.showExpansion ? 'padded-top' : ''} flow-content`}>
+                {!appState.showExpansion && <CloseFlow />}
                 <div className='email-optin-container'>
                     <div className='email-optin-card'>
                         <div className='email-optin-text'>Would you like to receive relevant credit offers from <b><em>The Card Note</em></b> and <b><em>Card Matcher</em></b> directly to your inbox?</div>                    

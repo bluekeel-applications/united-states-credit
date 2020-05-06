@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-// import { AppContext } from '../../context';
+import React, { useState, useEffect, useContext } from 'react';
+import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import FlowPage from '../Layout/FlowPage';
 
 const GetStarted = () => {
-    // const { appState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
     let history = useHistory();
     const [scrollTop, setScrollTop] = useState(0);
     const [showNavButton, setShowNavButton] = useState(false);
@@ -41,7 +41,7 @@ const GetStarted = () => {
         <FlowPage showCrumbs={false}>
             <div className='get-started__container flow-content'>
                 <span className='start-title-text'>FIND THE RIGHT CREDIT FOR YOU</span>
-                <div id={`${showNavButton? 'nav-button' : 'start'}`} className='start-search'>
+                <div id={`${showNavButton? 'nav-button' : 'start'}`} className={`${appState.provider === 'pch' ? 'start-search-pch' : 'start-search'}`}>
                     <Button
                         onClick={handleStartClick} 
                         className={`${showNavButton? 'nav-button' : 'is_start'} flow-button bg__blue`}

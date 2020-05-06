@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import CloseFlow from '../Shared/CloseFlow';
 
 const PersonalLoans = () => {
-    const { dispatchApp } = useContext(AppContext);
+    const { appState, dispatchApp } = useContext(AppContext);
     let history = useHistory();
 
     const componentIsMounted = useRef(true);
@@ -40,9 +40,9 @@ const PersonalLoans = () => {
     };
 
     return (
-        <FlowPage showCrumbs>
-            <div className='flow-content'>
-                <CloseFlow />
+        <FlowPage showCrumbs={appState.provider !== 'pch'}>
+            <div className={`${appState.showExpansion ? 'padded-top' : ''} flow-content`}>
+                {!appState.showExpansion && <CloseFlow />}
                 <span className='flow-title-text'>Select Loan Purpose:</span>
                 <div className='flow-page__button-group'>
                     {personal_loan_buttons.map((button, idx) => (

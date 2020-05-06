@@ -8,7 +8,7 @@ import { debt_amount_buttons } from './BUTTONS';
 import CloseFlow from '../Shared/CloseFlow';
 
 const DebtAmounts = () => {
-    const { dispatchApp } = useContext(AppContext);
+    const { appState, dispatchApp } = useContext(AppContext);
     let history = useHistory();
 
     const handleFlowClick = (e, choice, texts) => {
@@ -19,9 +19,9 @@ const DebtAmounts = () => {
     };
 
     return (
-        <FlowPage showCrumbs>
-            <div className='flow-content'>
-                <CloseFlow />
+        <FlowPage showCrumbs={appState.provider !== 'pch'}>
+            <div className={`${appState.showExpansion ? 'padded-top' : ''} flow-content`}>
+                {!appState.showExpansion && <CloseFlow />}
                 <span className='flow-title-text'>Your total Amount of Debt is:</span>
                 <div className='flow-page__button-group'>
                     {debt_amount_buttons.map((button, idx) => (

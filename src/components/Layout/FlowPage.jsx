@@ -18,7 +18,13 @@ const FlowPage = ({children, showCrumbs, showFinalCrumbs = false}) => {
     }, []);
     
     return (
-        <div className={`${showFinalCrumbs ? 'flow-content__container-final' : ''} flow-content__container`}>
+        <div 
+            className={`
+                ${showFinalCrumbs ? 'flow-content__container-final' : ''} 
+                flow-content__container 
+                ${appState.showExpansion ? 'top-shadow' : ''}
+            `}
+        >
             {showCrumbs && (<BreadCrumbs final={showFinalCrumbs}/>)}
             {children}
         </div>

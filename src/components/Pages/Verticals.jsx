@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../Layout/FlowPage';
 import { vertical_buttons } from './BUTTONS';
@@ -8,6 +9,7 @@ import CloseFlow from '../Shared/CloseFlow';
 
 const Verticals = () => {
     let history = useHistory();
+    const { appState } = useContext(AppContext);
 
     const handleVerticalClick = (e, choice) => {
         e.preventDefault();
@@ -18,7 +20,7 @@ const Verticals = () => {
     return (
         <FlowPage showCrumbs={false}>
             <div className='flow-content vertical-flow'>
-                <CloseFlow />
+                {!appState.showExpansion && <CloseFlow />}
                 <span className='flow-title-text'>Select one of the options below:</span>            
                 <div className='flow-page__button-group'>
                     {vertical_buttons.map((button, idx) => (

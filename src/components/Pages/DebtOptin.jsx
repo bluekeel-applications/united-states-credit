@@ -22,9 +22,9 @@ const DebtOptin = () => {
     };
 
     return (
-        <FlowPage showCrumbs>
-            <div className='flow-content'>
-                <CloseFlow />
+        <FlowPage showCrumbs={appState.provider !== 'pch'}>
+            <div className={`${appState.showExpansion ? 'padded-top' : ''} flow-content`}>
+                {!appState.showExpansion && <CloseFlow />}
                 <div className='optin-row row1'>
                     <h2 className='optin-header-text'>
                         Would you like a loan to consolidate debt <b><em>and</em></b> for {appState.breadcrumbs.loan_type}?

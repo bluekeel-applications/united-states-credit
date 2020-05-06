@@ -29,6 +29,10 @@
     }
 }
 
+.top-shadow {
+    box-shadow: 0 -3px 5px -2px rgba(0, 0, 0, 0.6);
+}
+
 .flow-content__flag {
     width: 20%;
     max-width: 250px;
@@ -112,6 +116,10 @@
         padding: 0 0 5vh 0;
         width: 100vw;
     }
+}
+
+.padded-top {
+    padding-top: 30px;
 }
 
 .vertical-flow{

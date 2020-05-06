@@ -8,7 +8,7 @@ import { home_loan_buttons } from './BUTTONS';
 import CloseFlow from '../Shared/CloseFlow';
 
 const HomeLoans = () => {
-    const { dispatchApp } = useContext(AppContext);
+    const { dispatchApp, appState } = useContext(AppContext);
     let history = useHistory();    
     const componentIsMounted = useRef(true);
 
@@ -29,9 +29,9 @@ const HomeLoans = () => {
     };
 
     return (
-        <FlowPage showCrumbs>
-            <div className='flow-content'>
-                <CloseFlow />
+        <FlowPage showCrumbs={appState.provider !== 'pch'}>
+            <div className={`${appState.showExpansion ? 'padded-top' : ''} flow-content`}>
+                {!appState.showExpansion && <CloseFlow />}
                 <span className='flow-title-text'>Select Loan Type:</span>
                 <div className='flow-page__button-group'>
                     {home_loan_buttons.map((button, idx) => (
