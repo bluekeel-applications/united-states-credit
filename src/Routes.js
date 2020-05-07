@@ -12,6 +12,7 @@ import CheckingOptin from './components/Pages/CheckingOptin';
 import DebtOptin from './components/Pages/DebtOptin';
 import EmailOptin from './components/Pages/EmailOptin';
 import Offers from './components/Offers';
+import Error from './components/Pages/Error';
 
 const Routes = () => {
   return (
@@ -29,6 +30,7 @@ const Routes = () => {
       <Route path='/debt_optin' component={DebtOptin} />
       <Route path='/email_optin' component={EmailOptin} />
       <Route path='/offers' component={Offers} />
+      <Route path='/error' component={Error} />
     </Switch>
   );
 };

@@ -118,6 +118,12 @@
     }
 }
 
+.email-content {
+    @include respond-to('small') {
+        padding: 30px 10px;
+    }    
+}
+
 .padded-top {
     padding-top: 30px;
 }

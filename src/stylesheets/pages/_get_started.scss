@@ -37,9 +37,11 @@
     transition: 1s all,0s top;
     overflow: hidden;
     cursor: pointer;
+    width: 400px;
     @include respond-to('small') {
         min-height: fit-content;
         padding: 0;
+        width: unset;
     }
 }
 .start-search-pch {

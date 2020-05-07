@@ -7,16 +7,22 @@ import FlowPage from '../Layout/FlowPage';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_USER_EMAIL } from '../../utils/mutations.js';
 import CloseFlow from '../Shared/CloseFlow';
+import LoadingWave from '../Shared/LoadingWave';
+import useOfferFinder from '../../hooks/useOfferFinder';
+import useTrackingLayer from '../../hooks/useTrackingLayer';
 
 const EmailOptin = () => {
     const { trackingState, dispatchApp, appState } = useContext(AppContext);    
     let history = useHistory();
+    useTrackingLayer();
     const [disabled, setDisabledState] = useState(true);
     const [termsChecked, checkTerms] = useState(false);
     const [validEmail, setEmailReady] = useState(false);
     const [showInputError, toggleError] = useState(false);
     const email_input_el = useRef();
 
+    const [ offerData, error, loading ] = useOfferFinder();
+    
     const checkValidity = () => {
         let email = email_input_el.current.value;
         if(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
@@ -27,11 +33,24 @@ const EmailOptin = () => {
     };
     const [addUserEmail] = useMutation(ADD_USER_EMAIL);
 
+    const checkForDirectLink = () => {
+        if(offerData.offer_page === 'direct_link') {
+            window.open(offerData.url);
+            if(offerData.jump !== 'N/A') {
+                window.location.href = offerData.jump;
+                return;
+            };
+            history.push('/verticals');
+            return;
+        };
+        history.push('/offers');
+        return;
+    };
+
     const handleOptOut = () => {
         dispatchApp({ type: 'EMAIL_OPT_OUT' });
         window.scrollTo(0, 0);
-        history.push('/offers');
-        return;
+        checkForDirectLink();
     };
     
     const handleSubmit = () => {
@@ -40,8 +59,7 @@ const EmailOptin = () => {
             dispatchApp({ type: 'EMAIL_OPT_IN', payload: emailValue });
             addUserEmail({ variables: { clickId: Number(trackingState.hsid), email: emailValue }});
             window.scrollTo(0, 0);
-            history.push('/offers');
-            return;
+            checkForDirectLink();
         };
         toggleError(true);
     };
@@ -58,11 +76,20 @@ const EmailOptin = () => {
 
         return () => setDisabledState(true);
         // eslint-disable-next-line
-    }, [validEmail, termsChecked])
+    }, [validEmail, termsChecked]);
+
+    if(error) {
+        history.push('/error');
+        return;
+    };
+
+    if(loading) {
+        return <LoadingWave />
+    };
 
     return (
         <FlowPage showCrumbs={appState.provider !== 'pch'}>
-            <div className={`${appState.showExpansion ? 'padded-top' : ''} flow-content`}>
+            <div className={`${appState.showExpansion ? 'padded-top' : ''} email-content flow-content`}>
                 {!appState.showExpansion && <CloseFlow />}
                 <div className='email-optin-container'>
                     <div className='email-optin-card'>
