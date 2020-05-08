@@ -1,65 +1,142 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import TextField from '@material-ui/core/TextField';
 import { AppContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../Layout/FlowPage';
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_USER_EMAIL } from '../../utils/mutations.js';
+import { ADD_USER_EMAIL, INSERT_COMMON_INFO } from '../../utils/mutations';
 import CloseFlow from '../Shared/CloseFlow';
-import LoadingWave from '../Shared/LoadingWave';
+import Loading from '../Shared/Loading';
 import useOfferFinder from '../../hooks/useOfferFinder';
 import useTrackingLayer from '../../hooks/useTrackingLayer';
+import { buildFullLink } from '../../utils/helpers';
 
 const EmailOptin = () => {
-    const { trackingState, dispatchApp, appState } = useContext(AppContext);    
+    const { trackingState, dispatchApp, appState } = useContext(AppContext);
+    let essentials = appState.flowState.vertical && appState.flowState.loan_type;  
     let history = useHistory();
     useTrackingLayer();
     const [disabled, setDisabledState] = useState(true);
     const [termsChecked, checkTerms] = useState(false);
     const [validEmail, setEmailReady] = useState(false);
     const [showInputError, toggleError] = useState(false);
-    const email_input_el = useRef();
-
-    const [ offerData, error, loading ] = useOfferFinder();
+    const [emailValue, setEmail] = useState('');
+    const [ data, error, loading ] = useOfferFinder();
+    const [offer, setOffer] = useState(null);
     
-    const checkValidity = () => {
-        let email = email_input_el.current.value;
+    const [offerPage, setOfferPage] = useState('');
+    const checkValidity = (event) => {
+        let email = event.target.value;
+        setEmail(email);
         if(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
             toggleError(false);
             setEmailReady(true);
             checkTerms(true);
-        } else { setEmailReady(false) };
+            setDisabledState(false);
+        } else { setEmailReady(false); };
     };
-    const [addUserEmail] = useMutation(ADD_USER_EMAIL);
 
-    const checkForDirectLink = () => {
-        if(offerData.offer_page === 'direct_link') {
-            window.open(offerData.url);
-            if(offerData.jump !== 'N/A') {
-                window.location.href = offerData.jump;
-                return;
-            };
-            history.push('/verticals');
+    const [addUserEmail] = useMutation(ADD_USER_EMAIL);
+    const [insertCommonInfo] = useMutation(INSERT_COMMON_INFO);
+
+    useEffect(() => {
+        if(!essentials) {
+            history.push('/');
             return;
         };
-        history.push('/offers');
+
+        if(data) {
+            setOffer(data.fetchEndpointOffer.body);
+            setOfferPage(data.fetchEndpointOffer.body.offer_page);
+        };
+
+        if(validEmail && termsChecked) {
+            setDisabledState(false);
+            return;
+        };
+
+        return () => setDisabledState(true);
+        // eslint-disable-next-line
+    }, [validEmail, termsChecked, data]);
+
+    if(error) {
+        history.push('/error');
         return;
     };
 
-    const handleOptOut = () => {
-        dispatchApp({ type: 'EMAIL_OPT_OUT' });
+    if(loading) {
+        return <Loading />
+    };
+
+    const processClick = async(direct) => {
+        dispatchApp({ type: 'HIDE_EXPANSION' });
         window.scrollTo(0, 0);
-        checkForDirectLink();
+        await insertCommonInfo({ 
+            variables: { 
+                visitor: {
+                    'hsid': Number(trackingState.hsid),
+                    'oid': Number(trackingState.oid),
+                    'eid': trackingState.eid,
+                    'sid': Number(trackingState.sid),
+                    'uid': trackingState.uid,
+                    'ip_address': trackingState.ip_address,
+                    'email': emailValue || ''
+                }
+            } 
+        });
+        if(direct) return;
+        history.push('/offers');
+        return;
     };
     
-    const handleSubmit = () => {
-        let emailValue = email_input_el.current.value;
+    const sendEmailToDB = () => {
+        console.log('email:', emailValue);
+        dispatchApp({ type: 'EMAIL_OPT_IN', payload: emailValue });
+        addUserEmail({ variables: { clickId: Number(trackingState.hsid), email: emailValue }});
+    };
+
+    const handleOptOut = async() => {
+        dispatchApp({ type: 'EMAIL_OPT_OUT' });
+        await processClick(false);
+        return;
+    };
+
+    const handleOptOutDirectLink = () => {
+        dispatchApp({ type: 'EMAIL_OPT_OUT' });
+        const newWindowLink = buildFullLink(offer.url, trackingState.sid, trackingState.eid);
+        window.open(newWindowLink);
+        processClick(true);
+        if(offer && offer.jump !== 'N/A') {
+            window.location.href = buildFullLink(offer.jump, trackingState.sid, trackingState.eid);
+            return;
+        };
+        history.push('/verticals');
+    };
+    
+    const handleEmailSubmit = async() => {
         if(!disabled) {
-            dispatchApp({ type: 'EMAIL_OPT_IN', payload: emailValue });
-            addUserEmail({ variables: { clickId: Number(trackingState.hsid), email: emailValue }});
-            window.scrollTo(0, 0);
-            checkForDirectLink();
+            sendEmailToDB();
+            await processClick(false);
+            return;
+        };
+        toggleError(true);
+    };
+
+
+    const handleDirectLink = () => {
+        const newWindowLink = buildFullLink(offer.url, trackingState.sid, trackingState.eid);
+        if(!disabled) {
+            window.open(newWindowLink);
+            sendEmailToDB();
+            processClick(true);
+            if(offer && offer.jump !== 'N/A') {
+                window.location.href = buildFullLink(offer.jump, trackingState.sid, trackingState.eid);
+                return;
+            };
+            history.push('/verticals');
+            return
         };
         toggleError(true);
     };
@@ -68,41 +145,64 @@ const EmailOptin = () => {
         checkTerms(!termsChecked);
     };
 
-    useEffect(() => {
-            if(validEmail && termsChecked) {
-                setDisabledState(false);
-                return;
-            };
+    const OfferButtons = ({ disabledState }) => (
+        <div className='email-button-group'>
+            <Button className={`email_submit-button ${!termsChecked && 'disabled'}`} variant='contained' color='primary' onClick={handleEmailSubmit} disabled={disabledState}>
+                <span className='button-text' >Next</span>
+                <FontAwesomeIcon
+                    icon={['fal', 'angle-double-right']}
+                    className='next-button-icon'
+                />
+            </Button>
+            <Button className='no-thanks' onClick={handleOptOut}>
+                No Thanks
+            </Button>
+        </div>
+    );
 
-        return () => setDisabledState(true);
-        // eslint-disable-next-line
-    }, [validEmail, termsChecked]);
+    const DirectLinkButtons = ({ disabledState }) => (
+        <div className='email-button-group'>
+            <Button className={`email_submit-button ${!termsChecked && 'disabled'}`} variant='contained' color='primary' onClick={handleDirectLink} disabled={disabledState}>
+                <span className='button-text' >Next</span>
+                <FontAwesomeIcon
+                    icon={['fal', 'angle-double-right']}
+                    className='next-button-icon'
+                />
+            </Button>
+            <Button className='no-thanks' onClick={handleOptOutDirectLink}>
+                No Thanks
+            </Button>
+        </div>
+    );
 
-    if(error) {
-        history.push('/error');
-        return;
-    };
-
-    if(loading) {
-        return <LoadingWave />
-    };
+    const input_props = {
+        autoFocus: true,
+        onChange: checkValidity,
+        value: emailValue,
+        error: showInputError,
+        type: 'email'
+    }
 
     return (
-        <FlowPage showCrumbs={appState.provider !== 'pch'}>
-            <div className={`${appState.showExpansion ? 'padded-top' : ''} email-content flow-content`}>
+        <FlowPage showCrumbs={appState.showStory}>
+            <div className={`${appState.showExpansion || !appState.showStory ? 'padded-top' : ''} email-content flow-content`}>
                 {!appState.showExpansion && <CloseFlow />}
                 <div className='email-optin-container'>
                     <div className='email-optin-card'>
                         <div className='email-optin-text'>Would you like to receive relevant credit offers from <b><em>The Card Note</em></b> and <b><em>Card Matcher</em></b> directly to your inbox?</div>                    
-                            <form className='email-form-container'>
-                                {showInputError && (<div className='input-error'>Please enter a valid email address</div>)}
-                                <input id='email-optin-input' 
-                                    className='optin-input-field'
-                                    onChange={checkValidity}
-                                    type='email'
-                                    ref={email_input_el} 
-                                    placeholder='Email Address'
-                                    />
+                            <form className='email-form-container'>                                
+                                <TextField 
+                                    id='email-optin-input' 
+                                    label='Email Address' 
+                                    variant='outlined'
+                                    InputProps={input_props}
+                                    inputProps={{ 'aria-label': 'email-optin-input' }}
+                                    // value={emailValue}
+                                    // onChange={checkValidity}
+                                    // error={showInputError}
+                                    // type='email'
+                                    fullWidth                                    
+                                />
                                 <div className='email-terms-container'>
                                     <input className='email_terms_box' type='checkbox' checked={termsChecked} name='email_terms' onChange={toggleTerms}/>
                                     <div className='email_terms_text'>
@@ -114,19 +214,8 @@ const EmailOptin = () => {
                                         </a>.
                                     </div>
                                 </div>
-                                <div className='email-button-group'>
-                                    <Button className={`email_submit-button ${!termsChecked && 'disabled'}`} variant='contained' color='primary' onClick={handleSubmit} disabled={disabled}>
-                                        <span className='button-text' >Next</span>
-                                        <FontAwesomeIcon
-                                            icon={['fal', 'angle-double-right']}
-                                            className='next-button-icon'
-                                        />
-                                    </Button>
-                                    <Button className='no-thanks' onClick={handleOptOut}>
-                                        No Thanks
-                                    </Button>
-                                </div>
-                            </form>                        
+                                {offerPage === 'direct_link' ? <DirectLinkButtons disabledState={disabled} /> : <OfferButtons disabledState={disabled} />}
+                            </form>
                     </div>            
                 </div>
             </div>

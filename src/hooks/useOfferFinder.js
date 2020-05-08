@@ -36,7 +36,7 @@ const useOfferFinder = () => {
         };
 	}, [data, offerData]);
 
-	return [offerData, error, loading];
+	return [data, error, loading];
 };
 
 export default useOfferFinder;

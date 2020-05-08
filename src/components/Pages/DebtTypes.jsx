@@ -15,6 +15,7 @@ const DebtTypes = () => {
         e.preventDefault();
         dispatchApp({ type: 'DEBT_TYPE_PICKED', payload: { value: choice, crumb: texts } });
         window.scrollTo(0, 0);
+        dispatchApp({ type: 'HIDE_EXPANSION' });
         switch(choice) {
             case 'credit_card':
                 history.push('/debt_amount');
@@ -31,8 +32,8 @@ const DebtTypes = () => {
     };
 
     return (
-        <FlowPage showCrumbs={appState.provider !== 'pch'}>
-            <div className={`${appState.showExpansion ? 'padded-top' : ''} flow-content`}>
+        <FlowPage showCrumbs={appState.showStory}>
+            <div className={`${appState.showExpansion || !appState.showStory ? 'padded-top' : ''} flow-content`}>
                 {!appState.showExpansion && <CloseFlow />}
                 <span className='flow-title-text'>Your primary type of Debt is:</span>
                 <div className='flow-page__button-group'>

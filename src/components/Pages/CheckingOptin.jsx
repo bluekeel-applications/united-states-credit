@@ -9,36 +9,23 @@ const CheckingOptin = () => {
     const { appState, dispatchApp } = useContext(AppContext);    
     let history = useHistory();
 
-    const renderNextPage = () => {
-        let currently = appState.flowState.vertical;
-        window.scrollTo(0, 0);
-        switch(currently) {
-            case 'personal_loans':                
-                history.push('/email_optin');
-                break;            
-            
-            case 'credit_cards':                
-                history.push('/email_optin');
-                break;            
-            
-            default:
-                history.push('/offers');
-        }
-    };
-
     const opt_IN = () => {
         dispatchApp({ type: 'CHECKING_OPT_IN' });
-        renderNextPage();
+        window.scrollTo(0, 0);
+        dispatchApp({ type: 'HIDE_EXPANSION' });
+        history.push('/email_optin');
     };
 
     const opt_OUT = () => {
         dispatchApp({ type: 'CHECKING_OPT_OUT' });
-        renderNextPage();
+        window.scrollTo(0, 0);
+        dispatchApp({ type: 'HIDE_EXPANSION' });
+        history.push('/email_optin');
     };
 
     return (
-        <FlowPage showCrumbs={appState.provider !== 'pch'}>
-            <div className={`${appState.showExpansion ? 'padded-top' : ''} flow-content`}>
+        <FlowPage showCrumbs={appState.showStory}>
+            <div className={`${appState.showExpansion || !appState.showStory ? 'padded-top' : ''} flow-content`}>
                 {!appState.showExpansion && <CloseFlow />}
                 <div className='optin-row row1'>
                     <h2 className='optin-header-text'>

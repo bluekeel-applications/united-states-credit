@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../context';
 import Routes from '../Routes';
+import LoadingPCH from './Shared/LoadingPCH';
 import Drawer from './Layout/Drawer';
 import Navbar from './Layout/Navbar';
 import Expansion from './Layout/Expansion';
 import Feed from './Feed';
-import { checkForDeepDive } from '../utils/deepDive';
+// import { checkForDeepDive } from '../utils/deepDive';
 import { sendHitStreetHSID } from '../utils/middleware';
 import { getCookie } from '../utils/helpers';
 import useGeoLocation from '../hooks/useGeoLocation';
@@ -14,15 +15,19 @@ import { useMutation } from '@apollo/react-hooks';
 import { ADD_NEW_USER } from '../utils/mutations';
 // import usePCH from '../hooks/usePCH';
 import useSetProvider from '../hooks/useSetProvider';
+import useSetDeepDive from '../hooks/useSetDeepDive';
 
 const App = () => {
-	useGeoLocation();
+	const [geoError] = useGeoLocation();
 	// usePCH();
 	useSetProvider();
 	let history = useHistory();
 	const myURL = new URL(window.location.href);
 	const [showDrawer, toggleDrawer] = useState(false);
-	const { dispatchTracking, dispatchApp, trackingState } = useContext(AppContext);
+	const inboundVertical = myURL.searchParams.get('vertical') || 'N/A';
+	const inboundType = myURL.searchParams.get('type') || 'N/A';
+	const redirect = useSetDeepDive(inboundVertical, inboundType);
+	const { dispatchTracking, trackingState, appState } = useContext(AppContext);
 
 	let tracking = {
 		HSID: myURL.searchParams.get('hsid') || getCookie('hsid') || 0,
@@ -37,16 +42,13 @@ const App = () => {
 		PT1: myURL.searchParams.get('pt1') || getCookie('pt1') || null,
 		PT2: myURL.searchParams.get('pt2') || getCookie('pt2') || null,
 		GCLID: myURL.searchParams.get('gclid') || getCookie('gclid') || null,
-		// DeepDive Checks
-		VERTICAL: myURL.searchParams.get('vertical') || null,
-		TYPE: myURL.searchParams.get('type') || null,
 	};
 
 	const [addNewUser] = useMutation(ADD_NEW_USER);
 	const createNewUser = async(clickId) => {
 		const obj = {
 			clickId: Number(clickId),
-			ip_address: trackingState.ip_address,
+			ip_address: trackingState.ip_address || 'N/A',
 			program: {
 				pid: Number(tracking.PID),
 				oid: Number(tracking.OID),
@@ -58,42 +60,61 @@ const App = () => {
 		addNewUser( { variables: { visitor: obj } } );
 	};
 
-	useEffect(() => {
-		checkForDeepDive(tracking.VERTICAL, tracking.TYPE, history, dispatchApp);
-		const setAsyncTracking = async () => {
-			if (trackingState.ip_address) {
-				const clickId = await sendHitStreetHSID(tracking);
-				const payload = {
-					hsid: clickId,
-					pid: Number(tracking.PID),
-					sid: Number(tracking.SID),
-					oid: Number(tracking.OID),
-					uid: tracking.UID,
-					eid: tracking.EID,
-					se: tracking.SE,
-					kwd: tracking.KWD,
-					pacid: tracking.PACID,
-					pt1: tracking.PT1,
-					pt2: tracking.PT2,
-					gclid: tracking.GCLID,
-					vertical: tracking.VERTICAL,
-					type: tracking.TYPE
-				};
-				dispatchTracking({ type: 'USER_ARRIVED', payload });
-				createNewUser(clickId);
-			};
+	const buildNewUser = async() => {
+		const clickId = await sendHitStreetHSID(tracking);
+		const payload = {
+			hsid: clickId,
+			pid: Number(tracking.PID),
+			sid: Number(tracking.SID),
+			oid: Number(tracking.OID),
+			uid: tracking.UID,
+			eid: tracking.EID,
+			se: tracking.SE,
+			kwd: tracking.KWD,
+			pacid: tracking.PACID,
+			pt1: tracking.PT1,
+			pt2: tracking.PT2,
+			gclid: tracking.GCLID
 		};
-		setAsyncTracking();
+		dispatchTracking({ type: 'USER_ARRIVED', payload });
+		createNewUser(clickId);
+	};
+
+	useEffect(() => {
+		const { vertical, loan_type } = appState.flowState;
+		if(vertical || loan_type) {
+			history.push(redirect);
+			return;
+		};
 		// eslint-disable-next-line
-	}, [trackingState.ip_address]);
+	}, [redirect]);
+
+	useEffect(() => {
+		if (trackingState.ip_address) {
+			buildNewUser();
+		};
+		if(geoError) {
+			console.log('Error in geo lookup:', geoError);
+			buildNewUser();
+		}
+		// eslint-disable-next-line
+	}, [trackingState.ip_address, geoError]);
 
 return (
 	<div className='App app-bg_container'>
-		<Navbar toggleDrawer={toggleDrawer}/> 
-		<Expansion /> 
-		<Routes />
-		<Feed />
-		<Drawer show={showDrawer} toggle={toggleDrawer}/>
+		{
+			appState.provider === 'pch' && !appState.animationPlayed ? (
+				<LoadingPCH redirect={redirect} />
+			) : (
+				<>
+					<Navbar toggleDrawer={toggleDrawer}/> 
+					<Expansion /> 
+					<Routes />
+					<Feed />
+					<Drawer show={showDrawer} toggle={toggleDrawer}/>
+				</>
+			)
+		}
 	</div>
 );
 }

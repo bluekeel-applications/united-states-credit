@@ -6,13 +6,13 @@ import FourButton from './FourButton';
 import OneButton from './OneButton';
 import MNet from './MNet';
 import DirectLink from './DirectLink';
+import { buildFullLink } from '../../utils/helpers';
 
-const OptinOffer = ({ optin_id, jump }) => {
+const OptinOffer = ({ optin_id, jump, sid, eid }) => {
     const { loading, error, data } = useQuery(OPTIN_OFFER, { variables: { id: optin_id } });
     
     const ShowOptin = () => {
         const optinOffer = data.fetchOptinById.body;
-        console.log('optin:', optinOffer);
         switch(optinOffer.offer_page) {
             case 'mNet':
                 return (
@@ -27,7 +27,7 @@ const OptinOffer = ({ optin_id, jump }) => {
                     <OneButton offer={optinOffer} />
                 )
             case 'direct_link':
-                window.open(optinOffer.link);
+                window.open(buildFullLink(optinOffer.link, sid, eid));
                 return (
                     <DirectLink jump={jump} />
                 )

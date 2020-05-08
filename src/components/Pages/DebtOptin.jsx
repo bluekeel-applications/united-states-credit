@@ -12,18 +12,20 @@ const DebtOptin = () => {
     const opt_IN = () => {
         dispatchApp({ type: 'DEBT_OPT_IN' });
         window.scrollTo(0, 0);
+        dispatchApp({ type: 'HIDE_EXPANSION' });
         history.push('/email_optin');
     };
 
     const opt_OUT = () => {
         dispatchApp({ type: 'DEBT_OPT_OUT' });
         window.scrollTo(0, 0);
+        dispatchApp({ type: 'HIDE_EXPANSION' });
         history.push('/checking_optin');
     };
 
     return (
-        <FlowPage showCrumbs={appState.provider !== 'pch'}>
-            <div className={`${appState.showExpansion ? 'padded-top' : ''} flow-content`}>
+        <FlowPage showCrumbs={appState.showStory}>
+            <div className={`${appState.showExpansion || !appState.showStory ? 'padded-top' : ''} flow-content`}>
                 {!appState.showExpansion && <CloseFlow />}
                 <div className='optin-row row1'>
                     <h2 className='optin-header-text'>

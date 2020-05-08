@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '../context';
-import { ADD_USER_FLOW, INSERT_COMMON_INFO } from '../utils/mutations';
+import { ADD_USER_FLOW } from '../utils/mutations';
 import { useMutation } from '@apollo/react-hooks';
 import { firePixelBlueKeel, firePixelBing, firePixelGoogle } from '../utils/pixels';
 
@@ -9,7 +9,6 @@ const useTrackingLayer = () => {
 	const hasFired = useRef(false);
 	const { appState, trackingState } = useContext(AppContext);
 	const [addUserFlow] = useMutation(ADD_USER_FLOW);
-    const [insertCommonInfo] = useMutation(INSERT_COMMON_INFO);
 	let isEnd = appState.flowState.vertical && appState.flowState.loan_type;
 
 	useEffect(() => {
@@ -33,19 +32,8 @@ const useTrackingLayer = () => {
 								'debt_optin': appState.flowState.debt_optin
 							} 
 						}
-					}).catch(e => e),
-					await insertCommonInfo({ 
-						variables: { 
-							visitor: {
-								'hsid': Number(trackingState.hsid),
-								'oid': Number(trackingState.oid),
-								'eid': trackingState.eid,
-								'sid': Number(trackingState.sid),
-								'uid': trackingState.uid,
-								'ip_address': trackingState.ip_address
-							}
-						} }).catch(e => e)
-					];
+					}).catch(e => e)
+				]
         			await Promise.all(promises);
 				}
 			)();

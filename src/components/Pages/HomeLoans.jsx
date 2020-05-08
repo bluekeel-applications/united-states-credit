@@ -13,9 +13,9 @@ const HomeLoans = () => {
     const componentIsMounted = useRef(true);
 
     useEffect(() => {
-            if (componentIsMounted.current) {
-                dispatchApp({ type: 'VERTICAL_PICKED', payload: { value: 'home_loans', crumb: 'Home Loans' } });                
-            };
+        if (componentIsMounted.current) {
+            dispatchApp({ type: 'VERTICAL_PICKED', payload: { value: 'home_loans', crumb: 'Home Loans' } });                
+        };
         // Clean-up Function
         return () => {componentIsMounted.current = false};
         // eslint-disable-next-line
@@ -25,12 +25,13 @@ const HomeLoans = () => {
         e.preventDefault();
         dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: choice, crumb: texts } });
         window.scrollTo(0, 0);
-        history.push('/offers');
+        dispatchApp({ type: 'HIDE_EXPANSION' });
+        history.push('/email_optin');
     };
 
     return (
-        <FlowPage showCrumbs={appState.provider !== 'pch'}>
-            <div className={`${appState.showExpansion ? 'padded-top' : ''} flow-content`}>
+        <FlowPage showCrumbs={appState.showStory}>
+            <div className={`${appState.showExpansion || !appState.showStory ? 'padded-top' : ''} flow-content`}>
                 {!appState.showExpansion && <CloseFlow />}
                 <span className='flow-title-text'>Select Loan Type:</span>
                 <div className='flow-page__button-group'>

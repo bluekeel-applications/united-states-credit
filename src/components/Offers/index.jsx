@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-// import LoadingWave from '../Shared/LoadingWave';
 import Loading from '../Shared/Loading';
 import FourButton from './FourButton';
 import OneButton from './OneButton';
@@ -13,37 +12,45 @@ import useOfferFinder from '../../hooks/useOfferFinder';
 
 const Offers = () => {
     let history = useHistory();
-    const { appState } = useContext(AppContext);
+    const { appState, trackingState } = useContext(AppContext);
     const [ offerData ] = useOfferFinder();
+    const [ selectedOffer, setOffer ] = useState(null);
     let isEnd = appState.flowState.vertical && appState.flowState.loan_type;
-    
-    if(!isEnd) {
-        history.push('/');
-        return null;
-    };
-    
+        
+    useEffect(() => {
+        if(!isEnd) {
+            history.push('/');
+            return null;
+        };
+
+        if(offerData) {
+            setOffer(offerData.fetchEndpointOffer.body)
+        };
+        // eslint-disable-next-line
+    }, [offerData]);
+
     const ShowOffers = () => {
-        console.log('offer:', offerData);
-        switch(offerData.offer_page) {
+        console.log('offer index page:', selectedOffer);
+        switch(selectedOffer.offer_page) {
             case 'mNet':
                 return (
-                    <MNet page={offerData.url} />
+                    <MNet page={selectedOffer.url} />
                 )
             case 'four_button':
                 return (
-                    <FourButton offer={offerData} />
+                    <FourButton offer={selectedOffer} />
                 )
             case 'one_button':
                 return (
-                    <OneButton offer={offerData} />
+                    <OneButton offer={selectedOffer} />
                 )
             case 'offer_wall':
                 return (
-                    <Wall offer={offerData} />
+                    <Wall offer={selectedOffer} />
                 )
             case 'optin':
                 return (
-                    <OptinOffer optin_id={offerData.optin.optin_id} jump={offerData.jump} />
+                    <OptinOffer optin_id={selectedOffer.optin.optin_id} jump={selectedOffer.jump} sid={trackingState.sid} eid={trackingState.eid}/>
                 )
             default:
                 return (
@@ -55,7 +62,7 @@ const Offers = () => {
     return (
         <FlowPage showCrumbs showFinalCrumbs>
             <div className='flow-content offer-container'>
-                {offerData && (<ShowOffers data={offerData} />)}
+                {selectedOffer && (<ShowOffers data={offerData} />)}
             </div>
         </FlowPage>
     )

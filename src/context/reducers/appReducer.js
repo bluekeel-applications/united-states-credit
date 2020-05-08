@@ -1,9 +1,11 @@
 
 const initialAppState = {
     provider: null,
+    animationPlayed: false,
     loadingOffers: true,
     showDrawer: false,
     showExpansion: false,
+    showStory: false,
     flowState: {
         vertical: null,
         loan_type: null,
@@ -38,6 +40,22 @@ const appStateReducer = (state, action) => {
                 provider: action.payload
             };
 
+        case 'ANIMATION_COMPLETED':
+            return {
+                ...state,
+                animationPlayed: true
+            };
+        
+        case 'DEEP_DIVE':
+            return {
+                ...state,
+                flowState: {
+                    ...initialAppState.flowState,
+                    vertical: action.payload.vertical, 
+                    loan_type: action.payload.loan_type
+                }
+            };
+
         case 'SHOW_EXPANSION':
             return {
                 ...state,
@@ -47,7 +65,8 @@ const appStateReducer = (state, action) => {
         case 'HIDE_EXPANSION':
             return {
                 ...state,
-                showExpansion: false
+                showExpansion: false,
+                showStory: true
             }; 
 // Flow Selections
         case 'VERTICAL_PICKED':

@@ -69,3 +69,10 @@ export const flattenLongString = (string) => {
     const stringCleaned = string.replace(/\s/g, '_');
   return stringCleaned.toLowerCase();
 };
+
+// Build the full like for an offer
+export const buildFullLink = (link, sid, eid) => { // eslint-disable-next-line
+    const halfPopulated = link.replace('${sid}', sid); // eslint-disable-next-line
+    const fullLink = halfPopulated.replace('${eid}', eid); 
+    return fullLink;
+};

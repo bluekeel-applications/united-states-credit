@@ -24,12 +24,13 @@ const CreditCards = () => {
         e.preventDefault();
         dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: choice, crumb: texts } });
         window.scrollTo(0, 0);
+        dispatchApp({ type: 'HIDE_EXPANSION' });
         history.push('/checking_optin');
     };
 
     return (
-        <FlowPage showCrumbs={appState.provider !== 'pch'}>
-            <div className={`${appState.showExpansion ? 'padded-top' : ''} flow-content`}>
+        <FlowPage showCrumbs={appState.showStory}>
+            <div className={`${appState.showExpansion || !appState.showStory ? 'padded-top' : ''} flow-content`}>
                 {!appState.showExpansion && <CloseFlow />}
                 <span className='flow-title-text'>Select Card Type:</span>
                 <div className='flow-page__button-group'>

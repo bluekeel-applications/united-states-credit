@@ -41,7 +41,7 @@ const GetStarted = () => {
         <FlowPage showCrumbs={false}>
             <div className='get-started__container flow-content'>
                 <span className='start-title-text'>FIND THE RIGHT CREDIT FOR YOU</span>
-                <div id={`${showNavButton? 'nav-button' : 'start'}`} className={`${appState.provider === 'pch' ? 'start-search-pch' : 'start-search'}`}>
+                <div id={`${showNavButton? 'nav-button' : 'start'}`} className={`${appState.showExpansion ? 'start-search-pch' : 'start-search'}`}>
                     <Button
                         onClick={handleStartClick} 
                         className={`${showNavButton? 'nav-button' : 'is_start'} flow-button bg__blue`}

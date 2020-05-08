@@ -9,17 +9,18 @@ import CloseFlow from '../Shared/CloseFlow';
 
 const Verticals = () => {
     let history = useHistory();
-    const { appState } = useContext(AppContext);
+    const { appState, dispatchApp } = useContext(AppContext);
 
     const handleVerticalClick = (e, choice) => {
         e.preventDefault();
         window.scrollTo(0, 0);
+        dispatchApp({ type: 'HIDE_EXPANSION' });
         history.push('/' + choice);
     };
 
     return (
         <FlowPage showCrumbs={false}>
-            <div className='flow-content vertical-flow'>
+            <div className='flow-content question-container'>
                 {!appState.showExpansion && <CloseFlow />}
                 <span className='flow-title-text'>Select one of the options below:</span>            
                 <div className='flow-page__button-group'>
