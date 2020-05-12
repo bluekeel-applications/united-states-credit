@@ -79,15 +79,15 @@ const useSetDeepDive = (vertical, type) => {
 				setRedirect('/debt_optin');
 				return;
 			case 'emergency':
-				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Emergency Cash' } });
+				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: 'emergency_cash', crumb: 'Emergency Cash' } });
 				setRedirect('/debt_optin');
 				return;
 			case 'taxes':
-				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Paying Taxes' } });
+				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: 'pay_taxes', crumb: 'Paying Taxes' } });
 				setRedirect('/email_optin');
 				return;
 			case 'other':
-				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Other' } });
+				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: 'other_purpose', crumb: 'Other' } });
 				setRedirect('/debt_optin');
 				return;
 			// Home Loans
@@ -100,7 +100,7 @@ const useSetDeepDive = (vertical, type) => {
 				setRedirect('/email_optin');
 				return;
 			case 'lease':
-				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Lease-To-Own' } });
+				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: 'lease_to_own', crumb: 'Lease-To-Own' } });
 				setRedirect('/email_optin');
 				return;
 			case 'purchase':

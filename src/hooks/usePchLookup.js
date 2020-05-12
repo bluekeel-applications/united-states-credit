@@ -1,7 +1,7 @@
 import { useEffect, useRef, useContext } from 'react';
 import { AppContext } from '../context';
 
-const usePCH = () => {
+const usePchLookup = () => {
     const componentIsMounted = useRef(true);
     const { dispatchApp } = useContext(AppContext);
 
@@ -18,4 +18,4 @@ const usePCH = () => {
     }, []);
 };
 
-export default usePCH;
+export default usePchLookup;

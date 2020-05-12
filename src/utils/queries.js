@@ -50,6 +50,7 @@ const ENDPOINT_OFFER = gql`
 				url
 				jump
 				usage
+				count
 				offer_page
 				four_button
 				restricted

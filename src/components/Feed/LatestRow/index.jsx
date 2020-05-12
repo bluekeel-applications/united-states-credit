@@ -57,7 +57,7 @@ const LatestRow = () => {
                             </div>
                         </div>
                         <div className='latest-item-column text-column'>{trimSnippet(article.content)}</div>
-                        <div className='latest-item-column image-column'><img  className='latest-image' src={getSrcFromHtml(article.html)} alt={`list-${i}`} /></div>
+                        <div className='latest-item-column image-column'><img  className='latest-image' src={getSrcFromHtml(article.html, true, 'lg')} alt={`list-${i}`} /></div>
                     </div>
                 ))
             )

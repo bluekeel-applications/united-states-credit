@@ -54,7 +54,7 @@ const LatestRow = () => {
                         <CardActionArea onClick={(e) => handleLinkClick(article.link, e)} >
                             <CardContent className='card-body'>
                                 <h2 className='card-title row-column-item-title'>{article.title}</h2>
-                                <CardMedia component='img' src={getSrcFromHtml(article.html)} />
+                                <CardMedia component='img' src={getSrcFromHtml(article.html, true, 'lg')} />
                                 <p className='card-text'>{trimSnippet(article.content)}</p>
                             </CardContent>
                         </CardActionArea>        

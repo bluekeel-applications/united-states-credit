@@ -24,7 +24,7 @@ const Tips = () => {
 	return (
 		<>
 		<div className='row-column-item'>
-			<img src={getSrcFromHtml(tipList[2].content)} className='row-column-item-image' alt='img' />
+			<img src={getSrcFromHtml(tipList[2].content, true, 'sm')} className='row-column-item-image' alt='img' />
 			<div className='row-column-item-content'>
 				<div className='row-column-item-title title-hover' onClick={(e) => handleLinkClick(tipList[2].link, e)}>{tipList[2].title}</div>
 				<div className='keyword-link-container small-column-categories'>
@@ -39,7 +39,7 @@ const Tips = () => {
 			</div>
 		</div>
 		<div className='row-column-item'>
-			<img src={getSrcFromHtml(tipList[3].content)} className='row-column-item-image' alt='img' />
+			<img src={getSrcFromHtml(tipList[3].content, true, 'sm')} className='row-column-item-image' alt='img' />
 			<div className='row-column-item-content'>
 				<div className='row-column-item-title title-hover' onClick={(e) => handleLinkClick(tipList[3].link, e)}>{tipList[3].title}</div>
 				<div className='keyword-link-container small-column-categories'>

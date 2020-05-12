@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { AppContext } from '../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,7 +25,7 @@ const EmailOptin = () => {
     const [emailValue, setEmail] = useState('');
     const [ data, error, loading ] = useOfferFinder();
     const [offer, setOffer] = useState(null);
-    
+    const hasSent = useRef(false);
     const [offerPage, setOfferPage] = useState('');
     const checkValidity = (event) => {
         let email = event.target.value;
@@ -48,6 +48,7 @@ const EmailOptin = () => {
         };
 
         if(data) {
+            console.log('offer:', data.fetchEndpointOffer.body);
             setOffer(data.fetchEndpointOffer.body);
             setOfferPage(data.fetchEndpointOffer.body.offer_page);
         };
@@ -62,6 +63,7 @@ const EmailOptin = () => {
     }, [validEmail, termsChecked, data]);
 
     if(error) {
+        console.log('error:', error);
         history.push('/error');
         return;
     };
@@ -70,36 +72,36 @@ const EmailOptin = () => {
         return <Loading />
     };
 
-    const processClick = async(direct) => {
+    const processClick = async() => {
         dispatchApp({ type: 'HIDE_EXPANSION' });
         window.scrollTo(0, 0);
-        await insertCommonInfo({ 
-            variables: { 
-                visitor: {
-                    'hsid': Number(trackingState.hsid),
-                    'oid': Number(trackingState.oid),
-                    'eid': trackingState.eid,
-                    'sid': Number(trackingState.sid),
-                    'uid': trackingState.uid,
-                    'ip_address': trackingState.ip_address,
-                    'email': emailValue || ''
-                }
-            } 
-        });
-        if(direct) return;
-        history.push('/offers');
-        return;
+        if(!hasSent.current) {
+            hasSent.current = true;
+            insertCommonInfo({ 
+                variables: { 
+                    visitor: {
+                        'hsid': Number(trackingState.hsid),
+                        'oid': Number(trackingState.oid),
+                        'eid': trackingState.eid,
+                        'sid': Number(trackingState.sid),
+                        'uid': trackingState.uid,
+                        'ip_address': trackingState.ip_address,
+                        'email': emailValue
+                    }
+                } 
+            });
+        };
     };
     
     const sendEmailToDB = () => {
-        console.log('email:', emailValue);
         dispatchApp({ type: 'EMAIL_OPT_IN', payload: emailValue });
         addUserEmail({ variables: { clickId: Number(trackingState.hsid), email: emailValue }});
     };
 
     const handleOptOut = async() => {
         dispatchApp({ type: 'EMAIL_OPT_OUT' });
-        await processClick(false);
+        processClick();
+        history.push('/offers');
         return;
     };
 
@@ -107,18 +109,20 @@ const EmailOptin = () => {
         dispatchApp({ type: 'EMAIL_OPT_OUT' });
         const newWindowLink = buildFullLink(offer.url, trackingState.sid, trackingState.eid);
         window.open(newWindowLink);
-        processClick(true);
+        processClick();
         if(offer && offer.jump !== 'N/A') {
             window.location.href = buildFullLink(offer.jump, trackingState.sid, trackingState.eid);
             return;
         };
         history.push('/verticals');
+        return;
     };
     
     const handleEmailSubmit = async() => {
         if(!disabled) {
             sendEmailToDB();
-            await processClick(false);
+            processClick();
+            history.push('/offers');
             return;
         };
         toggleError(true);
@@ -130,7 +134,7 @@ const EmailOptin = () => {
         if(!disabled) {
             window.open(newWindowLink);
             sendEmailToDB();
-            processClick(true);
+            processClick();
             if(offer && offer.jump !== 'N/A') {
                 window.location.href = buildFullLink(offer.jump, trackingState.sid, trackingState.eid);
                 return;

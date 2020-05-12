@@ -24,7 +24,7 @@ const Reviews = () => {
 	return (
 		<>
 		<div className='row-column-item'>
-			<img src={getSrcFromHtml(reviewList[2].content)} className='row-column-item-image' alt='img' />
+			<img src={getSrcFromHtml(reviewList[2].content, true, 'sm')} className='row-column-item-image' alt='img' />
 			<div className='row-column-item-content'>
 				<div className='row-column-item-title title-hover' onClick={(e) => handleLinkClick(reviewList[2].link, e)}>{reviewList[2].title}</div>
 				<div className='keyword-link-container small-column-categories'>
@@ -39,7 +39,7 @@ const Reviews = () => {
 			</div>
 		</div>
 		<div className='row-column-item'>
-			<img src={getSrcFromHtml(reviewList[3].content)} className='row-column-item-image' alt='img' />
+			<img src={getSrcFromHtml(reviewList[3].content, true, 'sm')} className='row-column-item-image' alt='img' />
 			<div className='row-column-item-content'>
 				<div className='row-column-item-title title-hover' onClick={(e) => handleLinkClick(reviewList[3].link, e)}>{reviewList[3].title}</div>
 				<div className='keyword-link-container small-column-categories'>

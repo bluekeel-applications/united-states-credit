@@ -6,7 +6,6 @@ import Drawer from './Layout/Drawer';
 import Navbar from './Layout/Navbar';
 import Expansion from './Layout/Expansion';
 import Feed from './Feed';
-// import { checkForDeepDive } from '../utils/deepDive';
 import { sendHitStreetHSID } from '../utils/middleware';
 import { getCookie } from '../utils/helpers';
 import useGeoLocation from '../hooks/useGeoLocation';
@@ -28,21 +27,9 @@ const App = () => {
 	const inboundType = myURL.searchParams.get('type') || 'N/A';
 	const redirect = useSetDeepDive(inboundVertical, inboundType);
 	const { dispatchTracking, trackingState, appState } = useContext(AppContext);
+	const [clickId, setClickId] = useState(null);
 
-	let tracking = {
-		HSID: myURL.searchParams.get('hsid') || getCookie('hsid') || 0,
-		PID: myURL.searchParams.get('pid') || getCookie('pid') || 1234,
-		SID: myURL.searchParams.get('sid') || getCookie('sid') || 7572,
-		OID: myURL.searchParams.get('oid') || getCookie('oid') || 50,
-		UID: myURL.searchParams.get('uid') || getCookie('uid') || null,
-		EID: myURL.searchParams.get('eid') || getCookie('eid') || 'organic',
-		SE: myURL.searchParams.get('se') || getCookie('se') || null,
-		KWD: myURL.searchParams.get('kwd') || getCookie('kwd') || null,
-		PACID: myURL.searchParams.get('pacid') || getCookie('pacid') || null,
-		PT1: myURL.searchParams.get('pt1') || getCookie('pt1') || null,
-		PT2: myURL.searchParams.get('pt2') || getCookie('pt2') || null,
-		GCLID: myURL.searchParams.get('gclid') || getCookie('gclid') || null,
-	};
+	
 
 	const [addNewUser] = useMutation(ADD_NEW_USER);
 	const createNewUser = async(clickId) => {
@@ -50,18 +37,33 @@ const App = () => {
 			clickId: Number(clickId),
 			ip_address: trackingState.ip_address || 'N/A',
 			program: {
-				pid: Number(tracking.PID),
-				oid: Number(tracking.OID),
-				eid: tracking.EID,
-				sid: Number(tracking.SID),
-				uid: tracking.UID
+				pid: Number(trackingState.pid),
+				oid: Number(trackingState.oid),
+				eid: trackingState.eid,
+				sid: Number(trackingState.sid),
+				uid: trackingState.uid
 			}
 		}
 		addNewUser( { variables: { visitor: obj } } );
 	};
 
 	const buildNewUser = async() => {
+		const tracking = {
+			HSID: myURL.searchParams.get('hsid') || getCookie('hsid') || 0,
+			PID: myURL.searchParams.get('pid') || getCookie('pid') || 1234,
+			SID: myURL.searchParams.get('sid') || getCookie('sid') || 7572,
+			OID: myURL.searchParams.get('oid') || getCookie('oid') || 50,
+			UID: myURL.searchParams.get('uid') || getCookie('uid') || null,
+			EID: myURL.searchParams.get('eid') || getCookie('eid') || 'organic',
+			SE: myURL.searchParams.get('se') || getCookie('se') || null,
+			KWD: myURL.searchParams.get('kwd') || getCookie('kwd') || null,
+			PACID: myURL.searchParams.get('pacid') || getCookie('pacid') || null,
+			PT1: myURL.searchParams.get('pt1') || getCookie('pt1') || null,
+			PT2: myURL.searchParams.get('pt2') || getCookie('pt2') || null,
+			GCLID: myURL.searchParams.get('gclid') || getCookie('gclid') || null,
+		};
 		const clickId = await sendHitStreetHSID(tracking);
+		setClickId(clickId);
 		const payload = {
 			hsid: clickId,
 			pid: Number(tracking.PID),
@@ -77,8 +79,12 @@ const App = () => {
 			gclid: tracking.GCLID
 		};
 		dispatchTracking({ type: 'USER_ARRIVED', payload });
-		createNewUser(clickId);
 	};
+
+	useEffect(() => {
+		buildNewUser();
+		// eslint-disable-next-line
+	}, []);
 
 	useEffect(() => {
 		const { vertical, loan_type } = appState.flowState;
@@ -90,15 +96,15 @@ const App = () => {
 	}, [redirect]);
 
 	useEffect(() => {
-		if (trackingState.ip_address) {
-			buildNewUser();
+		if (trackingState.ip_address && clickId) {
+			createNewUser(clickId, trackingState);
 		};
 		if(geoError) {
 			console.log('Error in geo lookup:', geoError);
-			buildNewUser();
+			createNewUser(clickId, trackingState);
 		}
 		// eslint-disable-next-line
-	}, [trackingState.ip_address, geoError]);
+	}, [trackingState.ip_address, geoError, clickId]);
 
 return (
 	<div className='App app-bg_container'>
