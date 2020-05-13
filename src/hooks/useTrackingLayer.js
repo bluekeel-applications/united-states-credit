@@ -16,7 +16,7 @@ const useTrackingLayer = () => {
 		if(componentIsMounted.current && !hasFired.current) {
             (async () => {
 				firePixelBing(appState.flowState.vertical);
-        		firePixelGoogle();
+				firePixelGoogle();
 				const promises = [
 					await firePixelBlueKeel(trackingState.hsid).catch(e => e),
 					await addUserFlow({ 

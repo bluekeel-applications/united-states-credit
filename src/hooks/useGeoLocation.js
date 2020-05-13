@@ -25,6 +25,7 @@ const getUserLocation = async() => {
 const useGeoLocation = () => {
     const componentIsMounted = useRef(true);
     const [error, setError] = useState(false);
+    const [ip_address, set_ip_address] = useState(null);
     const { dispatchTracking } = useContext(AppContext);
     const retry_count = useRef(3);
 
@@ -39,6 +40,7 @@ const useGeoLocation = () => {
             setError(true);
             return;
         };
+        set_ip_address(res.IPv4);
         dispatchTracking({ type: 'LOCATION_FOUND', payload: { state: res.state, ip_address: res.IPv4 }});
     };
 
@@ -48,7 +50,7 @@ const useGeoLocation = () => {
         return () => {componentIsMounted.current = false};
         // eslint-disable-next-line
     }, []);
-    return [error]
+    return [ip_address, error]
 };
 
 export default useGeoLocation;

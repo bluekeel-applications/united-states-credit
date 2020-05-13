@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../Layout/FlowPage';
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_USER_EMAIL, INSERT_COMMON_INFO } from '../../utils/mutations';
+import { ADD_USER_EMAIL, INSERT_COMMON_INFO, INSERT_OFFER_LOG } from '../../utils/mutations';
 import CloseFlow from '../Shared/CloseFlow';
 import Loading from '../Shared/Loading';
 import useOfferFinder from '../../hooks/useOfferFinder';
@@ -26,6 +26,7 @@ const EmailOptin = () => {
     const [ data, error, loading ] = useOfferFinder();
     const [offer, setOffer] = useState(null);
     const hasSent = useRef(false);
+    const hasLogged = useRef(false);
     const [offerPage, setOfferPage] = useState('');
     const checkValidity = (event) => {
         let email = event.target.value;
@@ -40,6 +41,7 @@ const EmailOptin = () => {
 
     const [addUserEmail] = useMutation(ADD_USER_EMAIL);
     const [insertCommonInfo] = useMutation(INSERT_COMMON_INFO);
+    const [ insertServiceLog ] = useMutation(INSERT_OFFER_LOG);
 
     useEffect(() => {
         if(!essentials) {
@@ -49,8 +51,20 @@ const EmailOptin = () => {
 
         if(data) {
             console.log('offer:', data.fetchEndpointOffer.body);
+            const { id, offer_page } = data.fetchEndpointOffer.body;
             setOffer(data.fetchEndpointOffer.body);
-            setOfferPage(data.fetchEndpointOffer.body.offer_page);
+            setOfferPage(offer_page);
+            if(!hasLogged.current) {
+                insertServiceLog({ 
+                    variables: { 
+                        clickData: { 
+                            endpoint_id: id, 
+                            clickId: Number(trackingState.hsid) 
+                        }
+                    }
+                });
+                hasLogged.current = true;
+            };
         };
 
         if(validEmail && termsChecked) {

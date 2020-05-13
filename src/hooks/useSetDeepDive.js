@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../context';
 
 const useSetDeepDive = (vertical, type) => {
-	const [redirect, setRedirect] = useState('/');
+	const [redirect, setRedirect] = useState(null);
 	const { dispatchApp } = useContext(AppContext);
 	
     const handleTypeChoice = () => {
@@ -157,12 +157,15 @@ const useSetDeepDive = (vertical, type) => {
 	}
 
 	useEffect(() => {
-		if(vertical === 'N/A' && type === 'N/A') return;
+		if(vertical === 'N/A' && type === 'N/A') {
+			setRedirect('/');
+			return;
+		};
 		checkForDeepDive();
 		// eslint-disable-next-line
 	}, []);
 
-	return redirect;
+	return [redirect];
 };
 
 export default useSetDeepDive;

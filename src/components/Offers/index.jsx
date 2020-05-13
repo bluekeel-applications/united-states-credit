@@ -30,7 +30,7 @@ const Offers = () => {
     }, [offerData]);
 
     const ShowOffers = () => {
-        console.log('offer index page:', selectedOffer);
+        // console.log('offer index page:', selectedOffer);       
         switch(selectedOffer.offer_page) {
             case 'mNet':
                 return (
