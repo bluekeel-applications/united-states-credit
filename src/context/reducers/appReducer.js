@@ -1,6 +1,16 @@
 
 const initialAppState = {
     provider: null,
+    pch: {
+        email: null,
+        title: null,
+        firstname: null,
+        lastname: null,
+        address: null,
+        city: null,
+        state: null,
+        zipcode: null
+    },
     animationPlayed: false,
     loadingOffers: true,
     showDrawer: false,
@@ -38,6 +48,22 @@ const appStateReducer = (state, action) => {
             return {
                 ...state,
                 provider: action.payload
+            };
+
+        case 'FOUND_PCH_USER':
+            return {
+                ...state,
+                pch: {
+                    ...state.pch,
+                    email: action.payload.EmailAddress,
+                    title: action.payload.Title,
+                    firstname: action.payload.FirstName,
+                    lastname: action.payload.LastName,
+                    address: action.payload.Address1,
+                    city: action.payload.City,
+                    state: action.payload.State,
+                    zipcode: action.payload.ZipCode
+                }
             };
 
         case 'ANIMATION_COMPLETED':

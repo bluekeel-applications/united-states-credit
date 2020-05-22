@@ -3,8 +3,10 @@ import { AppContext } from '../../context';
 import Lottie from 'react-lottie';
 import animationData from '../../assets/lotties/loading_wave.json';
 import { useHistory } from 'react-router-dom';
+import usePchAPI from '../../hooks/usePchAPI';
 
 const LoadingPCH = ({redirect}) => {
+	usePchAPI();
 	let history = useHistory();
 	const [ windowWidth ] = useState(window.innerWidth);
 	const [ windowHeight ] = useState(window.innerHeight - 100);

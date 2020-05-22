@@ -76,10 +76,6 @@
     }
 }
 
-.MuiButtonBase-root.4_button-item {
-    min-width: 275px;
-}
-
 .MuiButton-label {
     white-space: nowrap;
 }
@@ -199,3 +195,66 @@
     padding: 5px;
 }
 
+.MuiButton-contained.button-wrapper {
+    min-width: 250px;
+    width: 100%;
+    max-width: 450px;
+    min-height: 65px;
+    padding: 0;
+    margin: 10px;
+    color: white;
+    border-radius: 10px;
+    line-height: 1.3;
+    @include respond-to('small') {
+        max-width: unset;
+        width: unset;
+    }
+}
+
+.four_button-item {
+    width: 100%;
+    padding: 0;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 65px;
+    border-radius: 10px;
+}
+
+.button-bg__0 {
+    background-color: rgb(24,159,229);
+}
+.button-bg__1 {
+    background-color: rgb(24,188,85);
+}
+.button-bg__2 {
+    background-color: rgb(247,153,49);
+}
+.button-bg__3 {
+    background-color: rgb(229,67,147);
+}
+
+.button-icon-container {
+    min-height: 65px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 50px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-size: 1.5rem;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.button-text-container {
+    width: 75%;
+    min-height: 65px;
+    max-height: 65px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 1rem;
+    font-weight: 300;
+    white-space: normal;
+}

@@ -5,7 +5,7 @@ import Loading from '../Shared/Loading';
 import FourButton from './FourButton';
 import OneButton from './OneButton';
 import MNet from './MNet';
-import Wall from './Wall';
+import OfferWall from './OfferWall';
 import OptinOffer from './OptinOffer';
 import FlowPage from '../Layout/FlowPage';
 import useOfferFinder from '../../hooks/useOfferFinder';
@@ -30,7 +30,7 @@ const Offers = () => {
     }, [offerData]);
 
     const ShowOffers = () => {
-        // console.log('offer index page:', selectedOffer);       
+        console.log('offer:', selectedOffer); 
         switch(selectedOffer.offer_page) {
             case 'mNet':
                 return (
@@ -46,11 +46,17 @@ const Offers = () => {
                 )
             case 'offer_wall':
                 return (
-                    <Wall offer={selectedOffer} />
+                    <OfferWall offer={selectedOffer} />
                 )
             case 'optin':
                 return (
-                    <OptinOffer optin_id={selectedOffer.optin.optin_id} jump={selectedOffer.jump} sid={trackingState.sid} eid={trackingState.eid}/>
+                    <OptinOffer 
+                        optin_id={selectedOffer.optin.optin_id} 
+                        jump={selectedOffer.jump} 
+                        sid={trackingState.sid} 
+                        eid={trackingState.eid}
+                        hsid={trackingState.hsid}
+                    />
                 )
             default:
                 return (

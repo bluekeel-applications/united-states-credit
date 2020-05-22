@@ -6,11 +6,12 @@ const useSetProvider = () => {
     const { dispatchApp } = useContext(AppContext);
 
     useEffect(() => {
-        if(componentIsMounted.current) { 
+        if(componentIsMounted.current) {
             const locationParts = window.location.hostname.split('.');
             const subDomain = locationParts.shift();
             if(subDomain === 'pch') {
                 dispatchApp({ type: 'SET_PROVIDER', payload: 'pch' });
+                // dispatchApp({ type: 'SET_PCH_CREDS', payload: { pat: myURL.searchParams.get('pt1'), gmt: myURL.searchParams.get('pt2')}});
                 dispatchApp({ type: 'SHOW_EXPANSION' });
 				return;
 			};

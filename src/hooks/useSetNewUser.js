@@ -27,7 +27,7 @@ const useSetNewUser = () => {
 			GCLID: myURL.searchParams.get('gclid') || getCookie('gclid') || null,
 		};
 		const clickId = await sendHitStreetHSID(tracking);
-		// setClickId(clickId);
+		
 		const payload = {
 			hsid: clickId,
 			pid: Number(tracking.PID),

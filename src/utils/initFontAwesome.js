@@ -40,6 +40,7 @@ import {
     faThumbsUp,
     faBlog,
     faTimes,
+    faChevronUp,
 } from '@fortawesome/pro-light-svg-icons';
 
 function initFontAwesome() {
@@ -82,7 +83,8 @@ function initFontAwesome() {
         faChevronDoubleRight,
         faThumbsUp,
         faBlog,
-        faTimes
+        faTimes,
+        faChevronUp
     );
 }
 

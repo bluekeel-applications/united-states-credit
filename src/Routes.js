@@ -14,25 +14,39 @@ import EmailOptin from './components/Pages/EmailOptin';
 import Offers from './components/Offers';
 import Error from './components/Pages/Error';
 
+// import { testOfferWall } from './mocks/mockOfferWall';
+// import OfferWall from './components/Offers/OfferWall';
+// import FourButton from './components/Offers/FourButton';
+// import FlowPage from './components/Layout/FlowPage';
+
+// const TestWrapper = () => (
+// 	<FlowPage showCrumbs showFinalCrumbs>
+// 		<div className='flow-content offer-container'>
+// 			<OfferWall offer={testOfferWall} />
+// 		</div>
+// 	</FlowPage>
+// );
+
 const Routes = () => {
-  return (
-    <Switch>
-      <Route path='/' exact component={GetStarted} />
-      <Route path='/verticals' component={Verticals} />
-      <Route path='/credit_cards' component={CreditCards} />
-      <Route path='/auto_loans' component={AutoLoans} />
-      <Route path='/auto_loans' component={AutoLoans} />
-      <Route path='/personal_loans' component={PersonalLoans} />
-      <Route path='/home_loans' component={HomeLoans} />
-      <Route path='/debt_types' component={DebtTypes} />
-      <Route path='/debt_amount' component={DebtAmounts} />
-      <Route path='/checking_optin' component={CheckingOptin} />
-      <Route path='/debt_optin' component={DebtOptin} />
-      <Route path='/email_optin' component={EmailOptin} />
-      <Route path='/offers' component={Offers} />
-      <Route path='/error' component={Error} />
-    </Switch>
-  );
+	return (
+		<Switch>
+			<Route path='/' exact component={GetStarted} />
+			{/* <Route path='/' exact component={TestWrapper} /> */}
+			<Route path='/verticals' component={Verticals} />
+			<Route path='/credit_cards' component={CreditCards} />
+			<Route path='/auto_loans' component={AutoLoans} />
+			<Route path='/auto_loans' component={AutoLoans} />
+			<Route path='/personal_loans' component={PersonalLoans} />
+			<Route path='/home_loans' component={HomeLoans} />
+			<Route path='/debt_types' component={DebtTypes} />
+			<Route path='/debt_amount' component={DebtAmounts} />
+			<Route path='/checking_optin' component={CheckingOptin} />
+			<Route path='/debt_optin' component={DebtOptin} />
+			<Route path='/email_optin' component={EmailOptin} />
+			<Route path='/offers' component={Offers} />
+			<Route path='/error' component={Error} />
+		</Switch>
+	);
 };
 
 export default Routes;

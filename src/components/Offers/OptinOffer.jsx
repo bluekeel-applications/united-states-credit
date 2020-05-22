@@ -5,10 +5,9 @@ import { OPTIN_OFFER } from '../../utils/queries';
 import FourButton from './FourButton';
 import OneButton from './OneButton';
 import MNet from './MNet';
-import DirectLink from './DirectLink';
 import { buildFullLink } from '../../utils/helpers';
 
-const OptinOffer = ({ optin_id, jump, sid, eid }) => {
+const OptinOffer = ({ optin_id, jump, sid, eid, hsid }) => {
     const { loading, error, data } = useQuery(OPTIN_OFFER, { variables: { id: optin_id } });
     
     const ShowOptin = () => {
@@ -27,10 +26,12 @@ const OptinOffer = ({ optin_id, jump, sid, eid }) => {
                     <OneButton offer={optinOffer} />
                 )
             case 'direct_link':
-                window.open(buildFullLink(optinOffer.link, sid, eid));
-                return (
-                    <DirectLink jump={jump} />
-                )
+                window.open(buildFullLink(optinOffer.link, sid, eid, hsid));
+                if(jump && jump !== 'N/A') {
+                    window.location.href = buildFullLink(jump, sid, eid, hsid);
+                    return;
+                };
+                return;
             default:
                 return (
                     <Loading />

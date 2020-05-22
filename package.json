@@ -24,6 +24,7 @@
     "graphql-tag": "^2.10.3",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
+    "react-collapse": "^5.0.1",
     "react-dev-utils": "10.0.0",
     "react-dom": "^16.12.0",
     "react-fade-in": "^0.1.8",

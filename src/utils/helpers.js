@@ -71,8 +71,10 @@ export const flattenLongString = (string) => {
 };
 
 // Build the full like for an offer
-export const buildFullLink = (link, sid, eid) => { // eslint-disable-next-line
-    const halfPopulated = link.replace('${sid}', sid); // eslint-disable-next-line
-    const fullLink = halfPopulated.replace('${eid}', eid); 
-    return fullLink;
+export const buildFullLink = (link, sid, eid, hsid) => {
+    let linkout = link // eslint-disable-next-line
+    linkout = linkout.replace('${sid}', sid); // eslint-disable-next-line
+    linkout = linkout.replace('${eid}', eid); // eslint-disable-next-line
+    linkout = linkout.replace('${hsid}', hsid); // eslint-disable-next-line
+    return linkout;
 };

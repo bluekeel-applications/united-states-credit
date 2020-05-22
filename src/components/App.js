@@ -12,8 +12,8 @@ import useSetNewUser from '../hooks/useSetNewUser';
 import useInsertNewUser from '../hooks/useInsertNewUser';
 
 const App = () => {
-	const [redirect] = useSetNewUser();
 	useSetProvider();
+	const [redirect] = useSetNewUser();
 	useInsertNewUser();
 	let history = useHistory();
 	const [showDrawer, toggleDrawer] = useState(false);

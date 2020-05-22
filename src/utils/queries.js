@@ -92,12 +92,42 @@ const OPTIN_OFFER = gql`
 	}
 `;
 
-const PCH_USER = gql`
-	query FetchUserInfo {
-		fetchUserInfo {
+const LIST_OFFER = gql`
+	query FetchOfferById($id: ID) {
+		fetchOfferById(id: $id) {
 			success
 			status
 			message
+			body {
+				id
+				title
+				subtitle
+				description
+				link
+				bullets
+				offer_image
+				image_title
+			}
+		}
+	}
+`;
+
+const PCH_USER = gql`
+	query FetchUserInfo($pat: String, $gmt: String) {
+		fetchUserInfo(pat: $pat, gmt: $gmt) {
+			success
+			status
+			message
+			body {
+				EmailAddress
+				Title
+				FirstName
+				LastName
+				Address1
+				City
+				State
+				ZipCode
+			}
 		}
 	}
 `;
@@ -106,5 +136,6 @@ export {
 	FETCH_FEED,
 	ENDPOINT_OFFER,
 	OPTIN_OFFER,
+	LIST_OFFER,
 	PCH_USER
 };

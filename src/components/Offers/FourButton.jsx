@@ -1,47 +1,73 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../context';
 import { flattenLongString } from '../../utils/helpers';
 import Button from '@material-ui/core/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import CloseFlow from '../Shared/CloseFlow';
+import { buildFullLink } from '../../utils/helpers';
+import { useHistory } from 'react-router-dom';
 
 const FourButton = ({ offer }) => {
+    let history = useHistory();
+    const { trackingState } = useContext(AppContext);
 
     const handleOfferClick = (keywords, e) => {
         e.preventDefault();
-        console.log('keyword click:', flattenLongString(keywords));
+        const { sid, eid, hsid } = trackingState;
+        const flat_keywords = flattenLongString(keywords);
+        let builtLink = buildFullLink(offer.url, sid, eid, hsid);
+        builtLink = builtLink + '&kwd=' + flat_keywords
+        window.open(builtLink);
+        if(offer && offer.jump !== 'N/A') {
+            window.location.href = buildFullLink(offer.jump, sid, eid, hsid);
+            return;
+        };
+        history.push('/verticals');
+        return;
     };
 
     const RenderIcon = () => (
-        <FontAwesomeIcon
-            icon={['fal', 'chevron-double-right']}
-            className='4_button-icon'
-        />
+        <div className='button-icon-container'>
+            <FontAwesomeIcon
+                icon={['fal', 'chevron-double-right']}
+                className='4_button-icon'
+            />
+        </div>
     );
 
-    const test = ['1', '2', '3', '4'];
+    const RenderInnerButton = ({ text, idx }) => (
+        <div className={`four_button-item button-bg__${idx}`}>
+            <RenderIcon />
+            <div className='button-text-container'>{text}</div>
+        </div>
+    );
+
     const render4ButtonGroup = () => (
         <div className='4-button-group'>
-            {test.map((button_text, idx) => (
+            {offer.four_button.map((button_text, idx) => (
                 <Button
-                    onClick={handleOfferClick} 
+                    className='button-wrapper'
+                    onClick={(e) => handleOfferClick(button_text, e)} 
                     variant='contained' 
-                    className={`4_button-item button-bg__${idx}`}
-                    key={`4_button-item-${idx}`}
-                    startIcon={<RenderIcon />}
-                    size='large'
+                    key={`four_button-item-${idx}`}
                 >
-                    {button_text}
+                    <RenderInnerButton text={button_text} idx={idx}/>
                 </Button>
             ))}
         </div>
     );
 
     return(
-        <div className='offer-page__main-multi'>
-            <span className='offer-header-text'>
-                Multiple sponsored results could be available that suit your needs.
-            </span>
-            <div className='four-button_group'>
-                {render4ButtonGroup()}
+        <div className='four-button'>
+            <CloseFlow />
+            <div className='offer-page__main-multi'>
+                <span className='offer-header-text'>
+                    Multiple sponsored results could be available that suit your needs.
+                </span>
+                <span className='offer-sponsored-text'>View Sponsored Offers</span>
+                <div className='four-button_group'>
+                    {render4ButtonGroup()}
+                </div>
             </div>
         </div>
     )

@@ -9,3 +9,18 @@
     font-size: 18px;
     margin: 15px auto;
 }
+
+.four-button {
+    margin: 50px 0;
+}
+
+.offer-sponsored-text {
+    font-size: 0.9rem;
+    font-weight: 300;
+    width: 50%;
+    text-align: left;
+
+    @include respond-to('small') {
+        text-align: center;
+    }
+}
