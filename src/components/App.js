@@ -10,11 +10,13 @@ import { useHistory } from 'react-router-dom';
 import useSetProvider from '../hooks/useSetProvider';
 import useSetNewUser from '../hooks/useSetNewUser';
 import useInsertNewUser from '../hooks/useInsertNewUser';
+import usePchAPI from '../hooks/usePchAPI';
 
 const App = () => {
 	useSetProvider();
 	const [redirect] = useSetNewUser();
 	useInsertNewUser();
+	usePchAPI();
 	let history = useHistory();
 	const [showDrawer, toggleDrawer] = useState(false);
 	const { appState } = useContext(AppContext);
