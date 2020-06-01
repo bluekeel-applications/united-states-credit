@@ -8,12 +8,13 @@ import MNet from './MNet';
 import OfferWall from './OfferWall';
 import OptinOffer from './OptinOffer';
 import FlowPage from '../Layout/FlowPage';
-import useOfferFinder from '../../hooks/useOfferFinder';
+// import useOfferFinder from '../../hooks/useOfferFinder';
 
 const Offers = () => {
     let history = useHistory();
     const { appState, trackingState } = useContext(AppContext);
-    const [ offerData ] = useOfferFinder();
+    const offerData = appState.offer
+    // const [ offerData ] = useOfferFinder();
     const [ selectedOffer, setOffer ] = useState(null);
     let isEnd = appState.flowState.vertical && appState.flowState.loan_type;
         
@@ -24,13 +25,12 @@ const Offers = () => {
         };
 
         if(offerData) {
-            setOffer(offerData.fetchEndpointOffer.body)
+            setOffer(offerData);
         };
         // eslint-disable-next-line
     }, [offerData]);
 
     const ShowOffers = () => {
-        console.log('offer:', selectedOffer); 
         switch(selectedOffer.offer_page) {
             case 'mNet':
                 return (

@@ -38,7 +38,8 @@ const initialAppState = {
     offer_page: null,
     four_button: null,
     jump: null,
-    email: null
+    email: null,
+    offer: null
 };
 
 const appStateReducer = (state, action) => {
@@ -217,14 +218,9 @@ const appStateReducer = (state, action) => {
             };
 
         case 'SELECTED_OFFER':
-            const { link, offer_page, four_button, jump } = action.payload
             return {
                 ...state,
-                link,
-                offer_page,
-                four_button,
-                jump,
-                loadingOffers: false
+                offer: action.payload
             };
 
         case 'FAILED_OFFER_SELECTION':            

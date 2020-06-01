@@ -11,6 +11,7 @@ import useOfferFinder from '../../../hooks/useOfferFinder';
 import useTrackingLayer from '../../../hooks/useTrackingLayer';
 import MoveToOfferButtons from './MoveToOfferButtons';
 import DirectLinkButtons from './DirectLinkButtons';
+import { firePixelBlueKeel, firePixelBing, firePixelGoogle } from '../../../utils/pixels';
 
 const EmailOptin = () => {
     const { trackingState, dispatchApp, appState } = useContext(AppContext);
@@ -28,8 +29,7 @@ const EmailOptin = () => {
     const hasLogged = useRef(false);
     const [offerPage, setOfferPage] = useState('');
 	
-	const checkValidity = () => {
-        let email = emailValue;
+	const checkValidity = (email) => {
         if(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
             toggleError(false);
             setEmailReady(true);
@@ -41,6 +41,7 @@ const EmailOptin = () => {
     const handleInputChange = (event) => {
         let email = event.target.value;
         setEmail(email);
+        checkValidity(email);
     };
 
     const [ addUserEmail ] = useMutation(ADD_USER_EMAIL);
@@ -55,16 +56,17 @@ const EmailOptin = () => {
 
         if(appState.pch.email) {
             setEmail(appState.pch.email);
-            checkValidity();
+            checkValidity(appState.pch.email);
         };
 
         if(data) {
             const { id, offer_page } = data.fetchEndpointOffer.body;
             setOffer(data.fetchEndpointOffer.body);
             setOfferPage(offer_page);
+            dispatchApp({ type: 'SELECTED_OFFER', payload: data.fetchEndpointOffer.body });
             if(!hasLogged.current) {
 				console.log('offer:', data.fetchEndpointOffer.body);
-                insertServiceLog({ 
+                insertServiceLog({
                     variables: { 
                         clickData: { 
                             endpoint_id: id, 
@@ -109,7 +111,10 @@ const EmailOptin = () => {
         window.scrollTo(0, 0);
         if(!hasSent.current) {
             hasSent.current = true;
-            insertCommonInfo({ 
+            firePixelBlueKeel(trackingState.hsid);
+            firePixelBing(appState.flowState.vertical);
+			firePixelGoogle();
+            insertCommonInfo({
                 variables: { 
                     visitor: {
                         'hsid': Number(trackingState.hsid),
