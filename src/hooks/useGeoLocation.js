@@ -25,7 +25,7 @@ const getUserLocation = async() => {
 const useGeoLocation = () => {
     const componentIsMounted = useRef(true);
     const [error, setError] = useState(false);
-    const [ip_address, set_ip_address] = useState(null);
+    const [ip_address, set_ip_address] = useState('');
     const { dispatchTracking } = useContext(AppContext);
     const retry_count = useRef(3);
 

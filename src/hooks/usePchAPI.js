@@ -10,6 +10,7 @@ const usePchAPI = () => {
 
 	const handleCompletion = (data) => {
 		if(data) {
+			console.log('pch data:', data.fetchUserInfo.message);
 			const user = data.fetchUserInfo.body;
 			dispatchApp({ type: 'FOUND_PCH_USER', payload: user });
 		};

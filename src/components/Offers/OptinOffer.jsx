@@ -29,9 +29,8 @@ const OptinOffer = ({ optin_id, jump, sid, eid, hsid }) => {
                 window.open(buildFullLink(optinOffer.link, sid, eid, hsid));
                 if(jump && jump !== 'N/A') {
                     window.location.href = buildFullLink(jump, sid, eid, hsid);
-                    return;
                 };
-                return;
+                return null;
             default:
                 return (
                     <Loading />

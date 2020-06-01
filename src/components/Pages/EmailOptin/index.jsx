@@ -18,11 +18,11 @@ const EmailOptin = () => {
     let essentials = appState.flowState.vertical && appState.flowState.loan_type;  
     let history = useHistory();
     useTrackingLayer();
-    const [disabled, setDisabledState] = useState(true);
-    const [termsChecked, checkTerms] = useState(false);
-    const [validEmail, setEmailReady] = useState(false);
+    const [disabled, setDisabledState] = useState(!appState.pch.email);
+    const [termsChecked, checkTerms] = useState(!!appState.pch.email);
+    const [validEmail, setEmailReady] = useState(!!appState.pch.email);
     const [showInputError, toggleError] = useState(false);
-    const [emailValue, setEmail] = useState('');
+    const [emailValue, setEmail] = useState(`${appState.pch.email ? appState.pch.email : ''}`);
     const [ data, error, loading ] = useOfferFinder();
     const [offer, setOffer] = useState(null);
     const hasSent = useRef(false);
@@ -54,11 +54,6 @@ const EmailOptin = () => {
             return;
         };
 
-        if(appState.pch.email) {
-            setEmail(appState.pch.email);
-            checkValidity(appState.pch.email);
-        };
-
         if(data) {
             const { id, offer_page } = data.fetchEndpointOffer.body;
             setOffer(data.fetchEndpointOffer.body);
@@ -85,7 +80,7 @@ const EmailOptin = () => {
 
         return () => setDisabledState(true);
         // eslint-disable-next-line
-    }, [validEmail, termsChecked, data, appState.pch.email]);
+    }, [validEmail, termsChecked, data]);
 
     if(error) {
         console.log('error:', error);
