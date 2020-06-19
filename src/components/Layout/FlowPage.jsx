@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '../../context';
-import BreadCrumbs from '../Shared/BreadCrumbs';
+import BreadCrumbs from '../Shared/Breadcrumbs';
 import { useHistory } from 'react-router-dom';
 
 const FlowPage = ({children, showCrumbs, showFinalCrumbs = false}) => {
