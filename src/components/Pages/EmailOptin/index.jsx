@@ -61,14 +61,14 @@ const EmailOptin = () => {
             dispatchApp({ type: 'SELECTED_OFFER', payload: data.fetchEndpointOffer.body });
             if(!hasLogged.current) {
 				console.log('offer:', data.fetchEndpointOffer.body);
-                insertServiceLog({
-                    variables: { 
-                        clickData: { 
-                            endpoint_id: id, 
-                            clickId: Number(trackingState.hsid) 
-                        }
-                    }
-                });
+                // insertServiceLog({
+                //     variables: { 
+                //         clickData: { 
+                //             endpoint_id: id, 
+                //             clickId: Number(trackingState.hsid) 
+                //         }
+                //     }
+                // });
                 hasLogged.current = true;
             };
         };

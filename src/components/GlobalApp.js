@@ -14,39 +14,41 @@ import initFontAwesome from '../utils/initFontAwesome';
 initFontAwesome();
 
 const GlobalApp = () => {
-  const client = new ApolloClient({
+	const client = new ApolloClient({
 		link: ApolloLink.from([
 			onError(({ graphQLErrors, networkError }) => {
-			  	if (graphQLErrors)
+				if (graphQLErrors)
 					graphQLErrors.forEach(({ message, locations, path }) =>
-				 		console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`),
+						console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`),
 				);
 
-			  	if (networkError) console.log(`[Network error]: ${networkError}`);
+				if (networkError) console.log(`[Network error]: ${networkError}`);
 			}),
 			new HttpLink({
 				// Production
 				// uri: 'https://cbvb02ezl4.execute-api.us-east-1.amazonaws.com/prod/graphql',
 				// Test
-				uri: 'https://cypmxq177b.execute-api.us-east-1.amazonaws.com/test/graphql'
+				// uri: 'https://cypmxq177b.execute-api.us-east-1.amazonaws.com/test/graphql'
+				// Services
+				// uri: 'https://uqwaw9keg3.execute-api.us-east-1.amazonaws.com/services/graphql'
 				// Local
-				// uri: 'http://localhost:4000/graphql'
+				uri: 'http://localhost:4000/graphql'
 			})
 		]),
 		cache: new InMemoryCache(),
 		// connect to your application's Apollo Client in production
 		connectToDevTools: true,
-  });
-  
-  return (
-    <ApolloProvider client={client}>
-		<AppContextProvider>
-			<Router>
-				<App />
-			</Router>
-		</AppContextProvider>
-    </ApolloProvider>
-  );
+	});
+	
+	return (
+		<ApolloProvider client={client}>
+			<AppContextProvider>
+				<Router>
+					<App />
+				</Router>
+			</AppContextProvider>
+		</ApolloProvider>
+	);
 }
 
 
