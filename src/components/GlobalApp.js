@@ -14,15 +14,15 @@ import initFontAwesome from '../utils/initFontAwesome';
 initFontAwesome();
 
 const GlobalApp = () => {
-  const client = new ApolloClient({
+	const client = new ApolloClient({
 		link: ApolloLink.from([
 			onError(({ graphQLErrors, networkError }) => {
-			  	if (graphQLErrors)
+				if (graphQLErrors)
 					graphQLErrors.forEach(({ message, locations, path }) =>
-				 		console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`),
+						console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`),
 				);
 
-			  	if (networkError) console.log(`[Network error]: ${networkError}`);
+				if (networkError) console.log(`[Network error]: ${networkError}`);
 			}),
 			new HttpLink({
 				// Production
@@ -36,17 +36,17 @@ const GlobalApp = () => {
 		cache: new InMemoryCache(),
 		// connect to your application's Apollo Client in production
 		connectToDevTools: true,
-  });
-  
-  return (
-    <ApolloProvider client={client}>
-		<AppContextProvider>
-			<Router>
-				<App />
-			</Router>
-		</AppContextProvider>
-    </ApolloProvider>
-  );
+	});
+
+	return (
+		<ApolloProvider client={client}>
+			<AppContextProvider>
+				<Router>
+					<App />
+				</Router>
+			</AppContextProvider>
+		</ApolloProvider>
+	);
 }
 
 
