@@ -36,7 +36,7 @@ const PersonalLoans = () => {
                 break;
             
             default:
-                history.push('/debt_optin');
+                history.push('/email_optin');
         }
     };
 

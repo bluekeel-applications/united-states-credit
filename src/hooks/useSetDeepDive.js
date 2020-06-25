@@ -10,39 +10,39 @@ const useSetDeepDive = (vertical, type) => {
 			// Credit Cards
 			case 'low_interest':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Low Interest' } });
-				setRedirect('/checking_optin');
+				setRedirect('/email_optin');
 				return;
 			case 'cash_back':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Cash Back' } });
-				setRedirect('/checking_optin');
+				setRedirect('/email_optin');
 				return;
 			case 'reward':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Reward' } });
-				setRedirect('/checking_optin');
+				setRedirect('/email_optin');
 				return;
 			case 'student':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Student' } });
-				setRedirect('/checking_optin');
+				setRedirect('/email_optin');
 				return;
 			case 'travel':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Travel' } });
-				setRedirect('/checking_optin');
+				setRedirect('/email_optin');
 				return;
 			case 'credit_building':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Credit Building' } });
-				setRedirect('/checking_optin');
+				setRedirect('/email_optin');
 				return;
 			case 'business':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Business' } });
-				setRedirect('/checking_optin');
+				setRedirect('/email_optin');
 				return;
 			case 'balance_transfer':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Balance Transfer' } });
-				setRedirect('/checking_optin');
+				setRedirect('/email_optin');
 				return;
 			case 'prepaid':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Prepaid' } });
-				setRedirect('/checking_optin');
+				setRedirect('/email_optin');
 				return;
 			// Auto Loans
 			case 'car':
@@ -72,15 +72,15 @@ const useSetDeepDive = (vertical, type) => {
 				return;
 			case 'pay_bills':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Paying Bills' } });
-				setRedirect('/debt_optin');
+				setRedirect('/email_optin');
 				return;
 			case 'make_purchase':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Making a Purchase' } });
-				setRedirect('/debt_optin');
+				setRedirect('/email_optin');
 				return;
 			case 'emergency':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: 'emergency_cash', crumb: 'Emergency Cash' } });
-				setRedirect('/debt_optin');
+				setRedirect('/email_optin');
 				return;
 			case 'taxes':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: 'pay_taxes', crumb: 'Paying Taxes' } });
@@ -88,7 +88,7 @@ const useSetDeepDive = (vertical, type) => {
 				return;
 			case 'other':
 				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: 'other_purpose', crumb: 'Other' } });
-				setRedirect('/debt_optin');
+				setRedirect('/email_optin');
 				return;
 			// Home Loans
 			case 'refinance':
@@ -158,7 +158,7 @@ const useSetDeepDive = (vertical, type) => {
 
 	useEffect(() => {
 		if(vertical === 'N/A' && type === 'N/A') {
-			setRedirect('/');
+			setRedirect('/select');
 			return;
 		};
 		checkForDeepDive();

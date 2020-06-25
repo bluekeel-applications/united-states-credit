@@ -25,7 +25,7 @@ const CreditCards = () => {
         dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: choice, crumb: texts } });
         window.scrollTo(0, 0);
         dispatchApp({ type: 'HIDE_EXPANSION' });
-        history.push('/checking_optin');
+        history.push('/email_optin');
     };
 
     return (

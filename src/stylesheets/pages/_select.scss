@@ -1,0 +1,43 @@
+.quick-links {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    text-align: left;
+    font-weight: 500;
+}
+
+.quick-links-title {
+    width: 100%;
+    color: rgba(0,0,0,0.5);
+    text-align: left;
+    font-weight: 500;
+    padding: 10px;
+}
+
+.quick-links-left {
+    width: 50%;
+}
+
+.quick-links-right {
+    width: 50%;
+}
+
+.quick-link {
+    line-height: 1.4;
+}
+
+.quick-link:hover {
+    cursor: pointer;
+}
+
+.select-text-title {
+    font-size: 1.75rem;
+    padding-bottom: 20px;
+}
+
+.loading-select {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
