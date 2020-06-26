@@ -7,17 +7,17 @@ import { useHistory } from 'react-router-dom';
 
 const DirectLinkButtons = ({ disabledState, termsChecked, toggleError, offer, sendEmail, processClick }) => {
 	let history = useHistory();
-	const { trackingState, dispatchApp } = useContext(AppContext);
+	const { trackingState, dispatchApp, appState } = useContext(AppContext);
 
 	const handleDirectLink = () => {
-        const newWindowLink = buildFullLink(offer.url, trackingState.sid, trackingState.eid, trackingState.hsid);
+        const newWindowLink = buildFullLink(offer.url, trackingState.sid, trackingState.eid, trackingState.hsid, appState.pch);
         if(!disabledState) {
 			window.open(newWindowLink);
 			dispatchApp({ type: 'EMAIL_OPT_IN' });
             sendEmail();
             processClick();
             if(offer && offer.jump !== 'N/A') {
-                window.location.href = buildFullLink(offer.jump, trackingState.sid, trackingState.eid, trackingState.hsid);
+                window.location.href = buildFullLink(offer.jump, trackingState.sid, trackingState.eid, trackingState.hsid, appState.pch);
                 return;
             };
             history.push('/verticals');
@@ -28,11 +28,11 @@ const DirectLinkButtons = ({ disabledState, termsChecked, toggleError, offer, se
 
 	const handleOptOutDirectLink = () => {
         dispatchApp({ type: 'EMAIL_OPT_OUT' });
-        const newWindowLink = buildFullLink(offer.url, trackingState.sid, trackingState.eid, trackingState.hsid);
+        const newWindowLink = buildFullLink(offer.url, trackingState.sid, trackingState.eid, trackingState.hsid, appState.pch);
         window.open(newWindowLink);
         processClick();
         if(offer && offer.jump !== 'N/A') {
-            window.location.href = buildFullLink(offer.jump, trackingState.sid, trackingState.eid, trackingState.hsid);
+            window.location.href = buildFullLink(offer.jump, trackingState.sid, trackingState.eid, trackingState.hsid, appState.pch);
             return;
         };
         history.push('/verticals');
