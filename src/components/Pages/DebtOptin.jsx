@@ -20,7 +20,7 @@ const DebtOptin = () => {
         dispatchApp({ type: 'DEBT_OPT_OUT' });
         window.scrollTo(0, 0);
         dispatchApp({ type: 'HIDE_EXPANSION' });
-        history.push('/checking_optin');
+        history.push('/email_optin');
     };
 
     return (

@@ -155,10 +155,10 @@ const EmailOptin = () => {
                                 <div className='email-terms-container'>
                                     <input className='email_terms_box' type='checkbox' checked={termsChecked} name='email_terms' onChange={() => checkTerms(!termsChecked)}/>
                                     <div className='email_terms_text'>
-                                        I hereby declare that I am a U.S. resident over the age of 18 and I agree to this site's  
-                                        <a className='email_terms_links' href='/terms' target='_blank'>
-                                            Terms &amp; Conditions
-                                        </a> and <a className='email_terms_links' href='/privacy' target='_blank'>
+                                    I hereby declare that I am a U.S. resident over the age of 18 and I agree to this site's  
+                                        <a className='email_terms_links' href='https://unitedstatescredit.com/terms' rel='noopener noreferrer' target='_blank'>
+                                        Terms &amp; Conditions
+                                        </a> and <a className='email_terms_links' href='https://unitedstatescredit.com/privacy' rel='noopener noreferrer' target='_blank'>
                                             Privacy Policy
                                         </a>.
                                     </div>

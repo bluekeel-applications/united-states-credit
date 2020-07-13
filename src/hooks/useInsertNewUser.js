@@ -3,6 +3,7 @@ import { AppContext } from '../context';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_NEW_USER } from '../utils/mutations';
 import useGeoLocation from './useGeoLocation';
+import { firePixelBlueKeel } from '../utils/pixels';
 
 const useInsertNewUser = () => {
 	const { trackingState } = useContext(AppContext);	
@@ -22,6 +23,9 @@ const useInsertNewUser = () => {
 			}
 		}
 		addNewUser( { variables: { visitor: obj } } );
+		if(trackingState.sid === 5102 || trackingState.sid === 9113) {
+			firePixelBlueKeel(trackingState.hsid);
+		};
 	};
 
 	useEffect(() => {

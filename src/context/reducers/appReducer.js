@@ -2,14 +2,14 @@
 const initialAppState = {
     provider: null,
     pch: {
-        email: null,
-        title: null,
-        firstname: null,
-        lastname: null,
-        address: null,
-        city: null,
-        state: null,
-        zipcode: null
+        email: '',
+        title: '',
+        firstname: '',
+        lastname: '',
+        address: '',
+        city: '',
+        state: '',
+        zipcode: ''
     },
     animationPlayed: false,
     loadingOffers: true,
