@@ -61,13 +61,13 @@ export const setCachedObject = (key, obj) => {
 };
 
 export const flattenString = (string) => {
-  let flatString = string.replace(' ', '_');
-  return flatString.toLowerCase();
+    let flatString = string.replace(' ', '_');
+    return flatString.toLowerCase();
 };
 
 export const flattenLongString = (string) => {
     const stringCleaned = string.replace(/\s/g, '_');
-  return stringCleaned.toLowerCase();
+    return stringCleaned.toLowerCase();
 };
 
 // Build the full like for an offer
