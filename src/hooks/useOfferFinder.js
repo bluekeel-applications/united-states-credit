@@ -26,11 +26,17 @@ const useOfferFinder = () => {
         'debt_optin': debt_optin
     };
 
-	const { loading, error, data } = useQuery(ENDPOINT_OFFER, { 
-		variables: { queryData: flows, location: trackingState.location || 'N/A' } 
-	});
+    const queryObj = {
+        variables: {
+            queryData: flows,
+            location: trackingState.location || 'N/A'
+        }
+    }
+
+	const { loading, error, data } = useQuery(ENDPOINT_OFFER, queryObj);
 
 	useEffect(() => {		
+        console.log('query vars:', queryObj.variables);
 		if (data && !offerData) {
             setNewOffer(data.fetchEndpointOffer.body);
         };

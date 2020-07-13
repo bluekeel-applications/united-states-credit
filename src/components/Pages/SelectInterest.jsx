@@ -5,7 +5,7 @@ import { AppContext } from '../../context';
 import Loading from '../Shared/Loading';
 import FlowPage from '../Layout/FlowPage';
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_USER_EMAIL, INSERT_COMMON_INFO } from '../../utils/mutations';
+import { ADD_USER_EMAIL, INSERT_COMMON_INFO, INSERT_SEARCH_INFO } from '../../utils/mutations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import CloseFlow from '../Shared/CloseFlow';
@@ -52,6 +52,7 @@ const SelectInterest = () => {
     
     const [addUserEmail] = useMutation(ADD_USER_EMAIL);
     const [insertCommonInfo] = useMutation(INSERT_COMMON_INFO);
+    const [insertSearchInfo] = useMutation(INSERT_SEARCH_INFO);
     
     const processClick = async (link) => {
         dispatchApp({ type: 'HIDE_EXPANSION' });
@@ -72,6 +73,19 @@ const SelectInterest = () => {
                             'uid': trackingState.uid,
                             'ip_address': trackingState.ip_address,
                             'email': emailValue
+                        }
+                    }
+            });
+            insertSearchInfo({
+                variables: {
+                    visitor: {
+                            'hsid': Number(trackingState.hsid),
+                            'oid': Number(trackingState.oid),
+                            'eid': trackingState.eid,
+                            'sid': Number(trackingState.sid),
+                            'uid': trackingState.uid,
+                            'ip_address': trackingState.ip_address,
+                            'query': interest
                         }
                     }
             });

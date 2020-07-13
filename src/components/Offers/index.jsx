@@ -16,13 +16,13 @@ const Offers = () => {
     const offerData = appState.offer
     // const [ offerData ] = useOfferFinder();
     const [ selectedOffer, setOffer ] = useState(null);
-    let isEnd = appState.flowState.vertical && appState.flowState.loan_type;
+    // let isEnd = appState.flowState.vertical && appState.flowState.loan_type;
         
     useEffect(() => {
-        if(!isEnd) {
-            history.push('/');
-            return null;
-        };
+        // if(!isEnd) {
+        //     history.push('/');
+        //     return null;
+        // };
 
         if(offerData) {
             setOffer(offerData);

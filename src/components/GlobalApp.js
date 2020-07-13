@@ -39,11 +39,6 @@ const GlobalApp = () => {
 		// connect to your application's Apollo Client in production
 		connectToDevTools: true,
 	});
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> master
 	return (
 		<ApolloProvider client={client}>
 			<AppContextProvider>

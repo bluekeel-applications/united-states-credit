@@ -4,7 +4,7 @@ import { AppContext } from '../../../context';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../../Layout/FlowPage';
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_USER_EMAIL, INSERT_COMMON_INFO, INSERT_OFFER_LOG } from '../../../utils/mutations';
+import { ADD_USER_EMAIL, INSERT_COMMON_INFO } from '../../../utils/mutations';
 import CloseFlow from '../../Shared/CloseFlow';
 import Loading from '../../Shared/Loading';
 import useOfferFinder from '../../../hooks/useOfferFinder';
@@ -46,7 +46,6 @@ const EmailOptin = () => {
 
     const [ addUserEmail ] = useMutation(ADD_USER_EMAIL);
     const [ insertCommonInfo ] = useMutation(INSERT_COMMON_INFO);
-    const [ insertServiceLog ] = useMutation(INSERT_OFFER_LOG);
 
     useEffect(() => {
         if(!essentials) {
@@ -120,7 +119,7 @@ const EmailOptin = () => {
                         'ip_address': trackingState.ip_address,
                         'email': emailValue
                     }
-                } 
+                }
             });
         };
     };
