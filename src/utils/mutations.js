@@ -48,6 +48,15 @@ const INSERT_COMMON_INFO = gql`
 		}
 	}
 `;
+const INSERT_SEARCH_INFO = gql`
+	mutation InsertSearchInfo($visitor: CommonInfo) {
+		insertSearchInfo(visitor: $visitor){
+			success
+			status
+			message
+		}
+	}
+`;
 
 const INSERT_OFFER_LOG = gql`
 	mutation OfferServed($clickData: ClickData) {
@@ -64,5 +73,6 @@ export {
 	ADD_USER_FLOW,
 	ADD_USER_EMAIL,
 	INSERT_COMMON_INFO,
+	INSERT_SEARCH_INFO,
 	INSERT_OFFER_LOG
 };
