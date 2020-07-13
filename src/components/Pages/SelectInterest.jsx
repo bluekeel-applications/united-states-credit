@@ -165,7 +165,7 @@ const SelectInterest = () => {
                                     {` and `} 
                                     <a className='email_terms_links' href='https://unitedstatescredit.com/terms' rel='noopener noreferrer' target='_blank'>
                                     Terms &amp; Conditions</a>.
-                                    {` In addition, I consent to receive emails ${appState.pch.email ? `to ${appState.pch.email}`: ''}
+                                    {` In addition, I consent to receive emails ${appState.pch.email ? `to ${emailValue}`: ''}
                                     in accordance with the `}
                                     <a className='email_terms_links' href='https://unitedstatescredit.com/privacy' rel='noopener noreferrer' target='_blank'>
                                     Privacy Policy
