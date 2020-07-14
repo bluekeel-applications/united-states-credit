@@ -15,6 +15,7 @@ const initialTrackingState = {
     pt1: checkCookie('pt1') ? getCookie('pt1') : null,
     pt2: checkCookie('pt2') ? getCookie('pt2') : null,
     gclid: checkCookie('gclid') ? getCookie('gclid') : null,
+    email: checkCookie('email') ? getCookie('email') : null
 };
 
 const trackingStateReducer = (state, action) => {
@@ -33,11 +34,19 @@ const trackingStateReducer = (state, action) => {
                 pt1: action.payload.pt1 || initialTrackingState.pt1,
                 pt2: action.payload.pt2 || initialTrackingState.pt2,
                 gclid: action.payload.gclid || initialTrackingState.gclid,
+                email: action.payload.email || initialTrackingState.email,
             };
             setCookies(tracking)
             return {
                 ...state,
                 ...tracking
+            };
+
+        case 'SET_PCH_USER_EMAIL':
+            setCookie('email', action.payload, 3);
+            return {
+                ...state,
+                email: action.payload
             };
 
         case 'HSID_FOUND':

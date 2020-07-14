@@ -9,7 +9,7 @@ const useSetNewUser = () => {
 	const { dispatchTracking } = useContext(AppContext);	
 	const inboundVertical = myURL.searchParams.get('vertical') || 'N/A';
 	const inboundType = myURL.searchParams.get('type') || 'N/A';
-	const [redirect] = useSetDeepDive(inboundVertical, inboundType);
+	const [ redirect ] = useSetDeepDive(inboundVertical, inboundType);
 
 	const buildNewUser = async() => {
 		const tracking = {
@@ -25,6 +25,7 @@ const useSetNewUser = () => {
 			PT1: myURL.searchParams.get('pt1') || getCookie('pt1') || null,
 			PT2: myURL.searchParams.get('pt2') || getCookie('pt2') || null,
 			GCLID: myURL.searchParams.get('gclid') || getCookie('gclid') || null,
+			EMAIL: myURL.searchParams.get('email') || getCookie('email') || null
 		};
 		const clickId = await sendHitStreetHSID(tracking);
 		
@@ -40,7 +41,8 @@ const useSetNewUser = () => {
 			pacid: tracking.PACID,
 			pt1: tracking.PT1,
 			pt2: tracking.PT2,
-			gclid: tracking.GCLID
+			gclid: tracking.GCLID,
+			email: tracking.EMAIL
 		};
 		dispatchTracking({ type: 'USER_ARRIVED', payload });
 	};

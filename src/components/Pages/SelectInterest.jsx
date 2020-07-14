@@ -33,10 +33,10 @@ const SelectInterest = () => {
     const { trackingState, dispatchApp, appState } = useContext(AppContext);
     // let history = useHistory();
     useTrackingLayer();
-    const [disabled, setDisabledState] = useState(true);
-    const [emailValue] = useState(`${appState.pch.email ? appState.pch.email : ''}`);
-    const [interest, setInterest] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [ disabled, setDisabledState ] = useState(true);
+    const [ emailValue ] = useState(trackingState.email ? trackingState.email : null);
+    const [ interest, setInterest ] = useState('');
+    const [ loading, setLoading ] = useState(false);
     const hasSent = useRef(false);
 
     const handleInputChange = (event) => {
@@ -171,7 +171,7 @@ const SelectInterest = () => {
                                     {` and `} 
                                     <a className='email_terms_links' href='https://unitedstatescredit.com/terms' rel='noopener noreferrer' target='_blank'>
                                     Terms &amp; Conditions</a>.
-                                    {` In addition, I consent to receive emails ${appState.pch.email ? `to ${emailValue}`: ''}
+                                    {` In addition, I consent to receive emails ${emailValue ? `to ${emailValue}`: ''}
                                     in accordance with the `}
                                     <a className='email_terms_links' href='https://unitedstatescredit.com/privacy' rel='noopener noreferrer' target='_blank'>
                                     Privacy Policy
