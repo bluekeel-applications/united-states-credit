@@ -1,70 +1,62 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import LoadingWave from '../LoadingWave';
-import Loading from '../Loading';
-import { useQuery } from '@apollo/react-hooks';
-import { ENDPOINT_OFFER } from '../../utils/queries';
+import Loading from '../Shared/Loading';
 import FourButton from './FourButton';
 import OneButton from './OneButton';
 import MNet from './MNet';
-import Wall from './Wall';
-import Zoom from 'react-reveal/Zoom';
+import OfferWall from './OfferWall';
+import OptinOffer from './OptinOffer';
+import FlowPage from '../Layout/FlowPage';
+// import useOfferFinder from '../../hooks/useOfferFinder';
 
 const Offers = () => {
     let history = useHistory();
     const { appState, trackingState } = useContext(AppContext);
-    const offerVertical = appState.flowState.vertical;
-    const loanType = appState.flowState.loan_type;
-    const debtType = appState.flowState.debt_type;
-    const debtAmount = appState.flowState.debt_amount;
-    const pid = trackingState.pid;
-    let isEnd = offerVertical && loanType;
+    const offerData = appState.offer
+    // const [ offerData ] = useOfferFinder();
+    const [ selectedOffer, setOffer ] = useState(null);
+    let isEnd = appState.flowState.vertical && appState.flowState.loan_type;
+        
+    useEffect(() => {
+        if(!isEnd) {
+            history.push('/');
+            return null;
+        };
 
-    const queryObj = {
-        'pid': pid,
-        'vertical': offerVertical,
-        'loan_type': loanType,
-        'debt_type': debtType,
-        'debt_amount': debtAmount
-    };
+        if(offerData) {
+            setOffer(offerData);
+        };
+        // eslint-disable-next-line
+    }, [offerData]);
 
-    const { loading, error, data } = useQuery(
-		ENDPOINT_OFFER,
-		{ variables: { query: queryObj } }
-    );
-    
-    if(!isEnd) {
-        history.push('/');
-        return null;
-    };
-    
-    if (error) {
-		return <div>Error</div>;
-	};
-	
-	if (loading) {
-		return <LoadingWave />;
-	};
-
-    const showOffers = () => {
-        const EndpointOffer = data.fetchEndpointOffer.body;
-        switch(EndpointOffer.offer_page) {
+    const ShowOffers = () => {
+        switch(selectedOffer.offer_page) {
             case 'mNet':
                 return (
-                    <MNet />
+                    <MNet page={selectedOffer.url} />
                 )
             case 'four_button':
                 return (
-                    <FourButton />
+                    <FourButton offer={selectedOffer} />
                 )
             case 'one_button':
                 return (
-                    <OneButton />
+                    <OneButton offer={selectedOffer} />
                 )
-            case 'wall':
+            case 'offer_wall':
                 return (
-                    <Wall />
+                    <OfferWall offer={selectedOffer} />
+                )
+            case 'optin':
+                return (
+                    <OptinOffer 
+                        optin_id={selectedOffer.optin.optin_id} 
+                        jump={selectedOffer.jump} 
+                        sid={trackingState.sid} 
+                        eid={trackingState.eid}
+                        hsid={trackingState.hsid}
+                    />
                 )
             default:
                 return (
@@ -74,11 +66,11 @@ const Offers = () => {
     };
 
     return (
-        <Zoom>
-            <div className='offer-container'>
-                {showOffers()}
+        <FlowPage showCrumbs showFinalCrumbs>
+            <div className='flow-content offer-container'>
+                {selectedOffer && (<ShowOffers data={offerData} />)}
             </div>
-        </Zoom>
+        </FlowPage>
     )
 };
 

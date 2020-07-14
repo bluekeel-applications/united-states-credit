@@ -1,48 +1,54 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
-import OptinButton from '../OptinButton';
+import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap';
-import Zoom from 'react-reveal/Zoom';
-import Breadcrumbs from '../Breadcrumbs';
+import FlowPage from '../Layout/FlowPage';
+import CloseFlow from '../Shared/CloseFlow';
 
 const DebtOptin = () => {
-    const { dispatchApp } = useContext(AppContext);    
+    const { dispatchApp, appState } = useContext(AppContext);    
     let history = useHistory();
 
     const opt_IN = () => {
         dispatchApp({ type: 'DEBT_OPT_IN' });
+        window.scrollTo(0, 0);
+        dispatchApp({ type: 'HIDE_EXPANSION' });
         history.push('/email_optin');
     };
 
     const opt_OUT = () => {
         dispatchApp({ type: 'DEBT_OPT_OUT' });
-        history.push('/checking_optin');
+        window.scrollTo(0, 0);
+        dispatchApp({ type: 'HIDE_EXPANSION' });
+        history.push('/email_optin');
     };
 
     return (
-        <>
-        <Breadcrumbs />
-        <Zoom>
-            <Container className='optin-container' fluid>
-                <Row className='optin-row row1'>
-                    <Col className='optin-header-text'>
-                        Would you like a loan to consolidate debt <b><em>and</em></b> Pay Taxes?
-                    </Col>
-                </Row>
-                <Row className='optin-row row2'>
-                    <OptinButton 
-                        color='blue' 
-                        value='Yes' 
-                        handleClick={opt_IN}
-                    />
-                    <OptinButton 
-                        color='light_blue' 
-                        value='No' 
-                        handleClick={opt_OUT}
-                    />
-                </Row>
-                <Row className='optin-row  row3'>
+        <FlowPage showCrumbs={appState.showStory}>
+            <div className={`${appState.showExpansion || !appState.showStory ? 'padded-top' : ''} flow-content`}>
+                {!appState.showExpansion && <CloseFlow />}
+                <div className='optin-row row1'>
+                    <h2 className='optin-header-text'>
+                        Would you like a loan to consolidate debt <b><em>and</em></b> for {appState.breadcrumbs.loan_type}?
+                    </h2>
+                </div>
+                <div className='optin-row row2'>
+                    <Button
+                        onClick={opt_IN} 
+                        variant='contained' 
+                        className='optin-button flow-button bg__blue'
+                    >
+                        Yes
+                    </Button>
+                    <Button
+                        onClick={opt_OUT} 
+                        variant='contained' 
+                        className='optin-button flow-button bg__light_blue'
+                    >
+                        No
+                    </Button>
+                </div>
+                <div className='optin-row  row3'>
                     <div className='debt-article-heading'>{`Debt Consolidation & Debt Settlement`}</div>
                     <div className='article-content sub'>
                         <div className='article-content-item'>
@@ -59,10 +65,10 @@ const DebtOptin = () => {
                         <div className='article-content-item'>This includes: <b>Credit Card Debt, Personal Loan Debt, Medical Debt</b></div>
                         <div className='article-content-item'>This Does Not include: Auto Loans, Home Loans</div>
                     </div>
-                </Row>
-            </Container>
-        </Zoom>
-        </>
+                </div>
+            </div>
+        </FlowPage>
+                    
     )
 };
 

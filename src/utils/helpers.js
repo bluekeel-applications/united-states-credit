@@ -61,6 +61,27 @@ export const setCachedObject = (key, obj) => {
 };
 
 export const flattenString = (string) => {
-  let flatString = string.replace(' ', '_');
-  return flatString.toLowerCase();
+    let flatString = string.replace(' ', '_');
+    return flatString.toLowerCase();
+};
+
+export const flattenLongString = (string) => {
+    const stringCleaned = string.replace(/\s/g, '_');
+    return stringCleaned.toLowerCase();
+};
+
+// Build the full like for an offer
+export const buildFullLink = (link, sid, eid, hsid, pch) => {
+    let linkout = link // eslint-disable-next-line
+    linkout = linkout.replace('${sid}', sid); // eslint-disable-next-line
+    linkout = linkout.replace('${eid}', eid); // eslint-disable-next-line
+    linkout = linkout.replace('${hsid}', hsid); // eslint-disable-next-line
+    linkout = linkout.replace('${em}', pch.email); // eslint-disable-next-line
+    linkout = linkout.replace('${first}', pch.firstname); // eslint-disable-next-line
+    linkout = linkout.replace('${last}', pch.lastname); // eslint-disable-next-line
+    linkout = linkout.replace('${adrs}', pch.address); // eslint-disable-next-line
+    linkout = linkout.replace('${city}', pch.city); // eslint-disable-next-line
+    linkout = linkout.replace('${state}', pch.state); // eslint-disable-next-line
+    linkout = linkout.replace('${zip}', pch.zipcode); // eslint-disable-next-line
+    return linkout;
 };

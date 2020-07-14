@@ -1,16 +1,29 @@
-import { addToClickCount } from '../../utils/middleware';
 
 const initialAppState = {
+    provider: null,
+    pch: {
+        email: '',
+        title: '',
+        firstname: '',
+        lastname: '',
+        address: '',
+        city: '',
+        state: '',
+        zipcode: ''
+    },
+    animationPlayed: false,
     loadingOffers: true,
     showDrawer: false,
+    showExpansion: false,
+    showStory: false,
     flowState: {
         vertical: null,
         loan_type: null,
         debt_type: 'N/A',
         debt_amount: 'N/A',
-        checking_optin: false,
-        debt_optin: false,
-        email_optin: false
+        checking_optin: null,
+        debt_optin: null,
+        email_optin: null
     },
     breadcrumbs: {
         vertical: null,
@@ -25,23 +38,63 @@ const initialAppState = {
     offer_page: null,
     four_button: null,
     jump: null,
-    email: null
+    email: null,
+    offer: null
 };
 
 const appStateReducer = (state, action) => {
     switch (action.type) {
 
-        case 'SHOW_DRAWER':
+        case 'SET_PROVIDER':
             return {
                 ...state,
-                showDrawer: true
+                provider: action.payload
+            };
+
+        case 'FOUND_PCH_USER':
+            return {
+                ...state,
+                pch: {
+                    ...state.pch,
+                    email: action.payload.EmailAddress,
+                    title: action.payload.Title,
+                    firstname: action.payload.FirstName,
+                    lastname: action.payload.LastName,
+                    address: action.payload.Address1,
+                    city: action.payload.City,
+                    state: action.payload.State,
+                    zipcode: action.payload.ZipCode
+                }
+            };
+
+        case 'ANIMATION_COMPLETED':
+            return {
+                ...state,
+                animationPlayed: true
+            };
+        
+        case 'DEEP_DIVE':
+            return {
+                ...state,
+                flowState: {
+                    ...initialAppState.flowState,
+                    vertical: action.payload.vertical, 
+                    loan_type: action.payload.loan_type
+                }
+            };
+
+        case 'SHOW_EXPANSION':
+            return {
+                ...state,
+                showExpansion: true
             };        
 
-        case 'HIDE_DRAWER':
+        case 'HIDE_EXPANSION':
             return {
                 ...state,
-                showDrawer: false
-            };        
+                showExpansion: false,
+                showStory: true
+            }; 
 // Flow Selections
         case 'VERTICAL_PICKED':
             return {
@@ -143,35 +196,20 @@ const appStateReducer = (state, action) => {
                 },
                 email: action.payload
             };
+        case 'EMAIL_OPT_OUT':
+            return {
+                ...state,
+                flowState: {
+                    ...state.flowState,
+                    email_optin: false
+                },
+                email: 'N/A'
+            };
 
         case 'FETCH_OFFERS':
             return {
                 ...state,
                 loadingOffers: true
-            };
-
-        case 'FETCH_OFFERS_SUCCESS':
-            const { click_count, _id } = action.payload;
-            const addToCCount = async() => {
-                if(!!_id) { 
-                    const res = await addToClickCount(_id); 
-                    if(res && res.status === 'failed') {
-                        console.warn('Error trying to add to click count:', res[0].message,  '...trying again');
-                        addToCCount();
-                        return;
-                    }
-                    if(res && !res.status) {
-                        console.log('Successfully added +1 to the click count');
-                        return;
-                    }
-                    console.log('something else happened:', res);
-                }
-            };
-            addToCCount();
-            return {
-                ...state,
-                click_count: click_count || 0,
-                program_id: _id || 'Unknown PID'
             };
 
         case 'FETCH_OFFERS_FAILURE':
@@ -180,14 +218,9 @@ const appStateReducer = (state, action) => {
             };
 
         case 'SELECTED_OFFER':
-            const { link, offer_page, four_button, jump } = action.payload
             return {
                 ...state,
-                link,
-                offer_page,
-                four_button,
-                jump,
-                loadingOffers: false
+                offer: action.payload
             };
 
         case 'FAILED_OFFER_SELECTION':            

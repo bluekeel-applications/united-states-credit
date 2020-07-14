@@ -1,60 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
-    <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest">
-    <link rel="mask-icon" href="%PUBLIC_URL%/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta http-equiv='keywords' content="travel cards, rewards cards, cash back cards, top credit cards, 2017 credit cards, fair credit, average credit, bad credit, no credit, visa card, visa cards, mastercard, discover, american express, credit cards, credit card offers, best credit cards, credit card applications, compare credit cards,prepaid credit cards, guaranteed credit cards, 100% approval, secured cards, personal loans, home loans, mortgage, lease, home refinance, refinance, auto loan, auto finance, new car") />
-    <meta name='description' content="Search for and compare top credit card, personal loan, home loan and auto offers.  Our exclusive visual credit search engine helps take the guess work out of finding the perfect offer that matches your needs and credit profile.  Find credit cards from VISA and MasterCard and AMEX using our tools and information so you can choose the best bad credit credit cards for you.  We specialize in all credit card types which include Rewards credit cards, Cash Back credit cards, 0 APR and Low APR credit cards, Prepaid credit cards, Guaranteed Credit Cards, Credit Building credit cards and credit cards for bad credit.  In addition, we can help you find a personal loan from $1000 to $100000, finance a new car and refinance or purchase a new home!") />
-    <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <script src="https://kit.fontawesome.com/17e2865f40.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://use.typekit.net/bym1fef.css">
-    <title>United States Credit</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-<!-- Bing Pixel Code -->
-    <script>
-      (function(w, d, t, r, u) {
-        var f, n, i;
-        w[u] = w[u] || [], f = function() {
-          var o = {
-            ti: "5681707"
-          };
-          o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad")
-        }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function() {
-          var s = this.readyState;
-          s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null)
-        }, i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i)
-      })(window, document, "script", "//bat.bing.com/bat.js", "uetq");
-    </script>
-<!-- End Bing Pixel Code -->
-<!-- Facebook Pixel Code -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '460235250998541');
-      fbq('track', 'PageView');
-    </script>
-    <noscript>
-      <img height="1" width="1" style="display:none" 
-          src="https://www.facebook.com/tr?id=460235250998541&ev=PageView&noscript=1"/>
-    </noscript>
-<!-- End Facebook Pixel Code -->
-  </body>
+	<head>
+		<meta charset="utf-8" />
+		<meta name='viewport' content='width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0'/>
+		<link rel='apple-touch-icon' sizes='180x180' href='%PUBLIC_URL%/apple-touch-icon.png'>
+		<link rel='icon' type='image/png' sizes="32x32" href='%PUBLIC_URL%/favicon-32x32.png'>
+		<link rel='icon' type='image/png' sizes="16x16" href='%PUBLIC_URL%/favicon-16x16.png'>
+		<!-- <link rel='manifest' href='%PUBLIC_URL%/site.webmanifest'> -->
+		<link rel='mask-icon' href='%PUBLIC_URL%/safari-pinned-tab.svg' color='#5bbad5'>
+		<meta name='msapplication-TileColor' content='#da532c'>
+		<meta http-equiv='keywords' content='travel cards, rewards cards, cash back cards, top credit cards, 2017 credit cards, fair credit, average credit, bad credit, no credit, visa card, visa cards, mastercard, discover, american express, credit cards, credit card offers, best credit cards, credit card applications, compare credit cards,prepaid credit cards, guaranteed credit cards, 100% approval, secured cards, personal loans, home loans, mortgage, lease, home refinance, refinance, auto loan, auto finance, new car') />
+		<meta name='description' content='Search for and compare top credit card, personal loan, home loan and auto offers.  Our exclusive visual credit search engine helps take the guess work out of finding the perfect offer that matches your needs and credit profile.  Find credit cards from VISA and MasterCard and AMEX using our tools and information so you can choose the best bad credit credit cards for you.  We specialize in all credit card types which include Rewards credit cards, Cash Back credit cards, 0 APR and Low APR credit cards, Prepaid credit cards, Guaranteed Credit Cards, Credit Building credit cards and credit cards for bad credit.  In addition, we can help you find a personal loan from $1000 to $100000, finance a new car and refinance or purchase a new home!') />
+		<meta name='theme-color' content='#ffffff'>
+		<link rel='manifest' href='%PUBLIC_URL%/manifest.json' />
+		<!-- <link rel="stylesheet" href='https://use.typekit.net/bym1fef.css'> -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+		<title>United States Credit</title>
+		<!-- uPush-->
+		<!-- <script type='text/javascript' src='https://sdk.upush.co/upush.js'></script>
+		<script>upushRequest('48Gn7yuacANoKUbim956RgPq10dOF2tx');</script> -->
+	</head>
+	<body>
+		<noscript>You need to enable JavaScript to run this app.</noscript>
+		<div id='root'></div>
+		<script id='mNCC' language='javascript'>
+			window._mNHandle = window._mNHandle || {};
+			window._mNHandle.queue = window._mNHandle.queue || [];
+			si_versionId = '3111299';
+			si_chnm = ' '; // Used to specify the channel name
+			si_chnm2 = ' '; // Used to specify the channel 2 name
+			si_chnm3 = ' '; // Used to specify the channel 3 name
+			si_misc = {};
+			// si_misc.query = 'Personal Loans';
+		</script>
+	<!-- Bing Pixel Code -->
+		<script>
+			(function(w, d, t, r, u) {
+				var f, n, i;
+				w[u] = w[u] || [], f = function() {
+				var o = {
+					ti: '5681707'
+				};
+				o.q = w[u], w[u] = new UET(o), w[u].push('pageLoad')
+				}, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function() {
+				var s = this.readyState;
+				s && s !== 'loaded' && s !== 'complete' || (f(), n.onload = n.onreadystatechange = null)
+				}, i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i)
+			})(window, document, 'script', '//bat.bing.com/bat.js', 'uetq');
+		</script>
+	<!-- End Bing Pixel Code -->
+	<!-- Global site tag (gtag.js) - Google Ads: 1062401053 -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-1062401053"></script>
+		<script async src='https://kit.fontawesome.com/17e2865f40.js' crossorigin='anonymous'></script>
+		<script type='text/javascript'>
+			(function(document, window){
+				var script = document.createElement('script');
+				script.type = 'text/javascript';
+				script.src = 'https://sdk.upush.co/upush.js';
+				script.onload = function() {
+					//Search
+					// upushRequest('48Gn7yuacANoKUbim956RgPq10dOF2tx');
+					//PCH
+					upushRequest('uYKcVT0p2SReilZUJIOGDHyfW3QdqgBX');
+				};
+				document.getElementsByTagName('head')[0].appendChild(script);
+			})(document, window);
+		</script>
+	</body>
 </html>

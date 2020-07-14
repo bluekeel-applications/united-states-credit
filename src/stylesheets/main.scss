@@ -8,8 +8,7 @@
 
 // 2. Vendors
 @import
-  'vendors/normalize',
-  'vendors/bootstrap';
+  'vendors/normalize';
 
 // 3. Base stuff
 @import
@@ -21,14 +20,15 @@
 // 4. Layout-related sections
 @import
   'layout/grid',
+  'layout/expansion',
   'layout/rss_feed',
   'layout/header',
   'layout/drawer',
-  'layout/flows',
-  'layout/footer';
+  'layout/flows';
 
 // 5. Components
 @import
+  'components/four_button',
   'components/loaders',
   'components/footer',
   'components/featured_row',
@@ -45,10 +45,7 @@
 @import
   'pages/offers_page',
   'pages/optins',
+  'pages/offer_wall',
   'pages/content_feed',
-  'pages/get_started',
-  'pages/home';
-
-// 7. Themes
-@import
-  'themes/default';
+  'pages/select',
+  'pages/get_started';

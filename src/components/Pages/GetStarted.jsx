@@ -1,34 +1,68 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import HeadShake from 'react-reveal/HeadShake';
-import flag__left from '../../assets/images/flag_left.png';
-import flag__right from '../../assets/images/flag_right.png';
+import Button from '@material-ui/core/Button';
+import FlowPage from '../Layout/FlowPage';
 
 const GetStarted = () => {
+    const { appState } = useContext(AppContext);
     let history = useHistory();
+    const [scrollTop, setScrollTop] = useState(0);
+    const [showNavButton, setShowNavButton] = useState(false);
 
     const handleStartClick = () => {
         history.push('/verticals');
+        window.scrollTo(0, 0);
     };
 
+    useEffect(() => {
+		const onScroll = e => {
+            setScrollTop(e.target.documentElement.scrollTop);
+			// setScrolling(e.target.documentElement.scrollTop > scrollTop);       
+		};
+		window.addEventListener('scroll', onScroll);
+
+		return () => window.removeEventListener('scroll', onScroll);
+    }, [scrollTop]);
+    
+    useEffect(() => {
+        if(scrollTop <= 100) setShowNavButton(false);
+        
+		if(scrollTop > 200) {
+			setShowNavButton(true);
+			return;
+		};
+
+		return () => setShowNavButton(false);
+    }, [scrollTop]);
+    
     return (
-        <div className='flow-content__container'>
-            <img src={flag__left} alt='american-flag' className='flow-content__flag flag__left'/>
-            <div className='get-started__container'>
+        <FlowPage showCrumbs={false}>
+            <div className='get-started__container flow-content'>
                 <span className='start-title-text'>FIND THE RIGHT CREDIT FOR YOU</span>
-                <HeadShake forever timeout={2000} >
-                    <button onClick={handleStartClick} className={'flow-button icon__right bg__blue is_start'}>
+                <div id={`${showNavButton? 'nav-button' : 'start'}`} className={`${appState.showExpansion ? 'start-search-pch' : 'start-search'}`}>
+                    <Button
+                        onClick={handleStartClick} 
+                        className={`${showNavButton? 'nav-button' : 'is_start'} flow-button bg__blue`}
+                        variant='contained'
+                    >
+                        Get Started
+                        {!showNavButton ? (
                         <FontAwesomeIcon
                             icon={['fal', 'arrow-alt-right']}
                             className='flow-button-icon'
                         />
-                        Get Started
-                    </button>
-                </HeadShake>
+                        ): (
+                        <FontAwesomeIcon
+                            icon={['fal', 'chevron-double-right']}
+                            className='nav-start-button-icon'
+                        />)}
+                    </Button>
+                </div>                
+                
             </div>
-            <img src={flag__right} alt='american-flag' className='flow-content__flag flag__right'/>
-        </div>
+        </FlowPage>
     );
 }
 

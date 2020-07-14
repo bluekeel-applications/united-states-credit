@@ -12,7 +12,7 @@
 
 html {
   font-family: $text-font-stack; /* 1 */
-  line-height: 1.15; /* 2 */
+  line-height: 1.1; /* 2 */
   -ms-text-size-adjust: 100%; /* 3 */
   -webkit-text-size-adjust: 100%; /* 3 */
 }
@@ -458,4 +458,9 @@ template {
 
 [hidden] {
   display: none;
+}
+
+.MuiButton-root {
+  text-transform: none !important;
+  font-weight: 400 !important;
 }

@@ -11,42 +11,44 @@ import DebtTypes from './components/Pages/DebtTypes';
 import CheckingOptin from './components/Pages/CheckingOptin';
 import DebtOptin from './components/Pages/DebtOptin';
 import EmailOptin from './components/Pages/EmailOptin';
+import SelectInterest from './components/Pages/SelectInterest';
 import Offers from './components/Offers';
+import Error from './components/Pages/Error';
 
-import { USCLayout } from './context/Layouts';
+// import { testOfferWall } from './mocks/mockOfferWall';
+// import OfferWall from './components/Offers/OfferWall';
+// import FourButton from './components/Offers/FourButton';
+// import FlowPage from './components/Layout/FlowPage';
 
-const RouteWrapper = ({
-  component: Component,
-  layout: Layout,
-  ...rest
-}) => (
-  <Route {...rest} render={(props) => 
-    <Layout {...props}>
-      <Component {...props} />
-    </Layout>
-  } />
-);
+// const TestWrapper = () => (
+// 	<FlowPage showCrumbs showFinalCrumbs>
+// 		<div className='flow-content offer-container'>
+// 			<OfferWall offer={testOfferWall} />
+// 		</div>
+// 	</FlowPage>
+// );
 
 const Routes = () => {
-  // let { path } = useRouteMatch();
-
-  return (
-    <Switch>
-      <Route path='/' exact layout={USCLayout} component={GetStarted} />
-      <RouteWrapper path='/verticals' layout={USCLayout} component={Verticals} />
-      <RouteWrapper path='/credit_cards' layout={USCLayout} component={CreditCards} />
-      <RouteWrapper path='/auto_loans' layout={USCLayout} component={AutoLoans} />
-      <RouteWrapper path='/auto_loans' layout={USCLayout} component={AutoLoans} />
-      <RouteWrapper path='/personal_loans' layout={USCLayout} component={PersonalLoans} />
-      <RouteWrapper path='/home_loans' layout={USCLayout} component={HomeLoans} />
-      <RouteWrapper path='/debt_types' layout={USCLayout} component={DebtTypes} />
-      <RouteWrapper path='/debt_amount' layout={USCLayout} component={DebtAmounts} />
-      <RouteWrapper path='/checking_optin' layout={USCLayout} component={CheckingOptin} />
-      <RouteWrapper path='/debt_optin' layout={USCLayout} component={DebtOptin} />
-      <RouteWrapper path='/email_optin' layout={USCLayout} component={EmailOptin} />
-      <RouteWrapper path='/offers' layout={USCLayout} component={Offers} />
-    </Switch>
-  );
+	return (
+		<Switch>
+			<Route path='/' exact component={GetStarted} />
+			{/* <Route path='/' exact component={TestWrapper} /> */}
+			<Route path='/verticals' component={Verticals} />
+			<Route path='/credit_cards' component={CreditCards} />
+			<Route path='/auto_loans' component={AutoLoans} />
+			<Route path='/auto_loans' component={AutoLoans} />
+			<Route path='/personal_loans' component={PersonalLoans} />
+			<Route path='/home_loans' component={HomeLoans} />
+			<Route path='/debt_types' component={DebtTypes} />
+			<Route path='/debt_amount' component={DebtAmounts} />
+			<Route path='/checking_optin' component={CheckingOptin} />
+			<Route path='/debt_optin' component={DebtOptin} />
+			<Route path='/email_optin' component={EmailOptin} />
+			<Route path='/select' component={SelectInterest} />
+			<Route path='/offers' component={Offers} />
+			<Route path='/error' component={Error} />
+		</Switch>
+	);
 };
 
 export default Routes;
