@@ -15,7 +15,7 @@ import { firePixelBlueKeel, firePixelBing, firePixelGoogle } from '../../../util
 
 const EmailOptin = () => {
     const { trackingState, dispatchApp, appState } = useContext(AppContext);
-    let essentials = appState.flowState.vertical && appState.flowState.loan_type;  
+    // let essentials = appState.flowState.vertical && appState.flowState.loan_type;  
     let history = useHistory();
     useTrackingLayer();
     const [disabled, setDisabledState] = useState(!appState.pch.email);
@@ -49,10 +49,10 @@ const EmailOptin = () => {
     const [ insertServiceLog ] = useMutation(INSERT_OFFER_LOG);
 
     useEffect(() => {
-        if(!essentials) {
-            history.push('/');
-            return;
-        };
+        // if(!essentials) {
+        //     history.push('/');
+        //     return;
+        // };
 
         if(data) {
             const { id, offer_page } = data.fetchEndpointOffer.body;

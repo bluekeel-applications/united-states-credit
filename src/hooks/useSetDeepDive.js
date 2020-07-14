@@ -158,6 +158,8 @@ const useSetDeepDive = (vertical, type) => {
 
 	useEffect(() => {
 		if(vertical === 'N/A' && type === 'N/A') {
+			console.log('vertical:', vertical);
+			console.log('type:', type);
 			setRedirect('/select');
 			return;
 		};

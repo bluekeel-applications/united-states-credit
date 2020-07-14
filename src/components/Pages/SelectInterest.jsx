@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { AppContext } from '../../context';
 // import { useHistory } from 'react-router-dom';
@@ -54,6 +54,12 @@ const SelectInterest = () => {
     const [insertCommonInfo] = useMutation(INSERT_COMMON_INFO);
     const [insertSearchInfo] = useMutation(INSERT_SEARCH_INFO);
     
+    useEffect(() => {
+        console.log('tracking:', trackingState);
+        console.log('appState:', appState);
+        // eslint-disable-next-line
+    }, [trackingState, appState]);
+
     const processClick = async (link) => {
         dispatchApp({ type: 'HIDE_EXPANSION' });
         window.scrollTo(0, 0);
