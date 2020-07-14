@@ -5,7 +5,7 @@ import { ENDPOINT_OFFER } from '../utils/queries';
 
 const useOfferFinder = () => {
     const [offerData, setNewOffer] = useState(null);
-	const { appState, trackingState } = useContext(AppContext);	
+	const { appState, trackingState } = useContext(AppContext);
 	const { 
         vertical, 
         loan_type,
@@ -29,14 +29,16 @@ const useOfferFinder = () => {
     const queryObj = {
         variables: {
             queryData: flows,
-            location: trackingState.location || 'N/A'
+            user: {
+                location: trackingState.location || 'N/A',
+                clickId: trackingState.hsid
+            }
         }
     }
 
 	const { loading, error, data } = useQuery(ENDPOINT_OFFER, queryObj);
 
-	useEffect(() => {		
-        console.log('query vars:', queryObj.variables);
+	useEffect(() => {
 		if (data && !offerData) {
             setNewOffer(data.fetchEndpointOffer.body);
         };

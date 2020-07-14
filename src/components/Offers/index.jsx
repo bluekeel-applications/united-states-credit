@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 import FourButton from './FourButton';
 import OneButton from './OneButton';
@@ -11,7 +11,7 @@ import FlowPage from '../Layout/FlowPage';
 // import useOfferFinder from '../../hooks/useOfferFinder';
 
 const Offers = () => {
-    let history = useHistory();
+    // let history = useHistory();
     const { appState, trackingState } = useContext(AppContext);
     const offerData = appState.offer
     // const [ offerData ] = useOfferFinder();

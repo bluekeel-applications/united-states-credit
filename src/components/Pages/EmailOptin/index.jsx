@@ -26,7 +26,6 @@ const EmailOptin = () => {
     const [ data, error, loading ] = useOfferFinder();
     const [offer, setOffer] = useState(null);
     const hasSent = useRef(false);
-    const hasLogged = useRef(false);
     const [offerPage, setOfferPage] = useState('');
 	
 	const checkValidity = (email) => {
@@ -54,22 +53,10 @@ const EmailOptin = () => {
         };
 
         if(data) {
-            const { id, offer_page } = data.fetchEndpointOffer.body;
+            const { offer_page } = data.fetchEndpointOffer.body;
             setOffer(data.fetchEndpointOffer.body);
             setOfferPage(offer_page);
             dispatchApp({ type: 'SELECTED_OFFER', payload: data.fetchEndpointOffer.body });
-            if(!hasLogged.current) {
-				console.log('offer:', data.fetchEndpointOffer.body);
-                // insertServiceLog({
-                //     variables: { 
-                //         clickData: { 
-                //             endpoint_id: id, 
-                //             clickId: Number(trackingState.hsid) 
-                //         }
-                //     }
-                // });
-                hasLogged.current = true;
-            };
         };
 
         if(validEmail && termsChecked) {

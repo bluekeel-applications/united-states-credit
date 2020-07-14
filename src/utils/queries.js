@@ -39,8 +39,8 @@ const FETCH_FEED = gql`
 `;
 // Offer
 const ENDPOINT_OFFER = gql`
-	query FetchEndpointOffer($queryData: OfferQuery, $location: String) {
-		fetchEndpointOffer(queryData: $queryData, location: $location) {
+	query FetchEndpointOffer($queryData: OfferQuery, $user: UserLog) {
+		fetchEndpointOffer(queryData: $queryData, user: $user) {
 			success
 			status
 			message
@@ -49,7 +49,6 @@ const ENDPOINT_OFFER = gql`
 				name
 				url
 				jump
-				usage
 				offer_page
 				four_button
 				restricted
@@ -57,11 +56,6 @@ const ENDPOINT_OFFER = gql`
 				offers {
 					id
 					title
-				}
-				optin {
-					type
-					title
-					optin_id
 				}
 			}
 		}
