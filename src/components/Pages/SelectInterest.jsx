@@ -1,16 +1,14 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { AppContext } from '../../context';
-// import { useHistory } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 import FlowPage from '../Layout/FlowPage';
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_USER_EMAIL, INSERT_COMMON_INFO, INSERT_SEARCH_INFO } from '../../utils/mutations';
+import { INSERT_SEARCH_INFO } from '../../utils/mutations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import CloseFlow from '../Shared/CloseFlow';
 import useTrackingLayer from '../../hooks/useTrackingLayer';
-import { firePixelBlueKeel, firePixelBing, firePixelGoogle } from '../../utils/pixels';
 
 const quickLinks1 = [
     'Free Coupons',
@@ -31,7 +29,6 @@ const quickLinks2 = [
 
 const SelectInterest = () => {
     const { trackingState, dispatchApp, appState } = useContext(AppContext);
-    // let history = useHistory();
     useTrackingLayer();
     const [ disabled, setDisabledState ] = useState(true);
     const [ emailValue ] = useState(trackingState.email ? trackingState.email : null);
@@ -48,54 +45,28 @@ const SelectInterest = () => {
         };
         setDisabledState(true);
     };
-
     
-    const [addUserEmail] = useMutation(ADD_USER_EMAIL);
-    const [insertCommonInfo] = useMutation(INSERT_COMMON_INFO);
     const [insertSearchInfo] = useMutation(INSERT_SEARCH_INFO);
-    
-    useEffect(() => {
-        console.log('tracking:', trackingState);
-        console.log('appState:', appState);
-        // eslint-disable-next-line
-    }, [trackingState, appState]);
 
     const processClick = async (link) => {
         dispatchApp({ type: 'HIDE_EXPANSION' });
         window.scrollTo(0, 0);
         setLoading(true);
         if (!hasSent.current) {
-            hasSent.current = true;
-            firePixelBlueKeel(trackingState.hsid);
-            firePixelBing(appState.flowState.vertical);
-            firePixelGoogle();
-            insertCommonInfo({
-                variables: {
-                    visitor: {
-                            'hsid': Number(trackingState.hsid),
-                            'oid': Number(trackingState.oid),
-                            'eid': trackingState.eid,
-                            'sid': Number(trackingState.sid),
-                            'uid': trackingState.uid,
-                            'ip_address': trackingState.ip_address,
-                            'email': emailValue
-                        }
-                    }
-            });
             insertSearchInfo({
                 variables: {
                     visitor: {
-                            'hsid': Number(trackingState.hsid),
-                            'oid': Number(trackingState.oid),
-                            'eid': trackingState.eid,
-                            'sid': Number(trackingState.sid),
-                            'uid': trackingState.uid,
-                            'ip_address': trackingState.ip_address,
-                            'query': interest
-                        }
+                        'hsid': Number(trackingState.hsid),
+                        'oid': Number(trackingState.oid),
+                        'eid': trackingState.eid,
+                        'sid': Number(trackingState.sid),
+                        'uid': trackingState.uid,
+                        'ip_address': trackingState.ip_address,
+                        'query': interest
                     }
+                }
             });
-            addUserEmail({ variables: { clickId: Number(trackingState.hsid), email: emailValue } });
+            hasSent.current = true;
             window.location.href = link;
         };
     };
@@ -106,7 +77,7 @@ const SelectInterest = () => {
         linkout = linkout.replace('${sid}', trackingState.sid); // eslint-disable-next-line
         linkout = linkout.replace('${eid}', trackingState.eid); // eslint-disable-next-line
         let keyword = encodeURIComponent(value); // eslint-disable-next-line
-        linkout = linkout.replace('${kwd}', keyword); // eslint-disable-next-line
+        linkout = linkout.replace('${kwd}', keyword);
         processClick(linkout);
     };
 
@@ -124,6 +95,7 @@ const SelectInterest = () => {
         // eslint-disable-next-line
         return (
             <div className='quick-link' onClick={() => handleQuickLink(text)}>
+                {/* eslint-disable-next-line */}
                 <a><u>{text}</u></a>
             </div>
         )

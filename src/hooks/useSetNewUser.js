@@ -25,7 +25,13 @@ const useSetNewUser = () => {
 			PT1: myURL.searchParams.get('pt1') || getCookie('pt1') || null,
 			PT2: myURL.searchParams.get('pt2') || getCookie('pt2') || null,
 			GCLID: myURL.searchParams.get('gclid') || getCookie('gclid') || null,
-			EMAIL: myURL.searchParams.get('email') || getCookie('email') || null
+			EMAIL: myURL.searchParams.get('email') || getCookie('email') || null,
+			FNAME: myURL.searchParams.get('fname') || getCookie('fname') || null,
+			LNAME: myURL.searchParams.get('lname') || getCookie('lname') || null,
+			ADDRESS: myURL.searchParams.get('address') || getCookie('address') || null,
+			CITY: myURL.searchParams.get('city') || getCookie('city') || null,
+			STATE: myURL.searchParams.get('state') || getCookie('state') || null,
+			ZIP: myURL.searchParams.get('zip') || getCookie('zip') || null
 		};
 		const clickId = await sendHitStreetHSID(tracking);
 		
@@ -42,7 +48,13 @@ const useSetNewUser = () => {
 			pt1: tracking.PT1,
 			pt2: tracking.PT2,
 			gclid: tracking.GCLID,
-			email: tracking.EMAIL
+			email: tracking.EMAIL,
+			fname: tracking.FNAME,
+			lname: tracking.LNAME,
+			address: tracking.ADDRESS,
+			city: tracking.CITY,
+			state: tracking.STATE,
+			zip: tracking.ZIP
 		};
 		dispatchTracking({ type: 'USER_ARRIVED', payload });
 	};

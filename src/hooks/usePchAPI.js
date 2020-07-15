@@ -10,10 +10,9 @@ const usePchAPI = () => {
 
 	const handleCompletion = (data) => {
 		if(data) {
-			console.log('pch data:', data.fetchUserInfo.message);
 			const user = data.fetchUserInfo.body;
 			dispatchApp({ type: 'FOUND_PCH_USER', payload: user });
-			dispatchTracking({ type: 'SET_PCH_USER_EMAIL', payload: user.EmailAddress });
+			dispatchTracking({ type: 'SET_PCH_USER', payload: user });
 		};
 	};
 

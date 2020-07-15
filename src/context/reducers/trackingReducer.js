@@ -1,4 +1,10 @@
-import { getCookie, checkCookie, setCookies, setCookie } from '../../utils/helpers';
+import {
+    getCookie,
+    checkCookie,
+    setCookies,
+    setPchCookies,
+    setCookie
+} from '../../utils/helpers';
 
 const initialTrackingState = {
     oid: checkCookie('oid') ? getCookie('oid') : null,
@@ -15,7 +21,13 @@ const initialTrackingState = {
     pt1: checkCookie('pt1') ? getCookie('pt1') : null,
     pt2: checkCookie('pt2') ? getCookie('pt2') : null,
     gclid: checkCookie('gclid') ? getCookie('gclid') : null,
-    email: checkCookie('email') ? getCookie('email') : null
+    email: checkCookie('email') ? getCookie('email') : null,
+    fname: checkCookie('fname') ? getCookie('fname') : null,
+    lname: checkCookie('lname') ? getCookie('lname') : null,
+    address: checkCookie('address') ? getCookie('address') : null,
+    city: checkCookie('city') ? getCookie('city') : null,
+    state: checkCookie('state') ? getCookie('state') : null,
+    zip: checkCookie('zip') ? getCookie('zip') : null,
 };
 
 const trackingStateReducer = (state, action) => {
@@ -35,18 +47,31 @@ const trackingStateReducer = (state, action) => {
                 pt2: action.payload.pt2 || initialTrackingState.pt2,
                 gclid: action.payload.gclid || initialTrackingState.gclid,
                 email: action.payload.email || initialTrackingState.email,
+                fname: action.payload.fname || initialTrackingState.fname,
+                lname: action.payload.lname || initialTrackingState.lname,
+                address: action.payload.address || initialTrackingState.address,
+                city: action.payload.city || initialTrackingState.city,
+                state: action.payload.state || initialTrackingState.state,
+                zip: action.payload.zip || initialTrackingState.zip,
             };
-            setCookies(tracking)
+            setCookies(tracking);
             return {
                 ...state,
                 ...tracking
             };
 
-        case 'SET_PCH_USER_EMAIL':
-            setCookie('email', action.payload, 3);
+        case 'SET_PCH_USER':
+            console.log('pch reducer:', action.payload);
+            setPchCookies(action.payload);
             return {
                 ...state,
-                email: action.payload
+                email: action.payload.EmailAddress || initialTrackingState.email,
+                fname: action.payload.FirstName || initialTrackingState.fname,
+                lname: action.payload.LastName || initialTrackingState.lname,
+                address: action.payload.Address1 || initialTrackingState.address,
+                city: action.payload.City || initialTrackingState.city,
+                state: action.payload.State || initialTrackingState.state,
+                zip: action.payload.ZipCode || initialTrackingState.zip
             };
 
         case 'HSID_FOUND':

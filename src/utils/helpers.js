@@ -46,6 +46,15 @@ export const setCookies = (tracking) => {
     setCookie('eid', tracking.eid, 3);
     setCookie('hsid', tracking.hsid, 3);
 };
+export const setPchCookies = (user) => {
+    setCookie('email', user.EmailAddress, 3);
+    setCookie('fname', user.FirstName, 3);
+    setCookie('lname', user.LastName, 3);
+    setCookie('address', user.Address1, 3);
+    setCookie('city', user.City, 3);
+    setCookie('state', user.State, 3);
+    setCookie('zip', user.ZipCode, 3);
+};
 // Local Storage Tools
 export const getCachedObject = (key) => {
     const item = localStorage.getItem(key);

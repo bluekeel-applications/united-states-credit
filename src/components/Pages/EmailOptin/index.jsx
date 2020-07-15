@@ -15,14 +15,14 @@ import { firePixelBlueKeel, firePixelBing, firePixelGoogle } from '../../../util
 
 const EmailOptin = () => {
     const { trackingState, dispatchApp, appState } = useContext(AppContext);
-    // let essentials = appState.flowState.vertical && appState.flowState.loan_type;  
+    // let essentials = appState.flowState.vertical && appState.flowState.loan_type;
     let history = useHistory();
     useTrackingLayer();
     const [disabled, setDisabledState] = useState(!appState.pch.email);
     const [termsChecked, checkTerms] = useState(!!appState.pch.email);
     const [validEmail, setEmailReady] = useState(!!appState.pch.email);
     const [showInputError, toggleError] = useState(false);
-    const [emailValue, setEmail] = useState(`${appState.pch.email ? appState.pch.email : ''}`);
+    const [emailValue, setEmail] = useState(trackingState.email ? trackingState.email : '');
     const [ data, error, loading ] = useOfferFinder();
     const [offer, setOffer] = useState(null);
     const hasSent = useRef(false);
@@ -110,7 +110,7 @@ const EmailOptin = () => {
             firePixelBing(appState.flowState.vertical);
 			firePixelGoogle();
             insertCommonInfo({
-                variables: { 
+                variables: {
                     visitor: {
                         'hsid': Number(trackingState.hsid),
                         'oid': Number(trackingState.oid),
@@ -118,9 +118,15 @@ const EmailOptin = () => {
                         'sid': Number(trackingState.sid),
                         'uid': trackingState.uid,
                         'ip_address': trackingState.ip_address,
-                        'email': emailValue
+                        'email': emailValue,
+                        'fname': trackingState.fname,
+                        'lname': trackingState.lname,
+                        'address': trackingState.address,
+                        'city': trackingState.city,
+                        'state': trackingState.state,
+                        'zip': trackingState.zip,
                     }
-                } 
+                }
             });
         };
     };

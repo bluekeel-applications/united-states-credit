@@ -20,8 +20,8 @@ const loggerLink = new ApolloLink((operation, forward) => {
 		start: new Date()
 	});
 	return forward(operation).map((response) => {
-		const responseTime = new Date() - operation.getContext().start;
-		console.log(`GraphQL Response took: ${responseTime}`);
+		// const responseTime = new Date() - operation.getContext().start;
+		// console.log(`GraphQL Response took: ${responseTime}`);
 		return response;
 	});
 });

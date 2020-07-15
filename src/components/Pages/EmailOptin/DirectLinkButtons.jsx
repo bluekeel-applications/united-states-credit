@@ -7,17 +7,26 @@ import { useHistory } from 'react-router-dom';
 
 const DirectLinkButtons = ({ disabledState, termsChecked, toggleError, offer, sendEmail, processClick }) => {
 	let history = useHistory();
-	const { trackingState, dispatchApp, appState } = useContext(AppContext);
+	const { trackingState, dispatchApp } = useContext(AppContext);
+    const pchUser = {
+        email: trackingState.email,
+        firstname: trackingState.fname,
+        lastname: trackingState.lname,
+        address: trackingState.address,
+        city: trackingState.city,
+        state: trackingState.state,
+        zipcode: trackingState.zip
+    };
 
 	const handleDirectLink = () => {
-        const newWindowLink = buildFullLink(offer.url, trackingState.sid, trackingState.eid, trackingState.hsid, appState.pch);
+        const newWindowLink = buildFullLink(offer.url, trackingState.sid, trackingState.eid, trackingState.hsid, pchUser);
         if(!disabledState) {
 			window.open(newWindowLink);
 			dispatchApp({ type: 'EMAIL_OPT_IN' });
             sendEmail();
             processClick();
             if(offer && offer.jump !== 'N/A') {
-                window.location.href = buildFullLink(offer.jump, trackingState.sid, trackingState.eid, trackingState.hsid, appState.pch);
+                window.location.href = buildFullLink(offer.jump, trackingState.sid, trackingState.eid, trackingState.hsid, pchUser);
                 return;
             };
             history.push('/verticals');
@@ -28,11 +37,11 @@ const DirectLinkButtons = ({ disabledState, termsChecked, toggleError, offer, se
 
 	const handleOptOutDirectLink = () => {
         dispatchApp({ type: 'EMAIL_OPT_OUT' });
-        const newWindowLink = buildFullLink(offer.url, trackingState.sid, trackingState.eid, trackingState.hsid, appState.pch);
+        const newWindowLink = buildFullLink(offer.url, trackingState.sid, trackingState.eid, trackingState.hsid, pchUser);
         window.open(newWindowLink);
         processClick();
         if(offer && offer.jump !== 'N/A') {
-            window.location.href = buildFullLink(offer.jump, trackingState.sid, trackingState.eid, trackingState.hsid, appState.pch);
+            window.location.href = buildFullLink(offer.jump, trackingState.sid, trackingState.eid, trackingState.hsid, pchUser);
             return;
         };
         history.push('/verticals');
