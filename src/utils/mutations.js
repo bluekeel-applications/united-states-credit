@@ -59,21 +59,10 @@ const INSERT_SEARCH_INFO = gql`
 	}
 `;
 
-const INSERT_OFFER_LOG = gql`
-	mutation OfferServed($clickData: ClickData) {
-		offerServed(clickData: $clickData) {
-			success
-			status
-			message
-		}
-	}
-`;
-
 export {
 	ADD_NEW_USER,
 	ADD_USER_FLOW,
 	ADD_USER_EMAIL,
 	INSERT_COMMON_INFO,
-	INSERT_SEARCH_INFO,
-	INSERT_OFFER_LOG
+	INSERT_SEARCH_INFO
 };
