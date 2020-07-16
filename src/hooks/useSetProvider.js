@@ -9,7 +9,7 @@ const useSetProvider = () => {
         if(componentIsMounted.current) {
             const locationParts = window.location.hostname.split('.');
             const subDomain = locationParts.shift();
-            if(subDomain === 'pch') {
+            if (subDomain === 'pch' || subDomain === 'staging') {
                 dispatchApp({ type: 'SET_PROVIDER', payload: 'pch' });
                 // dispatchApp({ type: 'SET_PCH_CREDS', payload: { pat: myURL.searchParams.get('pt1'), gmt: myURL.searchParams.get('pt2')}});
                 dispatchApp({ type: 'SHOW_EXPANSION' });

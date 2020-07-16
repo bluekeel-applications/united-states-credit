@@ -4,15 +4,15 @@ import { useQuery } from '@apollo/react-hooks';
 import { PCH_USER } from '../utils/queries';
 
 const usePchAPI = () => {
-	const { dispatchApp, trackingState } = useContext(AppContext);
+	const { dispatchApp, dispatchTracking, trackingState } = useContext(AppContext);
 	const [ userPAT, setUserPAT ] = useState(null);
 	const [ userGMT, setUserGMT ] = useState(null);
 
 	const handleCompletion = (data) => {
 		if(data) {
-			console.log('pch data:', data.fetchUserInfo.message);
 			const user = data.fetchUserInfo.body;
 			dispatchApp({ type: 'FOUND_PCH_USER', payload: user });
+			dispatchTracking({ type: 'SET_PCH_USER', payload: user });
 		};
 	};
 

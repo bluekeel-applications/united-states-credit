@@ -51,7 +51,7 @@ const INSERT_COMMON_INFO = gql`
 
 const INSERT_SEARCH_INFO = gql`
 	mutation InsertSearchInfo($visitor: CommonInfo) {
-		insertSearchInfo(visitor: $visitor) {
+		insertSearchInfo(visitor: $visitor){
 			success
 			status
 			message
