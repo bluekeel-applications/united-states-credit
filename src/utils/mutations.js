@@ -59,10 +59,21 @@ const INSERT_SEARCH_INFO = gql`
 	}
 `;
 
+const ADD_SERVICE_LOG = gql`
+	mutation AddServiceLog($service: ServiceLog) {
+		addServiceLog(service: $service) {
+			success
+			status
+			message
+		}
+	}
+`;
+
 export {
 	ADD_NEW_USER,
 	ADD_USER_FLOW,
 	ADD_USER_EMAIL,
 	INSERT_COMMON_INFO,
-	INSERT_SEARCH_INFO
+	INSERT_SEARCH_INFO,
+	ADD_SERVICE_LOG
 };

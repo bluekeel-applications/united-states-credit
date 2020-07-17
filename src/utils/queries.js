@@ -57,6 +57,8 @@ const ENDPOINT_OFFER = gql`
 					id
 					title
 				}
+				program_id
+				group_id
 			}
 		}
 	}

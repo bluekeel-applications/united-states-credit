@@ -97,7 +97,7 @@ const SelectInterest = () => {
         linkout = linkout.replace('${sid}', trackingState.sid); // eslint-disable-next-line
         linkout = linkout.replace('${eid}', trackingState.eid); // eslint-disable-next-line
         let keyword = encodeURIComponent(value); // eslint-disable-next-line
-        linkout = linkout.replace('${kwd}', keyword);
+        linkout = linkout.replace('${kwd}', keyword); // eslint-disable-next-line
         linkout = linkout.replace('${hsid}', trackingState.hsid);
         processClick(linkout, value);
     };
@@ -108,8 +108,7 @@ const SelectInterest = () => {
         linkout = linkout.replace('${sid}', trackingState.sid); // eslint-disable-next-line
         linkout = linkout.replace('${eid}', trackingState.eid); // eslint-disable-next-line
         let keyword = encodeURIComponent(interest); // eslint-disable-next-line
-        linkout = linkout.replace('${kwd}', keyword);
-         // eslint-disable-next-line
+        linkout = linkout.replace('${kwd}', keyword); // eslint-disable-next-line
         linkout = linkout.replace('${hsid}', trackingState.hsid);
         processClick(linkout, interest);
     };
