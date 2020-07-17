@@ -11,11 +11,10 @@ import useOfferFinder from '../../../hooks/useOfferFinder';
 import useTrackingLayer from '../../../hooks/useTrackingLayer';
 import MoveToOfferButtons from './MoveToOfferButtons';
 import DirectLinkButtons from './DirectLinkButtons';
-import { firePixelBlueKeel, firePixelBing, firePixelGoogle } from '../../../utils/pixels';
+import { firePixelBlueKeel } from '../../../utils/pixels';
 
 const EmailOptin = () => {
     const { trackingState, dispatchApp, appState } = useContext(AppContext);
-    // let essentials = appState.flowState.vertical && appState.flowState.loan_type;
     let history = useHistory();
     useTrackingLayer();
     const [disabled, setDisabledState] = useState(!appState.pch.email);
@@ -47,10 +46,6 @@ const EmailOptin = () => {
     const [ insertCommonInfo ] = useMutation(INSERT_COMMON_INFO);
 
     useEffect(() => {
-        // if(!essentials) {
-        //     history.push('/');
-        //     return;
-        // };
 
         if(data) {
             const { offer_page } = data.fetchEndpointOffer.body;
@@ -93,8 +88,8 @@ const EmailOptin = () => {
         if(!hasSent.current) {
             hasSent.current = true;
             firePixelBlueKeel(trackingState.hsid);
-            firePixelBing(appState.flowState.vertical);
-			firePixelGoogle();
+            // firePixelBing(appState.flowState.vertical);
+			// firePixelGoogle();
             insertCommonInfo({
                 variables: {
                     visitor: {
