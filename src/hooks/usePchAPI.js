@@ -8,11 +8,15 @@ const usePchAPI = () => {
 	const [ userPAT, setUserPAT ] = useState(null);
 	const [ userGMT, setUserGMT ] = useState(null);
 
-	const handleCompletion = (data) => {
+	const handleCompletion = (data, error) => {
 		if(data) {
+			console.log('Fetched PCH user data:', data.fetchUserInfo.message);
 			const user = data.fetchUserInfo.body;
 			dispatchApp({ type: 'FOUND_PCH_USER', payload: user });
 			dispatchTracking({ type: 'SET_PCH_USER', payload: user });
+		};
+		if(error) {
+			console.error('ERROR fetching PCH user:', error);
 		};
 	};
 
