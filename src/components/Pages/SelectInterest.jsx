@@ -123,7 +123,6 @@ const SelectInterest = () => {
     const QuickLink = ({text}) => {
         return (
             <div className='quick-link' onClick={(e) => handleQuickLink(e, text)}>
-                {/* eslint-disable-next-line */}
                 <u>{text}</u>
             </div>
         )
