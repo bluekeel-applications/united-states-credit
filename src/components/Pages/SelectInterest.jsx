@@ -4,7 +4,12 @@ import { AppContext } from '../../context';
 import Loading from '../Shared/Loading';
 import FlowPage from '../Layout/FlowPage';
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_USER_EMAIL, INSERT_COMMON_INFO, INSERT_SEARCH_INFO } from '../../utils/mutations';
+import { 
+    ADD_USER_EMAIL, 
+    INSERT_COMMON_INFO, 
+    INSERT_SEARCH_INFO,
+    ADD_QUERY_INSIGHT
+} from '../../utils/mutations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import CloseFlow from '../Shared/CloseFlow';
@@ -50,6 +55,7 @@ const SelectInterest = () => {
     const [addUserEmail] = useMutation(ADD_USER_EMAIL);
     const [insertSearchInfo] = useMutation(INSERT_SEARCH_INFO);
     const [insertCommonInfo] = useMutation(INSERT_COMMON_INFO);
+    const [addQueryInsight] = useMutation(ADD_QUERY_INSIGHT);
 
     const processClick = async (link, query) => {
         setLoading(true);
@@ -83,8 +89,8 @@ const SelectInterest = () => {
             firePixelBlueKeel(trackingState.hsid);
             await insertCommonInfo({ variables: { visitor: commonInsert } });
             await insertSearchInfo({ variables: { visitor: searchInsert } });
+            await addQueryInsight({ variables: { clickId: Number(trackingState.hsid), query } });
             await addUserEmail({ variables: { clickId: Number(trackingState.hsid), email: emailValue } });
-            // Common info may be an overlap if 
             hasSent.current = true;
             window.location.href = link;
         };
