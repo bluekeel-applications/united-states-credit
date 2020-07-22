@@ -69,10 +69,21 @@ const INSERT_OFFER_LOG = gql`
 	}
 `;
 
+const ADD_QUERY_INSIGHT = gql`
+	mutation AddUserSearchQuery($clickId: Int, $query: String) {
+		addUserSearchQuery(clickId: $clickId, query: $query) {
+			success
+			status
+			message
+		}
+	}
+`;
+
 export {
 	ADD_NEW_USER,
 	ADD_USER_FLOW,
 	ADD_USER_EMAIL,
+	ADD_QUERY_INSIGHT,
 	INSERT_COMMON_INFO,
 	INSERT_SEARCH_INFO,
 	INSERT_OFFER_LOG
