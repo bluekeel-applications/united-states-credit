@@ -71,9 +71,9 @@ const GlobalApp = () => {
 			// Test
 			// uri: 'https://cypmxq177b.execute-api.us-east-1.amazonaws.com/test/graphql'
 			// Services
-			// uri: 'https://uqwaw9keg3.execute-api.us-east-1.amazonaws.com/services/graphql'
+			uri: 'https://uqwaw9keg3.execute-api.us-east-1.amazonaws.com/services/graphql'
 			// Local
-			uri: 'http://localhost:4000/graphql'
+			// uri: 'http://localhost:4000/graphql'
 		})
 	]);
 

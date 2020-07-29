@@ -1,77 +1,94 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context';
-// import { useHistory } from 'react-router-dom';
 import Loading from '../Shared/Loading';
 import FourButton from './FourButton';
 import OneButton from './OneButton';
 import MNet from './MNet';
 import OfferWall from './OfferWall';
 import OptinOffer from './OptinOffer';
+import UserSelection from './UserSelection';
 import FlowPage from '../Layout/FlowPage';
-// import useOfferFinder from '../../hooks/useOfferFinder';
 
 const Offers = () => {
-    // let history = useHistory();
     const { appState, trackingState } = useContext(AppContext);
-    const offerData = appState.offer
-    // const [ offerData ] = useOfferFinder();
-    const [ selectedOffer, setOffer ] = useState(null);
-    // let isEnd = appState.flowState.vertical && appState.flowState.loan_type;
+    const [ selectedOffer ] = useState(appState.offer);
         
     useEffect(() => {
-        // if(!isEnd) {
-        //     history.push('/');
-        //     return null;
-        // };
-
-        if(offerData) {
-            setOffer(offerData);
+        if (!selectedOffer) {
+            window.location.pathname = '/';
+            return;
         };
         // eslint-disable-next-line
-    }, [offerData]);
+    }, []);
 
     const ShowOffers = () => {
         switch(selectedOffer.offer_page) {
             case 'mNet':
                 return (
-                    <MNet page={selectedOffer.url} />
+                    <FlowPage showCrumbs showFinalCrumbs>
+                        <div className='flow-content offer-container'>
+                            <MNet page={selectedOffer.url} />
+                        </div>
+                    </FlowPage>
                 )
             case 'four_button':
                 return (
-                    <FourButton offer={selectedOffer} />
+                    <FlowPage showCrumbs showFinalCrumbs>
+                        <div className='flow-content offer-container'>
+                            <FourButton offer={selectedOffer} />
+                        </div>
+                    </FlowPage>
                 )
             case 'one_button':
                 return (
-                    <OneButton offer={selectedOffer} />
+                    <FlowPage showCrumbs showFinalCrumbs>
+                        <div className='flow-content offer-container'>
+                            <OneButton offer={selectedOffer} />
+                        </div>
+                    </FlowPage>
                 )
             case 'offer_wall':
                 return (
-                    <OfferWall offer={selectedOffer} />
+                    <FlowPage showCrumbs showFinalCrumbs>
+                        <div className='flow-content offer-container'>
+                            <OfferWall offer={selectedOffer} />
+                        </div>
+                    </FlowPage>
                 )
             case 'optin':
                 return (
-                    <OptinOffer 
-                        optin_id={selectedOffer.optin.optin_id} 
-                        jump={selectedOffer.jump} 
-                        sid={trackingState.sid} 
-                        eid={trackingState.eid}
-                        hsid={trackingState.hsid}
-                    />
+                    <FlowPage showCrumbs showFinalCrumbs>
+                        <div className='flow-content offer-container'>
+                            <OptinOffer 
+                                optin_id={selectedOffer.optin.optin_id} 
+                                jump={selectedOffer.jump} 
+                                sid={trackingState.sid} 
+                                eid={trackingState.eid}
+                                hsid={trackingState.hsid}
+                            />
+                        </div>
+                    </FlowPage>
+                )
+            case 'selection':
+                return (
+                    <FlowPage>
+                        <div className='flow-content offer-container'>
+                            <UserSelection />
+                        </div>
+                    </FlowPage>
                 )
             default:
                 return (
-                    <Loading />
+                    <FlowPage showCrumbs showFinalCrumbs>
+                        <div className='flow-content offer-container'>
+                            <Loading />
+                        </div>
+                    </FlowPage>
                 )
         }
     };
 
-    return (
-        <FlowPage showCrumbs showFinalCrumbs>
-            <div className='flow-content offer-container'>
-                {selectedOffer && (<ShowOffers data={offerData} />)}
-            </div>
-        </FlowPage>
-    )
+    return selectedOffer ? (<ShowOffers data={selectedOffer} />) : null;
 };
 
 export default Offers;

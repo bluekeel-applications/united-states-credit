@@ -57,6 +57,7 @@ const ENDPOINT_OFFER = gql`
 					id
 					title
 				}
+				quick_links
 				program_id
 				group_id
 			}
@@ -127,10 +128,27 @@ const PCH_USER = gql`
 	}
 `;
 
+const QUICK_LINKS = gql `
+	query FetchQuickLinks($quick_link_ids: [String], $url: String, $jump: String) {
+		fetchQuickLinks(quick_link_ids: $quick_link_ids, url: $url, jump: $jump) {
+			success
+			status
+			message
+			body {
+				id
+				text
+				url
+				jump
+			}
+		}
+	}
+`;
+
 export {
 	FETCH_FEED,
 	ENDPOINT_OFFER,
 	OPTIN_OFFER,
 	LIST_OFFER,
-	PCH_USER
+	PCH_USER,
+	QUICK_LINKS
 };

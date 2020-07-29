@@ -79,6 +79,15 @@ export const flattenLongString = (string) => {
     return stringCleaned.toLowerCase();
 };
 
+export const capitalizeValue = (value) => {
+    let text = value;
+    text = text.toLowerCase()
+        .split('_')
+        .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+        .join(' ');
+    return text;
+};
+
 // Build the full like for an offer
 export const buildFullLink = (link, sid, eid, hsid, pch) => {
     let linkout = link // eslint-disable-next-line

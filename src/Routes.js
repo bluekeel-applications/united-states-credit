@@ -14,16 +14,17 @@ import EmailOptin from './components/Pages/EmailOptin';
 import SelectInterest from './components/Pages/SelectInterest';
 import Offers from './components/Offers';
 import Error from './components/Pages/Error';
-
+// import UserSelection from './components/Offers/UserSelection';
 // import { testOfferWall } from './mocks/mockOfferWall';
 // import OfferWall from './components/Offers/OfferWall';
 // import FourButton from './components/Offers/FourButton';
 // import FlowPage from './components/Layout/FlowPage';
 
 // const TestWrapper = () => (
-// 	<FlowPage showCrumbs showFinalCrumbs>
+// 	// <FlowPage showCrumbs showFinalCrumbs>
+// 	<FlowPage>
 // 		<div className='flow-content offer-container'>
-// 			<OfferWall offer={testOfferWall} />
+// 			<UserSelection />
 // 		</div>
 // 	</FlowPage>
 // );
