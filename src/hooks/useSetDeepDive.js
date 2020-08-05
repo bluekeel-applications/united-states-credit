@@ -17,7 +17,7 @@ const useSetDeepDive = (vertical, type) => {
 				setRedirect('/email_optin');
 				return;
 			case 'reward':
-				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: type, crumb: 'Reward' } });
+				dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: 'rewards', crumb: 'Reward' } });
 				setRedirect('/email_optin');
 				return;
 			case 'student':
