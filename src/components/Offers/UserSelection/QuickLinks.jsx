@@ -47,8 +47,7 @@ const QuickLinks = ({ processClick, setInterest }) => {
     const quickLinks = data.fetchQuickLinks.body;
 
     return (
-        <div className='selection-links-container'>
-            <div className='selection-links-title'>Quick Links</div>
+        <div className={`selection-links-container ${quickLinks.length > 6 && 'scroll-box'}`}>
             <div className='selection-links'>
                 {quickLinks.map((link, idx) => (
                     <SelectionLink key={`${idx}`} link={link} color={pickButtonColor(idx)} />)

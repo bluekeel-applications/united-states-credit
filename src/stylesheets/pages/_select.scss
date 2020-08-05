@@ -46,6 +46,9 @@
 .selection-links-container {
     display: flex;
     flex-direction: column;
+}
+
+.scroll-box {
     max-height: 450px;
     overflow-y: scroll;
 }
@@ -62,4 +65,9 @@
     cursor: pointer;
     background-color: rgba(0,0,0,0.15) !important;
     color: black !important;
+}
+
+.MuiFormControl-fullWidth.search-input {
+    width: 80%;
+    margin-top: 20px;
 }

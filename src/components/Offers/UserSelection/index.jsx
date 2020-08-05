@@ -103,19 +103,20 @@ const UserSelection = () => {
             <div className='email-optin-card'>
                 <div className='select-text-title'>What are you interested in?</div>
                 <form className='email-form-container' onSubmit={handleSubmit}>
+                    <QuickLinks processClick={processClick} setInterest={setInterest}/>
                     <TextField
-                        id='email-optin-input'
+                        id='search-query-input'
                         label='Search'
                         variant='outlined'
                         InputProps={{
-                            autoFocus: true,
+                            autoFocus: false,
                             onChange: handleInputChange,
                             value: interest
                         }}
-                        inputProps={{ 'aria-label': 'email-optin-input' }}
+                        inputProps={{ 'aria-label': 'search-query-input' }}
                         fullWidth
+                        className='search-input'
                     />
-                    <QuickLinks processClick={processClick} setInterest={setInterest}/>
                     <EmailTerms email={emailValue} />
                     <div className='email-button-group'>
                         <Button className={`email_submit-button ${disabled && 'disabled'}`} variant='contained' color='primary' type='submit' disabled={disabled}>

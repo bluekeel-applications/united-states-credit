@@ -30,7 +30,7 @@ const quickLinks2 = [
     'Work From Home',
     'All-Inclusive Vacations',
     'Luxury SUVs',
-    'Diet & Nurition'
+    'Diet & Nutrition'
 ];
 
 const SelectInterest = () => {
