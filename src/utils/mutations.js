@@ -39,6 +39,19 @@ const ADD_USER_EMAIL = gql`
 	}
 `;
 
+const ADD_USER_PCH = gql`
+	mutation AddUserPCH($clickId: Int, $pch: AddPCHData) {
+		addUserPCH(clickId: $clickId, pch: $pch) {
+			success
+			status
+			message
+			body {
+				id
+			}
+		}
+	}
+`;
+
 const INSERT_COMMON_INFO = gql`
 	mutation InsertCommonInfo($visitor: CommonInfo) {
 		insertCommonInfo(visitor: $visitor){
@@ -83,6 +96,7 @@ export {
 	ADD_NEW_USER,
 	ADD_USER_FLOW,
 	ADD_USER_EMAIL,
+	ADD_USER_PCH,
 	ADD_QUERY_INSIGHT,
 	INSERT_COMMON_INFO,
 	INSERT_SEARCH_INFO,
