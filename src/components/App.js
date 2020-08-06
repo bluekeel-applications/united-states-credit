@@ -22,8 +22,7 @@ const App = () => {
 	const { appState } = useContext(AppContext);
 
 	useEffect(() => {
-		const { vertical, loan_type } = appState.flowState;
-		if(vertical || loan_type) {
+		if(redirect) {
 			history.push(redirect);
 			return;
 		};

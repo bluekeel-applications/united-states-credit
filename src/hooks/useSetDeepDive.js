@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../context';
 
 const useSetDeepDive = (vertical, type) => {
-	const [redirect, setRedirect] = useState(null);
+	const [ redirect, setRedirect ] = useState(null);
 	const { dispatchApp } = useContext(AppContext);
 	
     const handleTypeChoice = () => {
@@ -150,6 +150,11 @@ const useSetDeepDive = (vertical, type) => {
 				};
 				setRedirect('/home_loans');
 				return;
+			
+			case 'direct':
+				dispatchApp({ type: 'VERTICAL_PICKED', payload: { value:vertical, crumb: 'Select Interest'}})				
+				setRedirect('/direct');
+				return;
 
 			default:
 				return;
@@ -158,11 +163,13 @@ const useSetDeepDive = (vertical, type) => {
 
 	useEffect(() => {
 		if(vertical === 'N/A' && type === 'N/A') {
-			console.log('vertical:', vertical);
-			console.log('type:', type);
-			setRedirect('/select');
-			return;
+			const locationParts = window.location.hostname.split('.');
+			const subDomain = locationParts.shift();
+			if(subDomain === 'pch') {
+				setRedirect('/select');
+			}
 		};
+
 		checkForDeepDive();
 		// eslint-disable-next-line
 	}, []);

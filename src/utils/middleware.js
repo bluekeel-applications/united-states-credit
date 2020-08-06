@@ -18,6 +18,10 @@ const buildHitStreetLink = (payload) => {
 
 export const sendHitStreetHSID = async(payload) => {
     let fetchLink = buildHitStreetLink(payload);
+    if (payload.HSID !== 0) {
+        console.log('HSID found locally:', payload.HSID);
+        return payload.HSID;
+    };
     try{
         const res = await axios({
             method: 'get',
@@ -34,6 +38,7 @@ export const sendHitStreetHSID = async(payload) => {
         };
         if(typeof res.data === 'number') {
             setCookie('hsid', res.data, 3);
+            console.log('HSID fetched from HitStreet:', res.data);
             return res.data;
         };
         setCookie('hsid', payload.HSID, 3);

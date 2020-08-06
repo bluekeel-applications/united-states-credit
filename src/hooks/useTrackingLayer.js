@@ -8,10 +8,8 @@ const useTrackingLayer = () => {
 	const hasFired = useRef(false);
 	const { appState, trackingState } = useContext(AppContext);
 	const [addUserFlow] = useMutation(ADD_USER_FLOW);
-	let isEnd = appState.flowState.vertical && appState.flowState.loan_type;
 
 	useEffect(() => {
-		if(!isEnd) return;
 		if(componentIsMounted.current && !hasFired.current) {
             addUserFlow({
 				variables: { 

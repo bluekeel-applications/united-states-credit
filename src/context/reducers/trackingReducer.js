@@ -21,13 +21,13 @@ const initialTrackingState = {
     pt1: checkCookie('pt1') ? getCookie('pt1') : null,
     pt2: checkCookie('pt2') ? getCookie('pt2') : null,
     gclid: checkCookie('gclid') ? getCookie('gclid') : null,
-    email: checkCookie('email') ? getCookie('email') : null,
-    fname: checkCookie('fname') ? getCookie('fname') : null,
-    lname: checkCookie('lname') ? getCookie('lname') : null,
-    address: checkCookie('address') ? getCookie('address') : null,
-    city: checkCookie('city') ? getCookie('city') : null,
-    state: checkCookie('state') ? getCookie('state') : null,
-    zip: checkCookie('zip') ? getCookie('zip') : null,
+    email: checkCookie('email') ? getCookie('email') : '',
+    fname: checkCookie('fname') ? getCookie('fname') : '',
+    lname: checkCookie('lname') ? getCookie('lname') : '',
+    address: checkCookie('address') ? getCookie('address') : '',
+    city: checkCookie('city') ? getCookie('city') : '',
+    state: checkCookie('state') ? getCookie('state') : '',
+    zip: checkCookie('zip') ? getCookie('zip') : '',
 };
 
 const trackingStateReducer = (state, action) => {

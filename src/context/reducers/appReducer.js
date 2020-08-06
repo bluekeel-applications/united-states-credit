@@ -17,12 +17,12 @@ const initialAppState = {
     showExpansion: false,
     showStory: false,
     flowState: {
-        vertical: null,
-        loan_type: null,
+        vertical: 'direct',
+        loan_type: 'N/A',
         debt_type: 'N/A',
         debt_amount: 'N/A',
-        checking_optin: null,
-        debt_optin: null,
+        checking_optin: false,
+        debt_optin: false,
         email_optin: null
     },
     breadcrumbs: {

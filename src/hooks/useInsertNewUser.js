@@ -29,8 +29,7 @@ const useInsertNewUser = () => {
 	};
 
 	useEffect(() => {
-		if (ip_address && trackingState.hsid) {
-			console.log('inserting new user...', trackingState.hsid);
+		if (ip_address && trackingState.hsid !== 0) {
 			createNewUser(trackingState.hsid, trackingState);
 		};
 		if(geoError) {

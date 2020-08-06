@@ -47,11 +47,17 @@ const EmailOptin = () => {
 
     useEffect(() => {
 
-        if(data) {
+        if(data && !offer) {
             const { offer_page } = data.fetchEndpointOffer.body;
             setOffer(data.fetchEndpointOffer.body);
             setOfferPage(offer_page);
             dispatchApp({ type: 'SELECTED_OFFER', payload: data.fetchEndpointOffer.body });
+            return;
+        };
+
+        if(appState.flowState.vertical === 'direct' && appState.offer) {
+            history.push('/offers');
+            return;
         };
 
         if(validEmail && termsChecked) {
@@ -61,7 +67,7 @@ const EmailOptin = () => {
 
         return () => setDisabledState(true);
         // eslint-disable-next-line
-    }, [validEmail, termsChecked, data]);
+    }, [validEmail, termsChecked, data, appState]);
 
     if(error) {
         console.log('error:', error);
