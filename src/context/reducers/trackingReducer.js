@@ -79,7 +79,14 @@ const trackingStateReducer = (state, action) => {
             return {
                 ...state,
                 hsid: action.payload
-                };
+            };
+
+        case 'SET_EMAIL':
+            setCookie('email', action.payload, 3);
+            return {
+                ...state,
+                email: action.payload
+            };
             
         case 'LOCATION_FOUND':
             setCookie('state', action.payload.state, 3);

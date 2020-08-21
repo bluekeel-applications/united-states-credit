@@ -13,7 +13,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import CloseFlow from '../Shared/CloseFlow';
-import useTrackingLayer from '../../hooks/useTrackingLayer';
 import { firePixelBlueKeel } from '../../utils/pixels';
 
 const quickLinks1 = [
@@ -35,7 +34,6 @@ const quickLinks2 = [
 
 const SelectInterest = () => {
     const { trackingState, appState } = useContext(AppContext);
-    useTrackingLayer();
     const [ disabled, setDisabledState ] = useState(true);
     const [ emailValue ] = useState(trackingState.email ? trackingState.email : null);
     const [ interest, setInterest ] = useState('');

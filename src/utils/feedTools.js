@@ -4,18 +4,16 @@ const setNewSizeParams = (url, size) => {
     const query = parser.search.substring(1);
     const base = parser.href.split('?')[0];
     let vars = query.split('&');
-    let newSrc;
+
     switch(size) {
         case 'sm':
             vars[0] = 'fit=250%2C150';
             let newTailS = vars[0] + '&' + vars[1];
-            newSrc = base + '?' + newTailS;
-	        return newSrc;
+            return base + '?' + newTailS;
         case 'lg':
             vars[0] = 'fit=450%2C350';
             let newTailL = vars[0] + '&' + vars[1];
-            newSrc = base + '?' + newTailL;
-	        return newSrc;
+            return base + '?' + newTailL;
         default:
             return url;
     }

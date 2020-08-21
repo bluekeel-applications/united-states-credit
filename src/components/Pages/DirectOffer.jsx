@@ -1,22 +1,25 @@
-import React, { useContext, useEffect } from 'react';
-import { AppContext } from '../../context';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../Layout/FlowPage';
 import Loading from '../Shared/Loading';
 import useOfferFinder from '../../hooks/useOfferFinder';
 
 const DirectOffer = () => {
-    const { dispatchApp } = useContext(AppContext);
     let history = useHistory();
     const [data, error, loading] = useOfferFinder();
 
     useEffect(() => {
-        if (data) {
-            dispatchApp({ type: 'SELECTED_OFFER', payload: data.fetchEndpointOffer.body });
+        if (data && data.fetchEndpointOffer.success) {
+            console.log('Direct offer found and set in context.');
             history.push('/offers');
+            return;
         };
 
-        return;
+        if (data && !data.fetchEndpointOffer.success) {
+            console.log('Offer not found...lets start over!');
+            history.push('/');
+            return;
+        };
         // eslint-disable-next-line
     }, [data]);
 

@@ -3,42 +3,55 @@ import { AppContext } from '../../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
+import { useMutation } from '@apollo/react-hooks';
+import { ADD_USER_EMAIL } from '../../../utils/mutations';
 
-const MoveToOfferButtons = ({ disabledState, termsChecked, toggleError, sendEmail, processClick }) => {
-	let history = useHistory();
-	const { dispatchApp } = useContext(AppContext);
+const MoveToOfferButtons = ({ disabledState, email }) => {
+    let history = useHistory();
+    const { trackingState, dispatchTracking, dispatchApp } = useContext(AppContext);
+    const [ addUserEmail ] = useMutation(ADD_USER_EMAIL);
 
-	const handleEmailSubmit = async() => {
-        if(!disabledState) {
-            sendEmail();
-            processClick();
-            history.push('/offers');
-            return;
-        };
-        toggleError(true);
+    const sendEmail = async() => {
+        dispatchTracking({ type: 'SET_EMAIL', payload: email });
+        dispatchApp({ type: 'SET_EMAIL', payload: email });
+        addUserEmail({
+            variables: {
+                clickId: Number(trackingState.hsid),
+                email: email
+            }
+        });
     };
 
-	const handleOptOut = async() => {
-        dispatchApp({ type: 'EMAIL_OPT_OUT' });
-        processClick();
+    const handleSubmitClick = () => {
+        sendEmail();
         history.push('/offers');
         return;
     };
-	
-	return (
-		<div className='email-button-group'>
-            <Button className={`email_submit-button ${!termsChecked && 'disabled'}`} variant='contained' color='primary' onClick={handleEmailSubmit} disabled={disabledState}>
+
+    const handleOptOutClick = () => {
+        history.push('/offers');
+        return;
+    };
+
+    return (
+        <div className='email-button-group'>
+            <Button
+                className='email_submit-button'
+                variant='contained' color='primary'
+                onClick={handleSubmitClick}
+                disabled={disabledState}
+            >
                 <span className='button-text' >Next</span>
                 <FontAwesomeIcon
                     icon={['fal', 'angle-double-right']}
                     className='next-button-icon'
                 />
             </Button>
-            <Button className='no-thanks' onClick={handleOptOut}>
+            <Button className='no-thanks' onClick={handleOptOutClick}>
                 No Thanks
-            </Button>
+			</Button>
         </div>
-	);
+    );
 }
 
 export default MoveToOfferButtons;

@@ -1,73 +1,37 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import TextField from '@material-ui/core/TextField';
+import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../../../context';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../../Layout/FlowPage';
-import { useMutation } from '@apollo/react-hooks';
-import { ADD_USER_EMAIL, INSERT_COMMON_INFO } from '../../../utils/mutations';
 import CloseFlow from '../../Shared/CloseFlow';
 import Loading from '../../Shared/Loading';
 import useOfferFinder from '../../../hooks/useOfferFinder';
-import useTrackingLayer from '../../../hooks/useTrackingLayer';
 import MoveToOfferButtons from './MoveToOfferButtons';
-import DirectLinkButtons from './DirectLinkButtons';
-import { firePixelBlueKeel } from '../../../utils/pixels';
+import EmailTerms from './EmailTerms';
+import EmailInput from './EmailInput';
 
 const EmailOptin = () => {
-    const { trackingState, dispatchApp, appState } = useContext(AppContext);
+    const { trackingState, appState } = useContext(AppContext);
     let history = useHistory();
-    useTrackingLayer();
-    const [disabled, setDisabledState] = useState(!appState.pch.email);
-    const [termsChecked, checkTerms] = useState(!!appState.pch.email);
-    const [validEmail, setEmailReady] = useState(!!appState.pch.email);
-    const [showInputError, toggleError] = useState(false);
-    const [emailValue, setEmail] = useState(trackingState.email ? trackingState.email : '');
+    const [ emailValue, setEmail ] = useState(trackingState.email ? trackingState.email : '');
+    const [ disabled, setDisabledState ] = useState(emailValue === '');
     const [ data, error, loading ] = useOfferFinder();
-    const [offer, setOffer] = useState(null);
-    const hasSent = useRef(false);
-    const [offerPage, setOfferPage] = useState('');
-	
-	const checkValidity = (email) => {
-        if(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
-            toggleError(false);
-            setEmailReady(true);
-            checkTerms(true);
-            setDisabledState(false);
-        } else { setEmailReady(false); };
-    };
-
-    const handleInputChange = (event) => {
-        let email = event.target.value;
-        setEmail(email);
-        checkValidity(email);
-    };
-
-    const [ addUserEmail ] = useMutation(ADD_USER_EMAIL);
-    const [ insertCommonInfo ] = useMutation(INSERT_COMMON_INFO);
 
     useEffect(() => {
-
-        if(data && !offer) {
-            const { offer_page } = data.fetchEndpointOffer.body;
-            setOffer(data.fetchEndpointOffer.body);
-            setOfferPage(offer_page);
-            dispatchApp({ type: 'SELECTED_OFFER', payload: data.fetchEndpointOffer.body });
+        if (data && data.fetchEndpointOffer.success) {
+            console.log('Offer found and set to context.');
+            // TODO Also, this is a good place to check for exisiting email and forward user
+        };
+        if (data && !data.fetchEndpointOffer.success) {
+            console.log('Offer not found...lets start over!');
+            history.push('/');
             return;
         };
-
-        if(appState.flowState.vertical === 'direct' && appState.offer) {
-            history.push('/offers');
-            return;
-        };
-
-        if(validEmail && termsChecked) {
-            setDisabledState(false);
-            return;
-        };
-
-        return () => setDisabledState(true);
         // eslint-disable-next-line
-    }, [validEmail, termsChecked, data, appState]);
+    }, [data]);
+
+    const handleReadyChange = () => {
+        setDisabledState(false);
+    };
 
     if(error) {
         console.log('error:', error);
@@ -77,50 +41,15 @@ const EmailOptin = () => {
 
     if(loading) {
         return (
-            <FlowPage showCrumbs={appState.showStory}>
-                <div className={`${appState.showExpansion || !appState.showStory ? 'padded-top' : ''} email-content flow-content`}>
-                    {!appState.showExpansion && <CloseFlow />}
+            <FlowPage>
+                <div className='email-content flow-content'>
+                    <CloseFlow />
                     <div className='email-optin-container'>
                         <Loading />
                     </div>
                 </div>
             </FlowPage>
         )
-    };
-
-    const processClick = async() => {
-        dispatchApp({ type: 'HIDE_EXPANSION' });
-        window.scrollTo(0, 0);
-        if(!hasSent.current) {
-            hasSent.current = true;
-            firePixelBlueKeel(trackingState.hsid);
-            // firePixelBing(appState.flowState.vertical);
-			// firePixelGoogle();
-            insertCommonInfo({
-                variables: {
-                    visitor: {
-                        'hsid': Number(trackingState.hsid),
-                        'oid': Number(trackingState.oid),
-                        'eid': trackingState.eid,
-                        'sid': Number(trackingState.sid),
-                        'uid': trackingState.uid,
-                        'ip_address': trackingState.ip_address,
-                        'email': emailValue,
-                        'fname': trackingState.fname,
-                        'lname': trackingState.lname,
-                        'address': trackingState.address,
-                        'city': trackingState.city,
-                        'state': trackingState.state,
-                        'zip': trackingState.zip,
-                    }
-                }
-            });
-        };
-    };
-    
-    const sendEmailToDB = () => {
-        dispatchApp({ type: 'EMAIL_OPT_IN', payload: emailValue });
-        addUserEmail({ variables: { clickId: Number(trackingState.hsid), email: emailValue }});
     };
 
     return (
@@ -131,49 +60,16 @@ const EmailOptin = () => {
                     <div className='email-optin-card'>
                         <div className='email-optin-text'>Would you like to receive relevant credit offers from <b><em>The Card Note</em></b> and <b><em>Card Matcher</em></b> directly to your inbox?</div>                    
                             <form className='email-form-container'>                                
-                                <TextField 
-                                    id='email-optin-input' 
-                                    label='Email Address' 
-                                    variant='outlined'
-                                    InputProps={{
-										autoFocus: true,
-										onChange: handleInputChange,
-										value: emailValue,
-										error: showInputError,
-										type: 'email'
-									}}
-                                    inputProps={{ 'aria-label': 'email-optin-input' }}
-                                    fullWidth                                    
+                                <EmailInput
+                                    email={emailValue}
+                                    setEmail={setEmail}
+                                    setEmailReady={handleReadyChange}
                                 />
-                                <div className='email-terms-container'>
-                                    <input className='email_terms_box' type='checkbox' checked={termsChecked} name='email_terms' onChange={() => checkTerms(!termsChecked)}/>
-                                    <div className='email_terms_text'>
-                                    I hereby declare that I am a U.S. resident over the age of 18 and I agree to this site's  
-                                        <a className='email_terms_links' href='https://unitedstatescredit.com/terms' rel='noopener noreferrer' target='_blank'>
-                                        Terms &amp; Conditions
-                                        </a> and <a className='email_terms_links' href='https://unitedstatescredit.com/privacy' rel='noopener noreferrer' target='_blank'>
-                                            Privacy Policy
-                                        </a>.
-                                    </div>
-                                </div>
-                                {offerPage === 'direct_link' ? 
-									<DirectLinkButtons 
-										disabledState={disabled}
-										termsChecked={termsChecked}
-										toggleError={toggleError}
-										offer={offer}
-										sendEmail={sendEmailToDB}
-										processClick={processClick}
-									/> 
-									: 
-									<MoveToOfferButtons 
-										disabledState={disabled}
-										termsChecked={termsChecked}
-										toggleError={toggleError}
-										sendEmail={sendEmailToDB}
-										processClick={processClick}
-									/>
-								}
+                                <EmailTerms disabled={disabled} />
+                                <MoveToOfferButtons
+                                    disabledState={disabled}
+                                    email={emailValue}
+                                />
                             </form>
                     </div>            
                 </div>

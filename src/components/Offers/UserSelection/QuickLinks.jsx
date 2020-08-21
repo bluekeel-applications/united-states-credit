@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../../context';
-import { handleQuickLink, pickButtonColor } from './selection-utils';
+import { pickButtonColor } from './selection-utils';
 import Loading from '../../Shared/Loading';
 import { useQuery } from '@apollo/react-hooks';
 import { QUICK_LINKS } from '../../../utils/queries';
 import { capitalizeValue } from '../../../utils/helpers';
 
-const QuickLinks = ({ processClick, setInterest }) => {
-    const { appState, trackingState } = useContext(AppContext);
+const QuickLinks = ({ quickLinkClick, setInterest }) => {
+    const { appState } = useContext(AppContext);
 
     const { loading, error, data } = useQuery(QUICK_LINKS, {
         variables: { 
@@ -18,14 +18,10 @@ const QuickLinks = ({ processClick, setInterest }) => {
     });
 
     const handleClick = (e, link) => {
-        handleQuickLink(e, link, processClick, setInterest, trackingState)
+        e.preventDefault();
+        setInterest(link.text);
+        quickLinkClick(link);
     };
-
-    const SelectionLink = ({ link, color }) => (
-        <div className={`selection-link bg__${color}`} onClick={(e) => handleClick(e, link)}>
-            {capitalizeValue(link.text)}
-        </div>
-    );
 
     if(loading) {
         return (
@@ -50,8 +46,14 @@ const QuickLinks = ({ processClick, setInterest }) => {
         <div className={`selection-links-container ${quickLinks.length > 6 && 'scroll-box'}`}>
             <div className='selection-links'>
                 {quickLinks.map((link, idx) => (
-                    <SelectionLink key={`${idx}`} link={link} color={pickButtonColor(idx)} />)
-                )}
+                    <div
+                        key={`user-selection-link__${idx}`}
+                        className={`selection-link bg__${pickButtonColor(idx)}`} 
+                        onClick={(e) => handleClick(e, link)}
+                    >
+                        {capitalizeValue(link.text)}
+                    </div>
+                ))}
             </div>
         </div>
     )

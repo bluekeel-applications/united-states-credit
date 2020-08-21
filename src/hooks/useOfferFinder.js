@@ -6,14 +6,12 @@ import { ADD_SERVICE_LOG } from '../utils/mutations';
 
 const useOfferFinder = () => {
     const [ offerData, setNewOffer ] = useState(null);
-	const { appState, trackingState } = useContext(AppContext);
+	const { appState, trackingState, dispatchApp } = useContext(AppContext);
 	const { 
         vertical, 
         loan_type,
         debt_type,
-        debt_amount,
-        checking_optin,
-        debt_optin
+        debt_amount
 	} = appState.flowState;
 	const pid = trackingState.pid;
 
@@ -22,9 +20,7 @@ const useOfferFinder = () => {
         'vertical': vertical,
         'loan_type': loan_type,
         'debt_type': debt_type,
-        'debt_amount': debt_amount,
-        'checking_optin': checking_optin,
-        'debt_optin': debt_optin
+        'debt_amount': debt_amount
     };
 
     const queryObj = {
@@ -44,6 +40,7 @@ const useOfferFinder = () => {
 		if (data && !offerData) {
             const { program_id, group_id, id } = data.fetchEndpointOffer.body;
             setNewOffer(data.fetchEndpointOffer.body);
+            dispatchApp({ type: 'SELECTED_OFFER', payload: data.fetchEndpointOffer.body });
             addTagToServiceLog({ 
                 variables: {
                     service: {

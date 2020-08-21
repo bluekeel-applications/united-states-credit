@@ -89,12 +89,30 @@ export const capitalizeValue = (value) => {
 };
 
 // Build the full like for an offer
-export const buildFullLink = (link, sid, eid, hsid, pch) => {
+export const buildFullLink = (link, sid, eid, hsid, email, pch) => {
     let linkout = link // eslint-disable-next-line
     linkout = linkout.replace('${sid}', sid || ''); // eslint-disable-next-line
     linkout = linkout.replace('${eid}', eid || ''); // eslint-disable-next-line
     linkout = linkout.replace('${hsid}', hsid || ''); // eslint-disable-next-line
-    linkout = linkout.replace('${em}', pch.email || ''); // eslint-disable-next-line
+    linkout = linkout.replace('${em}', email || pch.email || ''); // eslint-disable-next-line
+    linkout = linkout.replace('${first}', pch.firstname || ''); // eslint-disable-next-line
+    linkout = linkout.replace('${last}', pch.lastname || ''); // eslint-disable-next-line
+    linkout = linkout.replace('${adrs}', pch.address || ''); // eslint-disable-next-line
+    linkout = linkout.replace('${city}', pch.city || ''); // eslint-disable-next-line
+    linkout = linkout.replace('${state}', pch.state || ''); // eslint-disable-next-line
+    linkout = linkout.replace('${zip}', pch.zipcode || ''); // eslint-disable-next-line
+    return linkout;
+};
+
+export const buildQueryLink = (link, sid, eid, hsid, email, pch, query) => {
+    let linkout = link; // eslint-disable-next-line
+    let keyword = encodeURIComponent(query); // eslint-disable-next-line
+    if (linkout === 'N/A') return linkout; // eslint-disable-next-line 
+    linkout = linkout.replace('${sid}', sid); // eslint-disable-next-line
+    linkout = linkout.replace('${eid}', eid); // eslint-disable-next-line
+    linkout = linkout.replace('${kwd}', keyword); // eslint-disable-next-line
+    linkout = linkout.replace('${hsid}', hsid); // eslint-disable-next-line
+    linkout = linkout.replace('${em}', email || pch.email || ''); // eslint-disable-next-line
     linkout = linkout.replace('${first}', pch.firstname || ''); // eslint-disable-next-line
     linkout = linkout.replace('${last}', pch.lastname || ''); // eslint-disable-next-line
     linkout = linkout.replace('${adrs}', pch.address || ''); // eslint-disable-next-line

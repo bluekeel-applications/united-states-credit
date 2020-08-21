@@ -7,31 +7,16 @@ const flattenString = (string) => {
     return stringCleaned.toLowerCase();
 };
 
-const dressLink = (link, tracking, query) => {
+const dressLink = (link, sid, eid, hsid, query) => {
     let linkout = link; // eslint-disable-next-line
     if (linkout === 'N/A') return linkout; // eslint-disable-next-line 
-    linkout = linkout.replace('${sid}', tracking.sid); // eslint-disable-next-line
-    linkout = linkout.replace('${eid}', tracking.eid); // eslint-disable-next-line
-    let keyword = encodeURIComponent(query); // eslint-disable-next-line
+    linkout = linkout.replace('${sid}', sid); // eslint-disable-next-line
+    linkout = linkout.replace('${eid}', eid); // eslint-disable-next-line
+    let keyword = flattenString(query); // eslint-disable-next-line
+    keyword = encodeURIComponent(keyword); // eslint-disable-next-line
     linkout = linkout.replace('${kwd}', keyword); // eslint-disable-next-line
-    linkout = linkout.replace('${hsid}', tracking.hsid);
+    linkout = linkout.replace('${hsid}', hsid);
     return linkout;
-};
-
-const handleQuickLink = (e, link, processClick, setInterest, trackingState) => {
-    e.preventDefault();
-    setInterest(link.text);
-    const linkout = dressLink(link.url, trackingState, link.text);
-    const jump = dressLink(link.jump, trackingState, link.text);
-    processClick(linkout, jump, link.text);
-};
-
-const handleUserSubmit = (e, link, jump, processClick, query, trackingState) => {
-    e.preventDefault();
-    const interest = flattenString(query);
-    let linkout = dressLink(link, trackingState, interest);
-    const jumpBehind = dressLink(jump, trackingState, interest);
-    processClick(linkout, jumpBehind, interest);
 };
 
 const pickButtonColor = (idx) => {
@@ -64,7 +49,6 @@ const pickButtonColor = (idx) => {
 }
 
 export {
-    handleQuickLink,
-    handleUserSubmit,
+    dressLink,
     pickButtonColor
 }

@@ -3,30 +3,26 @@ import TextField from '@material-ui/core/TextField';
 import { AppContext } from '../../../context';
 import Loading from '../../Shared/Loading';
 import { useMutation } from '@apollo/react-hooks';
-import {
-    ADD_USER_EMAIL,
-    INSERT_COMMON_INFO,
-    INSERT_SEARCH_INFO,
-    ADD_QUERY_INSIGHT
-} from '../../../utils/mutations';
+import { ADD_USER_EMAIL, INSERT_SEARCH_INFO, ADD_QUERY_INSIGHT } from '../../../utils/mutations';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import QuickLinks from './QuickLinks';
 import EmailTerms from './EmailTerms';
-import useTrackingLayer from '../../../hooks/useTrackingLayer';
-import { firePixelBlueKeel } from '../../../utils/pixels';
-import { handleUserSubmit } from './selection-utils';
+import { flattenLongString, buildQueryLink } from '../../../utils/helpers';
 
 const UserSelection = () => {
-    const { appState, trackingState } = useContext(AppContext);
-    useTrackingLayer();
     let history = useHistory();
-    const [disabled, setDisabledState] = useState(true);
-    const [emailValue] = useState(trackingState.email ? trackingState.email : null);
-    const [interest, setInterest] = useState('');
-    const [loading, setLoading] = useState(false);
+    const { appState, trackingState } = useContext(AppContext);
+    const [ disabled, setDisabledState ] = useState(true);
+    const [ emailValue ] = useState(trackingState.email ? trackingState.email : '');
+    const [ interest, setInterest ] = useState('');
+    const [ loading, setLoading ] = useState(false);
     const hasSent = useRef(false);
+
+    const [insertSearchInfo] = useMutation(INSERT_SEARCH_INFO);
+    const [addQueryInsight] = useMutation(ADD_QUERY_INSIGHT);
+    const [addUserEmail] = useMutation(ADD_USER_EMAIL);
 
     const handleInputChange = (event) => {
         let interestValue = event.target.value;
@@ -38,49 +34,49 @@ const UserSelection = () => {
         setDisabledState(true);
     };
 
-    const [addUserEmail] = useMutation(ADD_USER_EMAIL);
-    const [insertSearchInfo] = useMutation(INSERT_SEARCH_INFO);
-    const [insertCommonInfo] = useMutation(INSERT_COMMON_INFO);
-    const [addQueryInsight] = useMutation(ADD_QUERY_INSIGHT);
+    if (loading) {
+        return <div className='loading-select'><Loading /></div>
+    };
 
-    const processClick = async (link, jump, query) => {
-        setLoading(true);
-        const commonInsert = {
-            'hsid': Number(trackingState.hsid),
-            'oid': Number(trackingState.oid),
-            'eid': trackingState.eid,
-            'sid': Number(trackingState.sid),
-            'uid': trackingState.uid,
-            'ip_address': trackingState.ip_address,
-            'email': emailValue,
-            'fname': trackingState.fname,
-            'lname': trackingState.lname,
-            'address': trackingState.address,
-            'city': trackingState.city,
-            'state': trackingState.state,
-            'zip': trackingState.zip,
-        };
+    const captureEmail = () => {
+        addUserEmail({
+            variables: {
+                clickId: Number(trackingState.hsid),
+                email: emailValue
+            }
+        });
+    };
 
-        const searchInsert = {
-            'hsid': Number(trackingState.hsid),
-            'oid': Number(trackingState.oid),
-            'eid': trackingState.eid,
-            'sid': Number(trackingState.sid),
-            'uid': trackingState.uid,
-            'ip_address': trackingState.ip_address,
-            'query': query
-        };
-
+    const handleSubmit = async( quick_link = {} ) => {
+        const { hsid, oid, eid, sid, uid, ip_address } = trackingState;
+        const { url, jump } = quick_link;
+        const offer_url = url ? url : appState.offer.url;
+        const offer_jump = jump && jump !== 'N/A' ? jump : appState.offer.jump;
+        const query = flattenLongString(interest);
+        
         if (!hasSent.current) {
-            firePixelBlueKeel(trackingState.hsid);
-            await insertCommonInfo({ variables: { visitor: commonInsert } });
-            await insertSearchInfo({ variables: { visitor: searchInsert } });
-            await addQueryInsight({ variables: { clickId: Number(trackingState.hsid), query } });
-            await addUserEmail({ variables: { clickId: Number(trackingState.hsid), email: emailValue } });
+            setLoading(true);
             hasSent.current = true;
-            window.open(link);
-            if(jump && jump !== 'N/A') {
-                window.location.href = jump;
+            captureEmail();
+            await insertSearchInfo({
+                variables: {
+                    visitor: {
+                        'hsid': Number(hsid),
+                        'oid': Number(oid),
+                        'eid': eid,
+                        'sid': Number(sid),
+                        'uid': uid,
+                        'ip_address': ip_address,
+                        'query': query
+                    }
+                }
+            });
+
+            await addQueryInsight({ variables: { clickId: Number(hsid), query } });
+            window.open(buildQueryLink(offer_url, sid, eid, hsid, emailValue, appState.pch, query));
+
+            if (offer_jump && offer_jump !== 'N/A') {
+                window.location.href = buildQueryLink(offer_jump, sid, eid, hsid, emailValue, appState.pch, query);
                 return;
             };
             history.push('/verticals');
@@ -88,22 +84,12 @@ const UserSelection = () => {
         };
     };
 
-    if (loading) {
-        return <div className='loading-select'><Loading /></div>
-    };
-
-    const handleSubmit = (e) => {
-        const offer_url = appState.offer.url;
-        const offer_jump = appState.offer.jump;
-        handleUserSubmit(e, offer_url, offer_jump, processClick, interest, trackingState);
-    };
-
     return (
         <div className='user-selection-container'>
             <div className='email-optin-card'>
                 <div className='select-text-title'>What are you interested in?</div>
                 <form className='email-form-container' onSubmit={handleSubmit}>
-                    <QuickLinks processClick={processClick} setInterest={setInterest}/>
+                    <QuickLinks quickLinkClick={handleSubmit} setInterest={setInterest}/>
                     <TextField
                         id='search-query-input'
                         label='Search'

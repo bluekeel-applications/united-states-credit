@@ -1,3 +1,6 @@
+import {
+    setCookie
+} from '../../utils/helpers';
 
 const initialAppState = {
     provider: null,
@@ -204,6 +207,13 @@ const appStateReducer = (state, action) => {
                     email_optin: false
                 },
                 email: 'N/A'
+            };
+
+        case 'SET_EMAIL':
+            setCookie('email', action.payload, 3);
+            return {
+                ...state,
+                email: action.payload
             };
 
         case 'FETCH_OFFERS':
