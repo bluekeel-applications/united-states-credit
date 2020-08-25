@@ -8,13 +8,14 @@
     flex-flow: column;
     justify-content: flex-start;
     align-items: center;
-
+    // min-height: 100vh;
     @include respond-to('medium') {
         background-size: 150px auto;
     }
     @include respond-to('small') {
         background-size: 60px auto;
         padding: 0;
+        min-height: fit-content;
     }
 }
 .flow-content__container-final {
