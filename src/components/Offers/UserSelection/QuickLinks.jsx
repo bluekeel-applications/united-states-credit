@@ -1,21 +1,21 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../../context';
 import { pickButtonColor } from './selection-utils';
-import Loading from '../../Shared/Loading';
-import { useQuery } from '@apollo/react-hooks';
-import { QUICK_LINKS } from '../../../utils/queries';
+// import Loading from '../../Shared/Loading';
+// import { useQuery } from '@apollo/react-hooks';
+// import { QUICK_LINKS } from '../../../utils/queries';
 import { capitalizeValue } from '../../../utils/helpers';
 
 const QuickLinks = ({ quickLinkClick, setInterest }) => {
     const { appState } = useContext(AppContext);
 
-    const { loading, error, data } = useQuery(QUICK_LINKS, {
-        variables: { 
-            quick_link_ids: appState.offer.quick_links,
-            url: appState.offer.url,
-            jump: appState.offer.jump
-        }
-    });
+    // const { loading, error, data } = useQuery(QUICK_LINKS, {
+    //     variables: { 
+    //         quick_link_ids: appState.offer.quick_link,
+    //         url: appState.offer.url,
+    //         jump: appState.offer.jump
+    //     }
+    // });
 
     const handleClick = (e, link) => {
         e.preventDefault();
@@ -23,24 +23,24 @@ const QuickLinks = ({ quickLinkClick, setInterest }) => {
         quickLinkClick(link);
     };
 
-    if(loading) {
-        return (
-            <div className='selection-links-container'>
-                <div className='selection-links-title'>Quick Links</div>
-                <div className='selection-links'>
-                    <Loading />
-                </div>
-            </div>
-        )
-    };
+    // if(loading) {
+    //     return (
+    //         <div className='selection-links-container'>
+    //             <div className='selection-links-title'>Quick Links</div>
+    //             <div className='selection-links'>
+    //                 <Loading />
+    //             </div>
+    //         </div>
+    //     )
+    // };
 
-    if (error) {
-        console.log('error:', error);
-        window.location.pathname = '/error';
-        return;
-    };
+    // if (error) {
+    //     console.log('error:', error);
+    //     window.location.pathname = '/error';
+    //     return;
+    // };
 
-    const quickLinks = data.fetchQuickLinks.body;
+    const quickLinks = appState.offer.quick_link_group;
 
     return (
         <div className={`selection-links-container ${quickLinks.length > 6 && 'scroll-box'}`}>

@@ -57,7 +57,37 @@ const ENDPOINT_OFFER = gql`
 					id
 					title
 				}
-				quick_links
+				quick_link_group
+				program_id
+				group_id
+			}
+		}
+	}
+`;
+const DIRECT_OFFER = gql`
+	query FetchDirectOffer($pid: Int) {
+		fetchDirectOffer(pid: $pid) {
+			success
+			status
+			message
+			body {
+				id
+				name
+				url
+				jump
+				offer_page
+				four_button
+				restricted
+				states
+				offers {
+					id
+					title
+				}
+				quick_link_group {
+					text
+					url
+					jump
+				}
 				program_id
 				group_id
 			}
@@ -147,6 +177,7 @@ const QUICK_LINKS = gql `
 export {
 	FETCH_FEED,
 	ENDPOINT_OFFER,
+	DIRECT_OFFER,
 	OPTIN_OFFER,
 	LIST_OFFER,
 	PCH_USER,

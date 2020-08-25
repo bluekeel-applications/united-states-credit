@@ -7,33 +7,23 @@ import { ADD_SERVICE_LOG } from '../utils/mutations';
 const useOfferFinder = () => {
     const [ offerData, setNewOffer ] = useState(null);
 	const { appState, trackingState, dispatchApp } = useContext(AppContext);
-	const { 
-        vertical, 
-        loan_type,
-        debt_type,
-        debt_amount
-	} = appState.flowState;
-	const pid = trackingState.pid;
 
-	const flows = {
-        'pid': Number(pid),
-        'vertical': vertical,
-        'loan_type': loan_type,
-        'debt_type': debt_type,
-        'debt_amount': debt_amount
-    };
-
-    const queryObj = {
+	const { loading, error, data } = useQuery(ENDPOINT_OFFER, {
         variables: {
-            queryData: flows,
+            queryData: {
+                'pid': Number(trackingState.pid),
+                'vertical': appState.flowState.vertical,
+                'loan_type': appState.flowState.loan_type,
+                'debt_type': appState.flowState.debt_type,
+                'debt_amount': appState.flowState.debt_amount
+            },
             user: {
                 location: trackingState.location || 'N/A',
                 clickId: trackingState.hsid
             }
         }
-    }
-
-	const { loading, error, data } = useQuery(ENDPOINT_OFFER, queryObj);
+    });
+    
     const [ addTagToServiceLog ] = useMutation(ADD_SERVICE_LOG);
 
 	useEffect(() => {

@@ -131,60 +131,58 @@ const SelectInterest = () => {
 
     return (
         <FlowPage showCrumbs={appState.showStory}>
-            <div className={`${appState.showExpansion || !appState.showStory ? 'padded-top' : ''} email-content flow-content`}>
-                {!appState.showExpansion && <CloseFlow />}
-                <div className='email-optin-container'>
-                    <div className='email-optin-card'>
-                        <div className='select-text-title'>What are you interested in?</div>
-                        <form className='email-form-container' onSubmit={handleSubmit}>
-                            <TextField
-                                id='email-optin-input'
-                                label='Search'
-                                variant='outlined'
-                                InputProps={{
-                                    autoFocus: true,
-                                    onChange: handleInputChange,
-                                    value: interest
-                                }}
-                                inputProps={{ 'aria-label': 'email-optin-input' }}
-                                fullWidth
-                            />
-                            <div className='quick-links-title'>Quick Links</div>
-                            <div className='quick-links'>
-                                <div className='quick-links-left'>
-                                    {quickLinks1.map((text, idx) => (<QuickLink key={`${idx}`} text={text} />))}
-                                </div>
-                                <div className='quick-links-right'>
-                                    {quickLinks2.map((text, idx) => (<QuickLink key={`${idx}`} text={text} />))}
-                                </div>
+            {!appState.showExpansion && <CloseFlow />}
+            <div className='email-optin-container'>
+                <div className='email-optin-card'>
+                    <div className='select-text-title'>What are you interested in?</div>
+                    <form className='email-form-container' onSubmit={handleSubmit}>
+                        <TextField
+                            id='email-optin-input'
+                            label='Search'
+                            variant='outlined'
+                            InputProps={{
+                                autoFocus: true,
+                                onChange: handleInputChange,
+                                value: interest
+                            }}
+                            inputProps={{ 'aria-label': 'email-optin-input' }}
+                            fullWidth
+                        />
+                        <div className='quick-links-title'>Quick Links</div>
+                        <div className='quick-links'>
+                            <div className='quick-links-left'>
+                                {quickLinks1.map((text, idx) => (<QuickLink key={`${idx}`} text={text} />))}
                             </div>
-                            <div className='email-terms-container'>
-                                <div className='email_terms_text'>
-                                    {`By clicking “Next” button below or any of the links above, I agree with the `}
-                                    <a className='email_terms_links' href='https://unitedstatescredit.com/privacy' rel='noopener noreferrer' target='_blank'>
-                                    Privacy Policy
-                                    </a>
-                                    {` and `} 
-                                    <a className='email_terms_links' href='https://unitedstatescredit.com/terms' rel='noopener noreferrer' target='_blank'>
-                                    Terms &amp; Conditions</a>.
-                                    {` In addition, I consent to receive emails ${emailValue ? `to ${emailValue}`: ''}
-                                    in accordance with the `}
-                                    <a className='email_terms_links' href='https://unitedstatescredit.com/privacy' rel='noopener noreferrer' target='_blank'>
-                                    Privacy Policy
-                                    </a>.
-                                </div>
+                            <div className='quick-links-right'>
+                                {quickLinks2.map((text, idx) => (<QuickLink key={`${idx}`} text={text} />))}
                             </div>
-                            <div className='email-button-group'>
-                                <Button className={`email_submit-button ${disabled && 'disabled'}`} variant='contained' color='primary' type='submit' disabled={disabled}>
-                                    <span className='button-text' >Next</span>
-                                    <FontAwesomeIcon
-                                        icon={['fal', 'angle-double-right']}
-                                        className='next-button-icon'
-                                    />
-                                </Button>
+                        </div>
+                        <div className='email-terms-container'>
+                            <div className='email_terms_text'>
+                                {`By clicking “Next” button below or any of the links above, I agree with the `}
+                                <a className='email_terms_links' href='https://unitedstatescredit.com/privacy' rel='noopener noreferrer' target='_blank'>
+                                Privacy Policy
+                                </a>
+                                {` and `} 
+                                <a className='email_terms_links' href='https://unitedstatescredit.com/terms' rel='noopener noreferrer' target='_blank'>
+                                Terms &amp; Conditions</a>.
+                                {` In addition, I consent to receive emails ${emailValue ? `to ${emailValue}`: ''}
+                                in accordance with the `}
+                                <a className='email_terms_links' href='https://unitedstatescredit.com/privacy' rel='noopener noreferrer' target='_blank'>
+                                Privacy Policy
+                                </a>.
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div className='email-button-group'>
+                            <Button className={`email_submit-button ${disabled && 'disabled'}`} variant='contained' color='primary' type='submit' disabled={disabled}>
+                                <span className='button-text' >Next</span>
+                                <FontAwesomeIcon
+                                    icon={['fal', 'angle-double-right']}
+                                    className='next-button-icon'
+                                />
+                            </Button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </FlowPage>

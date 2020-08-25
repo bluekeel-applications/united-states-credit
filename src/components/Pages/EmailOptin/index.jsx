@@ -22,7 +22,7 @@ const EmailOptin = () => {
             // TODO Also, this is a good place to check for exisiting email and forward user
         };
         if (data && !data.fetchEndpointOffer.success) {
-            console.log('Offer not found...lets start over!');
+            console.log('Offer not found...lets start over!', data.fetchEndpointOffer);
             history.push('/');
             return;
         };
@@ -54,25 +54,23 @@ const EmailOptin = () => {
 
     return (
         <FlowPage showCrumbs={appState.showStory}>
-            <div className={`${appState.showExpansion || !appState.showStory ? 'padded-top' : ''} email-content flow-content`}>
-                {!appState.showExpansion && <CloseFlow />}
-                <div className='email-optin-container'>
-                    <div className='email-optin-card'>
-                        <div className='email-optin-text'>Would you like to receive relevant credit offers from <b><em>The Card Note</em></b> and <b><em>Card Matcher</em></b> directly to your inbox?</div>                    
-                            <form className='email-form-container'>                                
-                                <EmailInput
-                                    email={emailValue}
-                                    setEmail={setEmail}
-                                    setEmailReady={handleReadyChange}
-                                />
-                                <EmailTerms disabled={disabled} />
-                                <MoveToOfferButtons
-                                    disabledState={disabled}
-                                    email={emailValue}
-                                />
-                            </form>
-                    </div>            
-                </div>
+            {!appState.showExpansion && <CloseFlow />}
+            <div className='email-optin-container'>
+                <div className='email-optin-card'>
+                    <div className='email-optin-text'>Would you like to receive relevant credit offers from <b><em>The Card Note</em></b> and <b><em>Card Matcher</em></b> directly to your inbox?</div>                    
+                        <form className='email-form-container'>                                
+                            <EmailInput
+                                email={emailValue}
+                                setEmail={setEmail}
+                                setEmailReady={handleReadyChange}
+                            />
+                            <EmailTerms disabled={disabled} />
+                            <MoveToOfferButtons
+                                disabledState={disabled}
+                                email={emailValue}
+                            />
+                        </form>
+                </div>            
             </div>
         </FlowPage>
     )
