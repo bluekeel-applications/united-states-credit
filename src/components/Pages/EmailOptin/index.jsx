@@ -125,58 +125,56 @@ const EmailOptin = () => {
 
     return (
         <FlowPage showCrumbs={appState.showStory}>
-            <div className={`${appState.showExpansion || !appState.showStory ? 'padded-top' : ''} email-content flow-content`}>
-                {!appState.showExpansion && <CloseFlow />}
-                <div className='email-optin-container'>
-                    <div className='email-optin-card'>
-                        <div className='email-optin-text'>Would you like to receive relevant credit offers from <b><em>The Card Note</em></b> and <b><em>Card Matcher</em></b> directly to your inbox?</div>                    
-                            <form className='email-form-container'>                                
-                                <TextField 
-                                    id='email-optin-input' 
-                                    label='Email Address' 
-                                    variant='outlined'
-                                    InputProps={{
-										autoFocus: true,
-										onChange: handleInputChange,
-										value: emailValue,
-										error: showInputError,
-										type: 'email'
-									}}
-                                    inputProps={{ 'aria-label': 'email-optin-input' }}
-                                    fullWidth                                    
-                                />
-                                <div className='email-terms-container'>
-                                    <input className='email_terms_box' type='checkbox' checked={termsChecked} name='email_terms' onChange={() => checkTerms(!termsChecked)}/>
-                                    <div className='email_terms_text'>
-                                    I hereby declare that I am a U.S. resident over the age of 18 and I agree to this site's  
-                                        <a className='email_terms_links' href='https://unitedstatescredit.com/terms' rel='noopener noreferrer' target='_blank'>
-                                        Terms &amp; Conditions
-                                        </a> and <a className='email_terms_links' href='https://unitedstatescredit.com/privacy' rel='noopener noreferrer' target='_blank'>
-                                            Privacy Policy
-                                        </a>.
-                                    </div>
+            {!appState.showExpansion && <CloseFlow />}
+            <div className='email-optin-container'>
+                <div className='email-optin-card'>
+                    <div className='email-optin-text'>Would you like to receive relevant credit offers from <b><em>The Card Note</em></b> and <b><em>Card Matcher</em></b> directly to your inbox?</div>                    
+                        <form className='email-form-container'>                                
+                            <TextField 
+                                id='email-optin-input' 
+                                label='Email Address' 
+                                variant='outlined'
+                                InputProps={{
+                                    autoFocus: true,
+                                    onChange: handleInputChange,
+                                    value: emailValue,
+                                    error: showInputError,
+                                    type: 'email'
+                                }}
+                                inputProps={{ 'aria-label': 'email-optin-input' }}
+                                fullWidth                                    
+                            />
+                            <div className='email-terms-container'>
+                                <input className='email_terms_box' type='checkbox' checked={termsChecked} name='email_terms' onChange={() => checkTerms(!termsChecked)}/>
+                                <div className='email_terms_text'>
+                                I hereby declare that I am a U.S. resident over the age of 18 and I agree to this site's  
+                                    <a className='email_terms_links' href='https://unitedstatescredit.com/terms' rel='noopener noreferrer' target='_blank'>
+                                    Terms &amp; Conditions
+                                    </a> and <a className='email_terms_links' href='https://unitedstatescredit.com/privacy' rel='noopener noreferrer' target='_blank'>
+                                        Privacy Policy
+                                    </a>.
                                 </div>
-                                {offerPage === 'direct_link' ? 
-									<DirectLinkButtons 
-										disabledState={disabled}
-										termsChecked={termsChecked}
-										toggleError={toggleError}
-										offer={offer}
-										sendEmail={sendEmailToDB}
-										processClick={processClick}
-									/> 
-									: 
-									<MoveToOfferButtons 
-										disabledState={disabled}
-										termsChecked={termsChecked}
-										toggleError={toggleError}
-										sendEmail={sendEmailToDB}
-										processClick={processClick}
-									/>
-								}
-                            </form>
-                    </div>            
-                </div>
+                            </div>
+                            {offerPage === 'direct_link' ? 
+                                <DirectLinkButtons 
+                                    disabledState={disabled}
+                                    termsChecked={termsChecked}
+                                    toggleError={toggleError}
+                                    offer={offer}
+                                    sendEmail={sendEmailToDB}
+                                    processClick={processClick}
+                                /> 
+                                : 
+                                <MoveToOfferButtons 
+                                    disabledState={disabled}
+                                    termsChecked={termsChecked}
+                                    toggleError={toggleError}
+                                    sendEmail={sendEmailToDB}
+                                    processClick={processClick}
+                                />
+                            }
+                        </form>
+                </div>            
             </div>
         </FlowPage>
     )

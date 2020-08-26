@@ -31,25 +31,23 @@ const HomeLoans = () => {
 
     return (
         <FlowPage showCrumbs={appState.showStory}>
-            <div className={`${appState.showExpansion || !appState.showStory ? 'padded-top' : ''} flow-content`}>
-                {!appState.showExpansion && <CloseFlow />}
-                <span className='flow-title-text'>Select Loan Type:</span>
-                <div className='flow-page__button-group'>
-                    {home_loan_buttons.map((button, idx) => (
-                        <Button
-                            onClick={(e) => handleFlowClick(e, button.value, button.text)} 
-                            variant='contained' 
-                            className={`flow-button bg__${button.color}`}
-                            key={`home_loans-page_button-${idx}`}
-                        >
-                            {button.icon.length > 0 && (<FontAwesomeIcon
-                                icon={[button.icon[1], button.icon[2]]}
-                                className='flow-button-icon'
-                            />)}
-                            {button.text}
-                        </Button>
-                    ))}
-                </div>
+            {!appState.showExpansion && <CloseFlow />}
+            <span className='flow-title-text'>Select Loan Type:</span>
+            <div className='flow-page__button-group'>
+                {home_loan_buttons.map((button, idx) => (
+                    <Button
+                        onClick={(e) => handleFlowClick(e, button.value, button.text)} 
+                        variant='contained' 
+                        className={`flow-button bg__${button.color}`}
+                        key={`home_loans-page_button-${idx}`}
+                    >
+                        {button.icon.length > 0 && (<FontAwesomeIcon
+                            icon={[button.icon[1], button.icon[2]]}
+                            className='flow-button-icon'
+                        />)}
+                        {button.text}
+                    </Button>
+                ))}
             </div>
         </FlowPage>
     )

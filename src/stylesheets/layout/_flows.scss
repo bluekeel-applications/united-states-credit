@@ -1,4 +1,5 @@
-.flow-content__container {
+.flow-content__container,
+.flow-content__container-final {
     width: 100%;
     background-image: url('../../assets/images/flag_left.png'), url('../../assets/images/flag_right.png');
     background-repeat: no-repeat;
@@ -8,7 +9,10 @@
     flex-flow: column;
     justify-content: flex-start;
     align-items: center;
-    // min-height: 100vh;
+    -webkit-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.6);
+    height: fit-content;
     @include respond-to('medium') {
         background-size: 150px auto;
     }
@@ -95,9 +99,6 @@
 }
 
 .flow-content {
-    -webkit-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.6);
-    -moz-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.6);
-    box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.6);
     height: fit-content;
     width: 100%;
     padding: 0 10vw 5vh 10vw;

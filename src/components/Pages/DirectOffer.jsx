@@ -29,10 +29,8 @@ const DirectOffer = () => {
     if (loading) {
         return (
             <FlowPage showCrumbs={false}>
-                <div className='padded-top email-content flow-content'>
-                    <div className='email-optin-container'>
-                        <Loading />
-                    </div>
+                <div className='email-optin-container'>
+                    <Loading />
                 </div>
             </FlowPage>
         )

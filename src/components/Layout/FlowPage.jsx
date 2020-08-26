@@ -1,32 +1,25 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../../context';
+import React from 'react';
+import useContentHeight from '../../hooks/useContentHeight';
 import BreadCrumbs from '../Shared/Breadcrumbs';
-// import { useHistory } from 'react-router-dom';
+import { animated, useSpring, config } from 'react-spring';
 
 const FlowPage = ({children, showCrumbs, showFinalCrumbs = false}) => {
-    // let history = useHistory();
-    const { appState } = useContext(AppContext);
-    // const componentIsMounted = useRef(true);
-    
-    // useEffect(() => {
-    //     if(componentIsMounted.current && !appState.provider) {
-    //         history.push('/');
-    //         return;
-    //     };
-    //     return () => {componentIsMounted.current = false};
-    //     // eslint-disable-next-line
-    // }, []);
+    const [heightRef, height] = useContentHeight();
+
+    const wrapper_styles = useSpring({
+        config: config.default,
+        from: { opacity: 0, height: 0 },
+        to: { opacity: 1, height: height + 100 }
+    });
     
     return (
-        <div 
-            className={`
-                ${showFinalCrumbs ? 'flow-content__container-final' : ''} 
-                flow-content__container 
-                ${appState.showExpansion ? 'top-shadow' : ''}
-            `}
-        >
-            {showCrumbs && (<BreadCrumbs final={showFinalCrumbs}/>)}
-            {children}
+        <div className={`flow-content__${showFinalCrumbs ? 'container-final' : 'container'} flow-content__container`}>
+            <animated.div style={wrapper_styles} >
+                {showCrumbs && (<BreadCrumbs final={showFinalCrumbs} />)}
+                <div className='flow-content question-container' ref={heightRef}>
+                    {children}
+                </div>
+            </animated.div>
         </div>
     );
 };

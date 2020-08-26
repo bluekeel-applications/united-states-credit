@@ -79,7 +79,7 @@ const Breadcrumbs = ({ final }) => {
             <div className='breadcrumb-container'>
                 <div className='breadcrumb-row'>
                     {renderVertical()}
-                    {loan_type && renderType()}
+                    {loan_type && loan_type !== 'N/A' && renderType()}
                     {debtOptinCrumb && renderDebtOptin()}
                 </div>
                 {debtTypeCrumb && (
