@@ -9,36 +9,42 @@ import Loading from '../Shared/Loading';
 
 const DirectOffer = () => {
     let history = useHistory();
-    const [offerData, setNewOffer] = useState(null);
     const { trackingState, dispatchApp } = useContext(AppContext);
+    const [ readyToMove, setReady ] = useState(false);
+    
+    const handleFetchComplete = () => {
+        const offer = data.fetchDirectOffer.body;
+        dispatchApp({ type: 'SELECTED_OFFER', payload: offer });
+        addTagToServiceLog({
+            variables: {
+                service: {
+                    program_id: offer.program_id,
+                    group_id: offer.group_id,
+                    offer_id: offer.id,
+                    clickId: Number(trackingState.hsid)
+                }
+            },
+            skip: !offer.program_id || !offer.group_id || !offer.id || !trackingState.hsid
+        });
+        setReady(true);
+    };
 
     const { loading, error, data } = useQuery(DIRECT_OFFER, {
-        variables: { pid: Number(trackingState.pid)
+            variables: { pid: Number(trackingState.pid),
+            onCompleted: handleFetchComplete
         }
     });
 
     const [addTagToServiceLog] = useMutation(ADD_SERVICE_LOG);
 
     useEffect(() => {
-        if (data && data.fetchDirectOffer.success && !offerData) {
-            const { program_id, group_id, id } = data.fetchDirectOffer.body;
-            dispatchApp({ type: 'SELECTED_OFFER', payload: data.fetchDirectOffer.body });
-            addTagToServiceLog({
-                variables: {
-                    service: {
-                        program_id,
-                        group_id,
-                        offer_id: id,
-                        clickId: Number(trackingState.hsid)
-                    }
-                },
-                skip: !program_id || !group_id || !id || !trackingState.hsid
-            });
-            setNewOffer(data.fetchDirectOffer.body);
+        if (readyToMove) {
             history.push('/offers');
         };
+
+        return () => setReady(false);
         // eslint-disable-next-line
-    }, [data, offerData]);
+    }, [readyToMove]);
 
     useEffect(() => {
         if (data && !data.fetchDirectOffer.success) {
