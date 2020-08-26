@@ -94,18 +94,14 @@ const Offers = () => {
             case 'selection':
                 return (
                     <FlowPage>
-                        <div className='flow-content offer-container'>
-                            <UserSelection />
-                        </div>
+                        <UserSelection />
                     </FlowPage>
                 );
 
             default:
                 return (
                     <FlowPage showCrumbs showFinalCrumbs>
-                        <div className='flow-content offer-container'>
                             <Loading />
-                        </div>
                     </FlowPage>
                 );
         }

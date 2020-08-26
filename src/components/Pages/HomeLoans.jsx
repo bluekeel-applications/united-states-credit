@@ -48,7 +48,7 @@ const HomeLoans = () => {
                         {button.text}
                     </Button>
                 ))}
-                </div>
+            </div>
         </FlowPage>
     )
 };
