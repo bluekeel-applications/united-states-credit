@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag.macro';
 
 // RSS Feed
 const FETCH_FEED = gql`

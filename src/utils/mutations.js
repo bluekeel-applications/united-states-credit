@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag.macro';
 
 const ADD_NEW_USER = gql`
 	mutation AddNewUser($visitor: NewUser) {
