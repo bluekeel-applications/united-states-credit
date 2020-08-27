@@ -10,6 +10,8 @@ import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 import { RetryLink } from 'apollo-link-retry';
 import { ApolloProvider } from '@apollo/react-hooks';
+import usePushPros from '../hooks/usePushPros';
+
 // fontawesome
 import initFontAwesome from '../utils/initFontAwesome';
 initFontAwesome();
@@ -47,6 +49,7 @@ const retryLink = new RetryLink({
 });
 
 const GlobalApp = () => {
+	usePushPros();
 	const links = ApolloLink.from([
 		loggerLink,
 		retryLink,

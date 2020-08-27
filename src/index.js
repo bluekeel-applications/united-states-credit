@@ -4,6 +4,9 @@ import GlobalApp from './components/GlobalApp';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 import * as serviceWorker from './serviceWorker';
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
 
 import './stylesheets/main.scss';
 

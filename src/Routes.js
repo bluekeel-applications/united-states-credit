@@ -15,26 +15,11 @@ import SelectInterest from './components/Pages/SelectInterest';
 import Offers from './components/Offers';
 import DirectOffer from './components/Pages/DirectOffer';
 import Error from './components/Pages/Error';
-// import UserSelection from './components/Offers/UserSelection';
-// import { testOfferWall } from './mocks/mockOfferWall';
-// import OfferWall from './components/Offers/OfferWall';
-// import FourButton from './components/Offers/FourButton';
-// import FlowPage from './components/Layout/FlowPage';
-
-// const TestWrapper = () => (
-// 	// <FlowPage showCrumbs showFinalCrumbs>
-// 	<FlowPage>
-// 		<div className='flow-content offer-container'>
-// 			<UserSelection />
-// 		</div>
-// 	</FlowPage>
-// );
 
 const Routes = () => {
 	return (
 		<Switch>
 			<Route path='/' exact component={GetStarted} />
-			{/* <Route path='/' exact component={TestWrapper} /> */}
 			<Route path='/verticals' component={Verticals} />
 			<Route path='/credit_cards' component={CreditCards} />
 			<Route path='/auto_loans' component={AutoLoans} />
