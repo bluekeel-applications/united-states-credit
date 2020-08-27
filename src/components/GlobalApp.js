@@ -70,9 +70,9 @@ const GlobalApp = () => {
 		}),
 		new HttpLink({
 			// Production
-			// uri: 'https://cbvb02ezl4.execute-api.us-east-1.amazonaws.com/prod/graphql',
+			uri: 'https://cbvb02ezl4.execute-api.us-east-1.amazonaws.com/prod/graphql',
 			// Test
-			uri: 'https://cypmxq177b.execute-api.us-east-1.amazonaws.com/test/graphql'
+			// uri: 'https://cypmxq177b.execute-api.us-east-1.amazonaws.com/test/graphql'
 			// Services
 			// uri: 'https://uqwaw9keg3.execute-api.us-east-1.amazonaws.com/services/graphql'
 			// Local
