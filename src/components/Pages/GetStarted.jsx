@@ -42,7 +42,7 @@ const GetStarted = () => {
             <span className='start-title-text'>FIND THE RIGHT CREDIT FOR YOU</span>
             <div id={`${showNavButton? 'nav-button' : 'start'}`} className={`${appState.showExpansion ? 'start-search-pch' : 'start-search'}`}>
                 <Button
-                    onClick={handleStartClick} 
+                    onClick={handleStartClick}
                     className={`${showNavButton? 'nav-button' : 'is_start'} flow-button bg__blue`}
                     variant='contained'
                 >

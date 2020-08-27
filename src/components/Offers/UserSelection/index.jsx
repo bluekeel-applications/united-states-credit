@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import QuickLinks from './QuickLinks';
 import EmailTerms from './EmailTerms';
-import { flattenLongString, buildQueryLink } from '../../../utils/helpers';
+import { flattenLongString, buildQueryLink, capitalizeValue } from '../../../utils/helpers';
 
 const UserSelection = () => {
     let history = useHistory();
@@ -26,7 +26,8 @@ const UserSelection = () => {
 
     const handleInputChange = (event) => {
         let interestValue = event.target.value;
-        setInterest(interestValue);
+        const query = flattenLongString(interestValue);
+        setInterest(query);
         if (interestValue !== '') {
             setDisabledState(false);
             return;
@@ -49,11 +50,11 @@ const UserSelection = () => {
 
     const handleSubmit = async( quick_link = {} ) => {
         const { hsid, oid, eid, sid, uid, ip_address } = trackingState;
-        const { url, jump } = quick_link;
+        const { text, url, jump } = quick_link;
         const offer_url = url ? url : appState.offer.url;
         const offer_jump = jump && jump !== 'N/A' ? jump : appState.offer.jump;
-        const query = flattenLongString(interest);
-        
+        const query = text ? text : interest;
+
         if (!hasSent.current) {
             setLoading(true);
             hasSent.current = true;
@@ -84,12 +85,17 @@ const UserSelection = () => {
         };
     };
 
+    const handleClickSubmit = (value) => {
+        setInterest(value.text);
+        handleSubmit(value);
+    };
+
     return (
         <div className='user-selection-container'>
             <div className='email-optin-card'>
                 <div className='select-text-title'>What are you interested in?</div>
                 <form className='email-form-container' onSubmit={handleSubmit}>
-                    <QuickLinks quickLinkClick={handleSubmit} setInterest={setInterest}/>
+                    <QuickLinks quickLinkClick={handleClickSubmit}/>
                     <TextField
                         id='search-query-input'
                         label='Search'
@@ -97,7 +103,7 @@ const UserSelection = () => {
                         InputProps={{
                             autoFocus: false,
                             onChange: handleInputChange,
-                            value: interest
+                            value: capitalizeValue(interest)
                         }}
                         inputProps={{ 'aria-label': 'search-query-input' }}
                         fullWidth
