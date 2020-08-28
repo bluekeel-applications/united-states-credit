@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_USER_EMAIL } from '../../../utils/mutations';
+import { setCookie } from '../../../utils/helpers';
 
 const MoveToOfferButtons = ({ disabledState, email }) => {
     let history = useHistory();
@@ -14,6 +15,7 @@ const MoveToOfferButtons = ({ disabledState, email }) => {
     const sendEmail = async() => {
         dispatchTracking({ type: 'SET_EMAIL', payload: email });
         dispatchApp({ type: 'SET_EMAIL', payload: email });
+        setCookie('em_sub', email, 3);
         addUserEmail({
             variables: {
                 clickId: Number(trackingState.hsid),

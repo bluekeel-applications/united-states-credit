@@ -28,6 +28,8 @@ const initialTrackingState = {
     city: checkCookie('city') ? getCookie('city') : '',
     state: checkCookie('state') ? getCookie('state') : '',
     zip: checkCookie('zip') ? getCookie('zip') : '',
+    // Resubmission catching
+    em_sub: checkCookie('em_sub') ? getCookie('em_sub') : '',
 };
 
 const trackingStateReducer = (state, action) => {

@@ -8,13 +8,11 @@ import MNet from './MNet';
 import OfferWall from './OfferWall';
 import OptinOffer from './OptinOffer';
 import UserSelection from './UserSelection';
+import DirectLink from './DirectLink';
 import FlowPage from '../Layout/FlowPage';
-import useTrackingLayer from '../../hooks/useTrackingLayer';
-import { buildFullLink } from '../../utils/helpers';
 import * as Sentry from '@sentry/react';
 
 const Offers = () => {
-    useTrackingLayer();
     let history = useHistory();
     const { appState, trackingState } = useContext(AppContext);
     const [ selectedOffer ] = useState(appState.offer);
@@ -27,8 +25,7 @@ const Offers = () => {
     }, [selectedOffer, history]);
 
     const routedOfferPage = () => {
-        const { sid, eid, hsid, email } = trackingState;
-        const { url, jump, offer_page } = selectedOffer;
+        const { url, offer_page } = selectedOffer;
 
         switch(offer_page) {
             case 'mNet':
@@ -41,14 +38,13 @@ const Offers = () => {
                 );
 
             case 'direct_link':
-                const newWindowLink = buildFullLink(url, sid, eid, hsid, email, appState.pch);
-                window.open(newWindowLink);
-                if (jump !== 'N/A') {
-                    window.location.href = buildFullLink(jump, sid, eid, hsid, email, appState.pch);
-                    return null;
-                };
-                history.push('/verticals');
-                return null;
+                return (
+                    <FlowPage showCrumbs showFinalCrumbs>
+                        <div className='flow-content offer-container'>
+                            <DirectLink />
+                        </div>
+                    </FlowPage>
+                )
 
             case 'four_button':
                 return (
