@@ -8,6 +8,7 @@ import useOfferFinder from '../../../hooks/useOfferFinder';
 import MoveToOfferButtons from './MoveToOfferButtons';
 import EmailTerms from './EmailTerms';
 import EmailInput from './EmailInput';
+import * as Sentry from '@sentry/react';
 
 const EmailOptin = () => {
     const { trackingState, appState } = useContext(AppContext);
@@ -76,4 +77,4 @@ const EmailOptin = () => {
     )
 };
 
-export default EmailOptin;
+export default Sentry.withProfiler(EmailOptin, { name: 'Email OptIn Page', includeUpdates: false });

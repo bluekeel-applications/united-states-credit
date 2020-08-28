@@ -1,7 +1,7 @@
 import  { useRef, useState, useLayoutEffect } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 
-export default function useContentHeight({ on = true /* no value means on */ } = {}) {
+const useContentHeight = ({ on = true /* no value means on */ } = {}) => {
     const ref = useRef();
     const [height, set] = useState(0);
     const heightRef = useRef(height);
@@ -14,12 +14,6 @@ export default function useContentHeight({ on = true /* no value means on */ } =
                 }
             }
         })
-        // new ResizeObserver(packet => {
-        //     if (ref.current && heightRef.current !== ref.current.offsetHeight) {
-        //     heightRef.current = ref.current.offsetHeight;
-        //     set(ref.current.offsetHeight);
-        //     }
-        // })
     );
     useLayoutEffect(() => {
         if (on && ref.current) {
@@ -33,3 +27,5 @@ export default function useContentHeight({ on = true /* no value means on */ } =
 
     return [ref, height];
 };
+
+export default useContentHeight;

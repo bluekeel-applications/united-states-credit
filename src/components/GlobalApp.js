@@ -1,8 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import App from './App';
 import { AppContextProvider } from '../context';
-// Apollo
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
@@ -15,6 +17,17 @@ import usePushPros from '../hooks/usePushPros';
 // fontawesome
 import initFontAwesome from '../utils/initFontAwesome';
 initFontAwesome();
+
+const history = createBrowserHistory();
+// Sentry Monitoring
+Sentry.init({
+	dsn: 'https://e7b6d13933254ee29da1019e52d8447c@o440028.ingest.sentry.io/5407883',
+	integrations: [new Integrations.BrowserTracing({
+		routingInstrumentation: Sentry.reactRouterV5Instrumentation(history),
+	})],
+	tracesSampleRate: 1.0,
+	release: 'united-states-credit@' + process.env.npm_package_version,
+});
 
 const loggerLink = new ApolloLink((operation, forward) => {
 	console.log(`GraphQL Request: ${operation.operationName}`);
@@ -90,7 +103,7 @@ const GlobalApp = () => {
 	return (
 		<ApolloProvider client={client}>
 			<AppContextProvider>
-				<Router>
+				<Router history={history}>
 					<App />
 				</Router>
 			</AppContextProvider>
@@ -99,4 +112,4 @@ const GlobalApp = () => {
 }
 
 
-export default GlobalApp;
+export default Sentry.withProfiler(GlobalApp, { name: 'AppContainer' });

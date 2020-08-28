@@ -11,6 +11,7 @@ import UserSelection from './UserSelection';
 import FlowPage from '../Layout/FlowPage';
 import useTrackingLayer from '../../hooks/useTrackingLayer';
 import { buildFullLink } from '../../utils/helpers';
+import * as Sentry from '@sentry/react';
 
 const Offers = () => {
     useTrackingLayer();
@@ -110,4 +111,4 @@ const Offers = () => {
     return selectedOffer ? routedOfferPage() : null;
 };
 
-export default Offers;
+export default Sentry.withProfiler(Offers, { name: 'Offer Page' });
