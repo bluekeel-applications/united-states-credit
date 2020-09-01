@@ -8,18 +8,24 @@ import MoveToOfferButtons from './MoveToOfferButtons';
 import EmailTerms from './EmailTerms';
 import EmailInput from './EmailInput';
 import * as Sentry from '@sentry/react';
+import { checkCookie } from '../../../utils/helpers';
 
 const EmailOptin = () => {
     const { trackingState, appState } = useContext(AppContext);
     let history = useHistory();
     const [ emailValue, setEmail ] = useState(trackingState.email ? trackingState.email : '');
     const [ disabled, setDisabledState ] = useState(emailValue === '');
+    const [ duplicateUser ] = useState(checkCookie('em_sub'));
     const [ data, error, loading ] = useOfferFinder();
 
     useEffect(() => {
         if (data && data.fetchEndpointOffer.success) {
             console.log('Offer found and set to context.');
-            // TODO Also, this is a good place to check for exisiting email and forward user
+            if(duplicateUser) {
+                console.log('Duplicate User...sending to offer');
+                history.push('/offers');
+            };
+            return;
         };
         if (data && !data.fetchEndpointOffer.success) {
             console.log('Offer not found...lets start over!', data.fetchEndpointOffer);

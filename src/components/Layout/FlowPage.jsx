@@ -9,9 +9,9 @@ const FlowPage = ({children, showCrumbs, showFinalCrumbs = false}) => {
     const [ isIE ] = useCheckForIE();
 
     const wrapper_styles = useSpring({
-        config: config.default,
-        from: { opacity: 0, height: 0 },
-        to: { opacity: 1, height: height + 100 }
+        config: config.wobbly,
+        from: { height: 0, opacity: 0, },
+        to: { height: height + 100, opacity: 1 }
     });
 
     if(isIE) {
