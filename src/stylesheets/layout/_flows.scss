@@ -107,11 +107,11 @@
     align-items: center;
     margin-bottom: 20px;
     @include respond-to('medium') {
-        padding: 0 10vw 5vh 10vw;
+        padding: 10px 10vw 5vh 10vw;
         width: 100vw;
     }
     @include respond-to('small') {
-        padding: 0 0 5vh 0;
+        padding: 10px 0 5vh 0;
         width: 100vw;
     }
 }

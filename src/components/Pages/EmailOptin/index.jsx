@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../../../context';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../../Layout/FlowPage';
-import CloseFlow from '../../Shared/CloseFlow';
 import Loading from '../../Shared/Loading';
 import useOfferFinder from '../../../hooks/useOfferFinder';
 import MoveToOfferButtons from './MoveToOfferButtons';
@@ -44,7 +43,6 @@ const EmailOptin = () => {
         return (
             <FlowPage>
                 <div className='email-content flow-content'>
-                    <CloseFlow />
                     <div className='email-optin-container'>
                         <Loading />
                     </div>
@@ -55,7 +53,6 @@ const EmailOptin = () => {
 
     return (
         <FlowPage showCrumbs={appState.showStory}>
-            {!appState.showExpansion && <CloseFlow />}
             <div className='email-optin-container'>
                 <div className='email-optin-card'>
                     <div className='email-optin-text'>Would you like to receive relevant credit offers from <b><em>The Card Note</em></b> and <b><em>Card Matcher</em></b> directly to your inbox?</div>                    

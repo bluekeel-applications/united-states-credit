@@ -3,7 +3,6 @@ import { AppContext } from '../../context';
 import { flattenLongString } from '../../utils/helpers';
 import Button from '@material-ui/core/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CloseFlow from '../Shared/CloseFlow';
 import { buildFullLink } from '../../utils/helpers';
 import { useHistory } from 'react-router-dom';
 
@@ -59,7 +58,6 @@ const FourButton = ({ offer }) => {
 
     return(
         <div className='four-button'>
-            <CloseFlow />
             <div className='offer-page__main-multi'>
                 <span className='offer-header-text'>
                     Multiple sponsored results could be available that suit your needs.

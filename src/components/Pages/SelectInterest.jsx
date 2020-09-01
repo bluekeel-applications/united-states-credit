@@ -12,7 +12,6 @@ import {
 } from '../../utils/mutations';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
-import CloseFlow from '../Shared/CloseFlow';
 import { firePixelBlueKeel } from '../../utils/pixels';
 
 const quickLinks1 = [
@@ -131,7 +130,6 @@ const SelectInterest = () => {
 
     return (
         <FlowPage showCrumbs={appState.showStory}>
-            {!appState.showExpansion && <CloseFlow />}
             <div className='email-optin-container'>
                 <div className='email-optin-card'>
                     <div className='select-text-title'>What are you interested in?</div>

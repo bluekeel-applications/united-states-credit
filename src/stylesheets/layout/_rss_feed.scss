@@ -14,17 +14,17 @@
 }
 
 .feed-row {
-    min-width: 100%;
-    max-width: 1500px;
-    min-height: fit-content;
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
-    @include respond-to('small') {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+    // min-width: 100%;
+    // max-width: 1500px;
+    // min-height: fit-content;
+    // display: inline-flex;
+    // justify-content: space-between;
+    // align-items: center;
+    // @include respond-to('small') {
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: space-between;
+    // }
     text-align: left;
 }
 
@@ -59,7 +59,7 @@
     color: $red;
     font-weight: 800;
     font-size: 1.4rem;
-    width: 90vw;
+    // width: 90vw;
     max-width: 1200px;
     margin: 2vh 0;
     padding: 0 15px;

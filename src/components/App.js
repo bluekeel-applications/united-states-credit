@@ -4,8 +4,9 @@ import Routes from '../Routes';
 import LoadingPCH from './Shared/LoadingPCH';
 import Drawer from './Layout/Drawer';
 import Navbar from './Layout/Navbar';
+import Footer from './Layout/Footer';
 import Expansion from './Layout/Expansion';
-import Feed from './Feed';
+import BlogFeed from '@bit/bluekeel.feed.blog-feed';
 import { useHistory } from 'react-router-dom';
 import useSetProvider from '../hooks/useSetProvider';
 import useSetNewUser from '../hooks/useSetNewUser';
@@ -39,7 +40,8 @@ return (
 					<Navbar toggleDrawer={toggleDrawer}/> 
 					<Expansion /> 
 					<Routes />
-					<Feed />
+					<BlogFeed/>
+					<Footer />
 					<Drawer show={showDrawer} toggle={toggleDrawer}/>
 				</>
 			)

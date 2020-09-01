@@ -3,7 +3,6 @@ import { AppContext } from '../../context';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../Layout/FlowPage';
-import CloseFlow from '../Shared/CloseFlow';
 
 const DebtOptin = () => {
     const { dispatchApp, appState } = useContext(AppContext);    
@@ -25,7 +24,6 @@ const DebtOptin = () => {
 
     return (
         <FlowPage showCrumbs={appState.showStory}>
-            {!appState.showExpansion && <CloseFlow />}
             <div className='optin-row row1'>
                 <h2 className='optin-header-text'>
                     Would you like a loan to consolidate debt <b><em>and</em></b> for {appState.breadcrumbs.loan_type}?

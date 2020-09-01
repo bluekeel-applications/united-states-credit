@@ -5,7 +5,6 @@ import FlowPage from '../Layout/FlowPage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import { home_loan_buttons } from './BUTTONS';
-import CloseFlow from '../Shared/CloseFlow';
 
 const HomeLoans = () => {
     const { dispatchApp, appState } = useContext(AppContext);
@@ -31,7 +30,6 @@ const HomeLoans = () => {
 
     return (
         <FlowPage showCrumbs={appState.showStory}>
-            {!appState.showExpansion && <CloseFlow />}
             <span className='flow-title-text'>Select Loan Type:</span>
             <div className='flow-page__button-group'>
                 {home_loan_buttons.map((button, idx) => (

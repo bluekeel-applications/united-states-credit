@@ -5,7 +5,6 @@ import FlowPage from '../Layout/FlowPage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import { credit_card_buttons } from './BUTTONS';
-import CloseFlow from '../Shared/CloseFlow';
 
 const CreditCards = () => {
     const { appState, dispatchApp } = useContext(AppContext);
@@ -30,7 +29,6 @@ const CreditCards = () => {
 
     return (
         <FlowPage showCrumbs={appState.showStory}>
-            {!appState.showExpansion && <CloseFlow />}
             <span className='flow-title-text'>Select Card Type:</span>
             <div className='flow-page__button-group'>
                 {credit_card_buttons.map((button, idx) => (

@@ -3,7 +3,6 @@ import { AppContext } from '../../context';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import FlowPage from '../Layout/FlowPage';
-import CloseFlow from '../Shared/CloseFlow';
 
 const CheckingOptin = () => {
     const { appState, dispatchApp } = useContext(AppContext);    
@@ -25,7 +24,6 @@ const CheckingOptin = () => {
 
     return (
         <FlowPage showCrumbs={appState.showStory}>
-            {!appState.showExpansion && <CloseFlow />}
             <div className='optin-row row1'>
                 <h2 className='optin-header-text'>
                     <b>Banks are paying $100s</b> to new checking customers.<br />

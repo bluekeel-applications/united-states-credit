@@ -45,7 +45,7 @@ const useTrackingLayer = () => {
 					}
 				}
 			});
-			console.log('Trackers ran!');
+			console.log('CommonInsert and UserFlow posted.');
 		} catch (error) {
 			console.log('error running trackers@!');
 		};

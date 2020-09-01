@@ -11,7 +11,6 @@ import QuickLinks from './QuickLinks';
 import EmailTerms from './EmailTerms';
 import { flattenLongString, capitalizeValue, buildQueryLink } from '../../../utils/helpers';
 import { useHistory } from 'react-router-dom';
-// import useTrackingLayer from '../../../hooks/useTrackingLayer';
 
 const UserSelection = () => {
     let history = useHistory();
@@ -20,7 +19,6 @@ const UserSelection = () => {
     const [ emailValue ] = useState(trackingState.email ? trackingState.email : '');
     const [ interest, setInterest ] = useState('');
     const [ loading, setLoading ] = useState(false);
-    // const { executing } = useTrackingLayer(shouldRunTrackers);
     const [addUserFlow] = useMutation(ADD_USER_FLOW);
     const [insertCommonInfo] = useMutation(INSERT_COMMON_INFO);
     const [insertSearchInfo] = useMutation(INSERT_SEARCH_INFO);
@@ -44,18 +42,22 @@ const UserSelection = () => {
 
     const handleSubmit = async( quick_link = {} ) => {
         setLoading(true);
-        const { hsid, oid, eid, sid, uid, email, ip_address } = trackingState;
+        const { 
+            hsid, pid, oid, eid, sid, uid, 
+            email, ip_address,
+            fname, lname, address, city, state, zip
+        } = trackingState;
         const query = quick_link.text ? quick_link.text : interest;
         const offer_url = quick_link.url ? quick_link.url : appState.offer.url;
         const offer_jump = quick_link.jump && quick_link.jump !== 'N/A' ? quick_link.jump : appState.offer.jump;
-
-    // setShouldRunTrackers(true);     
+    
         addUserEmail({
             variables: {
-                clickId: Number(trackingState.hsid),
+                clickId: Number(hsid),
                 email: email
             }
         });
+
         insertSearchInfo({
             variables: {
                 visitor: {
@@ -70,33 +72,33 @@ const UserSelection = () => {
             }
         })
         addQueryInsight({ variables: { clickId: Number(hsid), query } })
-        firePixelBlueKeel(trackingState.hsid)
+        firePixelBlueKeel(hsid)
         // firePixelBing(appState.flowState.vertical);
         // firePixelGoogle();
         insertCommonInfo({
             variables: {
                 visitor: {
-                    'hsid': Number(trackingState.hsid),
-                    'oid': Number(trackingState.oid),
-                    'eid': trackingState.eid,
-                    'sid': Number(trackingState.sid),
-                    'uid': trackingState.uid,
-                    'ip_address': trackingState.ip_address,
-                    'email': trackingState.email || appState.email || appState.pch.email || '',
-                    'fname': trackingState.fname,
-                    'lname': trackingState.lname,
-                    'address': trackingState.address,
-                    'city': trackingState.city,
-                    'state': trackingState.state,
-                    'zip': trackingState.zip,
+                    'hsid': Number(hsid),
+                    'oid': Number(oid),
+                    'eid': eid,
+                    'sid': Number(sid),
+                    'uid': uid,
+                    'ip_address': ip_address,
+                    'email': email || appState.email || appState.pch.email || '',
+                    'fname': fname,
+                    'lname': lname,
+                    'address': address,
+                    'city': city,
+                    'state': state,
+                    'zip': zip,
                 }
             }
         })
         addUserFlow({
             variables: {
-                clickId: Number(trackingState.hsid),
+                clickId: Number(hsid),
                 flow: {
-                    'pid': Number(trackingState.pid),
+                    'pid': Number(pid),
                     'vertical': appState.flowState.vertical,
                     'loan_type': appState.flowState.loan_type,
                     'debt_type': appState.flowState.debt_type,
