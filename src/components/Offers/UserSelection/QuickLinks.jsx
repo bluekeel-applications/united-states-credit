@@ -7,8 +7,8 @@ const QuickLinks = ({ quickLinkClick }) => {
     const { appState } = useContext(AppContext);
 
     const handleClick = (e, link) => {
-        e.preventDefault();
-        quickLinkClick(link);
+        // e.preventDefault();
+        quickLinkClick(e, link);
     };
 
     const quickLinks = appState.offer.quick_link_group;

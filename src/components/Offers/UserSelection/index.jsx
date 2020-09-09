@@ -40,7 +40,8 @@ const UserSelection = () => {
         return <div className='loading-select'><Loading /></div>
     };
 
-    const handleSubmit = async( quick_link = {} ) => {
+    const handleSubmit = async( e, quick_link = {} ) => {
+        e.preventDefault();
         setLoading(true);
         const { 
             hsid, pid, oid, eid, sid, uid, 
@@ -108,25 +109,26 @@ const UserSelection = () => {
         })
 
         setLoading(false);
-        window.open(buildQueryLink(offer_url, sid, eid, hsid, email, appState.pch, query));
-
+        const linkout = buildQueryLink(offer_url, sid, eid, hsid, email, appState.pch, query);
+        window.open(linkout);
         if (offer_jump && offer_jump !== 'N/A') {
-            window.location.href = buildQueryLink(offer_jump, sid, eid, hsid, email, appState.pch, query);
+            const jumpBehind = buildQueryLink(offer_jump, sid, eid, hsid, email, appState.pch, query);
+            window.location.href = jumpBehind;
         } else {
             history.push('/verticals');
         };
     };
     
-    const handleClickSubmit = async(value) => {
+    const handleClickSubmit = async(e, value) => {
         setInterest(value.text);
-        handleSubmit(value);
+        handleSubmit(e, value);
     };
 
     return (
         <div className='user-selection-container'>
             <div className='email-optin-card'>
                 <div className='select-text-title'>What are you interested in?</div>
-                <form className='email-form-container' onSubmit={handleSubmit}>
+                <form className='email-form-container' onSubmit={(e) => handleSubmit(e)}>
                     <QuickLinks quickLinkClick={handleClickSubmit}/>
                     <TextField
                         id='search-query-input'

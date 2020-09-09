@@ -11,18 +11,19 @@ import * as Sentry from '@sentry/react';
 import { checkCookie } from '../../../utils/helpers';
 
 const EmailOptin = () => {
-    const { trackingState, appState } = useContext(AppContext);
+    const { trackingState, appState, dispatchApp } = useContext(AppContext);
     let history = useHistory();
     const [ emailValue, setEmail ] = useState(trackingState.email ? trackingState.email : '');
     const [ disabled, setDisabledState ] = useState(emailValue === '');
     const [ duplicateUser ] = useState(checkCookie('em_sub'));
     const [ data, error, loading ] = useOfferFinder();
-
+    
     useEffect(() => {
         if (data && data.fetchEndpointOffer.success) {
             console.log('Offer found and set to context.');
-            if(duplicateUser) {
+            if(duplicateUser && !appState.em_sub) {
                 console.log('Duplicate User...sending to offer');
+                dispatchApp({ type: 'REDIRECTION' });
                 history.push('/offers');
             };
             return;

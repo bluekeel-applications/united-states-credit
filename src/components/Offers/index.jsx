@@ -41,7 +41,7 @@ const Offers = () => {
                 return (
                     <FlowPage showCrumbs showFinalCrumbs>
                         <div className='flow-content offer-container'>
-                            <DirectLink />
+                            <DirectLink offer={selectedOffer} />
                         </div>
                     </FlowPage>
                 )

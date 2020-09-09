@@ -34,6 +34,7 @@ const initialAppState = {
         debt_type: null,
         debt_amount: null
     },
+    redirection: false,
     program_id: null,
     click_count: 0,
     offers: null,
@@ -42,6 +43,7 @@ const initialAppState = {
     four_button: null,
     jump: null,
     email: null,
+    em_sub: false,
     offer: null
 };
 
@@ -84,6 +86,12 @@ const appStateReducer = (state, action) => {
                     vertical: action.payload.vertical, 
                     loan_type: action.payload.loan_type
                 }
+            };
+
+        case 'REDIRECTION':
+            return {
+                ...state,
+                redirection: true
             };
 
         case 'SHOW_EXPANSION':
@@ -193,12 +201,9 @@ const appStateReducer = (state, action) => {
         case 'EMAIL_OPT_IN':
             return {
                 ...state,
-                flowState: {
-                    ...state.flowState,
-                    email_optin: true
-                },
-                email: action.payload
+                em_sub: true
             };
+
         case 'EMAIL_OPT_OUT':
             return {
                 ...state,

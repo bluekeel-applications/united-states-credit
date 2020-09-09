@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AppContext } from '../../context';
 import { useQuery, useMutation } from '@apollo/react-hooks';
@@ -9,6 +9,7 @@ import Loading from '../Shared/Loading';
 
 const DirectOffer = () => {
     let history = useHistory();
+    const [ offerData, setNewOffer ] = useState(null);
     const { trackingState, dispatchApp } = useContext(AppContext);
 
     const { loading, error, data } = useQuery(DIRECT_OFFER, {
@@ -19,9 +20,10 @@ const DirectOffer = () => {
     const [addTagToServiceLog] = useMutation(ADD_SERVICE_LOG);
 
     useEffect(() => {
-        if (data) {
+        if (data && !offerData) {
             const offer = data.fetchDirectOffer.body;
             dispatchApp({ type: 'SELECTED_OFFER', payload: offer });
+            setNewOffer(offer);
             addTagToServiceLog({
                 variables: {
                     service: {
@@ -37,7 +39,7 @@ const DirectOffer = () => {
             return;
         };
         // eslint-disable-next-line
-    }, [data]);
+    }, [data, offerData]);
 
     if (error) {
         console.log('error:', error);

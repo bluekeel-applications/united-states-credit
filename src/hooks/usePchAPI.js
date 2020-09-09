@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { PCH_USER } from '../utils/queries';
 import { ADD_USER_PCH } from '../utils/mutations';
 import { useMutation } from '@apollo/react-hooks';
-import { setCookie } from '../utils/helpers';
+// import { setCookie } from '../utils/helpers';
 
 const usePchAPI = () => {
 	const { dispatchApp, dispatchTracking, trackingState } = useContext(AppContext);
@@ -19,7 +19,7 @@ const usePchAPI = () => {
 			const user = data.fetchUserInfo.body;
 			dispatchApp({ type: 'FOUND_PCH_USER', payload: user });
 			dispatchTracking({ type: 'SET_PCH_USER', payload: user });
-			setCookie('em_sub', user.Email, 30);
+			// setCookie('em_sub', user.EmailAddress, 30);
 			addUserPCH({
 				variables: {
 					clickId: Number(trackingState.hsid),

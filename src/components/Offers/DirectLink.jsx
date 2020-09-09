@@ -4,22 +4,26 @@ import { useHistory } from 'react-router-dom';
 import { buildFullLink } from '../../utils/helpers';
 import useTrackingLayer from '../../hooks/useTrackingLayer';
 
-const DirectLink = () => {
+const DirectLink = ({ offer }) => {
     let history = useHistory();
     const { appState, trackingState } = useContext(AppContext);
     const { sid, eid, hsid, email } = trackingState;
-    const { url, jump } = appState.offer;
+    const { url, jump } = offer;
     const componentIsMounted = useRef(true);
     useTrackingLayer();
 
     useEffect(() => {
         if (componentIsMounted.current) {
             const newWindowLink = buildFullLink(url, sid, eid, hsid, email, appState.pch);
-            window.open(newWindowLink);
-            if (jump && jump !== 'N/A') {
-                window.location.href = buildFullLink(jump, sid, eid, hsid, email, appState.pch);
+            if(!appState.redirection || appState.em_sub) {
+                window.open(newWindowLink, '_blank');
+                if (jump && jump !== 'N/A') {
+                    window.location.href = buildFullLink(jump, sid, eid, hsid, email, appState.pch);
+                } else {
+                    history.push('/verticals');
+                };
             } else {
-                history.push('/verticals');
+                window.location.href = newWindowLink;
             };
         };
 
@@ -30,8 +34,7 @@ const DirectLink = () => {
     return (
         <div id='857097420' className='offer-page__main'>
             <div className='offer-page__mnet-header'>
-                <span className='sponsored-text'>Sponsored: </span>
-                <span className='sponsored-text-lg'>Explore the options below</span>
+                <span className='sponsored-text-lg'>...Offers coming your way!</span>
             </div>
         </div>
     )

@@ -15,6 +15,7 @@ const MoveToOfferButtons = ({ disabledState, email }) => {
     const sendEmail = async() => {
         dispatchTracking({ type: 'SET_EMAIL', payload: email });
         dispatchApp({ type: 'SET_EMAIL', payload: email });
+        dispatchApp({ type: 'EMAIL_OPT_IN' });
         setCookie('em_sub', email, 30);
         addUserEmail({
             variables: {
