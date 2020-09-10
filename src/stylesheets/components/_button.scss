@@ -71,8 +71,10 @@
         width: 100px;
         // min-width: 175px;
         // font-size: 18px;
-        // min-height: fit-content;
+        min-height: 40px;
+        max-height: 50px;
         // padding: 5px;
+        margin: 1vh 0 0 0;
     }
 }
 
