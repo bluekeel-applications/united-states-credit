@@ -1,0 +1,29 @@
+{
+  "name": "@bit/bluekeel.feed.blog-feed",
+  "version": "0.0.3",
+  "homepage": "https://bit.dev/bluekeel/feed/blog-feed",
+  "main": "dist/BlogFeed.js",
+  "componentId": {
+    "scope": "bluekeel.feed",
+    "name": "blog-feed",
+    "version": "0.0.3"
+  },
+  "dependencies": {
+    "@bit/bluekeel.feed.content-top": "0.0.2",
+    "@bit/bluekeel.feed.editorial-row": "0.0.1",
+    "@bit/bluekeel.feed.featured-row": "0.0.1",
+    "@bit/bluekeel.feed.info-row": "0.0.1",
+    "@bit/bluekeel.feed.latest-row": "0.0.1",
+    "@bit/bluekeel.feed.popular-row": "0.0.1"
+  },
+  "devDependencies": {},
+  "peerDependencies": {
+    "react": "^16.13.1"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "bit": {
+    "env": {
+      "compiler": "bit.envs/compilers/react@1.0.20"
+    }
+  }
+}

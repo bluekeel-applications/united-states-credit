@@ -1173,22 +1173,22 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@bit/bluekeel.feed.blog-feed@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.blog-feed/-/bluekeel.feed.blog-feed-0.0.1.tgz#e678d2a32edf67a5fcabed64b7842b90479fe321"
-  integrity sha1-5njSoy7fZ6X8q+1kt4QrkEef4yE=
+"@bit/bluekeel.feed.blog-feed@^0.0.3":
+  version "0.0.3"
+  resolved "https://node.bit.dev/bluekeel.feed.blog-feed/-/bluekeel.feed.blog-feed-0.0.3.tgz#9e79d10dd9f3cf968f1d810734e8808a0b9dc27b"
+  integrity sha1-nnnRDdnzz5aPHYEHNOiAigudwns=
   dependencies:
-    "@bit/bluekeel.feed.content-top" "0.0.1"
+    "@bit/bluekeel.feed.content-top" "0.0.2"
     "@bit/bluekeel.feed.editorial-row" "0.0.1"
     "@bit/bluekeel.feed.featured-row" "0.0.1"
     "@bit/bluekeel.feed.info-row" "0.0.1"
     "@bit/bluekeel.feed.latest-row" "0.0.1"
     "@bit/bluekeel.feed.popular-row" "0.0.1"
 
-"@bit/bluekeel.feed.content-top@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.content-top/-/bluekeel.feed.content-top-0.0.1.tgz#9c7ae9b48aee1eb514b055de1bc93589d814226e"
-  integrity sha1-nHrptIruHrUUsFXeG8k1idgUIm4=
+"@bit/bluekeel.feed.content-top@0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.feed.content-top/-/bluekeel.feed.content-top-0.0.2.tgz#6982a18984fd395def2716731bf3478b88120d0b"
+  integrity sha1-aYKhiYT9OV3vJxZzG/NHi4gSDQs=
 
 "@bit/bluekeel.feed.credit@0.0.1":
   version "0.0.1"

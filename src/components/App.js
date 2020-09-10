@@ -40,7 +40,7 @@ return (
 					<Navbar toggleDrawer={toggleDrawer}/> 
 					<Expansion /> 
 					<Routes />
-					<BlogFeed/>
+					<BlogFeed host='united_states_credit' />
 					<Footer />
 					<Drawer show={showDrawer} toggle={toggleDrawer}/>
 				</>
