@@ -17,6 +17,7 @@ const initialAppState = {
     animationPlayed: false,
     loadingOffers: true,
     showDrawer: false,
+    showNavStart: false,
     showExpansion: false,
     showStory: false,
     flowState: {
@@ -76,6 +77,12 @@ const appStateReducer = (state, action) => {
             return {
                 ...state,
                 animationPlayed: true
+            };
+        
+        case 'TOGGLE_START_IN_NAV':
+            return {
+                ...state,
+                showNavStart: action.payload
             };
         
         case 'DEEP_DIVE':
