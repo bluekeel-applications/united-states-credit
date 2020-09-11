@@ -3,7 +3,9 @@ import { AppContext } from '../context';
 import Routes from '../Routes';
 import LoadingPCH from './Shared/LoadingPCH';
 import Drawer from './Layout/Drawer';
-import Navbar from './Layout/Navbar';
+import Navbar from '@bit/bluekeel.component-library.navbar';
+import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
+import UscBlogLogo from '@bit/bluekeel.assets.usc_blog_logo';
 import Footer from './Layout/Footer';
 import Expansion from './Layout/Expansion';
 import BlogFeed from '@bit/bluekeel.feed.blog-feed';
@@ -19,8 +21,8 @@ const App = () => {
 	useInsertNewUser();
 	usePchAPI();
 	let history = useHistory();
-	const [showDrawer, toggleDrawer] = useState(false);
-	const { appState } = useContext(AppContext);
+	const [ showDrawer, toggleDrawer ] = useState(false);
+	const { appState, dispatchApp } = useContext(AppContext);
 
 	useEffect(() => {
 		if(redirect) {
@@ -30,24 +32,45 @@ const App = () => {
 		// eslint-disable-next-line
 	}, [redirect]);
 
-return (
-	<div className='App app-bg_container'>
-		{
-			appState.provider === 'pch' && !appState.animationPlayed ? (
-				<LoadingPCH redirect={redirect} />
-			) : (
-				<>
-					<Navbar toggleDrawer={toggleDrawer}/> 
-					<Expansion /> 
-					<Routes />
-					<BlogFeed host='united_states_credit' />
-					<Footer />
-					<Drawer show={showDrawer} toggle={toggleDrawer}/>
-				</>
-			)
-		}
-	</div>
-);
-}
+	const goHome = () => {
+        dispatchApp({ type: 'RESTART_SEARCH' });
+        window.scrollTo(0, 0);
+		history.push('/');
+    };
+
+	return (
+		<div className='App app-bg_container'>
+			{
+				appState.provider === 'pch' && !appState.animationPlayed ? (
+					<LoadingPCH redirect={redirect} />
+				) : (
+					<>
+						<Navbar 
+							drawerClick={() => toggleDrawer(true)} 
+							goHome={goHome}
+							brandIcon={UscBlogLogo}
+							brand={UscFullLogo}
+							styleVariant={navbarVariants}
+						> 
+							<Expansion /> 
+							<Routes />
+							<BlogFeed host='united_states_credit' />
+							<Footer />
+							<Drawer show={showDrawer} toggle={toggleDrawer}/>
+						</Navbar>
+					</>
+				)
+			}
+		</div>
+	);
+};
+
+const navbarVariants = {
+	navbar: {},
+	toolbar: {},
+	navContent: {}, 
+	brand: {}, 
+	menuIcon: {}
+};
 
 export default App;

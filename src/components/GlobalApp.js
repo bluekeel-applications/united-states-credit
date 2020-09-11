@@ -13,7 +13,7 @@ import { ApolloLink } from 'apollo-link';
 import { RetryLink } from 'apollo-link-retry';
 import { ApolloProvider } from '@apollo/react-hooks';
 import usePushPros from '../hooks/usePushPros';
-
+import Radium, { StyleRoot } from 'radium';
 // fontawesome
 import initFontAwesome from '../utils/initFontAwesome';
 initFontAwesome();
@@ -100,11 +100,15 @@ const GlobalApp = () => {
 		connectToDevTools: true,
 	});
 	
+	const WrappedApp = Radium(App);
+
 	return (
 		<ApolloProvider client={client}>
 			<AppContextProvider>
 				<Router history={history}>
-					<App />
+					<StyleRoot>
+						<WrappedApp />
+					</StyleRoot>
 				</Router>
 			</AppContextProvider>
 		</ApolloProvider>

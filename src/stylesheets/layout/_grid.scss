@@ -12,7 +12,7 @@
 	background-position: left, right;
 	background-size: contain;
 	position: absolute;
-	top: 60px;
+	top: -5px;
 	padding: 0;
 	@include respond-to('small') {
         height: 60px;
