@@ -189,7 +189,8 @@ const useSetDeepDive = (vertical, type) => {
 			const locationParts = window.location.hostname.split('.');
 			const subDomain = locationParts.shift();
 			if(subDomain === 'pch') {
-				setRedirect('/select');
+				setRedirect('/direct');
+				// setRedirect('/select');
 			}
 		};
 

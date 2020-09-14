@@ -29,13 +29,16 @@ export const sendHitStreetHSID = async(payload) => {
         });
         if (res.status !== 200) {
             const backup = Date.now();
+            console.log('Error occured on HitStreet; Fallback ClickID created:', backup);
             setCookie('hsid', backup, 3);
             return backup;
         };
         if(typeof res.data === 'number') {
+            console.log('New ClickID:', res.data);
             setCookie('hsid', res.data, 3);
             return res.data;
         };
+        console.log('ClickID found in cookies:', payload.HSID);
         setCookie('hsid', payload.HSID, 3);
         return payload.HSID;
     } catch(err) {

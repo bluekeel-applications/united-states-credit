@@ -15,6 +15,7 @@ const DirectLink = ({ offer }) => {
     useEffect(() => {
         if (componentIsMounted.current) {
             const newWindowLink = buildFullLink(url, sid, eid, hsid, email, appState.pch);
+            // If they were NOT placed here through redirection, then there is a click event to use.
             if(!appState.redirection || appState.em_sub) {
                 window.open(newWindowLink, '_blank');
                 if (jump && jump !== 'N/A') {

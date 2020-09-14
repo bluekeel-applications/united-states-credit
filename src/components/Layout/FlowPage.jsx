@@ -3,15 +3,17 @@ import BreadCrumbs from '../Shared/Breadcrumbs';
 import useContentHeight from '../../hooks/useContentHeight';
 import { animated, useSpring, config } from 'react-spring';
 import useCheckForIE from '../../hooks/useCheckForIE';
+import { useMediaQuery } from 'react-responsive';
 
 const FlowPage = ({children, showCrumbs, showFinalCrumbs = false}) => {
     const [ heightRef, height ] = useContentHeight();
     const [ isIE ] = useCheckForIE();
+    const isMobile = useMediaQuery({ maxWidth: 767 });
 
     const wrapper_styles = useSpring({
         config: config.wobbly,
         from: { height: 0, opacity: 0, },
-        to: { height: height + 100, opacity: 1 }
+        to: { height: isMobile ? height + 200 : height + 100, opacity: 1 }
     });
 
     if(isIE) {

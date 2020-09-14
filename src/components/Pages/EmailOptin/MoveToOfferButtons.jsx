@@ -4,13 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
-import { ADD_USER_EMAIL } from '../../../utils/mutations';
+import { ADD_USER_EMAIL, INSERT_COMMON_INFO } from '../../../utils/mutations';
 import { setCookie } from '../../../utils/helpers';
 
 const MoveToOfferButtons = ({ disabledState, email }) => {
     let history = useHistory();
     const { trackingState, dispatchTracking, dispatchApp } = useContext(AppContext);
     const [ addUserEmail ] = useMutation(ADD_USER_EMAIL);
+    const [ insertCommonInfo ] = useMutation(INSERT_COMMON_INFO);
 
     const sendEmail = async() => {
         dispatchTracking({ type: 'SET_EMAIL', payload: email });
@@ -21,6 +22,25 @@ const MoveToOfferButtons = ({ disabledState, email }) => {
             variables: {
                 clickId: Number(trackingState.hsid),
                 email: email
+            }
+        });
+        insertCommonInfo({
+            variables: {
+                visitor: {
+                    'hsid': Number(trackingState.hsid),
+                    'oid': Number(trackingState.oid),
+                    'eid': trackingState.eid,
+                    'sid': Number(trackingState.sid),
+                    'uid': trackingState.uid,
+                    'ip_address': trackingState.ip_address,
+                    'email': email,
+                    'fname': trackingState.fname,
+                    'lname': trackingState.lname,
+                    'address': trackingState.address,
+                    'city': trackingState.city,
+                    'state': trackingState.state,
+                    'zip': trackingState.zip,
+                }
             }
         });
     };

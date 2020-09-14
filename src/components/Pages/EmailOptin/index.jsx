@@ -21,8 +21,10 @@ const EmailOptin = () => {
     useEffect(() => {
         if (data && data.fetchEndpointOffer.success) {
             console.log('Offer found and set to context.');
+            // If user has cookied submission, but has not clicked
             if(duplicateUser && !appState.em_sub) {
                 console.log('Duplicate User...sending to offer');
+                // Because there has not been a click event yet...
                 dispatchApp({ type: 'REDIRECTION' });
                 history.push('/offers');
             };
