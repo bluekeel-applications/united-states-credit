@@ -8,7 +8,7 @@ import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
 import UscBlogLogo from '@bit/bluekeel.assets.usc_blog_logo';
 import Footer from './Layout/Footer';
 import Expansion from './Layout/Expansion';
-import BlogFeed from '@bit/bluekeel.feed.blog-feed';
+import Feed from '../components/Layout/Feed';
 import { useHistory } from 'react-router-dom';
 import useSetProvider from '../hooks/useSetProvider';
 import useSetNewUser from '../hooks/useSetNewUser';
@@ -91,7 +91,7 @@ const App = () => {
 						> 
 							<Expansion /> 
 							<Routes />
-							<BlogFeed host='united_states_credit' />
+							<Feed />
 							<Footer />
 							<Drawer show={showDrawer} toggle={toggleDrawer}/>
 						</Navbar>

@@ -1183,124 +1183,61 @@
   resolved "https://node.bit.dev/bluekeel.assets.usc_full_logo/-/bluekeel.assets.usc_full_logo-0.0.1.tgz#533b863d4f76b5c9f7db6c6eb152484c7275abd6"
   integrity sha1-UzuGPU92tcn322xusVJITHJ1q9Y=
 
-"@bit/bluekeel.component-library.navbar@^0.0.6":
-  version "0.0.6"
-  resolved "https://node.bit.dev/bluekeel.component-library.navbar/-/bluekeel.component-library.navbar-0.0.6.tgz#974d91bec885683cf216776b5985292d74f081a6"
-  integrity sha1-l02RvsiFaDzyFndrWYUpLXTwgaY=
+"@bit/bluekeel.component-library.content-top@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.component-library.content-top/-/bluekeel.component-library.content-top-0.0.1.tgz#2dfbc4013ec07a9d6ba9307a2f839674585c43af"
+  integrity sha1-LfvEAT7Aep1rqTB6L4OWdFhcQ68=
   dependencies:
-    "@fortawesome/react-fontawesome" "^0.1.11"
-    "@material-ui/core" "^4.11.0"
     radium "^0.26.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.start-button@^0.0.6":
-  version "0.0.6"
-  resolved "https://node.bit.dev/bluekeel.component-library.start-button/-/bluekeel.component-library.start-button-0.0.6.tgz#1e1ca38abe59358c8fbe7987bdf2e9b94d4e8de0"
-  integrity sha1-Hhyjir5ZNYyPvnmHvfLpuU1OjeA=
-  dependencies:
-    "@fortawesome/react-fontawesome" "^0.1.11"
-    "@material-ui/core" "^4.11.0"
-    radium "^0.26.0"
-    react "^16.13.1"
-
-"@bit/bluekeel.feed.blog-feed@^0.0.3":
+"@bit/bluekeel.component-library.featured@^0.0.3":
   version "0.0.3"
-  resolved "https://node.bit.dev/bluekeel.feed.blog-feed/-/bluekeel.feed.blog-feed-0.0.3.tgz#9e79d10dd9f3cf968f1d810734e8808a0b9dc27b"
-  integrity sha1-nnnRDdnzz5aPHYEHNOiAigudwns=
+  resolved "https://node.bit.dev/bluekeel.component-library.featured/-/bluekeel.component-library.featured-0.0.3.tgz#3f1d38376b57ebb438a2bacf38b3cc30fae9b980"
+  integrity sha1-Px04N2tX67Q4orrPOLPMMPrpuYA=
   dependencies:
-    "@bit/bluekeel.feed.content-top" "0.0.2"
-    "@bit/bluekeel.feed.editorial-row" "0.0.1"
-    "@bit/bluekeel.feed.featured-row" "0.0.1"
-    "@bit/bluekeel.feed.info-row" "0.0.1"
-    "@bit/bluekeel.feed.latest-row" "0.0.1"
-    "@bit/bluekeel.feed.popular-row" "0.0.1"
+    "@bit/bluekeel.component-library.feed-toolz" "0.0.1"
+    radium "^0.26.0"
+    react "^16.13.1"
 
-"@bit/bluekeel.feed.content-top@0.0.2":
+"@bit/bluekeel.component-library.feed-toolz@0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.component-library.feed-toolz/-/bluekeel.component-library.feed-toolz-0.0.1.tgz#3a30e9d104964a1613ae10c1b7d781dc90b5c2f2"
+  integrity sha1-OjDp0QSWShYTrhDBt9eB3JC1wvI=
+
+"@bit/bluekeel.component-library.knowledge@^0.0.2":
   version "0.0.2"
-  resolved "https://node.bit.dev/bluekeel.feed.content-top/-/bluekeel.feed.content-top-0.0.2.tgz#6982a18984fd395def2716731bf3478b88120d0b"
-  integrity sha1-aYKhiYT9OV3vJxZzG/NHi4gSDQs=
-
-"@bit/bluekeel.feed.credit@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.credit/-/bluekeel.feed.credit-0.0.1.tgz#1df9f4e8cd7fbc75150aaf8ca2634a90df8410fa"
-  integrity sha1-Hfn06M1/vHUVCq+MomNKkN+EEPo=
-
-"@bit/bluekeel.feed.editorial-row@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.editorial-row/-/bluekeel.feed.editorial-row-0.0.1.tgz#b47e4a98db4395c78b0e21fa229f0eedeacaf8df"
-  integrity sha1-tH5KmNtDlceLDiH6Ip8O7erK+N8=
+  resolved "https://node.bit.dev/bluekeel.component-library.knowledge/-/bluekeel.component-library.knowledge-0.0.2.tgz#d79d2a65ca0e1abe1ac926f5d4d3abf4253b258a"
+  integrity sha1-150qZcoOGr4aySb11NOr9CU7JYo=
   dependencies:
-    "@bit/bluekeel.feed.featured" "0.0.1"
-    "@bit/bluekeel.feed.search_pad" "0.0.1"
+    "@bit/bluekeel.component-library.feed-toolz" "0.0.1"
+    radium "^0.26.0"
+    react "^16.13.1"
 
-"@bit/bluekeel.feed.featured-row@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.featured-row/-/bluekeel.feed.featured-row-0.0.1.tgz#7d90e6c82f3b8978dbd76ab7f091485974011f3a"
-  integrity sha1-fZDmyC87iXjb12q38JFIWXQBHzo=
+"@bit/bluekeel.component-library.navbar@^0.0.7":
+  version "0.0.7"
+  resolved "https://node.bit.dev/bluekeel.component-library.navbar/-/bluekeel.component-library.navbar-0.0.7.tgz#81e4e21295093df2bacda9c77d591fcc91bfa1bc"
+  integrity sha1-geTiEpUJPfK6zanHfVkfzJG/obw=
   dependencies:
-    "@bit/bluekeel.feed.featured" "0.0.1"
-    "@bit/bluekeel.feed.helperz" "0.0.1"
+    "@fortawesome/react-fontawesome" "^0.1.11"
+    "@material-ui/core" "^4.11.0"
+    radium "^0.26.0"
+    react "^16.13.1"
 
-"@bit/bluekeel.feed.featured@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.featured/-/bluekeel.feed.featured-0.0.1.tgz#ddf2a58a6308f510549f8bafa792a48d1b79ac13"
-  integrity sha1-3fKlimMI9RBUn4uvp5KkjRt5rBM=
-
-"@bit/bluekeel.feed.helperz@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.helperz/-/bluekeel.feed.helperz-0.0.1.tgz#d060753a1ba454a9f4f68bfbe1b86641a83d076e"
-  integrity sha1-0GB1OhukVKn09ov74bhmQag9B24=
-
-"@bit/bluekeel.feed.info-row@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.info-row/-/bluekeel.feed.info-row-0.0.1.tgz#f4efde92549abf3b7e137d72665d53549c75bb1d"
-  integrity sha1-9O/eklSavzt+E31yZl1TVJx1ux0=
+"@bit/bluekeel.component-library.start-button@^0.0.8":
+  version "0.0.8"
+  resolved "https://node.bit.dev/bluekeel.component-library.start-button/-/bluekeel.component-library.start-button-0.0.8.tgz#d301c9c17b6f5b8ebbfd36bf4842108fdfb8041b"
+  integrity sha1-0wHJwXtvW467/Ta/SEIQj9+4BBs=
   dependencies:
-    "@bit/bluekeel.feed.credit" "0.0.1"
-    "@bit/bluekeel.feed.helperz" "0.0.1"
-    "@bit/bluekeel.feed.reviews" "0.0.1"
-    "@bit/bluekeel.feed.tips" "0.0.1"
+    "@fortawesome/react-fontawesome" "^0.1.11"
+    "@material-ui/core" "^4.11.0"
+    radium "^0.26.0"
+    react "^16.13.1"
 
-"@bit/bluekeel.feed.latest-row@0.0.1":
+"@bit/bluekeel.component-library.usc@^0.0.1":
   version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.latest-row/-/bluekeel.feed.latest-row-0.0.1.tgz#d2e1e22b3331b9583e875855448547d151e05877"
-  integrity sha1-0uHiKzMxuVg+h1hVRIVH0VHgWHc=
-  dependencies:
-    "@bit/bluekeel.feed.helperz" "0.0.1"
-    "@bit/bluekeel.feed.latest" "0.0.1"
-
-"@bit/bluekeel.feed.latest@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.latest/-/bluekeel.feed.latest-0.0.1.tgz#ca45762508978915888c6afd91f01cab55624ddb"
-  integrity sha1-ykV2JQiXiRWIjGr9kfAcq1ViTds=
-
-"@bit/bluekeel.feed.popular-row@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.popular-row/-/bluekeel.feed.popular-row-0.0.1.tgz#2bf3f7b3a3c370a1bb750cab17d949a089f43bff"
-  integrity sha1-K/P3s6PDcKG7dQyrF9lJoIn0O/8=
-  dependencies:
-    "@bit/bluekeel.feed.helperz" "0.0.1"
-    "@bit/bluekeel.feed.popular" "0.0.1"
-
-"@bit/bluekeel.feed.popular@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.popular/-/bluekeel.feed.popular-0.0.1.tgz#7361f677831543f0c434d9f4a64b2ee66c3733f3"
-  integrity sha1-c2H2d4MVQ/DENNn0pksu5mw3M/M=
-
-"@bit/bluekeel.feed.reviews@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.reviews/-/bluekeel.feed.reviews-0.0.1.tgz#8e351398f36d35b8b399318cc23f012600eb96a6"
-  integrity sha1-jjUTmPNtNbizmTGMwj8BJgDrlqY=
-
-"@bit/bluekeel.feed.search_pad@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.search_pad/-/bluekeel.feed.search_pad-0.0.1.tgz#daf23423fe91eb14428f232fa2938d97c85a31d2"
-  integrity sha1-2vI0I/6R6xRCjyMvopONl8haMdI=
-
-"@bit/bluekeel.feed.tips@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.feed.tips/-/bluekeel.feed.tips-0.0.1.tgz#3e950a8c75ae4c71c4f5c93a0a0f640a7907f427"
-  integrity sha1-PpUKjHWuTHHE9ck6Cg9kCnkH9Cc=
+  resolved "https://node.bit.dev/bluekeel.component-library.usc/-/bluekeel.component-library.usc-0.0.1.tgz#c3fca3467aa83da45e813ac790fd87f012c82c08"
+  integrity sha1-w/yjRnqoPaRegTrHkP2H8BLILAg=
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
