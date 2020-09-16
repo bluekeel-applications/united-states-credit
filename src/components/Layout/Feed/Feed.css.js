@@ -22,5 +22,13 @@ export default {
         contentTitleSpan: { color: '#f80000' },
         typeColumnTitle: { color: '#f80000' },
         columnItemTitle: { color: '#092c7e' }
-    }
+    },
+    overrideLatest: {
+        contentTitleSpan: { color: '#f80000' },
+        articleTitle: { color: '#092c7e' }
+    },
+    overridePopular: {
+        contentTitleSpan: { color: '#f80000' },
+        cardTitle: { color: '#092c7e' }
+    },
 }
