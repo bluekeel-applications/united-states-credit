@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import App from './App';
@@ -13,21 +13,12 @@ import { ApolloLink } from 'apollo-link';
 import { RetryLink } from 'apollo-link-retry';
 import { ApolloProvider } from '@apollo/react-hooks';
 import usePushPros from '../hooks/usePushPros';
-import Radium, { StyleRoot } from 'radium';
+import { StyleRoot } from 'radium';
 // fontawesome
 import initFontAwesome from '../utils/initFontAwesome';
 initFontAwesome();
 
 const history = createBrowserHistory();
-// Sentry Monitoring
-Sentry.init({
-	dsn: 'https://e7b6d13933254ee29da1019e52d8447c@o440028.ingest.sentry.io/5407883',
-	integrations: [new Integrations.BrowserTracing({
-		routingInstrumentation: Sentry.reactRouterV5Instrumentation(history),
-	})],
-	tracesSampleRate: 1.0,
-	release: 'united-states-credit@' + process.env.npm_package_version,
-});
 
 const loggerLink = new ApolloLink((operation, forward) => {
 	console.log(`GraphQL Request: ${operation.operationName}`);
@@ -63,6 +54,19 @@ const retryLink = new RetryLink({
 
 const GlobalApp = () => {
 	usePushPros();
+
+	useEffect(() => {
+		// Sentry Monitoring
+        Sentry.init({
+			dsn: 'https://e7b6d13933254ee29da1019e52d8447c@o440028.ingest.sentry.io/5407883',
+			integrations: [new Integrations.BrowserTracing({
+				routingInstrumentation: Sentry.reactRouterV5Instrumentation(history),
+			})],
+			tracesSampleRate: 1.0,
+			release: 'united-states-credit@' + process.env.npm_package_version,
+		});
+	}, []);
+	
 	const links = ApolloLink.from([
 		loggerLink,
 		retryLink,
@@ -99,15 +103,13 @@ const GlobalApp = () => {
 		// connect to your application's Apollo Client in production
 		connectToDevTools: true,
 	});
-	
-	const WrappedApp = Radium(App);
 
 	return (
 		<ApolloProvider client={client}>
 			<AppContextProvider>
 				<Router history={history}>
 					<StyleRoot>
-						<WrappedApp />
+						<App />
 					</StyleRoot>
 				</Router>
 			</AppContextProvider>

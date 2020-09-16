@@ -7,7 +7,7 @@ import Navbar from '@bit/bluekeel.component-library.navbar';
 import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
 import UscBlogLogo from '@bit/bluekeel.assets.usc_blog_logo';
 import Footer from './Layout/Footer';
-import Expansion from './Layout/Expansion';
+// import Expansion from './Layout/Expansion';
 import Feed from '../components/Layout/Feed';
 import { useHistory } from 'react-router-dom';
 import useSetProvider from '../hooks/useSetProvider';
@@ -15,6 +15,7 @@ import useSetNewUser from '../hooks/useSetNewUser';
 import useInsertNewUser from '../hooks/useInsertNewUser';
 import usePchAPI from '../hooks/usePchAPI';
 import { useMediaQuery } from 'react-responsive';
+import Radium from 'radium';
 
 const App = () => {
 	useSetProvider();
@@ -77,23 +78,24 @@ const App = () => {
     };
 
 	return (
-		<div className='App app-bg_container'>
+		<div key='app-key' className='App app-bg_container'>
 			{
 				appState.provider === 'pch' && !appState.animationPlayed ? (
 					<LoadingPCH redirect={redirect} />
 				) : (
 					<>
-						<Navbar 
+						<Navbar
+							key='usc-navbar'
 							drawerClick={() => toggleDrawer(true)} 
 							goHome={goHome}
 							brand={showLogoText ? UscFullLogo : UscBlogLogo}
 							styleVariant={navbarVariants}
 						> 
-							<Expansion /> 
-							<Routes />
-							<Feed />
-							<Footer />
-							<Drawer show={showDrawer} toggle={toggleDrawer}/>
+							{/* <Expansion />  */}
+							<Routes key='usc-routes'/>
+							<Feed key='usc-feed'/>
+							<Footer key='usc-footer'/>
+							<Drawer key='usc-drawer' show={showDrawer} toggle={toggleDrawer}/>
 						</Navbar>
 					</>
 				)
@@ -110,4 +112,4 @@ const navbarVariants = {
 	menuIcon: {}
 };
 
-export default App;
+export default Radium(App);

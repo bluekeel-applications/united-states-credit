@@ -23,6 +23,11 @@ export default {
         typeColumnTitle: { color: '#f80000' },
         columnItemTitle: { color: '#092c7e' }
     },
+    overrideEditorial: {
+        contentTitleSpan: { color: '#f80000' },
+        editorialTitle: { color: '#092c7e' },
+        articleTitle: { color: '#092c7e' }
+    },
     overrideLatest: {
         contentTitleSpan: { color: '#f80000' },
         articleTitle: { color: '#092c7e' }

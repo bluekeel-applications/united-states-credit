@@ -1191,10 +1191,19 @@
     radium "^0.26.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.featured@^0.0.3":
-  version "0.0.3"
-  resolved "https://node.bit.dev/bluekeel.component-library.featured/-/bluekeel.component-library.featured-0.0.3.tgz#3f1d38376b57ebb438a2bacf38b3cc30fae9b980"
-  integrity sha1-Px04N2tX67Q4orrPOLPMMPrpuYA=
+"@bit/bluekeel.component-library.editorial@^0.0.4":
+  version "0.0.4"
+  resolved "https://node.bit.dev/bluekeel.component-library.editorial/-/bluekeel.component-library.editorial-0.0.4.tgz#58f2a9da6a97f41cc51f9a8d1b63a72a777953d7"
+  integrity sha1-WPKp2mqX9BzFH5qNG2OnKnd5U9c=
+  dependencies:
+    "@bit/bluekeel.feed.search_pad" "0.0.1"
+    radium "^0.26.0"
+    react "^16.13.1"
+
+"@bit/bluekeel.component-library.featured@^0.0.4":
+  version "0.0.4"
+  resolved "https://node.bit.dev/bluekeel.component-library.featured/-/bluekeel.component-library.featured-0.0.4.tgz#7f4590ddd3c43b8a3e0bbe6fa8e8654efcf8151e"
+  integrity sha1-f0WQ3dPEO4o+C75vqOhlTvz4FR4=
   dependencies:
     "@bit/bluekeel.component-library.feed-toolz" "0.0.1"
     radium "^0.26.0"
@@ -1214,10 +1223,10 @@
     radium "^0.26.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.latest@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.latest/-/bluekeel.component-library.latest-0.0.1.tgz#b147f76db04504f1dd085d7079ea5b0c0cd53088"
-  integrity sha1-sUf3bbBFBPHdCF1weepbDAzVMIg=
+"@bit/bluekeel.component-library.latest@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.latest/-/bluekeel.component-library.latest-0.0.2.tgz#268bc2a9b0f0bd4e98a4014ec45af29b6fc92460"
+  integrity sha1-JovCqbDwvU6YpAFOxFrym2/JJGA=
   dependencies:
     "@bit/bluekeel.component-library.feed-toolz" "0.0.1"
     radium "^0.26.0"
@@ -1233,10 +1242,10 @@
     radium "^0.26.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.popular@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.popular/-/bluekeel.component-library.popular-0.0.1.tgz#91c23124563f19de93a07f0fc5784f224d158a6e"
-  integrity sha1-kcIxJFY/Gd6ToH8PxXhPIk0Vim4=
+"@bit/bluekeel.component-library.popular@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.popular/-/bluekeel.component-library.popular-0.0.2.tgz#cf050ee20f92d7bbe94ead435cef1bf0e456f49b"
+  integrity sha1-zwUO4g+S17vpTq1DXO8b8ORW9Js=
   dependencies:
     "@bit/bluekeel.component-library.feed-toolz" "0.0.1"
     "@material-ui/core" "^4.11.0"
@@ -1257,6 +1266,11 @@
   version "0.0.1"
   resolved "https://node.bit.dev/bluekeel.component-library.usc/-/bluekeel.component-library.usc-0.0.1.tgz#c3fca3467aa83da45e813ac790fd87f012c82c08"
   integrity sha1-w/yjRnqoPaRegTrHkP2H8BLILAg=
+
+"@bit/bluekeel.feed.search_pad@0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.feed.search_pad/-/bluekeel.feed.search_pad-0.0.1.tgz#daf23423fe91eb14428f232fa2938d97c85a31d2"
+  integrity sha1-2vI0I/6R6xRCjyMvopONl8haMdI=
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
