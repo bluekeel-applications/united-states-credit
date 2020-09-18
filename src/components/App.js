@@ -15,6 +15,7 @@ import useInsertNewUser from '../hooks/useInsertNewUser';
 import usePchAPI from '../hooks/usePchAPI';
 import { useMediaQuery } from 'react-responsive';
 import Radium from 'radium';
+import Styles from './Styles';
 
 const App = () => {
 	useSetProvider();
@@ -77,7 +78,7 @@ const App = () => {
     };
 
 	return (
-		<div key='app-key' className='App app-bg_container'>
+		<div key='app-key' style={Styles.app}>
 			{
 				appState.provider === 'pch' && !appState.animationPlayed ? (
 					<LoadingPCH redirect={redirect} />

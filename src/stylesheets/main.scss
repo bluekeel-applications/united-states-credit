@@ -19,10 +19,8 @@
 
 // 4. Layout-related sections
 @import
-  'layout/grid',
-  'layout/expansion',
-  'layout/drawer',
-  'layout/flows';
+  'layout/drawer';
+  // 'layout/flows';
 
 // 5. Components
 @import
@@ -34,7 +32,7 @@
 
 // 6. Page-specific styles
 @import
-  'pages/offers_page',
+  // 'pages/offers_page',
   'pages/optins',
   'pages/offer_wall',
   'pages/select';
