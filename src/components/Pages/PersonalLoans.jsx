@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import FlowPage from '../Layout/FlowPage';
+import ContentWrapper from '@bit/bluekeel.component-library.content-wrapper';
+import Radium from 'radium';
 import { personal_loan_buttons } from './BUTTONS';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
+import QuestionTitle from '../Shared/QuestionTitle';
 
 const PersonalLoans = () => {
     const { appState, dispatchApp } = useContext(AppContext);
@@ -40,8 +42,13 @@ const PersonalLoans = () => {
     };
 
     return (
-        <FlowPage showCrumbs={appState.showStory}>
-            <span className='flow-title-text'>Select Loan Purpose:</span>
+        <ContentWrapper
+            key='personal-loan-type'
+            crumbs={{verticalCrumb: appState.breadcrumbs.vertical}}
+            flow={{ vertical: appState.vertical, loan_type: appState.loan_type }}
+            theme='usc'
+        >
+            <QuestionTitle text={'Select Loan Purpose:'} />
             <div className='flow-page__button-group'>
                 {personal_loan_buttons.map((button, idx) => (
                     <Button
@@ -58,8 +65,8 @@ const PersonalLoans = () => {
                     </Button>
                 ))}
             </div>
-        </FlowPage>
+        </ContentWrapper>
     )
 };
 
-export default PersonalLoans;
+export default Radium(PersonalLoans);

@@ -1,27 +1,3 @@
-.flow-content__container,
-.flow-content__container-final {
-    width: 100%;
-    background-image: url('../../assets/images/flag_left.png'), url('../../assets/images/flag_right.png');
-    background-repeat: no-repeat;
-    background-size: 220px auto;
-    background-position: left top, right top;
-    display: flex;
-    flex-flow: column;
-    justify-content: flex-start;
-    align-items: center;
-    -webkit-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.6);
-    -moz-box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.6);
-    box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.6);
-    min-height: inherit;
-    @include respond-to('medium') {
-        background-size: 150px auto;
-    }
-    @include respond-to('small') {
-        background-size: 60px auto;
-        padding: 0;
-        min-height: fit-content;
-    }
-}
 .flow-content__container-final {
     @include respond-to('medium') {
         min-height: 100vh;

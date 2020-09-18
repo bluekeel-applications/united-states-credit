@@ -9,7 +9,7 @@ import OfferWall from './OfferWall';
 import OptinOffer from './OptinOffer';
 import UserSelection from './UserSelection';
 import DirectLink from './DirectLink';
-import FlowPage from '../Layout/FlowPage';
+// import FlowPage from '../Layout/FlowPage';
 import * as Sentry from '@sentry/react';
 
 const Offers = () => {
@@ -30,52 +30,52 @@ const Offers = () => {
         switch(offer_page) {
             case 'mNet':
                 return (
-                    <FlowPage showCrumbs showFinalCrumbs>
+                    // <FlowPage showCrumbs showFinalCrumbs>
                         <div className='flow-content offer-container'>
                             <MNet page={url} />
                         </div>
-                    </FlowPage>
+                    // </FlowPage>
                 );
 
             case 'direct_link':
                 return (
-                    <FlowPage showCrumbs showFinalCrumbs>
+                    // <FlowPage showCrumbs showFinalCrumbs>
                         <div className='flow-content offer-container'>
                             <DirectLink offer={selectedOffer} />
                         </div>
-                    </FlowPage>
+                    // </FlowPage>
                 )
 
             case 'four_button':
                 return (
-                    <FlowPage showCrumbs showFinalCrumbs>
+                    // <FlowPage showCrumbs showFinalCrumbs>
                         <div className='flow-content offer-container'>
                             <FourButton offer={selectedOffer} />
                         </div>
-                    </FlowPage>
+                    // </FlowPage>
                 );
 
             case 'one_button':
                 return (
-                    <FlowPage showCrumbs showFinalCrumbs>
+                    // <FlowPage showCrumbs showFinalCrumbs>
                         <div className='flow-content offer-container'>
                             <OneButton offer={selectedOffer} />
                         </div>
-                    </FlowPage>
+                    // </FlowPage>
                 );
 
             case 'offer_wall':
                 return (
-                    <FlowPage showCrumbs showFinalCrumbs>
+                    // <FlowPage showCrumbs showFinalCrumbs>
                         <div className='flow-content offer-container'>
                             <OfferWall offer={selectedOffer} />
                         </div>
-                    </FlowPage>
+                    // </FlowPage>
                 );
 
             case 'optin':
                 return (
-                    <FlowPage showCrumbs showFinalCrumbs>
+                    // <FlowPage showCrumbs showFinalCrumbs>
                         <div className='flow-content offer-container'>
                             <OptinOffer 
                                 optin_id={selectedOffer.optin.optin_id} 
@@ -85,21 +85,21 @@ const Offers = () => {
                                 hsid={trackingState.hsid}
                             />
                         </div>
-                    </FlowPage>
+                    // </FlowPage>
                 );
 
             case 'selection':
                 return (
-                    <FlowPage>
+                    // <FlowPage>
                         <UserSelection />
-                    </FlowPage>
+                    // </FlowPage>
                 );
 
             default:
                 return (
-                    <FlowPage showCrumbs showFinalCrumbs>
+                    // <FlowPage showCrumbs showFinalCrumbs>
                             <Loading />
-                    </FlowPage>
+                    // </FlowPage>
                 );
         }
     };

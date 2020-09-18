@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import FlowPage from '../Layout/FlowPage';
+import ContentWrapper from '@bit/bluekeel.component-library.content-wrapper';
+import Radium from 'radium';
 import { debt_type_buttons } from './BUTTONS';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
+import QuestionTitle from '../Shared/QuestionTitle';
 
 const DebtTypes = () => {
     const { appState, dispatchApp } = useContext(AppContext);
@@ -31,8 +33,16 @@ const DebtTypes = () => {
     };
 
     return (
-        <FlowPage showCrumbs={appState.showStory}>
-            <span className='flow-title-text'>Your primary type of Debt is:</span>
+        <ContentWrapper
+            key='debt-type'
+            crumbs={{
+                verticalCrumb: appState.breadcrumbs.vertical,
+                loanTypeCrumb: appState.breadcrumbs.loan_type,
+            }}
+            flow={{ vertical: appState.vertical, loan_type: appState.loan_type }}
+            theme='usc'
+        >
+            <QuestionTitle text={'Your primary type of Debt is:'} />
             <div className='flow-page__button-group'>
                 {debt_type_buttons.map((button, idx) => (
                     <Button
@@ -49,8 +59,8 @@ const DebtTypes = () => {
                     </Button>
                 ))}
             </div>
-        </FlowPage>  
+        </ContentWrapper>  
     )
 };
 
-export default DebtTypes;
+export default Radium(DebtTypes);

@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import FlowPage from '../Layout/FlowPage';
+import ContentWrapper from '@bit/bluekeel.component-library.content-wrapper';
+import Radium from 'radium';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import { debt_amount_buttons } from './BUTTONS';
+import QuestionTitle from '../Shared/QuestionTitle';
 
 const DebtAmounts = () => {
     const { appState, dispatchApp } = useContext(AppContext);
@@ -19,8 +21,17 @@ const DebtAmounts = () => {
     };
 
     return (
-        <FlowPage showCrumbs={appState.showStory}>
-            <span className='flow-title-text'>Your total Amount of Debt is:</span>
+        <ContentWrapper
+            key='debt-amount'
+            crumbs={{
+                verticalCrumb: appState.breadcrumbs.vertical,
+                loanTypeCrumb: appState.breadcrumbs.loan_type,
+                debtTypeCrumb: appState.breadcrumbs.debt_type,
+            }}
+            flow={{ vertical: appState.vertical, loan_type: appState.loan_type }}
+            theme='usc'
+        >
+            <QuestionTitle text={'Your total Amount of Debt is:'} />
             <div className='flow-page__button-group'>
                 {debt_amount_buttons.map((button, idx) => (
                     <Button
@@ -37,8 +48,8 @@ const DebtAmounts = () => {
                     </Button>
                 ))}
             </div>
-        </FlowPage>
+        </ContentWrapper>
     )
 };
 
-export default DebtAmounts;
+export default Radium(DebtAmounts);

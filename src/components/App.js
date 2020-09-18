@@ -7,7 +7,6 @@ import Navbar from '@bit/bluekeel.component-library.navbar';
 import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
 import UscBlogLogo from '@bit/bluekeel.assets.usc_blog_logo';
 import Footer from './Layout/Footer';
-// import Expansion from './Layout/Expansion';
 import Feed from '../components/Layout/Feed';
 import { useHistory } from 'react-router-dom';
 import useSetProvider from '../hooks/useSetProvider';
@@ -90,8 +89,7 @@ const App = () => {
 							goHome={goHome}
 							brand={showLogoText ? UscFullLogo : UscBlogLogo}
 							styleVariant={navbarVariants}
-						> 
-							{/* <Expansion />  */}
+						>
 							<Routes key='usc-routes'/>
 							<Feed key='usc-feed'/>
 							<Footer key='usc-footer'/>

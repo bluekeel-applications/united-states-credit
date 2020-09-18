@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import FlowPage from '../Layout/FlowPage';
+import ContentWrapper from '@bit/bluekeel.component-library.content-wrapper';
+import Radium from 'radium';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
 import { credit_card_buttons } from './BUTTONS';
+import QuestionTitle from '../Shared/QuestionTitle';
 
 const CreditCards = () => {
     const { appState, dispatchApp } = useContext(AppContext);
@@ -28,8 +30,13 @@ const CreditCards = () => {
     };
 
     return (
-        <FlowPage showCrumbs={appState.showStory}>
-            <span className='flow-title-text'>Select Card Type:</span>
+        <ContentWrapper
+            key='credit-card-type'
+            crumbs={{verticalCrumb: appState.breadcrumbs.vertical}}
+            flow={{ vertical: appState.vertical, loan_type: appState.loan_type }}
+            theme='usc'
+        >
+            <QuestionTitle text={'Select Card Type:'} />
             <div className='flow-page__button-group'>
                 {credit_card_buttons.map((button, idx) => (
                     <Button
@@ -46,8 +53,8 @@ const CreditCards = () => {
                     </Button>
                 ))}
             </div>
-        </FlowPage>  
+        </ContentWrapper>  
     )
 };
 
-export default CreditCards;
+export default Radium(CreditCards);

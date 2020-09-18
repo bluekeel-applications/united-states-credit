@@ -2,6 +2,26 @@
 # yarn lockfile v1
 
 
+"@apollo/client@latest":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.2.0.tgz#d16ea4384a2126bf60e7d87b0a6c6df00382220b"
+  integrity sha512-6ISMYW9QpEykJAkN6ZZteTkXXwtYSPGbh+4iBZ478p/Eox1JOMGYlqosGgMGv2oduug9SnsR65y0iCAxKOFGiQ==
+  dependencies:
+    "@graphql-typed-document-node/core" "^3.0.0"
+    "@types/zen-observable" "^0.8.0"
+    "@wry/context" "^0.5.2"
+    "@wry/equality" "^0.2.0"
+    fast-json-stable-stringify "^2.0.0"
+    graphql-tag "^2.11.0"
+    hoist-non-react-statics "^3.3.2"
+    optimism "^0.12.1"
+    prop-types "^15.7.2"
+    symbol-observable "^2.0.0"
+    terser "^5.2.0"
+    ts-invariant "^0.4.4"
+    tslib "^1.10.0"
+    zen-observable "^0.8.14"
+
 "@apollo/react-common@^3.1.4":
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/@apollo/react-common/-/react-common-3.1.4.tgz#ec13c985be23ea8e799c9ea18e696eccc97be345"
@@ -19,6 +39,13 @@
     "@wry/equality" "^0.1.9"
     ts-invariant "^0.4.4"
     tslib "^1.10.0"
+
+"@apollo/react-hooks@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@apollo/react-hooks/-/react-hooks-4.0.0.tgz#7bf7b320c90d276f637d9a84b503e17b840dd4e6"
+  integrity sha512-fCu0cbne3gbUl0QbA8X4L33iuuFVQbC5Jo2MIKRK8CyawR6PoxDpFdFA1kc6033ODZuZZ9Eo4RdeJFlFIIYcLA==
+  dependencies:
+    "@apollo/client" latest
 
 "@babel/code-frame@7.5.5":
   version "7.5.5"
@@ -1183,6 +1210,15 @@
   resolved "https://node.bit.dev/bluekeel.assets.usc_full_logo/-/bluekeel.assets.usc_full_logo-0.0.1.tgz#533b863d4f76b5c9f7db6c6eb152484c7275abd6"
   integrity sha1-UzuGPU92tcn322xusVJITHJ1q9Y=
 
+"@bit/bluekeel.component-library.breadcrumbs@0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.breadcrumbs/-/bluekeel.component-library.breadcrumbs-0.0.2.tgz#fd38d302ce9d2153ad0e3412cf038c78838ba1e9"
+  integrity sha1-/TjTAs6dIVOtDjQSzwOMeIOLoek=
+  dependencies:
+    radium "^0.26.0"
+    react "^16.13.1"
+    react-router-dom "^5.2.0"
+
 "@bit/bluekeel.component-library.content-top@^0.0.1":
   version "0.0.1"
   resolved "https://node.bit.dev/bluekeel.component-library.content-top/-/bluekeel.component-library.content-top-0.0.1.tgz#2dfbc4013ec07a9d6ba9307a2f839674585c43af"
@@ -1190,6 +1226,31 @@
   dependencies:
     radium "^0.26.0"
     react "^16.13.1"
+
+"@bit/bluekeel.component-library.content-wrapper@^0.0.9":
+  version "0.0.9"
+  resolved "https://node.bit.dev/bluekeel.component-library.content-wrapper/-/bluekeel.component-library.content-wrapper-0.0.9.tgz#fd53143e5899c5370dd50d9ad54592f203e21b61"
+  integrity sha1-/VMUPliZxTcN1Q2a1UWS8gPiG2E=
+  dependencies:
+    "@bit/bluekeel.component-library.breadcrumbs" "0.0.2"
+    "@bit/bluekeel.hookz.use-check-for-ie" "0.0.1"
+    "@bit/bluekeel.hookz.use-content-height" "0.0.1"
+    radium "^0.26.0"
+    react "^16.13.1"
+    react-responsive "^8.1.0"
+    react-spring "^8.0.27"
+
+"@bit/bluekeel.component-library.direct-link@^0.0.3":
+  version "0.0.3"
+  resolved "https://node.bit.dev/bluekeel.component-library.direct-link/-/bluekeel.component-library.direct-link-0.0.3.tgz#ed37dc409a0696198a742c91785c8b5f290b878a"
+  integrity sha1-7TfcQJoGlhmKdCyReFyLXykLh4o=
+  dependencies:
+    "@apollo/react-hooks" "^4.0.0"
+    "@bit/bluekeel.hookz.use-apollo-client" "0.0.2"
+    "@bit/bluekeel.hookz.use-tracking-layer" "0.0.2"
+    radium "^0.26.0"
+    react "^16.13.1"
+    react-router-dom "^5.2.0"
 
 "@bit/bluekeel.component-library.editorial@^0.0.4":
   version "0.0.4"
@@ -1199,6 +1260,25 @@
     "@bit/bluekeel.feed.search_pad" "0.0.1"
     radium "^0.26.0"
     react "^16.13.1"
+
+"@bit/bluekeel.component-library.email-capture@^0.0.3":
+  version "0.0.3"
+  resolved "https://node.bit.dev/bluekeel.component-library.email-capture/-/bluekeel.component-library.email-capture-0.0.3.tgz#5d6581c20e7b6dc732f36dffeb0519da80394da2"
+  integrity sha1-XWWBwg57bccy823/6wUZ2oA5TaI=
+  dependencies:
+    "@apollo/react-hooks" "^4.0.0"
+    "@bit/bluekeel.hookz.use-apollo-client" "0.0.2"
+    "@bit/bluekeel.hookz.use-offer-finder" "0.0.3"
+    "@bit/bluekeel.mutationz.add_service_log" "0.0.1"
+    "@bit/bluekeel.mutationz.add_user_email" "0.0.1"
+    "@bit/bluekeel.mutationz.insert_common_info" "0.0.1"
+    "@bit/bluekeel.queriez.endpoint_offer" "0.0.1"
+    "@fortawesome/react-fontawesome" "^0.1.11"
+    "@material-ui/core" "^4.11.0"
+    radium "^0.26.0"
+    react "^16.13.1"
+    react-lottie "^1.2.3"
+    react-router-dom "^5.2.0"
 
 "@bit/bluekeel.component-library.featured@^0.0.4":
   version "0.0.4"
@@ -1252,10 +1332,10 @@
     radium "^0.26.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.start-button@^0.0.8":
-  version "0.0.8"
-  resolved "https://node.bit.dev/bluekeel.component-library.start-button/-/bluekeel.component-library.start-button-0.0.8.tgz#d301c9c17b6f5b8ebbfd36bf4842108fdfb8041b"
-  integrity sha1-0wHJwXtvW467/Ta/SEIQj9+4BBs=
+"@bit/bluekeel.component-library.start-button@^0.0.14":
+  version "0.0.14"
+  resolved "https://node.bit.dev/bluekeel.component-library.start-button/-/bluekeel.component-library.start-button-0.0.14.tgz#5233907b827d974fc1cf509a73f0f40f79fa1c83"
+  integrity sha1-UjOQe4J9l0/Bz1Cac/D0D3n6HIM=
   dependencies:
     "@fortawesome/react-fontawesome" "^0.1.11"
     "@material-ui/core" "^4.11.0"
@@ -1271,6 +1351,90 @@
   version "0.0.1"
   resolved "https://node.bit.dev/bluekeel.feed.search_pad/-/bluekeel.feed.search_pad-0.0.1.tgz#daf23423fe91eb14428f232fa2938d97c85a31d2"
   integrity sha1-2vI0I/6R6xRCjyMvopONl8haMdI=
+
+"@bit/bluekeel.hookz.use-apollo-client@0.0.2", "@bit/bluekeel.hookz.use-apollo-client@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.hookz.use-apollo-client/-/bluekeel.hookz.use-apollo-client-0.0.2.tgz#0113c32cb88f932fef94aa5b5fc619e2ee560cfa"
+  integrity sha1-ARPDLLiPky/vlKpbX8YZ4u5WDPo=
+  dependencies:
+    apollo-client-preset "^1.0.8"
+    apollo-link-error "^1.1.13"
+    apollo-link-http "^1.5.17"
+    apollo-link-retry "^2.2.16"
+
+"@bit/bluekeel.hookz.use-check-for-ie@0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.hookz.use-check-for-ie/-/bluekeel.hookz.use-check-for-ie-0.0.1.tgz#18f6f30f935aebbe4160379b2fc27f39b439f55f"
+  integrity sha1-GPbzD5Na675BYDebL8J/ObQ59V8=
+  dependencies:
+    react "^16.13.1"
+
+"@bit/bluekeel.hookz.use-content-height@0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.hookz.use-content-height/-/bluekeel.hookz.use-content-height-0.0.1.tgz#caffa75ba1e01528c44b877f38634d0d141c13e8"
+  integrity sha1-yv+nW6HgFSjES4d/OGNNDRQcE+g=
+  dependencies:
+    react "^16.13.1"
+
+"@bit/bluekeel.hookz.use-offer-finder@0.0.3":
+  version "0.0.3"
+  resolved "https://node.bit.dev/bluekeel.hookz.use-offer-finder/-/bluekeel.hookz.use-offer-finder-0.0.3.tgz#bf3f7f81d1a2ddda94dcc5ab631be05a801cfae5"
+  integrity sha1-vz9/gdGi3dqU3MWrYxvgWoAc+uU=
+  dependencies:
+    "@apollo/react-hooks" "^4.0.0"
+    react "^16.13.1"
+
+"@bit/bluekeel.hookz.use-tracking-layer@0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.hookz.use-tracking-layer/-/bluekeel.hookz.use-tracking-layer-0.0.2.tgz#dd3367a8ae681d2d8a0d22340a08c6a5a2421293"
+  integrity sha1-3TNnqK5oHS2KDSI0CgjGpaJCEpM=
+  dependencies:
+    "@apollo/react-hooks" "^4.0.0"
+    "@bit/bluekeel.mutationz.add_user_flow" "0.0.2"
+    "@bit/bluekeel.pixels.bluekeel-pixel" "0.0.1"
+    react "^16.13.1"
+
+"@bit/bluekeel.mutationz.add_service_log@0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.mutationz.add_service_log/-/bluekeel.mutationz.add_service_log-0.0.1.tgz#bc92a94907711655c308a08dd4bfc5b52ae56f91"
+  integrity sha1-vJKpSQdxFlXDCKCN1L/FtSrlb5E=
+  dependencies:
+    graphql-tag "^2.11.0"
+
+"@bit/bluekeel.mutationz.add_user_email@0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.mutationz.add_user_email/-/bluekeel.mutationz.add_user_email-0.0.1.tgz#c8c09e63014c89fe754ba277e5a60c69204d8849"
+  integrity sha1-yMCeYwFMif51S6J35aYMaSBNiEk=
+  dependencies:
+    graphql-tag "^2.11.0"
+
+"@bit/bluekeel.mutationz.add_user_flow@0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.mutationz.add_user_flow/-/bluekeel.mutationz.add_user_flow-0.0.2.tgz#1d7a59d47137b53f710a358b8ac19e9435836740"
+  integrity sha1-HXpZ1HE3tT9xCjWLisGelDWDZ0A=
+  dependencies:
+    graphql-tag "^2.11.0"
+
+"@bit/bluekeel.mutationz.insert_common_info@0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.mutationz.insert_common_info/-/bluekeel.mutationz.insert_common_info-0.0.1.tgz#07f9790e52d9e6f9e90455f0b54244d0af7e97fa"
+  integrity sha1-B/l5DlLZ5vnpBFXwtUJE0K9+l/o=
+  dependencies:
+    graphql-tag "^2.11.0"
+
+"@bit/bluekeel.pixels.bluekeel-pixel@0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.pixels.bluekeel-pixel/-/bluekeel.pixels.bluekeel-pixel-0.0.1.tgz#eca0207ee96070ec0678a08cf00725cb5b9ea0cb"
+  integrity sha1-7KAgfulgcOwGeKCM8Acly1ueoMs=
+  dependencies:
+    axios "^0.20.0"
+
+"@bit/bluekeel.queriez.endpoint_offer@0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.queriez.endpoint_offer/-/bluekeel.queriez.endpoint_offer-0.0.1.tgz#38fcb596d522710b1b89cc29a940585a055f06d2"
+  integrity sha1-OPy1ltUicQsbicwpqUBYWgVfBtI=
+  dependencies:
+    graphql-tag "^2.11.0"
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
@@ -1332,6 +1496,11 @@
   integrity sha512-sClfojasRifQKI0OPqTy8Ln8iIhnxR/Pv/hukBhWnBz9kQRmqi6JSH3nghlhAY7SUeIIM7B5/D2G8WjX0iepVg==
   dependencies:
     prop-types "^15.7.2"
+
+"@graphql-typed-document-node/core@^3.0.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.1.0.tgz#0eee6373e11418bfe0b5638f654df7a4ca6a3950"
+  integrity sha512-wYn6r8zVZyQJ6rQaALBEln5B1pzxb9shV5Ef97kTvn6yVGrqyXVnDqnU24MXnFubR+rZjBY9NWuxX3FB2sTsjg==
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -2231,10 +2400,24 @@
     "@types/node" ">=6"
     tslib "^1.9.3"
 
+"@wry/context@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@wry/context/-/context-0.5.2.tgz#f2a5d5ab9227343aa74c81e06533c1ef84598ec7"
+  integrity sha512-B/JLuRZ/vbEKHRUiGj6xiMojST1kHhu4WcreLfNN7q9DqQFrb97cWgf/kiYsPSUCAMVN0HzfFc8XjJdzgZzfjw==
+  dependencies:
+    tslib "^1.9.3"
+
 "@wry/equality@^0.1.2", "@wry/equality@^0.1.9":
   version "0.1.11"
   resolved "https://registry.yarnpkg.com/@wry/equality/-/equality-0.1.11.tgz#35cb156e4a96695aa81a9ecc4d03787bc17f1790"
   integrity sha512-mwEVBDUVODlsQQ5dfuLUS5/Tf7jqUKyhKYHmVi4fPB6bDMOfWvUPJmKgS1Z7Za/sOI3vzWt4+O7yCiL/70MogA==
+  dependencies:
+    tslib "^1.9.3"
+
+"@wry/equality@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@wry/equality/-/equality-0.2.0.tgz#a312d1b6a682d0909904c2bcd355b02303104fb7"
+  integrity sha512-Y4d+WH6hs+KZJUC8YKLYGarjGekBrhslDbf/R20oV+AakHPINSitHfDRQz3EGcEWc1luXYNUvMhawWtZVWNGvQ==
   dependencies:
     tslib "^1.9.3"
 
@@ -2431,7 +2614,7 @@ anymatch@~3.1.1:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-apollo-cache-inmemory@^1.6.5:
+apollo-cache-inmemory@^1.1.7, apollo-cache-inmemory@^1.6.5:
   version "1.6.6"
   resolved "https://registry.yarnpkg.com/apollo-cache-inmemory/-/apollo-cache-inmemory-1.6.6.tgz#56d1f2a463a6b9db32e9fa990af16d2a008206fd"
   integrity sha512-L8pToTW/+Xru2FFAhkZ1OA9q4V4nuvfoPecBM34DecAugUZEBhI2Hmpgnzq2hTKZ60LAMrlqiASm0aqAY6F8/A==
@@ -2450,7 +2633,18 @@ apollo-cache@1.3.5, apollo-cache@^1.3.5:
     apollo-utilities "^1.3.4"
     tslib "^1.10.0"
 
-apollo-client@^2.6.8:
+apollo-client-preset@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/apollo-client-preset/-/apollo-client-preset-1.0.8.tgz#23bd7176849d0d815f12c648774d009b258a449e"
+  integrity sha512-vRrdBfoOBkSboUmkec/zDWK9dT22GoZ2NgTKxfPXaTRh82HGDejDAblMr7BuDtZQ6zxMUiD9kghmO+3HXsHKdQ==
+  dependencies:
+    apollo-cache-inmemory "^1.1.7"
+    apollo-client "^2.2.2"
+    apollo-link "^1.0.6"
+    apollo-link-http "^1.3.1"
+    graphql-tag "^2.4.2"
+
+apollo-client@^2.2.2, apollo-client@^2.6.8:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-2.6.10.tgz#86637047b51d940c8eaa771a4ce1b02df16bea6a"
   integrity sha512-jiPlMTN6/5CjZpJOkGeUV0mb4zxx33uXWdj/xQCfAMkuNAC3HN7CvYDyMHHEzmcQ5GV12LszWoQ/VlxET24CtA==
@@ -2464,7 +2658,7 @@ apollo-client@^2.6.8:
     tslib "^1.10.0"
     zen-observable "^0.8.0"
 
-apollo-link-error@^1.1.12:
+apollo-link-error@^1.1.12, apollo-link-error@^1.1.13:
   version "1.1.13"
   resolved "https://registry.yarnpkg.com/apollo-link-error/-/apollo-link-error-1.1.13.tgz#c1a1bb876ffe380802c8df0506a32c33aad284cd"
   integrity sha512-jAZOOahJU6bwSqb2ZyskEK1XdgUY9nkmeclCrW7Gddh1uasHVqmoYc4CKdb0/H0Y1J9lvaXKle2Wsw/Zx1AyUg==
@@ -2482,7 +2676,7 @@ apollo-link-http-common@^0.2.16:
     ts-invariant "^0.4.0"
     tslib "^1.9.3"
 
-apollo-link-http@^1.5.16:
+apollo-link-http@^1.3.1, apollo-link-http@^1.5.16, apollo-link-http@^1.5.17:
   version "1.5.17"
   resolved "https://registry.yarnpkg.com/apollo-link-http/-/apollo-link-http-1.5.17.tgz#499e9f1711bf694497f02c51af12d82de5d8d8ba"
   integrity sha512-uWcqAotbwDEU/9+Dm9e1/clO7hTB2kQ/94JYcGouBVLjoKmTeJTUPQKcJGpPwUjZcSqgYicbFqQSoJIW0yrFvg==
@@ -2500,7 +2694,7 @@ apollo-link-retry@^2.2.16:
     apollo-link "^1.2.14"
     tslib "^1.9.3"
 
-apollo-link@^1.0.0, apollo-link@^1.2.13, apollo-link@^1.2.14:
+apollo-link@^1.0.0, apollo-link@^1.0.6, apollo-link@^1.2.13, apollo-link@^1.2.14:
   version "1.2.14"
   resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.2.14.tgz#3feda4b47f9ebba7f4160bef8b977ba725b684d9"
   integrity sha512-p67CMEFP7kOG1JZ0ZkYZwRDa369w5PIjtMjvrQd/HnIV8FRsHRqLqK+oAZQnFa1DDdZtOtHTi+aMIW6EatC2jg==
@@ -2753,6 +2947,13 @@ axios@^0.19.1:
   integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
   dependencies:
     follow-redirects "1.5.10"
+
+axios@^0.20.0:
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.20.0.tgz#057ba30f04884694993a8cd07fa394cff11c50bd"
+  integrity sha512-ANA4rr2BDcmmAQLOKft2fufrtuvlqR+cXNNinUmvfeSNCOF98PZL+7M/v1zIdGo7OLjEA9J2gXJL+j4zGsl0bA==
+  dependencies:
+    follow-redirects "^1.10.0"
 
 axobject-query@^2.0.2:
   version "2.2.0"
@@ -5347,7 +5548,7 @@ follow-redirects@1.5.10:
   dependencies:
     debug "=3.1.0"
 
-follow-redirects@^1.0.0:
+follow-redirects@^1.0.0, follow-redirects@^1.10.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.0.tgz#b42e8d93a2a7eea5ed88633676d6597bc8e384db"
   integrity sha512-aq6gF1BEKje4a9i9+5jimNFIpq4Q1WiwBToeRK5NvZBd/TRsmW8BsJfOEGkr76TbOyPVD3OVDN910EcUNtRYEA==
@@ -5691,7 +5892,7 @@ graphql-tag.macro@^2.0.1:
     graphql "^14.0.2"
     graphql-tag "^2.10.0"
 
-graphql-tag@^2.10.0, graphql-tag@^2.10.3:
+graphql-tag@^2.10.0, graphql-tag@^2.10.3, graphql-tag@^2.11.0, graphql-tag@^2.4.2:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.11.0.tgz#1deb53a01c46a7eb401d6cb59dec86fa1cccbffd"
   integrity sha512-VmsD5pJqWJnQZMUeRwrDhfgoyqcfwEkvtpANqcoUG8/tOLkwNgU9mzub/Mc78OJMhHjx7gfAMTxzdG43VGg3bA==
@@ -8363,6 +8564,13 @@ optimism@^0.10.0:
   dependencies:
     "@wry/context" "^0.4.0"
 
+optimism@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/optimism/-/optimism-0.12.1.tgz#933f9467b9aef0e601655adb9638f893e486ad02"
+  integrity sha512-t8I7HM1dw0SECitBYAqFOVHoBAHEQBTeKjIL9y9ImHzAVkdyPK4ifTgM4VJRDtTUY4r/u5Eqxs4XcGPHaoPkeQ==
+  dependencies:
+    "@wry/context" "^0.5.2"
+
 optimize-css-assets-webpack-plugin@5.0.3:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/optimize-css-assets-webpack-plugin/-/optimize-css-assets-webpack-plugin-5.0.3.tgz#e2f1d4d94ad8c0af8967ebd7cf138dcb1ef14572"
@@ -9859,7 +10067,7 @@ react-reveal@^1.2.2:
   dependencies:
     prop-types "^15.5.10"
 
-react-router-dom@^5.1.2:
+react-router-dom@^5.1.2, react-router-dom@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-5.2.0.tgz#9e65a4d0c45e13289e66c7b17c7e175d0ea15662"
   integrity sha512-gxAmfylo2QUjcwxI63RhQ5G85Qqt4voZpUXSEqCwykV0baaOTQDR1f0PmY8AELqIyVc0NEZUj0Gov5lNGcXgsA==
@@ -11286,6 +11494,11 @@ symbol-observable@^1.0.2:
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
   integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
 
+symbol-observable@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-2.0.1.tgz#ce66c36a04ed0f3056e7293184749a6fdd7063ea"
+  integrity sha512-QrfHrrEUMadQCgMijc3YpfA4ncwgqGv58Xgvdu3JZVQB7iY7cAkiqobZEZbaA863jof8AdpR01CPnZ5UWeqZBQ==
+
 symbol-tree@^3.2.2:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
@@ -11349,6 +11562,15 @@ terser@^4.1.2, terser@^4.6.12, terser@^4.6.3:
   version "4.8.0"
   resolved "https://registry.yarnpkg.com/terser/-/terser-4.8.0.tgz#63056343d7c70bb29f3af665865a46fe03a0df17"
   integrity sha512-EAPipTNeWsb/3wLPeup1tVPaXfIaU68xMnVdPafIL1TV05OhASArYyIfFvnvJCNrR2NIOvDVNNTFRa+Re2MWyw==
+  dependencies:
+    commander "^2.20.0"
+    source-map "~0.6.1"
+    source-map-support "~0.5.12"
+
+terser@^5.2.0:
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-5.3.2.tgz#f4bea90eb92945b2a028ceef79181b9bb586e7af"
+  integrity sha512-H67sydwBz5jCUA32ZRL319ULu+Su1cAoZnnc+lXnenGRYWyLE3Scgkt8mNoAsMx0h5kdo758zdoS0LG9rYZXDQ==
   dependencies:
     commander "^2.20.0"
     source-map "~0.6.1"
@@ -12329,7 +12551,7 @@ zen-observable-ts@^0.8.21:
     tslib "^1.9.3"
     zen-observable "^0.8.0"
 
-zen-observable@^0.8.0:
+zen-observable@^0.8.0, zen-observable@^0.8.14:
   version "0.8.15"
   resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.15.tgz#96415c512d8e3ffd920afd3889604e30b9eaac15"
   integrity sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==

@@ -4,7 +4,6 @@ import { AppContext } from '../../context';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { DIRECT_OFFER } from '../../utils/queries';
 import { ADD_SERVICE_LOG } from '../../utils/mutations';
-import FlowPage from '../Layout/FlowPage';
 import Loading from '../Shared/Loading';
 
 const DirectOffer = () => {
@@ -28,7 +27,7 @@ const DirectOffer = () => {
             }
         });
         console.log('Added service log and redirecting to offer page...');
-        history.push('/offers');
+        history.push('/offer');
         return;
     };
 
@@ -48,11 +47,9 @@ const DirectOffer = () => {
 
     if (loading) {
         return (
-            <FlowPage showCrumbs={false}>
-                <div className='email-optin-container'>
-                    <Loading />
-                </div>
-            </FlowPage>
+            <div className='email-optin-container'>
+                <Loading />
+            </div>
         )
     };
 

@@ -1,4 +1,16 @@
 export default {
+    feed: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        maxWidth: '1200px',
+        margin: '20px 0 5vh 0',
+        '@media (max-width: 767px)': {
+            padding: '0',
+        }
+    },
     data: {
         topText: `Credit, now more than ever, has become the financial lifeblood of the American consumer. 
         At United States Credit we know and understand the importance and impacts credit can have. 

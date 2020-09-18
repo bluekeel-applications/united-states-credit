@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import FlowPage from '../Layout/FlowPage';
+import ContentWrapper from '@bit/bluekeel.component-library.content-wrapper';
 import { vertical_buttons } from './BUTTONS';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
+import Radium from 'radium';
+import QuestionTitle from '../Shared/QuestionTitle';
 
 const Verticals = () => {
     let history = useHistory();
@@ -18,8 +20,8 @@ const Verticals = () => {
     };
 
     return (
-        <FlowPage showCrumbs={false}>
-            <span className='flow-title-text'>Select one of the options below:</span>            
+        <ContentWrapper theme='usc'>
+            <QuestionTitle text={'Select one of the options below:'} />           
             <div className='flow-page__button-group'>
                 {vertical_buttons.map((button, idx) => (
                     <Button
@@ -36,8 +38,8 @@ const Verticals = () => {
                     </Button>
                 ))}
             </div>
-        </FlowPage>
+        </ContentWrapper>
     )
 };
 
-export default Verticals;
+export default Radium(Verticals);

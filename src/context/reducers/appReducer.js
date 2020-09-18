@@ -1,7 +1,3 @@
-import {
-    setCookie
-} from '../../utils/helpers';
-
 const initialAppState = {
     provider: null,
     pch: {
@@ -20,15 +16,13 @@ const initialAppState = {
     showNavStart: false,
     showExpansion: false,
     showStory: false,
-    flowState: {
-        vertical: 'direct',
-        loan_type: 'N/A',
-        debt_type: 'N/A',
-        debt_amount: 'N/A',
-        checking_optin: false,
-        debt_optin: false,
-        email_optin: null
-    },
+    vertical: 'direct',
+    loan_type: 'N/A',
+    debt_type: 'N/A',
+    debt_amount: 'N/A',
+    checking_optin: false,
+    debt_optin: false,
+    email_optin: null,
     breadcrumbs: {
         vertical: null,
         loan_type: null,
@@ -88,11 +82,8 @@ const appStateReducer = (state, action) => {
         case 'DEEP_DIVE':
             return {
                 ...state,
-                flowState: {
-                    ...initialAppState.flowState,
-                    vertical: action.payload.vertical, 
-                    loan_type: action.payload.loan_type
-                }
+                vertical: action.payload.vertical, 
+                loan_type: action.payload.loan_type
             };
 
         case 'REDIRECTION':
@@ -117,10 +108,7 @@ const appStateReducer = (state, action) => {
         case 'VERTICAL_PICKED':
             return {
                 ...state,
-                flowState: {
-                    ...initialAppState.flowState,
-                    vertical: action.payload.value
-                },
+                vertical: action.payload.value,
                 breadcrumbs:{
                     ...initialAppState.breadcrumbs,
                     vertical: action.payload.crumb
@@ -130,10 +118,7 @@ const appStateReducer = (state, action) => {
         case 'LOAN_TYPE_PICKED':
             return {
                 ...state,
-                flowState: {
-                    ...state.flowState,
-                    loan_type: action.payload.value
-                },
+                loan_type: action.payload.value,
                 breadcrumbs:{
                     ...state.breadcrumbs,
                     loan_type: action.payload.crumb,
@@ -145,10 +130,7 @@ const appStateReducer = (state, action) => {
         case 'DEBT_TYPE_PICKED':
             return {
                 ...state,
-                flowState: {
-                    ...state.flowState,
-                    debt_type: action.payload.value
-                },
+                debt_type: action.payload.value,
                 breadcrumbs:{
                     ...state.breadcrumbs,
                     debt_type: action.payload.crumb,
@@ -159,84 +141,17 @@ const appStateReducer = (state, action) => {
         case 'DEBT_AMOUNT_PICKED':
             return {
                 ...state,
-                flowState: {
-                    ...state.flowState,
-                    debt_amount: action.payload.value
-                },
+                debt_amount: action.payload.value,
                 breadcrumbs:{
                     ...state.breadcrumbs,
                     debt_amount: action.payload.crumb
                 }
             };
-
-        case 'CHECKING_OPT_IN':
-            return {
-                ...state,
-                flowState: {
-                    ...state.flowState,
-                    checking_optin: true
-                }
-            };
-
-        case 'CHECKING_OPT_OUT':
-            return {
-                ...state,
-                flowState: {
-                    ...state.flowState,
-                    checking_optin: false
-                }
-            };
-
-        case 'DEBT_OPT_IN':
-            return {
-                ...state,
-                flowState: {
-                    ...state.flowState,
-                    debt_optin: true
-                }
-            };
-
-        case 'DEBT_OPT_OUT':
-            return {
-                ...state,
-                flowState: {
-                    ...state.flowState,
-                    debt_optin: false
-                }
-            };
         
-        case 'EMAIL_OPT_IN':
+        case 'CLICK_SET_EMAIL':
             return {
                 ...state,
                 em_sub: true
-            };
-
-        case 'EMAIL_OPT_OUT':
-            return {
-                ...state,
-                flowState: {
-                    ...state.flowState,
-                    email_optin: false
-                },
-                email: 'N/A'
-            };
-
-        case 'SET_EMAIL':
-            setCookie('email', action.payload, 3);
-            return {
-                ...state,
-                email: action.payload
-            };
-
-        case 'FETCH_OFFERS':
-            return {
-                ...state,
-                loadingOffers: true
-            };
-
-        case 'FETCH_OFFERS_FAILURE':
-            return {
-                ...state
             };
 
         case 'SELECTED_OFFER':
@@ -245,26 +160,13 @@ const appStateReducer = (state, action) => {
                 offer: action.payload
             };
 
-        case 'FAILED_OFFER_SELECTION':            
-            return {
-                ...state,
-                link: null,
-                offer_page: null,
-                four_button: null,
-                jump: null,
-                loadingOffers: false
-            };
-
         case 'RESTART_SEARCH':
             return {
-                ...state,
-                flowState: {
-                    ...state.flowState,
-                    vertical: null,
-                    loan_type: null,
-                    debt_type: 'N/A',
-                    debt_amount: 'N/A'
-                },
+                ...state,                
+                vertical: null,
+                loan_type: null,
+                debt_type: 'N/A',
+                debt_amount: 'N/A',
                 breadcrumbs: {
                     vertical: null,
                     loan_type: null,
