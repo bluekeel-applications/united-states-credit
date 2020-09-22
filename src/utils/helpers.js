@@ -104,20 +104,24 @@ export const buildFullLink = (link, sid, eid, hsid, email, pch) => {
     return linkout;
 };
 
-export const buildQueryLink = (link, sid, eid, hsid, email, pch, query) => {
-    let linkout = link; // eslint-disable-next-line
-    let keyword = encodeURIComponent(query); // eslint-disable-next-line
-    if (linkout === 'N/A') return linkout; // eslint-disable-next-line 
-    linkout = linkout.replace('${sid}', sid); // eslint-disable-next-line
-    linkout = linkout.replace('${eid}', eid); // eslint-disable-next-line
-    linkout = linkout.replace('${kwd}', keyword); // eslint-disable-next-line
-    linkout = linkout.replace('${hsid}', hsid); // eslint-disable-next-line
-    linkout = linkout.replace('${em}', email || pch.email || ''); // eslint-disable-next-line
-    linkout = linkout.replace('${first}', pch.firstname || ''); // eslint-disable-next-line
-    linkout = linkout.replace('${last}', pch.lastname || ''); // eslint-disable-next-line
-    linkout = linkout.replace('${adrs}', pch.address || ''); // eslint-disable-next-line
-    linkout = linkout.replace('${city}', pch.city || ''); // eslint-disable-next-line
-    linkout = linkout.replace('${state}', pch.state || ''); // eslint-disable-next-line
-    linkout = linkout.replace('${zip}', pch.zipcode || ''); // eslint-disable-next-line
-    return linkout;
-};
+
+export const buildTracking = (appState, trackingState) => ({
+    hsid: Number(trackingState.hsid),
+    pid: Number(trackingState.pid),
+    oid: Number(trackingState.oid),
+    eid: trackingState.eid,
+    sid: Number(trackingState.sid),
+    uid: trackingState.uid,
+    vertical: appState.vertical, 
+    loan_type: appState.loan_type, 
+    debt_type: appState.debt_type, 
+    debt_amount: appState.debt_amount,
+    email: trackingState.email || '', 
+    ip_address: trackingState.ip_address || '', 
+    fname: trackingState.fname || '', 
+    lname: trackingState.lname || '', 
+    address: trackingState.address || '', 
+    city: trackingState.city || '', 
+    state: trackingState.state || '', 
+    zip: trackingState.zip || ''
+})

@@ -176,7 +176,7 @@ const useSetDeepDive = (vertical, type) => {
 			
 			case 'direct':
 				dispatchApp({ type: 'VERTICAL_PICKED', payload: { value:vertical, crumb: 'Select Interest'}});		
-				setRedirect('/direct');
+				setRedirect('/email_optin');
 				return;
 
 			default:
@@ -185,14 +185,14 @@ const useSetDeepDive = (vertical, type) => {
 	}
 
 	useEffect(() => {
-		if(vertical === 'N/A' && type === 'N/A') {
-			const locationParts = window.location.hostname.split('.');
-			const subDomain = locationParts.shift();
-			if(subDomain === 'pch') {
-				setRedirect('/direct');
-				// setRedirect('/select');
-			}
-		};
+		// if(vertical === 'N/A' && type === 'N/A') {
+		// 	const locationParts = window.location.hostname.split('.');
+		// 	const subDomain = locationParts.shift();
+		// 	if(subDomain === 'pch') {
+		// 		setRedirect('/email_optin');
+		// 		// setRedirect('/select');
+		// 	}
+		// };
 
 		checkForDeepDive();
 		// eslint-disable-next-line

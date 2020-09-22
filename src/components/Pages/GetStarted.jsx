@@ -16,7 +16,7 @@ const GetStarted = () => {
     };
     
     return (
-        <ContentWrapper theme='usc'>
+        <ContentWrapper theme='uscStart'>
             <span style={styles.welcomeText}>FIND THE RIGHT CREDIT FOR YOU!</span>
             <StartButton 
                 showNav={appState.showNavStart}

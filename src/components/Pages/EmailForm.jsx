@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import EmailCapture from '@bit/bluekeel.component-library.email-capture';
-import ContentWrapper from '@bit/bluekeel.component-library.content-wrapper';
 
 const EmailForm = () => {
     const { 
@@ -10,14 +9,25 @@ const EmailForm = () => {
     } = useContext(AppContext);
 
     const tracking = {
-        pid: trackingState.pid, 
-        vertical: appState.vertical, 
-        loan_type: appState.loan_type, 
-        debt_type: appState.debt_type, 
-        debt_amount: appState.debt_amount, 
-        location: trackingState.location, 
-        hsid: trackingState.hsid,
-        email: trackingState.email
+        hsid: Number(trackingState['hsid']),
+        pid: Number(trackingState['pid']),
+        oid: Number(trackingState['oid']),
+        eid: trackingState['eid'],
+        sid: Number(trackingState['sid']),
+        uid: trackingState['uid'],
+        vertical: appState['vertical'], 
+        loan_type: appState['loan_type'], 
+        debt_type: appState['debt_type'], 
+        debt_amount: appState['debt_amount'], 
+        location: trackingState['location'],
+        email: trackingState['email'] || '',
+        ip_address: trackingState['ip_address'] || '', 
+        fname: trackingState['fname'] || '', 
+        lname: trackingState['lname'] || '', 
+        address: trackingState['address'] || '', 
+        city: trackingState['city'] || '', 
+        state: trackingState['state'] || '', 
+        zip: trackingState['zip'] || ''
     };
 
     const crumbs = {
@@ -32,22 +42,14 @@ const EmailForm = () => {
         tracking: dispatchTracking
     };
 
-    return (
-        <ContentWrapper 
-            theme='usc' 
-            crumbs={crumbs} 
-            flow={{
-                vertical: appState.vertical,
-                loan_type: appState.loan_type
-            }}
-            isEnd={true}
-        >
-            <EmailCapture 
-                tracking={tracking}
-                dispatches={dispatches}
-                isSubmission={appState.em_sub}
-            />
-        </ContentWrapper>
+    return (        
+        <EmailCapture 
+            tracking={tracking}
+            dispatches={dispatches}
+            isSubmission={appState.em_sub}
+            theme='usc'
+            crumbs={crumbs}
+        />
     )
 };
 

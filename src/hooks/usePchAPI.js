@@ -19,7 +19,6 @@ const usePchAPI = () => {
 			const user = data.fetchUserInfo.body;
 			dispatchApp({ type: 'FOUND_PCH_USER', payload: user });
 			dispatchTracking({ type: 'SET_PCH_USER', payload: user });
-			// setCookie('em_sub', user.EmailAddress, 30);
 			addUserPCH({
 				variables: {
 					clickId: Number(trackingState.hsid),

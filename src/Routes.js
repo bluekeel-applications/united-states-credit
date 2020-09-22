@@ -10,7 +10,6 @@ import DebtAmounts from './components/Pages/DebtAmounts';
 import DebtTypes from './components/Pages/DebtTypes';
 import EmailForm from './components/Pages/EmailForm';
 import OfferPage from './components/Pages/OfferPage';
-import DirectOffer from './components/Pages/DirectOffer';
 import Error from './components/Pages/Error';
 import Radium from 'radium';
 
@@ -27,7 +26,6 @@ const Routes = () => {
 			<Route path='/debt_types' component={DebtTypes} />
 			<Route path='/debt_amount' component={DebtAmounts} />
 			<Route path='/email_optin' component={EmailForm} />
-			<Route path='/direct' component={DirectOffer} />
 			<Route path='/offer' component={OfferPage} />
 			<Route path='/error' component={Error} />
 		</Switch>

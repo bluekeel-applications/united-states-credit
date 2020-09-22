@@ -3,6 +3,7 @@ import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
 import ContentWrapper from '@bit/bluekeel.component-library.content-wrapper';
 import DirectLink from '@bit/bluekeel.component-library.direct-link';
+import UserSelection from '@bit/bluekeel.component-library.user-selection';
 
 const OfferPage = () => {
     let history = useHistory();
@@ -17,14 +18,25 @@ const OfferPage = () => {
     }, [selectedOffer, history]);
 
     const trackingValues = {
-        pid: trackingState['pid'], 
-        vertical: appState['vertical'], 
-        loan_type: appState['loan_type'], 
-        debt_type: appState['debt_type'], 
-        debt_amount: appState['debt_amount'], 
-        location: trackingState['location'], 
-        hsid: trackingState['hsid'],
-        email: trackingState['email']
+        hsid: Number(trackingState['hsid']),
+        pid: Number(trackingState['pid']),
+        oid: Number(trackingState['oid']),
+        eid: trackingState['eid'],
+        sid: Number(trackingState['sid']),
+        uid: trackingState['uid'] || '',
+        vertical: appState['vertical'] || '', 
+        loan_type: appState['loan_type'] || '', 
+        debt_type: appState['debt_type'] || '', 
+        debt_amount: appState['debt_amount'] || '', 
+        location: trackingState['location'] || '',
+        email: trackingState['email'] || '',
+        ip_address: trackingState['ip_address'] || '', 
+        fname: trackingState['fname'] || '', 
+        lname: trackingState['lname'] || '', 
+        address: trackingState['address'] || '', 
+        city: trackingState['city'] || '', 
+        state: trackingState['state'] || '', 
+        zip: trackingState['zip'] || ''
     };
 
     const routedOfferPage = () => {
@@ -38,17 +50,18 @@ const OfferPage = () => {
                             url={selectedOffer['url']}
                             jump={selectedOffer['jump']}
                             tracking={trackingValues}
-                            pch={null}
                         />
                     </ContentWrapper>
                 );
 
-            // case 'selection':
-            //     return (
-            //         <ContentWrapper theme='usc'>
-            //             <UserSelection />
-            //         </ContentWrapper>
-            //     );
+                case 'selection':
+                    return (
+                        <UserSelection 
+                            theme='usc'
+                            offer={selectedOffer}
+                            tracking={trackingValues}
+                        />
+                    );
 
             default:
                 console.log('offer_page not recognized!!!!', selectedOffer);
