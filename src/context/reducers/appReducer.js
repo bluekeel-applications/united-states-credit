@@ -11,18 +11,12 @@ const initialAppState = {
         zipcode: ''
     },
     animationPlayed: false,
-    loadingOffers: true,
     showDrawer: false,
-    showNavStart: false,
-    showExpansion: false,
-    showStory: false,
+    showFullLogo: true,
     vertical: 'direct',
     loan_type: 'N/A',
     debt_type: 'N/A',
     debt_amount: 'N/A',
-    checking_optin: false,
-    debt_optin: false,
-    email_optin: null,
     breadcrumbs: {
         vertical: null,
         loan_type: null,
@@ -30,14 +24,6 @@ const initialAppState = {
         debt_amount: null
     },
     redirection: false,
-    program_id: null,
-    click_count: 0,
-    offers: null,
-    link: null,
-    offer_page: null,
-    four_button: null,
-    jump: null,
-    email: null,
     em_sub: false,
     offer: null
 };
@@ -73,10 +59,10 @@ const appStateReducer = (state, action) => {
                 animationPlayed: true
             };
         
-        case 'TOGGLE_START_IN_NAV':
+        case 'SHOW_FULL_LOGO':
             return {
                 ...state,
-                showNavStart: action.payload
+                showFullLogo: action.payload
             };
         
         case 'DEEP_DIVE':
@@ -90,20 +76,8 @@ const appStateReducer = (state, action) => {
             return {
                 ...state,
                 redirection: true
-            };
+            };       
 
-        case 'SHOW_EXPANSION':
-            return {
-                ...state,
-                showExpansion: true
-            };        
-
-        case 'HIDE_EXPANSION':
-            return {
-                ...state,
-                showExpansion: false,
-                showStory: true
-            }; 
 // Flow Selections
         case 'VERTICAL_PICKED':
             return {

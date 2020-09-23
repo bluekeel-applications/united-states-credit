@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import ContentWrapper from '@bit/bluekeel.component-library.content-wrapper';
-import QuestionButtons from '@bit/bluekeel.component-library.question-buttons';
+import Question from '@bit/bluekeel.component-library.question';
 import Radium from 'radium';
 import { home_loan_buttons } from './BUTTONS';
-import QuestionTitle from '../Shared/QuestionTitle';
 
 const HomeLoans = () => {
-    const { dispatchApp, appState } = useContext(AppContext);
+    const { dispatchApp } = useContext(AppContext);
     let history = useHistory();    
     const componentIsMounted = useRef(true);
 
@@ -29,20 +27,19 @@ const HomeLoans = () => {
     };
 
     return (
-        <ContentWrapper
-            key='home-loan-type'
-            crumbs={{verticalCrumb: appState.breadcrumbs.vertical}}
-            flow={{ vertical: appState.vertical, loan_type: appState.loan_type }}
-            theme='usc'
-        >
-            <div style={{ padding: '20px 0' }}>
-                <QuestionTitle text={'Select Loan Type:'} />
-                <QuestionButtons 
-                    buttonData={home_loan_buttons}
-                    handleClick={handleButtonClick}
-                />
-            </div>
-        </ContentWrapper>
+        <Question 
+            page={{
+                buttonData: home_loan_buttons,
+                handleClick: handleButtonClick,
+                text: 'Select Home Loan Type:'
+            }}
+            wrapper={{
+                theme: 'usc',
+                crumbs: { verticalCrumb: 'Home Loans' },
+                flow: { vertical: 'home_loans' },
+                isEnd: false
+            }}
+        />
     )
 };
 

@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import ContentWrapper from '@bit/bluekeel.component-library.content-wrapper';
-import QuestionButtons from '@bit/bluekeel.component-library.question-buttons';
+import Question from '@bit/bluekeel.component-library.question';
 import Radium from 'radium';
 import { credit_card_buttons } from './BUTTONS';
-import QuestionTitle from '../Shared/QuestionTitle';
 
 const CreditCards = () => {
-    const { appState, dispatchApp } = useContext(AppContext);
+    const { dispatchApp } = useContext(AppContext);
     let history = useHistory();
     const componentIsMounted = useRef(true);
 
@@ -20,28 +18,27 @@ const CreditCards = () => {
         // eslint-disable-next-line
     }, []);
 
-    const handleButtonClick = (e, choice, texts) => {
+    const handleButtonClick = (e, choice, text) => {
         e.preventDefault();
-        dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: choice, crumb: texts } });
+        dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: choice, crumb: text } });
         window.scrollTo(0, 0);
         history.push('/email_optin');
     };
 
     return (
-        <ContentWrapper
-            key='credit-card-type'
-            crumbs={{verticalCrumb: appState.breadcrumbs.vertical}}
-            flow={{ vertical: appState.vertical, loan_type: appState.loan_type }}
-            theme='usc'
-        >
-            <div style={{ padding: '20px 0' }}>
-                <QuestionTitle text={'Select Card Type:'} />
-                <QuestionButtons 
-                    buttonData={credit_card_buttons}
-                    handleClick={handleButtonClick}
-                />
-            </div>
-        </ContentWrapper>  
+        <Question 
+            page={{
+                buttonData: credit_card_buttons,
+                handleClick: handleButtonClick,
+                text: 'Select Card Type:'
+            }}
+            wrapper={{
+                theme: 'usc',
+                crumbs: { verticalCrumb: 'Credit Cards' },
+                flow: { vertical: 'credit_cards' },
+                isEnd: false
+            }}
+        />  
     )
 };
 

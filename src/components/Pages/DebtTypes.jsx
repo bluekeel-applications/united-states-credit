@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import ContentWrapper from '@bit/bluekeel.component-library.content-wrapper';
-import QuestionButtons from '@bit/bluekeel.component-library.question-buttons';
+import Question from '@bit/bluekeel.component-library.question';
 import Radium from 'radium';
 import { debt_type_buttons } from './BUTTONS';
-import QuestionTitle from '../Shared/QuestionTitle';
 
 const DebtTypes = () => {
     const { appState, dispatchApp } = useContext(AppContext);
@@ -31,23 +29,25 @@ const DebtTypes = () => {
     };
 
     return (
-        <ContentWrapper
-            key='debt-type'
-            crumbs={{
-                verticalCrumb: appState.breadcrumbs.vertical,
-                loanTypeCrumb: appState.breadcrumbs.loan_type,
+        <Question 
+            page={{
+                buttonData: debt_type_buttons,
+                handleClick: handleButtonClick,
+                text: 'Your primary type of Debt is:'
             }}
-            flow={{ vertical: appState.vertical, loan_type: appState.loan_type }}
-            theme='usc'
-        >
-            <div style={{ padding: '20px 0' }}>
-                <QuestionTitle text={'Your primary type of Debt is:'} />
-                <QuestionButtons 
-                    buttonData={debt_type_buttons}
-                    handleClick={handleButtonClick}
-                />
-            </div>
-        </ContentWrapper>  
+            wrapper={{
+                theme: 'usc',
+                crumbs: { 
+                    verticalCrumb: appState.breadcrumbs.vertical,
+                    loanTypeCrumb: appState.breadcrumbs.loan_type
+                },
+                flow: { 
+                    vertical: appState.vertical, 
+                    loan_type: appState.loan_type
+                },
+                isEnd: false
+            }}
+        /> 
     )
 };
 

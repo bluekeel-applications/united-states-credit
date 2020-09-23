@@ -12,7 +12,6 @@ const useSetProvider = () => {
             if (subDomain === 'pch') {
                 dispatchApp({ type: 'SET_PROVIDER', payload: 'pch' });
                 // dispatchApp({ type: 'SET_PCH_CREDS', payload: { pat: myURL.searchParams.get('pt1'), gmt: myURL.searchParams.get('pt2')}});
-                // dispatchApp({ type: 'SHOW_EXPANSION' });
 				return;
 			};
 			dispatchApp({ type: 'SET_PROVIDER', payload: 'bluekeel' });

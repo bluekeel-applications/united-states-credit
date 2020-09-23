@@ -13,7 +13,6 @@ import useSetProvider from '../hooks/useSetProvider';
 import useSetNewUser from '../hooks/useSetNewUser';
 import useInsertNewUser from '../hooks/useInsertNewUser';
 import usePchAPI from '../hooks/usePchAPI';
-import { useMediaQuery } from 'react-responsive';
 import Radium from 'radium';
 import Styles from './Styles';
 
@@ -25,43 +24,6 @@ const App = () => {
 	let history = useHistory();
 	const [ showDrawer, toggleDrawer ] = useState(false);
 	const { appState, dispatchApp } = useContext(AppContext);
-	const [ scrollTop, setScrollTop ] = useState(0);
-    const [ showLogoText, setShowLogoText ] = useState(true);
-	const isMobile = useMediaQuery({ maxWidth: 767 });
-	
-    useEffect(() => {
-        const onScroll = e => {
-            setScrollTop(e.target.documentElement.scrollTop);
-        };
-        window.addEventListener('scroll', onScroll);
-
-        return () => window.removeEventListener('scroll', onScroll);
-    }, [scrollTop]);
-
-    useEffect(() => {
-        if (isMobile && scrollTop > 200 && window.location.pathname === '/') {
-			setShowLogoText(false);
-            return;
-        };
-
-		return () => setShowLogoText(true);
-		
-	}, [scrollTop, isMobile]);
-
-	useEffect(() => {
-		if (scrollTop <= 100) {
-			dispatchApp({ type: 'TOGGLE_START_IN_NAV', payload: false});
-			return;
-		};
-
-		if (scrollTop > 200) {
-			dispatchApp({ type: 'TOGGLE_START_IN_NAV', payload: true })
-			return;
-		};
-
-		return () => dispatchApp({ type: 'TOGGLE_START_IN_NAV', payload: false });
-		// eslint-disable-next-line
-	}, [scrollTop]);
 	
 	useEffect(() => {
 		if(redirect) {
@@ -70,6 +32,10 @@ const App = () => {
 		};
 		// eslint-disable-next-line
 	}, [redirect]);
+
+	const handleMenuClick = () => {
+		toggleDrawer(!showDrawer);
+	};
 
 	const goHome = () => {
         dispatchApp({ type: 'RESTART_SEARCH' });
@@ -86,9 +52,9 @@ const App = () => {
 					<>
 						<Navbar
 							key='usc-navbar'
-							drawerClick={() => toggleDrawer(true)} 
+							drawerClick={handleMenuClick} 
 							goHome={goHome}
-							brand={showLogoText ? UscFullLogo : UscBlogLogo}
+							brand={appState['showFullLogo'] ? UscFullLogo : UscBlogLogo}
 							styleVariant={navbarVariants}
 						>
 							<Routes key='usc-routes'/>
