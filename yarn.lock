@@ -1237,10 +1237,10 @@
     radium "^0.26.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.content-wrapper@0.0.1", "@bit/bluekeel.component-library.content-wrapper@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.content-wrapper/-/bluekeel.component-library.content-wrapper-0.0.1.tgz#32d0ad36b0fcf6235be43d35575a14d67d88863b"
-  integrity sha1-MtCtNrD89iNb5D01V1oU1n2Ihjs=
+"@bit/bluekeel.component-library.content-wrapper@0.0.2", "@bit/bluekeel.component-library.content-wrapper@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.content-wrapper/-/bluekeel.component-library.content-wrapper-0.0.2.tgz#7b464affecd869fb3030105a0a52ddf4e0909091"
+  integrity sha1-e0ZK/+zYafswMBBaClLd9OCQkJE=
   dependencies:
     "@bit/bluekeel.assets.usc-flag-left" "0.0.1"
     "@bit/bluekeel.assets.usc-flag-right" "0.0.1"
@@ -1250,12 +1250,12 @@
     react-responsive "^8.1.0"
     react-spring "^8.0.27"
 
-"@bit/bluekeel.component-library.debt-optin@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.debt-optin/-/bluekeel.component-library.debt-optin-0.0.1.tgz#f26220657516e511e03adcbaea42f47ca3deffe2"
-  integrity sha1-8mIgZXUW5RHgOty66kL0fKPe/+I=
+"@bit/bluekeel.component-library.debt-optin@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.debt-optin/-/bluekeel.component-library.debt-optin-0.0.2.tgz#dfa7edb605f6985ab0d2da8efc98cd9a7993a52e"
+  integrity sha1-36fttgX2mFqw0tqO/JjNmnmTpS4=
   dependencies:
-    "@bit/bluekeel.component-library.content-wrapper" "0.0.1"
+    "@bit/bluekeel.component-library.content-wrapper" "0.0.2"
     radium "^0.26.0"
     react "^16.13.1"
 
@@ -1280,13 +1280,13 @@
     radium "^0.26.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.email-capture@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.email-capture/-/bluekeel.component-library.email-capture-0.0.1.tgz#7cb206020911aef4997055d361a50e6b3d5e3a8f"
-  integrity sha1-fLIGAgkRrvSZcFXTYaUOaz1eOo8=
+"@bit/bluekeel.component-library.email-capture@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.email-capture/-/bluekeel.component-library.email-capture-0.0.2.tgz#d8203d54d3e4dd2758c503fec055ba2c7ddf2c98"
+  integrity sha1-2CA9VNPk3SdYxQP+wFW6LH3fLJg=
   dependencies:
     "@apollo/react-hooks" "^4.0.0"
-    "@bit/bluekeel.component-library.content-wrapper" "0.0.1"
+    "@bit/bluekeel.component-library.content-wrapper" "0.0.2"
     "@bit/bluekeel.hookz.use-apollo-client" "0.0.2"
     "@bit/bluekeel.mutationz.add_service_log" "0.0.1"
     "@bit/bluekeel.mutationz.add_user_email" "0.0.2"
@@ -1320,13 +1320,13 @@
     "@material-ui/core" "^4.11.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.four-button@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.four-button/-/bluekeel.component-library.four-button-0.0.1.tgz#009c75898834eaa901648be5c51f2cdb5ab0dd2e"
-  integrity sha1-AJx1iYg06qkBZIvlxR8s21qw3S4=
+"@bit/bluekeel.component-library.four-button@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.four-button/-/bluekeel.component-library.four-button-0.0.2.tgz#d0a681475077e6b5aa6aafd4e56566292aecbc43"
+  integrity sha1-0KaBR1B35rWqaq/U5WVmKSrsvEM=
   dependencies:
     "@apollo/react-hooks" "^4.0.0"
-    "@bit/bluekeel.component-library.content-wrapper" "0.0.1"
+    "@bit/bluekeel.component-library.content-wrapper" "0.0.2"
     "@bit/bluekeel.component-library.loading-bubbles" "0.0.1"
     "@bit/bluekeel.hookz.use-apollo-client" "0.0.2"
     "@bit/bluekeel.mutationz.add_user_email" "0.0.2"
@@ -1394,20 +1394,20 @@
     radium "^0.26.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.question@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.question/-/bluekeel.component-library.question-0.0.1.tgz#cc1c16c156236e60a62daf2a5158310d1efe3d8a"
-  integrity sha1-zBwWwVYjbmCmLa8qUVgxDR7+PYo=
+"@bit/bluekeel.component-library.question@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.question/-/bluekeel.component-library.question-0.0.2.tgz#8e175404c084a25819c3e3fb97cd54431756de08"
+  integrity sha1-jhdUBMCEolgZw+P7l81UQxdW3gg=
   dependencies:
-    "@bit/bluekeel.component-library.content-wrapper" "0.0.1"
+    "@bit/bluekeel.component-library.content-wrapper" "0.0.2"
     "@fortawesome/react-fontawesome" "^0.1.11"
     radium "^0.26.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.start-button@^0.0.4":
-  version "0.0.4"
-  resolved "https://node.bit.dev/bluekeel.component-library.start-button/-/bluekeel.component-library.start-button-0.0.4.tgz#980ab7c39ee34c17566038b7ccfa00d20a193297"
-  integrity sha1-mAq3w57jTBdWYDi3zPoA0goZMpc=
+"@bit/bluekeel.component-library.start-button@^0.0.5":
+  version "0.0.5"
+  resolved "https://node.bit.dev/bluekeel.component-library.start-button/-/bluekeel.component-library.start-button-0.0.5.tgz#8da3511894b5e434f04b4438b5dfebfd8c3b7775"
+  integrity sha1-jaNRGJS15DTwS0Q4td/r/Yw7d3U=
   dependencies:
     "@fortawesome/react-fontawesome" "^0.1.11"
     radium "^0.26.0"
@@ -1418,13 +1418,13 @@
   resolved "https://node.bit.dev/bluekeel.component-library.usc/-/bluekeel.component-library.usc-0.0.1.tgz#c3fca3467aa83da45e813ac790fd87f012c82c08"
   integrity sha1-w/yjRnqoPaRegTrHkP2H8BLILAg=
 
-"@bit/bluekeel.component-library.user-selection@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.user-selection/-/bluekeel.component-library.user-selection-0.0.1.tgz#a9595ad2f1b6100061cd2b36540a265ccf53f343"
-  integrity sha1-qVla0vG2EABhzSs2VAomXM9T80M=
+"@bit/bluekeel.component-library.user-selection@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.user-selection/-/bluekeel.component-library.user-selection-0.0.2.tgz#59513ddb7ff0614fc81a81c01dd2ad6ae13c021c"
+  integrity sha1-WVE923/wYU/IGoHAHdKtauE8Ahw=
   dependencies:
     "@apollo/react-hooks" "^4.0.0"
-    "@bit/bluekeel.component-library.content-wrapper" "0.0.1"
+    "@bit/bluekeel.component-library.content-wrapper" "0.0.2"
     "@bit/bluekeel.component-library.form-input" "0.0.1"
     "@bit/bluekeel.component-library.loading-bubbles" "0.0.1"
     "@bit/bluekeel.hookz.use-apollo-client" "0.0.2"
