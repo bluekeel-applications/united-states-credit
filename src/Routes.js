@@ -8,6 +8,7 @@ import HomeLoans from './components/Pages/HomeLoans';
 import PersonalLoans from './components/Pages/PersonalLoans';
 import DebtAmounts from './components/Pages/DebtAmounts';
 import DebtTypes from './components/Pages/DebtTypes';
+import DebtLoan from './components/Pages/DebtLoan';
 import EmailForm from './components/Pages/EmailForm';
 import OfferPage from './components/Pages/OfferPage';
 import Error from './components/Pages/Error';
@@ -25,6 +26,7 @@ const Routes = () => {
 			<Route path='/home_loans' component={HomeLoans} />
 			<Route path='/debt_types' component={DebtTypes} />
 			<Route path='/debt_amount' component={DebtAmounts} />
+			<Route path='/debt_optin' component={DebtLoan} />
 			<Route path='/email_optin' component={EmailForm} />
 			<Route path='/offer' component={OfferPage} />
 			<Route path='/error' component={Error} />

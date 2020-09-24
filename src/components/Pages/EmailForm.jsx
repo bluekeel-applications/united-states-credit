@@ -31,10 +31,11 @@ const EmailForm = () => {
     };
 
     const crumbs = {
-        verticalCrumb: appState.breadcrumbs.vertical,
-        loanTypeCrumb: appState.breadcrumbs.loan_type,
-        debtTypeCrumb: appState.breadcrumbs.debt_type,
-        debtAmountCrumb: appState.breadcrumbs.debt_amount,
+        verticalCrumb: appState.breadcrumbs['vertical'],
+        loanTypeCrumb: appState.breadcrumbs['loan_type'],
+        debtTypeCrumb: appState.breadcrumbs['debt_type'],
+        debtAmountCrumb: appState.breadcrumbs['debt_amount'],
+        optinCrumb: appState.breadcrumbs['optin']
     };
 
     const dispatches = {

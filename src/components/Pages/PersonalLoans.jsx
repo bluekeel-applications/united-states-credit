@@ -29,7 +29,7 @@ const PersonalLoans = () => {
                 break;
 
             case 'pay_taxes':
-                history.push('/email_optin');
+                history.push('/debt_optin');
                 break;
             
             default:

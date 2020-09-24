@@ -17,11 +17,14 @@ const initialAppState = {
     loan_type: 'N/A',
     debt_type: 'N/A',
     debt_amount: 'N/A',
+    checking_optin: false,
+    debt_optin: false,
     breadcrumbs: {
         vertical: null,
         loan_type: null,
         debt_type: null,
-        debt_amount: null
+        debt_amount: null,
+        optin: null
     },
     redirection: false,
     em_sub: false,
@@ -121,6 +124,26 @@ const appStateReducer = (state, action) => {
                     debt_amount: action.payload.crumb
                 }
             };
+
+        case 'CHECKING_OPT_IN':
+            return {
+                ...state,
+                checking_optin: true,
+                breadcrumbs:{
+                    ...state.breadcrumbs,
+                    optin: ' + Free Online Checking'
+                }
+            };
+        
+        case 'DEBT_OPT_IN':
+            return {
+                ...state,
+                debt_optin: true,
+                breadcrumbs:{
+                    ...state.breadcrumbs,
+                    optin: '+ Consolidate Debt'
+                }
+            };
         
         case 'CLICK_SET_EMAIL':
             return {
@@ -141,6 +164,8 @@ const appStateReducer = (state, action) => {
                 loan_type: null,
                 debt_type: 'N/A',
                 debt_amount: 'N/A',
+                checking_optin: false,
+                debt_optin: false,
                 breadcrumbs: {
                     vertical: null,
                     loan_type: null,

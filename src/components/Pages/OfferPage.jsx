@@ -76,7 +76,8 @@ const OfferPage = () => {
                                 verticalCrumb: appState.breadcrumbs['vertical'],
                                 loanTypeCrumb: appState.breadcrumbs['loan_type'],
                                 debtTypeCrumb: appState.breadcrumbs['debt_type'],
-                                debtAmountCrumb: appState.breadcrumbs['debt_amount']
+                                debtAmountCrumb: appState.breadcrumbs['debt_amount'],
+                                optinCrumb: appState.breadcrumbs['optin']
                             },
                             isEnd: true
                         }}
