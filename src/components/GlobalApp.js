@@ -5,7 +5,7 @@ import App from './App';
 import { AppContextProvider } from '../context';
 import UseApolloClient from '@bit/bluekeel.hookz.use-apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
-import usePushPros from '../hooks/usePushPros';
+import UsePushProsScripts from '@bit/bluekeel.hookz.use-push-pros-scripts';
 import useSentry from '../hooks/useSentry';
 import Radium, { StyleRoot } from 'radium';
 // fontawesome
@@ -15,11 +15,13 @@ initFontAwesome();
 const history = createBrowserHistory();
 
 const GlobalApp = () => {
-	usePushPros();
+	UsePushProsScripts('https://pushpros.tech/GetPushScript?key=2Xa3N8H4tIMDq5DaLOjgimHq4HG8UhWO&domain=');
 	useSentry(history);
-	const client = UseApolloClient('https://cbvb02ezl4.execute-api.us-east-1.amazonaws.com/prod/graphql');
-	// const client = UseApolloClient('http://localhost:4000/graphql');
-    // const client = UseApolloClient('https://cypmxq177b.execute-api.us-east-1.amazonaws.com/test/graphql');
+	const apolloUri = 'https://cbvb02ezl4.execute-api.us-east-1.amazonaws.com/prod/graphql';
+	// const apolloTest = 'https://cypmxq177b.execute-api.us-east-1.amazonaws.com/test/graphql';
+	// const apolloLocal = 'http://localhost:4000/graphql';
+
+	const client = UseApolloClient(apolloUri);
 
 	const WrappedApp = Radium(App);
 
