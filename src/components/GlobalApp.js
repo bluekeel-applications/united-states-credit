@@ -18,6 +18,8 @@ const GlobalApp = () => {
 	usePushPros();
 	useSentry(history);
 	const client = UseApolloClient('https://cbvb02ezl4.execute-api.us-east-1.amazonaws.com/prod/graphql');
+	// const client = UseApolloClient('http://localhost:4000/graphql');
+    // const client = UseApolloClient('https://cypmxq177b.execute-api.us-east-1.amazonaws.com/test/graphql');
 
 	const WrappedApp = Radium(App);
 

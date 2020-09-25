@@ -20,19 +20,10 @@
 // 4. Layout-related sections
 @import
   'layout/drawer';
-  // 'layout/flows';
 
 // 5. Components
 @import
-  'components/four_button',
   'components/loaders',
   'components/footer',
   'components/side_column',
   'components/button';
-
-// 6. Page-specific styles
-@import
-  // 'pages/offers_page',
-  'pages/optins',
-  'pages/offer_wall',
-  'pages/select';

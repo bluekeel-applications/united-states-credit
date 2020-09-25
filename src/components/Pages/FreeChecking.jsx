@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import DebtOptin from '@bit/bluekeel.component-library.debt-optin';
+import CheckingOptin from '@bit/bluekeel.component-library.checking-optin';
 
-const DebtLoan = () => {
+const FreeChecking = () => {
     let history = useHistory();
     const { appState, dispatchApp } = useContext(AppContext);
 
@@ -24,17 +24,17 @@ const DebtLoan = () => {
     };
     const handlerFunctions = {
         handleYes: () => {
-            dispatchApp({ type: 'DEBT_OPT_IN' });
+            dispatchApp({ type: 'CHECKING_OPT_IN' });
             window.scrollTo(0, 0);
             history.push('/email_optin');
         },
         handleNo: () => {
             window.scrollTo(0, 0);
-            history.push('/checking');
+            history.push('/email_optin');
         }
     };
 
-    return <DebtOptin handlers={handlerFunctions} wrapper={wrapperData} />
+    return <CheckingOptin handlers={handlerFunctions} wrapper={wrapperData} />
 };
 
-export default DebtLoan;
+export default FreeChecking;

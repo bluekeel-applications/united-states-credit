@@ -5,7 +5,7 @@ import Loading from '../Shared/Loading';
 import FourButton from './FourButton';
 import OneButton from './OneButton';
 import MNet from './MNet';
-import OfferWall from './OfferWall';
+// import OfferWall from './OfferWall';
 import OptinOffer from './OptinOffer';
 import UserSelection from './UserSelection';
 import DirectLink from './DirectLink';
@@ -60,15 +60,6 @@ const Offers = () => {
                     // <FlowPage showCrumbs showFinalCrumbs>
                         <div className='flow-content offer-container'>
                             <OneButton offer={selectedOffer} />
-                        </div>
-                    // </FlowPage>
-                );
-
-            case 'offer_wall':
-                return (
-                    // <FlowPage showCrumbs showFinalCrumbs>
-                        <div className='flow-content offer-container'>
-                            <OfferWall offer={selectedOffer} />
                         </div>
                     // </FlowPage>
                 );

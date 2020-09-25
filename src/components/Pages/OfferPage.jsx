@@ -29,7 +29,9 @@ const OfferPage = () => {
         vertical: appState['vertical'] || '', 
         loan_type: appState['loan_type'] || '', 
         debt_type: appState['debt_type'] || '', 
-        debt_amount: appState['debt_amount'] || '', 
+        debt_amount: appState['debt_amount'] || '',
+        debt_optin: appState['debt_optin'],
+        checking_optin: appState['checking_optin'],
         location: trackingState['location'] || '',
         email: trackingState['email'] || '',
         ip_address: trackingState['ip_address'] || '', 
@@ -78,6 +80,10 @@ const OfferPage = () => {
                                 debtTypeCrumb: appState.breadcrumbs['debt_type'],
                                 debtAmountCrumb: appState.breadcrumbs['debt_amount'],
                                 optinCrumb: appState.breadcrumbs['optin']
+                            },
+                            flow: {
+                                vertical: appState['vertical'],
+                                loan_type: appState['loan_type']
                             },
                             isEnd: true
                         }}
