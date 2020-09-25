@@ -32,7 +32,7 @@ const EmailForm = () => {
         zip: trackingState['zip'] || ''
     };
 
-    const crumbs = {
+    const crumbData = {
         verticalCrumb: appState.breadcrumbs['vertical'],
         loanTypeCrumb: appState.breadcrumbs['loan_type'],
         debtTypeCrumb: appState.breadcrumbs['debt_type'],
@@ -45,13 +45,22 @@ const EmailForm = () => {
         tracking: dispatchTracking
     };
 
+    const wrapperData = {
+        theme: 'usc',
+        crumbs: crumbData,
+        flow: {
+            vertical: appState['vertical'],
+            loan_type: appState['loan_type']
+        },
+        isEnd: true
+    };
+
     return (        
         <EmailCapture 
             tracking={tracking}
             dispatches={dispatches}
             isSubmission={appState.em_sub}
-            theme='usc'
-            crumbs={crumbs}
+            wrapper={wrapperData}
         />
     )
 };

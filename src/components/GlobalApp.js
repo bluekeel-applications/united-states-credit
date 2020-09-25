@@ -6,7 +6,7 @@ import { AppContextProvider } from '../context';
 import UseApolloClient from '@bit/bluekeel.hookz.use-apollo-client';
 import { ApolloProvider } from '@apollo/react-hooks';
 import UsePushProsScripts from '@bit/bluekeel.hookz.use-push-pros-scripts';
-import useSentry from '../hooks/useSentry';
+// import UseSentry from '@bit/bluekeel.hookz.use-sentry';
 import Radium, { StyleRoot } from 'radium';
 // fontawesome
 import initFontAwesome from '../utils/initFontAwesome';
@@ -16,7 +16,13 @@ const history = createBrowserHistory();
 
 const GlobalApp = () => {
 	UsePushProsScripts('https://pushpros.tech/GetPushScript?key=2Xa3N8H4tIMDq5DaLOjgimHq4HG8UhWO&domain=');
-	useSentry(history);
+	// UseSentry({ 
+	// 	history,
+	// 	dsn: 'https://e7b6d13933254ee29da1019e52d8447c@o440028.ingest.sentry.io/5407883',
+	// 	page: 'united-states-credit',
+	// 	version: '0.0.1'
+	// });
+
 	const apolloUri = 'https://cbvb02ezl4.execute-api.us-east-1.amazonaws.com/prod/graphql';
 	// const apolloTest = 'https://cypmxq177b.execute-api.us-east-1.amazonaws.com/test/graphql';
 	// const apolloLocal = 'http://localhost:4000/graphql';

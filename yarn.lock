@@ -1289,16 +1289,15 @@
     radium "^0.26.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.email-capture@^0.0.4":
-  version "0.0.4"
-  resolved "https://node.bit.dev/bluekeel.component-library.email-capture/-/bluekeel.component-library.email-capture-0.0.4.tgz#ba59a2567b3b08677d793459e36e018a1fdb41bc"
-  integrity sha1-ulmiVns7CGd9eTRZ424Bih/bQbw=
+"@bit/bluekeel.component-library.email-capture@^0.0.6":
+  version "0.0.6"
+  resolved "https://node.bit.dev/bluekeel.component-library.email-capture/-/bluekeel.component-library.email-capture-0.0.6.tgz#9c8e3f197fa35e99bccf80a7141ac565d0ff2116"
+  integrity sha1-nI4/GX+jXpm8z4CnFBrFZdD/IRY=
   dependencies:
     "@apollo/react-hooks" "^4.0.0"
     "@bit/bluekeel.component-library.content-wrapper" "0.0.2"
     "@bit/bluekeel.hookz.use-apollo-client" "0.0.2"
     "@bit/bluekeel.mutationz.add_service_log" "0.0.1"
-    "@bit/bluekeel.mutationz.add_user_email" "0.0.2"
     "@bit/bluekeel.queriez.get_offer" "0.0.1"
     "@fortawesome/react-fontawesome" "^0.1.11"
     "@material-ui/core" "^4.11.0"
@@ -1471,6 +1470,15 @@
   dependencies:
     react "^16.13.1"
     whatwg-fetch "^3.4.1"
+
+"@bit/bluekeel.hookz.use-sentry@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.hookz.use-sentry/-/bluekeel.hookz.use-sentry-0.0.1.tgz#e5e80d62094c7d48b223f7a95766116f1a3e99bc"
+  integrity sha1-5egNYglMfUiyI/epV2YRbxo+mbw=
+  dependencies:
+    "@sentry/react" "^5.24.2"
+    "@sentry/tracing" "^5.24.2"
+    react "^16.13.1"
 
 "@bit/bluekeel.hookz.use-tracking-layer@0.0.3":
   version "0.0.3"
@@ -1923,7 +1931,7 @@
     "@sentry/types" "5.24.2"
     tslib "^1.9.3"
 
-"@sentry/react@^5.22.0":
+"@sentry/react@^5.22.0", "@sentry/react@^5.24.2":
   version "5.24.2"
   resolved "https://registry.yarnpkg.com/@sentry/react/-/react-5.24.2.tgz#781ae4274ad5c3148b8f80b613c1b0a73f763e47"
   integrity sha512-iVti69qCMFztgP2E0LMx6V+3+ppKdylMJalWnwMt4LyL9idnnuiwFzMCA9g3QEvXRCTSuqEO39Dk4XYXyxi8pA==
@@ -1935,7 +1943,7 @@
     hoist-non-react-statics "^3.3.2"
     tslib "^1.9.3"
 
-"@sentry/tracing@^5.22.0":
+"@sentry/tracing@^5.22.0", "@sentry/tracing@^5.24.2":
   version "5.24.2"
   resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-5.24.2.tgz#a36b4f9bf699c5e07e99a148360091c8e727c51f"
   integrity sha512-1uDgvGGVF8lb3hRXbhNnns+8DBUKjhRKOFR5Z3RExjrDFYTDbHmoNtV73Q12Ra+Iht9HTZnIBOqYD3oSZIbJ0w==
