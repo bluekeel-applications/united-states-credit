@@ -1229,12 +1229,12 @@
     react "^16.13.1"
     react-router-dom "^5.2.0"
 
-"@bit/bluekeel.component-library.checking-optin@^0.0.2":
-  version "0.0.2"
-  resolved "https://node.bit.dev/bluekeel.component-library.checking-optin/-/bluekeel.component-library.checking-optin-0.0.2.tgz#0b245ff5c68c04c218fc395952a86495f5e09639"
-  integrity sha1-CyRf9caMBMIY/DlZUqhklfXgljk=
+"@bit/bluekeel.component-library.checking-optin@^0.0.3":
+  version "0.0.3"
+  resolved "https://node.bit.dev/bluekeel.component-library.checking-optin/-/bluekeel.component-library.checking-optin-0.0.3.tgz#8c63cb22c8bb81cd5973d5741380eb0b7197e521"
+  integrity sha1-jGPLIsi7gc1Zc9V0E4DrC3GX5SE=
   dependencies:
-    "@bit/bluekeel.component-library.content-wrapper" "0.0.4"
+    "@bit/bluekeel.component-library.content-wrapper" "0.0.5"
     radium "^0.26.0"
     react "^16.13.1"
 
@@ -1246,26 +1246,25 @@
     radium "^0.26.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.content-wrapper@0.0.4", "@bit/bluekeel.component-library.content-wrapper@^0.0.4":
-  version "0.0.4"
-  resolved "https://node.bit.dev/bluekeel.component-library.content-wrapper/-/bluekeel.component-library.content-wrapper-0.0.4.tgz#36120b3bf8a0054eaf739cf3becb0eee6a006a77"
-  integrity sha1-NhILO/igBU6vc5zzvssO7moAanc=
+"@bit/bluekeel.component-library.content-wrapper@0.0.5", "@bit/bluekeel.component-library.content-wrapper@^0.0.5":
+  version "0.0.5"
+  resolved "https://node.bit.dev/bluekeel.component-library.content-wrapper/-/bluekeel.component-library.content-wrapper-0.0.5.tgz#153585e8750fee247866e31ed5573b17ac81d234"
+  integrity sha1-FTWF6HUP7iR4ZuMe1Vc7F6yB0jQ=
   dependencies:
     "@bit/bluekeel.assets.usc-flag-left" "0.0.1"
     "@bit/bluekeel.assets.usc-flag-right" "0.0.1"
     "@bit/bluekeel.component-library.breadcrumbs" "0.0.4"
-    "@bit/bluekeel.hookz.use-resize-observer" "0.0.2"
     radium "^0.26.0"
     react "^16.13.1"
     react-responsive "^8.1.0"
     react-spring "^8.0.27"
 
-"@bit/bluekeel.component-library.debt-optin@^0.0.3":
-  version "0.0.3"
-  resolved "https://node.bit.dev/bluekeel.component-library.debt-optin/-/bluekeel.component-library.debt-optin-0.0.3.tgz#339eeb22c6a8798fe011cf16ba7621a406e9044a"
-  integrity sha1-M57rIsaoeY/gEc8WunYhpAbpBEo=
+"@bit/bluekeel.component-library.debt-optin@^0.0.4":
+  version "0.0.4"
+  resolved "https://node.bit.dev/bluekeel.component-library.debt-optin/-/bluekeel.component-library.debt-optin-0.0.4.tgz#f1a90ca6b928cd0d0e4c9e060f967afe605af4f2"
+  integrity sha1-8akMprkozQ0OTJ4GD5Z6/mBa9PI=
   dependencies:
-    "@bit/bluekeel.component-library.content-wrapper" "0.0.4"
+    "@bit/bluekeel.component-library.content-wrapper" "0.0.5"
     radium "^0.26.0"
     react "^16.13.1"
 
@@ -1347,12 +1346,12 @@
     radium "^0.26.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.question@^0.0.4":
-  version "0.0.4"
-  resolved "https://node.bit.dev/bluekeel.component-library.question/-/bluekeel.component-library.question-0.0.4.tgz#a3d305bfebfa05d96eceff8addc8486034d5a9ea"
-  integrity sha1-o9MFv+v6Bdluzv+K3chIYDTVqeo=
+"@bit/bluekeel.component-library.question@^0.0.11":
+  version "0.0.11"
+  resolved "https://node.bit.dev/bluekeel.component-library.question/-/bluekeel.component-library.question-0.0.11.tgz#153128015599dc291f76d4581091d2d72393699b"
+  integrity sha1-FTEoAVWZ3CkfdtRYEJHS1yOTaZs=
   dependencies:
-    "@bit/bluekeel.component-library.content-wrapper" "0.0.4"
+    "@bit/bluekeel.component-library.content-wrapper" "0.0.5"
     "@fortawesome/react-fontawesome" "^0.1.11"
     radium "^0.26.0"
     react "^16.13.1"
@@ -1371,10 +1370,10 @@
   resolved "https://node.bit.dev/bluekeel.component-library.usc/-/bluekeel.component-library.usc-0.0.1.tgz#c3fca3467aa83da45e813ac790fd87f012c82c08"
   integrity sha1-w/yjRnqoPaRegTrHkP2H8BLILAg=
 
-"@bit/bluekeel.component-library.user-end@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.user-end/-/bluekeel.component-library.user-end-0.0.1.tgz#86ac7aecec3f5eb0fb7a35d6ca86817d3fd2c636"
-  integrity sha1-hqx67Ow/XrD7ejXWyoaBfT/SxjY=
+"@bit/bluekeel.component-library.user-end@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.user-end/-/bluekeel.component-library.user-end-0.0.2.tgz#1e7f78550f4f52c1003b418b46f585a868666c2b"
+  integrity sha1-Hn94VQ9PUsEAO0GLRvWFqGhmbCs=
   dependencies:
     "@apollo/react-hooks" "^4.0.0"
     "@bit/bluekeel.component-library.form-input" "0.0.1"
@@ -1418,14 +1417,6 @@
   dependencies:
     react "^16.13.1"
     whatwg-fetch "^3.4.1"
-
-"@bit/bluekeel.hookz.use-resize-observer@0.0.2":
-  version "0.0.2"
-  resolved "https://node.bit.dev/bluekeel.hookz.use-resize-observer/-/bluekeel.hookz.use-resize-observer-0.0.2.tgz#dc59c400bfbe36ff4955f9bfb4d3b2014f1e3926"
-  integrity sha1-3FnEAL++Nv9JVfm/tNOyAU8eOSY=
-  dependencies:
-    react "^16.13.1"
-    resize-observer-polyfill "^1.5.1"
 
 "@bit/bluekeel.hookz.use-sentry@^0.0.1":
   version "0.0.1"
