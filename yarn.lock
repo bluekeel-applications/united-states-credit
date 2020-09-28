@@ -1268,18 +1268,6 @@
     radium "^0.26.0"
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.direct-link@^0.0.5":
-  version "0.0.5"
-  resolved "https://node.bit.dev/bluekeel.component-library.direct-link/-/bluekeel.component-library.direct-link-0.0.5.tgz#150be58e44a2f8883bfa9f058e320fa739b3cbff"
-  integrity sha1-FQvljkSi+Ig7+p8FjjIPpzmzy/8=
-  dependencies:
-    "@apollo/react-hooks" "^4.0.0"
-    "@bit/bluekeel.hookz.use-apollo-client" "0.0.2"
-    "@bit/bluekeel.hookz.use-tracking-layer" "0.0.3"
-    radium "^0.26.0"
-    react "^16.13.1"
-    react-router-dom "^5.2.0"
-
 "@bit/bluekeel.component-library.editorial@^0.0.4":
   version "0.0.4"
   resolved "https://node.bit.dev/bluekeel.component-library.editorial/-/bluekeel.component-library.editorial-0.0.4.tgz#58f2a9da6a97f41cc51f9a8d1b63a72a777953d7"
@@ -1288,23 +1276,6 @@
     "@bit/bluekeel.feed.search_pad" "0.0.1"
     radium "^0.26.0"
     react "^16.13.1"
-
-"@bit/bluekeel.component-library.email-capture@^0.0.6":
-  version "0.0.6"
-  resolved "https://node.bit.dev/bluekeel.component-library.email-capture/-/bluekeel.component-library.email-capture-0.0.6.tgz#9c8e3f197fa35e99bccf80a7141ac565d0ff2116"
-  integrity sha1-nI4/GX+jXpm8z4CnFBrFZdD/IRY=
-  dependencies:
-    "@apollo/react-hooks" "^4.0.0"
-    "@bit/bluekeel.component-library.content-wrapper" "0.0.2"
-    "@bit/bluekeel.hookz.use-apollo-client" "0.0.2"
-    "@bit/bluekeel.mutationz.add_service_log" "0.0.1"
-    "@bit/bluekeel.queriez.get_offer" "0.0.1"
-    "@fortawesome/react-fontawesome" "^0.1.11"
-    "@material-ui/core" "^4.11.0"
-    radium "^0.26.0"
-    react "^16.13.1"
-    react-lottie "^1.2.3"
-    react-router-dom "^5.2.0"
 
 "@bit/bluekeel.component-library.featured@^0.0.4":
   version "0.0.4"
@@ -1327,24 +1298,6 @@
   dependencies:
     "@material-ui/core" "^4.11.0"
     react "^16.13.1"
-
-"@bit/bluekeel.component-library.four-button@^0.0.2":
-  version "0.0.2"
-  resolved "https://node.bit.dev/bluekeel.component-library.four-button/-/bluekeel.component-library.four-button-0.0.2.tgz#d0a681475077e6b5aa6aafd4e56566292aecbc43"
-  integrity sha1-0KaBR1B35rWqaq/U5WVmKSrsvEM=
-  dependencies:
-    "@apollo/react-hooks" "^4.0.0"
-    "@bit/bluekeel.component-library.content-wrapper" "0.0.2"
-    "@bit/bluekeel.component-library.loading-bubbles" "0.0.1"
-    "@bit/bluekeel.hookz.use-apollo-client" "0.0.2"
-    "@bit/bluekeel.mutationz.add_user_email" "0.0.2"
-    "@bit/bluekeel.mutationz.add_user_flow" "0.0.2"
-    "@bit/bluekeel.mutationz.insert_common_info" "0.0.1"
-    "@bit/bluekeel.pixels.bluekeel-pixel" "0.0.1"
-    "@fortawesome/react-fontawesome" "^0.1.11"
-    radium "^0.26.0"
-    react "^16.13.1"
-    react-router-dom "^5.2.0"
 
 "@bit/bluekeel.component-library.knowledge@^0.0.2":
   version "0.0.2"
@@ -1372,15 +1325,6 @@
     radium "^0.26.0"
     react "^16.13.1"
     react-lottie "^1.2.3"
-
-"@bit/bluekeel.component-library.m-net@^0.0.2":
-  version "0.0.2"
-  resolved "https://node.bit.dev/bluekeel.component-library.m-net/-/bluekeel.component-library.m-net-0.0.2.tgz#ebfb98fd250ec6f0c85d06dbbcda2be8402dfa85"
-  integrity sha1-6/uY/SUOxvDIXQbbvNor6EAt+oU=
-  dependencies:
-    "@bit/bluekeel.hookz.use-tracking-layer" "0.0.3"
-    radium "^0.26.0"
-    react "^16.13.1"
 
 "@bit/bluekeel.component-library.navbar@^0.0.8":
   version "0.0.8"
@@ -1426,26 +1370,29 @@
   resolved "https://node.bit.dev/bluekeel.component-library.usc/-/bluekeel.component-library.usc-0.0.1.tgz#c3fca3467aa83da45e813ac790fd87f012c82c08"
   integrity sha1-w/yjRnqoPaRegTrHkP2H8BLILAg=
 
-"@bit/bluekeel.component-library.user-selection@^0.0.3":
-  version "0.0.3"
-  resolved "https://node.bit.dev/bluekeel.component-library.user-selection/-/bluekeel.component-library.user-selection-0.0.3.tgz#4556a1dcb947d8c83bd59cf9bb2bf66525dd49a0"
-  integrity sha1-RVah3LlH2Mg71Zz5uyv2ZSXdSaA=
+"@bit/bluekeel.component-library.user-end@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.component-library.user-end/-/bluekeel.component-library.user-end-0.0.1.tgz#86ac7aecec3f5eb0fb7a35d6ca86817d3fd2c636"
+  integrity sha1-hqx67Ow/XrD7ejXWyoaBfT/SxjY=
   dependencies:
     "@apollo/react-hooks" "^4.0.0"
-    "@bit/bluekeel.component-library.content-wrapper" "0.0.2"
     "@bit/bluekeel.component-library.form-input" "0.0.1"
     "@bit/bluekeel.component-library.loading-bubbles" "0.0.1"
     "@bit/bluekeel.hookz.use-apollo-client" "0.0.2"
+    "@bit/bluekeel.hookz.use-tracking-layer" "0.0.3"
     "@bit/bluekeel.mutationz.add_query_insight" "0.0.1"
+    "@bit/bluekeel.mutationz.add_service_log" "0.0.1"
     "@bit/bluekeel.mutationz.add_user_email" "0.0.2"
     "@bit/bluekeel.mutationz.add_user_flow" "0.0.2"
     "@bit/bluekeel.mutationz.insert_common_info" "0.0.1"
     "@bit/bluekeel.mutationz.insert_search_info" "0.0.1"
     "@bit/bluekeel.pixels.bluekeel-pixel" "0.0.1"
+    "@bit/bluekeel.queriez.get_offer" "0.0.1"
     "@fortawesome/react-fontawesome" "^0.1.11"
     "@material-ui/core" "^4.11.0"
     radium "^0.26.0"
     react "^16.13.1"
+    react-lottie "^1.2.3"
     react-router-dom "^5.2.0"
 
 "@bit/bluekeel.feed.search_pad@0.0.1":
