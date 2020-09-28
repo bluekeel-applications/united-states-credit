@@ -1372,8 +1372,8 @@
 
 "@bit/bluekeel.component-library.user-end@^0.0.2":
   version "0.0.2"
-  resolved "https://node.bit.dev/bluekeel.component-library.user-end/-/bluekeel.component-library.user-end-0.0.2.tgz#1e7f78550f4f52c1003b418b46f585a868666c2b"
-  integrity sha1-Hn94VQ9PUsEAO0GLRvWFqGhmbCs=
+  resolved "https://node.bit.dev/bluekeel.component-library.user-end/-/bluekeel.component-library.user-end-0.0.2.tgz#9e76ca408da8a8baaac2bd794a2812360f6b6790"
+  integrity sha1-nnbKQI2oqLqqwr15SigSNg9rZ5A=
   dependencies:
     "@apollo/react-hooks" "^4.0.0"
     "@bit/bluekeel.component-library.form-input" "0.0.1"
