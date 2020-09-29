@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { AppContext } from '../../context';
 import { useHistory } from 'react-router-dom';
-import FlowPage from '../Layout/FlowPage';
+import Question from '@bit/bluekeel.component-library.question';
+import Radium from 'radium';
 import { personal_loan_buttons } from './BUTTONS';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from '@material-ui/core/Button';
 
 const PersonalLoans = () => {
-    const { appState, dispatchApp } = useContext(AppContext);
+    const { trackingState, dispatchApp } = useContext(AppContext);
     let history = useHistory();
 
     const componentIsMounted = useRef(true);
@@ -20,17 +19,55 @@ const PersonalLoans = () => {
         // eslint-disable-next-line
     }, []);
 
-    const handleFlowClick = (e, choice, texts) => {
+    const isOptinProgram = () => {
+        const optinPids = [3274, 3275, 3276, 3277];
+        if(optinPids.includes(trackingState['pid'])) {
+            console.log('This is an Opt-In program!');
+            return true;
+        };
+        return false;
+    };
+
+    const handleButtonClick = (e, choice, texts) => {
         e.preventDefault();
         dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: choice, crumb: texts } });
         window.scrollTo(0, 0);
-        dispatchApp({ type: 'HIDE_EXPANSION' });
+        const useOptins = isOptinProgram();
+
         switch(choice) {
             case 'debt_consolidation':
                 history.push('/debt_types');
                 break;
 
-            case 'pay_taxes':
+            case 'make_purchase':
+                if(useOptins) {
+                    history.push('/debt_optin');
+                    break;
+                }
+                history.push('/email_optin');
+                break;
+
+            case 'emergency_cash':
+                if(useOptins) {
+                    history.push('/debt_optin');
+                    break;
+                }
+                history.push('/email_optin');
+                break;
+
+            case 'pay_bills':
+                if(useOptins) {
+                    history.push('/debt_optin');
+                    break;
+                }
+                history.push('/email_optin');
+                break;
+
+            case 'other_purpose':
+                if(useOptins) {
+                    history.push('/debt_optin');
+                    break;
+                }
                 history.push('/email_optin');
                 break;
             
@@ -40,26 +77,20 @@ const PersonalLoans = () => {
     };
 
     return (
-        <FlowPage showCrumbs={appState.showStory}>
-            <span className='flow-title-text'>Select Loan Purpose:</span>
-            <div className='flow-page__button-group'>
-                {personal_loan_buttons.map((button, idx) => (
-                    <Button
-                        onClick={(e) => handleFlowClick(e, button.value, button.crumb)} 
-                        variant='contained' 
-                        className={`flow-button bg__${button.color}`}
-                        key={`personal_loans-page_button-${idx}`}
-                    >
-                        {button.icon.length > 0 && (<FontAwesomeIcon
-                            icon={[button.icon[1], button.icon[2]]}
-                            className='flow-button-icon'
-                        />)}
-                        {button.text}
-                    </Button>
-                ))}
-            </div>
-        </FlowPage>
+        <Question 
+            page={{
+                buttonData: personal_loan_buttons,
+                handleClick: handleButtonClick,
+                text: 'Select Loan Purpose:'
+            }}
+            wrapper={{
+                theme: 'usc',
+                crumbs: { verticalCrumb: 'Personal Loans' },
+                flow: { vertical: 'personal_loans' },
+                isEnd: false
+            }}
+        />
     )
 };
 
-export default PersonalLoans;
+export default Radium(PersonalLoans);

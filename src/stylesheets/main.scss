@@ -19,31 +19,11 @@
 
 // 4. Layout-related sections
 @import
-  'layout/grid',
-  'layout/expansion',
-  'layout/rss_feed',
-  'layout/drawer',
-  'layout/flows';
+  'layout/drawer';
 
 // 5. Components
 @import
-  'components/four_button',
   'components/loaders',
   'components/footer',
-  'components/featured_row',
-  'components/info_row',
-  'components/latest_row',
-  'components/popular_row',
-  'components/editorial_row',
-  'components/breadcrumbs',
   'components/side_column',
   'components/button';
-
-// 6. Page-specific styles
-@import
-  'pages/offers_page',
-  'pages/optins',
-  'pages/offer_wall',
-  'pages/content_feed',
-  'pages/select',
-  'pages/get_started';

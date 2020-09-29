@@ -1,42 +1,5 @@
 import gql from 'graphql-tag.macro';
 
-// RSS Feed
-const FETCH_FEED = gql`
-	query FetchFeed($type: String) {
-		fetchFeed(type: $type) {
-			success
-			status
-			message
-			body {
-				feedUrl
-				title
-				description
-				link
-				language
-				lastBuildDate
-				image {
-					link
-					url
-					title
-					width
-					height
-				}
-				items {
-					creator
-					title
-					link
-					pubDate
-					comments
-					content
-					contentSnippet
-					guid
-					categories
-					isoDate
-				}
-			}
-		}
-	}
-`;
 // Offer
 const ENDPOINT_OFFER = gql`
 	query FetchEndpointOffer($queryData: OfferQuery, $user: UserLog) {
@@ -175,7 +138,6 @@ const QUICK_LINKS = gql `
 `;
 
 export {
-	FETCH_FEED,
 	ENDPOINT_OFFER,
 	DIRECT_OFFER,
 	OPTIN_OFFER,

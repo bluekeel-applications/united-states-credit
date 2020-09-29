@@ -9,7 +9,7 @@ export const auto_loan_buttons = [
 	{
 		icon: ['left', 'fal', 'truck-monster'],
 		text: 'SUV',
-		color: 'light_blue',
+		color: 'lightBlue',
 		value: 'suv',
 		crumb: ''
 	},
@@ -23,7 +23,7 @@ export const auto_loan_buttons = [
 	{
 		icon: ['left', 'fal', 'shuttle-van'],
 		text: 'Van/Minivan',
-		color: 'dark_blue',
+		color: 'darkBlue',
 		value: 'van',
 		crumb: ''
 	},
@@ -46,7 +46,7 @@ export const credit_card_buttons = [
 	{
 		icon: ['left', 'fal', 'money-bill-wave'],
 		text: 'Cash Back',
-		color: 'light_blue',
+		color: 'lightBlue',
 		value: 'cash_back'
 	},
 	{
@@ -58,7 +58,7 @@ export const credit_card_buttons = [
 	{
 		icon: ['left', 'fal', 'user-graduate'],
 		text: 'Student',
-		color: 'dark_blue',
+		color: 'darkBlue',
 		value: 'student'
 	},
 	{
@@ -70,7 +70,7 @@ export const credit_card_buttons = [
 	{
 		icon: ['left', 'fal', 'chart-line'],
 		text: 'Credit Building',
-		color: 'light_blue',
+		color: 'lightBlue',
 		value: 'credit_building'
 	},
 	{
@@ -82,7 +82,7 @@ export const credit_card_buttons = [
 	{
 		icon: ['left', 'fal', 'exchange'],
 		text: 'Balance Transfer',
-		color: 'dark_blue',
+		color: 'darkBlue',
 		value: 'balance_transfer'
 	},
 	{
@@ -104,7 +104,7 @@ export const personal_loan_buttons = [
 	{
 		icon: ['left', 'fal', 'money-check-edit-alt'],
 		text: 'Paying Bills',
-		color: 'light_blue',
+		color: 'lightBlue',
 		value: 'pay_bills',
 		crumb: 'Paying Bills'
 	},
@@ -118,7 +118,7 @@ export const personal_loan_buttons = [
 	{
 		icon: ['left', 'fal', 'hands-usd'],
 		text: 'Emergency Cash',
-		color: 'dark_blue',
+		color: 'darkBlue',
 		value: 'emergency_cash',
 		crumb: 'Emergency Cash'
 	},
@@ -132,7 +132,7 @@ export const personal_loan_buttons = [
 	{
 		icon: ['left', 'fal', 'search-dollar'],
 		text: 'Other Reasons',
-		color: 'light_blue',
+		color: 'lightBlue',
 		value: 'other_purpose',
 		crumb: 'Other Reasons'
 	},
@@ -149,7 +149,7 @@ export const home_loan_buttons = [
 	{
 		icon: ['left', 'fal', 'donate'],
 		text: 'Lease to Own',
-		color: 'light_blue',
+		color: 'lightBlue',
 		value: 'lease_to_own',
 		crumb: 'Lease to Own'
 	},
@@ -163,7 +163,7 @@ export const home_loan_buttons = [
 	{
 		icon: ['left', 'fal', 'shopping-cart'],
 		text: 'Purchase',
-		color: 'dark_blue',
+		color: 'darkBlue',
 		value: 'purchase',
 		crumb: 'Purchase'
 	},
@@ -179,7 +179,7 @@ export const debt_type_buttons = [
 	{
 		icon: ['left', 'fal', 'hand-holding-usd'],
 		text: 'Personal Loans',
-		color: 'light_blue',
+		color: 'lightBlue',
 		value: 'personal_loan'
 	},
 	{
@@ -191,7 +191,7 @@ export const debt_type_buttons = [
 	{
 		icon: ['left', 'fal', 'user-graduate'],
 		text: 'Student Loans',
-		color: 'dark_blue',
+		color: 'darkBlue',
 		value: 'student_loan'
 	},
 	{
@@ -203,7 +203,7 @@ export const debt_type_buttons = [
 	{
 		icon: ['left', 'fal', 'file-invoice-dollar'],
 		text: 'Other Debts',
-		color: 'light_blue',
+		color: 'lightBlue',
 		value: 'other'
 	},
 ];
@@ -218,7 +218,7 @@ export const debt_amount_buttons = [
 	{
 		icon: ['left', 'fal', 'coins'],
 		text: '$15,000 - $30,000',
-		color: 'light_blue',
+		color: 'lightBlue',
 		value: '15000-30000'
 	},
 	{
@@ -230,7 +230,7 @@ export const debt_amount_buttons = [
 	{
 		icon: ['left', 'fal', 'sack-dollar'],
 		text: 'More than $50,000',
-		color: 'dark_blue',
+		color: 'darkBlue',
 		value: '>50000'
 	},
 ];
@@ -245,7 +245,7 @@ export const vertical_buttons =[
 	{
 		icon: ['left', 'fal', 'hand-holding-usd'],
 		text: 'Personal Loans',
-		color: 'light_blue',
+		color: 'lightBlue',
 		value: 'personal_loans'
 	},
 	{
@@ -257,7 +257,7 @@ export const vertical_buttons =[
 	{
 		icon: ['left', 'fal', 'car'],
 		text: 'Auto Loans',
-		color: 'dark_blue',
+		color: 'darkBlue',
 		value: 'auto_loans'
 	},
 ];

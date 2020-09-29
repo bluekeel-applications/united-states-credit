@@ -36,48 +36,6 @@
     }
 }
 
-.nav-start-button-icon {
-    margin: 0 0 0 5px;
-}
-
-.MuiButtonBase-root.flow-button.is_start {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    font-size: 1.4rem;
-    width: 100%;
-    max-width: 275px;
-    text-align: center;
-    position: static;
-    z-index: 1000;
-    @include respond-to('small') {
-        // max-width: 250px;
-    }
-}
-
-.MuiButtonBase-root.nav-button {
-    -webkit-transition: .5s all;
-    transition: .5s all;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 175px;
-    font-size: 1.2rem;
-    min-height: 50px;
-    padding: 5px;
-    margin: 5px 0 0 0;
-    @include respond-to('small') {
-        width: 100px;
-        // min-width: 175px;
-        // font-size: 18px;
-        min-height: 40px;
-        max-height: 50px;
-        // padding: 5px;
-        margin: 1vh 0 0 0;
-    }
-}
-
 .MuiButton-label {
     white-space: nowrap;
 }
@@ -85,37 +43,13 @@
 .button-link:hover,
 .button-link:active,
 .button-link:link,
-.button-link:visited,
-.is_start:hover,
-.is_start:active,
-.is_start:link,
-.is_start:visited {
+.button-link:visited {
     text-decoration: none;
-}
-
-.button-link .is_start {
-    margin-top: 20px
 }
 
 .MuiButtonBase-root.optin-button.flow-button {
     padding: 0;
     justify-content: center;
-}
-
-.MuiButtonBase-root.email-optin-buttons {
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 100px;
-}
-
-.MuiButtonBase-root.optin__button_email {
-    width: 100%;
-    height: 45px;
-    border-radius: 10px;
-    font-size: 1.1rem;
 }
 
 .MuiButtonBase-root.offer__button_single {

@@ -8,13 +8,11 @@ import HomeLoans from './components/Pages/HomeLoans';
 import PersonalLoans from './components/Pages/PersonalLoans';
 import DebtAmounts from './components/Pages/DebtAmounts';
 import DebtTypes from './components/Pages/DebtTypes';
-import CheckingOptin from './components/Pages/CheckingOptin';
-import DebtOptin from './components/Pages/DebtOptin';
-import EmailOptin from './components/Pages/EmailOptin';
-import SelectInterest from './components/Pages/SelectInterest';
-import Offers from './components/Offers';
-import DirectOffer from './components/Pages/DirectOffer';
+import DebtLoan from './components/Pages/DebtLoan';
+import FreeChecking from './components/Pages/FreeChecking';
+import EndUserFlow from './components/Pages/EndUserFlow';
 import Error from './components/Pages/Error';
+import Radium from 'radium';
 
 const Routes = () => {
 	return (
@@ -28,15 +26,12 @@ const Routes = () => {
 			<Route path='/home_loans' component={HomeLoans} />
 			<Route path='/debt_types' component={DebtTypes} />
 			<Route path='/debt_amount' component={DebtAmounts} />
-			<Route path='/checking_optin' component={CheckingOptin} />
-			<Route path='/debt_optin' component={DebtOptin} />
-			<Route path='/email_optin' component={EmailOptin} />
-			<Route path='/select' component={SelectInterest} />
-			<Route path='/direct' component={DirectOffer} />
-			<Route path='/offers' component={Offers} />
+			<Route path='/debt_optin' component={DebtLoan} />
+			<Route path='/checking' component={FreeChecking} />
+			<Route path='/email_optin' component={EndUserFlow} />
 			<Route path='/error' component={Error} />
 		</Switch>
 	);
 };
 
-export default Routes;
+export default Radium(Routes);
