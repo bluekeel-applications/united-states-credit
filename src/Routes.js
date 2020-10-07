@@ -12,7 +12,13 @@ import DebtLoan from './components/Pages/DebtLoan';
 import FreeChecking from './components/Pages/FreeChecking';
 import EndUserFlow from './components/Pages/EndUserFlow';
 import Error from './components/Pages/Error';
+import PrivacyPolicy from '@bit/bluekeel.component-library.privacy-policy';
+import TermConditions from '@bit/bluekeel.component-library.term-conditions';
+import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
 import Radium from 'radium';
+
+const Policy = () => (<PrivacyPolicy domain='UnitedStatesCredit.com' logo={UscFullLogo}/>);
+const Terms = () => (<TermConditions domain='UnitedStatesCredit.com' logo={UscFullLogo}/>);
 
 const Routes = () => {
 	return (
@@ -29,6 +35,8 @@ const Routes = () => {
 			<Route path='/debt_optin' component={DebtLoan} />
 			<Route path='/checking' component={FreeChecking} />
 			<Route path='/email_optin' component={EndUserFlow} />
+			<Route path='/privacy' component={Policy} />
+			<Route path='/terms' component={Terms} />
 			<Route path='/error' component={Error} />
 		</Switch>
 	);

@@ -1200,6 +1200,11 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@bit/bluekeel.assets.people@0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.assets.people/-/bluekeel.assets.people-0.0.1.tgz#10986a1aaaf5a8c0780ede28e10893864221961f"
+  integrity sha1-EJhqGqr1qMB4Dt4o4QiThkIhlh8=
+
 "@bit/bluekeel.assets.usc-flag-left@0.0.1":
   version "0.0.1"
   resolved "https://node.bit.dev/bluekeel.assets.usc-flag-left/-/bluekeel.assets.usc-flag-left-0.0.1.tgz#48ce0d81a2058b31ca7bd8975180dabc8ffd8c78"
@@ -1219,6 +1224,11 @@
   version "0.0.1"
   resolved "https://node.bit.dev/bluekeel.assets.usc_full_logo/-/bluekeel.assets.usc_full_logo-0.0.1.tgz#533b863d4f76b5c9f7db6c6eb152484c7275abd6"
   integrity sha1-UzuGPU92tcn322xusVJITHJ1q9Y=
+
+"@bit/bluekeel.assets.usc_logo_gray@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.assets.usc_logo_gray/-/bluekeel.assets.usc_logo_gray-0.0.1.tgz#294bdb82d8ae0f4ba33e98643d1a212782bbc87d"
+  integrity sha1-KUvbgtiuD0ujPphkPRohJ4K7yH0=
 
 "@bit/bluekeel.component-library.breadcrumbs@0.0.4":
   version "0.0.4"
@@ -1290,6 +1300,16 @@
   resolved "https://node.bit.dev/bluekeel.component-library.feed-toolz/-/bluekeel.component-library.feed-toolz-0.0.1.tgz#3a30e9d104964a1613ae10c1b7d781dc90b5c2f2"
   integrity sha1-OjDp0QSWShYTrhDBt9eB3JC1wvI=
 
+"@bit/bluekeel.component-library.footer@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.component-library.footer/-/bluekeel.component-library.footer-0.0.1.tgz#7de3c543c3bf8d4abab910f3a2c287bb4707d8ae"
+  integrity sha1-fePFQ8O/jUq6uRDzosKHu0cH2K4=
+  dependencies:
+    "@bit/bluekeel.assets.people" "0.0.1"
+    radium "^0.26.0"
+    react "^16.13.1"
+    react-router-dom "^5.2.0"
+
 "@bit/bluekeel.component-library.form-input@0.0.1":
   version "0.0.1"
   resolved "https://node.bit.dev/bluekeel.component-library.form-input/-/bluekeel.component-library.form-input-0.0.1.tgz#4d6ae3dd7667450e66a9eca9c36fcf0bc41356a2"
@@ -1345,6 +1365,13 @@
     radium "^0.26.0"
     react "^16.13.1"
 
+"@bit/bluekeel.component-library.privacy-policy@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.privacy-policy/-/bluekeel.component-library.privacy-policy-0.0.2.tgz#bd7accecc1a789459be7b928d06a891fc842e2c0"
+  integrity sha1-vXrM7MGniUWb57ko0GqJH8hC4sA=
+  dependencies:
+    react "^16.13.1"
+
 "@bit/bluekeel.component-library.question@^0.0.19":
   version "0.0.19"
   resolved "https://node.bit.dev/bluekeel.component-library.question/-/bluekeel.component-library.question-0.0.19.tgz#ace3dc4a830b1a75ec4b293d10f3c46436a9101e"
@@ -1363,6 +1390,13 @@
   dependencies:
     "@fortawesome/react-fontawesome" "^0.1.11"
     radium "^0.26.0"
+    react "^16.13.1"
+
+"@bit/bluekeel.component-library.term-conditions@^0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.component-library.term-conditions/-/bluekeel.component-library.term-conditions-0.0.1.tgz#f74ef8e2e05e1bf623341094b2fa4f0acea406d2"
+  integrity sha1-90744uBeG/YjNBCUsvpPCs6kBtI=
+  dependencies:
     react "^16.13.1"
 
 "@bit/bluekeel.component-library.usc@^0.0.1":

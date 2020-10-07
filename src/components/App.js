@@ -6,7 +6,8 @@ import Drawer from './Layout/Drawer';
 import Navbar from '@bit/bluekeel.component-library.navbar';
 import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
 import UscBlogLogo from '@bit/bluekeel.assets.usc_blog_logo';
-import Footer from './Layout/Footer';
+import UscLogoGray from '@bit/bluekeel.assets.usc_logo_gray';
+import Footer from '@bit/bluekeel.component-library.footer';
 import Feed from '../components/Layout/Feed';
 import { useHistory } from 'react-router-dom';
 import useSetProvider from '../hooks/useSetProvider';
@@ -59,7 +60,7 @@ const App = () => {
 						>
 							<Routes key='usc-routes'/>
 							<Feed key='usc-feed'/>
-							<Footer key='usc-footer'/>
+							<Footer key='usc-footer' domain='UnitedStatesCredit' logo={UscLogoGray}/>
 							<Drawer key='usc-drawer' show={showDrawer} toggle={toggleDrawer}/>
 						</Navbar>
 					</>
