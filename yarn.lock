@@ -1370,10 +1370,10 @@
   resolved "https://node.bit.dev/bluekeel.component-library.usc/-/bluekeel.component-library.usc-0.0.1.tgz#c3fca3467aa83da45e813ac790fd87f012c82c08"
   integrity sha1-w/yjRnqoPaRegTrHkP2H8BLILAg=
 
-"@bit/bluekeel.component-library.user-end@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.user-end/-/bluekeel.component-library.user-end-0.0.1.tgz#3306cba44323b5b693cb974a11032dbc83dbc0c5"
-  integrity sha1-MwbLpEMjtbaTy5dKEQMtvIPbwMU=
+"@bit/bluekeel.component-library.user-end@^0.0.3":
+  version "0.0.3"
+  resolved "https://node.bit.dev/bluekeel.component-library.user-end/-/bluekeel.component-library.user-end-0.0.3.tgz#06d8d6c39e4f6823dae0a6200e90bdddc0e5ef11"
+  integrity sha1-BtjWw55PaCPa4KYgDpC93cDl7xE=
   dependencies:
     "@apollo/react-hooks" "^4.0.0"
     "@bit/bluekeel.component-library.form-input" "0.0.1"

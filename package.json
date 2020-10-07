@@ -19,7 +19,7 @@
     "@bit/bluekeel.component-library.question": "^0.0.19",
     "@bit/bluekeel.component-library.start-button": "^0.0.5",
     "@bit/bluekeel.component-library.usc": "^0.0.1",
-    "@bit/bluekeel.component-library.user-end": "^0.0.1",
+    "@bit/bluekeel.component-library.user-end": "^0.0.3",
     "@bit/bluekeel.hookz.use-apollo-client": "^0.0.2",
     "@bit/bluekeel.hookz.use-push-pros-scripts": "^0.0.2",
     "@bit/bluekeel.hookz.use-sentry": "^0.0.1",

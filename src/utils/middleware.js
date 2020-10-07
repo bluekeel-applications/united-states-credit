@@ -7,7 +7,7 @@ const buildHitStreetLink = (payload) => {
     const hitStreetLink = 'https://bkoffers.com/hitstreet/hit_count_hsid2.cfm?' +
         'offer_id=' + payload.OID + '&' +
         'program_id=' + payload.PID + '&' +
-        'hsid=' + payload.HSID + '&' +
+        'hsid=0&' +
         'eid=' + payload.EID + '&' +
         'oid=' + payload.OID + '&' +
         'pid=' + payload.PID + '&' +
@@ -18,6 +18,11 @@ const buildHitStreetLink = (payload) => {
 
 export const sendHitStreetHSID = async(payload) => {
     let fetchLink = buildHitStreetLink(payload);
+    if(payload.HSID !== 0) {
+        console.log('HSID found in url params:', payload.HSID);
+        setCookie('hsid', payload.HSID, 3);
+        return payload.HSID;
+    };
     try{
         const res = await axios({
             method: 'get',
@@ -33,14 +38,10 @@ export const sendHitStreetHSID = async(payload) => {
             setCookie('hsid', backup, 3);
             return backup;
         };
-        if(typeof res.data === 'number') {
-            console.log('New ClickID:', res.data);
-            setCookie('hsid', res.data, 3);
-            return res.data;
-        };
-        console.log('ClickID found in cookies:', payload.HSID);
-        setCookie('hsid', payload.HSID, 3);
-        return payload.HSID;
+        console.log('New HSID set:', res.data);
+        setCookie('hsid', res.data, 3);
+        return res.data;
+        
     } catch(err) {
         return {status: 'failed', message: err};
     }

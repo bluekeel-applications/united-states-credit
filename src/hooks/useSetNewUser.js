@@ -13,7 +13,7 @@ const useSetNewUser = () => {
 
 	const buildNewUser = async() => {
 		const tracking = {
-			HSID: myURL.searchParams.get('hsid') || getCookie('hsid') || 0,
+			HSID: myURL.searchParams.get('hsid') || 0,
 			PID: myURL.searchParams.get('pid') || getCookie('pid') || 1234,
 			SID: myURL.searchParams.get('sid') || getCookie('sid') || 7572,
 			OID: myURL.searchParams.get('oid') || getCookie('oid') || 50,

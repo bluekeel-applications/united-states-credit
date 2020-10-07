@@ -18,9 +18,9 @@ import Styles from './Styles';
 
 const App = () => {
 	useSetProvider();
-	const [redirect] = useSetNewUser();
 	useInsertNewUser();
 	usePchAPI();
+	const [redirect] = useSetNewUser();
 	let history = useHistory();
 	const [ showDrawer, toggleDrawer ] = useState(false);
 	const { appState, dispatchApp } = useContext(AppContext);
