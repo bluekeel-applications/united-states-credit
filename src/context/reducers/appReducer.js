@@ -1,5 +1,4 @@
 const initialAppState = {
-    provider: null,
     pch: {
         email: '',
         title: '',
@@ -10,7 +9,6 @@ const initialAppState = {
         state: '',
         zipcode: ''
     },
-    animationPlayed: false,
     showDrawer: false,
     showFullLogo: true,
     vertical: 'direct',
@@ -34,12 +32,6 @@ const initialAppState = {
 const appStateReducer = (state, action) => {
     switch (action.type) {
 
-        case 'SET_PROVIDER':
-            return {
-                ...state,
-                provider: action.payload
-            };
-
         case 'FOUND_PCH_USER':
             return {
                 ...state,
@@ -54,12 +46,6 @@ const appStateReducer = (state, action) => {
                     state: action.payload.State,
                     zipcode: action.payload.ZipCode
                 }
-            };
-
-        case 'ANIMATION_COMPLETED':
-            return {
-                ...state,
-                animationPlayed: true
             };
         
         case 'SHOW_FULL_LOGO':
