@@ -1555,6 +1555,13 @@
   dependencies:
     graphql-tag "^2.11.0"
 
+"@bit/bluekeel.utilities.helpers@^0.0.3":
+  version "0.0.3"
+  resolved "https://node.bit.dev/bluekeel.utilities.helpers/-/bluekeel.utilities.helpers-0.0.3.tgz#147d3ca65446391a2981d423ec34fa17bec2b16a"
+  integrity sha1-FH08plRGORopgdQj7DT6F77CsWo=
+  dependencies:
+    axios "^0.20.0"
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"

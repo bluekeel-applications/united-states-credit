@@ -1,33 +1,27 @@
-import {
-    getCookie,
-    checkCookie,
-    setCookies,
-    setPchCookies,
-    setCookie
-} from '../../utils/helpers';
+import * as Helpers from '@bit/bluekeel.utilities.helpers';
 
 const initialTrackingState = {
-    oid: checkCookie('oid') ? getCookie('oid') : null,
-    pid: checkCookie('pid') ? getCookie('pid') : null,
-    eid: checkCookie('eid') ? getCookie('eid') : null,
-    sid: checkCookie('sid') ? getCookie('sid') : null,
-    uid: checkCookie('uid') ? getCookie('uid') : null,
-    hsid: checkCookie('hsid') ? getCookie('hsid') : null,
-    location: checkCookie('state') ? getCookie('state') : null,
-    ip_address: checkCookie('ip') ? getCookie('ip') : null,
-    kwd: checkCookie('kwd') ? getCookie('kwd') : null,
-    se: checkCookie('se') ? getCookie('se') : null,
-    pacid: checkCookie('pacid') ? getCookie('pacid') : null,
-    pt1: checkCookie('pt1') ? getCookie('pt1') : null,
-    pt2: checkCookie('pt2') ? getCookie('pt2') : null,
-    gclid: checkCookie('gclid') ? getCookie('gclid') : null,
-    email: checkCookie('email') ? getCookie('email') : '',
-    fname: checkCookie('fname') ? getCookie('fname') : '',
-    lname: checkCookie('lname') ? getCookie('lname') : '',
-    address: checkCookie('address') ? getCookie('address') : '',
-    city: checkCookie('city') ? getCookie('city') : '',
-    state: checkCookie('state') ? getCookie('state') : '',
-    zip: checkCookie('zip') ? getCookie('zip') : '',
+    oid: Helpers.checkCookie('oid') ? Helpers.getCookie('oid') : null,
+    pid: Helpers.checkCookie('pid') ? Helpers.getCookie('pid') : null,
+    eid: Helpers.checkCookie('eid') ? Helpers.getCookie('eid') : null,
+    sid: Helpers.checkCookie('sid') ? Helpers.getCookie('sid') : null,
+    uid: Helpers.checkCookie('uid') ? Helpers.getCookie('uid') : null,
+    hsid: Helpers.checkCookie('hsid') ? Helpers.getCookie('hsid') : null,
+    ip_address: Helpers.checkCookie('ip') ? Helpers.getCookie('ip') : null,
+    kwd: Helpers.checkCookie('kwd') ? Helpers.getCookie('kwd') : null,
+    se: Helpers.checkCookie('se') ? Helpers.getCookie('se') : null,
+    pacid: Helpers.checkCookie('pacid') ? Helpers.getCookie('pacid') : null,
+    pt1: Helpers.checkCookie('pt1') ? Helpers.getCookie('pt1') : null,
+    pt2: Helpers.checkCookie('pt2') ? Helpers.getCookie('pt2') : null,
+    gclid: Helpers.checkCookie('gclid') ? Helpers.getCookie('gclid') : null,
+    email: Helpers.checkCookie('email') ? Helpers.getCookie('email') : '',
+    fname: Helpers.checkCookie('fname') ? Helpers.getCookie('fname') : '',
+    lname: Helpers.checkCookie('lname') ? Helpers.getCookie('lname') : '',
+    address: Helpers.checkCookie('address') ? Helpers.getCookie('address') : '',
+    city: Helpers.checkCookie('city') ? Helpers.getCookie('city') : '',
+    state: Helpers.checkCookie('state') ? Helpers.getCookie('state') : '',
+    country: Helpers.checkCookie('country') ? Helpers.getCookie('country') : null,
+    zip: Helpers.checkCookie('zip') ? Helpers.getCookie('zip') : '',
 };
 
 const trackingStateReducer = (state, action) => {
@@ -54,7 +48,7 @@ const trackingStateReducer = (state, action) => {
                 state: action.payload.state || initialTrackingState.state,
                 zip: action.payload.zip || initialTrackingState.zip,
             };
-            setCookies(tracking);
+            Helpers.setCookies(tracking);
             return {
                 ...state,
                 ...tracking
@@ -62,7 +56,7 @@ const trackingStateReducer = (state, action) => {
 
         case 'SET_PCH_USER':
             console.log('pch reducer:', action.payload);
-            setPchCookies(action.payload);
+            Helpers.setPchCookies(action.payload);
             return {
                 ...state,
                 email: action.payload.EmailAddress || initialTrackingState.email,
@@ -75,7 +69,7 @@ const trackingStateReducer = (state, action) => {
             };
 
         case 'HSID_FOUND':
-            setCookie('hsid', action.payload, 3);
+            Helpers.setCookie('hsid', action.payload, 3);
             return {
                 ...state,
                 hsid: action.payload
@@ -88,20 +82,26 @@ const trackingStateReducer = (state, action) => {
             };
             
         case 'LOCATION_FOUND':
-            setCookie('state', action.payload.state, 3);
-            setCookie('ip', action.payload.ip_address, 3);
+            Helpers.setCookie('city', action.payload.city, 3);
+            Helpers.setCookie('state', action.payload.state, 3);
+            Helpers.setCookie('country', action.payload.country, 3);
+            Helpers.setCookie('zip', action.payload.zip, 3);
+            Helpers.setCookie('ip', action.payload.ip_address, 3);
             return {
                 ...state,
-                location: action.payload.state,
+                city: action.payload.city,
+                state: action.payload.state,
+                country: action.payload.country,
+                zip: action.payload.zip,
                 ip_address: action.payload.ip_address,
-            };        
+            };          
         
         case 'KEYWORD_SELECTED':
-            setCookie('kwd', action.payload, 3);
+            Helpers.setCookie('kwd', action.payload, 3);
             return {
                 ...state,
                 kwd: action.payload
-            };        
+            };       
 
         case 'RESET':
             return initialTrackingState;        
