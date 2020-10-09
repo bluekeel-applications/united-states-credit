@@ -1396,15 +1396,14 @@
   resolved "https://node.bit.dev/bluekeel.component-library.usc/-/bluekeel.component-library.usc-0.0.1.tgz#c3fca3467aa83da45e813ac790fd87f012c82c08"
   integrity sha1-w/yjRnqoPaRegTrHkP2H8BLILAg=
 
-"@bit/bluekeel.component-library.user-end@^0.0.3":
-  version "0.0.3"
-  resolved "https://node.bit.dev/bluekeel.component-library.user-end/-/bluekeel.component-library.user-end-0.0.3.tgz#06d8d6c39e4f6823dae0a6200e90bdddc0e5ef11"
-  integrity sha1-BtjWw55PaCPa4KYgDpC93cDl7xE=
+"@bit/bluekeel.component-library.user-end@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.user-end/-/bluekeel.component-library.user-end-0.0.2.tgz#0622092d873ef83bff42ba36f54c1bef0b2d1b96"
+  integrity sha1-BiIJLYc++Dv/Qro29Uwb7wstG5Y=
   dependencies:
     "@apollo/react-hooks" "^4.0.0"
     "@bit/bluekeel.component-library.form-input" "0.0.1"
     "@bit/bluekeel.component-library.loading-bubbles" "0.0.1"
-    "@bit/bluekeel.hookz.use-apollo-client" "0.0.2"
     "@bit/bluekeel.hookz.use-tracking-layer" "0.0.3"
     "@bit/bluekeel.mutationz.add_query_insight" "0.0.1"
     "@bit/bluekeel.mutationz.add_service_log" "0.0.1"
@@ -1426,7 +1425,7 @@
   resolved "https://node.bit.dev/bluekeel.feed.search_pad/-/bluekeel.feed.search_pad-0.0.1.tgz#daf23423fe91eb14428f232fa2938d97c85a31d2"
   integrity sha1-2vI0I/6R6xRCjyMvopONl8haMdI=
 
-"@bit/bluekeel.hookz.use-apollo-client@0.0.2", "@bit/bluekeel.hookz.use-apollo-client@^0.0.2":
+"@bit/bluekeel.hookz.use-apollo-client@^0.0.2":
   version "0.0.2"
   resolved "https://node.bit.dev/bluekeel.hookz.use-apollo-client/-/bluekeel.hookz.use-apollo-client-0.0.2.tgz#0113c32cb88f932fef94aa5b5fc619e2ee560cfa"
   integrity sha1-ARPDLLiPky/vlKpbX8YZ4u5WDPo=

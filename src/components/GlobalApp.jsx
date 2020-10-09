@@ -25,7 +25,7 @@ const GlobalApp = () => {
 
 	const apolloUri = 'https://cbvb02ezl4.execute-api.us-east-1.amazonaws.com/prod/graphql';
 	// const apolloTest = 'https://cypmxq177b.execute-api.us-east-1.amazonaws.com/test/graphql';
-	// const apolloLocal = 'http://localhost:4000/graphql';
+	// const apolloUri = 'http://localhost:4000/graphql';
 
 	const client = UseApolloClient(apolloUri);
 
@@ -42,7 +42,7 @@ const GlobalApp = () => {
 			</AppContextProvider>
 		</ApolloProvider>
 	);
-}
+};
 
 
 export default GlobalApp;
