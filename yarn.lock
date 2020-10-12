@@ -1221,12 +1221,12 @@
     react "^16.13.1"
     react-router-dom "^5.2.0"
 
-"@bit/bluekeel.component-library.checking-optin@^0.0.8":
-  version "0.0.8"
-  resolved "https://node.bit.dev/bluekeel.component-library.checking-optin/-/bluekeel.component-library.checking-optin-0.0.8.tgz#d913aea60742e4f57dc92c89fa589594eb15f897"
-  integrity sha1-2ROupgdC5PV9ySyJ+liVlOsV+Jc=
+"@bit/bluekeel.component-library.checking-optin@^1.0.0":
+  version "1.0.0"
+  resolved "https://node.bit.dev/bluekeel.component-library.checking-optin/-/bluekeel.component-library.checking-optin-1.0.0.tgz#9f667a48c507ffbd52a79d668160a588aae8cf7d"
+  integrity sha1-n2Z6SMUH/71Sp51mgWCliKroz30=
   dependencies:
-    "@bit/bluekeel.component-library.content-wrapper" "0.0.10"
+    "@fortawesome/react-fontawesome" "^0.1.11"
     radium "^0.26.0"
     react "^16.13.1"
 
@@ -1250,12 +1250,12 @@
     react "^16.13.1"
     react-responsive "^8.1.0"
 
-"@bit/bluekeel.component-library.debt-optin@^0.0.9":
-  version "0.0.9"
-  resolved "https://node.bit.dev/bluekeel.component-library.debt-optin/-/bluekeel.component-library.debt-optin-0.0.9.tgz#961626a3d3ec541fde1fa51f2bcb842b69560057"
-  integrity sha1-lhYmo9PsVB/eH6UfK8uEK2lWAFc=
+"@bit/bluekeel.component-library.debt-optin@^1.0.0":
+  version "1.0.0"
+  resolved "https://node.bit.dev/bluekeel.component-library.debt-optin/-/bluekeel.component-library.debt-optin-1.0.0.tgz#5242573fc3219591c868848a2a494e7e2ec3b119"
+  integrity sha1-UkJXP8MhlZHIaISKKklOfi7DsRk=
   dependencies:
-    "@bit/bluekeel.component-library.content-wrapper" "0.0.10"
+    "@fortawesome/react-fontawesome" "^0.1.11"
     radium "^0.26.0"
     react "^16.13.1"
 
