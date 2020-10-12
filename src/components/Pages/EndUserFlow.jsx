@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
-import UserEnd from '@bit/bluekeel.component-library.user-end';
+import UserEnd from '@bit/bluekeel.controllers.user-end';
 import ContentWrapper from '@bit/bluekeel.component-library.content-wrapper';
 
 const EndUserFlow = () => {
@@ -23,7 +23,7 @@ const EndUserFlow = () => {
         checking_optin: appState['checking_optin'],
         isSubmission: appState['em_sub'],
         isRedirection: appState['redirection'],
-        location: trackingState['location'],
+        location: trackingState['state'],
         email: trackingState['email'] || '',
         ip_address: trackingState['ip_address'] || '', 
         fname: trackingState['fname'] || '', 

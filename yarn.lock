@@ -1292,14 +1292,6 @@
     react "^16.13.1"
     react-router-dom "^5.2.0"
 
-"@bit/bluekeel.component-library.form-input@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.form-input/-/bluekeel.component-library.form-input-0.0.1.tgz#4d6ae3dd7667450e66a9eca9c36fcf0bc41356a2"
-  integrity sha1-TWrj3XZnRQ5mqeypw2/PC8QTVqI=
-  dependencies:
-    "@material-ui/core" "^4.11.0"
-    react "^16.13.1"
-
 "@bit/bluekeel.component-library.knowledge@^0.0.2":
   version "0.0.2"
   resolved "https://node.bit.dev/bluekeel.component-library.knowledge/-/bluekeel.component-library.knowledge-0.0.2.tgz#d79d2a65ca0e1abe1ac926f5d4d3abf4253b258a"
@@ -1317,15 +1309,6 @@
     "@bit/bluekeel.component-library.feed-toolz" "0.0.1"
     radium "^0.26.0"
     react "^16.13.1"
-
-"@bit/bluekeel.component-library.loading-bubbles@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.loading-bubbles/-/bluekeel.component-library.loading-bubbles-0.0.1.tgz#cd6a8df915e69aae217ff3670f40829ad467cbc6"
-  integrity sha1-zWqN+RXmmq4hf/NnD0CCmtRny8Y=
-  dependencies:
-    radium "^0.26.0"
-    react "^16.13.1"
-    react-lottie "^1.2.3"
 
 "@bit/bluekeel.component-library.loading-redirect@^0.0.1":
   version "0.0.1"
@@ -1396,26 +1379,25 @@
   resolved "https://node.bit.dev/bluekeel.component-library.usc/-/bluekeel.component-library.usc-0.0.1.tgz#c3fca3467aa83da45e813ac790fd87f012c82c08"
   integrity sha1-w/yjRnqoPaRegTrHkP2H8BLILAg=
 
-"@bit/bluekeel.component-library.user-end@^0.0.3":
-  version "0.0.3"
-  resolved "https://node.bit.dev/bluekeel.component-library.user-end/-/bluekeel.component-library.user-end-0.0.3.tgz#0a943bc259d111fa053bee75610fe2df8a981c3e"
-  integrity sha1-CpQ7wlnREfoFO+51YQ/i34qYHD4=
+"@bit/bluekeel.controllers.helpers@1.0.0":
+  version "1.0.0"
+  resolved "https://node.bit.dev/bluekeel.controllers.helpers/-/bluekeel.controllers.helpers-1.0.0.tgz#576e1be6b83e16ddc68ba29c7c74089909e582dd"
+  integrity sha1-V24b5rg+Ft3Gi6KcfHQImQnlgt0=
+  dependencies:
+    axios "^0.20.0"
+
+"@bit/bluekeel.controllers.user-end@^1.0.0":
+  version "1.0.0"
+  resolved "https://node.bit.dev/bluekeel.controllers.user-end/-/bluekeel.controllers.user-end-1.0.0.tgz#2d9d73bc9363b1c5a537d17a620cdd4c8a0b949d"
+  integrity sha1-LZ1zvJNjscWlN9F6YgzdTIoLlJ0=
   dependencies:
     "@apollo/react-hooks" "^4.0.0"
-    "@bit/bluekeel.component-library.form-input" "0.0.1"
-    "@bit/bluekeel.component-library.loading-bubbles" "0.0.1"
-    "@bit/bluekeel.hookz.use-tracking-layer" "0.0.3"
-    "@bit/bluekeel.mutationz.add_query_insight" "0.0.1"
-    "@bit/bluekeel.mutationz.add_service_log" "0.0.1"
-    "@bit/bluekeel.mutationz.add_user_email" "0.0.2"
-    "@bit/bluekeel.mutationz.add_user_flow" "0.0.2"
-    "@bit/bluekeel.mutationz.insert_common_info" "0.0.1"
-    "@bit/bluekeel.mutationz.insert_search_info" "0.0.1"
-    "@bit/bluekeel.pixels.bluekeel-pixel" "0.0.1"
-    "@bit/bluekeel.queriez.get_offer" "0.0.1"
+    "@bit/bluekeel.controllers.helpers" "1.0.0"
     "@fortawesome/react-fontawesome" "^0.1.11"
     "@material-ui/core" "^4.11.0"
-    radium "^0.26.0"
+    axios "0.20.0"
+    graphql-tag "^2.11.0"
+    radium "^0.26.1"
     react "^16.13.1"
     react-lottie "^1.2.3"
     react-router-dom "^5.2.0"
@@ -1465,50 +1447,10 @@
     axios "^0.20.0"
     react "^16.13.1"
 
-"@bit/bluekeel.hookz.use-tracking-layer@0.0.3":
-  version "0.0.3"
-  resolved "https://node.bit.dev/bluekeel.hookz.use-tracking-layer/-/bluekeel.hookz.use-tracking-layer-0.0.3.tgz#4fa5cf1636c0843c2bbd40001cb9f487e7f72394"
-  integrity sha1-T6XPFjbAhDwrvUAAHLn0h+f3I5Q=
-  dependencies:
-    "@apollo/react-hooks" "^4.0.0"
-    "@bit/bluekeel.mutationz.add_user_email" "0.0.2"
-    "@bit/bluekeel.mutationz.add_user_flow" "0.0.2"
-    "@bit/bluekeel.mutationz.insert_common_info" "0.0.1"
-    "@bit/bluekeel.pixels.bluekeel-pixel" "0.0.1"
-    react "^16.13.1"
-
 "@bit/bluekeel.mutationz.add_new_user@0.0.1", "@bit/bluekeel.mutationz.add_new_user@^0.0.1":
   version "0.0.1"
   resolved "https://node.bit.dev/bluekeel.mutationz.add_new_user/-/bluekeel.mutationz.add_new_user-0.0.1.tgz#afaa80ace33cc30fede9c21874d95176c85212b7"
   integrity sha1-r6qArOM8ww/t6cIYdNlRdshSErc=
-  dependencies:
-    graphql-tag "^2.11.0"
-
-"@bit/bluekeel.mutationz.add_query_insight@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.mutationz.add_query_insight/-/bluekeel.mutationz.add_query_insight-0.0.1.tgz#85d43bc1a3202c2b70b89e8b00432f3bc66a93bb"
-  integrity sha1-hdQ7waMgLCtwuJ6LAEMvO8Zqk7s=
-  dependencies:
-    graphql-tag "^2.11.0"
-
-"@bit/bluekeel.mutationz.add_service_log@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.mutationz.add_service_log/-/bluekeel.mutationz.add_service_log-0.0.1.tgz#bc92a94907711655c308a08dd4bfc5b52ae56f91"
-  integrity sha1-vJKpSQdxFlXDCKCN1L/FtSrlb5E=
-  dependencies:
-    graphql-tag "^2.11.0"
-
-"@bit/bluekeel.mutationz.add_user_email@0.0.2":
-  version "0.0.2"
-  resolved "https://node.bit.dev/bluekeel.mutationz.add_user_email/-/bluekeel.mutationz.add_user_email-0.0.2.tgz#be1d547df531c0d1c9ddfe2395b10ee22b160d8b"
-  integrity sha1-vh1UffUxwNHJ3f4jlbEO4isWDYs=
-  dependencies:
-    graphql-tag "^2.11.0"
-
-"@bit/bluekeel.mutationz.add_user_flow@0.0.2":
-  version "0.0.2"
-  resolved "https://node.bit.dev/bluekeel.mutationz.add_user_flow/-/bluekeel.mutationz.add_user_flow-0.0.2.tgz#1d7a59d47137b53f710a358b8ac19e9435836740"
-  integrity sha1-HXpZ1HE3tT9xCjWLisGelDWDZ0A=
   dependencies:
     graphql-tag "^2.11.0"
 
@@ -1519,33 +1461,12 @@
   dependencies:
     graphql-tag "^2.11.0"
 
-"@bit/bluekeel.mutationz.insert_common_info@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.mutationz.insert_common_info/-/bluekeel.mutationz.insert_common_info-0.0.1.tgz#07f9790e52d9e6f9e90455f0b54244d0af7e97fa"
-  integrity sha1-B/l5DlLZ5vnpBFXwtUJE0K9+l/o=
-  dependencies:
-    graphql-tag "^2.11.0"
-
-"@bit/bluekeel.mutationz.insert_search_info@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.mutationz.insert_search_info/-/bluekeel.mutationz.insert_search_info-0.0.1.tgz#351738bda4fd0931fb5768837866f866b899af71"
-  integrity sha1-NRc4vaT9CTH7V2iDeGb4ZriZr3E=
-  dependencies:
-    graphql-tag "^2.11.0"
-
 "@bit/bluekeel.pixels.bluekeel-pixel@0.0.1":
   version "0.0.1"
   resolved "https://node.bit.dev/bluekeel.pixels.bluekeel-pixel/-/bluekeel.pixels.bluekeel-pixel-0.0.1.tgz#eca0207ee96070ec0678a08cf00725cb5b9ea0cb"
   integrity sha1-7KAgfulgcOwGeKCM8Acly1ueoMs=
   dependencies:
     axios "^0.20.0"
-
-"@bit/bluekeel.queriez.get_offer@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.queriez.get_offer/-/bluekeel.queriez.get_offer-0.0.1.tgz#f6b32d0a3d9cf68b42c1f44bfce405603b79b040"
-  integrity sha1-9rMtCj2c9otCwfRL/OQFYDt5sEA=
-  dependencies:
-    graphql-tag "^2.11.0"
 
 "@bit/bluekeel.queriez.pch_user@0.0.1", "@bit/bluekeel.queriez.pch_user@^0.0.1":
   version "0.0.1"
@@ -3067,19 +2988,19 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.10.1.tgz#e1e82e4f3e999e2cfd61b161280d16a111f86428"
   integrity sha512-zg7Hz2k5lI8kb7U32998pRRFin7zJlkfezGJjUc2heaD4Pw2wObakCDVzkKztTm/Ln7eiVvYsjqak0Ed4LkMDA==
 
+axios@0.20.0, axios@^0.20.0:
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.20.0.tgz#057ba30f04884694993a8cd07fa394cff11c50bd"
+  integrity sha512-ANA4rr2BDcmmAQLOKft2fufrtuvlqR+cXNNinUmvfeSNCOF98PZL+7M/v1zIdGo7OLjEA9J2gXJL+j4zGsl0bA==
+  dependencies:
+    follow-redirects "^1.10.0"
+
 axios@^0.19.1:
   version "0.19.2"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
   integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
   dependencies:
     follow-redirects "1.5.10"
-
-axios@^0.20.0:
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.20.0.tgz#057ba30f04884694993a8cd07fa394cff11c50bd"
-  integrity sha512-ANA4rr2BDcmmAQLOKft2fufrtuvlqR+cXNNinUmvfeSNCOF98PZL+7M/v1zIdGo7OLjEA9J2gXJL+j4zGsl0bA==
-  dependencies:
-    follow-redirects "^1.10.0"
 
 axobject-query@^2.0.2:
   version "2.2.0"
@@ -9992,7 +9913,7 @@ querystringify@^2.1.1:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.2.0.tgz#3345941b4153cb9d082d8eee4cda2016a9aef7f6"
   integrity sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==
 
-radium@^0.26.0:
+radium@^0.26.0, radium@^0.26.1:
   version "0.26.1"
   resolved "https://registry.yarnpkg.com/radium/-/radium-0.26.1.tgz#77f605625a90c7a7eac6cb9ac755497ee87a55ce"
   integrity sha512-v2DvtBmy5w01hKrCAZmIkEHOMHmj6AeKI9115W2GOCExosP6+7PXV9LHPjZaiOkw3LP4FGvqhNaAWJhcQzoU4g==
