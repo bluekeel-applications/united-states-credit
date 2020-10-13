@@ -1282,6 +1282,28 @@
   resolved "https://node.bit.dev/bluekeel.component-library.feed-toolz/-/bluekeel.component-library.feed-toolz-0.0.1.tgz#3a30e9d104964a1613ae10c1b7d781dc90b5c2f2"
   integrity sha1-OjDp0QSWShYTrhDBt9eB3JC1wvI=
 
+"@bit/bluekeel.component-library.flow-page@^0.0.4":
+  version "0.0.4"
+  resolved "https://node.bit.dev/bluekeel.component-library.flow-page/-/bluekeel.component-library.flow-page-0.0.4.tgz#e001bf5df3b3c0aefdaa430fc82271b7cb360ea1"
+  integrity sha1-4AG/XfOzwK79qkMPyCJxt8s2DqE=
+  dependencies:
+    "@fortawesome/react-fontawesome" "^0.1.11"
+    radium "^0.26.0"
+    react "^16.13.1"
+    react-spring "^8.0.27"
+
+"@bit/bluekeel.component-library.flow-wrapper@^1.0.5":
+  version "1.0.5"
+  resolved "https://node.bit.dev/bluekeel.component-library.flow-wrapper/-/bluekeel.component-library.flow-wrapper-1.0.5.tgz#d99cc5fef156722eb864bbc10a0313081a5cc062"
+  integrity sha1-2ZzF/vFWci64ZLvBCgMTCBpcwGI=
+  dependencies:
+    "@bit/bluekeel.assets.usc-flag-left" "0.0.1"
+    "@bit/bluekeel.assets.usc-flag-right" "0.0.1"
+    radium "^0.26.0"
+    react "^16.13.1"
+    react-router-dom "^5.2.0"
+    react-spring "^8.0.27"
+
 "@bit/bluekeel.component-library.footer@^0.0.1":
   version "0.0.1"
   resolved "https://node.bit.dev/bluekeel.component-library.footer/-/bluekeel.component-library.footer-0.0.1.tgz#7de3c543c3bf8d4abab910f3a2c287bb4707d8ae"
@@ -1320,10 +1342,10 @@
     react-lottie "^1.2.3"
     react-responsive "^8.1.0"
 
-"@bit/bluekeel.component-library.navbar@^0.0.8":
-  version "0.0.8"
-  resolved "https://node.bit.dev/bluekeel.component-library.navbar/-/bluekeel.component-library.navbar-0.0.8.tgz#96f33cd19b30bbcbd67432882c0241f02ec0a79e"
-  integrity sha1-lvM80Zswu8vWdDKILAJB8C7Ap54=
+"@bit/bluekeel.component-library.navbar@^1.0.0":
+  version "1.0.0"
+  resolved "https://node.bit.dev/bluekeel.component-library.navbar/-/bluekeel.component-library.navbar-1.0.0.tgz#88fe26c35ae66de0c8ca23a9d98686d2a950985f"
+  integrity sha1-iP4mw1rmbeDIyiOp2YaG0qlQmF8=
   dependencies:
     "@fortawesome/react-fontawesome" "^0.1.11"
     "@material-ui/core" "^4.11.0"
@@ -1358,14 +1380,15 @@
     react "^16.13.1"
     react-spring "^8.0.27"
 
-"@bit/bluekeel.component-library.start-button@^0.0.5":
-  version "0.0.5"
-  resolved "https://node.bit.dev/bluekeel.component-library.start-button/-/bluekeel.component-library.start-button-0.0.5.tgz#8da3511894b5e434f04b4438b5dfebfd8c3b7775"
-  integrity sha1-jaNRGJS15DTwS0Q4td/r/Yw7d3U=
+"@bit/bluekeel.component-library.start-button@^1.0.1":
+  version "1.0.1"
+  resolved "https://node.bit.dev/bluekeel.component-library.start-button/-/bluekeel.component-library.start-button-1.0.1.tgz#cc7e9847258ea062bd315b120bb8c859e9e8af0a"
+  integrity sha1-zH6YRyWOoGK9MVsSC7jIWenorwo=
   dependencies:
     "@fortawesome/react-fontawesome" "^0.1.11"
     radium "^0.26.0"
     react "^16.13.1"
+    react-router-dom "^5.2.0"
 
 "@bit/bluekeel.component-library.term-conditions@^0.0.1":
   version "0.0.1"
@@ -1379,7 +1402,7 @@
   resolved "https://node.bit.dev/bluekeel.component-library.usc/-/bluekeel.component-library.usc-0.0.1.tgz#c3fca3467aa83da45e813ac790fd87f012c82c08"
   integrity sha1-w/yjRnqoPaRegTrHkP2H8BLILAg=
 
-"@bit/bluekeel.controllers.helpers@1.0.0":
+"@bit/bluekeel.controllers.helpers@1.0.0", "@bit/bluekeel.controllers.helpers@^1.0.0":
   version "1.0.0"
   resolved "https://node.bit.dev/bluekeel.controllers.helpers/-/bluekeel.controllers.helpers-1.0.0.tgz#576e1be6b83e16ddc68ba29c7c74089909e582dd"
   integrity sha1-V24b5rg+Ft3Gi6KcfHQImQnlgt0=
@@ -1444,34 +1467,6 @@
     "@sentry/react" "^5.24.2"
     "@sentry/tracing" "^5.24.2"
     react "^16.13.1"
-
-"@bit/bluekeel.mutationz.add_new_user@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.mutationz.add_new_user/-/bluekeel.mutationz.add_new_user-0.0.1.tgz#afaa80ace33cc30fede9c21874d95176c85212b7"
-  integrity sha1-r6qArOM8ww/t6cIYdNlRdshSErc=
-  dependencies:
-    graphql-tag "^2.11.0"
-
-"@bit/bluekeel.mutationz.add_user_pch@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.mutationz.add_user_pch/-/bluekeel.mutationz.add_user_pch-0.0.1.tgz#257974d652ee68f5552394d04f0341b2cf862997"
-  integrity sha1-JXl01lLuaPVVI5TQTwNBss+GKZc=
-  dependencies:
-    graphql-tag "^2.11.0"
-
-"@bit/bluekeel.queriez.pch_user@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.queriez.pch_user/-/bluekeel.queriez.pch_user-0.0.1.tgz#d296c419192fd6c0c05e6362f51f30cfcd5f4a96"
-  integrity sha1-0pbEGRkv1sDAXmNi9R8wz81fSpY=
-  dependencies:
-    graphql-tag "^2.11.0"
-
-"@bit/bluekeel.utilities.helpers@^0.0.3":
-  version "0.0.3"
-  resolved "https://node.bit.dev/bluekeel.utilities.helpers/-/bluekeel.utilities.helpers-0.0.3.tgz#147d3ca65446391a2981d423ec34fa17bec2b16a"
-  integrity sha1-FH08plRGORopgdQj7DT6F77CsWo=
-  dependencies:
-    axios "^0.20.0"
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"

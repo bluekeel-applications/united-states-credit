@@ -1,10 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { vertical_buttons } from './BUTTONS';
-import Question from '@bit/bluekeel.component-library.question';
-import Radium from 'radium';
+import FlowPage from '@bit/bluekeel.component-library.flow-page';
+import buttons from './verticals';
 
-const Verticals = () => {
+const SelectVertical = () => {
     let history = useHistory();
 
     const handleButtonClick = (e, choice) => {
@@ -14,18 +13,14 @@ const Verticals = () => {
     };
 
     return (
-        <Question 
+        <FlowPage
             page={{
-                buttonData: vertical_buttons,
+                buttonData: buttons,
                 handleClick: handleButtonClick,
                 text: 'Select one of the options below:'
-            }}
-            wrapper={{
-                theme: 'usc',
-                isEnd: false
             }}
         />
     )
 };
 
-export default Radium(Verticals);
+export default SelectVertical;

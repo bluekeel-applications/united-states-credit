@@ -1,14 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AppContext } from '../../context';
-import { useHistory } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
+import { AppContext } from '../../../context';
 import StartButton from '@bit/bluekeel.component-library.start-button';
-import ContentWrapper from '@bit/bluekeel.component-library.content-wrapper';
-import styles from './StyleOverrides.css.js';
 import Radium from 'radium';
+import styles from './Welcome.css.js';
+import { useMediaQuery } from 'react-responsive';
 
-const GetStarted = () => {
-    let history = useHistory();
+const Welcome = () => {
     const { dispatchApp } = useContext(AppContext);
     const [ scrollTop, setScrollTop ] = useState(0);
     const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -48,22 +45,18 @@ const GetStarted = () => {
 		return () => toggleShowNavStart(false);
 		
 	}, [scrollTop]);
-    const handleStartClick = () => {
-        history.push('/verticals');
-        window.scrollTo(0, 0);
-    };
-    
+
     return (
-        <ContentWrapper theme='uscStart' isEnd={false}>
-            <span style={styles.welcomeText}>FIND THE RIGHT CREDIT FOR YOU!</span>
-            <StartButton 
-                showNav={showNavStart}
-                theme='usc'
-                handleClick={handleStartClick}
-            />
-        </ContentWrapper>
+		<div style={styles.welcomeContainer}>
+            <span style={styles.titleText}>FIND THE RIGHT CREDIT FOR YOU!</span>
+			<div style={styles.startButtonContainer}>
+				<StartButton 
+					showNav={showNavStart}
+					theme='usc'
+				/>
+			</div>
+		</div>
     );
-};
+}
 
-
-export default Radium(GetStarted);
+export default Radium(Welcome);

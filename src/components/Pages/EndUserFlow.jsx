@@ -1,12 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../../context';
+import { useHistory } from 'react-router-dom';
 import UserEnd from '@bit/bluekeel.controllers.user-end';
-import ContentWrapper from '@bit/bluekeel.component-library.content-wrapper';
 
 const EndUserFlow = () => {
-    const { 
-        appState, trackingState
-    } = useContext(AppContext);
+    let history = useHistory();
+    const { appState, trackingState } = useContext(AppContext);
+    const selectedVertical = appState['vertical'];
+    const isRedirection = appState['redirection'];
+
+    useEffect(() => {
+        // If someone is here without being redirected, it is unintentional.
+        if(
+            (selectedVertical === 'direct' && !isRedirection) ||
+            !trackingState['hsid'] || trackingState['hsid'] === '0'
+        ) {
+            history.push('/');
+        };
+        // eslint-disable-next-line
+    },[selectedVertical, isRedirection]);
 
     const tracking = {
         hsid: Number(trackingState['hsid']),
@@ -34,29 +46,7 @@ const EndUserFlow = () => {
         zip: trackingState['zip'] || ''
     };
 
-    const crumbData = {
-        verticalCrumb: appState.breadcrumbs['vertical'],
-        loanTypeCrumb: appState.breadcrumbs['loan_type'],
-        debtTypeCrumb: appState.breadcrumbs['debt_type'],
-        debtAmountCrumb: appState.breadcrumbs['debt_amount'],
-        optinCrumb: appState.breadcrumbs['optin']
-    };
-
-    const wrapperData = {
-        theme: 'usc',
-        crumbs: crumbData,
-        flow: {
-            vertical: appState['vertical'],
-            loan_type: appState['loan_type']
-        },
-        isEnd: true
-    };
-
-    return (
-        <ContentWrapper {...wrapperData}>
-            <UserEnd tracking={tracking} theme='usc' />
-        </ContentWrapper>        
-    )
+    return <UserEnd tracking={tracking} theme='usc' />
 };
 
 export default EndUserFlow;

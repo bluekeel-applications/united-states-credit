@@ -1,21 +1,22 @@
-import React, { useContext, useEffect, useRef } from 'react';
-import { AppContext } from '../../context';
+import React, { useRef, useEffect, useContext } from 'react';
+import { AppContext } from '../../../context';
 import { useHistory } from 'react-router-dom';
-import Question from '@bit/bluekeel.component-library.question';
-import Radium from 'radium';
-import { personal_loan_buttons } from './BUTTONS';
+import FlowPage from '@bit/bluekeel.component-library.flow-page';
+import buttons from './personal_loans';
 
-const PersonalLoans = () => {
-    const { trackingState, dispatchApp } = useContext(AppContext);
+const SelectLoanType = () => {
+    const { dispatchApp, trackingState } = useContext(AppContext);
     let history = useHistory();
-
     const componentIsMounted = useRef(true);
 
     useEffect(() => {
         if (componentIsMounted.current) {
-            dispatchApp({ type: 'VERTICAL_PICKED', payload: { value: 'personal_loans', crumb: 'Personal Loans' }});                
+            dispatchApp({
+                type: 'VERTICAL_PICKED',
+                payload: { value: 'personal_loans', crumb: 'Personal Loans' }
+            });
         };
-        return () => {componentIsMounted.current = false};
+        return () => { componentIsMounted.current = false };
         // eslint-disable-next-line
     }, []);
 
@@ -28,9 +29,9 @@ const PersonalLoans = () => {
         return false;
     };
 
-    const handleButtonClick = (e, choice, texts) => {
+    const handleButtonClick = (e, choice, text) => {
         e.preventDefault();
-        dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: choice, crumb: texts } });
+        dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: choice, crumb: text } });
         window.scrollTo(0, 0);
         const useOptins = isOptinProgram();
 
@@ -77,20 +78,14 @@ const PersonalLoans = () => {
     };
 
     return (
-        <Question 
+        <FlowPage 
             page={{
-                buttonData: personal_loan_buttons,
+                buttonData: buttons,
                 handleClick: handleButtonClick,
                 text: 'Select Loan Purpose:'
-            }}
-            wrapper={{
-                theme: 'usc',
-                crumbs: { verticalCrumb: 'Personal Loans' },
-                flow: { vertical: 'personal_loans' },
-                isEnd: false
             }}
         />
     )
 };
 
-export default Radium(PersonalLoans);
+export default SelectLoanType;

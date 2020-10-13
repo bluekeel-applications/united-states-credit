@@ -1,4 +1,4 @@
-import * as Helpers from '@bit/bluekeel.utilities.helpers';
+import * as Helpers from '@bit/bluekeel.controllers.helpers';
 
 const initialTrackingState = {
     oid: Helpers.checkCookie('oid') ? Helpers.getCookie('oid') : null,
