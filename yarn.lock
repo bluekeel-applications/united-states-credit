@@ -1386,6 +1386,17 @@
   dependencies:
     axios "^0.20.0"
 
+"@bit/bluekeel.controllers.use-set-new-session@^1.0.0":
+  version "1.0.0"
+  resolved "https://node.bit.dev/bluekeel.controllers.use-set-new-session/-/bluekeel.controllers.use-set-new-session-1.0.0.tgz#de65e8eb30e1e9933af9d6a0824874db3cb1eff2"
+  integrity sha1-3mXo6zDh6ZM6+daggkh02zyx7/I=
+  dependencies:
+    "@apollo/react-hooks" "^4.0.0"
+    "@bit/bluekeel.controllers.helpers" "1.0.0"
+    axios "^0.20.0"
+    graphql-tag "^2.11.0"
+    react "^16.13.1"
+
 "@bit/bluekeel.controllers.user-end@^1.0.0":
   version "1.0.0"
   resolved "https://node.bit.dev/bluekeel.controllers.user-end/-/bluekeel.controllers.user-end-1.0.0.tgz#2d9d73bc9363b1c5a537d17a620cdd4c8a0b949d"
@@ -1434,41 +1445,21 @@
     "@sentry/tracing" "^5.24.2"
     react "^16.13.1"
 
-"@bit/bluekeel.hookz.use-set-new-session@^0.0.2":
-  version "0.0.2"
-  resolved "https://node.bit.dev/bluekeel.hookz.use-set-new-session/-/bluekeel.hookz.use-set-new-session-0.0.2.tgz#4ea9198d2991abb982f2a7b43465953e902b4f70"
-  integrity sha1-TqkZjSmRq7mC8qe0NGWVPpArT3A=
-  dependencies:
-    "@apollo/react-hooks" "^4.0.0"
-    "@bit/bluekeel.mutationz.add_new_user" "0.0.1"
-    "@bit/bluekeel.mutationz.add_user_pch" "0.0.1"
-    "@bit/bluekeel.pixels.bluekeel-pixel" "0.0.1"
-    "@bit/bluekeel.queriez.pch_user" "0.0.1"
-    axios "^0.20.0"
-    react "^16.13.1"
-
-"@bit/bluekeel.mutationz.add_new_user@0.0.1", "@bit/bluekeel.mutationz.add_new_user@^0.0.1":
+"@bit/bluekeel.mutationz.add_new_user@^0.0.1":
   version "0.0.1"
   resolved "https://node.bit.dev/bluekeel.mutationz.add_new_user/-/bluekeel.mutationz.add_new_user-0.0.1.tgz#afaa80ace33cc30fede9c21874d95176c85212b7"
   integrity sha1-r6qArOM8ww/t6cIYdNlRdshSErc=
   dependencies:
     graphql-tag "^2.11.0"
 
-"@bit/bluekeel.mutationz.add_user_pch@0.0.1", "@bit/bluekeel.mutationz.add_user_pch@^0.0.1":
+"@bit/bluekeel.mutationz.add_user_pch@^0.0.1":
   version "0.0.1"
   resolved "https://node.bit.dev/bluekeel.mutationz.add_user_pch/-/bluekeel.mutationz.add_user_pch-0.0.1.tgz#257974d652ee68f5552394d04f0341b2cf862997"
   integrity sha1-JXl01lLuaPVVI5TQTwNBss+GKZc=
   dependencies:
     graphql-tag "^2.11.0"
 
-"@bit/bluekeel.pixels.bluekeel-pixel@0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.pixels.bluekeel-pixel/-/bluekeel.pixels.bluekeel-pixel-0.0.1.tgz#eca0207ee96070ec0678a08cf00725cb5b9ea0cb"
-  integrity sha1-7KAgfulgcOwGeKCM8Acly1ueoMs=
-  dependencies:
-    axios "^0.20.0"
-
-"@bit/bluekeel.queriez.pch_user@0.0.1", "@bit/bluekeel.queriez.pch_user@^0.0.1":
+"@bit/bluekeel.queriez.pch_user@^0.0.1":
   version "0.0.1"
   resolved "https://node.bit.dev/bluekeel.queriez.pch_user/-/bluekeel.queriez.pch_user-0.0.1.tgz#d296c419192fd6c0c05e6362f51f30cfcd5f4a96"
   integrity sha1-0pbEGRkv1sDAXmNi9R8wz81fSpY=
