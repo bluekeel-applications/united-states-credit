@@ -1282,20 +1282,20 @@
   resolved "https://node.bit.dev/bluekeel.component-library.feed-toolz/-/bluekeel.component-library.feed-toolz-0.0.1.tgz#3a30e9d104964a1613ae10c1b7d781dc90b5c2f2"
   integrity sha1-OjDp0QSWShYTrhDBt9eB3JC1wvI=
 
-"@bit/bluekeel.component-library.flow-page@^0.0.4":
-  version "0.0.4"
-  resolved "https://node.bit.dev/bluekeel.component-library.flow-page/-/bluekeel.component-library.flow-page-0.0.4.tgz#e001bf5df3b3c0aefdaa430fc82271b7cb360ea1"
-  integrity sha1-4AG/XfOzwK79qkMPyCJxt8s2DqE=
+"@bit/bluekeel.component-library.flow-page@^1.0.0":
+  version "1.0.0"
+  resolved "https://node.bit.dev/bluekeel.component-library.flow-page/-/bluekeel.component-library.flow-page-1.0.0.tgz#68729495f8b6501721161bbdc6dfbb5f1cd1e212"
+  integrity sha1-aHKUlfi2UBchFhu9xt+7XxzR4hI=
   dependencies:
     "@fortawesome/react-fontawesome" "^0.1.11"
     radium "^0.26.0"
     react "^16.13.1"
     react-spring "^8.0.27"
 
-"@bit/bluekeel.component-library.flow-wrapper@^1.0.5":
-  version "1.0.5"
-  resolved "https://node.bit.dev/bluekeel.component-library.flow-wrapper/-/bluekeel.component-library.flow-wrapper-1.0.5.tgz#d99cc5fef156722eb864bbc10a0313081a5cc062"
-  integrity sha1-2ZzF/vFWci64ZLvBCgMTCBpcwGI=
+"@bit/bluekeel.component-library.flow-wrapper@^1.0.8":
+  version "1.0.8"
+  resolved "https://node.bit.dev/bluekeel.component-library.flow-wrapper/-/bluekeel.component-library.flow-wrapper-1.0.8.tgz#2ae31dab71dc02e567c3838131a0bfa150d25990"
+  integrity sha1-KuMdq3HcAuVnw4OBMaC/oVDSWZA=
   dependencies:
     "@bit/bluekeel.assets.usc-flag-left" "0.0.1"
     "@bit/bluekeel.assets.usc-flag-right" "0.0.1"

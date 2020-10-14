@@ -24,28 +24,30 @@ export default {
         featuredTitle: {
             color: '#092c7e',
             marginRight: '25px',
-            fontSize: '3rem'
+            fontSize: '3rem',
+            fontFamily: 'Roboto'
         },
         itemTitle: {
-            color: '#092c7e'
+            color: '#092c7e',
+            fontFamily: 'Roboto'
         }
     },
     overrideKnowledge: {
-        contentTitleSpan: { color: '#f80000' },
-        typeColumnTitle: { color: '#f80000' },
+        contentTitleSpan: { color: '#f80000', fontFamily: 'Roboto' },
+        typeColumnTitle: { color: '#f80000', fontFamily: 'Roboto' },
         columnItemTitle: { color: '#092c7e' }
     },
     overrideEditorial: {
-        contentTitleSpan: { color: '#f80000' },
-        editorialTitle: { color: '#092c7e' },
-        articleTitle: { color: '#092c7e' }
+        contentTitleSpan: { color: '#f80000', fontFamily: 'Roboto' },
+        editorialTitle: { color: '#092c7e', fontFamily: 'Roboto' },
+        articleTitle: { color: '#092c7e', fontFamily: 'Roboto' }
     },
     overrideLatest: {
-        contentTitleSpan: { color: '#f80000' },
-        articleTitle: { color: '#092c7e' }
+        contentTitleSpan: { color: '#f80000', fontFamily: 'Roboto' },
+        articleTitle: { color: '#092c7e', fontFamily: 'Roboto' }
     },
     overridePopular: {
-        contentTitleSpan: { color: '#f80000' },
-        cardTitle: { color: '#092c7e' }
+        contentTitleSpan: { color: '#f80000', fontFamily: 'Roboto' },
+        cardTitle: { color: '#092c7e', fontFamily: 'Roboto' }
     },
 }

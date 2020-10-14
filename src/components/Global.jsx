@@ -14,7 +14,7 @@ initFontAwesome();
 
 const history = createBrowserHistory();
 
-const GlobalApp = () => {
+const Global = () => {
 	UsePushProsScripts('https://pushpros.tech/GetPushScript?key=2Xa3N8H4tIMDq5DaLOjgimHq4HG8UhWO&domain=');
 	UseSentry({ 
 		history,
@@ -45,4 +45,4 @@ const GlobalApp = () => {
 };
 
 
-export default GlobalApp;
+export default Global;

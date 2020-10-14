@@ -1,5 +1,6 @@
 export default {
     app: {
+        fontFamily: 'Verlag A, Verlag B, aktiv-grotesk, sans-serif',
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',
