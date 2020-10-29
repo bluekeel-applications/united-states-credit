@@ -1422,10 +1422,10 @@
     graphql-tag "^2.11.0"
     react "^16.13.1"
 
-"@bit/bluekeel.controllers.user-end@^1.0.3":
-  version "1.0.3"
-  resolved "https://node.bit.dev/bluekeel.controllers.user-end/-/bluekeel.controllers.user-end-1.0.3.tgz#9ac66835a318e589de094cc8a169139b7db988a3"
-  integrity sha1-msZoNaMY5YneCUzIoWkTm325iKM=
+"@bit/bluekeel.controllers.user-end@^1.0.7":
+  version "1.0.7"
+  resolved "https://node.bit.dev/bluekeel.controllers.user-end/-/bluekeel.controllers.user-end-1.0.7.tgz#ba935305a8ebff7d33eada5922b39b80e04b9c1d"
+  integrity sha1-upNTBajr/30z6tpZIrObgOBLnB0=
   dependencies:
     "@apollo/react-hooks" "^4.0.0"
     "@bit/bluekeel.controllers.helpers" "1.0.0"

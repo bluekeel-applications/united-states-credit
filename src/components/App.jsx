@@ -19,7 +19,7 @@ import Styles from './Styles.css.js';
 const App = () => {
 	let history = useHistory();
 	const componentIsMounted = useRef(true);
-	const myURL = new URL(window.location.href);
+	const [ myURL ] = useState(new URL(window.location.href));
 	const [ showDrawer, toggleDrawer ] = useState(false);
 	const [ showLoading, setLoading ] = useState(!!myURL.searchParams.get('vertical'));
 	const [ showLoadingPch, setLoadingPch ] = useState(false);
