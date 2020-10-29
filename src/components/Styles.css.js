@@ -8,5 +8,13 @@ export default {
         alignItems: 'center',
         width: '100vw',
         backgroundColor: '#ffffff',
-    }
+    },
+    loadingContainer: {
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100vw'
+    },
 };

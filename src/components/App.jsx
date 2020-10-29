@@ -2,6 +2,7 @@ import React, { useContext, useState, useRef, useEffect } from 'react';
 import { AppContext } from '../context';
 import Routes from '../Routes';
 import LoadingRedirect from '@bit/bluekeel.component-library.loading-redirect';
+import LoadingBubbles from '@bit/bluekeel.component-library.loading-bubbles';
 import Drawer from './Layout/Drawer';
 import Navbar from '@bit/bluekeel.component-library.navbar';
 import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
@@ -20,8 +21,8 @@ const App = () => {
 	const componentIsMounted = useRef(true);
 	const myURL = new URL(window.location.href);
 	const [ showDrawer, toggleDrawer ] = useState(false);
-	const [ showLoading, setLoading ] = useState(false);
-	const [ isDirectOffer ] = useState(myURL.searchParams.get('vertical') === 'direct');
+	const [ showLoading, setLoading ] = useState(!!myURL.searchParams.get('vertical'));
+	const [ showLoadingPch, setLoadingPch ] = useState(false);
 	const [ animationComplete, setAnimationComplete ] = useState(false);
 	const { appState, dispatchApp, dispatchTracking } = useContext(AppContext);
 	
@@ -51,18 +52,15 @@ const App = () => {
 
 	UseSetNewSession({ 
 		tracking, dispatchTracking, dispatchApp, 
-		history, showLoading, animationComplete 
+		history, setLoading, showLoadingPch, animationComplete 
 	});
 
     useEffect(() => {
         if(componentIsMounted.current) {
-			if(isDirectOffer) {
-                dispatchApp({ type: 'REDIRECTION' });
-            };
             const locationParts = window.location.hostname.split('.');
             const subDomain = locationParts.shift();
             if (subDomain === 'pch') {
-                setLoading(true);
+                setLoadingPch(true);
 			};
 		};
         return () => {componentIsMounted.current = false};
@@ -79,8 +77,16 @@ const App = () => {
 		history.push('/');
     };
 
-	if(showLoading && !animationComplete) {
+	if(showLoadingPch && !animationComplete) {
 		return <LoadingRedirect setComplete={() => setAnimationComplete(true)}/>
+	};
+	
+	if(showLoading) {
+		return (
+			<div style={Styles.loadingContainer}>
+				<LoadingBubbles />
+			</div>
+		)
 	};
 
 	return (
