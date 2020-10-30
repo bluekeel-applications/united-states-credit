@@ -55,17 +55,16 @@ const trackingStateReducer = (state, action) => {
             };
 
         case 'SET_PCH_USER':
-            console.log('pch reducer:', action.payload);
             Helpers.setPchCookies(action.payload);
             return {
                 ...state,
-                email: action.payload.EmailAddress || initialTrackingState.email,
-                fname: action.payload.FirstName || initialTrackingState.fname,
-                lname: action.payload.LastName || initialTrackingState.lname,
-                address: action.payload.Address1 || initialTrackingState.address,
-                city: action.payload.City || initialTrackingState.city,
-                state: action.payload.State || initialTrackingState.state,
-                zip: action.payload.ZipCode || initialTrackingState.zip
+                email: action.payload.email,
+                fname: action.payload.fname,
+                lname: action.payload.lname,
+                address: action.payload.address,
+                city: action.payload.city,
+                state: action.payload.state,
+                zip: action.payload.zip 
             };
 
         case 'HSID_FOUND':

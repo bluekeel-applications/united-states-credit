@@ -1404,17 +1404,24 @@
   resolved "https://node.bit.dev/bluekeel.component-library.usc/-/bluekeel.component-library.usc-0.0.1.tgz#c3fca3467aa83da45e813ac790fd87f012c82c08"
   integrity sha1-w/yjRnqoPaRegTrHkP2H8BLILAg=
 
-"@bit/bluekeel.controllers.helpers@1.0.0", "@bit/bluekeel.controllers.helpers@^1.0.0":
+"@bit/bluekeel.controllers.helpers@1.0.0":
   version "1.0.0"
   resolved "https://node.bit.dev/bluekeel.controllers.helpers/-/bluekeel.controllers.helpers-1.0.0.tgz#576e1be6b83e16ddc68ba29c7c74089909e582dd"
   integrity sha1-V24b5rg+Ft3Gi6KcfHQImQnlgt0=
   dependencies:
     axios "^0.20.0"
 
-"@bit/bluekeel.controllers.use-set-new-session@^1.0.5":
-  version "1.0.5"
-  resolved "https://node.bit.dev/bluekeel.controllers.use-set-new-session/-/bluekeel.controllers.use-set-new-session-1.0.5.tgz#3efa334debf0b2dfb108fcdd12d626dd3342afa8"
-  integrity sha1-PvozTevwst+xCPzdEtYm3TNCr6g=
+"@bit/bluekeel.controllers.helpers@^1.0.1":
+  version "1.0.1"
+  resolved "https://node.bit.dev/bluekeel.controllers.helpers/-/bluekeel.controllers.helpers-1.0.1.tgz#3f992977f80f21dbc4ef28c49d58390103e642a6"
+  integrity sha1-P5kpd/gPIdvE7yjEnVg5AQPmQqY=
+  dependencies:
+    axios "^0.20.0"
+
+"@bit/bluekeel.controllers.use-set-new-session@^1.0.7":
+  version "1.0.7"
+  resolved "https://node.bit.dev/bluekeel.controllers.use-set-new-session/-/bluekeel.controllers.use-set-new-session-1.0.7.tgz#0d842145e72daf1ad96c3451dbd7f1a1b618a404"
+  integrity sha1-DYQhRectrxrZbDRR29fxobYYpAQ=
   dependencies:
     "@apollo/react-hooks" "^4.0.0"
     "@bit/bluekeel.controllers.helpers" "1.0.0"
@@ -1422,10 +1429,10 @@
     graphql-tag "^2.11.0"
     react "^16.13.1"
 
-"@bit/bluekeel.controllers.user-end@^1.0.7":
-  version "1.0.7"
-  resolved "https://node.bit.dev/bluekeel.controllers.user-end/-/bluekeel.controllers.user-end-1.0.7.tgz#ba935305a8ebff7d33eada5922b39b80e04b9c1d"
-  integrity sha1-upNTBajr/30z6tpZIrObgOBLnB0=
+"@bit/bluekeel.controllers.user-end@^1.0.9":
+  version "1.0.9"
+  resolved "https://node.bit.dev/bluekeel.controllers.user-end/-/bluekeel.controllers.user-end-1.0.9.tgz#2e88406454af61cd9f62f1ef1d577a18ce0cdab7"
+  integrity sha1-LohAZFSvYc2fYvHvHVd6GM4M2rc=
   dependencies:
     "@apollo/react-hooks" "^4.0.0"
     "@bit/bluekeel.controllers.helpers" "1.0.0"
