@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context';
 import Routes from '../Routes';
 import LoadingRedirect from '@bit/bluekeel.component-library.loading-redirect';
@@ -11,20 +11,29 @@ import UscLogoGray from '@bit/bluekeel.assets.usc_logo_gray';
 import Footer from '@bit/bluekeel.component-library.footer';
 import Feed from './Layout/Feed';
 import { useHistory } from 'react-router-dom';
-import { getCookie } from '@bit/bluekeel.controllers.helpers';
+import { getCookie, isPch } from '@bit/bluekeel.controllers.helpers';
 import UseSetNewSession from '@bit/bluekeel.controllers.use-set-new-session';
 import Radium from 'radium';
 import Styles from './Styles.css.js';
 
 const App = () => {
 	let history = useHistory();
-	const componentIsMounted = useRef(true);
 	const [ myURL ] = useState(new URL(window.location.href));
 	const [ showDrawer, toggleDrawer ] = useState(false);
-	const [ showLoading, setLoading ] = useState(!!myURL.searchParams.get('vertical'));
-	const [ showLoadingPch, setLoadingPch ] = useState(false);
-	const [ animationComplete, setAnimationComplete ] = useState(false);
+	const [ showLoading, setLoading ] = useState(true);
+    const [ showLoadingPch ] = useState(isPch());
+	const [ animationComplete, setAnimationComplete ] = useState(!showLoadingPch);
 	const { appState, dispatchApp, dispatchTracking } = useContext(AppContext);
+	
+	const handleMenuClick = () => {
+		toggleDrawer(!showDrawer);
+	};
+
+	const goHome = () => {
+        dispatchApp({ type: 'RESTART_SEARCH' });
+        window.scrollTo(0, 0);
+		history.push('/');
+	};
 	
 	const tracking = {
         HSID: myURL.searchParams.get('hsid') || 0,
@@ -40,42 +49,21 @@ const App = () => {
         PT2: myURL.searchParams.get('pt2') || getCookie('pt2') || 'N/A',
         GCLID: myURL.searchParams.get('gclid') || getCookie('gclid') || null,
         EMAIL: myURL.searchParams.get('email') || getCookie('email') || '',
-        FNAME: myURL.searchParams.get('fname') || getCookie('fname') || '',
-        LNAME: myURL.searchParams.get('lname') || getCookie('lname') || '',
-        ADDRESS: myURL.searchParams.get('address') || getCookie('address') || '',
-        CITY: myURL.searchParams.get('city') || getCookie('city') || '',
-        STATE: myURL.searchParams.get('state') || getCookie('state') || '',
-        ZIP: myURL.searchParams.get('zip') || getCookie('zip') || '',
         VERTICAL: myURL.searchParams.get('vertical') || 'N/A',
         TYPE: myURL.searchParams.get('type') || 'N/A'
     };
 
-	UseSetNewSession({ 
+	const redirectTo = UseSetNewSession({ 
 		tracking, dispatchTracking, dispatchApp, 
-		history, setLoading, showLoadingPch, animationComplete 
-	});
-
+		setLoading, animationComplete 
+    });
+    
     useEffect(() => {
-        if(componentIsMounted.current) {
-            const locationParts = window.location.hostname.split('.');
-            const subDomain = locationParts.shift();
-            if (subDomain === 'pch') {
-                setLoadingPch(true);
-			};
-		};
-        return () => {componentIsMounted.current = false};
+        if(!!redirectTo && !showLoading) {
+            history.push(redirectTo);
+        };
         // eslint-disable-next-line
-	}, []);
-	
-	const handleMenuClick = () => {
-		toggleDrawer(!showDrawer);
-	};
-
-	const goHome = () => {
-        dispatchApp({ type: 'RESTART_SEARCH' });
-        window.scrollTo(0, 0);
-		history.push('/');
-    };
+	}, [redirectTo, showLoading]);
 
 	if(showLoadingPch && !animationComplete) {
 		return <LoadingRedirect setComplete={() => setAnimationComplete(true)}/>

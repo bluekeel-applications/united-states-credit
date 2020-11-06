@@ -1,14 +1,4 @@
 const initialAppState = {
-    pch: {
-        email: '',
-        title: '',
-        firstname: '',
-        lastname: '',
-        address: '',
-        city: '',
-        state: '',
-        zipcode: ''
-    },
     showDrawer: false,
     showFullLogo: true,
     vertical: 'direct',
@@ -31,22 +21,6 @@ const initialAppState = {
 
 const appStateReducer = (state, action) => {
     switch (action.type) {
-
-        case 'FOUND_PCH_USER':
-            return {
-                ...state,
-                pch: {
-                    ...state.pch,
-                    email: action.payload.EmailAddress,
-                    title: action.payload.Title,
-                    firstname: action.payload.FirstName,
-                    lastname: action.payload.LastName,
-                    address: action.payload.Address1,
-                    city: action.payload.City,
-                    state: action.payload.State,
-                    zipcode: action.payload.ZipCode
-                }
-            };
         
         case 'SHOW_FULL_LOGO':
             return {

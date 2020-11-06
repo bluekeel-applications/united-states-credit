@@ -20,7 +20,7 @@ const initialTrackingState = {
     address: Helpers.checkCookie('address') ? Helpers.getCookie('address') : '',
     city: Helpers.checkCookie('city') ? Helpers.getCookie('city') : '',
     state: Helpers.checkCookie('state') ? Helpers.getCookie('state') : '',
-    country: Helpers.checkCookie('country') ? Helpers.getCookie('country') : null,
+    country: Helpers.checkCookie('country') ? Helpers.getCookie('country') : '',
     zip: Helpers.checkCookie('zip') ? Helpers.getCookie('zip') : '',
 };
 
@@ -41,12 +41,6 @@ const trackingStateReducer = (state, action) => {
                 pt2: action.payload.pt2,
                 gclid: action.payload.gclid,
                 email: action.payload.email,
-                fname: action.payload.fname,
-                lname: action.payload.lname,
-                address: action.payload.address,
-                city: action.payload.city,
-                state: action.payload.state,
-                zip: action.payload.zip,
             };
             Helpers.setCookies(tracking);
             return {
