@@ -1275,14 +1275,15 @@
   resolved "https://node.bit.dev/bluekeel.component-library.feed-toolz/-/bluekeel.component-library.feed-toolz-0.0.1.tgz#3a30e9d104964a1613ae10c1b7d781dc90b5c2f2"
   integrity sha1-OjDp0QSWShYTrhDBt9eB3JC1wvI=
 
-"@bit/bluekeel.component-library.flow-page@^1.0.0":
-  version "1.0.0"
-  resolved "https://node.bit.dev/bluekeel.component-library.flow-page/-/bluekeel.component-library.flow-page-1.0.0.tgz#68729495f8b6501721161bbdc6dfbb5f1cd1e212"
-  integrity sha1-aHKUlfi2UBchFhu9xt+7XxzR4hI=
+"@bit/bluekeel.component-library.flow-page@^1.0.1":
+  version "1.0.1"
+  resolved "https://node.bit.dev/bluekeel.component-library.flow-page/-/bluekeel.component-library.flow-page-1.0.1.tgz#51e9017b932d032ecf9645d1077446c3f530906c"
+  integrity sha1-UekBe5MtAy7PlkXRB3RGw/UwkGw=
   dependencies:
     "@fortawesome/react-fontawesome" "^0.1.11"
     radium "^0.26.0"
     react "^16.13.1"
+    react-responsive "^8.1.0"
     react-spring "^8.0.27"
 
 "@bit/bluekeel.component-library.flow-wrapper@^1.0.8":

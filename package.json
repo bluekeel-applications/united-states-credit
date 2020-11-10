@@ -12,7 +12,7 @@
     "@bit/bluekeel.component-library.debt-optin": "^1.0.0",
     "@bit/bluekeel.component-library.editorial": "^0.0.4",
     "@bit/bluekeel.component-library.featured": "^0.0.4",
-    "@bit/bluekeel.component-library.flow-page": "^1.0.0",
+    "@bit/bluekeel.component-library.flow-page": "^1.0.1",
     "@bit/bluekeel.component-library.flow-wrapper": "^1.0.8",
     "@bit/bluekeel.component-library.footer": "^0.0.1",
     "@bit/bluekeel.component-library.knowledge": "^0.0.2",
