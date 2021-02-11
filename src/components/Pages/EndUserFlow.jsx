@@ -18,7 +18,7 @@ const EndUserFlow = () => {
             history.push('/');
         };
         // eslint-disable-next-line
-    },[selectedVertical, isRedirection]);
+    },[selectedVertical, isRedirection]); 
 
     const tracking = {
         hsid: Number(trackingState['hsid']),
