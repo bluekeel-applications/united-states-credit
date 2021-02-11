@@ -1265,10 +1265,10 @@
     react-responsive "^8.1.0"
     react-spring "^8.0.27"
 
-"@bit/bluekeel.component-library.flow-wrapper@^2.0.1":
-  version "2.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.flow-wrapper/-/bluekeel.component-library.flow-wrapper-2.0.1.tgz#0ae1b4c39a00623e614014344cdd899e1da11e48"
-  integrity sha1-CuG0w5oAYj5hQBQ0TN2Jnh2hHkg=
+"@bit/bluekeel.component-library.flow-wrapper@^2.0.2":
+  version "2.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.flow-wrapper/-/bluekeel.component-library.flow-wrapper-2.0.2.tgz#71a07d86971d994ed7edf3c479fbd2f69ae2de45"
+  integrity sha1-caB9hpcdmU7X7fPEefvS9pri3kU=
   dependencies:
     "@bit/bluekeel.assets.usc-flag-left" "0.0.1"
     "@bit/bluekeel.assets.usc-flag-right" "0.0.1"

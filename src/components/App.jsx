@@ -15,6 +15,7 @@ import { getCookie, isPch } from '@bit/bluekeel.controllers.helpers';
 import UseSetNewSession from '@bit/bluekeel.controllers.use-set-new-session';
 import Radium from 'radium';
 import Styles from './Styles.css.js';
+import './Overrides.css';
 
 const App = () => {
 	let history = useHistory();
