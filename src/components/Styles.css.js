@@ -1,3 +1,5 @@
+import './overrides.css';
+
 export default {
     app: {
         fontFamily: 'Verlag A, Verlag B, aktiv-grotesk, sans-serif',
