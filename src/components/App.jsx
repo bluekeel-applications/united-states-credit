@@ -50,8 +50,16 @@ const App = () => {
         GCLID: myURL.searchParams.get('gclid') || getCookie('gclid') || null,
         EMAIL: myURL.searchParams.get('email') || getCookie('email') || '',
         VERTICAL: myURL.searchParams.get('vertical') || 'N/A',
-        TYPE: myURL.searchParams.get('type') || 'N/A'
+        TYPE: myURL.searchParams.get('type') || 'N/A',
+		AUTH_GROUP: myURL.searchParams.get('group') || 'bk'
     };
+
+	useEffect(() => {
+		if(tracking.AUTH_GROUP !== 'bk') {
+			dispatchTracking({ type: 'SET_GROUP', payload: tracking.AUTH_GROUP });
+		};
+		// eslint-disable-next-line
+	}, [tracking]);
 
 	const redirectTo = UseSetNewSession({ 
 		tracking, dispatchTracking, dispatchApp, 
