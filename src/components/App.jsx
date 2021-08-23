@@ -46,13 +46,21 @@ const App = () => {
         SE: myURL.searchParams.get('se') || getCookie('se') || null,
         KWD: myURL.searchParams.get('kwd') || getCookie('kwd') || null,
         PACID: myURL.searchParams.get('pacid') || getCookie('pacid') || null,
-        PT1: myURL.searchParams.get('pt1') || getCookie('pt1') || 'N/A',
-        PT2: myURL.searchParams.get('pt2') || getCookie('pt2') || 'N/A',
+        PT1: myURL.searchParams.get('pt1') || 'N/A',
+        PT2: myURL.searchParams.get('pt2') || 'N/A',
         GCLID: myURL.searchParams.get('gclid') || getCookie('gclid') || null,
         EMAIL: myURL.searchParams.get('email') || getCookie('email') || '',
         VERTICAL: myURL.searchParams.get('vertical') || 'N/A',
-        TYPE: myURL.searchParams.get('type') || 'N/A'
+        TYPE: myURL.searchParams.get('type') || 'N/A',
+		AUTH_GROUP: myURL.searchParams.get('group') || 'bk'
     };
+
+	useEffect(() => {
+		if(tracking.AUTH_GROUP !== 'bk') {
+			dispatchTracking({ type: 'SET_GROUP', payload: tracking.AUTH_GROUP });
+		};
+		// eslint-disable-next-line
+	}, [tracking]);
 
 	const redirectTo = UseSetNewSession({ 
 		tracking, dispatchTracking, dispatchApp, 

@@ -1,6 +1,7 @@
 import * as Helpers from '@bit/bluekeel.controllers.helpers';
 
 const initialTrackingState = {
+    auth_group: 'bk',
     oid: Helpers.checkCookie('oid') ? Helpers.getCookie('oid') : null,
     pid: Helpers.checkCookie('pid') ? Helpers.getCookie('pid') : null,
     eid: Helpers.checkCookie('eid') ? Helpers.getCookie('eid') : null,
@@ -26,6 +27,12 @@ const initialTrackingState = {
 
 const trackingStateReducer = (state, action) => {
     switch (action.type) {
+        case 'SET_GROUP':
+            return {
+                ...state,
+                auth_group: action.payload
+            };
+
         case 'USER_ARRIVED':
             let tracking = {
                 oid: action.payload.oid,
