@@ -1,21 +1,24 @@
 {
-  "name": "United States Credit",
-  "short_name": "USC",
-  "icons": [{
-      "src": "/android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/android-chrome-256x256.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    }
-  ],
-  "start_url": "/",
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone",
-  "gcm_sender_id": "240162852362",
-  "DO_NOT_CHANGE_GCM_SENDER_ID": "Do not change the GCM Sender ID"
+    "short_name": "USC",
+    "icons": [{
+        "src": "/android-chrome-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+        },
+        {
+        "src": "/android-chrome-256x256.png",
+        "sizes": "256x256",
+        "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "manifest_version": 2,
+    "name": "United States Credit",
+    "version": "0.0.2",
+    "permissions": ["gcm", "storage", "notifications"],
+    "gcm_sender_id": "733213273952",
+    "gcm_user_visible_only": true,
+    "display": "standalone"
 }

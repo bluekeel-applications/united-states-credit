@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context';
 import Routes from '../Routes';
+import usePushProviders from '@bit/bluekeel.hookz.use-push-providers';
 import LoadingRedirect from '@bit/bluekeel.component-library.loading-redirect';
 import LoadingBubbles from '@bit/bluekeel.component-library.loading-bubbles';
 import Drawer from './Layout/Drawer';
@@ -15,7 +16,6 @@ import { getCookie, isPch } from '@bit/bluekeel.controllers.helpers';
 import UseSetNewSession from '@bit/bluekeel.controllers.use-set-new-session';
 import Radium from 'radium';
 import Styles from './Styles.css.js';
-import './Overrides.css';
 
 const App = () => {
 	let history = useHistory();
@@ -25,6 +25,8 @@ const App = () => {
     const [ showLoadingPch ] = useState(isPch());
 	const [ animationComplete, setAnimationComplete ] = useState(!showLoadingPch);
 	const { appState, dispatchApp, dispatchTracking } = useContext(AppContext);
+	
+	usePushProviders();
 	
 	const handleMenuClick = () => {
 		toggleDrawer(!showDrawer);
