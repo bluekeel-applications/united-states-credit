@@ -1460,6 +1460,15 @@
     react "^16.13.1"
     whatwg-fetch "^3.4.1"
 
+"@bit/bluekeel.hookz.use-push-providers@^0.0.5":
+  version "0.0.5"
+  resolved "https://node.bit.dev/bluekeel.hookz.use-push-providers/-/bluekeel.hookz.use-push-providers-0.0.5.tgz#a7dba5459e90bb362cc307cd3a9e14f74778203a"
+  integrity sha1-p9ulRZ6QuzYswwfNOp4U90d4IDo=
+  dependencies:
+    "@apollo/client" "^3.2.5"
+    "@bit/bluekeel.queriez.push_providers" "0.0.1"
+    react "^16.13.1"
+
 "@bit/bluekeel.hookz.use-sentry@^0.0.4":
   version "0.0.4"
   resolved "https://node.bit.dev/bluekeel.hookz.use-sentry/-/bluekeel.hookz.use-sentry-0.0.4.tgz#cb6309b491d868d522f2714906b2eda43fa3dcc2"
@@ -1468,6 +1477,13 @@
     "@sentry/react" "^5.24.2"
     "@sentry/tracing" "^5.24.2"
     react "^16.13.1"
+
+"@bit/bluekeel.queriez.push_providers@0.0.1":
+  version "0.0.1"
+  resolved "https://node.bit.dev/bluekeel.queriez.push_providers/-/bluekeel.queriez.push_providers-0.0.1.tgz#039f2c539db8361b7a729e62f4b4664091412d48"
+  integrity sha1-A58sU524Nht6cp5i9LRmQJFBLUg=
+  dependencies:
+    graphql-tag "^2.11.0"
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
