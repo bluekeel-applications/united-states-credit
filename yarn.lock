@@ -1408,10 +1408,10 @@
   dependencies:
     axios "^0.20.0"
 
-"@bit/bluekeel.controllers.use-set-new-session@^2.1.1":
-  version "2.1.1"
-  resolved "https://node.bit.dev/bluekeel.controllers.use-set-new-session/-/bluekeel.controllers.use-set-new-session-2.1.1.tgz#4d4e079e5f7d1420c80ff322efd38a9184339cd2"
-  integrity sha1-TU4Hnl99FCDID/Mi79OKkYQznNI=
+"@bit/bluekeel.controllers.use-set-new-session@^2.1.2":
+  version "2.1.2"
+  resolved "https://node.bit.dev/bluekeel.controllers.use-set-new-session/-/bluekeel.controllers.use-set-new-session-2.1.2.tgz#dbee41ffc5de2d14110b583f9d8c8473be03a712"
+  integrity sha1-2+5B/8XeLRQRC1g/nYyEc74DpxI=
   dependencies:
     "@apollo/client" "^3.2.5"
     "@apollo/react-hooks" "^4.0.0"
@@ -1460,10 +1460,10 @@
     react "^16.13.1"
     whatwg-fetch "^3.4.1"
 
-"@bit/bluekeel.hookz.use-push-providers@^0.0.5":
-  version "0.0.5"
-  resolved "https://node.bit.dev/bluekeel.hookz.use-push-providers/-/bluekeel.hookz.use-push-providers-0.0.5.tgz#a7dba5459e90bb362cc307cd3a9e14f74778203a"
-  integrity sha1-p9ulRZ6QuzYswwfNOp4U90d4IDo=
+"@bit/bluekeel.hookz.use-push-providers@^0.0.7":
+  version "0.0.7"
+  resolved "https://node.bit.dev/bluekeel.hookz.use-push-providers/-/bluekeel.hookz.use-push-providers-0.0.7.tgz#7116dd05ee030d10b3be4df3748fb64ab9bb37da"
+  integrity sha1-cRbdBe4DDRCzvk3zdI+2Srm7N9o=
   dependencies:
     "@apollo/client" "^3.2.5"
     "@bit/bluekeel.queriez.push_providers" "0.0.1"
