@@ -1298,10 +1298,10 @@
     react-router-dom "^5.2.0"
     react-spring "^8.0.27"
 
-"@bit/bluekeel.component-library.footer@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.footer/-/bluekeel.component-library.footer-0.0.1.tgz#7de3c543c3bf8d4abab910f3a2c287bb4707d8ae"
-  integrity sha1-fePFQ8O/jUq6uRDzosKHu0cH2K4=
+"@bit/bluekeel.component-library.footer@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.footer/-/bluekeel.component-library.footer-0.0.2.tgz#7925698eb86503d72876428f93d9abb20d3342dc"
+  integrity sha1-eSVpjrhlA9codkKPk9mrsg0zQtw=
   dependencies:
     "@bit/bluekeel.assets.people" "0.0.1"
     radium "^0.26.0"
@@ -1389,10 +1389,10 @@
   dependencies:
     react "^16.13.1"
 
-"@bit/bluekeel.component-library.usc@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/bluekeel.component-library.usc/-/bluekeel.component-library.usc-0.0.1.tgz#c3fca3467aa83da45e813ac790fd87f012c82c08"
-  integrity sha1-w/yjRnqoPaRegTrHkP2H8BLILAg=
+"@bit/bluekeel.component-library.usc@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/bluekeel.component-library.usc/-/bluekeel.component-library.usc-0.0.2.tgz#8a3ceaa96a20bca891d0644df8b633515e8f2908"
+  integrity sha1-ijzqqWogvKiR0GRN+LYzUV6PKQg=
 
 "@bit/bluekeel.controllers.helpers@1.0.0":
   version "1.0.0"
