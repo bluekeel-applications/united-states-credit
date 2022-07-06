@@ -4,8 +4,15 @@ import StartButton from '@bit/bluekeel.component-library.start-button';
 import Radium from 'radium';
 import styles from './Welcome.css.js';
 import { useMediaQuery } from 'react-responsive';
+import AdSenseComp from '../AdSense';
 
-const Welcome = () => {
+function getRandomIntInclusive(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+};
+
+const StartButtonComponent = () => {
     const { dispatchApp } = useContext(AppContext);
     const [ scrollTop, setScrollTop ] = useState(0);
     const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -46,9 +53,14 @@ const Welcome = () => {
 		
 	}, [scrollTop]);
 
+	const titleTextStyle = Object.assign({},
+		styles.titleText,
+		isMobile && styles.titleTextMobile
+	);
+
     return (
 		<div style={styles.welcomeContainer}>
-            <span style={styles.titleText}>FIND THE RIGHT CREDIT FOR YOU!</span>
+            <span style={titleTextStyle}>FIND THE RIGHT CREDIT FOR YOU!</span>
 			<div style={styles.startButtonContainer}>
 				<StartButton 
 					showNav={showNavStart}
@@ -57,6 +69,20 @@ const Welcome = () => {
 			</div>
 		</div>
     );
+};
+
+const Welcome = () => {
+	const [showAd, setShowAd] = useState(false);
+
+	useEffect(() => {
+		const count = getRandomIntInclusive(0, 100);
+		console.log('count:', count);
+		if(count <= 100) {
+			setShowAd(true);
+		};
+	},[]);
+
+	return showAd ? <AdSenseComp /> : <StartButtonComponent />
 }
 
 export default Radium(Welcome);

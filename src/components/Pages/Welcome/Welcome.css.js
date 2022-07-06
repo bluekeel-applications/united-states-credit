@@ -10,11 +10,11 @@ export default {
         margin: '5vh 0 5vh 0',
         fontWeight: 'bold',
         fontFamily: 'Roboto',
-        color: '#092c7e',
-        '@media (max-width: 767px)': {
-            margin: '4vh 0 10vh 0',
-            fontSize: '2.3rem',
-        }
+        color: '#092c7e'
+    },
+    titleTextMobile: {
+        margin: '4vh 0 10vh 0',
+        fontSize: '2.3rem',
     },
     startButtonContainer :{
         display: 'flex',

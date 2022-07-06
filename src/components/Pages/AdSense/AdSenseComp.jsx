@@ -27,6 +27,7 @@ class GoogleAd extends Component {
 
 const AdSenseComp = () => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
+
     const [ adWidth ] = useState(() => {
         let windowWidth = window.innerWidth;
         if(windowWidth > 1800) { return 1800 };
@@ -44,7 +45,7 @@ const AdSenseComp = () => {
         styles.mainContainer,
         isMobile && styles.mobileContainer
     );
-    
+
     return (
         <div style={mainStyle}>
             <GoogleAd 

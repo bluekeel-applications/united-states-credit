@@ -3,7 +3,7 @@ import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import App from './App';
 import { AppContextProvider } from '../context';
-import UseApolloClient from '@bit/bluekeel.hookz.use-apollo-client';
+import useApolloClient from '../utils/useApolloClient';
 import { ApolloProvider } from '@apollo/react-hooks';
 import useSentry from '@bit/bluekeel.hookz.use-sentry';
 import * as Sentry from '@sentry/react';
@@ -27,7 +27,7 @@ const Global = () => {
 	// const apolloUri = 'https://cypmxq177b.execute-api.us-east-1.amazonaws.com/test/graphql';
 	// const apolloUri = 'http://localhost:4000/dev/graphql';
 
-	const client = UseApolloClient(apolloUri);
+	const client = useApolloClient(apolloUri);
 
 	const WrappedApp = Radium(App);
 

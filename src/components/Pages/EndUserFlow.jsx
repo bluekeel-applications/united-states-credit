@@ -47,7 +47,11 @@ const EndUserFlow = () => {
         auth_group: trackingState['auth_group']
     };
 
-    return <UserEnd tracking={tracking} theme='usc' />
+    return (
+        <div>
+            <UserEnd tracking={tracking} theme='usc' />
+        </div>
+    )
 };
 
 export default EndUserFlow;

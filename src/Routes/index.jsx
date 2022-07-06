@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-// import Welcome from '../components/Pages/Welcome';
-import AdSenseComp from '../components/Pages/AdSense';
+import Welcome from '../components/Pages/Welcome';
 import PrivacyPolicy from '@bit/bluekeel.component-library.privacy-policy';
 import TermConditions from '@bit/bluekeel.component-library.term-conditions';
 import SelectVertical from '../components/Pages/SelectVertical';
@@ -27,7 +26,7 @@ const DebtOptin = () => (<SelectOptin type='debt'/>);
 const Routes = () => (
     <RouteWrapper>
         <Switch>
-            <Route path='/' exact component={AdSenseComp} />
+            <Route path='/' exact component={Welcome} />
             <Route path='/privacy' component={Policy} />
             <Route path='/terms' component={Terms} />
             <Route path='/verticals' component={SelectVertical} />
