@@ -1,24 +1,24 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../../context';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import UserEnd from '@bit/bluekeel.controllers.user-end';
 
 const EndUserFlow = () => {
-    let history = useHistory();
+    // let history = useHistory();
     const { appState, trackingState } = useContext(AppContext);
-    const selectedVertical = appState['vertical'];
-    const isRedirection = appState['redirection'];
+    // const selectedVertical = appState['vertical'];
+    // const isRedirection = appState['redirection'];
 
-    useEffect(() => {
-        // If someone is here without being redirected, it is unintentional.
-        if(
-            (selectedVertical === 'direct' && !isRedirection) ||
-            !trackingState['hsid'] || trackingState['hsid'] === '0'
-        ) {
-            history.push('/');
-        };
-        // eslint-disable-next-line
-    },[selectedVertical, isRedirection]); 
+    // useEffect(() => {
+    //     // If someone is here without being redirected, it is unintentional.
+    //     if(
+    //         (selectedVertical === 'direct' && !isRedirection) ||
+    //         !trackingState['hsid'] || trackingState['hsid'] === '0'
+    //     ) {
+    //         history.push('/');
+    //     };
+    //     // eslint-disable-next-line
+    // },[selectedVertical, isRedirection]); 
 
     const tracking = {
         hsid: Number(trackingState['hsid']),
@@ -47,11 +47,7 @@ const EndUserFlow = () => {
         auth_group: trackingState['auth_group']
     };
 
-    return (
-        <div>
-            <UserEnd tracking={tracking} theme='usc' />
-        </div>
-    )
+    return <UserEnd tracking={tracking} theme='usc' />;
 };
 
 export default EndUserFlow;

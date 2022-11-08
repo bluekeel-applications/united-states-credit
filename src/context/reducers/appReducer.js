@@ -2,7 +2,7 @@ const initialAppState = {
     showDrawer: false,
     showFullLogo: true,
     vertical: 'direct',
-    loan_type: 'N/A',
+    loan_type: 'loans_range',
     debt_type: 'N/A',
     debt_amount: 'N/A',
     checking_optin: false,

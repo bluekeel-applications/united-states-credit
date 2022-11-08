@@ -21,9 +21,10 @@ const Global = () => {
 		page: 'united-states-credit',
 		version: '1.0.0'
 	});
-
+	const apolloUri = 'https://28ohcsi2ph.execute-api.us-east-1.amazonaws.com/running/graphql';
+	// const apolloUri = 'https://n01g6wwfaf.execute-api.us-east-1.amazonaws.com/active/graphql';
 	// const apolloUri = 'https://cbvb02ezl4.execute-api.us-east-1.amazonaws.com/prod/graphql';
-	const apolloUri = 'https://uqwaw9keg3.execute-api.us-east-1.amazonaws.com/services/graphql';
+	// const apolloUri = 'https://uqwaw9keg3.execute-api.us-east-1.amazonaws.com/services/graphql';
 	// const apolloUri = 'https://cypmxq177b.execute-api.us-east-1.amazonaws.com/test/graphql';
 	// const apolloUri = 'http://localhost:4000/dev/graphql';
 
