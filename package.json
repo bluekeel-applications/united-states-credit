@@ -28,7 +28,7 @@
     "@bit/bluekeel.component-library.usc": "^0.0.2",
     "@bit/bluekeel.controllers.helpers": "^1.0.5",
     "@bit/bluekeel.controllers.use-set-new-session": "^2.1.2",
-    "@bit/bluekeel.controllers.user-end": "^3.3.13",
+    "@bit/bluekeel.controllers.user-end": "^3.3.21",
     "@bit/bluekeel.hookz.use-push-pros-scripts": "^0.0.2",
     "@bit/bluekeel.hookz.use-push-providers": "^0.0.7",
     "@bit/bluekeel.hookz.use-sentry": "^0.0.4",

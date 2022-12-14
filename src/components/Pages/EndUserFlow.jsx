@@ -44,7 +44,8 @@ const EndUserFlow = () => {
         city: trackingState['city'] || '', 
         state: trackingState['state'] || '', 
         zip: trackingState['zip'] || '',
-        auth_group: trackingState['auth_group']
+        auth_group: trackingState['auth_group'],
+        gclid: trackingState['gclid'] || ''
     };
 
     return <UserEnd tracking={tracking} theme='usc' />;
