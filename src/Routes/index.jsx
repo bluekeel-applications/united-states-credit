@@ -8,6 +8,7 @@ import EndUserFlow from '../components/Pages/EndUserFlow';
 import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
 import Radium from 'radium';
 import RouteWrapper from './RouteWrapper';
+import OptInESP from '../components/Pages/OptInESP';
 
 const SelectVertical = lazy(() => import('../components/Pages/SelectVertical'));
 const SelectAutoType = lazy(() => import('../components/Pages/SelectAutoType'));
@@ -30,6 +31,7 @@ const Routes = () => (
             <Route path='/' exact component={Welcome} />
             <Route path='/privacy' component={Policy} />
             <Route path='/terms' component={Terms} />
+            <Route path='/join' component={OptInESP} />
             <Route path='/verticals' element={
                 <Suspense fallback={<>...</>}>
                     <SelectVertical/>

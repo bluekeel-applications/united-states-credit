@@ -25,7 +25,7 @@
     "@bit/bluekeel.component-library.privacy-policy": "^0.0.2",
     "@bit/bluekeel.component-library.start-button": "^1.0.1",
     "@bit/bluekeel.component-library.term-conditions": "^0.0.1",
-    "@bit/bluekeel.component-library.usc": "^0.0.2",
+    "@bit/bluekeel.component-library.usc": "^0.0.3",
     "@bit/bluekeel.controllers.helpers": "^1.0.5",
     "@bit/bluekeel.controllers.use-set-new-session": "^2.1.16",
     "@bit/bluekeel.controllers.user-end": "^3.5.4",
