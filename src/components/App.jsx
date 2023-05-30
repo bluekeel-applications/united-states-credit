@@ -5,7 +5,7 @@ import usePushProviders from '@bit/bluekeel.hookz.use-push-providers';
 import LoadingRedirect from '@bit/bluekeel.component-library.loading-redirect';
 import LoadingBubbles from '@bit/bluekeel.component-library.loading-bubbles';
 import Drawer from './Layout/Drawer';
-import Navbar from '@bit/bluekeel.component-library.navbar';
+import Navbar from '../components/Shared/Navbar';
 import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
 import UscBlogLogo from '@bit/bluekeel.assets.usc_blog_logo';
 import UscLogoGray from '@bit/bluekeel.assets.usc_logo_gray';
@@ -20,11 +20,12 @@ import Styles from './Styles.css.js';
 const App = () => {
 	let history = useHistory();
 	const [ myURL ] = useState(new URL(window.location.href));
+	const [ screenSize, setScreenSize ] = useState(getCurrentDimension());
 	const [ showDrawer, toggleDrawer ] = useState(false);
 	const [ showLoading, setLoading ] = useState(true);
     const [ showLoadingPch ] = useState(isPch());
 	const [ animationComplete, setAnimationComplete ] = useState(!showLoadingPch);
-	const { appState, dispatchApp, dispatchTracking } = useContext(AppContext);
+	const { dispatchApp, dispatchTracking } = useContext(AppContext);
 	
 	usePushProviders();
 	
@@ -56,6 +57,23 @@ const App = () => {
         TYPE: myURL.searchParams.get('type') || 'N/A',
 		AUTH_GROUP: myURL.searchParams.get('group') || 'bk'
     };
+
+	function getCurrentDimension(){
+		return {
+			width: window.innerWidth
+		}
+	};
+
+	useEffect(() => {
+		const updateDimension = () => {
+			setScreenSize(getCurrentDimension())
+		};
+		window.addEventListener('resize', updateDimension);
+
+		return(() => {
+			window.removeEventListener('resize', updateDimension);
+		})
+	}, [screenSize]);
 
 	useEffect(() => {
 		if(tracking.AUTH_GROUP !== 'bk') {
@@ -94,7 +112,7 @@ const App = () => {
 				key='usc-navbar'
 				drawerClick={handleMenuClick} 
 				goHome={goHome}
-				brand={appState['showFullLogo'] ? UscFullLogo : UscBlogLogo}
+				brand={screenSize.width > 900 ? UscFullLogo : UscBlogLogo}
 				styleVariant={navbarVariants}
 			>
 				<Routes />

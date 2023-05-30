@@ -1,6 +1,6 @@
 const initialAppState = {
     showDrawer: false,
-    showFullLogo: true,
+    showFullLogo: false,
     vertical: 'direct',
     loan_type: 'loans_range',
     debt_type: 'N/A',
