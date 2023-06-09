@@ -10,6 +10,7 @@ import Radium from 'radium';
 import RouteWrapper from './RouteWrapper';
 import OptInESP from '../components/Pages/OptInESP';
 import DuplicateCheck from '../components/Pages/DuplicateCheck';
+import System1 from '../components/Pages/System1';
 
 const SelectVertical = lazy(() => import('../components/Pages/SelectVertical'));
 const SelectAutoType = lazy(() => import('../components/Pages/SelectAutoType'));
@@ -80,6 +81,7 @@ const Routes = () => (
             } />
             <Route path='/email_optin' component={EndUserFlow} />
             <Route path='/duplicate_check' component={DuplicateCheck} />
+            <Route path='/rsoc' component={System1} />
         </Switch>
     </RouteWrapper>
 );

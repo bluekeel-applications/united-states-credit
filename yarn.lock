@@ -1442,10 +1442,10 @@
   dependencies:
     axios "^0.20.0"
 
-"@bit/bluekeel.controllers.use-set-new-session@^2.1.16":
-  version "2.1.16"
-  resolved "https://node.bit.dev/bluekeel.controllers.use-set-new-session/-/bluekeel.controllers.use-set-new-session-2.1.16.tgz#270251e5b0faf9328b88b7279683206cfe973985"
-  integrity sha1-JwJR5bD6+TKLiLcnloMgbP6XOYU=
+"@bit/bluekeel.controllers.use-set-new-session@^2.1.18":
+  version "2.1.18"
+  resolved "https://node.bit.dev/bluekeel.controllers.use-set-new-session/-/bluekeel.controllers.use-set-new-session-2.1.18.tgz#5858a3d0ba60436ad69e5b4a531e365879b6ec86"
+  integrity sha1-WFij0LpgQ2rWnltKUx42WHm27IY=
   dependencies:
     "@apollo/client" "^3.2.5"
     "@apollo/react-hooks" "^4.0.0"
@@ -1454,10 +1454,10 @@
     graphql-tag "^2.11.0"
     react "^16.13.1"
 
-"@bit/bluekeel.controllers.user-end@^3.5.4":
-  version "3.5.4"
-  resolved "https://node.bit.dev/bluekeel.controllers.user-end/-/bluekeel.controllers.user-end-3.5.4.tgz#ea94b955de8afab5afcff2f7756db48a5273cfae"
-  integrity sha1-6pS5Vd6K+rWvz/L3dW20ilJzz64=
+"@bit/bluekeel.controllers.user-end@^3.5.6":
+  version "3.5.6"
+  resolved "https://node.bit.dev/bluekeel.controllers.user-end/-/bluekeel.controllers.user-end-3.5.6.tgz#af65c67e93bad3b266b33950d9a7c83d1c19ebbe"
+  integrity sha1-r2XGfpO607JmszlQ2afIPRwZ674=
   dependencies:
     "@apollo/client" "^3.2.5"
     "@apollo/react-hooks" "^4.0.0"

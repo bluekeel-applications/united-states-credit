@@ -7,7 +7,7 @@ import LoadingBubbles from '@bit/bluekeel.component-library.loading-bubbles';
 import Drawer from './Layout/Drawer';
 import Navbar from '../components/Shared/Navbar';
 import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
-import UscBlogLogo from '@bit/bluekeel.assets.usc_blog_logo';
+// import UscBlogLogo from '@bit/bluekeel.assets.usc_blog_logo';
 import UscLogoGray from '@bit/bluekeel.assets.usc_logo_gray';
 import Footer from '@bit/bluekeel.component-library.footer';
 import Feed from './Layout/Feed';
@@ -55,7 +55,8 @@ const App = () => {
         EMAIL: myURL.searchParams.get('email') || getCookie('email') || '',
         VERTICAL: myURL.searchParams.get('vertical') || 'N/A',
         TYPE: myURL.searchParams.get('type') || 'N/A',
-		AUTH_GROUP: myURL.searchParams.get('group') || 'bk'
+		AUTH_GROUP: myURL.searchParams.get('group') || 'bk',
+		ARTICLE: myURL.searchParams.get('article') || 'loan'
     };
 
 	function getCurrentDimension(){
@@ -112,7 +113,8 @@ const App = () => {
 				key='usc-navbar'
 				drawerClick={handleMenuClick} 
 				goHome={goHome}
-				brand={screenSize.width > 900 ? UscFullLogo : UscBlogLogo}
+				// brand={screenSize.width > 900 ? UscFullLogo : UscBlogLogo}
+				brand={UscFullLogo}
 				styleVariant={navbarVariants}
 			>
 				<Routes />

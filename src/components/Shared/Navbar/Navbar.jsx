@@ -5,7 +5,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Radium from 'radium';
-import SearchBar from './SearchBar.jsx';
+// import SearchBar from './SearchBar.jsx';
 
 const ElevationScroll = (props) => {
     const { children } = props;
@@ -46,7 +46,7 @@ const Navbar = ({
                             onClick={goHome}
                             style={fullBrandStyle}
                         />
-                        <SearchBar />
+                        {/* <SearchBar /> */}
                         <div key='icon_key' style={fullMenuStyle} onClick={drawerClick}>
                             <FontAwesomeIcon
                                 icon={['fal', 'bars']}
