@@ -46,6 +46,8 @@ const App = () => {
         OID: myURL.searchParams.get('oid') || getCookie('oid') || 50,
         UID: myURL.searchParams.get('uid') || getCookie('uid') || null,
         EID: myURL.searchParams.get('eid') || getCookie('eid') || 'organic',
+        SUBID: myURL.searchParams.get('subid') || getCookie('subid') || null,
+        SEGMENT: myURL.searchParams.get('segment') || getCookie('segment') || null,
         SE: myURL.searchParams.get('se') || getCookie('se') || null,
         KWD: myURL.searchParams.get('kwd') || getCookie('kwd') || null,
         PACID: myURL.searchParams.get('pacid') || getCookie('pacid') || null,

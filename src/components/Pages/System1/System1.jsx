@@ -85,11 +85,32 @@ const System1 = () => {
         const res = await axios.get('https://api.ipify.org/?format=json');
         setIP(res.data.ip);
     };
-    
+
+    const sendDelta = () => {
+        const diffTime = Math.abs(end.current - start.current);
+        addLoadTime({
+            variables: {
+                user_ip: ip,
+                delta: diffTime,
+                subid: trackingState.subid,
+                segment: trackingState.segment,
+                width: window.innerWidth,
+                height: window.innerHeight
+            }
+        });
+    };
+
     useEffect(() => {
     //passing getData method to the lifecycle method
         getIpData();
     }, []);
+
+    useEffect(() => {
+        if(!!end.current && !!ip) {
+            sendDelta();
+        };
+
+    },[end, ip]);
 
     useEffect(() => {
         window.fbq('init', '531202445442265');
@@ -128,24 +149,13 @@ const System1 = () => {
         }, [observer, targetEl, options]);
     };
 
-    const findDelta = () => {
-        const diffTime = Math.abs(end.current - start.current);
-        addLoadTime({
-            variables: {
-                user_ip: ip,
-                delta: diffTime
-            }
-        })
-        timerDone.current = true;
-    };
-
     const callbackWhenReady = () => {
         if(!timerDone.current) {
             end.current = new Date();
-            findDelta();
             setTimeout(() => {
                 setLoading(false);
             }, 1000);
+            timerDone.current = true;
         }
     };
     const parent = document.querySelector('#rampjs_slot1');
