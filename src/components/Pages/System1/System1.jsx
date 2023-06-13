@@ -109,7 +109,7 @@ const System1 = () => {
         if(!!end.current && !!ip) {
             sendDelta();
         };
-
+// eslint-disable-next-line
     },[end, ip]);
 
     useEffect(() => {
