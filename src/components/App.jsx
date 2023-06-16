@@ -11,7 +11,7 @@ import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
 import UscLogoGray from '@bit/bluekeel.assets.usc_logo_gray';
 import Footer from '@bit/bluekeel.component-library.footer';
 import Feed from './Layout/Feed';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { getCookie, isPch } from '@bit/bluekeel.controllers.helpers';
 import UseSetNewSession from '@bit/bluekeel.controllers.use-set-new-session';
 import Radium from 'radium';
@@ -19,8 +19,8 @@ import Styles from './Styles.css.js';
 
 const App = () => {
 	let history = useHistory();
+	const location = useLocation();
 	const [ myURL ] = useState(new URL(window.location.href));
-	const [ screenSize, setScreenSize ] = useState(getCurrentDimension());
 	const [ showDrawer, toggleDrawer ] = useState(false);
 	const [ showLoading, setLoading ] = useState(true);
     const [ showLoadingPch ] = useState(isPch());
@@ -61,23 +61,6 @@ const App = () => {
 		ARTICLE: myURL.searchParams.get('article') || 'loan'
     };
 
-	function getCurrentDimension(){
-		return {
-			width: window.innerWidth
-		}
-	};
-
-	useEffect(() => {
-		const updateDimension = () => {
-			setScreenSize(getCurrentDimension())
-		};
-		window.addEventListener('resize', updateDimension);
-
-		return(() => {
-			window.removeEventListener('resize', updateDimension);
-		})
-	}, [screenSize]);
-
 	useEffect(() => {
 		if(tracking.AUTH_GROUP !== 'bk') {
 			dispatchTracking({ type: 'SET_GROUP', payload: tracking.AUTH_GROUP });
@@ -115,12 +98,11 @@ const App = () => {
 				key='usc-navbar'
 				drawerClick={handleMenuClick} 
 				goHome={goHome}
-				// brand={screenSize.width > 900 ? UscFullLogo : UscBlogLogo}
 				brand={UscFullLogo}
 				styleVariant={navbarVariants}
 			>
 				<Routes />
-				<Feed />
+				{location.pathname !== '/rsoc' && <Feed />}
 				<Footer key='usc-footer' domain='UnitedStatesCredit' logo={UscLogoGray}/>
 				<Drawer key='usc-drawer' show={showDrawer} toggle={toggleDrawer}/>
 			</Navbar>

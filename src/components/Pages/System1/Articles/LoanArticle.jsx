@@ -1,12 +1,10 @@
 import React from 'react';
+// import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 import { useMediaQuery } from 'react-responsive';
+import ArticleTitle from './ArticleTitle.jsx';
+// import ButtonContainer from '../ButtonContainer.jsx';
 
-const MainTitle = ({text}) => (
-    <div style={styles.title}>
-        {text}
-    </div>
-);
 const ContentTitle = ({text}) => (
     <div style={styles.contentHeading}>
         {text}
@@ -147,11 +145,12 @@ const CostsTable = () => {
 }
 
 const LoanArticle = () => {
+    // const { trackingState } = useContext(AppContext);
 
     return(
         <div style={styles.mainConatiner}>
             <div style={styles.contentContainer}>
-                <MainTitle text="How To: Apply for a Loan Online"/>
+                <ArticleTitle text="How To: Apply for a Loan Online"/>
                 <div>
                 There are many reasons why you need to get a personal loan. You may need money in an emergency to pay for medical bills or repair damages to property and possessions. You could be looking to refinance your credit cards, make home improvements or even pay for a wedding or vacation. No matter the reason, a personal loan can provide you with the money you need as you can make convenient payments that are more aligned to your personal financial situation.
                 </div>
@@ -180,6 +179,7 @@ const LoanArticle = () => {
                 <ContentText text="You will need to fill out the required application and provide the online lender with certain personal information regarding your finances. While each lender’s requirements can differ, the main documents you will need to send them include proof of income, personal identification, and address verification. Copies of a driver’s license or passport, your W2 forms or wage stubs, and utility bills are common documents people send in to lenders." />
                 <ContentText text="After submitting your documents, you will hear back from the online lender regarding final approval and when the money will be transferred to your bank account. This approval can take anywhere from a few days to over a week based on the loan amount you are asking for and any other additional documents they may ask for to make a decision. Once you are approved, you will have the personal loan that you need." />
             </div>
+            {/* <ButtonContainer containerId='rampjs_slot2' email={trackingState['email']} title='Search and Compare Personal Loans'/> */}
             <div style={styles.contentContainer}>
                 <ContentTitle text="Examples of Costs & APR"/>
                 <CostsTable />

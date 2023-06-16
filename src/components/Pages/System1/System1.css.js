@@ -7,6 +7,32 @@ const styles = {
         width: '100%',
         maxWidth: '100vw'
     },
+    headerContainer: {
+        width: '70vw',
+        maxWidth: '1200px',
+        marginTop: '50px',
+        padding: '15px'
+    },
+    headerContainerMobile: {
+        width: '95vw',
+        maxWidth: '95vw',
+        // marginTop: '50px',
+        padding: '0 10px'
+    },
+    headerText: {
+        color: '#777',
+        textAlign: 'justify',
+        fontWeight: '300',
+        lineHeight: '1.3',
+        fontSize: '1.5rem',
+        width: '100%',
+        maxWidth: '1200px',
+        padding: '15px'
+    },
+    headerTextMobile: {
+        fontSize: '1.4rem',
+        padding: '0 15px'
+    },
     formCard: {
         margin: '50px',
         maxWidth: '600px',
@@ -16,9 +42,17 @@ const styles = {
         backgroundColor: '#ffffff'
     },
     formCardMobile: {
-        margin: '60px 0 30px 0',
+        margin: '0 0 30px 0',
         boxShadow: 'none',
         padding: '30px 25px',
+    },
+    title: {
+        fontWeight: '700',
+        fontSize: '2.5rem',
+        paddingBottom: '15px'
+    },
+    titleMobile: {
+        fontSize: '2rem',
     },
     titleText: {
         fontSize: '1.75rem',
