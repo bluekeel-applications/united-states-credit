@@ -87,6 +87,32 @@ const System1 = () => {
         }
     },[trackingState.article]);
 
+    const [ addUserEmail ] = useMutation(ADD_USER_EMAIL, { 
+        onCompleted: (data) => {
+            const submittedEmail = data.addUserEmail.body.email
+            console.log('Email posted to Mongo:', submittedEmail);
+        }
+    });
+
+    const postEmailToMongo = emailProp => {
+        if(emailProp && emailProp !== '' && emailProp !== 'omit') {
+            addUserEmail({
+                variables: {
+                    clickId: Number(trackingState['hsid']),
+                    email: emailProp
+                }
+            })
+        }
+    };
+
+    useEffect(() => {
+        if(!emailSent.current) {
+            postEmailToMongo(trackingState['email']);
+            emailSent.current = true;
+        };
+        // eslint-disable-next-line
+    },[emailSent.current]);
+    
     useEffect(() => {
         window.fbq('init', '531202445442265');
         console.log('Initialized FB Pixel');
