@@ -7,6 +7,10 @@ import CreditCardArticle from './Articles/CreditCardArticle';
 import SavingsArticle from './Articles/SavingsArticle';
 import TaxArticle from './Articles/TaxArticle';
 import MetalsArticle from './Articles/MetalsArticle';
+import LifeInsuranceArticle from './Articles/LifeInsuranceArticle';
+import HomeWarrantyArticle from './Articles/HomeWarrantyArticle';
+import HomeSecurityArticle from './Articles/HomeSecurityArtilce';
+import EducationArticle from './Articles/EducationArticle';
 import ButtonContainer from './ButtonContainer';
 import MainTitle from './MainTitle';
 
@@ -49,6 +53,30 @@ const System1 = () => {
                 setHeaderSubText('Buying precious metals can preserve wealth, act as a hedge against inflation, and offer diversification benefits for investment portfolios.   Use the buttons below to search for and compare the best deals on purchasing gold, silver and other precious metals.');
                 setButtonQuestion('Search and Compare Precious Metals');
                 setArticle(<MetalsArticle />);
+                break;
+            case 'life':
+                setHeaderText('Find The Best, Low Cost Life Insurance Policy');
+                setHeaderSubText('Life Insurance is an inexpensive, yet essential financial tool that provides protection and peace of mind for individuals and their loved ones.  Use the buttons below to search for and compare the top life insurance companies and secure peace of mind and a lasting legacy for those you care about.');
+                setButtonQuestion('Search and Compare Life Insurance');
+                setArticle(<LifeInsuranceArticle />);
+                break;
+            case 'home':
+                setHeaderText('How to Find the Perfect Home Warranty on Any Budget');
+                setHeaderSubText('A home warranty is an invaluable, cost effective way to protect yourself from unexpected expenses. Use the buttons below to search for and compare top home warranty offers and gain an important peace of mind.');
+                setButtonQuestion('Search and Compare Home Warranties');
+                setArticle(<HomeWarrantyArticle />);
+                break;
+            case 'security':
+                setHeaderText('Find The Best Home Security Systems of 2023');
+                setHeaderSubText('A home security system is an essential, yet cost effective tool for protecting our loved ones and our valuable belongings. Use the buttons below to search for and compare top home security systems and gain an important peace of mind.');
+                setButtonQuestion('Search and Compare Home Security');
+                setArticle(<HomeSecurityArticle />);
+                break;
+            case 'edu':
+                setHeaderText('Double Your Income With an Online Degree');
+                setHeaderSubText('Those with college degrees earn an additional $1.2 million dollars in their lifetime. It’s a cost effective alternative to a 4 year University and takes only a few hours a week. Use the buttons below to search for and compare top online universities and degree programs.');
+                setButtonQuestion('Search and Compare Online Degrees');
+                setArticle(<EducationArticle />);
                 break;
             
             default:
