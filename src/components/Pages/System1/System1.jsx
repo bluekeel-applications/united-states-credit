@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import { AppContext } from '../../../context';
 import styles from './System1.css';
 import { useMediaQuery } from 'react-responsive';
@@ -13,9 +13,12 @@ import HomeSecurityArticle from './Articles/HomeSecurityArtilce';
 import EducationArticle from './Articles/EducationArticle';
 import ButtonContainer from './ButtonContainer';
 import MainTitle from './MainTitle';
+import { useMutation } from '@apollo/client';
+import ADD_USER_EMAIL from './GraphQL/ADD_USER_EMAIL';
 
 const System1 = () => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
+    const emailSent = useRef(false);
     const { trackingState } = useContext(AppContext);
     const [ headerText, setHeaderText ] = useState(null);
     const [ headerSubText, setHeaderSubText ] = useState(null);
