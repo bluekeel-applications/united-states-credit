@@ -11,6 +11,7 @@ import LifeInsuranceArticle from './Articles/LifeInsuranceArticle';
 import HomeWarrantyArticle from './Articles/HomeWarrantyArticle';
 import HomeSecurityArticle from './Articles/HomeSecurityArtilce';
 import EducationArticle from './Articles/EducationArticle';
+import DebtArticle from './Articles/DebtArticle';
 import ButtonContainer from './ButtonContainer';
 import MainTitle from './MainTitle';
 import { useMutation } from '@apollo/client';
@@ -80,6 +81,12 @@ const System1 = () => {
                 setHeaderSubText('Those with college degrees earn an additional $1.2 million dollars in their lifetime. It’s a cost effective alternative to a 4 year University and takes only a few hours a week. Use the buttons below to search for and compare top online universities and degree programs.');
                 setButtonQuestion('Search and Compare Online Degrees');
                 setArticle(<EducationArticle />);
+                break;
+            case 'debt':
+                setHeaderText('How a Debt Consolidation Company Can Help Eliminate Your Debt');
+                setHeaderSubText('A reputable debt consolidation company can simplify your payments and negotiate reduced payment amounts with your creditors.  Use the buttons below to search for and compare top debt consolidation companies.');
+                setButtonQuestion('Search and Compare Debt Consolidation');
+                setArticle(<DebtArticle />);
                 break;
             
             default:
