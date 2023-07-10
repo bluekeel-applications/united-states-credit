@@ -72,8 +72,15 @@ const App = () => {
 		tracking, dispatchTracking, dispatchApp, 
 		setLoading, animationComplete 
     });
-    
-    useEffect(() => {
+
+	useEffect(() => {
+		const isSplit = tracking.SPLIT === 'dynamic';
+		// If we want it to be dynamic, and is desktop - send to rsoc with params
+		if(isSplit && !isMobile) {
+			const rsocRedirect = `/rsoc${myURL.search}`;
+			history.push(rsocRedirect);
+			return;
+		};
         if(!!redirectTo && !showLoading) {
             history.push(redirectTo);
         };
