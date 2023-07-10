@@ -58,7 +58,8 @@ const App = () => {
         VERTICAL: myURL.searchParams.get('vertical') || 'N/A',
         TYPE: myURL.searchParams.get('type') || 'N/A',
 		AUTH_GROUP: myURL.searchParams.get('group') || 'bk',
-		ARTICLE: myURL.searchParams.get('article') || 'loan'
+		ARTICLE: myURL.searchParams.get('article') || 'loan',
+		SPLIT: myURL.searchParams.get('split') || '',
     };
 
 	useEffect(() => {
