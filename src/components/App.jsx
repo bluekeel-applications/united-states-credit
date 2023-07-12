@@ -16,8 +16,10 @@ import { getCookie, isPch } from '@bit/bluekeel.controllers.helpers';
 import UseSetNewSession from '@bit/bluekeel.controllers.use-set-new-session';
 import Radium from 'radium';
 import Styles from './Styles.css.js';
+import { useMediaQuery } from 'react-responsive';
 
 const App = () => {
+	const isMobile = useMediaQuery({ maxWidth: 1000 });
 	let history = useHistory();
 	const location = useLocation();
 	const [ myURL ] = useState(new URL(window.location.href));
