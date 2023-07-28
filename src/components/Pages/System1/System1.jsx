@@ -12,6 +12,8 @@ import HomeWarrantyArticle from './Articles/HomeWarrantyArticle';
 import HomeSecurityArticle from './Articles/HomeSecurityArtilce';
 import EducationArticle from './Articles/EducationArticle';
 import DebtArticle from './Articles/DebtArticle';
+import PersonalInjuryArticle from './Articles/PersonalInjuryArticle';
+import AutoWarrantyArticle from './Articles/AutoWarrantyArticle';
 import ButtonContainer from './ButtonContainer';
 import MainTitle from './MainTitle';
 import { useMutation } from '@apollo/client';
@@ -87,6 +89,18 @@ const System1 = () => {
                 setHeaderSubText('A reputable debt consolidation company can simplify your payments and negotiate reduced payment amounts with your creditors.  Use the buttons below to search for and compare top debt consolidation companies.');
                 setButtonQuestion('Search and Compare Debt Consolidation');
                 setArticle(<DebtArticle />);
+                break;
+            case 'injury':
+                setHeaderText('Get Every Penny You Are Owed – How to Find the Best Personal Injury Attorney');
+                setHeaderSubText('Accidents can happen unexpectedly, leaving victims with physical, emotional, and financial burdens. In such distressing times, a personal injury attorney can be your lifeline and ensure you receive fair compensation for your losses.  Use the buttons below to search for and compare the best personal injury attornies.');
+                setButtonQuestion('Search and Compare Personal Injury Attornies');
+                setArticle(<PersonalInjuryArticle />);
+                break;
+            case 'auto':
+                setHeaderText('The Importance of Extended Auto Warranties');
+                setHeaderSubText('As the cost of owning a vehicle continues to rise, one essential tool in protecting yourself against unexpected repairs and maintenance expenses is an extended auto warranty. Use the buttons below to search for and compare the best extended auto warranties.');
+                setButtonQuestion('Search and Compare Extended Auto Warranties');
+                setArticle(<AutoWarrantyArticle />);
                 break;
             
             default:

@@ -33,14 +33,14 @@ const Drawer = ({ show, toggle }) => {
     const list = () => (
         <div role='presentation'>
             <List>            
-                <ListItem button onClick={() => handleNavClick('verticals')}>
+                {/* <ListItem button onClick={() => handleNavClick('verticals')}>
                     <FontAwesomeIcon
                     icon={['fal', 'search-dollar']}
                     className='drawer-button-icon'
                     />
                     <ListItemText primary='Start a Visual Credit Search' />
                 </ListItem>
-                <Divider />
+                <Divider /> */}
                 <ListItem button onClick={() => handleNavClick('personal_loans')}>
                     <FontAwesomeIcon
                     icon={['fal', 'hand-holding-usd']}
@@ -56,23 +56,23 @@ const Drawer = ({ show, toggle }) => {
                     />
                     <ListItemText primary='Find a Credit Card' />
                 </ListItem>
-                <Divider />
-                <ListItem button onClick={(e) => handleLinkOutClick('https://unitedstatescredit.blog/category/reviews/', e)}>
+                {/* <Divider /> */}
+                {/* <ListItem button onClick={(e) => handleLinkOutClick('https://unitedstatescredit.blog/category/reviews/', e)}>
                     <FontAwesomeIcon
                     icon={['fal', 'thumbs-up']}
                     className='drawer-button-icon'
                     />
                     <ListItemText primary='Customer Reviews' />
-                </ListItem>
+                </ListItem> */}
                 <Divider />
-                <ListItem button onClick={(e) => handleLinkOutClick('https://unitedstatescredit.blog/', e)}>
+                {/* <ListItem button onClick={(e) => handleLinkOutClick('https://unitedstatescredit.blog/', e)}>
                     <FontAwesomeIcon
                     icon={['fal', 'blog']}
                     className='drawer-button-icon'
                     />
                     <ListItemText primary='Blog' />
                 </ListItem>
-                <Divider />
+                <Divider /> */}
                 <ListItem button onClick={() => toggle(false)}>
                     <FontAwesomeIcon
                     icon={['fal', 'times']}
