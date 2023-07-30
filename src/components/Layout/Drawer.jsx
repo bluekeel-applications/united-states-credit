@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../context/';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -7,7 +8,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory } from 'react-router-dom';
 
-const Drawer = ({ show, toggle }) => {
+const Drawer = ({ toggle }) => {
+    const { appState } = useContext(AppContext);
     let history = useHistory();
     // iOS has a "swipe to go back" feature that interferes with the discovery feature, so discovery has to be disabled.
     const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -15,22 +17,22 @@ const Drawer = ({ show, toggle }) => {
     const handleLinkOutClick = (url, e) => {
         e.preventDefault();
         window.open(url, '_blank');
-        toggle(false);
+        toggle();
     };
 
-    const handleNavClick = (route) => {
-        toggle(false);
-        history.push('/' + route);
-    }
+    // const handleNavClick = (route) => {
+    //     toggle(false);
+    //     history.push('/' + route);
+    // }
 
     const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
         return;
     };
-        toggle(open);
+        toggle();
     };
 
-    const list = () => (
+    const List = () => (
         <div role='presentation'>
             <List>            
                 {/* <ListItem button onClick={() => handleNavClick('verticals')}>
@@ -41,7 +43,7 @@ const Drawer = ({ show, toggle }) => {
                     <ListItemText primary='Start a Visual Credit Search' />
                 </ListItem>
                 <Divider /> */}
-                <ListItem button onClick={() => handleNavClick('personal_loans')}>
+                <ListItem button onClick={(e) => handleLinkOutClick('https://www.bkoffers.com/hitstreet/redirect_one_step.cfm?oid=40&sid=9659&pid=3415&eid=yourEID&uid=yourUID&email=omit', e)}>
                     <FontAwesomeIcon
                     icon={['fal', 'hand-holding-usd']}
                     className='drawer-button-icon'
@@ -49,7 +51,7 @@ const Drawer = ({ show, toggle }) => {
                     <ListItemText primary='Find a Loan' />
                 </ListItem>
                 <Divider />
-                <ListItem button onClick={() => handleNavClick('credit_cards')}>
+                <ListItem button onClick={(e) => handleLinkOutClick('https://www.bkoffers.com/hitstreet/redirect_one_step.cfm?oid=40&sid=9582&pid=3420&eid=USCmenu&uid=yourUID&email=omit', e)}>
                     <FontAwesomeIcon
                     icon={['fal', 'credit-card']}
                     className='drawer-button-icon'
@@ -88,13 +90,13 @@ const Drawer = ({ show, toggle }) => {
     return (        
         <SwipeableDrawer
             anchor='right'
-            open={show}
+            open={appState.showDrawer}
             onClose={toggleDrawer(false)}
             onOpen={toggleDrawer(true)}
             disableBackdropTransition={!iOS} 
             disableDiscovery={iOS}
         >
-            {list()}
+            <List />
         </SwipeableDrawer>
     )
 };

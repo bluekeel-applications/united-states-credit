@@ -1,24 +1,25 @@
-import React, { cloneElement } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import React, { cloneElement } from 'react';
+import React from 'react';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Navbar.css.js';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+// import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Radium from 'radium';
 // import SearchBar from './SearchBar.jsx';
 
-const ElevationScroll = (props) => {
-    const { children } = props;
-    const trigger = useScrollTrigger({
-        disableHysteresis: true,
-        threshold: 0,
-        target: window,
-    });
+// const ElevationScroll = (props) => {
+//     const { children } = props;
+//     const trigger = useScrollTrigger({
+//         disableHysteresis: true,
+//         threshold: 0,
+//         target: window,
+//     });
 
-    return cloneElement(children, {
-        elevation: trigger ? 4 : 0,
-    });
-};
+//     return cloneElement(children, {
+//         elevation: trigger ? 4 : 0,
+//     });
+// };
 
 const Navbar = ({ 
     drawerClick, 
@@ -32,11 +33,11 @@ const Navbar = ({
     const fullToolStyle = Object.assign({}, styles.toolbar, styleVariant.toolbar);
     const fullNavContentStyle = Object.assign({}, styles.navContent, styleVariant.navContent);
     const fullBrandStyle = Object.assign({}, styles.brand, styleVariant.brand);
-    const fullMenuStyle = Object.assign({}, styles.menuIcon, styleVariant.menuIcon);
+    // const fullMenuStyle = Object.assign({}, styles.menuIcon, styleVariant.menuIcon);
 
     return (
         <>
-        <ElevationScroll {...props}>
+        {/* <ElevationScroll {...props}> */}
             <AppBar position='fixed' key='navbar_key' style={fullNavStyle}>
                 <Toolbar style={fullToolStyle}>
                     <div key='brand_key' style={fullNavContentStyle}>
@@ -47,16 +48,16 @@ const Navbar = ({
                             style={fullBrandStyle}
                         />
                         {/* <SearchBar /> */}
-                        <div key='icon_key' style={fullMenuStyle} onClick={drawerClick}>
+                        {/* <div key='icon_key' style={fullMenuStyle} onClick={drawerClick}>
                             <FontAwesomeIcon
                                 icon={['fal', 'bars']}
                                 fixedWidth
                             />
-                        </div>
+                        </div> */}
                     </div>
                 </Toolbar>
             </AppBar>
-        </ElevationScroll>
+        {/* </ElevationScroll> */}
         <Toolbar style={{minHeight: '50px', height: '60px'}} />
         {children}
         </>

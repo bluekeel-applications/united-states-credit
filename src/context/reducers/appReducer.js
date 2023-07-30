@@ -22,6 +22,12 @@ const initialAppState = {
 const appStateReducer = (state, action) => {
     switch (action.type) {
         
+        case 'TOGGLE_DRAWER':
+            return {
+                ...state,
+                showDrawer: !state.showDrawer
+            };
+
         case 'SHOW_FULL_LOGO':
             return {
                 ...state,

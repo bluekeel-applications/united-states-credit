@@ -23,7 +23,7 @@ const App = () => {
 	let history = useHistory();
 	const location = useLocation();
 	const [ myURL ] = useState(new URL(window.location.href));
-	const [ showDrawer, toggleDrawer ] = useState(false);
+	// const [ showDrawer, toggleDrawer ] = useState(false);
 	const [ showLoading, setLoading ] = useState(true);
     const [ showLoadingPch ] = useState(isPch());
 	const [ animationComplete, setAnimationComplete ] = useState(!showLoadingPch);
@@ -32,13 +32,14 @@ const App = () => {
 	usePushProviders();
 	
 	const handleMenuClick = () => {
-		toggleDrawer(!showDrawer);
+		dispatchApp({ type: 'TOGGLE_DRAWER' });
 	};
 
 	const goHome = () => {
-        dispatchApp({ type: 'RESTART_SEARCH' });
+        // dispatchApp({ type: 'RESTART_SEARCH' });
         window.scrollTo(0, 0);
-		history.push('/');
+		// history.push('/');
+		window.location.href = 'https://www.unitedstatescredit.com'
 	};
 	
 	const tracking = {
@@ -114,7 +115,7 @@ const App = () => {
 				<Routes />
 				{location.pathname !== '/rsoc' && <Feed />}
 				<Footer key='usc-footer' domain='UnitedStatesCredit' logo={UscLogoGray}/>
-				<Drawer key='usc-drawer' show={showDrawer} toggle={toggleDrawer}/>
+				<Drawer key='usc-drawer' toggle={handleMenuClick}/>
 			</Navbar>
 		</div>
 	);
