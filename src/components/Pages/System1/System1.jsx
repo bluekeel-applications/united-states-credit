@@ -14,6 +14,7 @@ import EducationArticle from './Articles/EducationArticle';
 import DebtArticle from './Articles/DebtArticle';
 import PersonalInjuryArticle from './Articles/PersonalInjuryArticle';
 import AutoWarrantyArticle from './Articles/AutoWarrantyArticle';
+import CreditScoreArticle from './Articles/CreditScoreArticle';
 import ButtonContainer from './ButtonContainer';
 import MainTitle from './MainTitle';
 import { useMutation } from '@apollo/client';
@@ -101,6 +102,12 @@ const System1 = () => {
                 setHeaderSubText('As the cost of owning a vehicle continues to rise, one essential tool in protecting yourself against unexpected repairs and maintenance expenses is an extended auto warranty. Use the buttons below to search for and compare the best extended auto warranties.');
                 setButtonQuestion('Search and Compare Extended Auto Warranties');
                 setArticle(<AutoWarrantyArticle />);
+                break;
+            case 'score':
+                setHeaderText('The Crucial Role of Your Credit Score: Why Monitoring It Matters');
+                setHeaderSubText("In today's financial landscape, your credit score wields an unprecedented influence over your life. As such, monitoring your credit score has become not just a good practice, but a necessary one. Use the buttons below to search for and compare the best free credit score and monitoring services.");
+                setButtonQuestion('Search and Compare Credit Score Monitors');
+                setArticle(<CreditScoreArticle />);
                 break;
             
             default:
