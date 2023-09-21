@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context/';
-import List from '@material-ui/core/List';
+// import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
 const Drawer = ({ toggle }) => {
     const { appState } = useContext(AppContext);
-    let history = useHistory();
+    // let history = useHistory();
     // iOS has a "swipe to go back" feature that interferes with the discovery feature, so discovery has to be disabled.
     const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 

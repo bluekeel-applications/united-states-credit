@@ -16,6 +16,7 @@ import PersonalInjuryArticle from './Articles/PersonalInjuryArticle';
 import AutoWarrantyArticle from './Articles/AutoWarrantyArticle';
 import CreditScoreArticle from './Articles/CreditScoreArticle';
 import SeniorsArticle from './Articles/SeniorsAtricle';
+import AutoFinanceArticle from './Articles/AutoFinanceArticle';
 import ButtonContainer from './ButtonContainer';
 import MainTitle from './MainTitle';
 import { useMutation } from '@apollo/client';
@@ -115,6 +116,12 @@ const System1 = () => {
                 setHeaderSubText("As we age, the activities of daily living that once came easily may begin to pose challenges. Managing medication, grocery shopping and personal care can become burdensome. This is where assisted living communities come into play. If interested, you can search for and compare the best senior care options below.");
                 setButtonQuestion('Search and Compare Assisted Living');
                 setArticle(<SeniorsArticle />);
+                break;
+            case 'autoloan':
+                setHeaderText('A Comprehensive Guide to Auto Finance Loans');
+                setHeaderSubText("Buying a car is a significant financial decision, one that often necessitates some sort of financing for most people. Whether you're considering your first car or upgrading to a newer model, understanding the intricacies of auto finance loans can go a long way in making a prudent financial decision. If interested, you can search for and compare the auto finance options below.");
+                setButtonQuestion('Search and Compare Auto Finance Loans');
+                setArticle(<AutoFinanceArticle />);
                 break;
             
             default:
