@@ -15,6 +15,7 @@ import DebtArticle from './Articles/DebtArticle';
 import PersonalInjuryArticle from './Articles/PersonalInjuryArticle';
 import AutoWarrantyArticle from './Articles/AutoWarrantyArticle';
 import CreditScoreArticle from './Articles/CreditScoreArticle';
+import SeniorsArticle from './Articles/SeniorsAtricle';
 import ButtonContainer from './ButtonContainer';
 import MainTitle from './MainTitle';
 import { useMutation } from '@apollo/client';
@@ -108,6 +109,12 @@ const System1 = () => {
                 setHeaderSubText("In today's financial landscape, your credit score wields an unprecedented influence over your life. As such, monitoring your credit score has become not just a good practice, but a necessary one. If interested, you can search for and compare the best free credit score and monitoring services.");
                 setButtonQuestion('Search and Compare Credit Score Monitors');
                 setArticle(<CreditScoreArticle />);
+                break;
+            case 'senior':
+                setHeaderText('The Importance of Assisted Living Care for Seniors: A Comprehensive Guide to Making the Right Choice');
+                setHeaderSubText("As we age, the activities of daily living that once came easily may begin to pose challenges. Managing medication, grocery shopping and personal care can become burdensome. This is where assisted living communities come into play. If interested, you can search for and compare the best senior care options below.");
+                setButtonQuestion('Search and Compare Assisted Living');
+                setArticle(<SeniorsArticle />);
                 break;
             
             default:
