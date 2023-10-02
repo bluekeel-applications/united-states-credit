@@ -25,7 +25,7 @@ const initialTrackingState = {
     state: Helpers.checkCookie('state') ? Helpers.getCookie('state') : '',
     country: Helpers.checkCookie('country') ? Helpers.getCookie('country') : '',
     zip: Helpers.checkCookie('zip') ? Helpers.getCookie('zip') : '',
-    article: null
+    article: null,
 };
 
 const trackingStateReducer = (state, action) => {
