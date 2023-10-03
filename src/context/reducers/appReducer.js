@@ -27,7 +27,7 @@ const appStateReducer = (state, action) => {
         case 'TOGGLE_DRAWER':
             return {
                 ...state,
-                showDrawer: !state.showDrawer
+                showDrawer: action.payload
             };
 
         case 'SHOW_FULL_LOGO':

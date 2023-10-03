@@ -1,6 +1,7 @@
 // import React, { cloneElement } from 'react';
-import React from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useContext, useState } from 'react';
+import { AppContext } from '../../../context';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Navbar.css.js';
 // import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import AppBar from '@material-ui/core/AppBar';
@@ -21,39 +22,49 @@ import Radium from 'radium';
 //     });
 // };
 
-const Navbar = ({ 
-    drawerClick, 
+const Navbar = ({  
     goHome, 
-    brand, 
-    styleVariant,
-    children, ...props 
+    brand,
+    children
 }) => {
+    const { dispatchApp } = useContext(AppContext);
+    const [ isHovering, setHovering ] = useState(false);
+    
+    const handleMenuClick = () => {
+        console.log('clicked drawer')
+        dispatchApp({ type: 'TOGGLE_DRAWER', payload: true });
+    };
 
-    const fullNavStyle = Object.assign({}, styles.navbar, styleVariant.navbar);
-    const fullToolStyle = Object.assign({}, styles.toolbar, styleVariant.toolbar);
-    const fullNavContentStyle = Object.assign({}, styles.navContent, styleVariant.navContent);
-    const fullBrandStyle = Object.assign({}, styles.brand, styleVariant.brand);
-    // const fullMenuStyle = Object.assign({}, styles.menuIcon, styleVariant.menuIcon);
+    const fullMenuStyle = Object.assign({}, 
+        styles.menuIcon, 
+        isHovering && styles.hoverMenu
+    );
 
     return (
         <>
         {/* <ElevationScroll {...props}> */}
-            <AppBar position='fixed' key='navbar_key' style={fullNavStyle}>
-                <Toolbar style={fullToolStyle}>
-                    <div key='brand_key' style={fullNavContentStyle}>
+            <AppBar position='fixed' key='navbar_key' style={styles.navbar}>
+                <Toolbar style={styles.toolbar}>
+                    <div key='brand_key' style={styles.navContent}>
                         <img 
                             src={brand} 
                             alt='bluekeel_brand' 
                             onClick={goHome}
-                            style={fullBrandStyle}
+                            style={styles.brand}
                         />
                         {/* <SearchBar /> */}
-                        {/* <div key='icon_key' style={fullMenuStyle} onClick={drawerClick}>
+                        <div 
+                        key='icon_key' 
+                        style={fullMenuStyle} 
+                        onClick={handleMenuClick}
+                        onMouseEnter={() => setHovering(true)}
+                        onMouseLeave={() => setHovering(false)}
+                        >
                             <FontAwesomeIcon
                                 icon={['fal', 'bars']}
                                 fixedWidth
                             />
-                        </div> */}
+                        </div>
                     </div>
                 </Toolbar>
             </AppBar>

@@ -52,7 +52,7 @@ const SearchBar = () => {
             >
                 <FontAwesomeIcon
                     icon={['fal', 'search']}
-                    className='drawer-button-icon'
+                    style={styles.buttonIcon}
                 />
             </div>
         </div>

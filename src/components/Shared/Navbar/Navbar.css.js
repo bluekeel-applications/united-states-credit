@@ -38,14 +38,24 @@ export default {
     menuIcon: {
         fontSize: '24px',
         color: 'black',
-        width: '200px',
+        // width: '200px',
+        marginRight: '50px',
+        padding: '5px',
+        borderRadius: '25px',
         '@media (max-width: 900px)': {
             // paddingRight: '20px',
             width: '40px',
+            marginRight: '0px'
         },
-        ':hover': {
-            cursor: 'pointer'
-        }
+    },
+    hoverMenu: {
+        cursor: 'pointer',
+        WebkitBoxShadow: '0px 5px 40px -10px rgba(0,0,0,0.57)',
+        MozBoxShadow: '0px 5px 40px -10px rgba(0,0,0,0.57)',
+        boxShadow: '5px 40px -10px rgba(0,0,0,0.57)',
+        transition: 'all 0.7s ease',
+        color: 'white',
+        backgroundColor: 'rgb(8,43,126)'
     },
     searchBarContainer: {
         border: '1px solid #092c7e',
@@ -84,7 +94,8 @@ export default {
             backgroundColor: '#2670c5'
         }
     },
-    hover: {
-
+    buttonIcon: {
+        margin: '0 10px',
+        fontSize: '1.5rem',
     }
 }

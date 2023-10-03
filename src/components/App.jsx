@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context';
 import Routes from '../Routes';
-import usePushProviders from '@bit/bluekeel.hookz.use-push-providers';
+import usePushProviders from '../utils/usePushProviders';
 import LoadingRedirect from '@bit/bluekeel.component-library.loading-redirect';
-import LoadingBubbles from '@bit/bluekeel.component-library.loading-bubbles';
-import Drawer from './Layout/Drawer';
+import Loading from './Shared/Loading';
+import DrawerMenu from './Layout/DrawerMenu';
 import Navbar from '../components/Shared/Navbar';
 import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
 // import UscBlogLogo from '@bit/bluekeel.assets.usc_blog_logo';
@@ -30,10 +30,6 @@ const App = () => {
 	const { dispatchApp, dispatchTracking } = useContext(AppContext);
 	
 	usePushProviders();
-	
-	const handleMenuClick = () => {
-		dispatchApp({ type: 'TOGGLE_DRAWER' });
-	};
 
 	const goHome = () => {
         // dispatchApp({ type: 'RESTART_SEARCH' });
@@ -98,7 +94,7 @@ const App = () => {
 	if(showLoading) {
 		return (
 			<div style={Styles.loadingContainer}>
-				<LoadingBubbles />
+				<Loading />
 			</div>
 		)
 	};
@@ -107,26 +103,16 @@ const App = () => {
 		<div key='app-key' style={Styles.app}>
 			<Navbar
 				key='usc-navbar'
-				drawerClick={handleMenuClick} 
 				goHome={goHome}
 				brand={UscFullLogo}
-				styleVariant={navbarVariants}
 			>
 				<Routes />
 				{location.pathname !== '/rsoc' && <Feed />}
 				<Footer key='usc-footer' domain='UnitedStatesCredit' logo={UscLogoGray}/>
-				<Drawer key='usc-drawer' toggle={handleMenuClick}/>
 			</Navbar>
+			<DrawerMenu />
 		</div>
 	);
-};
-
-const navbarVariants = {
-	navbar: {},
-	toolbar: {},
-	navContent: {}, 
-	brand: {}, 
-	menuIcon: {}
 };
 
 export default Radium(App);

@@ -76,9 +76,10 @@ const Welcome = () => {
 
 	useEffect(() => {
 		const count = getRandomIntInclusive(0, 100);
-		console.log('count:', count);
 		if(count <= 100) {
-			setShowAd(true);
+			if(window.location.host !== 'localhost:3000') {
+				setShowAd(true);
+			};
 		};
 	},[]);
 
