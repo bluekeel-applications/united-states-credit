@@ -22,7 +22,7 @@ import MainTitle from './MainTitle';
 import { useMutation } from '@apollo/client';
 import ADD_USER_EMAIL from './utils/GraphQL/ADD_USER_EMAIL';
 
-const System1Static = () => {
+const System1Static = ({ article }) => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const emailSent = useRef(false);
     const { trackingState } = useContext(AppContext);
@@ -33,7 +33,7 @@ const System1Static = () => {
 
     useEffect(() => {
         console.log('STATIC!');
-        switch(trackingState.article) {
+        switch(article) {
             case 'credit':
                 setHeaderText('The Best Credit Cards in 2023 for Any Credit Type');
                 setHeaderSubText('Finding the perfect credit card can extend our spending abilities and help us manage our personal finances.  If interested, you can search for and compare the best credit card options currently available.');
@@ -131,7 +131,7 @@ const System1Static = () => {
                 setButtonQuestion('What are you interested in?');
                 setArticle(<CreditCardArticle />);
         }
-    },[trackingState.article]);
+    },[article]);
 
     const [ addUserEmail ] = useMutation(ADD_USER_EMAIL, { 
         onCompleted: (data) => {

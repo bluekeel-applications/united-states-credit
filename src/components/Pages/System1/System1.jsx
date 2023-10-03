@@ -1,56 +1,76 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { AppContext } from '../../../context';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import FETCH_ARTICLE_BY_KEY from './utils/GraphQL/FETCH_ARTICLE_BY_KEY';
+import { buildFullURL, setDefaultData } from './utils/helpers';
 import Loading from '../../Shared/Loading';
 import System1Page from './System1Page';
+import System1Static from './System1Static';
 import { useHistory } from 'react-router-dom';
 
 const System1 = () => {
     const history = useHistory();
     const myURL = new URL(window.location.href);
     const { trackingState, dispatchApp } = useContext(AppContext);
-    const { loading, error, data } = useQuery(FETCH_ARTICLE_BY_KEY, { variables: { key: trackingState.article } });
-    const [ showPage, setShowPage ] = useState(false);
-    
-    const buildKeyURL = (buttonArr) => {
-        const keys = ['&forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
-        const encodeArr = buttonArr.map((button) => {
-          return button.trim().replace(/ /g,"+").replace("$","%24");
-        });
-        const keyArr = encodeArr.map((item, idx) => {
-          return `${keys[idx]}${item}`;
-        });
-        return keyArr.join("");
+    const [ showDynamicPage, setShowDynamicPage ] = useState(false);
+    const [ pageReady, setPageReady ] = useState(false);
+    const [ staticArticle, setStaticArticle ] = useState(trackingState.article);
+
+    const showOldFormat = () => {
+        console.log('Using Static style rsoc');
+        window._rampJs();
+        setShowDynamicPage(false);
+        setPageReady(true);
     };
 
-    useEffect(() => {
-        if(!data || showPage) {
+    const handleInboundData = (data) => {
+        // If error getting article, use credit as default;
+        if(!data?.fetchArticleByKey?.success){
+            console.log('Error: No data found', data);
+            const newURL = `/rsoc${setDefaultData(trackingState)}`;
+            history.replace(newURL);
+            setStaticArticle('credit');
+            showOldFormat();
             return;
         };
+        // Otherwise, set context and build full url
         dispatchApp({ type: 'SET_SYSTEM_1', payload: data.fetchArticleByKey.body });
+        const tail = buildFullURL(data.fetchArticleByKey.body.buttons, trackingState);
+        const newURL = `/rsoc${myURL.search}${tail}`;
+        history.replace(newURL);
+        window._rampJs();
+        setShowDynamicPage(true);
+        setPageReady(true);
+    };
+
+    const [fetchArticle, { called, loading, data }] = useLazyQuery(
+        FETCH_ARTICLE_BY_KEY, { 
+            variables: { key: trackingState.article },
+            errorPolicy: 'ignore',
+            onCompleted: handleInboundData
+        }
+    );
+
+
+    useEffect(() => {
+        if(called || pageReady) {
+            return;
+        };
         const hasButtonKeys = !!myURL.searchParams.get('forceKeyA');
         if(!hasButtonKeys) {
-            const tail = buildKeyURL(data.fetchArticleByKey.body.buttons);
-            const newURL = `/rsoc${myURL.search}${tail}`;
-            history.replace(newURL);
-            window._rampJs();
-            setShowPage(true);
+            fetchArticle();
         } else {
-            console.log('setting rampjs without terms');
-            window._rampJs();
-            setShowPage(true);
+            showOldFormat();
         };
 // eslint-disable-next-line
-    },[data, showPage]);
+    },[data, pageReady]);
 
-
-    if (loading || !showPage) return <Loading/>;
-
-    if (error) return <div>{`Error occured: ${error.message}`}</div>;
+    if (loading || !pageReady) return <Loading/>;
 
     return (
-        showPage && <System1Page />
+        showDynamicPage ? 
+        <System1Page /> :
+        <System1Static article={staticArticle}/>
     );
 };
 
