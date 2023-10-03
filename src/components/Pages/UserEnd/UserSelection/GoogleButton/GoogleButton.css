@@ -1,0 +1,57 @@
+.pointer1 {
+    width: 85%;
+    height: 80px;
+    position: relative;
+    background: rgb(47,138,181);
+}
+.pointer1:after {
+content: "";
+position: absolute;
+left: 0;
+bottom: 0;
+width: 0;
+height: 0;
+border-left: 20px solid white;
+border-top: 40px solid transparent;
+border-bottom: 40px solid transparent;
+}
+.pointer1:before {
+content: "";
+position: absolute;
+right: -40px;
+bottom: 0;
+width: 0;
+height: 0;
+border-left: 40px solid rgb(47,138,181);
+border-top: 40px solid transparent;
+border-bottom: 40px solid transparent;
+}
+
+.pointer2 {
+    width: 85%;
+    height: 80px;
+    position: relative;
+    background: rgb(39,112,197);
+}
+.pointer2:after {
+content: "";
+position: absolute;
+left: 0;
+bottom: 0;
+width: 0;
+height: 0;
+border-left: 20px solid white;
+border-top: 40px solid transparent;
+border-bottom: 40px solid transparent;
+}
+.pointer2:before {
+content: "";
+position: absolute;
+right: -40px;
+bottom: 0;
+width: 0;
+height: 0;
+border-left: 40px solid rgb(39,112,197);
+border-top: 40px solid transparent;
+border-bottom: 40px solid transparent;
+}

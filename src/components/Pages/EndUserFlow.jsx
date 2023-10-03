@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context';
 // import { useHistory } from 'react-router-dom';
-import UserEnd from '@bit/bluekeel.controllers.user-end';
+// import UserEnd from '@bit/bluekeel.controllers.user-end';
+import UserEnd from './UserEnd';
 
 const EndUserFlow = () => {
     // let history = useHistory();
