@@ -20,7 +20,7 @@ import AutoFinanceArticle from './Articles/AutoFinanceArticle';
 import ButtonContainer from './ButtonContainer';
 import MainTitle from './MainTitle';
 import { useMutation } from '@apollo/client';
-import ADD_USER_EMAIL from './utils/GraphQL/ADD_USER_EMAIL';
+import { ADD_USER_EMAIL } from '../../../utils/GraphQL/mutations';
 
 const System1Static = ({ article }) => {
     const isMobile = useMediaQuery({ maxWidth: 767 });

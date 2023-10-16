@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 import ButtonContainer from './ButtonContainer';
 import MainTitle from './MainTitle';
 import { useMutation } from '@apollo/client';
-import ADD_USER_EMAIL from './utils/GraphQL/ADD_USER_EMAIL';
+import { ADD_USER_EMAIL } from '../../../utils/GraphQL/mutations';
 import { setPageComponent } from './utils/helpers';
 
 const System1Page = () => {

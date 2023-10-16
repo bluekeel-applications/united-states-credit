@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
-import ADD_USER_FLOW from './graphql/ADD_USER_FLOW';
-import ADD_USER_EMAIL from './graphql/ADD_USER_EMAIL';
-import INSERT_COMMON_INFO from './graphql/INSERT_COMMON_INFO';
-import ADD_SELECTION_LOG from './graphql/ADD_SELECTION_LOG';
+import { 
+    ADD_USER_EMAIL, 
+    ADD_USER_FLOW, 
+    INSERT_COMMON_INFO, 
+    ADD_SELECTION_LOG 
+} from '../../../../utils/GraphQL/mutations';
 import { useMutation } from '@apollo/client';
-import firePixelBlueKeel from './pixels/bluekeelPixel';
-import fireBingPixel from './pixels/bingPixel';
-import fireAdwordsEvent from './pixels/adWords';
-import fireTiktokPixel from './pixels/tiktokPixel';
+import firePixelBlueKeel from '../pixels/bluekeelPixel';
+import fireBingPixel from '../pixels/bingPixel';
+import fireAdwordsEvent from '../pixels/adWords';
+import fireTiktokPixel from '../pixels/tiktokPixel';
 import { setCookie, checkCookie } from '@bit/bluekeel.controllers.helpers';
 
 const useTrackingLayer = (tracking, email, offer) => {

@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import ADD_USER_FLOW from './graphql/ADD_USER_FLOW';
-import ADD_USER_EMAIL from './graphql/ADD_USER_EMAIL';
-import INSERT_COMMON_INFO from './graphql/INSERT_COMMON_INFO';
+import { ADD_USER_EMAIL, ADD_USER_FLOW, INSERT_COMMON_INFO } from '../GraphQL/mutations';
 import { useMutation } from '@apollo/client';
-import firePixelBlueKeel from './pixels/bluekeelPixel';
-import fireBingPixel from './pixels/bingPixel';
-import fireTiktokPixel from './pixels/tiktokPixel';
-import fireAdwordsEvent from './pixels/adWords';
+import firePixelBlueKeel from '../pixels/bluekeelPixel';
+import fireBingPixel from '../pixels/bingPixel';
+import fireTiktokPixel from '../pixels/tiktokPixel';
+import fireAdwordsEvent from '../pixels/adWords';
 import { setCookie, checkCookie } from '@bit/bluekeel.controllers.helpers';
 
 const useClickSubmit = (tracking, email, shouldExecute) => {

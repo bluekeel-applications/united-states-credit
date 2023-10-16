@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import ADD_QUERY_INSIGHT from './graphql/ADD_QUERY_INSIGHT';
-import INSERT_SEARCH_INFO from './graphql/INSERT_SEARCH_INFO';
+import { ADD_QUERY_INSIGHT, INSERT_SEARCH_INFO }from '../GraphQL/mutations';
 import { useMutation } from '@apollo/client';
 
 const useInsightSubmit = (query, tracking, shouldExecute) => {

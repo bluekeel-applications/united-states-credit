@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useClickSubmit from '../utils/useClickSubmit';
 import { flattenLongString } from '@bit/bluekeel.controllers.helpers';
-import { buildKeywordLink } from '../utils/helpers';
+import { buildKeywordLink } from '../../../../utils/helpers';
 import styles from './FourButton.css.js';
 import Loading from '../../../Shared/Loading';
 import Radium from 'radium';

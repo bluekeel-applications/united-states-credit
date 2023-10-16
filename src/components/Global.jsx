@@ -3,7 +3,7 @@ import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import App from './App';
 import { AppContextProvider } from '../context';
-import useApolloClient from '../utils/useApolloClient';
+import useApolloClient from '../utils/hooks/useApolloClient';
 import { ApolloProvider } from '@apollo/react-hooks';
 import useSentry from '@bit/bluekeel.hookz.use-sentry';
 import * as Sentry from '@sentry/react';

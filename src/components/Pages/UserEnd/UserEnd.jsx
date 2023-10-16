@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
-import GET_OFFER from './utils/graphql/GET_OFFER';
-import ADD_SERVICE_LOG from './utils/graphql/ADD_SERVICE_LOG';
+import { GET_OFFER } from '../../../utils/GraphQL/queries';
+import { ADD_SERVICE_LOG }from '../../../utils/GraphQL/mutations';
 import { useQuery, useMutation } from '@apollo/client';
 import LoadingSearch from './LoadingSearch';
 import EmailCapture from './EmailCapture';

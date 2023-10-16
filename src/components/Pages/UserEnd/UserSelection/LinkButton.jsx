@@ -6,14 +6,14 @@ import {
     pickWikiButtonColor,
     flattenLongString 
 } from '@bit/bluekeel.controllers.helpers';
-import GET_OFFER_BY_GROUP from '../utils/graphql/GET_OFFER_BY_GROUP';
+import { GET_OFFER_BY_GROUP } from '../../../../utils/GraphQL/queries';
 import Radium from 'radium';
 import GoogleButton from './GoogleButton';
 import { useQuery } from '@apollo/client';
-import useClickSubmit from '../utils/useClickSubmit';
-import useInsightSubmit from '../utils/useInsightSubmit';
+import useClickSubmit from '../../../../utils/hooks/useClickSubmit';
+import useInsightSubmit from '../../../../utils/hooks/useInsightSubmit';
 import styles from './UserSelection.css.js';
-import { buildKeywordLink } from '../utils/helpers';
+import { buildKeywordLink } from '../../../../utils/helpers';
 
 const flattenSystem1String = (string) => {
     const stringCleaned = string.replace(/\s/g, '+');

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context';
 import Routes from '../Routes';
-import usePushProviders from '../utils/usePushProviders';
+import usePushProviders from '../utils/hooks/usePushProviders';
 import LoadingRedirect from '@bit/bluekeel.component-library.loading-redirect';
 import Loading from './Shared/Loading';
 import DrawerMenu from './Layout/DrawerMenu';
