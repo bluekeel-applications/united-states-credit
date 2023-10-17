@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import ADD_NEW_USER from '../graphql/ADD_NEW_USER';
-import firePixelBlueKeel from '../utils/BluekeelPixel';
+import firePixelBlueKeel from '../utils/bluekeelPixel';
 
 const useInsertNewUser = (tracking, hsid, ip_address, shouldExecute) => {
 

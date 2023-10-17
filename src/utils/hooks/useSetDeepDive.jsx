@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AppContext } from '../../context';
 
-const useSetDeepDive = (vertical, type, dispatchApp) => {
+const useSetDeepDive = (vertical, type, record) => {
+	const { dispatchApp } = useContext(AppContext);
 	const [ redirect, setRedirect ] = useState(null);
 	
     const handleTypeChoice = () => {
@@ -135,6 +137,13 @@ const useSetDeepDive = (vertical, type, dispatchApp) => {
 	};
 	
 	const checkForDeepDive = () => {
+		if(!!record) {
+			dispatchApp({ type: 'VERTICAL_PICKED', payload: { value: 'direct', crumb: 'Select Interest'}});
+			dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: 'direct', crumb: 'Direct Offer' } });
+			dispatchApp({ type: 'REDIRECTION' });
+			setRedirect('/email_optin');
+			return;
+		};
 		switch(vertical) {
 			case 'credit_cards':
 				dispatchApp({ type: 'VERTICAL_PICKED', payload: { value: vertical, crumb: 'Credit Cards'}});

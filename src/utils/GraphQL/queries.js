@@ -106,8 +106,55 @@ const GET_OFFER = gql`
     }
 `;
 
+const GET_OFFER_BY_RECORD = gql`
+	query fetchEndpointByRecord($pid: Int, $name: String) {
+        fetchEndpointByRecord(pid: $pid, name: $name) {
+            success
+            status
+            message
+            body {
+                id
+                name
+                url
+                jump
+                offer_page
+                four_button {
+					text
+					url
+					jump
+				}
+                restricted
+                show_search
+                states
+                offers {
+                    id
+                    title
+                }
+                quick_link_group 
+                selection_links {
+                    id
+                    qid
+                    name
+                    text
+                    offer_group
+                    url
+                    jump
+                    google
+                    button_color
+                    text_color
+                }
+                question_text
+                program_id
+                group_id
+                google
+            }
+        }
+    }
+`;
+
 export {
     PUSH_PROVIDERS,
 	GET_OFFER_BY_GROUP,
-	GET_OFFER
+	GET_OFFER,
+    GET_OFFER_BY_RECORD
 };

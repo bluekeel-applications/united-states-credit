@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
+import { AppContext } from '../../context';
 import axios from 'axios';
 import { checkCookie, getCookie } from '@bit/bluekeel.controllers.helpers';
 const cancelToken = axios.CancelToken;
@@ -28,7 +29,8 @@ const getUserLocation = async() => {
     }
 };
 
-const useGeoLookup = (dispatchTracking) => {
+const useGeoLookup = () => {
+    const { dispatchTracking } = useContext(AppContext);
     const retry_count = useRef(3);
 	const [ ip_address, set_ip_address ] = useState(checkCookie('ip') ? getCookie('ip') : null);
 

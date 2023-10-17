@@ -59,6 +59,7 @@ const App = () => {
 		AUTH_GROUP: myURL.searchParams.get('group') || 'bk',
 		ARTICLE: myURL.searchParams.get('article') || 'loan',
 		SPLIT: myURL.searchParams.get('split') || '',
+		RECORD: myURL.searchParams.get('record') || '',
     };
 
 	useEffect(() => {
