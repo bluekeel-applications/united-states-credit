@@ -30,6 +30,16 @@ const ADD_SERVICE_LOG = gql `
 	}
 `;
 
+const ADD_SERVICE_ENDPOINT_LOG = gql `
+	mutation addServiceEndpointLog($service_endpoint: ServiceEndpointLog) {
+		addServiceEndpointLog(service_endpoint: $service_endpoint) {
+			success
+			status
+			message
+		}
+	}
+`;
+
 const ADD_USER_EMAIL = gql `
 	mutation AddUserEmail($clickId: Int, $email: String) {
 		addUserEmail(clickId: $clickId, email: $email){
@@ -75,12 +85,42 @@ const INSERT_SEARCH_INFO = gql `
 		}
 	}
 `;
+
+const ADD_NEW_USER = gql `
+	mutation AddNewUser($visitor: NewUser) {
+		addNewUser(visitor: $visitor) {
+			success
+			status
+			message
+			body {
+				id
+			}
+		}
+	}
+`;
+
+const ADD_USER_PCH = gql`
+	mutation AddUserPCH($clickId: Int, $pch: AddPCHData) {
+		addUserPCH(clickId: $clickId, pch: $pch) {
+			success
+			status
+			message
+			body {
+				id
+			}
+		}
+	}
+`;
+
 export {
     ADD_QUERY_INSIGHT,
     ADD_SELECTION_LOG,
     ADD_SERVICE_LOG,
+	ADD_SERVICE_ENDPOINT_LOG,
     ADD_USER_EMAIL,
     ADD_USER_FLOW,
     INSERT_COMMON_INFO,
-    INSERT_SEARCH_INFO
+    INSERT_SEARCH_INFO,
+	ADD_NEW_USER,
+	ADD_USER_PCH
 }

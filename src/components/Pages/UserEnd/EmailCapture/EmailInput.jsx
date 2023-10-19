@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Radium from 'radium';
 
-const EmailInput = ({ email, setEmail, setEmailReady }) => {
+const EmailInput = Radium(({ email, setEmail, setEmailReady }) => {
     const [ showInputError, toggleError ] = useState(false);
 
     const checkValidity = (email) => {
@@ -37,6 +37,6 @@ const EmailInput = ({ email, setEmail, setEmailReady }) => {
             fullWidth
         />
     )
-};
+});
 
-export default Radium(EmailInput);
+export default memo(EmailInput);

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import styles from './EmailCapture.css.js';
 import FormSubmit from './FormSubmit';
 import LegalTerms from './LegalTerms';
 import EmailInput from './EmailInput';
 import Radium from 'radium';
 
-const EmailCapture = ({ setPage, email, setEmail, theme, setSubmission }) => {
+const EmailCapture = Radium(({ setPage, email, setEmail, theme, setSubmission }) => {
 
     const [ disabled, setDisabledState ] = useState(email === '');
 
@@ -53,6 +53,6 @@ const EmailCapture = ({ setPage, email, setEmail, theme, setSubmission }) => {
             </div>
         </div>
     )
-};
+});
 
-export default Radium(EmailCapture);
+export default memo(EmailCapture);

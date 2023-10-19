@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './LoanArticle.css.js';
 import { useMediaQuery } from 'react-responsive';
 
@@ -55,7 +55,7 @@ const ExampleTable = () => (
 const TableHeader = ({text}) => (
     <th style={styles.tableHeader}>{text}</th>
 );
-const CostsTable = () => {
+const CostsTable = memo(() => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const mainStyle = Object.assign(
         styles.exampleTable,
@@ -144,7 +144,7 @@ const CostsTable = () => {
             </tbody>
         </table>
     );
-}
+})
 
 const LoanArticle = () => {
 
@@ -194,4 +194,4 @@ const LoanArticle = () => {
     );
 };
 
-export default LoanArticle;
+export default memo(LoanArticle);

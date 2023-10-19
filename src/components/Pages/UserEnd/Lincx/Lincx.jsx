@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import useTrackingLayer from '../utils/useTrackingLayer';
+import React, { useEffect, useRef, memo } from 'react';
+import useTrackingLayer from '../../../../utils/hooks/useTrackingLayer';
 
 const Lincx = ({ tracking, email }) => {
     const componentIsMounted = useRef(true);
@@ -31,4 +31,4 @@ const Lincx = ({ tracking, email }) => {
     return <div id='lincx-div' />;
 };
 
-export default Lincx;
+export default memo(Lincx);

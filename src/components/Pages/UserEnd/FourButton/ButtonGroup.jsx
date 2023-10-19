@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useClickSubmit from '../utils/useClickSubmit';
-import { flattenLongString } from '@bit/bluekeel.controllers.helpers';
-import { buildKeywordLink } from '../../../../utils/helpers';
+import useClickSubmit from '../../../../utils/hooks/useClickSubmit';
+import { buildKeywordLink, flattenLongString } from '../../../../utils/helpers';
 import styles from './FourButton.css.js';
 import Loading from '../../../Shared/Loading';
 import Radium from 'radium';
 
-const ButtonGroup = ({ buttons, tracking, email }) => {
+const ButtonGroup = Radium(({ buttons, tracking, email }) => {
     let history = useHistory();
     const [ shouldExecute, setExecute ] = useState(false);
     const [ loading, setLoading ] = useState(false);
@@ -58,6 +57,6 @@ const ButtonGroup = ({ buttons, tracking, email }) => {
             ))}
         </div>
     )
-};
+});
 
-export default Radium(ButtonGroup);
+export default memo(ButtonGroup);

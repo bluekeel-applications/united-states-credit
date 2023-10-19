@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, Profiler } from 'react';
 import { AppContext } from '../../context';
 // import { useHistory } from 'react-router-dom';
 // import UserEnd from '@bit/bluekeel.controllers.user-end';
@@ -46,10 +46,21 @@ const EndUserFlow = () => {
         state: trackingState['state'] || '', 
         zip: trackingState['zip'] || '',
         auth_group: trackingState['auth_group'],
-        gclid: trackingState['gclid'] || ''
+        gclid: trackingState['gclid'] || '',
+        record: trackingState['record'] || null
     };
 
-    return <UserEnd tracking={tracking} theme='usc' />;
+    const onRender = (id, phase, actualDuration, baseDuration) => {
+        const tableData = {
+            Component: id,
+            Phase: phase,
+            Actual: actualDuration,
+            Base: baseDuration
+        };
+        console.table(tableData);
+    };
+
+    return <Profiler id="UserEnd" onRender={onRender}><UserEnd onRender={onRender} tracking={tracking} theme='usc' /></Profiler>;
 };
 
 export default EndUserFlow;

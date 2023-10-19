@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../../context';
 import { useQuery } from '@apollo/client';
-import PCH_USER from '../graphql/PCH_USER';
-import ADD_USER_PCH from '../graphql/ADD_USER_PCH';
+import { PCH_USER } from '../GraphQL/queries';
+import { ADD_USER_PCH } from '../GraphQL/mutations';
 import { useMutation } from '@apollo/client';
 
 const usePchLookup = (pt1, pt2, hsid) => {

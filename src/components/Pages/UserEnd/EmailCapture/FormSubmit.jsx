@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Radium from 'radium';
 import styles from './EmailCapture.css.js';
 
-const FormSubmit = ({ disabledState, onSubmit, onOptOut, theme }) => {
+const FormSubmit = Radium(({ disabledState, onSubmit, onOptOut, theme }) => {
 
     const handleDisabledClick = (e) => {
         e.preventDefault();
@@ -36,6 +36,6 @@ const FormSubmit = ({ disabledState, onSubmit, onOptOut, theme }) => {
 			</button>
         </div>
     );
-}
+})
 
-export default Radium(FormSubmit);
+export default memo(FormSubmit);

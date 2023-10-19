@@ -1,5 +1,5 @@
 // import React, { cloneElement } from 'react';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, memo } from 'react';
 import { AppContext } from '../../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Navbar.css.js';
@@ -7,6 +7,7 @@ import styles from './Navbar.css.js';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Radium from 'radium';
+import { useHistory } from 'react-router-dom';
 // import SearchBar from './SearchBar.jsx';
 
 // const ElevationScroll = (props) => {
@@ -22,11 +23,11 @@ import Radium from 'radium';
 //     });
 // };
 
-const Navbar = ({  
-    goHome, 
+const Navbar = Radium(({  
     brand,
     children
 }) => {
+    let history = useHistory();
     const { dispatchApp } = useContext(AppContext);
     const [ isHovering, setHovering ] = useState(false);
     
@@ -40,6 +41,12 @@ const Navbar = ({
         isHovering && styles.hoverMenu
     );
 
+    const goHome = () => {
+        window.scrollTo(0, 0);
+		history.push('/');
+	};
+
+console.log('rendering navbar');
     return (
         <>
         {/* <ElevationScroll {...props}> */}
@@ -73,6 +80,6 @@ const Navbar = ({
         {children}
         </>
     );
-};
+});
 
-export default Radium(Navbar);
+export default memo(Navbar);

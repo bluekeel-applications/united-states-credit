@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import ButtonGroup from './ButtonGroup';
 import styles from './FourButton.css.js';
 import Radium from 'radium';
 
-const FourButton = ({ offer, tracking, email }) => (
+const FourButton = Radium(({ offer, tracking, email }) => (
     <div style={styles.main}>
         <div style={styles.header}>
             Multiple sponsored results could be available that suit your needs.
@@ -15,6 +15,6 @@ const FourButton = ({ offer, tracking, email }) => (
             email={email}
         />
     </div>
-);
+));
 
-export default Radium(FourButton);
+export default memo(FourButton);

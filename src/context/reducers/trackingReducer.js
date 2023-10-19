@@ -1,4 +1,4 @@
-import * as Helpers from '@bit/bluekeel.controllers.helpers';
+import * as Helpers from '../../utils/helpers';
 
 const initialTrackingState = {
     auth_group: 'bk',

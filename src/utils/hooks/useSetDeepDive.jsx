@@ -137,6 +137,7 @@ const useSetDeepDive = (vertical, type, record) => {
 	};
 	
 	const checkForDeepDive = () => {
+		console.log('record:', record);
 		if(!!record) {
 			dispatchApp({ type: 'VERTICAL_PICKED', payload: { value: 'direct', crumb: 'Select Interest'}});
 			dispatchApp({ type: 'LOAN_TYPE_PICKED', payload: { value: 'direct', crumb: 'Direct Offer' } });

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './UserSelection.css.js';
 import Radium from 'radium';
 
-const LegalTerms = ({ email, hasInput }) => (
+const LegalTerms = Radium(({ email, hasInput }) => (
     <div style={styles.legalTerms}>
         <div style={styles.termsText}>
             {hasInput ? 
@@ -40,6 +40,6 @@ const LegalTerms = ({ email, hasInput }) => (
             </a>.
         </div>
     </div>
-);
+));
 
-export default Radium(LegalTerms);
+export default memo(LegalTerms);

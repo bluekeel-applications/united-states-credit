@@ -1456,16 +1456,6 @@
     react "^16.13.1"
     react-router-dom "^5.2.0"
 
-"@bit/bluekeel.component-library.loading-redirect@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.cloud/bluekeel.component-library.loading-redirect/-/bluekeel.component-library.loading-redirect-0.0.1.tgz#7c82e5f632f3134857ebb2b650194d7fa8308f7d"
-  integrity sha1-fILl9jLzE0hX67K2UBlNf6gwj30=
-  dependencies:
-    radium "^0.26.0"
-    react "^16.13.1"
-    react-lottie "^1.2.3"
-    react-responsive "^8.1.0"
-
 "@bit/bluekeel.component-library.privacy-policy@^0.0.2":
   version "0.0.2"
   resolved "https://node.bit.cloud/bluekeel.component-library.privacy-policy/-/bluekeel.component-library.privacy-policy-0.0.2.tgz#bd7accecc1a789459be7b928d06a891fc842e2c0"
@@ -1494,13 +1484,6 @@
   version "1.0.0"
   resolved "https://node.bit.cloud/bluekeel.controllers.helpers/-/bluekeel.controllers.helpers-1.0.0.tgz#576e1be6b83e16ddc68ba29c7c74089909e582dd"
   integrity sha1-V24b5rg+Ft3Gi6KcfHQImQnlgt0=
-  dependencies:
-    axios "^0.20.0"
-
-"@bit/bluekeel.controllers.helpers@^1.0.5":
-  version "1.0.6"
-  resolved "https://node.bit.cloud/bluekeel.controllers.helpers/-/bluekeel.controllers.helpers-1.0.6.tgz#780d7745553762c0b5161ba371b547ae80c851e7"
-  integrity sha1-eA13RVU3YsC1FhujcbVHroDIUec=
   dependencies:
     axios "^0.20.0"
 

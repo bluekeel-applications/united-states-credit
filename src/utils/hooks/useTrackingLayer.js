@@ -4,13 +4,13 @@ import {
     ADD_USER_FLOW, 
     INSERT_COMMON_INFO, 
     ADD_SELECTION_LOG 
-} from '../../../../utils/GraphQL/mutations';
+} from '../GraphQL/mutations';
 import { useMutation } from '@apollo/client';
 import firePixelBlueKeel from '../pixels/bluekeelPixel';
 import fireBingPixel from '../pixels/bingPixel';
 import fireAdwordsEvent from '../pixels/adWords';
 import fireTiktokPixel from '../pixels/tiktokPixel';
-import { setCookie, checkCookie } from '@bit/bluekeel.controllers.helpers';
+import { setCookie, checkCookie } from '../helpers';
 
 const useTrackingLayer = (tracking, email, offer) => {
     const [ isDuplicate ] = useState(checkCookie('em_sub'));

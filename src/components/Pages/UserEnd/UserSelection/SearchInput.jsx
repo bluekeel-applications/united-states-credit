@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './UserSelection.css.js';
 import TextField from '@material-ui/core/TextField';
-import { capitalizeValue } from '@bit/bluekeel.controllers.helpers';
+import { capitalizeValue } from '../../../../utils/helpers';
 
 const SearchInput = ({ value, handleChange, name }) => (
     <div style={styles.inputContainer}>
@@ -21,4 +21,4 @@ const SearchInput = ({ value, handleChange, name }) => (
     </div>
 );
 
-export default SearchInput;
+export default memo(SearchInput);

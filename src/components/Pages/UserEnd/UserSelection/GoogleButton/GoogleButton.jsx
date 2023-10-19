@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import styles from './GoogleButtons.css.js';
 
 const GoogleButtons = ({ link, idx, handleClick }) => {
@@ -29,4 +29,4 @@ const GoogleButtons = ({ link, idx, handleClick }) => {
     )
 };
 
-export default GoogleButtons;
+export default memo(GoogleButtons);

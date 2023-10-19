@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useCallback, memo } from 'react';
 import { AppContext } from '../context';
 import Routes from '../Routes';
 import usePushProviders from '../utils/hooks/usePushProviders';
-import LoadingRedirect from '@bit/bluekeel.component-library.loading-redirect';
+import LoadingRedirect from '../components/Shared/LoadingRedirect';
 import Loading from './Shared/Loading';
 import DrawerMenu from './Layout/DrawerMenu';
 import Navbar from '../components/Shared/Navbar';
@@ -12,8 +12,9 @@ import UscLogoGray from '@bit/bluekeel.assets.usc_logo_gray';
 import Footer from '@bit/bluekeel.component-library.footer';
 import Feed from './Layout/Feed';
 import { useHistory, useLocation } from 'react-router-dom';
-import { getCookie, isPch } from '@bit/bluekeel.controllers.helpers';
-import UseSetNewSession from '@bit/bluekeel.controllers.use-set-new-session';
+import { getCookie, isPch } from '../utils/helpers';
+// import UseSetNewSession from '@bit/bluekeel.controllers.use-set-new-session';
+import useSetNewSession from '../utils/hooks/useSetNewSession';
 import Radium from 'radium';
 import Styles from './Styles.css.js';
 import { useMediaQuery } from 'react-responsive';
@@ -27,16 +28,9 @@ const App = () => {
 	const [ showLoading, setLoading ] = useState(true);
     const [ showLoadingPch ] = useState(isPch());
 	const [ animationComplete, setAnimationComplete ] = useState(!showLoadingPch);
-	const { dispatchApp, dispatchTracking } = useContext(AppContext);
+	const { dispatchTracking } = useContext(AppContext);
 	
 	usePushProviders();
-
-	const goHome = () => {
-        // dispatchApp({ type: 'RESTART_SEARCH' });
-        window.scrollTo(0, 0);
-		// history.push('/');
-		window.location.href = 'https://www.unitedstatescredit.com'
-	};
 	
 	const tracking = {
         HSID: myURL.searchParams.get('hsid') || 0,
@@ -69,10 +63,8 @@ const App = () => {
 		// eslint-disable-next-line
 	}, [tracking]);
 
-	const redirectTo = UseSetNewSession({ 
-		tracking, dispatchTracking, dispatchApp, 
-		setLoading, animationComplete 
-    });
+	const turnOffLoading = useCallback(() => {setLoading(false)},[]);
+	const redirectTo = useSetNewSession({ tracking, turnOffLoading, animationComplete });
 
 	useEffect(() => {
 		const isSplit = tracking.SPLIT === 'dynamic';
@@ -88,8 +80,10 @@ const App = () => {
         // eslint-disable-next-line
 	}, [redirectTo, showLoading]);
 
+	const handleFinishedAnimation = useCallback(() => {setAnimationComplete(true)}, []);
+
 	if(showLoadingPch && !animationComplete) {
-		return <LoadingRedirect setComplete={() => setAnimationComplete(true)}/>
+		return <LoadingRedirect setComplete={handleFinishedAnimation}/>;
 	};
 	
 	if(showLoading) {
@@ -102,11 +96,7 @@ const App = () => {
 
 	return (
 		<div key='app-key' style={Styles.app}>
-			<Navbar
-				key='usc-navbar'
-				goHome={goHome}
-				brand={UscFullLogo}
-			>
+			<Navbar key='usc-navbar' brand={UscFullLogo}>
 				<Routes />
 				{location.pathname !== '/rsoc' && <Feed />}
 				<Footer key='usc-footer' domain='UnitedStatesCredit' logo={UscLogoGray}/>

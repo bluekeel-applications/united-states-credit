@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './UserSelection.css.js';
 import Radium from 'radium';
 import LinkButton from './LinkButton';
 
-const QuickLinks = ({ program_id, tracking, email, quickLinks, theme, setOfferGroup }) => {
+const QuickLinks = Radium(({ program_id, tracking, email, quickLinks, theme, setOfferGroup }) => {
 
     // const longListStyle = Object.assign({},
     //     styles['linksContainer'],
@@ -27,6 +27,6 @@ const QuickLinks = ({ program_id, tracking, email, quickLinks, theme, setOfferGr
             )))}
         </div>
     )
-};
+});
 
-export default Radium(QuickLinks);
+export default memo(QuickLinks);

@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, memo } from 'react';
 import { useHistory } from 'react-router-dom';
-import useTrackingLayer from '../utils/useTrackingLayer';
+import useTrackingLayer from '../../../../utils/hooks/useTrackingLayer';
 import styles from './DirectLink.css';
 import Radium from 'radium';
 import { buildFullLink } from './direct-link_utils';
 
-const DirectLink = ({ isRedirection, isSubmission, email, url, jump, tracking, kwd, offer }) => {
+const DirectLink = Radium(({ isRedirection, isSubmission, email, url, jump, tracking, kwd, offer }) => {
     let history = useHistory();
     useTrackingLayer(tracking, email, offer);
     const hasFired = useRef(false);
@@ -38,6 +38,6 @@ const DirectLink = ({ isRedirection, isSubmission, email, url, jump, tracking, k
             </div>
         </div>
     )
-};
+});
 
-export default Radium(DirectLink);
+export default memo(DirectLink);

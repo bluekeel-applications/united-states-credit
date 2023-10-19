@@ -1,5 +1,25 @@
 import gql from 'graphql-tag';
 
+const PCH_USER = gql`
+	query FetchUserInfo($pat: String, $gmt: String) {
+		fetchUserInfo(pat: $pat, gmt: $gmt) {
+			success
+			status
+			message
+			body {
+				EmailAddress
+				Title
+				FirstName
+				LastName
+				Address1
+				City
+				State
+				ZipCode
+			}
+		}
+	}
+`;
+
 const PUSH_PROVIDERS = gql`
 	query FetchPushProviders {
 		fetchPushProviders {
@@ -105,7 +125,7 @@ const GET_OFFER = gql`
         }
     }
 `;
-
+// New
 const GET_OFFER_BY_RECORD = gql`
 	query fetchEndpointByRecord($pid: Int, $name: String) {
         fetchEndpointByRecord(pid: $pid, name: $name) {
@@ -145,7 +165,6 @@ const GET_OFFER_BY_RECORD = gql`
                 }
                 question_text
                 program_id
-                group_id
                 google
             }
         }
@@ -153,6 +172,7 @@ const GET_OFFER_BY_RECORD = gql`
 `;
 
 export {
+    PCH_USER,
     PUSH_PROVIDERS,
 	GET_OFFER_BY_GROUP,
 	GET_OFFER,

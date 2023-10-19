@@ -5,7 +5,7 @@ import firePixelBlueKeel from '../pixels/bluekeelPixel';
 import fireBingPixel from '../pixels/bingPixel';
 import fireTiktokPixel from '../pixels/tiktokPixel';
 import fireAdwordsEvent from '../pixels/adWords';
-import { setCookie, checkCookie } from '@bit/bluekeel.controllers.helpers';
+import { setCookie, checkCookie } from '../helpers';
 
 const useClickSubmit = (tracking, email, shouldExecute) => {
     const [ isDuplicate ] = useState(checkCookie('em_sub'));

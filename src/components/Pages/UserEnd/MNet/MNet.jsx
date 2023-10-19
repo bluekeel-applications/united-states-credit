@@ -1,6 +1,6 @@
 import React, { useRef, useEffect} from 'react';
 import useMNetScript from './useMNetScript';
-import useTrackingLayer from '../utils/useTrackingLayer';
+import useTrackingLayer from '../../../../utils/hooks/useTrackingLayer';
 import styles from './MNet.css.js';
 import Radium from 'radium';
 

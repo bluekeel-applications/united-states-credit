@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Radium from 'radium';
 import styles from './EmailCapture.css.js';
 
-const LegalTerms = ({ disabled }) => {
+const LegalTerms = Radium(({ disabled }) => {
     const [ checked, setChecked ] = useState(!disabled);
 
     useEffect(() => {
@@ -49,6 +49,6 @@ const LegalTerms = ({ disabled }) => {
             </div>
         </div>
     );
-}
+})
 
-export default Radium(LegalTerms);
+export default memo(LegalTerms);

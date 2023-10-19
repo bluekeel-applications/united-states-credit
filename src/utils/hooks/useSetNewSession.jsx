@@ -6,7 +6,7 @@ import usePchLookup from './usePchLookup';
 import useHitStreet from './useHitStreet';
 import useGeoLookup from './useGeoLookup';
 
-const useSetNewSession = ({ tracking, setLoading, animationComplete }) => {
+const useSetNewSession = ({ tracking, turnOffLoading, animationComplete }) => {
 	const { dispatchTracking } = useContext(AppContext);
 	const [ shouldExecute, setShouldExecutePost ] = useState(false);
 	const [ userContext, setUserContext ] = useState(null);
@@ -50,7 +50,7 @@ const useSetNewSession = ({ tracking, setLoading, animationComplete }) => {
 				// Wait until now to set the redirect variable because it triggers route change
 				setRedirection(redirect);
 			};
-			setLoading(false);
+			turnOffLoading();
 		};
 		
 		// eslint-disable-next-line

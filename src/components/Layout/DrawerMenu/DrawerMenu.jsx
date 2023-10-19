@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, memo } from 'react';
 import { AppContext } from '../../../context';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -31,7 +31,7 @@ const DrawerMenu = () => {
         fontSize: '1.5rem',
     };
 
-    const list = () => (
+    const ListComponent = memo(() => (
         <Box
         sx={{ width: 250 }}
         role='presentation'
@@ -102,7 +102,7 @@ const DrawerMenu = () => {
                 </ListItem>
             </List>
         </Box>
-    );
+    ));
 
   return (
     <div>
@@ -111,10 +111,10 @@ const DrawerMenu = () => {
             open={appState.showDrawer}
             onClose={toggleDrawer(false)}
         >
-            {list()}
+            <ListComponent/>
         </Drawer>
     </div>
     );
 };
 
-export default DrawerMenu;
+export default memo(DrawerMenu);

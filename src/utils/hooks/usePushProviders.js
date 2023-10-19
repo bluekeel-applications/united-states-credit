@@ -1,5 +1,5 @@
 import { useEffect} from 'react';
-import { PUSH_PROVIDERS } from '../utils/GraphQL/queries';
+import { PUSH_PROVIDERS } from '../GraphQL/queries';
 import { useQuery } from '@apollo/client';
 
 const getRandomInt = (min, max) => {

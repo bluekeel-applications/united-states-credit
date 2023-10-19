@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Lottie from 'react-lottie';
 import animationData from './searching.json';
 import styles from './LoadingSearch.css.js';
 import Radium from 'radium';
 
-const LoadingSearch = ({ onComplete }) => {
+const LoadingSearch = Radium(({ onComplete }) => {
 
     const defaultOptions = {
         loop: false,
@@ -28,6 +28,6 @@ const LoadingSearch = ({ onComplete }) => {
             </div>
         </div>
     );
-}
+})
 
-export default Radium(LoadingSearch);
+export default memo(LoadingSearch);

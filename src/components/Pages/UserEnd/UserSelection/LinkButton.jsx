@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
     pickUscButtonColor, 
     pickPcmButtonColor,
     pickWikiButtonColor,
-    flattenLongString 
-} from '@bit/bluekeel.controllers.helpers';
+    flattenLongString,
+    buildKeywordLink
+} from '../../../../utils/helpers';
 import { GET_OFFER_BY_GROUP } from '../../../../utils/GraphQL/queries';
 import Radium from 'radium';
 import GoogleButton from './GoogleButton';
@@ -13,14 +14,13 @@ import { useQuery } from '@apollo/client';
 import useClickSubmit from '../../../../utils/hooks/useClickSubmit';
 import useInsightSubmit from '../../../../utils/hooks/useInsightSubmit';
 import styles from './UserSelection.css.js';
-import { buildKeywordLink } from '../../../../utils/helpers';
 
 const flattenSystem1String = (string) => {
     const stringCleaned = string.replace(/\s/g, '+');
     return stringCleaned.toLowerCase();
 };
 
-const LinkButton = ({ program_id, link, tracking, email, idx, theme, setOfferGroup }) => {
+const LinkButton = Radium(({ program_id, link, tracking, email, idx, theme, setOfferGroup }) => {
     let history = useHistory();
     const [ isHovering, setHovering ] = useState(false);
     const [ shouldExecute, setExecute ] = useState(false);
@@ -119,6 +119,6 @@ const LinkButton = ({ program_id, link, tracking, email, idx, theme, setOfferGro
             </div>            
         </button>
     )
-};
+});
 
-export default Radium(LinkButton);
+export default memo(LinkButton);

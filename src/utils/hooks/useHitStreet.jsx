@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { setCookie } from '@bit/bluekeel.controllers.helpers';
+import { setCookie } from '../helpers';
 const cancelToken = axios.CancelToken;
 const source = cancelToken.source();
 

@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { Component, useState, useEffect, memo } from 'react';
 import styles from './UserSelection.css.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import QuickLinks from './QuickLinks';
@@ -8,8 +8,7 @@ import LoanArticle from './LoanArticle';
 import { useHistory } from 'react-router-dom';
 import useClickSubmit from '../../../../utils/hooks/useClickSubmit.js';
 import useInsightSubmit from '../../../../utils/hooks/useInsightSubmit.js';
-import { flattenLongString } from '@bit/bluekeel.controllers.helpers';
-import { buildKeywordLink } from '../../../../utils/helpers.js';
+import { buildKeywordLink, flattenLongString } from '../../../../utils/helpers.js';
 import Radium from 'radium';
 import OfferGroup from '../OfferGroup';
 import { useMediaQuery } from 'react-responsive';
@@ -43,7 +42,7 @@ class GoogleAd extends Component {
     }
 };
 
-const UserSelection = ({ theme, offer, tracking, email }) => {
+const UserSelection = Radium(({ theme, offer, tracking, email }) => {
     let history = useHistory();
     const [ showAd, setShowAd ] = useState(false);
     const [ showArticle, setShowArticle ] = useState(false);
@@ -188,6 +187,6 @@ const UserSelection = ({ theme, offer, tracking, email }) => {
             {showArticle && <LoanArticle />}
         </div>
     )
-};
+});
 
-export default Radium(UserSelection);
+export default memo(UserSelection);
