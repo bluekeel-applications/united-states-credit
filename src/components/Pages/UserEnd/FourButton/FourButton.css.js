@@ -1,4 +1,4 @@
-export default {
+const styles = {
     loadingContainer: {
         minHeight: '500px',
         display: 'flex',
@@ -87,4 +87,5 @@ export default {
         fontSize: '1.25rem',
         fontWeight: '400'
     }
-}
+};
+export default styles;

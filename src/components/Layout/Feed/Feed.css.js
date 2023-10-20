@@ -1,4 +1,4 @@
-export default {
+const styles = {
     feed: {
         display: 'flex',
         flexDirection: 'column',
@@ -50,4 +50,5 @@ export default {
         contentTitleSpan: { color: '#f80000', fontFamily: 'Roboto' },
         cardTitle: { color: '#092c7e', fontFamily: 'Roboto' }
     },
-}
+};
+export default styles;

@@ -1,4 +1,4 @@
-export default {
+const styles = {
     container: {
         display: 'flex',
         flexDirection: 'column',
@@ -32,4 +32,5 @@ export default {
     lottie: {
         minWidth: '100vw'
     }
-}
+};
+export default styles;

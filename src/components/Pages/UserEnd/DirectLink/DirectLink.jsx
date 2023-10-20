@@ -1,12 +1,12 @@
 import React, { useRef, memo } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useTrackingLayer from '../../../../utils/hooks/useTrackingLayer';
 import styles from './DirectLink.css';
 import Radium from 'radium';
 import { buildFullLink } from './direct-link_utils';
 
 const DirectLink = Radium(({ isRedirection, isSubmission, email, url, jump, tracking, kwd, offer }) => {
-    let history = useHistory();
+    let navigate = useNavigate();
     useTrackingLayer(tracking, email, offer);
     const hasFired = useRef(false);
 
@@ -22,7 +22,7 @@ const DirectLink = Radium(({ isRedirection, isSubmission, email, url, jump, trac
                 hasFired.current = true;
                 return;
             };
-            history.push('/verticals');
+            navigate('/verticals');
             hasFired.current = true;
             return;
         } else {

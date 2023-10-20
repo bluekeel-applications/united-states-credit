@@ -1,6 +1,6 @@
 import './overrides.css';
 
-export default {
+const styles = {
     app: {
         fontFamily: 'Verlag A, Verlag B, aktiv-grotesk, sans-serif',
         textAlign: 'center',
@@ -20,3 +20,4 @@ export default {
         width: '100vw'
     },
 };
+export default styles;

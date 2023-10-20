@@ -1,4 +1,4 @@
-export default {
+const styles = {
     component: {
         display: 'flex',
         flexDirection: 'column',
@@ -136,4 +136,5 @@ export default {
         height: '100%',
         borderRadius: '10px'
     }
-}
+};
+export default styles;

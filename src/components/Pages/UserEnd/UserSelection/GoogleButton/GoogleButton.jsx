@@ -3,7 +3,7 @@ import styles from './GoogleButtons.css.js';
 
 const GoogleButtons = ({ link, idx, handleClick }) => {
     const [ isHovering, setHovering ] = useState(false);
-
+console.log('rendering google button');
     const color = link.button_color || 'FFFFFF';
     const textColor = link.text_color || 'black';
 

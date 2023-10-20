@@ -1,75 +1,67 @@
-import React, { useEffect, Profiler, memo } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, memo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DirectLink from './DirectLink';
 import UserSelection from './UserSelection';
 import MNet from './MNet';
 import FourButton from './FourButton';
 
-const OfferPage = ({ offer, tracking, email, isRedirect, isSubmission, theme, onRender }) => {
-    const history = useHistory();
+const OfferPage = ({ offer, tracking, email, isRedirect, isSubmission, theme }) => {
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!offer) {
-            history.push('/');
+            navigate('/');
             return;
         };
-    }, [offer, history]);
+    // eslint-disable-next-line
+    }, [offer]);
 
     const routedOfferPage = () => {
-        console.log('setting offer page:', offer.offer_page);
         switch (offer.offer_page) {
             case 'direct_link':
                 return (
-                    <Profiler onRender={onRender} id='Direct'>
-                        <DirectLink
-                            isRedirection={isRedirect}
-                            isSubmission={isSubmission}
-                            url={offer['url']}
-                            jump={offer['jump']}
-                            tracking={tracking}
-                            email={email}
-                            offer={offer}
-                        />
-                    </Profiler>
+                    <DirectLink
+                        isRedirection={isRedirect}
+                        isSubmission={isSubmission}
+                        url={offer['url']}
+                        jump={offer['jump']}
+                        tracking={tracking}
+                        email={email}
+                        offer={offer}
+                    />
                 );
 
             case 'selection':
                 return (
-                    <Profiler onRender={onRender} id='Selection'>
-                        <UserSelection 
-                            theme={theme}
-                            offer={offer}
-                            tracking={tracking}
-                            email={email}
-                        />
-                    </Profiler>
+                    <UserSelection 
+                        theme={theme}
+                        offer={offer}
+                        tracking={tracking}
+                        email={email}
+                    />
                 );
 
             case 'four_button':
                 return (
-                    <Profiler onRender={onRender} id='Four'>
-                        <FourButton 
-                            offer={offer}
-                            tracking={tracking}
-                            email={email}
-                        />
-                    </Profiler>
+                    <FourButton 
+                        offer={offer}
+                        tracking={tracking}
+                        email={email}
+                    />
                 );
 
             case 'mNet':
                 return (
-                    <Profiler onRender={onRender} id='mNet'>
-                        <MNet 
-                            user={{
-                                sid: tracking['sid'],
-                                eid: tracking['eid'],
-                                hsid: tracking['hsid'],
-                                page: offer['url']
-                            }}
-                            tracking={tracking}
-                            email={email}
-                        />
-                    </Profiler>
+                    <MNet 
+                        user={{
+                            sid: tracking['sid'],
+                            eid: tracking['eid'],
+                            hsid: tracking['hsid'],
+                            page: offer['url']
+                        }}
+                        tracking={tracking}
+                        email={email}
+                    />
                 );
 
             default:

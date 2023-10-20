@@ -1,4 +1,4 @@
-export default {
+const styles = {
     contentContainer: {
         width: '100%',
         marginRight: 'auto',
@@ -156,4 +156,5 @@ export default {
     termsLinks: {
         textDecoration: 'underline'
     }
-}
+};
+export default styles;

@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect, useCallback, memo } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { AppContext } from '../context';
-import Routes from '../Routes';
+import RouteContainer from '../RouteContainer';
 import usePushProviders from '../utils/hooks/usePushProviders';
 import LoadingRedirect from '../components/Shared/LoadingRedirect';
 import Loading from './Shared/Loading';
@@ -9,9 +9,9 @@ import Navbar from '../components/Shared/Navbar';
 import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
 // import UscBlogLogo from '@bit/bluekeel.assets.usc_blog_logo';
 import UscLogoGray from '@bit/bluekeel.assets.usc_logo_gray';
-import Footer from '@bit/bluekeel.component-library.footer';
+import Footer from './Layout/Footer';
 import Feed from './Layout/Feed';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getCookie, isPch } from '../utils/helpers';
 // import UseSetNewSession from '@bit/bluekeel.controllers.use-set-new-session';
 import useSetNewSession from '../utils/hooks/useSetNewSession';
@@ -21,7 +21,7 @@ import { useMediaQuery } from 'react-responsive';
 
 const App = () => {
 	const isMobile = useMediaQuery({ maxWidth: 1000 });
-	let history = useHistory();
+	let navigate = useNavigate();
 	const location = useLocation();
 	const [ myURL ] = useState(new URL(window.location.href));
 	// const [ showDrawer, toggleDrawer ] = useState(false);
@@ -71,11 +71,11 @@ const App = () => {
 		// If we want it to be dynamic, and is desktop - send to rsoc with params
 		if(isSplit && !isMobile) {
 			const rsocRedirect = `/rsoc${myURL.search}`;
-			history.push(rsocRedirect);
+			navigate(rsocRedirect);
 			return;
 		};
         if(!!redirectTo && !showLoading) {
-            history.push(redirectTo);
+            navigate(redirectTo);
         };
         // eslint-disable-next-line
 	}, [redirectTo, showLoading]);
@@ -97,7 +97,7 @@ const App = () => {
 	return (
 		<div key='app-key' style={Styles.app}>
 			<Navbar key='usc-navbar' brand={UscFullLogo}>
-				<Routes />
+				<RouteContainer />
 				{location.pathname !== '/rsoc' && <Feed />}
 				<Footer key='usc-footer' domain='UnitedStatesCredit' logo={UscLogoGray}/>
 			</Navbar>

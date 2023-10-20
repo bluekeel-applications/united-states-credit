@@ -5,7 +5,7 @@ import popular from './popular.json';
 import reviews from './reviews.json';
 import tips from './tips.json';
 
-export default {
+export {
     credit,
     featured,
     latest,

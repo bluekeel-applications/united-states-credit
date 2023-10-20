@@ -1,6 +1,5 @@
 import React, { useState, memo } from 'react';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Radium from 'radium';
 import styles from './EmailCapture.css.js';
 
@@ -27,25 +26,25 @@ const LegalTerms = Radium(({ disabled }) => {
             />
             <div key='terms-text' style={styles.termsText}>
                 I hereby declare that I am a U.S. resident over the age of 18 and I agree to this site's
-                <Link 
-                    key='terms-link-1'
+                <a 
+                    key='terms-policy'
                     style={styles.termsLinks} 
-                    to='/terms' 
+                    href='https://unitedstatescredit.com/terms' 
                     rel='noopener noreferrer' 
                     target='_blank'
                 >
-                    {` Terms & Conditions `}
-                </Link> 
+                    Terms &amp; Conditions
+                </a> 
                 and 
-                <Link 
-                    key='terms-link-2'
-                    style={styles.termsLinks} 
-                    to='/privacy' 
+                <a 
+                    key='terms-privacy-policy-1'
+                    style={styles.termsLinks}
+                    href='https://unitedstatescredit.com/privacy' 
                     rel='noopener noreferrer' 
                     target='_blank'
                 >
-                    {` Privacy Policy `}
-                </Link>.
+                    Privacy Policy
+                </a>.
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-export default {
+const styles = {
     loadingContainer: {
         position: 'fixed',
         display: 'block',
@@ -18,4 +18,5 @@ export default {
         left: '50%',
         transform: 'translate(-50%,-50%)',
     },
-}
+};
+export default styles;

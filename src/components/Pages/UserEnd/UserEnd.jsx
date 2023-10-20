@@ -7,10 +7,10 @@ import EmailCapture from './EmailCapture';
 import Lincx from './Lincx';
 import OfferPage from './OfferPage';
 import { checkCookie } from '../../../utils/helpers';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const UserEnd = ({ onRender, theme, tracking }) => {
-    let history = useHistory();
+const UserEnd = ({ theme, tracking }) => {
+    let navigate = useNavigate();
     const [ duplicateUser ] = useState(checkCookie('em_sub'));
     const [ pageView, setPageView ] = useState('email');
     const [ animationPlayed, setAnimationPlayed ] = useState(false);
@@ -69,20 +69,20 @@ const UserEnd = ({ onRender, theme, tracking }) => {
         if(data && !offerFound && !error) {
             const offer = data.fetchEndpointByRecord.body;
             console.log('record:', offer);
-            // if(!hasFired.current) {
-            //     addTagToServiceEndpointLog({ 
-            //         variables: {
-            //             service_endpoint: {
-            //                 domain_key: offer.domain_key, 
-            //                 record_name: tracking.record, 
-            //                 endpoint_id: offer.id, 
-            //                 clickId: Number(tracking['hsid'])
-            //             }
-            //         }
-            //     });
-            // };
-            // setStateOffer(offer);
-            // checkForDup(offer['offer_page']);
+            if(!hasFired.current) {
+                addTagToServiceEndpointLog({ 
+                    variables: {
+                        service_endpoint: {
+                            domain_key: offer.domain_key, 
+                            record_name: tracking.record, 
+                            endpoint_id: offer.id, 
+                            clickId: Number(tracking['hsid'])
+                        }
+                    }
+                });
+            };
+            setStateOffer(offer);
+            checkForDup(offer['offer_page']);
 		};
 		if(error) {
 			console.error('ERROR fetching Record:', error);
@@ -151,7 +151,7 @@ const UserEnd = ({ onRender, theme, tracking }) => {
     useEffect(() => {
         if(!tracking['record'] && !tracking['loan_type']) {
             console.log('No offer variables - going to start');
-            history.push('/');
+            navigate('/');
         };
         // eslint-disable-next-line
     },[tracking['record'], tracking['loan_type']]);
@@ -164,29 +164,28 @@ const UserEnd = ({ onRender, theme, tracking }) => {
         return <Lincx tracking={tracking} email={emailValue} />;
     };
 
-    return (null
-        // <>
-        //     {pageView === 'email' && 
-        //         <EmailCapture 
-        //             email={emailValue}
-        //             setEmail={setEmailValue}
-        //             setPage={setPageView}
-        //             setSubmission={setAsSubmission}
-        //             theme={theme}
-        //         />
-        //     }
-        //     {pageView === 'offer' && 
-        //         <OfferPage
-        //             email={emailValue} 
-        //             offer={offerFound}
-        //             tracking={tracking}
-        //             isSubmission={isSubmission}
-        //             isRedirect={isRedirect}
-        //             theme={theme}
-        //             onRender={onRender}
-        //         />
-        //     }
-        // </>
+    return (
+        <>
+            {pageView === 'email' && 
+                <EmailCapture 
+                    email={emailValue}
+                    setEmail={setEmailValue}
+                    setPage={setPageView}
+                    setSubmission={setAsSubmission}
+                    theme={theme}
+                />
+            }
+            {pageView === 'offer' && 
+                <OfferPage
+                    email={emailValue} 
+                    offer={offerFound}
+                    tracking={tracking}
+                    isSubmission={isSubmission}
+                    isRedirect={isRedirect}
+                    theme={theme}
+                />
+            }
+        </>
     )
 };
 

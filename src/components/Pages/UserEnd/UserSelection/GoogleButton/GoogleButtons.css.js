@@ -1,6 +1,6 @@
 import './GoogleButton.css';
 
-export default {
+const styles = {
     pointerContainer: {
         margin: '5px 20px',
         padding: '15px',
@@ -43,3 +43,4 @@ export default {
         fontSize: '1.6rem',
     },
 };
+export default styles;

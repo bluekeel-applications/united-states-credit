@@ -6,10 +6,10 @@ import { buildFullURL, setDefaultData } from './utils/helpers';
 import Loading from '../../Shared/Loading';
 import System1Page from './System1Page';
 import System1Static from './System1Static';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const System1 = () => {
-    const history = useHistory();
+    const history = useNavigate();
     const myURL = new URL(window.location.href);
     const { trackingState, dispatchApp } = useContext(AppContext);
     const [ showDynamicPage, setShowDynamicPage ] = useState(false);

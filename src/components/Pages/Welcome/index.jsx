@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../../context';
-import StartButton from '@bit/bluekeel.component-library.start-button';
+import StartButton from '../../Layout/StartButton';
 import Radium from 'radium';
 import styles from './Welcome.css.js';
 import { useMediaQuery } from 'react-responsive';
@@ -62,10 +62,7 @@ const StartButtonComponent = () => {
 		<div style={styles.welcomeContainer}>
             <span style={titleTextStyle}>FIND THE RIGHT CREDIT FOR YOU!</span>
 			<div style={styles.startButtonContainer}>
-				<StartButton 
-					showNav={showNavStart}
-					theme='usc'
-				/>
+				<StartButton showNav={showNavStart}/>
 			</div>
 		</div>
     );

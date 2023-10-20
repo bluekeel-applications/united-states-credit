@@ -1,4 +1,4 @@
-export default {
+const styles = {
     component: {
         display: 'flex',
         flexDirection: 'column',
@@ -141,3 +141,4 @@ export default {
         }
     }
 };
+export default styles;

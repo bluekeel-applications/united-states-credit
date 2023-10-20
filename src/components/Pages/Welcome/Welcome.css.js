@@ -1,4 +1,4 @@
-export default {
+const styles = {
     welcomeContainer: {
         width: '100%',
         display: 'flex',
@@ -23,4 +23,5 @@ export default {
         justifyContent: 'center',
         alignItems: 'center'
     }
-}
+};
+export default styles;

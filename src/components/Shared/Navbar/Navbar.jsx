@@ -7,7 +7,7 @@ import styles from './Navbar.css.js';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Radium from 'radium';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import SearchBar from './SearchBar.jsx';
 
 // const ElevationScroll = (props) => {
@@ -27,7 +27,7 @@ const Navbar = Radium(({
     brand,
     children
 }) => {
-    let history = useHistory();
+    let navigate = useNavigate();
     const { dispatchApp } = useContext(AppContext);
     const [ isHovering, setHovering ] = useState(false);
     
@@ -43,7 +43,7 @@ const Navbar = Radium(({
 
     const goHome = () => {
         window.scrollTo(0, 0);
-		history.push('/');
+		navigate('/');
 	};
 
 console.log('rendering navbar');

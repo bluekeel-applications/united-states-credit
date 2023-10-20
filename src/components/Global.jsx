@@ -1,26 +1,18 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
-import App from './App';
 import { AppContextProvider } from '../context';
+import { BrowserRouter } from 'react-router-dom';
+// import { createBrowserHistory } from 'history';
+import App from './App';
 import useApolloClient from '../utils/hooks/useApolloClient';
 import { ApolloProvider } from '@apollo/react-hooks';
-import useSentry from '@bit/bluekeel.hookz.use-sentry';
-import * as Sentry from '@sentry/react';
 import Radium, { StyleRoot } from 'radium';
 // fontawesome
 import initFontAwesome from '../utils/initFontAwesome';
 initFontAwesome();
 
-const history = createBrowserHistory();
+// const history = createBrowserHistory();
 
 const Global = () => {
-	useSentry({
-		history,
-		dsn: 'https://e7b6d13933254ee29da1019e52d8447c@o440028.ingest.sentry.io/5407883',
-		page: 'united-states-credit',
-		version: '1.0.0'
-	});
 	// Prod now is running
 	// const apolloUri = 'https://28ohcsi2ph.execute-api.us-east-1.amazonaws.com/running/graphql';
 	// const apolloUri = 'https://99cdyp4f29.execute-api.us-east-1.amazonaws.com/preprod/graphql';
@@ -36,17 +28,17 @@ const Global = () => {
 	const WrappedApp = Radium(App);
 
 	return (
-		<ApolloProvider client={ client }>
+		<BrowserRouter>
 			<AppContextProvider>
-				<Router history={ history }>
+				<ApolloProvider client={ client }>
 					<StyleRoot>
 						<WrappedApp />
 					</StyleRoot>
-				</Router>
-			</AppContextProvider>
-		</ApolloProvider>
+				</ApolloProvider>
+			</AppContextProvider>		
+		</BrowserRouter>
 	);
 };
 
 
-export default Sentry.withProfiler(Global, { name: 'UnitedStatesCredit', includeUpdates: false });
+export default Global;

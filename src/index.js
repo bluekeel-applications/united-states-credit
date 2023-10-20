@@ -5,7 +5,6 @@ import * as serviceWorker from './serviceWorkerRegistration';
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
-
 import './stylesheets/main.scss';
 
 ReactDOM.render(<Global />, document.getElementById('root'));

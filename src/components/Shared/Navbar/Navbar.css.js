@@ -1,4 +1,4 @@
-export default {
+const styles = {
     navbar: {
         height: '60px',
         display: 'inline-flex',
@@ -98,4 +98,5 @@ export default {
         margin: '0 10px',
         fontSize: '1.5rem',
     }
-}
+};
+export default styles;

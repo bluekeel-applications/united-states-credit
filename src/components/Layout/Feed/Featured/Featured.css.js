@@ -1,4 +1,4 @@
-export default {
+const styles = {
     component: {
         display: 'flex',
         width: '100vw',
@@ -128,4 +128,5 @@ export default {
             textDecoration: 'none'
         }
     }
-}
+};
+export default styles;

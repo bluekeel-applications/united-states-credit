@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useClickSubmit from '../../../../utils/hooks/useClickSubmit';
 import { buildKeywordLink, flattenLongString } from '../../../../utils/helpers';
@@ -8,7 +8,7 @@ import Loading from '../../../Shared/Loading';
 import Radium from 'radium';
 
 const ButtonGroup = Radium(({ buttons, tracking, email }) => {
-    let history = useHistory();
+    let navigate = useNavigate();
     const [ shouldExecute, setExecute ] = useState(false);
     const [ loading, setLoading ] = useState(false);
 
@@ -24,7 +24,7 @@ const ButtonGroup = Radium(({ buttons, tracking, email }) => {
         if (jumpBehind && jumpBehind !== 'N/A') {
             window.location.href = jumpBehind;
         } else {
-            history.push('/verticals');
+            navigate('/verticals');
         };
     };
 

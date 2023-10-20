@@ -5,7 +5,7 @@ import QuickLinks from './QuickLinks';
 import LegalTerms from './LegalTerms';
 import SearchInput from './SearchInput';
 import LoanArticle from './LoanArticle';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useClickSubmit from '../../../../utils/hooks/useClickSubmit.js';
 import useInsightSubmit from '../../../../utils/hooks/useInsightSubmit.js';
 import { buildKeywordLink, flattenLongString } from '../../../../utils/helpers.js';
@@ -43,7 +43,7 @@ class GoogleAd extends Component {
 };
 
 const UserSelection = Radium(({ theme, offer, tracking, email }) => {
-    let history = useHistory();
+    let navigate = useNavigate();
     const [ showAd, setShowAd ] = useState(false);
     const [ showArticle, setShowArticle ] = useState(false);
     const [ disabled, setDisabledState ] = useState(true);
@@ -94,7 +94,7 @@ const UserSelection = Radium(({ theme, offer, tracking, email }) => {
         if (jumpBehind && jumpBehind !== 'N/A') {
             window.location.href = jumpBehind;
         } else {
-            history.push('/verticals');
+            navigate('/verticals');
         };      
     };
 

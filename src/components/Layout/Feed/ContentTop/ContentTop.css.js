@@ -1,4 +1,4 @@
-export default {
+const styles = {
     container: {
         display: 'flex',
         flexDirection: 'column',
@@ -20,4 +20,5 @@ export default {
         maxWidth: '1200px',
         padding: '0 15px'
     }
-}
+};
+export default styles;

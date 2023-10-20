@@ -1,4 +1,4 @@
-export default {
+const styles = {
     main: {
         width: '100vw',
         maxWidth: '100vw',
@@ -28,4 +28,5 @@ export default {
             fontSize: '1.25rem'
         }
     }
-}
+};
+export default styles;

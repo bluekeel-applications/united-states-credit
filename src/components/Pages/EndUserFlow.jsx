@@ -1,11 +1,12 @@
-import React, { useContext, Profiler } from 'react';
+import React, { useContext } from 'react';
+// import React, { useContext, Profiler } from 'react';
 import { AppContext } from '../../context';
-// import { useHistory } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 // import UserEnd from '@bit/bluekeel.controllers.user-end';
 import UserEnd from './UserEnd';
 
 const EndUserFlow = () => {
-    // let history = useHistory();
+    // let history = useNavigate();
     const { appState, trackingState } = useContext(AppContext);
     // const selectedVertical = appState['vertical'];
     // const isRedirection = appState['redirection'];
@@ -16,7 +17,7 @@ const EndUserFlow = () => {
     //         (selectedVertical === 'direct' && !isRedirection) ||
     //         !trackingState['hsid'] || trackingState['hsid'] === '0'
     //     ) {
-    //         history.push('/');
+    //         navigate('/');
     //     };
     //     // eslint-disable-next-line
     // },[selectedVertical, isRedirection]); 
@@ -50,17 +51,18 @@ const EndUserFlow = () => {
         record: trackingState['record'] || null
     };
 
-    const onRender = (id, phase, actualDuration, baseDuration) => {
-        const tableData = {
-            Component: id,
-            Phase: phase,
-            Actual: actualDuration,
-            Base: baseDuration
-        };
-        console.table(tableData);
-    };
+    // const onRender = (id, phase, actualDuration, baseDuration) => {
+    //     const tableData = {
+    //         Component: id,
+    //         Phase: phase,
+    //         Actual: actualDuration,
+    //         Base: baseDuration
+    //     };
+    //     console.table(tableData);
+    // };
 
-    return <Profiler id="UserEnd" onRender={onRender}><UserEnd onRender={onRender} tracking={tracking} theme='usc' /></Profiler>;
+    // return <Profiler id="UserEnd" onRender={onRender}><UserEnd tracking={tracking} theme='usc' /></Profiler>;
+    return <UserEnd tracking={tracking} theme='usc' />;
 };
 
 export default EndUserFlow;

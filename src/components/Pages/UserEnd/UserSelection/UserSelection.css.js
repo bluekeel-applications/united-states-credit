@@ -1,4 +1,4 @@
-export default {
+const styles = {
     mainContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -224,3 +224,4 @@ export default {
         backgroundColor: 'rgb(39,112,197)'
     }
 };
+export default styles;

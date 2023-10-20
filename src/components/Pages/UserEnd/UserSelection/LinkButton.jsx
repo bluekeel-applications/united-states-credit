@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
     pickUscButtonColor, 
     pickPcmButtonColor,
@@ -21,7 +21,7 @@ const flattenSystem1String = (string) => {
 };
 
 const LinkButton = Radium(({ program_id, link, tracking, email, idx, theme, setOfferGroup }) => {
-    let history = useHistory();
+    let navigate = useNavigate();
     const [ isHovering, setHovering ] = useState(false);
     const [ shouldExecute, setExecute ] = useState(false);
     const [ offerGroupFound, setOffer ] = useState(null);
@@ -63,7 +63,7 @@ const LinkButton = Radium(({ program_id, link, tracking, email, idx, theme, setO
         if (jumpBehind && jumpBehind !== 'N/A') {
             window.location.href = jumpBehind;
         } else {
-            history.push('/verticals');
+            navigate('/verticals');
         };
     };
 
