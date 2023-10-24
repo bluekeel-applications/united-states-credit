@@ -1,5 +1,5 @@
-import UscFlagRight from '@bit/bluekeel.assets.usc-flag-right';
-import UscFlagLeft from '@bit/bluekeel.assets.usc-flag-left';
+import UscFlagRight from '../../assets/Images/flag_right.png';
+import UscFlagLeft from '../../assets/Images/flag_left.png';
 
 const styles = {
     wrapper: {

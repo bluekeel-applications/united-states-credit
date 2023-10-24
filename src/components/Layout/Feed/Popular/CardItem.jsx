@@ -1,7 +1,7 @@
 import React from 'react';
 import { getSrcFromHtml, trimSnippet } from '../feed-toolz';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardContent from '@mui/material//CardContent';
 import Radium from 'radium';
 import styles from './Popular.css.js';
 

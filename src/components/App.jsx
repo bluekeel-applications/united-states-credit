@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useContext, useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { AppContext } from '../context';
 import RouteContainer from '../RouteContainer';
 import usePushProviders from '../utils/hooks/usePushProviders';
@@ -6,11 +6,8 @@ import LoadingRedirect from '../components/Shared/LoadingRedirect';
 import Loading from './Shared/Loading';
 import DrawerMenu from './Layout/DrawerMenu';
 import Navbar from '../components/Shared/Navbar';
-import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
-// import UscBlogLogo from '@bit/bluekeel.assets.usc_blog_logo';
-import UscLogoGray from '@bit/bluekeel.assets.usc_logo_gray';
 import Footer from './Layout/Footer';
-import Feed from './Layout/Feed';
+// import Feed from './Layout/Feed';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getCookie, isPch } from '../utils/helpers';
 // import UseSetNewSession from '@bit/bluekeel.controllers.use-set-new-session';
@@ -18,6 +15,8 @@ import useSetNewSession from '../utils/hooks/useSetNewSession';
 import Radium from 'radium';
 import Styles from './Styles.css.js';
 import { useMediaQuery } from 'react-responsive';
+
+const Feed = lazy(() => import('./Layout/Feed'));
 
 const App = () => {
 	const isMobile = useMediaQuery({ maxWidth: 1000 });
@@ -96,11 +95,10 @@ const App = () => {
 
 	return (
 		<div key='app-key' style={Styles.app}>
-			<Navbar key='usc-navbar' brand={UscFullLogo}>
-				<RouteContainer />
-				{location.pathname !== '/rsoc' && <Feed />}
-				<Footer key='usc-footer' domain='UnitedStatesCredit' logo={UscLogoGray}/>
-			</Navbar>
+			<Navbar />
+			<RouteContainer />
+			{location.pathname !== '/rsoc' && <Suspense fallback={<Loading/>}><Feed /></Suspense>}
+			<Footer />
 			<DrawerMenu />
 		</div>
 	);

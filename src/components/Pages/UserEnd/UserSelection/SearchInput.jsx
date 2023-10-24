@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import styles from './UserSelection.css.js';
-import TextField from '@material-ui/core/TextField';
+import TextField from '@mui/material/TextField';
 import { capitalizeValue } from '../../../../utils/helpers';
 
 const SearchInput = ({ value, handleChange, name }) => (

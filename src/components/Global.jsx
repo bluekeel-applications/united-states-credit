@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 // import { createBrowserHistory } from 'history';
 import App from './App';
 import useApolloClient from '../utils/hooks/useApolloClient';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 import Radium, { StyleRoot } from 'radium';
 // fontawesome
 import initFontAwesome from '../utils/initFontAwesome';

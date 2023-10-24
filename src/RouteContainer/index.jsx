@@ -1,37 +1,36 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import UscFullLogo from '@bit/bluekeel.assets.usc_full_logo';
 import Radium from 'radium';
-// import Loading from '../components/Shared/Loading';
+import Loading from '../components/Shared/Loading';
 
 import Welcome from '../components/Pages/Welcome';
-import PrivacyPolicy from '../components/Shared/PrivacyPolicy';
-import TermConditions from '../components/Shared/TermsConditions';
-import EndUserFlow from '../components/Pages/EndUserFlow';
+// import PrivacyPolicy from '../components/Shared/PrivacyPolicy';
+// import TermConditions from '../components/Shared/TermsConditions';
+// import EndUserFlow from '../components/Pages/EndUserFlow';
 import FlowWrapper from './FlowWrapper';
-import DuplicateCheck from '../components/Pages/DuplicateCheck';
-import System1 from '../components/Pages/System1';
-// const PrivacyPolicy = lazy(() => import('@bit/bluekeel.component-library.privacy-policy'));
-// const TermConditions = lazy(() => import('@bit/bluekeel.component-library.term-conditions'));
-// const EndUserFlow = lazy(() => import('../components/Pages/EndUserFlow'));
-// const RouteWrapper = lazy(() => import('./RouteWrapper'));
-// const DuplicateCheck = lazy(() => import('../components/Pages/DuplicateCheck'));
-// const System1 = lazy(() => import('../components/Pages/System1'));
+// import DuplicateCheck from '../components/Pages/DuplicateCheck';
+// import System1 from '../components/Pages/System1';
+const PrivacyPolicy = lazy(() => import('../components/Shared/PrivacyPolicy'));
+const TermConditions = lazy(() => import('../components/Shared/TermsConditions'));
+const EndUserFlow = lazy(() => import('../components/Pages/EndUserFlow'));
+// const FlowWrapper = lazy(() => import('./FlowWrapper'));
+const DuplicateCheck = lazy(() => import('../components/Pages/DuplicateCheck'));
+const System1 = lazy(() => import('../components/Pages/System1'));
 
 const RouteContainer = () => (
 
-        // <Suspense fallback={<Loading />}>
-            <FlowWrapper>
+        <FlowWrapper>
+            <Suspense fallback={<Loading />}>
                 <Routes>
                     <Route path='/' element={<Welcome />}/>
-                    <Route path='/privacy' element={<PrivacyPolicy domain='UnitedStatesCredit.com' logo={UscFullLogo}/>}/>
-                    <Route path='/terms' element={<TermConditions domain='UnitedStatesCredit.com' logo={UscFullLogo}/>}/>
+                    <Route path='/privacy' element={<PrivacyPolicy />}/>
+                    <Route path='/terms' element={<TermConditions />}/>
                     <Route path='/email_optin' element={<EndUserFlow />}/>
                     <Route path='/duplicate_check' element={<DuplicateCheck />}/>
                     <Route path='/rsoc' element={<System1 />}/>
                 </Routes>
-            </FlowWrapper> 
-        // </Suspense>
+            </Suspense>
+        </FlowWrapper> 
 );
 
 export default Radium(RouteContainer);

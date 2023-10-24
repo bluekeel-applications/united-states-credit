@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchPad from '@bit/bluekeel.feed.search_pad';
+import SearchPad from '../../../../assets/Images/search_pad.jpg';
 import EditorialList from './EditorialList';
 import styles from './Editorial.css.js';
 import Radium from 'radium';

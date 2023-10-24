@@ -1,10 +1,13 @@
 import React from 'react';
 import styles from './TermsConditions.css.js';
+import UscFullLogo from '../../../assets/Images/usc_full_logo.png';
 
-const TermsConditions = ({ domain, logo }) => (
+const domain = 'UnitedStatesCredit.com';
+
+const TermsConditions = () => (
     <div style={styles.container}>
         <div style={styles.logoBar}>
-            <img src={logo} alt='footer-logo' style={styles.headerLogo}/>
+            <img src={UscFullLogo} alt='footer-logo' style={styles.headerLogo}/>
         </div>
         <div style={styles.infoContainer}>
 

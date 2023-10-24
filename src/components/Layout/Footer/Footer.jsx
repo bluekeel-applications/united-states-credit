@@ -1,9 +1,11 @@
 import React from 'react';
-import People from '@bit/bluekeel.assets.people';
+import People from '../../../assets/Images/people.png';
+import UscLogoGray from '../../../assets/Images/usc_logo_gray.png';
 import styles from './Footer.css.js';
 import Radium from 'radium';
 
-const Footer = ({domain, logo}) => {
+const Footer = () => {
+    const domain = 'UnitedStatesCredit';
 
     const scrollToTop = () => {
         window.scrollTo(0,0);
@@ -29,7 +31,7 @@ const Footer = ({domain, logo}) => {
                 </div>
             )}
             <div style={styles.contentContainer}>
-                <img src={logo} alt='footer-logo' style={styles.logo}/>
+                <img src={UscLogoGray} alt='footer-logo' style={styles.logo}/>
             </div>
             <div style={styles.linkContainer}>
                 <LinkList/>

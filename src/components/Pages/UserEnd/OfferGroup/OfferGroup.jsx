@@ -1,7 +1,7 @@
 import React from 'react';
 // import GET_OFFER_BY_GROUP from '../utils/graphql/GET_OFFER_BY_GROUP';
 // import ADD_SERVICE_LOG from '../utils/graphql/ADD_SERVICE_LOG';
-// import CircularProgress from '@material-ui/core/CircularProgress';
+// import CircularProgress from '@mui/material//CircularProgress';
 // import { useQuery, useMutation } from '@apollo/react-hooks';
 import DirectLink from '../DirectLink';
 import UserSelection from '../UserSelection';

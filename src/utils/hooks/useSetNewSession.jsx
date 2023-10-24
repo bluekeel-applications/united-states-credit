@@ -38,6 +38,7 @@ const useSetNewSession = ({ tracking, turnOffLoading, animationComplete }) => {
 			pt2: tracking.PT2,
 			gclid: tracking.GCLID,
 			email: tracking.EMAIL,
+			article: tracking.ARTICLE,
 			record: tracking.RECORD
 		};
 		dispatchTracking({ type: 'USER_ARRIVED', payload });

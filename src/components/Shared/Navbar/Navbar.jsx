@@ -3,9 +3,10 @@ import React, { useContext, useState, memo } from 'react';
 import { AppContext } from '../../../context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Navbar.css.js';
-// import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import UscFullLogo from '../../../assets/Images/usc_full_logo.png';
+// import useScrollTrigger from '@mui/material//useScrollTrigger';
+import AppBar from '@mui/material//AppBar';
+import Toolbar from '@mui/material//Toolbar';
 import Radium from 'radium';
 import { useNavigate } from 'react-router-dom';
 // import SearchBar from './SearchBar.jsx';
@@ -23,10 +24,7 @@ import { useNavigate } from 'react-router-dom';
 //     });
 // };
 
-const Navbar = Radium(({  
-    brand,
-    children
-}) => {
+const Navbar = Radium(() => {
     let navigate = useNavigate();
     const { dispatchApp } = useContext(AppContext);
     const [ isHovering, setHovering ] = useState(false);
@@ -46,7 +44,6 @@ const Navbar = Radium(({
 		navigate('/');
 	};
 
-console.log('rendering navbar');
     return (
         <>
         {/* <ElevationScroll {...props}> */}
@@ -54,7 +51,7 @@ console.log('rendering navbar');
                 <Toolbar style={styles.toolbar}>
                     <div key='brand_key' style={styles.navContent}>
                         <img 
-                            src={brand} 
+                            src={UscFullLogo} 
                             alt='bluekeel_brand' 
                             onClick={goHome}
                             style={styles.brand}
@@ -77,7 +74,6 @@ console.log('rendering navbar');
             </AppBar>
         {/* </ElevationScroll> */}
         <Toolbar style={{minHeight: '50px', height: '60px'}} />
-        {children}
         </>
     );
 });

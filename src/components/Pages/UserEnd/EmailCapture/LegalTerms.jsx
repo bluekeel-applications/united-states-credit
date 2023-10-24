@@ -1,20 +1,8 @@
-import React, { useState, memo } from 'react';
-import { useEffect } from 'react';
+import React, { memo } from 'react';
 import Radium from 'radium';
 import styles from './EmailCapture.css.js';
 
-const LegalTerms = Radium(({ disabled }) => {
-    const [ checked, setChecked ] = useState(!disabled);
-
-    useEffect(() => {
-        setChecked(!disabled);
-    }, [disabled]);
-
-    const handleCheckboxChange = () => {
-        setChecked(!disabled);
-    };
-
-    return (
+const LegalTerms = Radium(({ checked, setChecked }) => (
         <div key='email-optin-terms' style={styles.termsContainer}>
             <input
                 key='terms-checkbox'
@@ -22,7 +10,7 @@ const LegalTerms = Radium(({ disabled }) => {
                 type='checkbox' 
                 checked={checked} 
                 name='email_terms'
-                onChange={handleCheckboxChange}
+                onChange={setChecked}
             />
             <div key='terms-text' style={styles.termsText}>
                 I hereby declare that I am a U.S. resident over the age of 18 and I agree to this site's
@@ -47,7 +35,7 @@ const LegalTerms = Radium(({ disabled }) => {
                 </a>.
             </div>
         </div>
-    );
-})
+    )
+);
 
 export default memo(LegalTerms);

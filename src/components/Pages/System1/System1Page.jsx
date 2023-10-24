@@ -68,7 +68,6 @@ const System1Page = () => {
             </div>
             <ButtonContainer containerId='rampjs_slot1' email={trackingState['email']} title={button_title}/>
             {useArticle}
-            <ButtonContainer containerId='rampjs_slot2' email={trackingState['email']} title={button_title}/>
         </div>
     );
 };

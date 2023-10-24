@@ -9,7 +9,7 @@ import System1Static from './System1Static';
 import { useNavigate } from 'react-router-dom';
 
 const System1 = () => {
-    const history = useNavigate();
+    const navigate = useNavigate();
     const myURL = new URL(window.location.href);
     const { trackingState, dispatchApp } = useContext(AppContext);
     const [ showDynamicPage, setShowDynamicPage ] = useState(false);
@@ -28,7 +28,7 @@ const System1 = () => {
         if(!data?.fetchArticleByKey?.success){
             console.log('Error: No data found', data);
             const newURL = `/rsoc${setDefaultData(trackingState)}`;
-            history.replace(newURL);
+            navigate(newURL, { replace: true });
             setStaticArticle('credit');
             showOldFormat();
             return;
@@ -37,7 +37,7 @@ const System1 = () => {
         dispatchApp({ type: 'SET_SYSTEM_1', payload: data.fetchArticleByKey.body });
         const tail = buildFullURL(data.fetchArticleByKey.body.buttons, trackingState);
         const newURL = `/rsoc${myURL.search}${tail}`;
-        history.replace(newURL);
+        navigate(newURL, { replace: true });
         window._rampJs();
         setShowDynamicPage(true);
         setPageReady(true);
