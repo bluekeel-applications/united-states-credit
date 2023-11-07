@@ -17,10 +17,10 @@ const Global = () => {
 	// const apolloUri = 'https://28ohcsi2ph.execute-api.us-east-1.amazonaws.com/running/graphql';
 	// const apolloUri = 'https://99cdyp4f29.execute-api.us-east-1.amazonaws.com/preprod/graphql';
 	// const apolloUri = 'https://n01g6wwfaf.execute-api.us-east-1.amazonaws.com/active/graphql';
-	// const apolloUri = 'https://cbvb02ezl4.execute-api.us-east-1.amazonaws.com/prod/graphql';
+	const apolloUri = 'https://f8fjn5bgw2.execute-api.us-east-1.amazonaws.com/prod/graphql';
 	// const apolloUri = 'https://uqwaw9keg3.execute-api.us-east-1.amazonaws.com/services/graphql';
 	// const apolloUri = 'https://cypmxq177b.execute-api.us-east-1.amazonaws.com/test/graphql';
-	const apolloUri = 'https://00mkew2tg9.execute-api.us-east-1.amazonaws.com/development/graphql';
+	// const apolloUri = 'https://00mkew2tg9.execute-api.us-east-1.amazonaws.com/development/graphql';
 	// const apolloUri = 'http://localhost:4000/dev/graphql';
 
 	const client = useApolloClient(apolloUri);

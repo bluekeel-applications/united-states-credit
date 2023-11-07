@@ -16,7 +16,6 @@ const System1Page = () => {
     const [ useArticle, setArticle ] = useState(null);
 
     useEffect(() => {
-        console.log('On Dynamic Page!');
         setPageComponent(trackingState.article, setArticle);
     },[trackingState.article]);
 
@@ -66,7 +65,11 @@ const System1Page = () => {
                 {!!header && <MainTitle text={header} />}
                 {!!sub_text && <div style={headerSubStyle}>{sub_text}</div>}
             </div>
-            <ButtonContainer containerId='rampjs_slot1' email={trackingState['email']} title={button_title}/>
+            <ButtonContainer 
+                containerId='rampjs_slot1' 
+                email={trackingState['email']} 
+                title={button_title}
+            />
             {useArticle}
         </div>
     );
