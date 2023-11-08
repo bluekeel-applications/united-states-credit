@@ -1,4 +1,5 @@
 import { InMemoryCache, ApolloClient, ApolloLink } from '@apollo/client';
+import { Honeybadger } from '@honeybadger-io/react';
 import { createHttpLink } from 'apollo-link-http'
 import { onError } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
@@ -39,10 +40,14 @@ const useApolloClient = (uri) => {
     const errorLink = onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors)
             graphQLErrors.forEach(({ message, locations, path }) =>{
+                Honeybadger.notify(`GraphQL error: ${message}`);
                 console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`);
             });
 
-        if (networkError) console.log(`[Network error]: ${networkError}`);
+        if (networkError) {
+            Honeybadger.notify(`GraphQL network error: ${networkError}`);
+            console.log(`[Network error]: ${networkError}`);
+        };
     });
 
     const links = ApolloLink.from([

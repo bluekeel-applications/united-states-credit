@@ -1,7 +1,8 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import { AppContext } from '../../../context';
-import { useLazyQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import FETCH_ARTICLE_BY_KEY from './utils/GraphQL/FETCH_ARTICLE_BY_KEY';
+import { ADD_USER_EMAIL } from '../../../utils/GraphQL/mutations';
 import { buildFullURL, setDefaultData } from './utils/helpers';
 import Loading from '../../Shared/Loading';
 import System1Page from './System1Page';
@@ -10,11 +11,40 @@ import { useNavigate } from 'react-router-dom';
 
 const System1 = () => {
     const navigate = useNavigate();
+    const emailSent = useRef(false);
     const myURL = new URL(window.location.href);
     const { trackingState, dispatchApp } = useContext(AppContext);
     const [ showDynamicPage, setShowDynamicPage ] = useState(false);
     const [ pageReady, setPageReady ] = useState(false);
     const [ staticArticle, setStaticArticle ] = useState(trackingState.article);
+
+    // Since there is no "end" click, post email to mongo for use later with search_track url param
+    const [ addUserEmail ] = useMutation(ADD_USER_EMAIL, { 
+        onCompleted: (data) => {
+            const submittedEmail = data.addUserEmail.body.email
+            console.log('Email posted to Mongo:', submittedEmail);
+        }
+    });
+
+    const postEmailToMongo = emailProp => {
+        if(emailProp && emailProp !== '' && emailProp !== 'omit') {
+            console.log('Sending email to Mongo:', emailProp);
+            addUserEmail({
+                variables: {
+                    clickId: Number(trackingState['hsid']),
+                    email: emailProp
+                }
+            });
+        }
+    };
+    
+    useEffect(() => {
+        if(!emailSent.current) {
+            postEmailToMongo(trackingState['email']);
+            emailSent.current = true;
+        };
+        // eslint-disable-next-line
+    },[emailSent.current]);
 
     const showOldFormat = () => {
         console.log('Using Static style rsoc');

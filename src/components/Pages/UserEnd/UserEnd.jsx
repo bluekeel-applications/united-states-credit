@@ -165,27 +165,22 @@ const UserEnd = ({ theme, tracking }) => {
     };
 
     return (
-        <>
-            {pageView === 'email' && 
-                <EmailCapture 
-                    email={emailValue}
-                    setEmail={setEmailValue}
-                    setPage={setPageView}
-                    setSubmission={setAsSubmission}
-                    theme={theme}
-                />
-            }
-            {pageView === 'offer' && 
-                <OfferPage
-                    email={emailValue} 
-                    offer={offerFound}
-                    tracking={tracking}
-                    isSubmission={isSubmission}
-                    isRedirect={isRedirect}
-                    theme={theme}
-                />
-            }
-        </>
+        pageView === 'email' ? 
+            <EmailCapture 
+                email={emailValue}
+                setEmail={setEmailValue}
+                setPage={setPageView}
+                setSubmission={setAsSubmission}
+                theme={theme}
+            /> :
+            <OfferPage
+                email={emailValue} 
+                offer={offerFound}
+                tracking={tracking}
+                isSubmission={isSubmission}
+                isRedirect={isRedirect}
+                theme={theme}
+            />
     )
 };
 

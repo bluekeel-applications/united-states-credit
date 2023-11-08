@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../../context';
+import { Honeybadger } from '@honeybadger-io/react';
 import useInsertUser from './useInsertUser';
 import useSetDeepDive from './useSetDeepDive';
 import usePchLookup from './usePchLookup';
@@ -43,6 +44,10 @@ const useSetNewSession = ({ tracking, turnOffLoading, animationComplete }) => {
 		};
 		dispatchTracking({ type: 'USER_ARRIVED', payload });
 		setUserContext(payload);
+		Honeybadger.setContext({
+			user_id: hsid,
+			user_email: tracking.EMAIL
+		});
 	};
 // Final step check before returning user to page
 	useEffect(() => {
