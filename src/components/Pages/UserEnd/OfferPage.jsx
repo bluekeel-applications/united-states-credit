@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DirectLink from './DirectLink';
 import UserSelection from './UserSelection';
@@ -74,4 +74,4 @@ const OfferPage = ({ offer, tracking, email, isRedirect, isSubmission, theme }) 
     return offer ? routedOfferPage() : null;
 };
 
-export default memo(OfferPage);
+export default OfferPage;

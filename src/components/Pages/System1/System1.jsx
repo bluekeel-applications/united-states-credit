@@ -39,12 +39,12 @@ const System1 = () => {
     };
     
     useEffect(() => {
-        if(!emailSent.current) {
+        if(!emailSent.current && !!trackingState.email) {
             postEmailToMongo(trackingState['email']);
             emailSent.current = true;
         };
         // eslint-disable-next-line
-    },[emailSent.current]);
+    },[emailSent.current, trackingState.email]);
 
     const showOldFormat = () => {
         console.log('Using Static style rsoc');

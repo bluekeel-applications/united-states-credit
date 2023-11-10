@@ -152,7 +152,7 @@ export const setCookies = (tracking) => {
     setCookie('uid', tracking.uid, 3);
     setCookie('eid', tracking.eid, 3);
     setCookie('hsid', tracking.hsid, 3);
-    if(!!tracking.email) {
+    if(!!tracking.email && tracking.email !== 'omit') {
         setCookie('email', tracking.email, 3);
     };
 };

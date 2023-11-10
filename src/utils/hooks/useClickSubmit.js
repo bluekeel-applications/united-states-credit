@@ -25,12 +25,11 @@ const useClickSubmit = (tracking, email, shouldExecute) => {
     });
 
     const [ addUserEmail ] = useMutation(ADD_USER_EMAIL, { 
-        onCompleted: (data) => {
-            const submittedEmail = data.addUserEmail.body.email
-            console.log('Email posted to Mongo:', submittedEmail)
-            if(submittedEmail && submittedEmail !== '') {
+        onCompleted: () => {
+            console.log('Email posted to Mongo:', email)
+            if(email && email !== '') {
                 console.log('Setting submission cookie!');
-                setCookie('em_sub', submittedEmail, 30);
+                setCookie('em_sub', email, 30);
             };
         }
     });
