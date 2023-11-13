@@ -31,7 +31,7 @@ const UserEnd = ({ theme, tracking }) => {
 
         if(tracking['email'] === 'omit') {
             console.log('Omitting email optin...sending to offer page');
-            setEmailValue('');
+            // setEmailValue('');
             setPageView('offer');
         };
 
@@ -44,7 +44,6 @@ const UserEnd = ({ theme, tracking }) => {
     const handleOfferFound = (data, error) => {
         if(data && !offerFound && !error) {
             const offer = data.fetchOfferFromFlow.body;
-            console.log('offer:', offer);
             if(!hasFired.current) {
                 addTagToServiceLog({ 
                     variables: {
@@ -68,7 +67,6 @@ const UserEnd = ({ theme, tracking }) => {
     const handleRecordFound = (data, error) => {
         if(data && !offerFound && !error) {
             const offer = data.fetchEndpointByRecord.body;
-            console.log('record:', offer);
             if(!hasFired.current) {
                 addTagToServiceEndpointLog({ 
                     variables: {

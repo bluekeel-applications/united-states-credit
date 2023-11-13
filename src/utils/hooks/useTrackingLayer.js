@@ -32,7 +32,7 @@ const useTrackingLayer = (tracking, email, offer) => {
         onCompleted: (data) => {
             const submittedEmail = data.addUserEmail.body.email
             console.log(data.addUserEmail.message, ':', submittedEmail);
-            if(submittedEmail && submittedEmail !== '') {
+            if(submittedEmail && submittedEmail !== 'missing' && submittedEmail !== 'omit') {
                 console.log('Setting submission cookie!');
                 setCookie('em_sub', submittedEmail, 30);
             };
@@ -43,7 +43,7 @@ const useTrackingLayer = (tracking, email, offer) => {
         onCompleted: (data) => console.log(data.insertCommonInfo.message) 
 	});
 	
-	const postToCommonInfo = (emailProp) => {
+	const postToCommonInfo = () => {
         insertCommonInfo({
             variables: {
                 visitor: {
@@ -51,22 +51,21 @@ const useTrackingLayer = (tracking, email, offer) => {
                     'oid': Number(oid),
                     eid, uid, ip_address,
                     'sid': Number(sid),
-                    'email': emailProp, 
+                    'email': email === 'omit' || isDuplicate ? '' : email,
                     fname, lname, address, city, state, zip
                 }
             }
         });
     };
 
-    const postEmailToMongo = (emailProp) => {
-        if(emailProp && emailProp !== '' && emailProp !== 'omit') {
-            addUserEmail({
-                variables: {
-                    clickId: Number(hsid),
-                    email: emailProp
-                }
-            })
-        }
+    const postEmailToMongo = () => {
+        const sendEmail = email === '' ? 'missing' : email;
+        addUserEmail({
+            variables: {
+                clickId: Number(hsid),
+                email: sendEmail
+            }
+        })
 	};
 	
 	const postFlowToMongo = () => {
@@ -97,13 +96,12 @@ const useTrackingLayer = (tracking, email, offer) => {
 	};
 
 	useEffect(() => {
-        const insertEmail = isDuplicate || email === 'omit' ? '' : email;
+        postEmailToMongo();
 		firePixelBlueKeel(hsid);
         fireBingPixel(vertical);
         fireTiktokPixel();
         fireAdwordsEvent();
-		postToCommonInfo(insertEmail);
-		postEmailToMongo(insertEmail);
+		postToCommonInfo();
 		postFlowToMongo();
         postSelectionData();
 		// eslint-disable-next-line

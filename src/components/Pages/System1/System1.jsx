@@ -26,25 +26,24 @@ const System1 = () => {
         }
     });
 
-    const postEmailToMongo = emailProp => {
-        if(emailProp && emailProp !== '' && emailProp !== 'omit') {
-            console.log('Sending email to Mongo:', emailProp);
-            addUserEmail({
-                variables: {
-                    clickId: Number(trackingState['hsid']),
-                    email: emailProp
-                }
-            });
-        }
+    const postEmailToMongo = () => {
+        const sendEmail = trackingState['email'] === '' ? 'missing' : trackingState['email'];
+        console.log('Sending email to Mongo:', sendEmail);
+        addUserEmail({
+            variables: {
+                clickId: Number(trackingState['hsid']),
+                email: sendEmail
+            }
+        });
     };
     
     useEffect(() => {
-        if(!emailSent.current && !!trackingState.email) {
-            postEmailToMongo(trackingState['email']);
+        if(!emailSent.current) {
+            postEmailToMongo();
             emailSent.current = true;
         };
         // eslint-disable-next-line
-    },[emailSent.current, trackingState.email]);
+    },[emailSent.current]);
 
     const showOldFormat = () => {
         console.log('Using Static style rsoc');

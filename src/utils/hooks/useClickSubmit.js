@@ -25,16 +25,17 @@ const useClickSubmit = (tracking, email, shouldExecute) => {
     });
 
     const [ addUserEmail ] = useMutation(ADD_USER_EMAIL, { 
-        onCompleted: () => {
-            console.log('Email posted to Mongo:', email)
-            if(email && email !== '') {
+        onCompleted: (data) => {
+            const submittedEmail = data.addUserEmail.body.email
+            console.log(data.addUserEmail.message, ':', submittedEmail);
+            if(submittedEmail && submittedEmail !== 'missing' && submittedEmail !== 'omit') {
                 console.log('Setting submission cookie!');
-                setCookie('em_sub', email, 30);
+                setCookie('em_sub', submittedEmail, 30);
             };
         }
     });
 
-    const postToCommonInfo = emailProp => {
+    const postToCommonInfo = () => {
         insertCommonInfo({
             variables: {
                 visitor: {
@@ -42,22 +43,21 @@ const useClickSubmit = (tracking, email, shouldExecute) => {
                     'oid': Number(oid),
                     eid, uid, ip_address,
                     'sid': Number(sid),
-                    'email': emailProp, 
+                    'email': email === 'omit' || isDuplicate ? '' : email, 
                     fname, lname, address, city, state, zip
                 }
             }
         });
     };
 
-    const postEmailToMongo = emailProp => {
-        if(emailProp && emailProp !== '' && emailProp !== 'omit') {
-            addUserEmail({
-                variables: {
-                    clickId: Number(hsid),
-                    email: emailProp
-                }
-            })
-        }
+    const postEmailToMongo = () => {
+        const sendEmail = email === '' ? 'missing' : email;
+        addUserEmail({
+            variables: {
+                clickId: Number(hsid),
+                email: sendEmail
+            }
+        })
     };
 
     const postFlowToMongo = () => {
@@ -75,13 +75,12 @@ const useClickSubmit = (tracking, email, shouldExecute) => {
 
 	useEffect(() => {
         if(shouldExecute) {
-            const insertEmail = isDuplicate || email === 'omit' ? '' : email;
             firePixelBlueKeel(hsid);
             fireBingPixel(vertical);
             fireTiktokPixel();
             fireAdwordsEvent();
-            postToCommonInfo(insertEmail);
-            postEmailToMongo(insertEmail);
+            postToCommonInfo();
+            postEmailToMongo();
             postFlowToMongo();
         };
 

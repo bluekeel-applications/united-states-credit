@@ -1,9 +1,16 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Radium from 'radium';
 
 const EmailInput = Radium(({ email, setEmail, setEmailReady }) => {
     const [ showInputError, toggleError ] = useState(false);
+
+    useEffect(() => {
+        if(email === 'omit') {
+            setEmail('');
+        };
+        // eslint-disable-next-line
+    },[]);
 
     const checkValidity = (email) => {
         if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
