@@ -53,6 +53,19 @@ const ADD_USER_EMAIL = gql `
 	}
 `;
 
+const ADD_START_URL = gql `
+	mutation AddStartUrl($clickId: Int, $url: String) {
+		addStartUrl(clickId: $clickId, url: $url){
+			success
+			status
+			message
+			body {
+				url
+			}
+		}
+	}
+`;
+
 const ADD_USER_FLOW = gql`
 	mutation AddUserFlow($clickId: Int, $flow: NewUserFlow) {
 		addUserFlow(clickId: $clickId, flow: $flow){
@@ -118,6 +131,7 @@ export {
     ADD_SERVICE_LOG,
 	ADD_SERVICE_ENDPOINT_LOG,
     ADD_USER_EMAIL,
+	ADD_START_URL,
     ADD_USER_FLOW,
     INSERT_COMMON_INFO,
     INSERT_SEARCH_INFO,

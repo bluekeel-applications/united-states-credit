@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { setCookie } from '../helpers';
 const cancelToken = axios.CancelToken;
 const source = cancelToken.source();
 
@@ -17,6 +16,7 @@ const buildHitStreetLink = (payload) => (
 );
 
 const useHitStreet = (payload) => {
+    const setAppHsid = useRef(false);
     const [ hsid, setHsid ] = useState(null);
     
     const pingHitStreet = async() => {
@@ -34,19 +34,17 @@ const useHitStreet = (payload) => {
             if (res.status !== 200) {
                 const backup = Date.now();
                 console.log('Error occured on HitStreet; Fallback ClickID created:', backup);
-                setCookie('hsid', backup, 3);
                 setHsid(backup);
+                setAppHsid.current = true;
                 return;
             };
             if(typeof res.data === 'number') {
                 console.log('New HSID fetched:', res.data);
-                setCookie('hsid', res.data, 3);
                 setHsid(res.data);
+                setAppHsid.current = true;
                 return;
             };
-            console.log('HSID passed in URL:', payload.hsid);
-            setCookie('hsid', payload.hsid, 3);
-            setHsid(payload.hsid);
+            console.log('Unknown result from Hitstreet:', res);
             return;
             
         } catch(err) {
@@ -58,12 +56,19 @@ const useHitStreet = (payload) => {
     };
 
     useEffect(() => {
-        if(!hsid) {
+        if(!!payload.hsid && !setAppHsid.current && !hsid) {
+            console.log('HSID passed in url:', payload.hsid);
+            setHsid(payload.hsid);
+            setAppHsid.current = true;
+            return;
+        };
+        if(!payload.hsid && !setAppHsid.current && !hsid) {
             pingHitStreet();
 		};
+
         return () => { source.cancel('axios request cancelled'); };
 		// eslint-disable-next-line
-    }, [hsid]);
+    }, [payload.hsid, hsid]);
     
     return hsid;
 };
