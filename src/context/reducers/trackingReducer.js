@@ -102,6 +102,13 @@ const trackingStateReducer = (state, action) => {
                 country: action.payload.country,
                 zip: action.payload.zip,
                 ip_address: action.payload.ip_address,
+            };  
+
+        case 'IP_FOUND':
+            Helpers.setCookie('ip', action.payload.ip_address, 3);
+            return {
+                ...state,
+                ip_address: action.payload.ip_address
             };          
         
         case 'KEYWORD_SELECTED':

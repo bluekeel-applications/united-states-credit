@@ -44,16 +44,17 @@ const useTrackingLayer = (tracking, email, offer) => {
 	});
 	
 	const postToCommonInfo = () => {
+        const commonObj = {
+            'hsid': Number(hsid),
+            'oid': Number(oid),
+            eid, uid, ip_address,
+            'sid': Number(sid),
+            'email': email === 'omit' || isDuplicate ? '' : email,
+            fname, lname, address, city, state, zip
+        };
         insertCommonInfo({
             variables: {
-                visitor: {
-                    'hsid': Number(hsid),
-                    'oid': Number(oid),
-                    eid, uid, ip_address,
-                    'sid': Number(sid),
-                    'email': email === 'omit' || isDuplicate ? '' : email,
-                    fname, lname, address, city, state, zip
-                }
+                visitor: commonObj
             }
         });
     };

@@ -66,9 +66,11 @@ const UserSelection = Radium(({ theme, offer, tracking, email }) => {
     useEffect(() => {
         const percent = 100;
 		const count = getRandomIntInclusive(0, 100);
-		if(count <= percent) { 
-            setShowAd(true);
-            console.log('Showing ad in quicklink component!');
+		if(count <= percent) {
+            if(window.location.host !== 'localhost:3000') {
+				setShowAd(true);
+                console.log('Showing ad in quicklink component!');
+			}; 
         };
 	},[]);
 
