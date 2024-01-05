@@ -15,6 +15,8 @@ import useSetNewSession from '../utils/hooks/useSetNewSession';
 import Radium from 'radium';
 import Styles from './Styles.css.js';
 import { useMediaQuery } from 'react-responsive';
+import { useLazyQuery } from '@apollo/client';
+import FETCH_ARTICLE_BY_KEY from '../components/Pages/System1/utils/GraphQL/FETCH_ARTICLE_BY_KEY.js';
 
 const Feed = lazy(() => import('./Layout/Feed'));
 
@@ -55,6 +57,66 @@ const App = () => {
 		RECORD: myURL.searchParams.get('record') || '',
     };
 
+	const buildBraineWaveURL = (buttonArr) => {
+		const keys = ['&forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
+		const encodeArr = buttonArr.map((button) => {
+		return button.trim().replace(/ /g,"+").replace("$","%24");
+		});
+		const keyArr = encodeArr.map((item, idx) => {
+		return `${keys[idx]}${item}`;
+		});
+		const forceKeys = keyArr.join("");
+		const UTM = myURL.searchParams.get('utm_source') || '';
+        const S1PAID = myURL.searchParams.get('s1paid') || '';
+		const S1PCID = myURL.searchParams.get('s1pcid') || '';
+        const S1PAGID = myURL.searchParams.get('s1pagid') || '';
+        const S1PP = myURL.searchParams.get('s1pplacement') || '';
+        const S1PADID = myURL.searchParams.get('s1padid') || '';
+		
+		const searchTrack = `search_track_url=https://f8fjn5bgw2.execute-api.us-east-1.amazonaws.com/prod/optin/${tracking.HSID}`;
+		const clickTrack = `click_track_url=http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${tracking.HSID}`;
+		const subId = `subid=${tracking.SID}-${tracking.EID}`;
+		const taboola = `tbid=1111048&tbclickid=${tracking.UID}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
+		const facebook = `fbid=531202445442265&fbclick=Search`;
+		const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
+		return `${forceKeys}&utm_source=${UTM}&s1paid=${S1PAID}&s1pcid=${S1PCID}&s1pagid=${S1PAGID}&s1pplacement=${S1PP}&s1padid=${S1PADID}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebook}&${google}`;
+	};
+
+	const getArticleSlug = () => {
+		switch(tracking.ARTICLE) {
+			case 'loan':
+				return 'finance/personal-loans-vs-credit-cards-making-the-right-choice-for-you/';
+			case 'credit':
+				return 'finance/best-credit-cards-with-the-most-incentives/';
+			case 'autoloan':
+				return 'auto/affordable-crossover-suvs-best-value-models-for-budget-conscious-buyers/';
+			case 'injury':
+				return 'finance/professional-legal-assistance-how-a-personal-injury-attorney-can-benefit-your-case/';
+			case 'checking':
+				return 'finance/a-guide-to-choosing-the-best-checking-account/';
+			case 'loanvscredit':
+				return 'finance/personal-loans-vs-credit-cards-making-the-right-choice-for-you/';
+			default:
+				return 'finance/a-guide-to-choosing-the-best-checking-account/';
+		};
+	};
+
+	const handleRedirect = (data) => {
+        // Set force keys and build full url
+		const tail = buildBraineWaveURL(data.fetchArticleByKey.body.buttons);
+		const articleSlug = getArticleSlug();
+		const base = 'https://brainwavesearch.com/';
+		window.location.href = `${base}${articleSlug}?${tail}`;
+    };
+
+    const [sendToBrainWave] = useLazyQuery(
+        FETCH_ARTICLE_BY_KEY, { 
+            variables: { key: tracking.ARTICLE },
+            errorPolicy: 'ignore',
+            onCompleted: handleRedirect
+        }
+    );
+
 	useEffect(() => {
 		if(tracking.AUTH_GROUP !== 'bk') {
 			dispatchTracking({ type: 'SET_GROUP', payload: tracking.AUTH_GROUP });
@@ -64,6 +126,15 @@ const App = () => {
 
 	const turnOffLoading = useCallback(() => {setLoading(false)},[]);
 	const redirectTo = useSetNewSession({ tracking, turnOffLoading, animationComplete });
+
+	useEffect(() => {
+		if(tracking.OID === '115') {
+			setLoading(true);
+			sendToBrainWave();
+			return;
+		};
+        // eslint-disable-next-line
+	}, [tracking]);
 
 	useEffect(() => {
 		const isSplit = tracking.SPLIT === 'dynamic';
