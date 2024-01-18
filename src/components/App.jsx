@@ -58,7 +58,7 @@ const App = () => {
     };
 
 	const buildBraineWaveURL = (buttonArr) => {
-		const keys = ['&forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
+		const keys = ['forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
 		const encodeArr = buttonArr.map((button) => {
 		return button.trim().replace(/ /g,"+").replace("$","%24");
 		});
@@ -77,9 +77,10 @@ const App = () => {
 		const clickTrack = `click_track_url=http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${tracking.HSID}`;
 		const subId = `subid=${tracking.SID}-${tracking.EID}`;
 		const taboola = `tbid=1111048&tbclickid=${tracking.UID}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
-		const facebook = `fbid=531202445442265&fbclick=Search`;
+		const facebook = `fbid=202255056230822&fbclick=Search`;
 		const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
-		return `${forceKeys}&utm_source=${UTM}&s1paid=${S1PAID}&s1pcid=${S1PCID}&s1pagid=${S1PAGID}&s1pplacement=${S1PP}&s1padid=${S1PADID}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebook}&${google}`;
+		const segment = `segment=${tracking.SEGMENT}`;
+		return `${forceKeys}&utm_source=${UTM}&s1paid=${S1PAID}&s1pcid=${S1PCID}&s1pagid=${S1PAGID}&s1pplacement=${S1PP}&s1padid=${S1PADID}&${searchTrack}&${clickTrack}&${segment}&${subId}&${taboola}&${facebook}&${google}`;
 	};
 
 	const getArticleSlug = () => {
@@ -96,6 +97,8 @@ const App = () => {
 				return 'finance/a-guide-to-choosing-the-best-checking-account/';
 			case 'loanvscredit':
 				return 'finance/personal-loans-vs-credit-cards-making-the-right-choice-for-you/';
+			case 'dental':
+				return 'health/are-dental-implants-right-for-you-exploring-your-options/';
 			default:
 				return 'finance/a-guide-to-choosing-the-best-checking-account/';
 		};
