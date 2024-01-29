@@ -19,6 +19,12 @@ const System1Page = () => {
     useEffect(() => {
         window.fbq('init', '531202445442265');
         console.log('Initialized FB Pixel');
+        window.liQ = window.liQ || [];
+        window.liQ.push({
+            "event": "viewContent",
+            "name": "lead"
+        });
+        console.log('Initialized Live Intent Pixel');
     },[]);
 
     const headerStyle = Object.assign({},
