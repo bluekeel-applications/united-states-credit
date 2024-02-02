@@ -26,6 +26,11 @@ const styles = {
         fontSize: '1.8rem',
         paddingBottom: '15px'
     },
+    sectionTitle: {
+        fontWeight: '700',
+        fontSize: '2.2rem',
+        paddingBottom: '15px'
+    },
     contentText: {
         fontSize: '1.3rem',
         padding: '15px 0'

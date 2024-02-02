@@ -14,6 +14,9 @@ import AutoWarrantyArticle from '../Articles/AutoWarrantyArticle';
 import CreditScoreArticle from '../Articles/CreditScoreArticle';
 import SeniorsArticle from '../Articles/SeniorsAtricle';
 import AutoFinanceArticle from '../Articles/AutoFinanceArticle';
+import DentalArticle from '../Articles/DentalArticle';
+import SolarArticle from '../Articles/SolarArticle';
+import MealPrepArticle from '../Articles/MealPrepArticle';
 
 export const buildFullURL = (buttonArr, trackingState) => {
     const keys = ['&forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
@@ -93,6 +96,15 @@ export const setPageComponent = (article, setArticle) => {
             break;
         case 'autoloan':
             setArticle(<AutoFinanceArticle />);
+            break;
+        case 'dental':
+            setArticle(<DentalArticle />);
+            break;
+        case 'solar':
+            setArticle(<SolarArticle />);
+            break;
+        case 'meal':
+            setArticle(<MealPrepArticle />);
             break;
         
         default:

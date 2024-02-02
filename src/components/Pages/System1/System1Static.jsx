@@ -17,6 +17,7 @@ import AutoWarrantyArticle from './Articles/AutoWarrantyArticle';
 import CreditScoreArticle from './Articles/CreditScoreArticle';
 import SeniorsArticle from './Articles/SeniorsAtricle';
 import AutoFinanceArticle from './Articles/AutoFinanceArticle';
+import DentalArticle from './Articles/DentalArticle';
 import ButtonContainer from './ButtonContainer';
 import MainTitle from './MainTitle';
 
@@ -120,6 +121,12 @@ const System1Static = ({ article }) => {
                 setHeaderSubText("Buying a car is a significant financial decision, one that often necessitates some sort of financing for most people. Whether you're considering your first car or upgrading to a newer model, understanding the intricacies of auto finance loans can go a long way in making a prudent financial decision. If interested, you can search for and compare the auto finance options below.");
                 setButtonQuestion('Search and Compare Auto Finance Loans');
                 setArticle(<AutoFinanceArticle />);
+                break;
+            case 'dental':
+                setHeaderText('A Comprehensive Guide to Dental Implants');
+                setHeaderSubText("Buying a car is a significant financial decision, one that often necessitates some sort of financing for most people. Whether you're considering your first car or upgrading to a newer model, understanding the intricacies of auto finance loans can go a long way in making a prudent financial decision. If interested, you can search for and compare the auto finance options below.");
+                setButtonQuestion('Search and Compare Dental Implants');
+                setArticle(<DentalArticle />);
                 break;
             
             default:
