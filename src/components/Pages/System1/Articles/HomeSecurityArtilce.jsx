@@ -2,7 +2,7 @@ import React from 'react';
 // import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
-import ArticleTitle from './ArticleTitle';
+import ArticleTitle from './components/ArticleTitle';
 
 const ContentText = ({title, text}) => (
     <div style={styles.contentText}>

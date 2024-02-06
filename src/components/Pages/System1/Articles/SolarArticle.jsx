@@ -2,8 +2,8 @@ import React from 'react';
 // import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
-import ArticleTitle from './ArticleTitle';
-import SectionTitle from './SectionTitle.jsx';
+import ArticleTitle from './components/ArticleTitle';
+import SectionTitle from './components/SectionTitle.jsx';
 
 const ContentText = ({title, text}) => (
     <div style={styles.contentText}>

@@ -2,7 +2,7 @@ import React from 'react';
 // import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 import { useMediaQuery } from 'react-responsive';
-import ArticleTitle from './ArticleTitle.jsx';
+import ArticleTitle from './components/ArticleTitle.jsx';
 // import ButtonContainer from '../ButtonContainer.jsx';
 
 const ContentTitle = ({text}) => (

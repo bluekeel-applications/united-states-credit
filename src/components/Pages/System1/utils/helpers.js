@@ -17,6 +17,7 @@ import AutoFinanceArticle from '../Articles/AutoFinanceArticle';
 import DentalArticle from '../Articles/DentalArticle';
 import SolarArticle from '../Articles/SolarArticle';
 import MealPrepArticle from '../Articles/MealPrepArticle';
+import CheckingArticle from '../Articles/CheckingArticle';
 
 export const buildFullURL = (buttonArr, trackingState) => {
     const keys = ['&forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
@@ -105,6 +106,9 @@ export const setPageComponent = (article, setArticle) => {
             break;
         case 'meal':
             setArticle(<MealPrepArticle />);
+            break;
+        case 'checking':
+            setArticle(<CheckingArticle />);
             break;
         
         default:
