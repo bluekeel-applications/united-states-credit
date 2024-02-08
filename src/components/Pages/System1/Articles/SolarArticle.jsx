@@ -3,13 +3,8 @@ import React from 'react';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
-import SectionTitle from './components/SectionTitle.jsx';
-
-const ContentText = ({title, text}) => (
-    <div style={styles.contentText}>
-        {!!title && <b style={styles.boldText}>{`${title} - `}</b>}{text}
-    </div>
-);
+import SectionTitle from './components/SectionTitle';
+import ContentText from './components/ContentText';
 
 const SolarArticle = () => {
     // const { trackingState } = useContext(AppContext);

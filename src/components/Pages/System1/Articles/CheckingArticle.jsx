@@ -11,12 +11,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
-
-const ContentText = ({title, text}) => (
-    <div style={styles.contentText}>
-        {!!title && <b style={styles.boldText}>{`${title} - `}</b>}{text}
-    </div>
-);
+import ContentText from './components/ContentText';
 
 const CheckingTable = () => {
     const columns = [

@@ -4,12 +4,7 @@ import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import SectionTitle from './components/SectionTitle.jsx';
-
-const ContentText = ({title, text}) => (
-    <div style={styles.contentText}>
-        {!!title && <b style={styles.boldText}>{`${title} - `}</b>}{text}
-    </div>
-);
+import ContentText from './components/ContentText';
 
 const DentalArticle = () => {
     // const { trackingState } = useContext(AppContext);

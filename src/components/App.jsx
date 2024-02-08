@@ -57,7 +57,7 @@ const App = () => {
 		RECORD: myURL.searchParams.get('record') || '',
     };
 
-	const buildBraineWaveURL = (buttonArr) => {
+	const buildURLTail = (buttonArr) => {
 		const keys = ['forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
 		const encodeArr = buttonArr.map((button) => {
 		return button.trim().replace(/ /g,"+").replace("$","%24");
@@ -76,7 +76,7 @@ const App = () => {
 		const searchTrack = `search_track_url=https://f8fjn5bgw2.execute-api.us-east-1.amazonaws.com/prod/optin/${tracking.HSID}`;
 		const clickTrack = `click_track_url=http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${tracking.HSID}`;
 		const subId = `subid=${tracking.SID}-${tracking.EID}`;
-		const taboola = `tbid=1111048&tbclickid=${tracking.UID}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
+		const taboola = `tbid=1648456&tbclickid=${tracking.UID}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
 		const facebook = `fbid=202255056230822&fbclick=Search`;
 		const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
 		const segment = `segment=${tracking.SEGMENT}`;
@@ -86,29 +86,34 @@ const App = () => {
 	const getArticleSlug = () => {
 		switch(tracking.ARTICLE) {
 			case 'loan':
-				return 'finance/personal-loans-vs-credit-cards-making-the-right-choice-for-you/';
+				// return 'finance/personal-loans-vs-credit-cards-making-the-right-choice-for-you/';
+				return 'general/personal-loans-your-key-to-financial-freedom/';
 			case 'credit':
-				return 'finance/best-credit-cards-with-the-most-incentives/';
+				// return 'finance/best-credit-cards-with-the-most-incentives/';
+				return 'personal-finance/maximize-your-money-the-power-of-credit-cards/';
 			case 'autoloan':
-				return 'auto/affordable-crossover-suvs-best-value-models-for-budget-conscious-buyers/';
-			case 'injury':
-				return 'finance/professional-legal-assistance-how-a-personal-injury-attorney-can-benefit-your-case/';
+				// return 'auto/affordable-crossover-suvs-best-value-models-for-budget-conscious-buyers/';
+				return 'auto-buying-and-selling/affordable-auto-financing-your-dream-car-awaits/';
+			// case 'injury':
+			// 	return 'finance/professional-legal-assistance-how-a-personal-injury-attorney-can-benefit-your-case/';
 			case 'checking':
-				return 'finance/a-guide-to-choosing-the-best-checking-account/';
-			case 'loanvscredit':
-				return 'finance/personal-loans-vs-credit-cards-making-the-right-choice-for-you/';
+				// return 'finance/a-guide-to-choosing-the-best-checking-account/';
+				return 'consumer-banking/maximize-your-money-the-power-of-a-zero-fee-checking-account/';
+			// case 'loanvscredit':
+			// 	return 'finance/personal-loans-vs-credit-cards-making-the-right-choice-for-you/';
 			case 'dental':
-				return 'health/are-dental-implants-right-for-you-exploring-your-options/';
+				// return 'health/are-dental-implants-right-for-you-exploring-your-options/';
+				return 'dental-health/affordable-dental-implants-radiant-smiles-fraction-of-the-cost/';
 			default:
-				return 'finance/a-guide-to-choosing-the-best-checking-account/';
+				return 'general/personal-loans-your-key-to-financial-freedom/';
 		};
 	};
 
 	const handleRedirect = (data) => {
         // Set force keys and build full url
-		const tail = buildBraineWaveURL(data.fetchArticleByKey.body.buttons);
+		const tail = buildURLTail(data.fetchArticleByKey.body.buttons);
 		const articleSlug = getArticleSlug();
-		const base = 'https://brainwavesearch.com/';
+		const base = 'https://clickcraftedinsight.com/';
 		window.location.href = `${base}${articleSlug}?${tail}`;
     };
 

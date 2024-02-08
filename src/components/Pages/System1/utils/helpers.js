@@ -18,6 +18,8 @@ import DentalArticle from '../Articles/DentalArticle';
 import SolarArticle from '../Articles/SolarArticle';
 import MealPrepArticle from '../Articles/MealPrepArticle';
 import CheckingArticle from '../Articles/CheckingArticle';
+import MortgageArticle from '../Articles/MortgageArticle';
+import HondaArticle from '../Articles/HondaArticle';
 
 export const buildFullURL = (buttonArr, trackingState) => {
     const keys = ['&forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
@@ -31,7 +33,7 @@ export const buildFullURL = (buttonArr, trackingState) => {
     const searchTrack = `search_track_url=https://f8fjn5bgw2.execute-api.us-east-1.amazonaws.com/prod/optin/${trackingState.hsid}`;
     const clickTrack = `click_track_url=http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${trackingState.hsid}`;
     const subId = `subid=${trackingState.sid}-${trackingState.eid}`;
-    const taboola = `tbid=1111048&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
+    const taboola = `tbid=1648456&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
     const facebook = `fbid=531202445442265&fbclick=Search`;
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
     return `${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebook}&${google}`;
@@ -44,7 +46,7 @@ export const setDefaultData = (trackingState) => {
     const segment = 'segment=c2sunitedstatescredit0005';
     const clickTrack = `click_track_url=http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${trackingState.hsid}`;
     const subId = `subid=${trackingState.sid}-${trackingState.eid}`;
-    const taboola = `tbid=1111048&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
+    const taboola = `tbid=1648456&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
     const facebook = `fbid=531202445442265&fbclick=Search`;
     const trackingVars = `email=omit&hsid=234820821&pid=3420&sid=9582&oid=40&uid=yourUID&eid=yourEID`;
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
@@ -109,6 +111,12 @@ export const setPageComponent = (article, setArticle) => {
             break;
         case 'checking':
             setArticle(<CheckingArticle />);
+            break;
+        case 'mortgage':
+            setArticle(<MortgageArticle />);
+            break;
+        case 'honda':
+            setArticle(<HondaArticle />);
             break;
         
         default:
