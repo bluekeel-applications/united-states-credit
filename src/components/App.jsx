@@ -86,24 +86,24 @@ const App = () => {
 	const getArticleSlug = () => {
 		switch(tracking.ARTICLE) {
 			case 'loan':
-				// return 'finance/personal-loans-vs-credit-cards-making-the-right-choice-for-you/';
 				return 'general/personal-loans-your-key-to-financial-freedom/';
 			case 'credit':
-				// return 'finance/best-credit-cards-with-the-most-incentives/';
 				return 'personal-finance/maximize-your-money-the-power-of-credit-cards/';
 			case 'autoloan':
-				// return 'auto/affordable-crossover-suvs-best-value-models-for-budget-conscious-buyers/';
 				return 'auto-buying-and-selling/affordable-auto-financing-your-dream-car-awaits/';
-			// case 'injury':
-			// 	return 'finance/professional-legal-assistance-how-a-personal-injury-attorney-can-benefit-your-case/';
 			case 'checking':
-				// return 'finance/a-guide-to-choosing-the-best-checking-account/';
 				return 'consumer-banking/maximize-your-money-the-power-of-a-zero-fee-checking-account/';
-			// case 'loanvscredit':
-			// 	return 'finance/personal-loans-vs-credit-cards-making-the-right-choice-for-you/';
 			case 'dental':
-				// return 'health/are-dental-implants-right-for-you-exploring-your-options/';
 				return 'dental-health/affordable-dental-implants-radiant-smiles-fraction-of-the-cost/';
+			case 'covid':
+				return 'medical-health/no-cost-covid-tests-a-reality/';
+			case 'checkingbonus':
+				return 'personal-finance/cash-bonus-awaits-open-a-checking-account-now/';
+			case 'seniorcci':
+				return 'senior-health/affordable-luxury-the-new-age-of-senior-living/';
+			case 'weight':
+				return 'pharmaceutical-drugs/semaglutide-injections-your-weight-loss-ally/';
+
 			default:
 				return 'general/personal-loans-your-key-to-financial-freedom/';
 		};
