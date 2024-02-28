@@ -103,6 +103,16 @@ const App = () => {
 				return 'senior-health/affordable-luxury-the-new-age-of-senior-living/';
 			case 'weight':
 				return 'pharmaceutical-drugs/semaglutide-injections-your-weight-loss-ally/';
+			case 'facelift':
+				return 'cosmetic-medical-services/rediscover-youthful-radiance-affordable-facelift-treatments/';
+			case 'prostate':
+				return 'surgery/revolutionizing-prostate-cancer-treatment-affordable-effective-personalized/';
+			case 'lasik':
+				return 'medical-health/lasik-eye-surgery-your-ticket-to-crystal-clear-vision/';
+			case 'sclerosis':
+				return 'diseases-and-conditions/decoding-multiple-sclerosis-early-detection-treatment-and-support/';
+			case 'copd':
+				return 'diseases-and-conditions/breathe-freely-unveiling-advanced-copd-treatments/';
 
 			default:
 				return 'general/personal-loans-your-key-to-financial-freedom/';

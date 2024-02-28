@@ -5,7 +5,7 @@ import styles from './StartButton.css.js';
 import Radium from 'radium';
 
 const StartButton = ({ showNav }) => {
-    let navigate = useNavigate();
+    // let navigate = useNavigate();
     const [ isHovering, setHovering ] = useState(false);
 
     const posStyle = Object.assign({}, 
@@ -21,7 +21,8 @@ const StartButton = ({ showNav }) => {
 
     const handleStartClick = () => {
         window.scrollTo(0, 0);
-        navigate('/verticals');
+        window.location.href = 'https://www.bkoffers.com/hitstreet/redirect_one_step.cfm?oid=40&sid=9659&pid=3415&eid=yourEID&uid=yourUID&email=omit';
+        // navigate('https://www.bkoffers.com/hitstreet/redirect_one_step.cfm?oid=40&sid=9659&pid=3415&eid=yourEID&uid=yourUID&email=omit');
         return;
     };
     

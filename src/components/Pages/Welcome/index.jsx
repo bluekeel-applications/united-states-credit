@@ -4,13 +4,13 @@ import StartButton from '../../Layout/StartButton';
 import Radium from 'radium';
 import styles from './Welcome.css.js';
 import { useMediaQuery } from 'react-responsive';
-import AdSenseComp from '../AdSense';
+// import AdSenseComp from '../AdSense';
 
-function getRandomIntInclusive(min, max) {
-	min = Math.ceil(min);
-	max = Math.floor(max);
-	return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
-};
+// function getRandomIntInclusive(min, max) {
+// 	min = Math.ceil(min);
+// 	max = Math.floor(max);
+// 	return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+// };
 
 const StartButtonComponent = () => {
     const { dispatchApp } = useContext(AppContext);
@@ -69,18 +69,18 @@ const StartButtonComponent = () => {
 };
 
 const Welcome = () => {
-	const [showAd, setShowAd] = useState(false);
+	// const [showAd, setShowAd] = useState(false);
 
-	useEffect(() => {
-		const count = getRandomIntInclusive(0, 100);
-		if(count <= 100) {
-			if(window.location.host !== 'localhost:3000') {
-				setShowAd(true);
-			};
-		};
-	},[]);
-
-	return showAd ? <AdSenseComp /> : <StartButtonComponent />
+	// useEffect(() => {
+	// 	const count = getRandomIntInclusive(0, 100);
+	// 	if(count <= 100) {
+	// 		if(window.location.host !== 'localhost:3000') {
+	// 			setShowAd(true);
+	// 		};
+	// 	};
+	// },[]);
+	return <StartButtonComponent />;
+	// return showAd ? <AdSenseComp /> : <StartButtonComponent />
 }
 
 export default Radium(Welcome);
