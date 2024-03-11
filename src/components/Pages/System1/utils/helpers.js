@@ -20,6 +20,8 @@ import MealPrepArticle from '../Articles/MealPrepArticle';
 import CheckingArticle from '../Articles/CheckingArticle';
 import MortgageArticle from '../Articles/MortgageArticle';
 import HondaArticle from '../Articles/HondaArticle';
+import EVArticle from '../Articles/EVArticle';
+import AutoInsuranceArticle from '../Articles/AutoInsuranceArticle';
 
 export const buildFullURL = (buttonArr, trackingState) => {
     const keys = ['&forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
@@ -117,6 +119,12 @@ export const setPageComponent = (article, setArticle) => {
             break;
         case 'honda':
             setArticle(<HondaArticle />);
+            break;
+        case 'ev':
+            setArticle(<EVArticle />);
+            break;
+        case 'autoinsurance':
+            setArticle(<AutoInsuranceArticle />);
             break;
         
         default:
