@@ -22,6 +22,7 @@ import MortgageArticle from '../Articles/MortgageArticle';
 import HondaArticle from '../Articles/HondaArticle';
 import EVArticle from '../Articles/EVArticle';
 import AutoInsuranceArticle from '../Articles/AutoInsuranceArticle';
+import BoTArticle from '../Articles/BoTArticle';
 
 export const buildFullURL = (buttonArr, trackingState) => {
     const keys = ['&forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
@@ -125,6 +126,9 @@ export const setPageComponent = (article, setArticle) => {
             break;
         case 'autoinsurance':
             setArticle(<AutoInsuranceArticle />);
+            break;
+        case 'bot':
+            setArticle(<BoTArticle />);
             break;
         
         default:

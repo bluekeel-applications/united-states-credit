@@ -3,22 +3,16 @@ import React from 'react';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import { styled } from '@mui/material/styles';
-import TableRow from '@mui/material/TableRow';
+import CustomTable from './components/CustomTable.jsx';
 import ContentText from './components/ContentText';
 
-const CheckingTable = () => {
+const CheckingArticle = () => {
     const columns = [
         { id: 'id', label: '', minWidth: 60, align: 'left' },
         { id: 'name', label: 'Bank', minWidth: 200, align: 'left' },
         { id: 'value', label: 'Bonus Offer', minWidth: 100, align: 'right' },
     ];
+
     function createData(id, name, value) {
         return { id, name, value};
     };
@@ -37,61 +31,11 @@ const CheckingTable = () => {
         createData('11', 'M&T Bank', 'Up to $200 bonus'),
         createData('12', 'Bank of America', '$200 bonus')
     ];
-
-    const StyledTableRow = styled(TableRow)(({ theme }) => ({
-        '&:nth-of-type(odd)': {
-          backgroundColor: theme.palette.action.hover,
-        },
-        // hide last border
-        '&:last-child td, &:last-child th': {
-          border: 0,
-        },
-      }));
-
-    return(
-        <Paper sx={{ width: '100%', overflow: 'hidden', maxWidth: 800 }}>
-            <TableContainer>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    {rows.map((row) => {
-                        return (
-                            <StyledTableRow key={row.id}>
-                            {columns.map((column) => {
-                                const value = row[column.id];
-                                return (
-                                    <TableCell key={column.id} align={column.align}>
-                                        {value}
-                                    </TableCell>
-                                );
-                            })}
-                            </StyledTableRow>
-                        );
-                        })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </Paper>
-    )
-};
-const CheckingArticle = () => {
     // const { trackingState } = useContext(AppContext);
     return(
         <div style={styles.mainConatiner}>
             <div style={{...styles.contentContainer, display:'flex', justifyContent: 'center', alignContent:' flex-start'}}>
-                <CheckingTable />
+                <CustomTable columns={columns} rows={rows}/>
             </div>
             <div style={styles.contentContainer}>
                 <ArticleTitle text="Mobile Deposit"/>                
