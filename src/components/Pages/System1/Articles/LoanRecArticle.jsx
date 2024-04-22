@@ -1,15 +1,13 @@
 import React from 'react';
-// import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 import ArticleTitle from './components/ArticleTitle.jsx';
-// import ButtonContainer from '../ButtonContainer.jsx';
 import CostsTable from './components/CostsTable.jsx';
 import ContentText from './components/ContentText.jsx';
 import ExampleTable from './components/ExampleTable.jsx';
 import ContentTitle from './components/ContentTitle.jsx';
+import RecommendBox from './components/RecommendBox.jsx';
 
-const LoanArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+const LoanRecArticle = () => {
 
     return(
         <div style={styles.mainConatiner}>
@@ -20,6 +18,11 @@ const LoanArticle = () => {
                 </div>
                 <ContentText text="Luckily, the Internet has expanded our options on where we can find loan options. You no longer have to just go to your local bank for a traditional loan. You can now look for loans online from a wide range of lenders as you can compare rates, terms and conditions that are more agreeable to you. Here are some tips on how to apply for a personal loan online."/>
             </div>
+            <RecommendBox
+                titleText="Why we like it"
+                text="This offer is targeted towards those with less than perfect credit.  The application process is fast, simple and strait-forward.  In addition, they are members of the OLA which has a commitment to responsible lending."
+                offerUrl="https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9478&pid=3361&eid=USC_loans&uid=yourUID"
+            />
             <div style={styles.contentContainer}>
                 <ContentTitle text="1. Understand Your Funding Needs" />
                 <ContentText text="A problem that a lot of people experience when getting a loan is figuring out the amount to ask from the lender. Ask for too little and you end up having to take out a second loan. Take out too much and you are paying back the extra money with interest. Sit down and decide on how much you need and whether getting a personal loan is the best option. There are times when other lending methods, such as friends or relatives, are better for your financial situation." />
@@ -58,4 +61,4 @@ const LoanArticle = () => {
     );
 };
 
-export default LoanArticle;
+export default LoanRecArticle;

@@ -42,6 +42,7 @@ import {
     faBlog,
     faTimes,
     faChevronUp,
+    faTrophyStar,
 } from '@fortawesome/pro-light-svg-icons';
 
 function initFontAwesome() {
@@ -86,7 +87,8 @@ function initFontAwesome() {
         faThumbsUp,
         faBlog,
         faTimes,
-        faChevronUp
+        faChevronUp,
+        faTrophyStar
     );
 }
 
