@@ -40,7 +40,8 @@ export const buildFullURL = (buttonArr, trackingState) => {
     const taboola = `tbid=1648456&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
     const facebook = `fbid=531202445442265&fbclick=Search`;
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
-    return `${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebook}&${google}`;
+    const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`
+    return `${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebook}&${google}&${tiktok}`;
 };
 
 export const setDefaultData = (trackingState) => {
@@ -54,7 +55,8 @@ export const setDefaultData = (trackingState) => {
     const facebook = `fbid=531202445442265&fbclick=Search`;
     const trackingVars = `email=omit&hsid=234820821&pid=3420&sid=9582&oid=40&uid=yourUID&eid=yourEID`;
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
-    return `?${searchTrack}&${article}&${clickTrack}&${segment}&${subId}&${facebook}&${google}&${forceKeys}&${taboola}&${trackingVars}`;
+    const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`
+    return `?${searchTrack}&${article}&${clickTrack}&${segment}&${subId}&${facebook}&${google}&${forceKeys}&${taboola}&${trackingVars}&${tiktok}`;
 };
 
 export const setPageComponent = (article, setArticle) => {

@@ -55,6 +55,8 @@ const App = () => {
 		ARTICLE: myURL.searchParams.get('article') || 'loan',
 		SPLIT: myURL.searchParams.get('split') || '',
 		RECORD: myURL.searchParams.get('record') || '',
+		TTID: myURL.searchParams.get('ttid') || 'CO5VQT3C77U2IBEA8QH0',
+		TTCLID: myURL.searchParams.get('ttclid') || '',
     };
 
 	const buildURLTail = (buttonArr) => {
