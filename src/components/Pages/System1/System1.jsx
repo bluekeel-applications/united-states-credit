@@ -53,7 +53,6 @@ const System1 = () => {
     };
 
     const handleInboundData = (data) => {
-        console.log('data:', data);
         // If error getting article, use credit as default;
         if(!data?.fetchArticleByKey?.success){
             console.log('Error: No data found', data);

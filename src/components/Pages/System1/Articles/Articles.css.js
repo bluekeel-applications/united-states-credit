@@ -109,7 +109,8 @@ const styles = {
         width: '100%',
         display: 'inline-flex',
         justifyContent: 'flex-start',
-        alignItems: 'baseline'
+        textAlign: 'left',
+        alignItems: 'baseline',
     },
     recIcon: {
         fontSize: '1.5rem',

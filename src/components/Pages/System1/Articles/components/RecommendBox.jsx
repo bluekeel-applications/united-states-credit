@@ -3,12 +3,23 @@ import styles from '../Articles.css';
 import ContentText from './ContentText';
 import ArticleTitle from './ArticleTitle.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useMediaQuery } from 'react-responsive';
 
 const RecommendBox = ({titleText, text, offerUrl}) => {
+    const isMobile = useMediaQuery({ maxWidth: 767 });
     const [ isHovering, setHovering ] = useState(false);
     const handleOfferClick = () => {
         window.open(offerUrl, "_blank");
     };
+
+    const iconContainerStyle = Object.assign(
+        styles.recTitleContainer,
+        isMobile && {alignItems: 'center'}
+    );
+    const iconStyle = Object.assign(
+        styles.recIcon,
+        isMobile && {fontSize: '2rem'}
+    );
 
     const buttStyle = Object.assign({}, 
         styles['offerButton'],
@@ -17,10 +28,10 @@ const RecommendBox = ({titleText, text, offerUrl}) => {
 
     return(
         <div style={styles.recOfferContainer}>
-            <div style={styles.recTitleContainer}>
+            <div style={iconContainerStyle}>
                 <FontAwesomeIcon
                     icon={['fal', 'trophy-star']}
-                    style={styles.recIcon}
+                    style={iconStyle}
                 />
                 <ArticleTitle text="Editor's Choice: United Loan" />
             </div>

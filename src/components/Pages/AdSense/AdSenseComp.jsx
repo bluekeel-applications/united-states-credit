@@ -20,12 +20,13 @@ class GoogleAd extends Component {
                 }}
                 data-ad-format='auto'
                 data-full-width-responsive='true'
+                data-ad-channel={this.props.channel}
             />
         );
     }
 };
 
-const AdSenseComp = () => {
+const AdSenseComp = ({ channel }) => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
 
     const [ adWidth ] = useState(() => {
@@ -52,6 +53,7 @@ const AdSenseComp = () => {
                 width={adWidth}
                 height={adHeight}
                 isMobile={isMobile}
+                channel={channel}
             />
         </div>
     );

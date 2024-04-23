@@ -80,7 +80,7 @@ const Welcome = () => {
 		};
 	},[]);
 	// return <StartButtonComponent />;
-	return showAd ? <AdSenseComp /> : <StartButtonComponent />
+	return showAd ? <AdSenseComp channel="start"/> : <StartButtonComponent />
 }
 
 export default Radium(Welcome);
