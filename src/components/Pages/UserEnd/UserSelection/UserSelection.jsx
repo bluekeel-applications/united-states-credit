@@ -185,7 +185,7 @@ const UserSelection = Radium(({ theme, offer, tracking, email }) => {
                     }
                 </form>
             </div>
-            {showAd && <AdSenseComp channel="quicklinks"/>}
+            {showAd && <AdSenseComp />}
             {showArticle && <LoanArticle />}
         </div>
     )

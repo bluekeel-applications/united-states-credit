@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 import ArticleTitle from './components/ArticleTitle.jsx';
 import CostsTable from './components/CostsTable.jsx';
@@ -8,7 +9,7 @@ import ContentTitle from './components/ContentTitle.jsx';
 import RecommendBox from './components/RecommendBox.jsx';
 
 const LoanRecArticle = () => {
-
+    const { trackingState } = useContext(AppContext);
     return(
         <div style={styles.mainConatiner}>
             <div style={styles.contentContainer}>
@@ -21,7 +22,7 @@ const LoanRecArticle = () => {
             <RecommendBox
                 titleText="Why we like it"
                 text="This offer is targeted towards those with less than perfect credit.  The application process is fast, simple and strait-forward.  In addition, they are members of the OLA which has a commitment to responsible lending."
-                offerUrl="https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9478&pid=3361&eid=USC_loans&uid=yourUID"
+                offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9478&pid=3361&eid=top-${trackingState.sid}&uid=yourUID`}
             />
             <div style={styles.contentContainer}>
                 <ContentTitle text="1. Understand Your Funding Needs" />
@@ -57,6 +58,11 @@ const LoanRecArticle = () => {
                 <ExampleTable />
                 <ContentText text="APR for good credit typically ranges from 5.99% to 35.99% and generally will have a repayment term of 2 months to 72 months. Loan amounts under $1,000 will have varying APR’s than what is listed in the represented example above. Please contact your lender for more information." />
             </div>
+            <RecommendBox
+                titleText="Why we like it"
+                text="This offer is targeted towards those with less than perfect credit.  The application process is fast, simple and strait-forward.  In addition, they are members of the OLA which has a commitment to responsible lending."
+                offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9478&pid=3361&eid=bottom-${trackingState.sid}&uid=yourUID`}
+            />
         </div>
     );
 };

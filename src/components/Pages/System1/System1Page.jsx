@@ -18,6 +18,7 @@ const System1Page = () => {
 
     useEffect(() => {
         window.fbq('init', '531202445442265');
+        // window.fbq('init', '1129397548111416');
         console.log('Initialized FB Pixel');
         window.liQ = window.liQ || [];
         window.liQ.push({
