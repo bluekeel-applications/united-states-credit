@@ -39,6 +39,7 @@ const useSetNewSession = ({ tracking, turnOffLoading, animationComplete }) => {
 			gclid: tracking.GCLID,
 			email: tracking.EMAIL,
 			article: tracking.ARTICLE,
+			segment: tracking.SEGMENT,
 			record: tracking.RECORD,
 			ttid: tracking.TTID,
 			ttclid: tracking.TTCLID,

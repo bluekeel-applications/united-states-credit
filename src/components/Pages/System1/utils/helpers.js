@@ -40,10 +40,12 @@ export const buildFullURL = (buttonArr, trackingState) => {
     const clickTrack = `click_track_url=http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${trackingState.hsid}`;
     const subId = `subid=${trackingState.sid}-${trackingState.eid}`;
     const taboola = `tbid=1648456&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
-    const facebook = !!trackingState.fbid ? 'fbclick=Search' : `fbid=531202445442265&fbclick=Search`;
+    // const facebook = !!trackingState.fbid ? 'fbclick=Search' : `fbid=531202445442265&fbclick=Search`;
+    const facebook = !!trackingState.fbid ? `fbid=${trackingState.fbid}&fbclick=Search` : `fbid=531202445442265&fbclick=Search`;
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
     const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`
-    return `${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebook}&${google}&${tiktok}`;
+    const inbound = `article=${trackingState.article}&pid=${trackingState.pid}&sid=${trackingState.sid}&oid=${trackingState.oid}&uid=${trackingState.uid}&eid=${trackingState.eid}&segment=${trackingState.segment}&email=${trackingState.email}&hsid=${trackingState.hsid}`
+    return `${inbound}&${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebook}&${google}&${tiktok}`;
 };
 
 export const setDefaultData = (trackingState) => {
@@ -54,11 +56,12 @@ export const setDefaultData = (trackingState) => {
     const clickTrack = `click_track_url=http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${trackingState.hsid}`;
     const subId = `subid=${trackingState.sid}-${trackingState.eid}`;
     const taboola = `tbid=1648456&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
-    const facebook = !!trackingState.fbid ? 'fbclick=Search' : `fbid=531202445442265&fbclick=Search`;
+    // const facebook = !!trackingState.fbid ? 'fbclick=Search' : `fbid=531202445442265&fbclick=Search`;
+    const facebook = !!trackingState.fbid ? `fbid=${trackingState.fbid}&fbclick=Search` : `fbid=531202445442265&fbclick=Search`;
     const trackingVars = `email=omit&hsid=234820821&pid=3420&sid=9582&oid=40&uid=yourUID&eid=yourEID`;
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
-    const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`
-    return `?${searchTrack}&${article}&${clickTrack}&${segment}&${subId}&${facebook}&${google}&${forceKeys}&${taboola}&${trackingVars}&${tiktok}`;
+    const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`;
+    return `${searchTrack}&${article}&${clickTrack}&${segment}&${subId}&${facebook}&${google}&${forceKeys}&${taboola}&${trackingVars}&${tiktok}`;
 };
 
 export const setPageComponent = (article, setArticle) => {

@@ -56,7 +56,7 @@ const System1 = () => {
         // If error getting article, use credit as default;
         if(!data?.fetchArticleByKey?.success){
             console.log('Error: No data found', data);
-            const newURL = `/rsoc${setDefaultData(trackingState)}`;
+            const newURL = `/rsoc?${setDefaultData(trackingState)}`;
             navigate(newURL, { replace: true });
             setStaticArticle('credit');
             showOldFormat();
@@ -65,7 +65,8 @@ const System1 = () => {
         // Otherwise, set context and build full url
         dispatchApp({ type: 'SET_SYSTEM_1', payload: data.fetchArticleByKey.body });
         const tail = buildFullURL(data.fetchArticleByKey.body.buttons, trackingState);
-        const newURL = `/rsoc${myURL.search}${tail}`;
+        // const newURL = `/rsoc${myURL.search}${tail}`;
+        const newURL = `/rsoc?${tail}`;
         navigate(newURL, { replace: true });
         window._rampJs();
         setShowDynamicPage(true);
