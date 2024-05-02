@@ -17,7 +17,8 @@ const System1Page = () => {
     },[trackingState.article]);
 
     useEffect(() => {
-        window.fbq('init', '531202445442265');
+        const facebookId = !!trackingState.fbid ? trackingState.fbid : '531202445442265';
+        window.fbq('init', facebookId);
         // window.fbq('init', '1129397548111416');
         console.log('Initialized FB Pixel');
         window.liQ = window.liQ || [];
@@ -26,6 +27,7 @@ const System1Page = () => {
             "name": "lead"
         });
         console.log('Initialized Live Intent Pixel');
+        // eslint-disable-next-line
     },[]);
 
     const headerStyle = Object.assign({},

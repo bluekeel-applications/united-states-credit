@@ -78,7 +78,8 @@ const styles = {
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: '10px'
     },
     offerButton: {
         display: 'flex',

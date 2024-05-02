@@ -57,6 +57,7 @@ const App = () => {
 		RECORD: myURL.searchParams.get('record') || '',
 		TTID: myURL.searchParams.get('ttid') || 'CO5VQT3C77U2IBEA8QH0',
 		TTCLID: myURL.searchParams.get('ttclid') || '',
+		FBID: myURL.searchParams.get('fbid') || null,
     };
 
 	const buildURLTail = (buttonArr) => {

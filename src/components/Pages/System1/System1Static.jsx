@@ -138,9 +138,11 @@ const System1Static = ({ article }) => {
     },[article]);
     
     useEffect(() => {
-        window.fbq('init', '531202445442265');
+        const facebookId = !!trackingState.fbid ? trackingState.fbid : '531202445442265';
+        window.fbq('init', facebookId);
         // window.fbq('init', '1129397548111416');
         console.log('Initialized FB Pixel');
+        // eslint-disable-next-line
     },[]);
 
     const headerStyle = Object.assign({},

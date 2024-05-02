@@ -1,7 +1,7 @@
 import React from 'react';
 // import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
-import ArticleTitle from './components/ArticleTitle.jsx';
+// import ArticleTitle from './components/ArticleTitle.jsx';
 // import ButtonContainer from '../ButtonContainer';
 import ContentText from './components/ContentText';
 

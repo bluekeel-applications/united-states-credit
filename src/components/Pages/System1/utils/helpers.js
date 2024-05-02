@@ -25,6 +25,7 @@ import AutoInsuranceArticle from '../Articles/AutoInsuranceArticle';
 import BoTArticle from '../Articles/BoTArticle';
 import RealEstateArticle from '../Articles/RealEstateArticle';
 import LoanRecArticle from '../Articles/LoanRecArticle';
+import CreditRecArticle from '../Articles/CreditRecArticle';
 
 export const buildFullURL = (buttonArr, trackingState) => {
     const keys = ['&forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
@@ -39,7 +40,7 @@ export const buildFullURL = (buttonArr, trackingState) => {
     const clickTrack = `click_track_url=http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${trackingState.hsid}`;
     const subId = `subid=${trackingState.sid}-${trackingState.eid}`;
     const taboola = `tbid=1648456&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
-    const facebook = `fbid=531202445442265&fbclick=Search`;
+    const facebook = !!trackingState.fbid ? 'fbclick=Search' : `fbid=531202445442265&fbclick=Search`;
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
     const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`
     return `${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebook}&${google}&${tiktok}`;
@@ -53,7 +54,7 @@ export const setDefaultData = (trackingState) => {
     const clickTrack = `click_track_url=http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${trackingState.hsid}`;
     const subId = `subid=${trackingState.sid}-${trackingState.eid}`;
     const taboola = `tbid=1648456&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
-    const facebook = `fbid=531202445442265&fbclick=Search`;
+    const facebook = !!trackingState.fbid ? 'fbclick=Search' : `fbid=531202445442265&fbclick=Search`;
     const trackingVars = `email=omit&hsid=234820821&pid=3420&sid=9582&oid=40&uid=yourUID&eid=yourEID`;
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
     const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`
@@ -139,6 +140,9 @@ export const setPageComponent = (article, setArticle) => {
             break;
         case 'loanrec':
             setArticle(<LoanRecArticle />);
+            break;
+        case 'creditrec':
+            setArticle(<CreditRecArticle />);
             break;
         
         default:

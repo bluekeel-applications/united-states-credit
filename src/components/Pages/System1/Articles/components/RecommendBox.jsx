@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styles from '../Articles.css';
 import ContentText from './ContentText';
-import ArticleTitle from './ArticleTitle.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useMediaQuery } from 'react-responsive';
 
-const RecommendBox = ({titleText, text, offerUrl}) => {
+const RecommendBox = ({mainTitle, titleText, text, offerUrl, cta}) => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const [ isHovering, setHovering ] = useState(false);
     const handleOfferClick = () => {
@@ -33,7 +32,9 @@ const RecommendBox = ({titleText, text, offerUrl}) => {
                     icon={['fal', 'trophy-star']}
                     style={iconStyle}
                 />
-                <ArticleTitle text="Editor's Choice: United Loan" />
+                <div style={{...styles.title, padding: '0'}}>
+                    {mainTitle}
+                </div>
             </div>
             <ContentText title={titleText} text={text} />
             <div style={styles.offerButtonContainer}>
@@ -43,8 +44,8 @@ const RecommendBox = ({titleText, text, offerUrl}) => {
                     onMouseEnter={() => setHovering(true)}
                     onMouseLeave={() => setHovering(false)}
                 >
-                    See Offer
-                !</button>
+                    {cta}
+                </button>
             </div>
         </div>
     )

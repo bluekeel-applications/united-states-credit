@@ -28,7 +28,8 @@ const initialTrackingState = {
     article: null,
     record: null,
     ttid: null,
-    ttclid: null
+    ttclid: null,
+    fbid: null
 };
 
 const trackingStateReducer = (state, action) => {
@@ -59,7 +60,8 @@ const trackingStateReducer = (state, action) => {
                 article: action.payload.article,
                 record: action.payload.record,
                 ttid: action.payload.ttid,
-                ttclid: action.payload.ttclid
+                ttclid: action.payload.ttclid,
+                fbid: action.payload.fbid
             };
             Helpers.setCookies(tracking);
             return {
