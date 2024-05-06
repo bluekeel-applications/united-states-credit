@@ -1,15 +1,15 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { AppContext } from '../../../context';
-import styles from './System1.css';
+import styles from '../System1/System1.css.js';
 import { useMediaQuery } from 'react-responsive';
-import ButtonContainer from './ButtonContainer';
-import MainTitle from './Articles/components/MainTitle';
-import { setPageComponent } from './utils/helpers';
+import MainTitle from '../System1/Articles/components/MainTitle.jsx';
+import { setPageComponent } from '../System1/utils/helpers';
+import InArticleAd from './InArticleAd';
 
-const System1Page = () => {
+const ActivePage = () => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const { trackingState, appState } = useContext(AppContext);
-    const { header, sub_text, button_title } = appState.system1;
+    const { header, sub_text } = appState.system1;
     const [ useArticle, setArticle ] = useState(null);
 
     useEffect(() => {
@@ -21,12 +21,12 @@ const System1Page = () => {
         window.fbq('init', facebookId);
         // window.fbq('init', '1129397548111416');
         console.log('Initialized FB Pixel');
-        window.liQ = window.liQ || [];
-        window.liQ.push({
-            "event": "viewContent",
-            "name": "lead"
-        });
-        console.log('Initialized Live Intent Pixel');
+        // window.liQ = window.liQ || [];
+        // window.liQ.push({
+        //     "event": "viewContent",
+        //     "name": "lead"
+        // });
+        // console.log('Initialized Live Intent Pixel');
         // eslint-disable-next-line
     },[]);
 
@@ -45,14 +45,10 @@ const System1Page = () => {
                 {!!header && <MainTitle text={header} />}
                 {!!sub_text && <div style={headerSubStyle}>{sub_text}</div>}
             </div>
-            <ButtonContainer 
-                containerId='rampjs_slot1' 
-                email={trackingState['email']} 
-                title={button_title}
-            />
+            <InArticleAd />
             {useArticle}
         </div>
     );
 };
 
-export default System1Page;
+export default ActivePage;

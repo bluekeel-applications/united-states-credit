@@ -16,7 +16,7 @@ import Radium from 'radium';
 import Styles from './Styles.css.js';
 import { useMediaQuery } from 'react-responsive';
 import { useLazyQuery } from '@apollo/client';
-import FETCH_ARTICLE_BY_KEY from '../components/Pages/System1/utils/GraphQL/FETCH_ARTICLE_BY_KEY.js';
+import { FETCH_ARTICLE_BY_KEY } from '../utils/GraphQL/queries.js';
 
 const Feed = lazy(() => import('./Layout/Feed'));
 

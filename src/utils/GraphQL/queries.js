@@ -171,10 +171,29 @@ const GET_OFFER_BY_RECORD = gql`
     }
 `;
 
+const FETCH_ARTICLE_BY_KEY = gql `
+	query FetchArticleByKey($key: String) {
+		fetchArticleByKey(key: $key){
+			success
+			status
+			message
+			body {
+				id
+                key
+                header
+                sub_text
+                button_title
+                buttons
+			}
+		}
+	}
+`;
+
 export {
     PCH_USER,
     PUSH_PROVIDERS,
 	GET_OFFER_BY_GROUP,
 	GET_OFFER,
-    GET_OFFER_BY_RECORD
+    GET_OFFER_BY_RECORD,
+    FETCH_ARTICLE_BY_KEY
 };

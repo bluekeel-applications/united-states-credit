@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState, useRef } from 'react';
 import { AppContext } from '../../../context';
 import { useLazyQuery, useMutation } from '@apollo/client';
-import FETCH_ARTICLE_BY_KEY from './utils/GraphQL/FETCH_ARTICLE_BY_KEY';
+import { FETCH_ARTICLE_BY_KEY } from '../../../utils/GraphQL/queries';
 import { ADD_USER_EMAIL } from '../../../utils/GraphQL/mutations';
 import { buildFullURL, setDefaultData } from './utils/helpers';
 import Loading from '../../Shared/Loading';

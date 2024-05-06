@@ -19,7 +19,7 @@ import SeniorsArticle from './Articles/SeniorsAtricle';
 import AutoFinanceArticle from './Articles/AutoFinanceArticle';
 import DentalArticle from './Articles/DentalArticle';
 import ButtonContainer from './ButtonContainer';
-import MainTitle from './MainTitle';
+import MainTitle from './Articles/components/MainTitle';
 
 const System1Static = ({ article }) => {
     const isMobile = useMediaQuery({ maxWidth: 767 });

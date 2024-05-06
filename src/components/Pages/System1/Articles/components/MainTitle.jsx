@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './System1.css.js';
+import styles from '../Articles.css.js';
 import { useMediaQuery } from 'react-responsive';
 
 const MainTitle = ({text}) => {
