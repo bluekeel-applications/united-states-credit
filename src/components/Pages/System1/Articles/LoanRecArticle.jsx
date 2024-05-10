@@ -23,7 +23,8 @@ const LoanRecArticle = () => {
                 mainTitle="Editor's Choice: Access Today’s Top Loan Offer for Any Credit Type"
                 titleText="Why we like it"
                 text="This offer caters to individuals with less-than-perfect credit, providing quick access to personal loans or emergency funds. The application process is speedy, uncomplicated, and direct."
-                offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9838&pid=3575&eid=top-${trackingState.sid}&uid=yourUID`}
+                offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9478&pid=3361&eid=top-${trackingState.sid}&uid=yourUID`}
+                // offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9838&pid=3575&eid=top-${trackingState.sid}&uid=yourUID`}
                 cta="ACCESS NOW"
             />
             <div style={styles.contentContainer}>
@@ -64,7 +65,8 @@ const LoanRecArticle = () => {
                 mainTitle="Editor's Choice: Access Today’s Top Loan Offer for Any Credit Type"
                 titleText="Why we like it"
                 text="This offer caters to individuals with less-than-perfect credit, providing quick access to personal loans or emergency funds. The application process is speedy, uncomplicated, and direct."
-                offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9838&pid=3575&eid=bottom-${trackingState.sid}&uid=yourUID`}
+                offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9478&pid=3361&eid=bottom-${trackingState.sid}&uid=yourUID`}
+                // offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9838&pid=3575&eid=bottom-${trackingState.sid}&uid=yourUID`}
                 cta="ACCESS NOW"
             />
         </div>

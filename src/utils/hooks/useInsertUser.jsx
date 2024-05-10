@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_NEW_USER, ADD_START_URL } from '../GraphQL/mutations';
 import firePixelBlueKeel from '../pixels/bluekeelPixel';
 
-const useInsertNewUser = (tracking, hsid, ip_address, shouldExecute) => {
+const useInsertUser = (tracking, hsid, ip_address, shouldExecute) => {
 
     const [ addNewUser ] = useMutation(ADD_NEW_USER, { 
         onCompleted: (data) => console.log(data.addNewUser.message)
@@ -34,7 +34,8 @@ const useInsertNewUser = (tracking, hsid, ip_address, shouldExecute) => {
                 url: window.location.search
             }
         });
-		if(tracking['sid'] === 5102 || tracking['sid'] === 9113 || tracking['sid'] === 9371 || tracking['sid'] === 9419 || tracking['sid'] === 9474) {
+        const sidList = [5102, 9113, 9371, 9419, 9474, 9560, 9568, 9641, 9649];
+		if(sidList.includes(tracking['sid'])) {
 			firePixelBlueKeel(hsid);
         };
 	};
@@ -49,4 +50,4 @@ const useInsertNewUser = (tracking, hsid, ip_address, shouldExecute) => {
 	return;
 };
 
-export default useInsertNewUser;
+export default useInsertUser;
