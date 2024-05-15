@@ -1,12 +1,14 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 import ArticleTitle from './components/ArticleTitle.jsx';
 // import ButtonContainer from '../ButtonContainer';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const CreditScoreArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -15,6 +17,16 @@ const CreditScoreArticle = () => {
                 In today's financial landscape, your credit score wields an unprecedented influence over your life. From securing loans and credit cards to determining interest rates and even impacting job opportunities, your credit score plays a pivotal role in various aspects of your financial journey. As such, monitoring your credit score has become not just a good practice, but a necessary one. In this article, we'll delve into the importance of your credit score and elaborate on why vigilant monitoring of it is paramount.
                 </div>
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text="The Significance of Your Credit Score"/>
                 <ContentText text="Your credit score is a three-digit number that reflects your creditworthiness. Ranging from 300 to 850 in most scoring models, a higher credit score signifies a lower credit risk. Lenders, such as banks and credit card companies, use this score to assess the likelihood that you will repay borrowed money on time. A high credit score opens the doors to lower interest rates, higher credit limits, and more favorable loan terms. Conversely, a low credit score can lead to higher interest rates, limited access to credit, and potentially even loan rejection." />
@@ -41,6 +53,16 @@ const CreditScoreArticle = () => {
                 <ContentText text="Regularly reviewing your credit report allows you to ensure its accuracy, detect and address errors, and safeguard yourself against identity theft. Furthermore, it empowers you to take control of your financial well-being, make informed decisions, and strategically plan for major life events." />
                 <ContentText text="In the digital age, monitoring your credit score has become more accessible than ever. Numerous free and paid services offer credit score tracking and alerts, making it easy for you to stay on top of your financial health. Remember, your credit score is a reflection of your financial journey, so make the effort to monitor and nurture it—the rewards will undoubtedly be worth it." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

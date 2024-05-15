@@ -1,14 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AppContext } from '../../../../../context';
 import styles from '../Articles.css';
 import ContentText from './ContentText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useMediaQuery } from 'react-responsive';
 
-const RecommendBox = ({mainTitle, titleText, text, offerUrl, cta}) => {
+const RecommendBox = ({mainTitle, titleText, text, offerUrl, cta, location}) => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const [ isHovering, setHovering ] = useState(false);
+    const [ fullUrl, setUrl ] = useState(null);
+    const { trackingState } = useContext(AppContext);
+
+    useEffect(() => {
+        var url = new URL(offerUrl);
+        var search_params = url.searchParams;
+        search_params.set('eid', `${location}-${trackingState.sid}`);
+        url.search = search_params.toString();
+        var new_url = url.toString();
+        setUrl(new_url);
+    },[]);
+
     const handleOfferClick = () => {
-        window.open(offerUrl, "_blank");
+        window.open(fullUrl, "_blank");
     };
 
     const iconContainerStyle = Object.assign(

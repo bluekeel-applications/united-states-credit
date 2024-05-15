@@ -1,12 +1,15 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const PersonalInjuryArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
+
     return(
         <div style={styles.mainConatiner}>
             <div style={styles.contentContainer}>
@@ -14,6 +17,16 @@ const PersonalInjuryArticle = () => {
                 Accidents can happen unexpectedly, leaving victims with physical, emotional, and financial burdens. In such distressing times, a personal injury attorney can be a lifeline, guiding individuals through the complexities of legal processes and ensuring they receive fair compensation for their losses. The importance of finding the best personal injury attorney cannot be understated, as their expertise, dedication, and experience play a vital role in securing a successful outcome for your case. This article explores the significance of having a skilled attorney on your side and provides valuable insights on how to find the best legal representation during challenging times.
                 </div>
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text="The Importance of a Personal Injury Attorney"/>                
                 <ContentText title="1. Legal Expertise and Experience" text='Personal injury law is a complex field that encompasses a wide range of cases, including car accidents, slip and falls, medical malpractice, and workplace accidents. A skilled personal injury attorney possesses a comprehensive understanding of the legal system and relevant laws, enabling them to navigate through the intricacies of your case efficiently. Their experience in handling similar cases equips them with the necessary tools to build a strong argument and negotiate with insurance companies or the opposing party effectively.' />
@@ -36,6 +49,16 @@ const PersonalInjuryArticle = () => {
                 <ArticleTitle text="Bringing It All Together"/> 
                 <ContentText text="Hiring the best personal injury attorney is an investment in your future, ensuring that you receive the compensation you deserve after an accident. Their legal expertise, negotiation skills, and dedication to your case are vital in maximizing your chances of a successful outcome. Take the time to research, ask for referrals, and evaluate the track record of potential attorneys before making your decision. A strong attorney-client relationship can make all the difference in navigating the complexities of personal injury law and securing the justice you seek." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

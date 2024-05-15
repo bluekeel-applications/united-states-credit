@@ -1,12 +1,14 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const SavingsArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -15,6 +17,16 @@ const SavingsArticle = () => {
                 In today's unpredictable financial landscape, finding safe and effective ways to grow your savings is a priority for many individuals. High-yield savings accounts have emerged as a popular option for those seeking to maximize their savings potential while maintaining liquidity and minimizing risk. In this article, we will delve into the world of high-yield savings accounts, exploring their benefits, considerations, and how they can help you achieve your financial goals.
                 </div>
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text="What are High-Yield Savings Accounts?"/>
                 <ContentText text='High-yield savings accounts are specialized savings vehicles offered by financial institutions that offer a higher interest rate compared to traditional savings accounts. These accounts allow you to earn more on your deposited funds while still providing the same level of security and accessibility as regular savings accounts. High-yield savings accounts are typically offered by online banks or credit unions, providing customers with a convenient and flexible banking experience.' />
@@ -37,6 +49,16 @@ const SavingsArticle = () => {
             <div style={styles.contentContainer}>
                 <ContentText text="High-yield savings accounts present a compelling option for individuals seeking to grow their savings with competitive interest rates while maintaining safety and accessibility. These accounts offer a balance between earning potential and liquidity, making them suitable for both short-term and long-term savings goals. By carefully evaluating the benefits, considering important factors, and selecting a reputable financial institution, you can harness the power of high-yield savings accounts to maximize your savings and achieve your financial aspirations." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

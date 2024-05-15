@@ -1,12 +1,14 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const EducationArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -15,7 +17,16 @@ const EducationArticle = () => {
                 In recent years, the popularity of online education has soared, with an increasing number of individuals opting to pursue their degrees through online programs. This paradigm shift in education has brought about numerous benefits, such as flexibility, accessibility, and diverse course offerings. In this article, we will explore the advantages of getting a degree online and provide valuable insights on how to select the best online degree program that aligns with your educational and career goals.
                 </div>
             </div>
-            
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text='Flexibility and Convenience'/>
                 <ContentText text='One of the primary advantages of obtaining a degree online is the flexibility it offers. Traditional brick-and-mortar institutions often require students to adhere to rigid schedules, making it difficult for individuals with work or family commitments to pursue higher education. Online programs, on the other hand, provide students with the freedom to study at their own pace and on their own schedule. This flexibility allows working professionals to maintain their jobs while acquiring new skills and knowledge that can enhance their career prospects.' />
@@ -45,6 +56,16 @@ const EducationArticle = () => {
                 <ContentText title='Curriculum and Course Offerings' text="Evaluate the curriculum and course offerings of the program. Ensure that the courses align with your academic and career goals. Look for programs that offer a comprehensive and well-structured curriculum that covers the necessary skills and knowledge in your field of interest." />
                 <ContentText title='Faculty and Support' text="Investigate the qualifications and expertise of the faculty members. Look for programs that boast experienced instructors who have practical" />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

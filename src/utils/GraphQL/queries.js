@@ -184,6 +184,20 @@ const FETCH_ARTICLE_BY_KEY = gql `
                 sub_text
                 button_title
                 buttons
+                offer1 {
+                    main_title
+                    sub_title
+                    sub_text
+                    cta
+                    offer_url
+                }
+                offer2 {
+                    main_title
+                    sub_title
+                    sub_text
+                    cta
+                    offer_url
+                }
 			}
 		}
 	}

@@ -1,12 +1,14 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import ContentText from './components/ContentText.jsx';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const AutoFinanceArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -16,6 +18,16 @@ const AutoFinanceArticle = () => {
                 An auto loan is essentially a sum of money borrowed to purchase a vehicle. The borrower agrees to repay the loan amount, along with interest, over a set period, typically ranging from 24 to 72 months. Lenders may be banks, credit unions, or auto finance companies. Some car manufacturers also offer financing options through their finance arms.
                 </div>
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text="Secured vs Unsecured Loans"/> 
                 <ContentText text="Most auto loans are secured loans, meaning the vehicle itself acts as collateral. If you default on the loan, the lender has the right to repossess the car. Unsecured auto loans are rare and typically have higher interest rates, as the lender takes on more risk." />
@@ -58,6 +70,16 @@ const AutoFinanceArticle = () => {
                 <ArticleTitle text="Bringing It All Together"/> 
                 <ContentText text="Auto finance loans offer a convenient way to own a vehicle, but they come with responsibilities. Understanding key elements like interest rates, loan terms, and down payments can significantly impact your financial health. Shop around for the best deals, read the fine print, and keep an eye out for potential pitfalls. Making informed decisions will not only get you behind the wheel but also keep you on the road to financial stability." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

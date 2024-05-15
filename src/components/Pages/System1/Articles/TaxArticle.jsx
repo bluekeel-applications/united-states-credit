@@ -1,12 +1,14 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const TaxArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -15,6 +17,16 @@ const TaxArticle = () => {
                 Tax issues can be daunting, especially when you find yourself in a situation where you owe a significant amount or are facing an audit. In such cases, tax resolution companies can provide invaluable assistance. These specialized firms are equipped with the knowledge and expertise to help individuals and businesses navigate through complex tax matters and find viable solutions. In this article, we will delve into the world of tax resolution companies, exploring their role, services, and how they can potentially alleviate your tax-related burdens.
                 </div>
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text="Understanding Tax Resolution Companies:"/>
                 <ContentText text='Tax resolution companies are professional firms that specialize in resolving tax problems on behalf of their clients. They employ tax professionals, including enrolled agents, certified public accountants (CPAs), and tax attorneys, who possess in-depth knowledge of tax laws and regulations. These professionals work closely with clients to identify and address their specific tax concerns.' />
@@ -46,6 +58,16 @@ const TaxArticle = () => {
             <div style={styles.contentContainer}>
                 <ContentText text="Tax resolution companies play a vital role in helping individuals and businesses navigate through complex tax challenges. Their expertise, experience, and understanding of tax laws can alleviate the burden of dealing with tax problems and provide you with peace of mind. If you find yourself in a tax predicament, consider consulting a reputable tax resolution company to explore viable solutions and work towards resolving your tax issues efficiently and effectively." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

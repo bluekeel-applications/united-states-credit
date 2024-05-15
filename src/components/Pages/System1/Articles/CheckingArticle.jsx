@@ -1,12 +1,16 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import CustomTable from './components/CustomTable.jsx';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const CheckingArticle = () => {
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
+
     const columns = [
         { id: 'id', label: '', minWidth: 60, align: 'left' },
         { id: 'name', label: 'Bank', minWidth: 200, align: 'left' },
@@ -31,12 +35,22 @@ const CheckingArticle = () => {
         createData('11', 'M&T Bank', 'Up to $200 bonus'),
         createData('12', 'Bank of America', '$200 bonus')
     ];
-    // const { trackingState } = useContext(AppContext);
+    
     return(
         <div style={styles.mainConatiner}>
             <div style={{...styles.contentContainer, display:'flex', justifyContent: 'center', alignContent:' flex-start'}}>
                 <CustomTable columns={columns} rows={rows}/>
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text="Mobile Deposit"/>                
                 <ContentText text='If you can take a picture with your mobile phone, you can deposit a check.  Mobile deposit, which is offered by most online checking providers, makes depositing a check as easy as taking a selfie. Just select the appropriate account and enter the dollar value of the check. Then simply position the check within the capture field, and voila!  The app takes care of the rest. In fact, now you have an image of the check for your records. This feature alone makes online checking one of the most convenient ways to manage your funds.' />
@@ -69,6 +83,16 @@ const CheckingArticle = () => {
                 <ArticleTitle text="Wrapping Things Up"/> 
                 <ContentText text="In conclusion, there are so many reasons for the majority of us to open an online checking account.  It’s convenient, secure and could potentially save you $100s in fees on an annual basis.  In addition, these types of checking accounts leverage some of the latest technologies which make managing your funds, paying bills, paying friends and preventing fraud easier than ever before.  I know, stepping away from something that exists in the physical world and is familiar can be a scary proposition.  Remember this, your money is still stored electronically as “1s” and “0s” whether you use an online banking provider or go to a physical location. So do yourself a favor and cut out the middle man." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

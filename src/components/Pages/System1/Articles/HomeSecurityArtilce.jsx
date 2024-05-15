@@ -1,12 +1,14 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const HomeSecurityArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -15,7 +17,16 @@ const HomeSecurityArticle = () => {
                 In an ever-changing world, ensuring the safety and security of our homes has become a paramount concern. With advancements in technology, home security systems have become an essential tool for protecting our loved ones and our valuable belongings. In this article, we will explore the significance of home security systems, delve into the different types available, and provide useful tips to help you select the best system for your specific needs.
                 </div>
             </div>
-            
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text='The Importance of Home Security Systems:'/>
                 <ContentText title='1. Deterrence' text='Home security systems act as a visible deterrent to potential intruders. The presence of security cameras, alarms, and other monitoring devices can discourage burglars from targeting your property.' />
@@ -45,6 +56,16 @@ const HomeSecurityArticle = () => {
                 <ArticleTitle text='Wrapping it all up:'/>
                 <ContentText text="Investing in a home security system is an investment in the safety and well-being of your family and your home. By deterring potential intruders, providing real-time alerts, and offering peace of mind, these systems play a crucial role in safeguarding your property. By understanding the various types of home security systems available and following the tips provided." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

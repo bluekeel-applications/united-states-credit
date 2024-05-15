@@ -9,7 +9,9 @@ import ContentTitle from './components/ContentTitle.jsx';
 import RecommendBox from './components/RecommendBox.jsx';
 
 const LoanRecArticle = () => {
-    const { trackingState } = useContext(AppContext);
+    const { trackingState, appState } = useContext(AppContext);
+    const page = appState.system1;
+
     return(
         <div style={styles.mainConatiner}>
             <div style={styles.contentContainer}>
@@ -19,14 +21,26 @@ const LoanRecArticle = () => {
                 </div>
                 <ContentText text="Luckily, the Internet has expanded our options on where we can find loan options. You no longer have to just go to your local bank for a traditional loan. You can now look for loans online from a wide range of lenders as you can compare rates, terms and conditions that are more agreeable to you. Here are some tips on how to apply for a personal loan online."/>
             </div>
-            <RecommendBox
-                mainTitle="Editor's Choice: Access Today’s Top Loan Offer for Any Credit Type"
-                titleText="Why we like it"
-                text="This offer caters to individuals with less-than-perfect credit, providing quick access to personal loans or emergency funds. The application process is speedy, uncomplicated, and direct."
-                offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9478&pid=3361&eid=top-${trackingState.sid}&uid=yourUID`}
-                // offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9838&pid=3575&eid=top-${trackingState.sid}&uid=yourUID`}
-                cta="ACCESS NOW"
-            />
+            {!!page.offer1.offer_url ? (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            ) : (
+                <RecommendBox
+                    mainTitle="Editor's Choice: Access Today’s Top Loan Offer for Any Credit Type"
+                    titleText="Why we like it"
+                    text="This offer caters to individuals with less-than-perfect credit, providing quick access to personal loans or emergency funds. The application process is speedy, uncomplicated, and direct."
+                    offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9478&pid=3361&eid=top-${trackingState.sid}&uid=yourUID`}
+                    // offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9838&pid=3575&eid=top-${trackingState.sid}&uid=yourUID`}
+                    cta="ACCESS NOW"
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ContentTitle text="1. Understand Your Funding Needs" />
                 <ContentText text="A problem that a lot of people experience when getting a loan is figuring out the amount to ask from the lender. Ask for too little and you end up having to take out a second loan. Take out too much and you are paying back the extra money with interest. Sit down and decide on how much you need and whether getting a personal loan is the best option. There are times when other lending methods, such as friends or relatives, are better for your financial situation." />
@@ -61,14 +75,26 @@ const LoanRecArticle = () => {
                 <ExampleTable />
                 <ContentText text="APR for good credit typically ranges from 5.99% to 35.99% and generally will have a repayment term of 2 months to 72 months. Loan amounts under $1,000 will have varying APR’s than what is listed in the represented example above. Please contact your lender for more information." />
             </div>
-            <RecommendBox
-                mainTitle="Editor's Choice: Access Today’s Top Loan Offer for Any Credit Type"
-                titleText="Why we like it"
-                text="This offer caters to individuals with less-than-perfect credit, providing quick access to personal loans or emergency funds. The application process is speedy, uncomplicated, and direct."
-                offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9478&pid=3361&eid=bottom-${trackingState.sid}&uid=yourUID`}
-                // offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9838&pid=3575&eid=bottom-${trackingState.sid}&uid=yourUID`}
-                cta="ACCESS NOW"
-            />
+            {!!page.offer2.offer_url ? (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            ) : (
+                <RecommendBox
+                    mainTitle="Editor's Choice: Access Today’s Top Loan Offer for Any Credit Type"
+                    titleText="Why we like it"
+                    text="This offer caters to individuals with less-than-perfect credit, providing quick access to personal loans or emergency funds. The application process is speedy, uncomplicated, and direct."
+                    offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9478&pid=3361&eid=bottom-${trackingState.sid}&uid=yourUID`}
+                    // offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9838&pid=3575&eid=bottom-${trackingState.sid}&uid=yourUID`}
+                    cta="ACCESS NOW"
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

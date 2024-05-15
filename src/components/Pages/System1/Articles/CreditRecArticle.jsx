@@ -7,7 +7,8 @@ import ContentText from './components/ContentText';
 import RecommendBox from './components/RecommendBox.jsx';
 
 const CreditRecArticle = () => {
-    const { trackingState } = useContext(AppContext);
+    const { trackingState, appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -17,13 +18,25 @@ const CreditRecArticle = () => {
                 We use credit cards to extend our spending abilities and better manage our personal finances. There are so many cards available and the card you choose will affect your financial well being. It’s important to do your research and not just apply for the first card you see.
                 </div>
             </div>
-            <RecommendBox
-                mainTitle="Today's Featured Offer!"
-                titleText="Why we like it"
-                text="Our crack team of credit experts rotate in new offers daily.  Bookmark us and check back often!"
-                offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9839&pid=3576&eid=top-${trackingState.sid}&uid=yourUID`}
-                cta="VIEW OFFER"
-            />
+            {!!page.offer1.offer_url ? (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            ) : (
+                <RecommendBox
+                    mainTitle="Today's Featured Offer!"
+                    titleText="Why we like it"
+                    text="Our crack team of credit experts rotate in new offers daily.  Bookmark us and check back often!"
+                    offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9839&pid=3576&eid=top-${trackingState.sid}&uid=yourUID`}
+                    cta="VIEW OFFER"
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text="Card Styles"/>
                 <ContentText text="Credit cards come in all shapes and sizes from many different companies. There are different types of credit cards that should be considered based on how you plan to use the card:" />
@@ -43,13 +56,25 @@ const CreditRecArticle = () => {
                 <ContentText text="There are cards that provide rewards for all kinds of purchasing habits and cards that provide better rates if your balance does not get paid off in full each month. There are cards that give extra points for shopping at specific places or spending certain amounts. Some cards offer a percentage back, while others might add on additional points per purchase – making all those little purchases add up faster." />
                 <ContentText text="We can help you consider all your options. If you are ready to start a new line of credit, click here!" />
             </div>
-            <RecommendBox
-                mainTitle="Today's Featured Offer!"
-                titleText="Why we like it"
-                text="Our crack team of credit experts rotate in new offers daily.  Bookmark us and check back often!"
-                offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9839&pid=3576&eid=bottom-${trackingState.sid}&uid=yourUID`}
-                cta="VIEW OFFER"
-            />
+            {!!page.offer2.offer_url ? (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            ) : (
+                <RecommendBox
+                    mainTitle="Today's Featured Offer!"
+                    titleText="Why we like it"
+                    text="Our crack team of credit experts rotate in new offers daily.  Bookmark us and check back often!"
+                    offerUrl={`https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9839&pid=3576&eid=bottom-${trackingState.sid}&uid=yourUID`}
+                    cta="VIEW OFFER"
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

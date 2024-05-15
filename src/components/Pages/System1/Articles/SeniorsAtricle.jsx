@@ -1,12 +1,14 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const SeniorsArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -15,6 +17,16 @@ const SeniorsArticle = () => {
                 As we age, the activities of daily living that once came easily may begin to pose challenges. Whether it's managing medication, grocery shopping, or even personal care, these tasks can become burdensome for seniors. This is where assisted living communities come into play. Offering a comprehensive approach to senior care, these facilities are designed to provide a safe, secure, and dignified environment for the elderly. In this article, we'll delve into the importance of assisted living care for seniors, the different options available, and key factors to consider when researching the ideal setting for your loved one.
                 </div>
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text="The Importance of Assisted Living Care"/>
                 <ContentText title='Dignity and Independence' text='Assisted living centers offer residents the opportunity to live independently, while also having access to assistance when needed. Residents can engage in activities, socialize, and maintain a certain level of privacy, which is crucial for their self-esteem and mental well-being.' />
@@ -43,6 +55,16 @@ const SeniorsArticle = () => {
                 <ArticleTitle text="Bringing It All Together"/> 
                 <ContentText text="Choosing the right assisted living option is crucial for a senior’s well-being. By understanding the importance of such facilities, identifying the type that suits your loved one, and conducting thorough research, you can make an informed decision that ensures your elderly family member lives a life of dignity, safety, and happiness in their twilight years." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

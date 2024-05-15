@@ -1,13 +1,16 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import CustomTable from './components/CustomTable.jsx';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const BoTArticle = () => {
-    
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
+
     function createData(id) {
         return { id };
     };
@@ -53,6 +56,16 @@ const BoTArticle = () => {
                 <ArticleTitle text="The Game Changer"/>
                 <ContentText text="Recently, I stumbled on a lease-to-own electronics store called BuyOnTrust.com.  I reached out to their customer service to get a better understanding of how the whole process works.  It’s basically like a Rent-A-Center™ online but for brand name electronics fulfilled by Best Buy™.  They literally have just about everything available that Best Buy™ offers.  I was pre-approved for $2,500 after filling out a quick form and I placed an order for a new TV, microwave and dishwasher.  I picked the items up the following day at the Best Buy™ I chose during the checkout process. It really was that simple. I just showed my ID and nothing else was required for pickup." />
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text="Yes, But Where’s the Catch"/>
                 <ContentText text="The lease-to-own model has been around for years.  In the past, you went to a brick and mortar store with an awful selection of products, but they usually provided you with a high enough approval amount you could get life’s bare necessities.   In many cases the products you leased were used.  Interest rates and fees were high, but not as bad as a short-term high interest loan which could cost you 10x your initial approval amount." />
@@ -83,6 +96,16 @@ const BoTArticle = () => {
                 <ArticleTitle text="Final Thoughts"/>
                 <ContentText text="The unfortunate reality of bad credit has always been high interest rates and fees, low credit amounts and a high credit hurdle to even get approved.  The lease-to-own model still has fairly steep fees but my experience with BuyOnTrust.com was extremely positive and overall, I felt I was treated fairly.  BuyOnTrust.com provided me with exactly what I wanted, and they were extremely open about their fees and the cost of ownership. In a world filled with predatory lending products, my experience at BuyOnTrust.com was a breath of fresh air." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

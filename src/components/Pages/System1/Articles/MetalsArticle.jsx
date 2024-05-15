@@ -1,12 +1,15 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const MetalsArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
+
     return(
         <div style={styles.mainConatiner}>
             <div style={styles.contentContainer}>
@@ -14,6 +17,16 @@ const MetalsArticle = () => {
                 Throughout history, precious metals have held a special place as a store of value and a hedge against economic uncertainty. In today's ever-changing financial landscape, owning precious metals can offer several benefits to investors and individuals seeking to diversify their portfolios. This article delves into the importance of buying and owning precious metals, highlighting their historical significance, value as a tangible asset, and potential for long-term wealth preservation.
                 </div>
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text="I. Historical Significance:"/>
                 <ContentText text='Precious metals like gold, silver, platinum, and palladium have been prized for centuries for their rarity, beauty, and inherent value.' />
@@ -46,6 +59,16 @@ const MetalsArticle = () => {
             <div style={styles.contentContainer}>
                 <ContentText text='The importance of buying and owning precious metals goes beyond their intrinsic beauty and historical significance. They offer a tangible form of wealth, act as a hedge against economic uncertainties, and provide portfolio diversification. While market fluctuations and short-term volatility may impact the price of precious metals, their long-term value has proven to be resilient. Including precious metals in your investment strategy can contribute to wealth preservation and offer peace of mind in times of economic instability. As always, it is advisable to consult with a financial advisor to determine the best approach based on your individual circumstances and investment goals.' />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

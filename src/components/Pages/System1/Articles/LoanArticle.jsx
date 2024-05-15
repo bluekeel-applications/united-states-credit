@@ -1,5 +1,5 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 import ArticleTitle from './components/ArticleTitle.jsx';
 // import ButtonContainer from '../ButtonContainer.jsx';
@@ -7,9 +7,11 @@ import CostsTable from './components/CostsTable.jsx';
 import ContentText from './components/ContentText.jsx';
 import ExampleTable from './components/ExampleTable.jsx';
 import ContentTitle from './components/ContentTitle.jsx';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const LoanArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -20,6 +22,16 @@ const LoanArticle = () => {
                 </div>
                 <ContentText text="Luckily, the Internet has expanded our options on where we can find loan options. You no longer have to just go to your local bank for a traditional loan. You can now look for loans online from a wide range of lenders as you can compare rates, terms and conditions that are more agreeable to you. Here are some tips on how to apply for a personal loan online."/>
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ContentTitle text="1. Understand Your Funding Needs" />
                 <ContentText text="A problem that a lot of people experience when getting a loan is figuring out the amount to ask from the lender. Ask for too little and you end up having to take out a second loan. Take out too much and you are paying back the extra money with interest. Sit down and decide on how much you need and whether getting a personal loan is the best option. There are times when other lending methods, such as friends or relatives, are better for your financial situation." />
@@ -54,6 +66,16 @@ const LoanArticle = () => {
                 <ExampleTable />
                 <ContentText text="APR for good credit typically ranges from 5.99% to 35.99% and generally will have a repayment term of 2 months to 72 months. Loan amounts under $1,000 will have varying APR’s than what is listed in the represented example above. Please contact your lender for more information." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

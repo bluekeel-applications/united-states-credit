@@ -1,12 +1,15 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const AutoWarrantyArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
+
     return(
         <div style={styles.mainConatiner}>
             <div style={styles.contentContainer}>
@@ -14,6 +17,16 @@ const AutoWarrantyArticle = () => {
                 As the cost of owning a vehicle continues to rise, the importance of safeguarding your investment becomes increasingly evident. One essential tool in protecting yourself against unexpected repairs and maintenance expenses is an extended auto warranty. While new vehicles typically come with a manufacturer's warranty, an extended warranty provides additional coverage once the initial warranty expires. In this article, we will delve into the significance of extended auto warranties and highlight key factors to consider when choosing the right one for your needs.
                 </div>
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text="The Significance of Extended Auto Warranties"/>                
                 <ContentText title="Peace of Mind and Financial Security" text='An extended auto warranty offers a sense of security, knowing that your vehicle is protected against costly repairs even after the original warranty has lapsed. Unexpected breakdowns and repairs can wreak havoc on your budget, causing financial stress. With an extended warranty, you can avoid such stress and maintain peace of mind, knowing that you are covered in case of mechanical failures.' />
@@ -33,6 +46,16 @@ const AutoWarrantyArticle = () => {
                 <ArticleTitle text="Wrapping Things Up"/> 
                 <ContentText text="An extended auto warranty is a valuable tool in protecting your vehicle and financial well-being against unexpected repairs and maintenance expenses. By providing peace of mind, cost savings, and enhancing the resale value of your vehicle, an extended warranty offers a safety net that every car owner should seriously consider. When choosing the right extended auto warranty, carefully evaluate the coverage options, duration of coverage, deductibles, repair facility options, transferability, and the provider's reputation. Investing in the right extended auto warranty ensures that you can enjoy your vehicle worry-free, regardless of unforeseen mechanical issues that may arise." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

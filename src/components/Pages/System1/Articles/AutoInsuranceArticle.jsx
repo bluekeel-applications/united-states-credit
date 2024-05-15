@@ -1,15 +1,27 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import ContentText from './components/ContentText.jsx';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const AutoInsuranceArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text="Here's how:"/>
                 <ContentText title='1. Shop Around and Compare Rates:' text="Don't settle for the first insurance quote you receive. Premiums can vary considerably among providers, so it's essential to compare rates from multiple insurers. Utilize online comparison tools or consult with an independent agent to find the best deal." />
@@ -25,6 +37,16 @@ const AutoInsuranceArticle = () => {
                 <ArticleTitle text="Bringing It All Together"/> 
                 <ContentText text="By implementing these strategies, you can achieve meaningful savings on your auto insurance without compromising on coverage. Remember, the key is to stay informed, shop around, and ask about discounts to find the best rates tailored to your needs." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

@@ -1,13 +1,15 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import SectionTitle from './components/SectionTitle';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const SolarArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -18,6 +20,16 @@ const SolarArticle = () => {
                 <ArticleTitle text='What is Solar Energy?'/>
                 <ContentText text="Solar energy is power obtained by harnessing the energy of the sun's rays. Residential solar energy typically involves installing solar panels on your home's roof or property." />
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             {/* <ButtonContainer containerId='rampjs_slot2' email={trackingState['email']} title='Search and Compare High Yield Savings'/> */}
             <div style={styles.contentContainer}>
                 <ArticleTitle text='Advantages'/>
@@ -71,6 +83,16 @@ const SolarArticle = () => {
                 <ArticleTitle text='Conclusion'/>
                 <ContentText text="Adopting solar energy for your home can be a financially sound and environmentally responsible decision. By exploring various options like government incentives, community solar, and DIY installations, you can make the transition to solar more affordable. Remember, while the upfront cost can be significant, the long-term savings and environmental benefits make solar energy a worthwhile investment." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

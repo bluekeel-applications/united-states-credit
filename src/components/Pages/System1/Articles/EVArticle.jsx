@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 import ContentText from './components/ContentText.jsx';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const EVArticle = () => {
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
+    
     const paragraphs = [
         'In recent years, a significant push from governments and various organizations around the world has made EVs more accessible and affordable to the general public. Through a combination of discounts, tax incentives, and rebates, the effective cost of purchasing an electric vehicle can be significantly reduced, and in some exceptional cases, EVs can become virtually "free" for the consumer after accounting for all these benefits.',
         'The concept of electric vehicles being "free" stems from a multi-faceted approach to encourage their adoption. Governments worldwide are offering substantial tax credits and rebates as part of their commitment to reducing carbon emissions and combatting climate change. For example, in the United States, consumers can benefit from a federal income tax credit of up to $7,500 for purchasing a new EV. Some states offer additional incentives, including cash rebates, reduced vehicle registration fees, and even free parking in certain areas.',
@@ -16,9 +21,29 @@ const EVArticle = () => {
     return (
         <div style={styles.mainConatiner}>
             <div style={styles.contentContainer}>
+                {!!page.offer1.offer_url && (
+                    <RecommendBox
+                        mainTitle={page.offer1.main_title}
+                        titleText={page.offer1.sub_title}
+                        text={page.offer1.sub_text}
+                        offerUrl={page.offer1.offer_url}
+                        cta={page.offer1.cta}
+                        location='top'
+                    />
+                )}
                 {paragraphs.map((text) => (
                     <ContentText text={text} />
                 ))}
+                {!!page.offer2.offer_url && (
+                    <RecommendBox
+                        mainTitle={page.offer2.main_title}
+                        titleText={page.offer2.sub_title}
+                        text={page.offer2.sub_text}
+                        offerUrl={page.offer2.offer_url}
+                        cta={page.offer2.cta}
+                        location='bottom'
+                    />
+                )}
             </div>
         </div>
     );

@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 import ContentText from './components/ContentText.jsx';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const HondaArticle = () => {
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
+
     const paragraphs = [
         "The Honda CR-V has long been celebrated for its blend of reliability, comfort, and practicality. Boasting a spacious interior, fuel-efficient engines, and a reputation for durability, it has consistently ranked among the top choices for families and commuters alike. However, the tides have shifted as dealerships across the country find themselves inundated with excess inventory of CR-Vs.",
         "Several factors have contributed to this surplus. Foremost among them is the evolution of consumer tastes and preferences. With the rise of electric vehicles (EVs) and the increasing popularity of larger SUVs and crossovers, the demand for compact SUVs like the CR-V has waned. Consumers are now drawn to vehicles offering advanced technology, greater fuel efficiency, and, in many cases, all-electric powertrains. This shift has left dealerships struggling to move their existing CR-V inventory.",
@@ -15,9 +20,29 @@ const HondaArticle = () => {
     return (
         <div style={styles.mainConatiner}>
             <div style={styles.contentContainer}>
+                {!!page.offer1.offer_url && (
+                    <RecommendBox
+                        mainTitle={page.offer1.main_title}
+                        titleText={page.offer1.sub_title}
+                        text={page.offer1.sub_text}
+                        offerUrl={page.offer1.offer_url}
+                        cta={page.offer1.cta}
+                        location='top'
+                    />
+                )}
                 {paragraphs.map((text) => (
                     <ContentText text={text} />
                 ))}
+                {!!page.offer2.offer_url && (
+                    <RecommendBox
+                        mainTitle={page.offer2.main_title}
+                        titleText={page.offer2.sub_title}
+                        text={page.offer2.sub_text}
+                        offerUrl={page.offer2.offer_url}
+                        cta={page.offer2.cta}
+                        location='bottom'
+                    />
+                )}
             </div>
         </div>
     );

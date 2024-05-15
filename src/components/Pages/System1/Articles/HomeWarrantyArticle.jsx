@@ -1,12 +1,14 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const HomeWarrantyArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -15,7 +17,16 @@ const HomeWarrantyArticle = () => {
                 When it comes to safeguarding your home and protecting your investment, a home warranty can be an invaluable tool. A home warranty provides coverage for the repair or replacement of major home systems and appliances, offering peace of mind and potential savings on unexpected expenses. In this article, we'll explore the importance of a home warranty and provide guidance on how to shop for and find the best one for your needs.
                 </div>
             </div>
-            
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text='Understanding the Importance of a Home Warranty:'/>
                 <ContentText title='1. Financial Protection' text='Homeownership often comes with unforeseen repair costs. A home warranty helps mitigate these expenses by covering the repair or replacement of covered items, such as heating and cooling systems, electrical systems, plumbing, kitchen appliances, and more.' />
@@ -37,6 +48,16 @@ const HomeWarrantyArticle = () => {
                 <ArticleTitle text='Wrapping it all up:'/>
                 <ContentText text="Investing in a home warranty is a wise decision for homeowners seeking financial protection, convenience, and peace of mind. By understanding the importance of a home warranty and following the tips outlined above, you can confidently navigate the market to find the best home warranty that suits your specific needs. Remember, thorough research, careful evaluation of coverage, and reputable providers are key to securing a reliable home warranty that will help protect your home for years to come." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

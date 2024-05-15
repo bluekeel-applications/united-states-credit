@@ -1,13 +1,15 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import SectionTitle from './components/SectionTitle.jsx';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const MealPrepArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -15,6 +17,16 @@ const MealPrepArticle = () => {
                 <SectionTitle text='Understanding Meal Prep Services:'/>
                 <ContentText text="Meal prep services prepare and deliver ready-to-eat meals to your door. They vary in terms of menu options, customization, pricing, and focus on specific dietary needs or health goals." />
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <SectionTitle text='Key Factors to Consider'/>
             </div>
@@ -85,6 +97,16 @@ const MealPrepArticle = () => {
                 <ArticleTitle text='Conclusion'/>
                 <ContentText text="Finding the right meal prep service requires balancing your health goals, dietary preferences, budget, and convenience. By carefully evaluating your options and paying close attention to customer reviews and nutritional balance, you can find a service that not only helps you manage your weight but also contributes to your overall health and wellbeing. Remember, the best service is one that suits your lifestyle and helps you maintain sustainable, healthy eating habits." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

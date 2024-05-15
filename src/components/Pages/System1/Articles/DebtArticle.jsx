@@ -1,12 +1,14 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const DebtArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -15,6 +17,16 @@ const DebtArticle = () => {
                 Debt consolidation can be a valuable strategy for individuals grappling with overwhelming debt. In this article, we will explore what debt consolidation entails and shed light on how a debt consolidation company can assist you in effectively eliminating your debt burdens.
                 </div>
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             <div style={styles.contentContainer}>
                 <ArticleTitle text='Understanding Debt Consolidation:'/>
                 <ContentText text='Debt consolidation involves merging multiple debts into a single loan or repayment plan. It is designed to simplify your financial obligations by combining various debts, such as credit card balances, personal loans, or medical bills, into one manageable payment. Rather than dealing with multiple creditors and due dates, debt consolidation allows you to focus on a single monthly payment.' />
@@ -40,6 +52,16 @@ const DebtArticle = () => {
                 <ArticleTitle text='Wrapping Things Up'/>
                 <ContentText text="Debt consolidation companies play a vital role in helping individuals eliminate their debt burdens. By leveraging their expertise, negotiation skills, and financial solutions, these companies simplify your debt management, reduce interest rates, and provide tailored strategies for a successful debt repayment journey. If you find yourself overwhelmed by multiple debts, seeking assistance from a reputable debt consolidation company can be a proactive step towards regaining control of your financial future." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };

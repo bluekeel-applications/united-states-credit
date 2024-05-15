@@ -147,6 +147,9 @@ export const setPageComponent = (article, setArticle) => {
         case 'creditrec':
             setArticle(<CreditRecArticle />);
             break;
+        case 'test':
+            setArticle(<CreditCardArticle />);
+            break;
         
         default:
             setArticle(<CreditCardArticle />);

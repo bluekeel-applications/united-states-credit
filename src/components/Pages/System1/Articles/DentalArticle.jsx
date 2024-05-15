@@ -1,13 +1,15 @@
-import React from 'react';
-// import { AppContext } from '../../../../context';
+import React, { useContext } from 'react';
+import { AppContext } from '../../../../context';
 import styles from './Articles.css.js';
 // import ButtonContainer from '../ButtonContainer';
 import ArticleTitle from './components/ArticleTitle';
 import SectionTitle from './components/SectionTitle.jsx';
 import ContentText from './components/ContentText';
+import RecommendBox from './components/RecommendBox.jsx';
 
 const DentalArticle = () => {
-    // const { trackingState } = useContext(AppContext);
+    const { appState } = useContext(AppContext);
+    const page = appState.system1;
 
     return(
         <div style={styles.mainConatiner}>
@@ -18,6 +20,16 @@ const DentalArticle = () => {
                 <ArticleTitle text='What are Dental Implants?'/>
                 <ContentText text='Dental implants are titanium posts that are surgically positioned into the jawbone beneath your gums. Once in place, they allow your dentist to mount replacement teeth onto them.' />
             </div>
+            {!!page.offer1.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer1.main_title}
+                    titleText={page.offer1.sub_title}
+                    text={page.offer1.sub_text}
+                    offerUrl={page.offer1.offer_url}
+                    cta={page.offer1.cta}
+                    location='top'
+                />
+            )}
             {/* <ButtonContainer containerId='rampjs_slot2' email={trackingState['email']} title='Search and Compare High Yield Savings'/> */}
             <div style={styles.contentContainer}>
                 <ArticleTitle text='Advantages'/>
@@ -68,6 +80,16 @@ const DentalArticle = () => {
                 <ArticleTitle text='Conclusion'/>
                 <ContentText text="While dental implants can be expensive, there are ways to make them more affordable. Research, careful planning, and exploring all your options can help reduce the financial burden. Always consult with a dental professional to understand the best options for your situation. Remember, investing in dental implants is not only an investment in your smile but also in your overall health and well-being." />
             </div>
+            {!!page.offer2.offer_url && (
+                <RecommendBox
+                    mainTitle={page.offer2.main_title}
+                    titleText={page.offer2.sub_title}
+                    text={page.offer2.sub_text}
+                    offerUrl={page.offer2.offer_url}
+                    cta={page.offer2.cta}
+                    location='bottom'
+                />
+            )}
         </div>
     );
 };
