@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useCallback, lazy, Suspense } from 'react';
+import React, { useContext, useState, useEffect, useCallback, lazy, Suspense, useRef } from 'react';
 import { AppContext } from '../context';
 import RouteContainer from '../RouteContainer';
 // import usePushProviders from '../utils/hooks/usePushProviders';
@@ -17,6 +17,7 @@ import Styles from './Styles.css.js';
 import { useMediaQuery } from 'react-responsive';
 import { useLazyQuery } from '@apollo/client';
 import { FETCH_ARTICLE_BY_KEY } from '../utils/GraphQL/queries.js';
+import firePixelBlueKeel from '../utils/pixels/bluekeelPixel.js';
 
 const Feed = lazy(() => import('./Layout/Feed'));
 
@@ -24,6 +25,7 @@ const App = () => {
 	const isMobile = useMediaQuery({ maxWidth: 1000 });
 	let navigate = useNavigate();
 	const location = useLocation();
+	const hasFiredPerClick = useRef(false);
 	const [ myURL ] = useState(new URL(window.location.href));
 	// const [ showDrawer, toggleDrawer ] = useState(false);
 	const [ showLoading, setLoading ] = useState(true);
@@ -156,6 +158,20 @@ const App = () => {
 		};
         // eslint-disable-next-line
 	}, [tracking]);
+	
+	useEffect(() => {
+		// Fire a pixel for load event of these SIDs
+		if(!hasFiredPerClick.current) {
+			const sidList = [ 5102, 9113, 9371, 9419, 9474, 9560, 9568, 9641, 9649 ];
+			const inboundSid = Number(tracking.SID);
+			if(sidList.includes(inboundSid)) {
+				console.log('BK pixel fire - per Click');
+				firePixelBlueKeel(tracking.HSID);
+			};
+			hasFiredPerClick.current = true;
+		};
+        // eslint-disable-next-line
+	}, [hasFiredPerClick.current]);
 
 	useEffect(() => {
 		const isSplit = tracking.SPLIT === 'dynamic';

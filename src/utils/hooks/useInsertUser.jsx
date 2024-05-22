@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_NEW_USER, ADD_START_URL } from '../GraphQL/mutations';
-import firePixelBlueKeel from '../pixels/bluekeelPixel';
+// import firePixelBlueKeel from '../pixels/bluekeelPixel';
 
 const useInsertUser = (tracking, hsid, ip_address, shouldExecute) => {
 
@@ -34,10 +34,10 @@ const useInsertUser = (tracking, hsid, ip_address, shouldExecute) => {
                 url: window.location.search
             }
         });
-        const sidList = [5102, 9113, 9371, 9419, 9474, 9560, 9568, 9641, 9649];
-		if(sidList.includes(tracking['sid'])) {
-			firePixelBlueKeel(hsid);
-        };
+        // const sidList = [5102, 9113, 9371, 9419, 9474, 9560, 9568, 9641, 9649];
+		// if(sidList.includes(tracking['sid'])) {
+		// 	firePixelBlueKeel(hsid);
+        // };
 	};
 
 	useEffect(() => {
