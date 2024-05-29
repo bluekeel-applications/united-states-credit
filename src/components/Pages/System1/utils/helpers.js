@@ -44,8 +44,9 @@ export const buildFullURL = (buttonArr, trackingState) => {
     const facebook = !!trackingState.fbid ? `fbid=${trackingState.fbid}&fbclick=Search` : `fbid=531202445442265&fbclick=Search`;
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
     const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`
-    const inbound = `article=${trackingState.article}&pid=${trackingState.pid}&sid=${trackingState.sid}&oid=${trackingState.oid}&uid=${trackingState.uid}&eid=${trackingState.eid}&segment=${trackingState.segment}&email=${trackingState.email}&hsid=${trackingState.hsid}`
-    return `${inbound}&${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebook}&${google}&${tiktok}`;
+    const inbound = `article=${trackingState.article}&pid=${trackingState.pid}&sid=${trackingState.sid}&oid=${trackingState.oid}&uid=${trackingState.uid}&eid=${trackingState.eid}&segment=${trackingState.segment}&email=${trackingState.email}&hsid=${trackingState.hsid}`;
+    const utm = `utm_source=${trackingState.article}-${trackingState.sid}`;
+    return `${utm}&${inbound}&${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebook}&${google}&${tiktok}`;
 };
 
 export const setDefaultData = (trackingState) => {
