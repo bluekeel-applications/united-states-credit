@@ -198,6 +198,14 @@ const FETCH_ARTICLE_BY_KEY = gql `
                     cta
                     offer_url
                 }
+                offer_block {
+                    id
+                    name
+                    offers {
+						display
+						offer_url
+                    }
+                }
 			}
 		}
 	}

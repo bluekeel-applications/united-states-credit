@@ -84,6 +84,60 @@ const styles = {
     termsLink: {
         textDecoration: 'underline',
     },
+    blockContainer: {
+        width: '100%',
+        maxWidth: '600px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        padding: '30px',
+        border: '1px solid rgba(15, 64, 107, 0.5)',
+        borderRadius: '10px',
+        backgroundColor: 'rgb(239,248,255)',
+        margin: '25px 5px'
+    },
+    blockTitle: {
+        width: '100%',
+        textAlign: 'center',
+        fontSize: '1.6rem',
+        fontWeight: 'bold',
+        marginBottom: '25px'
+    },
+    blockOffersListContainer: {
+        width: '100%',
+        maxWidth: '800px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+    },
+    blockOfferContainer: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    blockOfferButton: {
+        width: '350px',
+        height: '50px',
+        backgroundColor: 'rgb(9,44,126)',
+        color: 'rgb(255,255,255)',
+        fontSize: '1.5rem',
+        marginBottom: '10px',
+        borderRadius: '75px',
+        whiteSpace: 'nowrap'
+    },
+    offerHover: {
+        backgroundColor: '#f5f5f5',
+        color: 'black',
+        cursor: 'pointer',
+        WebkitBoxShadow: '0px 5px 40px -10px rgba(0,0,0,0.57)',
+        MozBoxShadow: '0px 5px 40px -10px rgba(0,0,0,0.57)',
+        boxShadow: '5px 40px -10px rgba(0,0,0,0.57)',
+        transition: 'all 0.7s ease',
+        fontSize: '1.6rem',
+    },
 };
 
 export default styles;

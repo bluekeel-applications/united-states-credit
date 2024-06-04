@@ -7,6 +7,7 @@ import { buildFullURL, setDefaultData } from './utils/helpers';
 import Loading from '../../Shared/Loading';
 import System1Page from './System1Page';
 import System1Static from './System1Static';
+import OfferBlockPage from './OfferBlockPage';
 import { useNavigate } from 'react-router-dom';
 
 const System1 = () => {
@@ -14,7 +15,7 @@ const System1 = () => {
     const emailSent = useRef(false);
     const myURL = new URL(window.location.href);
     const { trackingState, dispatchApp } = useContext(AppContext);
-    const [ showDynamicPage, setShowDynamicPage ] = useState(false);
+    const [ pageType, setPageType ] = useState(null);
     const [ pageReady, setPageReady ] = useState(false);
     const [ staticArticle, setStaticArticle ] = useState(trackingState.article);
 
@@ -48,7 +49,7 @@ const System1 = () => {
     const showOldFormat = () => {
         console.log('Using Static style rsoc');
         window._rampJs();
-        setShowDynamicPage(false);
+        setPageType('static');
         setPageReady(true);
     };
 
@@ -68,9 +69,18 @@ const System1 = () => {
         // const newURL = `/rsoc${myURL.search}${tail}`;
         const newURL = `/rsoc?${tail}`;
         navigate(newURL, { replace: true });
-        window._rampJs();
-        setShowDynamicPage(true);
-        setPageReady(true);
+        // If the dsiplay is set to Block and the article has associated offer block set
+        if(trackingState.display === 'block' && !!data.fetchArticleByKey.body.offer_block) {
+            // Show Offer Block
+            setPageType('block');
+            setPageReady(true);
+            return;
+        } else {
+            // For rsoc dynamic page
+            window._rampJs();
+            setPageType('dynamic');
+            setPageReady(true);
+        };
     };
 
     const [fetchArticle, { called, loading, data }] = useLazyQuery(
@@ -80,7 +90,6 @@ const System1 = () => {
             onCompleted: handleInboundData
         }
     );
-
 
     useEffect(() => {
         if(called || pageReady) {
@@ -97,11 +106,19 @@ const System1 = () => {
 
     if (loading || !pageReady) return <Loading/>;
 
-    return (
-        showDynamicPage ? 
-        <System1Page /> :
-        <System1Static article={staticArticle}/>
-    );
+    const renderSwitch = (page) => {
+        switch(page) {
+            case 'dynamic':
+                return <System1Page />;
+            case 'static':
+                return <System1Static article={staticArticle}/>;
+            case 'block':
+                return <OfferBlockPage />;
+            default:
+                return <System1Page />;
+        };
+    };
+    return renderSwitch(pageType);
 };
 
 export default System1;

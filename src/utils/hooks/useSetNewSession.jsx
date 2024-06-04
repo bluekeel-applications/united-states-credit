@@ -43,7 +43,8 @@ const useSetNewSession = ({ tracking, turnOffLoading, animationComplete }) => {
 			record: tracking.RECORD,
 			ttid: tracking.TTID,
 			ttclid: tracking.TTCLID,
-			fbid: tracking.FBID
+			fbid: tracking.FBID,
+			display: tracking.DISPLAY
 		};
 		dispatchTracking({ type: 'USER_ARRIVED', payload });
 		setUserContext(payload);
