@@ -4,7 +4,7 @@ import styles from '../System1/System1.css.js';
 import { useMediaQuery } from 'react-responsive';
 import MainTitle from '../System1/Articles/components/MainTitle.jsx';
 import { setPageComponent } from '../System1/utils/helpers';
-import InArticleAd from './InArticleAd';
+// import InArticleAd from './InArticleAd';
 
 const ActivePage = () => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -45,7 +45,7 @@ const ActivePage = () => {
                 {!!header && <MainTitle text={header} />}
                 {!!sub_text && <div style={headerSubStyle}>{sub_text}</div>}
             </div>
-            <InArticleAd />
+            {/* <InArticleAd /> */}
             {useArticle}
         </div>
     );

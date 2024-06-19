@@ -18,6 +18,7 @@ const RecommendBox = ({mainTitle, titleText, text, offerUrl, cta, location}) => 
         url.search = search_params.toString();
         var new_url = url.toString();
         setUrl(new_url);
+        // eslint-disable-next-line
     },[]);
 
     const handleOfferClick = () => {

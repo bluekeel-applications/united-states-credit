@@ -11,40 +11,40 @@ import useInsightSubmit from '../../../../utils/hooks/useInsightSubmit.js';
 import { buildKeywordLink, flattenLongString } from '../../../../utils/helpers.js';
 import Radium from 'radium';
 import OfferGroup from '../OfferGroup';
-import { useMediaQuery } from 'react-responsive';
+// import { useMediaQuery } from 'react-responsive';
 
-function getRandomIntInclusive(min, max) {
-	min = Math.ceil(min);
-	max = Math.floor(max);
-	return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
-};
+// function getRandomIntInclusive(min, max) {
+// 	min = Math.ceil(min);
+// 	max = Math.floor(max);
+// 	return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+// };
 
-class GoogleAd extends Component {
-    componentDidMount() {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-    };
+// class GoogleAd extends Component {
+//     componentDidMount() {
+//         (window.adsbygoogle = window.adsbygoogle || []).push({});
+//     };
 
-    render() {
-        return (
-            <ins
-                className='adsbygoogle'
-                data-ad-client='ca-pub-5105418052368941'
-                data-ad-slot={this.props.isMobile ? '4039041459' : '2474678347'}
-                style={{ 
-                    display: 'inline-block', 
-                    width: this.props.width, 
-                    height: this.props.height 
-                }}
-                data-ad-format='auto'
-                data-full-width-responsive='true'
-            />
-        );
-    }
-};
+//     render() {
+//         return (
+//             <ins
+//                 className='adsbygoogle'
+//                 data-ad-client='ca-pub-5105418052368941'
+//                 data-ad-slot={this.props.isMobile ? '4039041459' : '2474678347'}
+//                 style={{ 
+//                     display: 'inline-block', 
+//                     width: this.props.width, 
+//                     height: this.props.height 
+//                 }}
+//                 data-ad-format='auto'
+//                 data-full-width-responsive='true'
+//             />
+//         );
+//     }
+// };
 
 const UserSelection = Radium(({ theme, offer, tracking, email }) => {
     let navigate = useNavigate();
-    const [ showAd, setShowAd ] = useState(false);
+    // const [ showAd, setShowAd ] = useState(false);
     const [ showArticle, setShowArticle ] = useState(false);
     const [ disabled, setDisabledState ] = useState(true);
     const [ interest, setInterest ] = useState('');
@@ -63,16 +63,16 @@ const UserSelection = Radium(({ theme, offer, tracking, email }) => {
         };
 	},[tracking.loan_type]);
 
-    useEffect(() => {
-        const percent = 100;
-		const count = getRandomIntInclusive(0, 100);
-		if(count <= percent) {
-            if(window.location.host !== 'localhost:3000') {
-				setShowAd(true);
-                console.log('Showing ad in quicklink component!');
-			}; 
-        };
-	},[]);
+    // useEffect(() => {
+    //     const percent = 100;
+	// 	const count = getRandomIntInclusive(0, 100);
+	// 	if(count <= percent) {
+    //         if(window.location.host !== 'localhost:3000') {
+	// 			setShowAd(true);
+    //             console.log('Showing ad in quicklink component!');
+	// 		}; 
+    //     };
+	// },[]);
 
     const handleInputChange = (event) => {
         let interestValue = event.target.value;
@@ -100,38 +100,38 @@ const UserSelection = Radium(({ theme, offer, tracking, email }) => {
         };      
     };
 
-    const AdSenseComp = () => {
-        const isMobile = useMediaQuery({ maxWidth: 767 });
+    // const AdSenseComp = () => {
+    //     const isMobile = useMediaQuery({ maxWidth: 767 });
     
-        const [ adWidth ] = useState(() => {
-            let windowWidth = window.innerWidth;
-            if(windowWidth > 1800) { return 1800 };
-            if(isMobile) { return (windowWidth - 40) };
-            return windowWidth - 100;
-        });
-        const [ adHeight ] = useState(() => {
-            let windowWidth = window.innerWidth;
-            if(windowWidth > 1800) { return 720 };
-            if(isMobile) { return (windowWidth - 40) };
-            return ((windowWidth - 100)*0.8);
-        });
+    //     const [ adWidth ] = useState(() => {
+    //         let windowWidth = window.innerWidth;
+    //         if(windowWidth > 1800) { return 1800 };
+    //         if(isMobile) { return (windowWidth - 40) };
+    //         return windowWidth - 100;
+    //     });
+    //     const [ adHeight ] = useState(() => {
+    //         let windowWidth = window.innerWidth;
+    //         if(windowWidth > 1800) { return 720 };
+    //         if(isMobile) { return (windowWidth - 40) };
+    //         return ((windowWidth - 100)*0.8);
+    //     });
     
-        const mainStyle = Object.assign(
-            styles.adContainer,
-            isMobile && styles.mobileAdContainer
-        );
+    //     const mainStyle = Object.assign(
+    //         styles.adContainer,
+    //         isMobile && styles.mobileAdContainer
+    //     );
     
-        return (
-            <div style={mainStyle}>
-                <GoogleAd 
-                    width={adWidth}
-                    height={adHeight}
-                    isMobile={isMobile}
-                />
-            </div>
-        );
+    //     return (
+    //         <div style={mainStyle}>
+    //             <GoogleAd 
+    //                 width={adWidth}
+    //                 height={adHeight}
+    //                 isMobile={isMobile}
+    //             />
+    //         </div>
+    //     );
     
-    };
+    // };
 
     const themedButton = Object.assign({},
         styles['submitButton'],
@@ -185,7 +185,7 @@ const UserSelection = Radium(({ theme, offer, tracking, email }) => {
                     }
                 </form>
             </div>
-            {showAd && <AdSenseComp />}
+            {/* {showAd && <AdSenseComp />} */}
             {showArticle && <LoanArticle />}
         </div>
     )

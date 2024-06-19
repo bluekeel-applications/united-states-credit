@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import { AppContext } from '../../../context';
 import styles from './System1.css';
 import { useMediaQuery } from 'react-responsive';
-import ButtonContainer from './ButtonContainer';
+// import ButtonContainer from './ButtonContainer';
 import MainTitle from './Articles/components/MainTitle';
 import { setPageComponent } from './utils/helpers';
 

@@ -1,26 +1,27 @@
-import React, { useEffect, Component } from 'react';
+// import React, { useEffect, Component } from 'react';
+import React from 'react';
 import styles from './AdArticle.css';
 import { useMediaQuery } from 'react-responsive';
 
-class GoogleAd extends Component {
-    componentDidMount() {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-    };
+// class GoogleAd extends Component {
+//     componentDidMount() {
+//         (window.adsbygoogle = window.adsbygoogle || []).push({});
+//     };
 
-    render() {
-        return (
-            <ins
-                className='adsbygoogle'
-                style={{display:'block', textAlign: 'center', width: '100%'}}
-                data-ad-layout='in-article'
-                data-ad-format='fluid'
-                data-ad-client='ca-pub-5105418052368941'
-                data-ad-slot='3890031470'
-                data-full-width-responsive='true'
-            />
-        );
-    }
-};
+//     render() {
+//         return (
+//             <ins
+//                 className='adsbygoogle'
+//                 style={{display:'block', textAlign: 'center', width: '100%'}}
+//                 data-ad-layout='in-article'
+//                 data-ad-format='fluid'
+//                 data-ad-client='ca-pub-5105418052368941'
+//                 data-ad-slot='3890031470'
+//                 data-full-width-responsive='true'
+//             />
+//         );
+//     }
+// };
 
 const InArticleAd = props => {
     const { currentPath } = props;
@@ -38,7 +39,7 @@ const InArticleAd = props => {
 
     return (
         <div key={currentPath} style={mainStyle}>
-            <GoogleAd />
+            {/* <GoogleAd /> */}
             {/* <ins
                 // style="display:block; text-align:center;"
                 className='adsbygoogle'

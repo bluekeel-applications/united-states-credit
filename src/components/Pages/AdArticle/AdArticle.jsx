@@ -43,7 +43,7 @@ const AdArticle = () => {
         setPageReady(true);
     };
 
-    const [fetchArticle, { called, loading, data }] = useLazyQuery(
+    const [fetchArticle, { called, loading }] = useLazyQuery(
         FETCH_ARTICLE_BY_KEY, { 
             variables: { key: trackingState.article },
             errorPolicy: 'ignore',
