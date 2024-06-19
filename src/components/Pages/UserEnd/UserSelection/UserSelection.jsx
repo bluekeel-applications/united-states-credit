@@ -1,4 +1,5 @@
-import React, { Component, useState, useEffect, memo } from 'react';
+// import React, { Component, useState, useEffect, memo } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import styles from './UserSelection.css.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import QuickLinks from './QuickLinks';
