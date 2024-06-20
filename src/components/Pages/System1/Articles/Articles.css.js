@@ -116,7 +116,24 @@ const styles = {
     recIcon: {
         fontSize: '1.5rem',
         marginRight: '10px'
-    }
+    },
+    legalTerms: {
+        width: '75%',
+        fontSize: '0.8rem',
+        margin: '15px auto',
+        textAlign: 'center'
+    },
+    legalTermsMobile: {
+        width: '100%',
+        margin: '15px 0',
+    },
+    termsText: {
+        display: 'inline',
+        fontWeight: '400',
+    },
+    termsLink: {
+        textDecoration: 'underline',
+    },
 };
 
 export default styles;

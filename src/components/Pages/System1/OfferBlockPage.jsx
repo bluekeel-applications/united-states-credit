@@ -2,15 +2,19 @@ import React, { useEffect, useContext, useState } from 'react';
 import { AppContext } from '../../../context';
 import styles from './System1.css';
 import { useMediaQuery } from 'react-responsive';
-// import ButtonContainer from './ButtonContainer';
+import LegalTerms from './Articles/components/LegalTerms';
 import MainTitle from './Articles/components/MainTitle';
 import { setPageComponent } from './utils/helpers';
+import useClickSubmit from '../../../utils/hooks/useClickSubmit';
 
 const OfferBlockPage = () => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const { trackingState, appState } = useContext(AppContext);
     const { header, sub_text, offer_block } = appState.system1;
     const [ useArticle, setArticle ] = useState(null);
+    const [ shouldExecute, setExecute ] = useState(false);
+
+    useClickSubmit(trackingState, trackingState.email, shouldExecute);
 
     useEffect(() => {
         setPageComponent(trackingState.article, setArticle);
@@ -41,8 +45,11 @@ const OfferBlockPage = () => {
 
     const BlockOffer = ({ offerItem }) => {
         const [ isHovering, setHovering ] = useState(false);
+        
         const handleOfferClick = () => {
-            window.open(offerItem.offer_url, '_blank');
+            setExecute(true);
+            let newTab = window.open();
+            newTab.location = offerItem.offer_url;
         };
 
         const buttStyle = Object.assign({}, 
@@ -75,6 +82,7 @@ const OfferBlockPage = () => {
                 <div style={styles.blockOffersListContainer}>
                     {offer_block.offers.map((offer, idx) => <BlockOffer key={`block-offer-item-button-${idx}`} offerItem={offer}/>)}
                 </div>
+                <LegalTerms email={trackingState.email} />
             </div>
             {useArticle}
         </div>

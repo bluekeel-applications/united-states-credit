@@ -2,52 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './System1.css.js';
 import Loading from '../../Shared/Loading';
 import { useMediaQuery } from 'react-responsive';
-
-const LegalTerms = ({email}) => {
-    const isMobile = useMediaQuery({ maxWidth: 767 });
-
-    const legalStyle = Object.assign({},
-        styles.legalTerms,
-        isMobile && styles.legalTermsMobile
-    );
-
-    return (
-        <div style={legalStyle}>
-            <div style={styles.termsText}>
-                {`By clicking any of the links above, I agree with the `}
-                <a 
-                    key='terms-privacy-policy-1'
-                    style={styles.termsLink}
-                    href='https://unitedstatescredit.com/privacy' 
-                    rel='noopener noreferrer' 
-                    target='_blank'
-                >
-                    Privacy Policy
-                </a>
-                {` and `}
-                <a 
-                    key='terms-policy'
-                    style={styles.termsLink} 
-                    href='https://unitedstatescredit.com/terms' 
-                    rel='noopener noreferrer' 
-                    target='_blank'
-                >
-                    Terms &amp; Conditions</a>.
-                    {` In addition, I consent to receive emails ${email && email !== 'omit' ? `to ${email}` : ''}
-                    in accordance with the `}
-                <a 
-                    key='terms-privacy-policy-2'
-                    style={styles.termsLink} 
-                    href='https://unitedstatescredit.com/privacy' 
-                    rel='noopener noreferrer' 
-                    target='_blank'
-                >
-                    Privacy Policy
-                </a>.
-            </div>
-        </div>
-    );
-};
+import LegalTerms from './Articles/components/LegalTerms';
 
 const ButtonContainer = ({ containerId, email, title }) => {
     const [ isLoading, setLoading ] = useState(true);

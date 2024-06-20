@@ -67,23 +67,23 @@ const styles = {
     buttonContainer: {
         minHeight: '200px'
     },
-    legalTerms: {
-        width: '75%',
-        fontSize: '0.8rem',
-        margin: '15px auto',
-        textAlign: 'center'
-    },
-    legalTermsMobile: {
-        width: '100%',
-        margin: '15px 0',
-    },
-    termsText: {
-        display: 'inline',
-        fontWeight: '400',
-    },
-    termsLink: {
-        textDecoration: 'underline',
-    },
+    // legalTerms: {
+    //     width: '75%',
+    //     fontSize: '0.8rem',
+    //     margin: '15px auto',
+    //     textAlign: 'center'
+    // },
+    // legalTermsMobile: {
+    //     width: '100%',
+    //     margin: '15px 0',
+    // },
+    // termsText: {
+    //     display: 'inline',
+    //     fontWeight: '400',
+    // },
+    // termsLink: {
+    //     textDecoration: 'underline',
+    // },
     blockContainer: {
         width: '100%',
         maxWidth: '600px',
