@@ -3,7 +3,7 @@ import { AppContext } from '../../../context';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { FETCH_ARTICLE_BY_KEY } from '../../../utils/GraphQL/queries';
 import { ADD_USER_EMAIL } from '../../../utils/GraphQL/mutations';
-import { buildFullURL, setDefaultData } from './utils/helpers';
+import { buildFullURL, setDefaultData, resetUrl } from './utils/helpers';
 import Loading from '../../Shared/Loading';
 import System1Page from './System1Page';
 import System1Static from './System1Static';
@@ -14,7 +14,7 @@ const System1 = () => {
     const navigate = useNavigate();
     const emailSent = useRef(false);
     const myURL = new URL(window.location.href);
-    const { trackingState, dispatchApp } = useContext(AppContext);
+    const { trackingState, dispatchApp, appState } = useContext(AppContext);
     const [ pageType, setPageType ] = useState(null);
     const [ pageReady, setPageReady ] = useState(false);
     const [ staticArticle, setStaticArticle ] = useState(trackingState.article);
@@ -69,6 +69,7 @@ const System1 = () => {
         // const newURL = `/rsoc${myURL.search}${tail}`;
         const newURL = `/rsoc?${tail}`;
         navigate(newURL, { replace: true });
+
         // If the dsiplay is set to Block and the article has associated offer block set
         if(trackingState.display === 'block' && !!data.fetchArticleByKey.body.offer_block) {
             // Show Offer Block
@@ -91,16 +92,33 @@ const System1 = () => {
         }
     );
 
+    const handleRefresh = () => {
+        const newURL = `${window.location.origin}/rsoc?${resetUrl(trackingState)}`;
+        window.location.href = newURL;
+    };
+
     useEffect(() => {
         if(called || pageReady) {
             return;
         };
         const hasButtonKeys = !!myURL.searchParams.get('forceKeyA');
+        const isRefresh = !!myURL.searchParams.get('fired');
+        //Handle a refresh event
+        if(hasButtonKeys && isRefresh) {
+            handleRefresh();
+            return;
+        };
+
+        if(hasButtonKeys && !isRefresh) {
+            showOldFormat();
+            return;
+        };
+
         if(!hasButtonKeys) {
             fetchArticle();
-        } else {
-            showOldFormat();
+            return;
         };
+
 // eslint-disable-next-line
     },[data, pageReady]);
 

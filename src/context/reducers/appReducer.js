@@ -152,7 +152,7 @@ const appStateReducer = (state, action) => {
             return {
                 ...state,                
                 system1: action.payload
-            };        
+            };   
 
         default:
             throw new Error(`Not supported action ${action.type}`);

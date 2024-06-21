@@ -46,7 +46,7 @@ export const buildFullURL = (buttonArr, trackingState) => {
     const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`
     const inbound = `article=${trackingState.article}&pid=${trackingState.pid}&sid=${trackingState.sid}&oid=${trackingState.oid}&uid=${trackingState.uid}&eid=${trackingState.eid}&segment=${trackingState.segment}&email=${trackingState.email}&hsid=${trackingState.hsid}`;
     const utm = `utm_source=${trackingState.article}-${trackingState.sid}`;
-    return `${utm}&${inbound}&${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebook}&${google}&${tiktok}`;
+    return `${utm}&${inbound}&${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebook}&${google}&${tiktok}&fired=true`;
 };
 
 export const setDefaultData = (trackingState) => {
@@ -62,7 +62,11 @@ export const setDefaultData = (trackingState) => {
     const trackingVars = `email=omit&hsid=234820821&pid=3420&sid=9582&oid=40&uid=yourUID&eid=yourEID`;
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
     const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`;
-    return `${searchTrack}&${article}&${clickTrack}&${segment}&${subId}&${facebook}&${google}&${forceKeys}&${taboola}&${trackingVars}&${tiktok}`;
+    return `${searchTrack}&${article}&${clickTrack}&${segment}&${subId}&${facebook}&${google}&${forceKeys}&${taboola}&${trackingVars}&${tiktok}&fired=true`;
+};
+
+export const resetUrl = (trackingState) => {
+    return`article=${trackingState.article}&pid=${trackingState.pid}&sid=${trackingState.sid}&oid=${trackingState.oid}&uid=${trackingState.uid}&eid=${trackingState.eid}&segment=${trackingState.segment}&email=${trackingState.email}&hsid=${trackingState.hsid}`;
 };
 
 export const setPageComponent = (article, setArticle) => {
