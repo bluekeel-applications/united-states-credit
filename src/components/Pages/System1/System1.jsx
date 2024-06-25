@@ -9,11 +9,13 @@ import System1Page from './System1Page';
 import System1Static from './System1Static';
 import OfferBlockPage from './OfferBlockPage';
 import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 const System1 = () => {
     const navigate = useNavigate();
     const emailSent = useRef(false);
     const myURL = new URL(window.location.href);
+    const isMobile = useMediaQuery({ maxWidth: 767 });
     const { trackingState, dispatchApp, appState } = useContext(AppContext);
     const [ pageType, setPageType ] = useState(null);
     const [ pageReady, setPageReady ] = useState(false);
@@ -69,7 +71,13 @@ const System1 = () => {
         // const newURL = `/rsoc${myURL.search}${tail}`;
         const newURL = `/rsoc?${tail}`;
         navigate(newURL, { replace: true });
-
+        // If set RSOC desktop is true and its not mobile now send to RSOC
+        if(data.fetchArticleByKey.body.rsoc_desktop && !isMobile) {
+            window._rampJs();
+            setPageType('dynamic');
+            setPageReady(true);
+            return;
+        };
         // If the dsiplay is set to Block and the article has associated offer block set
         if(trackingState.display === 'block' && !!data.fetchArticleByKey.body.offer_block) {
             // Show Offer Block

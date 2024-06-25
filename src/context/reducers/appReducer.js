@@ -17,8 +17,7 @@ const initialAppState = {
     redirection: false,
     em_sub: false,
     offer: null,
-    system1: null,
-    system1_dynamic: null
+    system1: null
 };
 
 const appStateReducer = (state, action) => {
@@ -140,12 +139,6 @@ const appStateReducer = (state, action) => {
                     debt_type: null,
                     debt_amount: null
                 }
-            };
-
-        case 'SET_SYSTEM_1_STATE':
-            return {
-                ...state,                
-                system1_dynamic: action.payload
             };
 
         case 'SET_SYSTEM_1':

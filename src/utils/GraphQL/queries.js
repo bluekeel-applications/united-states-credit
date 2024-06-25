@@ -184,6 +184,7 @@ const FETCH_ARTICLE_BY_KEY = gql `
                 sub_text
                 button_title
                 buttons
+                rsoc_desktop
                 offer1 {
                     main_title
                     sub_title
