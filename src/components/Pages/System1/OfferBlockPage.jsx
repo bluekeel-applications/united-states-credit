@@ -48,8 +48,13 @@ const OfferBlockPage = () => {
         
         const handleOfferClick = () => {
             setExecute(true);
+            var url = new URL(offerItem.offer_url);
+            var search_params = url.searchParams;
+            search_params.set('eid', `block-${trackingState.sid}`);
+            url.search = search_params.toString();
+            var new_url = url.toString();
             let newTab = window.open();
-            newTab.location = offerItem.offer_url;
+            newTab.location = new_url;
         };
 
         const buttStyle = Object.assign({}, 
