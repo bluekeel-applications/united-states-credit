@@ -44,6 +44,7 @@ const useSetNewSession = ({ tracking, turnOffLoading, animationComplete }) => {
 			ttid: tracking.TTID,
 			ttclid: tracking.TTCLID,
 			fbid: tracking.FBID,
+			fbclickid: tracking.FBCLICKID,
 			display: tracking.DISPLAY
 		};
 		dispatchTracking({ type: 'USER_ARRIVED', payload });

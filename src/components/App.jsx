@@ -56,6 +56,7 @@ const App = () => {
 		TTID: myURL.searchParams.get('ttid') || 'CO5VQT3C77U2IBEA8QH0',
 		TTCLID: myURL.searchParams.get('ttclid') || '',
 		FBID: myURL.searchParams.get('fbid') || null,
+		FBCLICKID: myURL.searchParams.get('fbclickid') || null,
 		DISPLAY: myURL.searchParams.get('display') || 'rsoc'
     };
 
