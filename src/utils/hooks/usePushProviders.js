@@ -8,17 +8,17 @@ const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-// const initPushnami = ppUrl => {
-//     console.log('Pushnami Initialization: STARTED');
-//     var script = document.createElement('script');
-//     script.type = 'text/javascript';
-//     script.src = ppUrl;
-//     script.onload = function() {
-//         window.Pushnami.update().prompt();
-//         console.log('Pushnami Initialization: SUCCESS');
-//     };
-//     document.getElementsByTagName('head')[0].appendChild(script);
-// };
+const initPushnami = ppUrl => {
+    console.log('Pushnami Initialization: STARTED');
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = ppUrl;
+    script.onload = function() {
+        window.Pushnami.update().prompt();
+        console.log('Pushnami Initialization: SUCCESS');
+    };
+    document.getElementsByTagName('head')[0].appendChild(script);
+};
 
 const initPushPros = ppUrl => {
     console.log('PushPros Initialization: STARTED');
@@ -57,8 +57,8 @@ const usePushProviders = () => {
                 initPushPros('https://pushpros.tech/GetPushScript?key=2Xa3N8H4tIMDq5DaLOjgimHq4HG8UhWO&domain=');
                 return;
             };
-            // initPushnami('https://api.pushnami.com/scripts/v1/pushnami-adv/5dc01af91e6090001311fd72');
-            // return;
+            initPushnami('https://api.pushnami.com/scripts/v1/pushnami-adv/5dc01af91e6090001311fd72');
+            return;
         };
 		// eslint-disable-next-line
 	}, [loading, error, data]);

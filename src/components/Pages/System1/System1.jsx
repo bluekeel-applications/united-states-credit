@@ -16,7 +16,7 @@ const System1 = () => {
     const emailSent = useRef(false);
     const myURL = new URL(window.location.href);
     const isMobile = useMediaQuery({ maxWidth: 767 });
-    const { trackingState, dispatchApp, appState } = useContext(AppContext);
+    const { trackingState, dispatchApp } = useContext(AppContext);
     const [ pageType, setPageType ] = useState(null);
     const [ pageReady, setPageReady ] = useState(false);
     const [ staticArticle, setStaticArticle ] = useState(trackingState.article);
