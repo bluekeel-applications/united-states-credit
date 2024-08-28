@@ -28,6 +28,7 @@ import LoanRecArticle from '../Articles/LoanRecArticle';
 import CreditRecArticle from '../Articles/CreditRecArticle';
 
 export const buildFullURL = (buttonArr, trackingState) => {
+    // Build Force Keys
     const keys = ['&forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
     const encodeArr = buttonArr.map((button) => {
       return button.trim().replace(/ /g,"+").replace("$","%24");
@@ -36,18 +37,29 @@ export const buildFullURL = (buttonArr, trackingState) => {
       return `${keys[idx]}${item}`;
     });
     const forceKeys = keyArr.join("");
-    const searchTrack = `search_track_url=https://f8fjn5bgw2.execute-api.us-east-1.amazonaws.com/prod/optin/${trackingState.hsid}`;
-    const clickTrack = `click_track_url=http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${trackingState.hsid}`;
+    // Build encoded Tracking links
+    const searchTrack = `https://f8fjn5bgw2.execute-api.us-east-1.amazonaws.com/prod/optin/${trackingState.hsid}`;
+    const encodedSearchTrack = `search_track_url=${encodeURIComponent(searchTrack)}`;
+    const clickTrack = `http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${trackingState.hsid}`;
+    const encodedClickTrack = `click_track_url=${encodeURIComponent(clickTrack)}`;
+    // Build Required Params
     const subId = `subid=${trackingState.sid}-${trackingState.eid}`;
+    // Build Marketing Params
     const taboola = `tbid=1648456&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
     // const facebook = !!trackingState.fbid ? 'fbclick=Search' : `fbid=531202445442265&fbclick=Search`;
     const facebookId = !!trackingState.fbid ? `fbid=${trackingState.fbid}` : `fbid=531202445442265`;
     const facebookClick = !!trackingState.fbclickid ? `fbclick=${trackingState.fbclickid}` : 'fbclick=Search';
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
-    const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`
+    const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`;
+    // Build Inbound params for refresh;
     const inbound = `article=${trackingState.article}&pid=${trackingState.pid}&sid=${trackingState.sid}&oid=${trackingState.oid}&uid=${trackingState.uid}&eid=${trackingState.eid}&segment=${trackingState.segment}&email=${trackingState.email}&hsid=${trackingState.hsid}`;
     const utm = `utm_source=${trackingState.article}-${trackingState.sid}`;
-    return `${utm}&${inbound}&${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebookId}&${facebookClick}&${google}&${tiktok}&fired=true`;
+
+    // Build priority URL
+    const newTail = `${utm}&${inbound}&${forceKeys}&${encodedSearchTrack}&${encodedClickTrack}&${subId}&${taboola}&${facebookId}&${facebookClick}&${google}&${tiktok}&fired=true`;
+
+    // return `${utm}&${inbound}&${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebookId}&${facebookClick}&${google}&${tiktok}&fired=true`;
+    return newTail;
 };
 
 export const setDefaultData = (trackingState) => {
