@@ -17,7 +17,7 @@ import firePixelBlueKeel from '../utils/pixels/bluekeelPixel.js';
 
 const Feed = lazy(() => import('./Layout/Feed'));
 
-const App = () => {
+const App = ({ uri }) => {
 	const isMobile = useMediaQuery({ maxWidth: 1000 });
 	let navigate = useNavigate();
 	const location = useLocation();
@@ -27,7 +27,7 @@ const App = () => {
 	const [ showLoading, setLoading ] = useState(true);
     const [ showLoadingPch ] = useState(isPch());
 	const [ animationComplete, setAnimationComplete ] = useState(!showLoadingPch);
-	const { dispatchTracking } = useContext(AppContext);
+	const { dispatchTracking, dispatchApp, appState } = useContext(AppContext);
 	
 	usePushProviders();
 	
@@ -61,6 +61,14 @@ const App = () => {
     };
 
 	useEffect(() => {
+		if(!appState.uri) {
+			console.log('setting uri:', uri);
+			dispatchApp({ type: 'SET_URI', payload: uri });
+		};
+		// eslint-disable-next-line
+	},[]);
+
+	useEffect(() => {
 		if(tracking.AUTH_GROUP !== 'bk') {
 			dispatchTracking({ type: 'SET_GROUP', payload: tracking.AUTH_GROUP });
 		};
@@ -73,7 +81,7 @@ const App = () => {
 	useEffect(() => {
 		// Fire a pixel for load event of these SIDs
 		if(!hasFiredPerClick.current) {
-			const sidList = [ 5102, 9113, 9371, 9419, 9474, 9560, 9568, 9641, 9649 ];
+			const sidList = [ 5102, 9113, 9371, 9419, 9474, 9560, 9568, 9641, 9649, 9879 ];
 			const inboundSid = Number(tracking.SID);
 			if(sidList.includes(inboundSid)) {
 				console.log('BK pixel fire - per Click');

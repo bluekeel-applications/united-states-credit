@@ -5,19 +5,23 @@ import axios from 'axios';
 
 const DuplicateCheck = () => {
     const [ isDuplicate, setIsDuplicate ] = useState(null);
-    const { trackingState } = useContext(AppContext);
-    const AveI = `https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9523&pid=3389&eid=${trackingState.sid}&uid=${trackingState.eid}&subid2=${trackingState.hsid}`;
-    const System1 = `https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9445&pid=3349&eid=${trackingState.sid}&uid=${trackingState.eid}&kwd=${trackingState.kwd}&subid2=${trackingState.hsid}`;
+    const { trackingState, appState } = useContext(AppContext);
+    // const AveI = `https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9523&pid=3389&eid=${trackingState.sid}&uid=${trackingState.eid}&subid2=${trackingState.hsid}`;
+    const AveI = `https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9884&pid=3623&eid=${trackingState.sid}&uid=${trackingState.eid}`;
+    // const System1 = `https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9445&pid=3349&eid=${trackingState.sid}&uid=${trackingState.eid}&kwd=${trackingState.kwd}&subid2=${trackingState.hsid}`;
+    const CCI = `https://www.bkoffers.com/hitstreet/redirect_one_step.cfm?oid=115&sid=9860&pid=3615&eid=${trackingState.sid}&uid=${trackingState.eid}&email=omit`;
 
     const checkForDuplicate = async() => {
-        if(!trackingState.email) {
+        if(!trackingState.email || trackingState.email === 'omit') {
             //No email, so we send to backup
             console.log('Missing email - Setting to duplicate');
             setIsDuplicate(true);
             return;
         };
-        const url = `https://28ohcsi2ph.execute-api.us-east-1.amazonaws.com/running/check/${trackingState.email}`;
 
+        const encodedEmail = encodeURIComponent(trackingState.email);
+        const url = `${appState.uri}/check/${encodedEmail}`;
+        console.log('send endpoint:', url);
         const response = await axios({
             method: 'GET',
             url,
@@ -36,11 +40,11 @@ const DuplicateCheck = () => {
         };
         if(isDuplicate) {
             // Redirect to backup offer
-            console.log('Email is a duplicate - sending to System 1');
-            window.location.href = System1;
+            console.log('Email is a duplicate - sending to CCI (Loans)');
+            window.location.href = CCI;
             return;
         };
-        console.log('Email is unique - sending to Avenue I');
+        console.log('Email is unique - sending to Avelink - CPC');
         window.location.href = AveI;
 // eslint-disable-next-line
     },[isDuplicate]);

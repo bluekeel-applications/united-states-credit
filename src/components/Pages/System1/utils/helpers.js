@@ -26,8 +26,9 @@ import BoTArticle from '../Articles/BoTArticle';
 import RealEstateArticle from '../Articles/RealEstateArticle';
 import LoanRecArticle from '../Articles/LoanRecArticle';
 import CreditRecArticle from '../Articles/CreditRecArticle';
+import BankBonusArticle from '../Articles/BankBonusArticle';
 
-export const buildFullURL = (buttonArr, trackingState) => {
+export const buildFullURL = (buttonArr, trackingState, uri) => {
     // Build Force Keys
     const keys = ['&forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
     const encodeArr = buttonArr.map((button) => {
@@ -38,7 +39,7 @@ export const buildFullURL = (buttonArr, trackingState) => {
     });
     const forceKeys = keyArr.join("");
     // Build encoded Tracking links
-    const searchTrack = `https://f8fjn5bgw2.execute-api.us-east-1.amazonaws.com/prod/optin/${trackingState.hsid}`;
+    const searchTrack = `${uri}/optin/${trackingState.hsid}`;
     const encodedSearchTrack = `search_track_url=${encodeURIComponent(searchTrack)}`;
     const clickTrack = `http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${trackingState.hsid}`;
     const encodedClickTrack = `click_track_url=${encodeURIComponent(clickTrack)}`;
@@ -62,9 +63,9 @@ export const buildFullURL = (buttonArr, trackingState) => {
     return newTail;
 };
 
-export const setDefaultData = (trackingState) => {
+export const setDefaultData = (trackingState, uri) => {
     const forceKeys = '&forceKeyA=Credit+Cards+No+Credit&forceKeyB=Credit+Cards+for+Fair+Credit+Instant+Approval&forceKeyC=Best+Credit+Cards+for+Fair+Credit&forceKeyD=Best+Credit+Cards+to+Build+Credit&forceKeyE=Cash+Back+Credit+Cards&forceKeyF=Best+Rewards+Credit+Card+for+Travel';
-    const searchTrack = `search_track_url=https://f8fjn5bgw2.execute-api.us-east-1.amazonaws.com/prod/optin/${trackingState.hsid}`;
+    const searchTrack = `search_track_url=${uri}/optin/${trackingState.hsid}`;
     const article = 'article=credit';
     const segment = 'segment=c2sunitedstatescredit0005';
     const clickTrack = `click_track_url=http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${trackingState.hsid}`;
@@ -164,6 +165,9 @@ export const setPageComponent = (article, setArticle) => {
             break;
         case 'creditrec':
             setArticle(<CreditRecArticle />);
+            break;
+        case 'uscbank':
+            setArticle(<BankBonusArticle />);
             break;
         case 'test':
             setArticle(<CreditCardArticle />);

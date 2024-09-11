@@ -16,7 +16,7 @@ const System1 = () => {
     const emailSent = useRef(false);
     const myURL = new URL(window.location.href);
     const isMobile = useMediaQuery({ maxWidth: 767 });
-    const { trackingState, dispatchApp } = useContext(AppContext);
+    const { trackingState, dispatchApp, appState } = useContext(AppContext);
     const [ pageType, setPageType ] = useState(null);
     const [ pageReady, setPageReady ] = useState(false);
     const [ staticArticle, setStaticArticle ] = useState(trackingState.article);
@@ -59,7 +59,7 @@ const System1 = () => {
         // If error getting article, use credit as default;
         if(!data?.fetchArticleByKey?.success){
             console.log('Error: No data found', data);
-            const newURL = `/rsoc?${setDefaultData(trackingState)}`;
+            const newURL = `/rsoc?${setDefaultData(trackingState, appState.uri)}`;
             navigate(newURL, { replace: true });
             setStaticArticle('credit');
             showOldFormat();
@@ -67,7 +67,7 @@ const System1 = () => {
         };
         // Otherwise, set context and build full url
         dispatchApp({ type: 'SET_SYSTEM_1', payload: data.fetchArticleByKey.body });
-        const tail = buildFullURL(data.fetchArticleByKey.body.buttons, trackingState);
+        const tail = buildFullURL(data.fetchArticleByKey.body.buttons, trackingState, appState.uri);
         // const newURL = `/rsoc${myURL.search}${tail}`;
         const newURL = `/rsoc?${tail}`;
         navigate(newURL, { replace: true });

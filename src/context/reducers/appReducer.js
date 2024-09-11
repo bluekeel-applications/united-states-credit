@@ -1,4 +1,5 @@
 const initialAppState = {
+    uri: null,
     showDrawer: false,
     showFullLogo: false,
     vertical: 'direct',
@@ -23,6 +24,12 @@ const initialAppState = {
 const appStateReducer = (state, action) => {
     switch (action.type) {
         
+        case 'SET_URI':
+            return {
+                ...state,
+                uri: action.payload
+            };
+
         case 'TOGGLE_DRAWER':
             return {
                 ...state,
