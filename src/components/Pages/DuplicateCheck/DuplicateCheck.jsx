@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { AppContext } from '../../../context';
-import Loading from '../../Shared/Loading';
+import LoadingRedirect from '../../Shared/LoadingRedirect';
 import axios from 'axios';
 
 const DuplicateCheck = () => {
@@ -52,7 +52,7 @@ const DuplicateCheck = () => {
 
     return(
         <div style={styles.main}>
-            <Loading />
+            <LoadingRedirect />
         </div>
     )
 };
