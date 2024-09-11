@@ -21,12 +21,13 @@ const DuplicateCheck = () => {
 
         const encodedEmail = encodeURIComponent(trackingState.email);
         const url = `${appState.uri}/check/${encodedEmail}`;
-        console.log('send endpoint:', url);
+
         const response = await axios({
             method: 'GET',
             url,
         });
-        if(response.data === 'UNIQUE') {
+
+        if(response?.data?.status === 'UNIQUE') {
             setIsDuplicate(false);
             return;
         };
