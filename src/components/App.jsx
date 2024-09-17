@@ -81,7 +81,7 @@ const App = ({ uri }) => {
 	useEffect(() => {
 		// Fire a pixel for load event of these SIDs
 		if(!hasFiredPerClick.current) {
-			const sidList = [ 5102, 9113, 9371, 9419, 9474, 9560, 9568, 9641, 9649, 9879 ];
+			const sidList = [ 5102, 9113, 9371, 9419, 9474, 9560, 9568, 9649, 9879 ];
 			const inboundSid = Number(tracking.SID);
 			if(sidList.includes(inboundSid)) {
 				console.log('BK pixel fire - per Click');
