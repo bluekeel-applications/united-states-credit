@@ -14,6 +14,7 @@ import Radium from 'radium';
 import Styles from './Styles.css.js';
 import { useMediaQuery } from 'react-responsive';
 import firePixelBlueKeel from '../utils/pixels/bluekeelPixel.js';
+import { datadogRum } from '@datadog/browser-rum';
 
 const Feed = lazy(() => import('./Layout/Feed'));
 
@@ -69,6 +70,28 @@ const App = ({ uri }) => {
 	},[]);
 
 	useEffect(() => {
+		datadogRum.init({
+			applicationId: '99b0fdda-b808-4506-ad53-7aa417661bdc',
+			clientToken: 'pubcbe8b67a7273f6bbf184345029e031aa',
+			// `site` refers to the Datadog site parameter of your organization
+			// see https://docs.datadoghq.com/getting_started/site/
+			site: 'us5.datadoghq.com',
+			service: 'united-states-credit',
+			env: 'prod',
+			// Specify a version number to identify the deployed version of your application in Datadog
+			// version: '1.0.0',
+			forwardErrorsToLogs: true,
+			sessionSampleRate: 100,
+			sessionReplaySampleRate: 20,
+			trackUserInteractions: true,
+			trackResources: true,
+			trackLongTasks: true,
+			defaultPrivacyLevel: 'mask-user-input',
+		});
+		console.log('DataDog init');
+	},[]);
+
+	useEffect(() => {
 		if(tracking.AUTH_GROUP !== 'bk') {
 			dispatchTracking({ type: 'SET_GROUP', payload: tracking.AUTH_GROUP });
 		};
@@ -81,7 +104,7 @@ const App = ({ uri }) => {
 	useEffect(() => {
 		// Fire a pixel for load event of these SIDs
 		if(!hasFiredPerClick.current) {
-			const sidList = [ 5102, 9113, 9371, 9419, 9474, 9560, 9568, 9649, 9879 ];
+			const sidList = [ 5102, 9113, 9371, 9419, 9474, 9560, 9568, 9879 ];
 			const inboundSid = Number(tracking.SID);
 			if(sidList.includes(inboundSid)) {
 				console.log('BK pixel fire - per Click');

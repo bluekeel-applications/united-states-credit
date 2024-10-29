@@ -27,6 +27,7 @@ import RealEstateArticle from '../Articles/RealEstateArticle';
 import LoanRecArticle from '../Articles/LoanRecArticle';
 import CreditRecArticle from '../Articles/CreditRecArticle';
 import BankBonusArticle from '../Articles/BankBonusArticle';
+import AfdCards1 from '../Articles/AfdCards1';
 
 export const buildFullURL = (buttonArr, trackingState, uri) => {
     // Build Force Keys
@@ -168,6 +169,9 @@ export const setPageComponent = (article, setArticle) => {
             break;
         case 'uscbank':
             setArticle(<BankBonusArticle />);
+            break;
+        case 'afdcards1':
+            setArticle(<AfdCards1 />);
             break;
         case 'test':
             setArticle(<CreditCardArticle />);
