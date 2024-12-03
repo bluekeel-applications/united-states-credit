@@ -65,21 +65,27 @@ const System1 = () => {
             showOldFormat();
             return;
         };
+        let fetchedData = data.fetchArticleByKey.body;
+        // Switch to mobile offers if available and is Mobile
+        if(isMobile && !!fetchedData.mobile) {
+            fetchedData = fetchedData.mobile;
+            console.log('This is a mobile offer!');
+        };
         // Otherwise, set context and build full url
-        dispatchApp({ type: 'SET_SYSTEM_1', payload: data.fetchArticleByKey.body });
-        const tail = buildFullURL(data.fetchArticleByKey.body.buttons, trackingState, appState.uri);
+        dispatchApp({ type: 'SET_SYSTEM_1', payload: fetchedData });
+        const tail = buildFullURL(fetchedData.buttons, trackingState, appState.uri);
         // const newURL = `/rsoc${myURL.search}${tail}`;
         const newURL = `/rsoc?${tail}`;
         navigate(newURL, { replace: true });
         // If set RSOC desktop is true and its not mobile now send to RSOC
-        if(data.fetchArticleByKey.body.rsoc_desktop && !isMobile) {
+        if(fetchedData.rsoc_desktop && !isMobile) {
             window._rampJs();
             setPageType('dynamic');
             setPageReady(true);
             return;
         };
         // If the dsiplay is set to Block and the article has associated offer block set
-        if(trackingState.display === 'block' && !!data.fetchArticleByKey.body.offer_block) {
+        if(trackingState.display === 'block' && !!fetchedData.offer_block) {
             // Show Offer Block
             setPageType('block');
             setPageReady(true);

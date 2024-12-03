@@ -185,6 +185,7 @@ const FETCH_ARTICLE_BY_KEY = gql `
                 button_title
                 buttons
                 rsoc_desktop
+                segment
                 offer1 {
                     main_title
                     sub_title
@@ -205,6 +206,35 @@ const FETCH_ARTICLE_BY_KEY = gql `
                     offers {
 						display
 						offer_url
+                    }
+                }
+                mobile {
+                    header
+                    sub_text
+                    button_title
+                    buttons
+                    segment
+                    offer1 {
+                        main_title
+                        sub_title
+                        sub_text
+                        cta
+                        offer_url
+                    }
+                    offer2 {
+                        main_title
+                        sub_title
+                        sub_text
+                        cta
+                        offer_url
+                    }
+                    offer_block {
+                        id
+                        name
+                        offers {
+                            display
+                            offer_url
+                        }
                     }
                 }
 			}

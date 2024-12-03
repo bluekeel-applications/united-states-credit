@@ -134,7 +134,7 @@ export const setPageComponent = (article, setArticle) => {
         case 'dental':
             setArticle(<DentalArticle />);
             break;
-        case 'solar':
+        case 'tlsolar':
             setArticle(<SolarArticle />);
             break;
         case 'meal':
@@ -168,6 +168,9 @@ export const setPageComponent = (article, setArticle) => {
             setArticle(<CreditRecArticle />);
             break;
         case 'uscbank':
+            setArticle(<BankBonusArticle />);
+            break;
+        case 'checkingbonus':
             setArticle(<BankBonusArticle />);
             break;
         case 'afdcards1':

@@ -5,8 +5,10 @@ import { FETCH_ARTICLE_BY_KEY } from '../../../utils/GraphQL/queries';
 import { ADD_USER_EMAIL } from '../../../utils/GraphQL/mutations';
 import Loading from '../../Shared/Loading';
 import ActivePage from './ActivePage';
+import { useMediaQuery } from 'react-responsive';
 
 const AdArticle = () => {
+    const isMobile = useMediaQuery({ maxWidth: 767 });
     const emailSent = useRef(false);
     const { trackingState, dispatchApp } = useContext(AppContext);
     const [ pageReady, setPageReady ] = useState(false);
@@ -39,7 +41,13 @@ const AdArticle = () => {
     },[emailSent.current]);
 
     const handleInboundData = (data) => {
-        dispatchApp({ type: 'SET_SYSTEM_1', payload: data.fetchArticleByKey.body });
+        let fetchedData = data.fetchArticleByKey.body;
+        if(isMobile && !!fetchedData.mobile) {
+            fetchedData = fetchedData.mobile;
+            console.log('This is a mobile offer!');
+        };
+        console.log('fetched:', fetchedData);
+        dispatchApp({ type: 'SET_SYSTEM_1', payload: fetchedData });
         setPageReady(true);
     };
 
