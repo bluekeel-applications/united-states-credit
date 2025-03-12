@@ -14,6 +14,7 @@ const PrivacyPolicy = lazy(() => import('../components/Shared/PrivacyPolicy'));
 const TermConditions = lazy(() => import('../components/Shared/TermsConditions'));
 const EndUserFlow = lazy(() => import('../components/Pages/EndUserFlow'));
 // const FlowWrapper = lazy(() => import('./FlowWrapper'));
+const LoadingRedirect = lazy(() => import('../components/Shared/LoadingRedirect'));
 const DuplicateCheck = lazy(() => import('../components/Pages/DuplicateCheck'));
 const System1 = lazy(() => import('../components/Pages/System1'));
 const AdArticle = lazy(() => import('../components/Pages/AdArticle'));
@@ -30,6 +31,7 @@ const RouteContainer = () => (
                     <Route path='/duplicate_check' element={<DuplicateCheck />}/>
                     <Route path='/rsoc' element={<System1 />}/>
                     <Route path='/gas' element={<AdArticle />}/>
+                    <Route path='/loading' element={<LoadingRedirect />}/>
                 </Routes>
             </Suspense>
         </FlowWrapper> 

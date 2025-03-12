@@ -67,10 +67,10 @@ const System1 = () => {
         };
         let fetchedData = data.fetchArticleByKey.body;
         // Switch to mobile offers if available and is Mobile
-        if(isMobile && !!fetchedData.mobile) {
-            fetchedData = fetchedData.mobile;
-            console.log('This is a mobile offer!');
-        };
+        // if(isMobile && !!fetchedData.mobile) {
+        //     fetchedData = fetchedData.mobile;
+        //     console.log('This is a mobile offer!');
+        // };
         // Otherwise, set context and build full url
         dispatchApp({ type: 'SET_SYSTEM_1', payload: fetchedData });
         const tail = buildFullURL(fetchedData.buttons, trackingState, appState.uri);
@@ -86,6 +86,15 @@ const System1 = () => {
         };
         // If the dsiplay is set to Block and the article has associated offer block set
         if(trackingState.display === 'block' && !!fetchedData.offer_block) {
+        // if(isMobile && !!fetchedData.mobile.offer_block) {
+        //     // Show Offer Block
+        //     setPageType('block');
+        //     setPageReady(true);
+        //     return;
+        // };
+
+        // //the article has associated offer block set
+        // if(!!fetchedData.offer_block) {
             // Show Offer Block
             setPageType('block');
             setPageReady(true);

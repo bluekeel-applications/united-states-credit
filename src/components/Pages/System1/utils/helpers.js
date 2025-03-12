@@ -28,6 +28,7 @@ import LoanRecArticle from '../Articles/LoanRecArticle';
 import CreditRecArticle from '../Articles/CreditRecArticle';
 import BankBonusArticle from '../Articles/BankBonusArticle';
 import AfdCards1 from '../Articles/AfdCards1';
+import CellPhoneArticle from '../Articles/CellPhoneArticle';
 
 export const buildFullURL = (buttonArr, trackingState, uri) => {
     // Build Force Keys
@@ -176,8 +177,35 @@ export const setPageComponent = (article, setArticle) => {
         case 'afdcards1':
             setArticle(<AfdCards1 />);
             break;
+        case 'android':
+            setArticle(<CellPhoneArticle />);
+            break;
         case 'test':
             setArticle(<CreditCardArticle />);
+            break;
+        case 'creditrec2024':
+            setArticle(<CreditRecArticle />);
+            break;
+        case 'loanrec2024':
+            setArticle(<LoanRecArticle />);
+            break;
+        case 'loans2024':
+            setArticle(<LoanRecArticle />);
+            break;
+        case 'loanstest':
+            setArticle(<LoanRecArticle />);
+            break;
+        case 'tlscore':
+            setArticle(<CreditScoreArticle />);
+            break;
+        case 'ccicards':
+            setArticle(<CreditRecArticle />);
+            break;
+        case 'smscards':
+            setArticle(<CreditRecArticle />);
+            break;
+        case 'loanflow':
+            setArticle(<LoanRecArticle />);
             break;
         
         default:

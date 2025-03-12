@@ -10,8 +10,9 @@ import useClickSubmit from '../../../utils/hooks/useClickSubmit';
 const OfferBlockPage = () => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const { trackingState, appState } = useContext(AppContext);
-    const { header, sub_text, offer_block } = appState.system1;
+    const { header, sub_text, offer_block, mobile } = appState.system1;
     const [ useArticle, setArticle ] = useState(null);
+    const [ activeData, setActiveData ] = useState(null);
     const [ shouldExecute, setExecute ] = useState(false);
 
     useClickSubmit(trackingState, trackingState.email, shouldExecute);
@@ -34,6 +35,16 @@ const OfferBlockPage = () => {
         // eslint-disable-next-line
     },[]);
 
+    useEffect(() => {
+        if(isMobile) {
+            setActiveData(mobile.offer_block);
+            console.log('Mobile Data:', mobile.offer_block);
+        } else {
+            setActiveData(offer_block);
+            console.log('Desktop Data:', offer_block);
+        };
+    },[]);
+
     const headerStyle = Object.assign({},
         styles.headerContainer,
         isMobile && styles.headerContainerMobile
@@ -50,7 +61,7 @@ const OfferBlockPage = () => {
             setExecute(true);
             var url = new URL(offerItem.offer_url);
             var search_params = url.searchParams;
-            search_params.set('eid', `block-${trackingState.sid}`);
+            search_params.set('eid', `block-${trackingState.sid}-${trackingState.eid}`);
             url.search = search_params.toString();
             var new_url = url.toString();
             let newTab = window.open();
