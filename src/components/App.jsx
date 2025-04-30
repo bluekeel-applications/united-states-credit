@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useCallback, lazy, Suspense, useRef } from 'react';
 import { AppContext } from '../context';
 import RouteContainer from '../RouteContainer';
-import usePushProviders from '../utils/hooks/usePushProviders';
+// import usePushProviders from '../utils/hooks/usePushProviders';
 import LoadingRedirect from '../components/Shared/LoadingRedirect';
 import Loading from './Shared/Loading';
 import DrawerMenu from './Layout/DrawerMenu';
@@ -30,7 +30,7 @@ const App = ({ uri }) => {
 	const [ animationComplete, setAnimationComplete ] = useState(!showLoadingPch);
 	const { dispatchTracking, dispatchApp, appState } = useContext(AppContext);
 	
-	usePushProviders();
+	// usePushProviders();
 	
 	const tracking = {
         HSID: myURL.searchParams.get('hsid') || 0,

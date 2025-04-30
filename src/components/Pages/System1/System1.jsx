@@ -58,11 +58,12 @@ const System1 = () => {
     const handleInboundData = (data) => {
         // If error getting article, use credit as default;
         if(!data?.fetchArticleByKey?.success){
-            console.log('Error: No data found', data);
-            const newURL = `/rsoc?${setDefaultData(trackingState, appState.uri)}`;
-            navigate(newURL, { replace: true });
-            setStaticArticle('credit');
-            showOldFormat();
+            console.log('Error: No data found: Redirect to home', data);
+            window.location.href = '/';
+            // const newURL = `/rsoc?${setDefaultData(trackingState, appState.uri)}`;
+            // navigate(newURL, { replace: true });
+            // setStaticArticle('credit');
+            // showOldFormat();
             return;
         };
         let fetchedData = data.fetchArticleByKey.body;
@@ -73,7 +74,14 @@ const System1 = () => {
         // };
         // Otherwise, set context and build full url
         dispatchApp({ type: 'SET_SYSTEM_1', payload: fetchedData });
-        const tail = buildFullURL(fetchedData.buttons, trackingState, appState.uri);
+        let headlineTag = '';
+        if(isMobile && !!fetchedData?.mobile?.headline) {
+            headlineTag = fetchedData?.mobile?.headline ?? '';
+        } else {
+            headlineTag = fetchedData?.headline ?? '';
+        };
+        headlineTag = headlineTag.replace(/<[^>]+>/g, '+');
+        const tail = buildFullURL(fetchedData.buttons, trackingState, appState.uri, headlineTag);
         // const newURL = `/rsoc${myURL.search}${tail}`;
         const newURL = `/rsoc?${tail}`;
         navigate(newURL, { replace: true });
@@ -85,26 +93,44 @@ const System1 = () => {
             return;
         };
         // If the dsiplay is set to Block and the article has associated offer block set
-        if(trackingState.display === 'block' && !!fetchedData.offer_block) {
-        // if(isMobile && !!fetchedData.mobile.offer_block) {
+        // if(trackingState.display === 'block' && !!fetchedData.offer_block) {
+        // // if(isMobile && !!fetchedData.mobile.offer_block) {
+        // //     // Show Offer Block
+        // //     setPageType('block');
+        // //     setPageReady(true);
+        // //     return;
+        // // };
+
+        // // //the article has associated offer block set
+        // // if(!!fetchedData.offer_block) {
         //     // Show Offer Block
         //     setPageType('block');
         //     setPageReady(true);
         //     return;
+        // } else {
+        //     // For rsoc dynamic page
+        //     window._rampJs();
+        //     setPageType('dynamic');
+        //     setPageReady(true);
         // };
-
-        // //the article has associated offer block set
-        // if(!!fetchedData.offer_block) {
-            // Show Offer Block
+        if(trackingState.display === 'block' && !!fetchedData.offer_block) {
             setPageType('block');
             setPageReady(true);
             return;
-        } else {
-            // For rsoc dynamic page
-            window._rampJs();
-            setPageType('dynamic');
-            setPageReady(true);
+        }
+        // The new way just checks to see if there is an offer block
+        if((!!fetchedData.offer_block && !isMobile) || (!!fetchedData.mobile.offer_block && isMobile)) {
+                console.log('isMobile:', isMobile);
+                console.log('data:', fetchedData);
+                // Show Offer Block
+                setPageType('block');
+                setPageReady(true);
+                return;
         };
+        // Since no offer block is found, this must be a dynamic page
+        window._rampJs();
+        setPageType('dynamic');
+        setPageReady(true);
     };
 
     const [fetchArticle, { called, loading, data }] = useLazyQuery(

@@ -36,13 +36,12 @@ const OfferBlockPage = () => {
     },[]);
 
     useEffect(() => {
-        if(isMobile) {
+        if(isMobile && !!mobile.offer_block) {
             setActiveData(mobile.offer_block);
-            console.log('Mobile Data:', mobile.offer_block);
         } else {
             setActiveData(offer_block);
-            console.log('Desktop Data:', offer_block);
         };
+        // eslint-disable-next-line
     },[]);
 
     const headerStyle = Object.assign({},
@@ -87,6 +86,10 @@ const OfferBlockPage = () => {
         )
     };
 
+    if(!activeData) { 
+        return null; 
+    };
+
     return(
         <div style={styles.mainContainer}>
             <div style={headerStyle}>
@@ -96,7 +99,7 @@ const OfferBlockPage = () => {
             <div style={styles.blockContainer}>
                 <div style={styles.blockTitle}>Exclusive Offers!</div>
                 <div style={styles.blockOffersListContainer}>
-                    {offer_block.offers.map((offer, idx) => <BlockOffer key={`block-offer-item-button-${idx}`} offerItem={offer}/>)}
+                    {activeData.offers.map((offer, idx) => <BlockOffer key={`block-offer-item-button-${idx}`} offerItem={offer}/>)}
                 </div>
                 <LegalTerms email={trackingState.email} />
             </div>

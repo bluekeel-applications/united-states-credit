@@ -30,7 +30,7 @@ import BankBonusArticle from '../Articles/BankBonusArticle';
 import AfdCards1 from '../Articles/AfdCards1';
 import CellPhoneArticle from '../Articles/CellPhoneArticle';
 
-export const buildFullURL = (buttonArr, trackingState, uri) => {
+export const buildFullURL = (buttonArr, trackingState, uri, headline='') => {
     // Build Force Keys
     const keys = ['&forceKeyA=', '&forceKeyB=', '&forceKeyC=', '&forceKeyD=', '&forceKeyE=', '&forceKeyF=', '&forceKeyG=']
     const encodeArr = buttonArr.map((button) => {
@@ -55,7 +55,7 @@ export const buildFullURL = (buttonArr, trackingState, uri) => {
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
     const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`;
     // Build Inbound params for refresh;
-    const inbound = `article=${trackingState.article}&pid=${trackingState.pid}&sid=${trackingState.sid}&oid=${trackingState.oid}&uid=${trackingState.uid}&eid=${trackingState.eid}&segment=${trackingState.segment}&email=${trackingState.email}&hsid=${trackingState.hsid}`;
+    const inbound = `article=${trackingState.article}&headline=${headline}&pid=${trackingState.pid}&sid=${trackingState.sid}&oid=${trackingState.oid}&uid=${trackingState.uid}&eid=${trackingState.eid}&segment=${trackingState.segment}&email=${trackingState.email}&hsid=${trackingState.hsid}`;
     const utm = `utm_source=${trackingState.article}-${trackingState.sid}`;
 
     // Build priority URL
@@ -186,7 +186,7 @@ export const setPageComponent = (article, setArticle) => {
         case 'creditrec2024':
             setArticle(<CreditRecArticle />);
             break;
-        case 'loanrec2024':
+        case 'loanrec2025':
             setArticle(<LoanRecArticle />);
             break;
         case 'loans2024':
@@ -205,6 +205,9 @@ export const setPageComponent = (article, setArticle) => {
             setArticle(<CreditRecArticle />);
             break;
         case 'loanflow':
+            setArticle(<LoanRecArticle />);
+            break;
+        case 'loanflow3':
             setArticle(<LoanRecArticle />);
             break;
         
