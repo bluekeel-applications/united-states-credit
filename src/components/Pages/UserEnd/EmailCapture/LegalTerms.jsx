@@ -13,7 +13,7 @@ const LegalTerms = Radium(({ checked, setChecked }) => (
                 onChange={setChecked}
             />
             <div key='terms-text' style={styles.termsText}>
-                I hereby declare that I am a U.S. resident over the age of 18 and I agree to this site's
+            I hereby declare that I am a U.S. resident over the age of 18 and I agree to this site's 
                 <a 
                     key='terms-policy'
                     style={styles.termsLinks} 
@@ -23,7 +23,7 @@ const LegalTerms = Radium(({ checked, setChecked }) => (
                 >
                     Terms &amp; Conditions
                 </a> 
-                and 
+                <> and </> 
                 <a 
                     key='terms-privacy-policy-1'
                     style={styles.termsLinks}
@@ -33,6 +33,7 @@ const LegalTerms = Radium(({ checked, setChecked }) => (
                 >
                     Privacy Policy
                 </a>.
+            I also agree to receive relevant email from UnitedStatesCredit and affiliated brands that may be of interest to me.
             </div>
         </div>
     )

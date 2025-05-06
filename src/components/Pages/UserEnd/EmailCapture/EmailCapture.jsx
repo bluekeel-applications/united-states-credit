@@ -7,7 +7,7 @@ import Radium from 'radium';
 
 const EmailCapture = Radium(({ setPage, email, setEmail, theme, setSubmission }) => {
     const [ disabled, setDisabledState ] = useState(email === '');
-    const [ checked, setChecked ] = useState(true);
+    const [ checked, setChecked ] = useState(false);
 
     const handleReadyChange = () => {
         if(checked) {
@@ -41,6 +41,15 @@ const EmailCapture = Radium(({ setPage, email, setEmail, theme, setSubmission })
         return;
     };
 
+    const onHiddenChange = (e) => {
+        e.preventDefault();
+        if(e.target.value !== '') {
+            setEmail('')
+        };
+        setPage('offer');
+        return;
+    };
+
     return (
         <div key='email-capture' style={styles.contentContainer}>
             <div key='email-form' style={styles.formCard}>
@@ -56,6 +65,7 @@ const EmailCapture = Radium(({ setPage, email, setEmail, theme, setSubmission })
                         setEmail={setEmail}
                         setEmailReady={handleReadyChange}
                     />
+                    <input type='hidden' onChange={onHiddenChange}></input>
                     <LegalTerms checked={checked} setChecked={handleCheckClick}/>
                     <FormSubmit
                         disabledState={disabled}
