@@ -209,6 +209,13 @@ const FETCH_ARTICLE_BY_KEY = gql `
 						offer_url
                     }
                 }
+                button_group {
+                    button_text
+                    offers {
+                        offer_url
+                        usage
+                    }
+                }
                 mobile {
                     header
                     sub_text
@@ -236,6 +243,13 @@ const FETCH_ARTICLE_BY_KEY = gql `
                         offers {
                             display
                             offer_url
+                        }
+                    }
+                    button_group {
+                        button_text
+                        offers {
+                            offer_url
+                            usage
                         }
                     }
                 }

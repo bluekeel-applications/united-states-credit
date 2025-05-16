@@ -3,11 +3,12 @@ import { AppContext } from '../../../context';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { FETCH_ARTICLE_BY_KEY } from '../../../utils/GraphQL/queries';
 import { ADD_USER_EMAIL } from '../../../utils/GraphQL/mutations';
-import { buildFullURL, setDefaultData, resetUrl } from './utils/helpers';
+import { buildFullURL, resetUrl } from './utils/helpers';
 import Loading from '../../Shared/Loading';
 import System1Page from './System1Page';
 import System1Static from './System1Static';
 import OfferBlockPage from './OfferBlockPage';
+import ButtonGroupPage from './ButtonGroupPage';
 import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
@@ -19,7 +20,7 @@ const System1 = () => {
     const { trackingState, dispatchApp, appState } = useContext(AppContext);
     const [ pageType, setPageType ] = useState(null);
     const [ pageReady, setPageReady ] = useState(false);
-    const [ staticArticle, setStaticArticle ] = useState(trackingState.article);
+    // const [ staticArticle, setStaticArticle ] = useState(trackingState.article);
 
     // Since there is no "end" click, post email to mongo for use later with search_track url param
     const [ addUserEmail ] = useMutation(ADD_USER_EMAIL, { 
@@ -85,6 +86,16 @@ const System1 = () => {
         // const newURL = `/rsoc${myURL.search}${tail}`;
         const newURL = `/rsoc?${tail}`;
         navigate(newURL, { replace: true });
+        if(!!fetchedData.button_group && !isMobile) {
+            setPageType('button_group');
+            setPageReady(true);
+            return;
+        };
+        if(!!fetchedData.mobilebutton_group && isMobile) {
+            setPageType('button_group');
+            setPageReady(true);
+            return;
+        };
         // If set RSOC desktop is true and its not mobile now send to RSOC
         if(fetchedData.rsoc_desktop && !isMobile) {
             window._rampJs();
@@ -178,9 +189,11 @@ const System1 = () => {
             case 'dynamic':
                 return <System1Page />;
             case 'static':
-                return <System1Static article={staticArticle}/>;
+                return <System1Static article={trackingState.article}/>;
             case 'block':
                 return <OfferBlockPage />;
+            case 'button_group':
+                return <ButtonGroupPage />;
             default:
                 return <System1Page />;
         };
