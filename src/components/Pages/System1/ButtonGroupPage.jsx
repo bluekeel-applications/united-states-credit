@@ -39,18 +39,32 @@ const ButtonGroupPage = () => {
         let count = 0;
         let offerUrl = null;
         const randomNumber = Math.floor(Math.random() * 100) + 1;
+        console.log('randomNumber', randomNumber);
+        // Loop the offer array and set the offer url
         offer_array.forEach((offer_obj, idx) => {
-            // start count
-            if(idx === 0) {
-                count = offer_obj.usage;
+            // If an offer is already set, return
+            if(!!offerUrl) {
+                return;
             };
-            if(randomNumber <= count) {
+            // start count
+            count += Number(offer_obj.usage);
+            // if(idx === 0) {
+            //     count = Number(offer_obj.usage);
+            // };
+            // If the random number is less than or equal to the count, set the offer url
+            if(randomNumber <= count && !offerUrl) {
                 offerUrl = offer_obj.offer_url;
             };
-            if(idx !== 0) {
-                count += offer_obj.usage;
+            // Increment the count
+            // if(idx !== 0) {
+            //     count += Number(offer_obj.usage);
+            // };
+            // If this is the last offer and no offer url is set, set the offer url
+            if(idx === offer_array.length - 1 && !offerUrl) {
+                offerUrl = offer_obj.offer_url;
             };
         });
+        console.log('offerUrl', offerUrl);
         return offerUrl;
     };
     const SelectOffers = (data) => {
@@ -87,7 +101,6 @@ const ButtonGroupPage = () => {
 
     const BlockOffer = ({ offerItem }) => {
         const [ isHovering, setHovering ] = useState(false);
-        
         const handleOfferClick = () => {
             setExecute(true);
             var url = new URL(offerItem.url);

@@ -86,12 +86,12 @@ const System1 = () => {
         // const newURL = `/rsoc${myURL.search}${tail}`;
         const newURL = `/rsoc?${tail}`;
         navigate(newURL, { replace: true });
-        if(!!fetchedData.button_group && !isMobile) {
+        if(!!fetchedData.button_group && fetchedData.button_group.length > 1 && !isMobile) {
             setPageType('button_group');
             setPageReady(true);
             return;
         };
-        if(!!fetchedData.mobilebutton_group && isMobile) {
+        if(!!fetchedData.mobile.button_group && fetchedData.mobile.button_group.length > 1 && isMobile) {
             setPageType('button_group');
             setPageReady(true);
             return;
@@ -131,8 +131,6 @@ const System1 = () => {
         }
         // The new way just checks to see if there is an offer block
         if((!!fetchedData.offer_block && !isMobile) || (!!fetchedData.mobile.offer_block && isMobile)) {
-                console.log('isMobile:', isMobile);
-                console.log('data:', fetchedData);
                 // Show Offer Block
                 setPageType('block');
                 setPageReady(true);
