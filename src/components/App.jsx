@@ -15,6 +15,7 @@ import Styles from './Styles.css.js';
 import { useMediaQuery } from 'react-responsive';
 import firePixelBlueKeel from '../utils/pixels/bluekeelPixel.js';
 import { datadogRum } from '@datadog/browser-rum';
+import useAdSense from '../utils/hooks/useAdSense';
 
 const Feed = lazy(() => import('./Layout/Feed'));
 
@@ -60,6 +61,8 @@ const App = ({ uri }) => {
 		FBCLICKID: myURL.searchParams.get('fbclickid') || null,
 		DISPLAY: myURL.searchParams.get('display') || 'rsoc'
     };
+
+	useAdSense(tracking);
 
 	useEffect(() => {
 		if(!appState.uri) {
