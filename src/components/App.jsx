@@ -147,7 +147,7 @@ const App = ({ uri }) => {
 		<div key='app-key' style={Styles.app}>
 			<Navbar />
 			<RouteContainer />
-			{location.pathname !== '/rsoc' && location.pathname !== '/duplicate_check' && <Suspense fallback={<Loading/>}><Feed /></Suspense>}
+			{location.pathname !== '/rsoc' && location.pathname !== '/duplicate_check' && location.pathname !== '/new_user' && <Suspense fallback={<Loading/>}><Feed /></Suspense>}
 			{location.pathname !== '/duplicate_check' && <Footer />}
 			<DrawerMenu />
 		</div>

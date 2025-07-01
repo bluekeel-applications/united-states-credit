@@ -8,9 +8,6 @@ const styles = {
         justifyContent: 'flex-start',
         alignItems: 'center',
         width: '100vw',
-        WebkitBoxShadow: 'inset 0px -4px 6px -6px rgba(0,0,0,1)',
-        MozBoxShadow: 'inset 0px -4px 6px -6px rgba(0,0,0,1)',
-        boxShadow: 'inset 0px -4px 6px -6px rgba(0,0,0,1)',
     },
     usc: {
         backgroundImage: `url(${UscFlagLeft}), url(${UscFlagRight})`,
