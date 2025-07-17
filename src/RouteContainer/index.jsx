@@ -19,13 +19,19 @@ const DuplicateCheck = lazy(() => import('../components/Pages/DuplicateCheck'));
 const System1 = lazy(() => import('../components/Pages/System1'));
 const AdArticle = lazy(() => import('../components/Pages/AdArticle'));
 const UserCapture = lazy(() => import('../components/Pages/UserCapture'));
+const Home = lazy(() => import('../components/Pages/Home'));
+
+const WrappedRoute = ({ element, path }) => (
+    <Route path={path} element={<FlowWrapper>{element}</FlowWrapper>} />
+);
 
 const RouteContainer = () => (
 
-        <FlowWrapper>
+        // <FlowWrapper>
             <Suspense fallback={<Loading />}>
                 <Routes>
-                    <Route path='/' element={<Welcome />}/>
+                    <Route path='/' element={<Home />}/>
+                    {/* <Route path='/' element={<Welcome />}/>
                     <Route path='/privacy' element={<PrivacyPolicy />}/>
                     <Route path='/terms' element={<TermConditions />}/>
                     <Route path='/email_optin' element={<EndUserFlow />}/>
@@ -33,10 +39,10 @@ const RouteContainer = () => (
                     <Route path='/rsoc' element={<System1 />}/>
                     <Route path='/gas' element={<AdArticle />}/>
                     <Route path='/loading' element={<LoadingRedirect />}/>
-                    <Route path='/new_user' element={<UserCapture />}/>
+                    <Route path='/new_user' element={<UserCapture />}/> */}
                 </Routes>
             </Suspense>
-        </FlowWrapper> 
+        // </FlowWrapper> 
 );
 
 export default Radium(RouteContainer);

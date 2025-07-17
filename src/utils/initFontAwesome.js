@@ -44,6 +44,10 @@ import {
     faChevronUp,
     faTrophyStar,
     faAngleDown,
+    faTrianglePersonDigging,
+    faMoneyBillTrendUp,
+    faPiggyBank,
+    faComputer,
 } from '@fortawesome/pro-light-svg-icons';
 
 function initFontAwesome() {
@@ -90,7 +94,11 @@ function initFontAwesome() {
         faTimes,
         faChevronUp,
         faTrophyStar,
-        faAngleDown
+        faAngleDown,
+        faTrianglePersonDigging,
+        faMoneyBillTrendUp,
+        faPiggyBank,
+        faComputer,
     );
 }
 

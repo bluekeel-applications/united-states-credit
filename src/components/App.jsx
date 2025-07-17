@@ -148,10 +148,20 @@ const App = ({ uri }) => {
 
 	return (
 		<div key='app-key' style={Styles.app}>
-			<Navbar />
+			{location.pathname !== '/' && <Navbar />}
 			<RouteContainer />
-			{location.pathname !== '/rsoc' && location.pathname !== '/duplicate_check' && location.pathname !== '/new_user' && <Suspense fallback={<Loading/>}><Feed /></Suspense>}
-			{location.pathname !== '/duplicate_check' && <Footer />}
+			{location.pathname !== '/' &&
+			location.pathname !== '/rsoc' && 
+			location.pathname !== '/duplicate_check' && 
+			location.pathname !== '/new_user' && 
+			<Suspense fallback={<Loading/>}>
+				<Feed />
+			</Suspense>}
+			{
+			location.pathname !== '/duplicate_check' && 
+			location.pathname !== '/' &&
+			<Footer />
+			}
 			<DrawerMenu />
 		</div>
 	);
