@@ -9,7 +9,8 @@ import 'swiper/css/navigation';
 
 function Headline({ headlineData }) {
     const handleClick = () => {
-        window.open(headlineData.url, '_blank');
+        // window.open(headlineData.url, '_blank');
+        window.location.href = headlineData.url;
     };
     return(
         <div onClick={handleClick} style={styles.headlineCard}>
@@ -35,7 +36,7 @@ const Carousel = ({ headlines }) => {
                     }}
                     centeredSlides={true}
                     slidesPerView={1}
-                    spaceBetween={20}
+                    spaceBetween={25}
                     breakpoints={{
                     550: { slidesPerView: 2, spaceBetween: 10, centeredSlides: false },
                     840: { slidesPerView: 3, spaceBetween: 10, centeredSlides: false },

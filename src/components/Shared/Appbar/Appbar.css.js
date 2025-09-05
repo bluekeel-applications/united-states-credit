@@ -4,9 +4,10 @@ const styles = {
         color: 'white',
     },
     logo: {
-        width: '180px',
+        width: '250px',
         height: 'auto',
         padding: '10px 0',
+        cursor: 'pointer',
     },
 };
 

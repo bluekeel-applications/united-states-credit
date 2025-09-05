@@ -141,7 +141,7 @@ const ButtonGroupPage = () => {
                 {!!header && <MainTitle text={header} />}
                 {!!sub_text && <div style={headerSubStyle}>{sub_text}</div>}
             </div>
-            <div style={styles.blockContainer}>
+            <div style={styles.buttonBlockContainer}>
                 <div style={styles.blockTitle}>Exclusive Offers!</div>
                 <div style={styles.blockOffersListContainer}>
                     {activeData.map((offer, idx) => <BlockOffer key={`button-offer-item-${idx}`} offerItem={offer}/>)}

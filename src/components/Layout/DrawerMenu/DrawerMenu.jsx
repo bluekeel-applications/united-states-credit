@@ -64,7 +64,7 @@ const DrawerMenu = () => {
             </List>
             <Divider />
             <List>
-                <ListItem key='reviews-button' disablePadding>
+                {/* <ListItem key='reviews-button' disablePadding>
                     <ListItemButton onClick={(e) => handleLinkOutClick('https://unitedstatescredit.blog/category/reviews/', e)}>
                         <ListItemIcon>
                             <FontAwesomeIcon
@@ -74,9 +74,9 @@ const DrawerMenu = () => {
                         </ListItemIcon>
                         <ListItemText primary='Customer Reviews' />
                     </ListItemButton>
-                </ListItem>
+                </ListItem> */}
                 <ListItem key='blog-button' disablePadding>
-                    <ListItemButton onClick={(e) => handleLinkOutClick('https://unitedstatescredit.blog/', e)}>
+                    <ListItemButton onClick={(e) => handleLinkOutClick('https://blogs.unitedstatescredit.com/posts', e)}>
                         <ListItemIcon>
                             <FontAwesomeIcon
                                 icon={['fal', 'blog']}

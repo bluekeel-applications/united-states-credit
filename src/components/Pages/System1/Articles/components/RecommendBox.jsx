@@ -25,11 +25,11 @@ const RecommendBox = ({mainTitle, titleText, text, offerUrl, cta, location}) => 
         window.open(fullUrl, "_blank");
     };
 
-    const iconContainerStyle = Object.assign(
+    const iconContainerStyle = Object.assign({},
         styles.recTitleContainer,
         isMobile && {alignItems: 'center'}
     );
-    const iconStyle = Object.assign(
+    const iconStyle = Object.assign({},
         styles.recIcon,
         isMobile && {fontSize: '2rem'}
     );

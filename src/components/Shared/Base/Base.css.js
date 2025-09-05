@@ -35,7 +35,7 @@ const styles = {
         },
     },
     logo: {
-        width: '180px',
+        width: '225px',
         height: 'auto',
         padding: '10px 0',
     },

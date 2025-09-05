@@ -5,9 +5,11 @@ import styles from './Headlines.css.js';
 
 const Headlines = ({ headlines }) => {
     return (
-        <div style={styles.headlinesContainer}>
-            <TitleSection title="Headlines" />
-            <Carousel headlines={headlines} />
+        <div style={{backgroundColor: 'white', width: '100%'}}>
+            <div style={styles.headlinesContainer}>
+                <TitleSection title="Headlines" />
+                <Carousel headlines={headlines} />
+            </div>
         </div>
     );
 };

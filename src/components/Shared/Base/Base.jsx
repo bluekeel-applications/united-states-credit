@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Base.css.js';
-import UscFullLogo from '../../../assets/Images/usc_full_logo.png';
+import UscLogo from '../../../assets/Images/usc_logo_white.png';
 import Radium from 'radium';
 const Base = () => {
 
@@ -33,7 +33,7 @@ const Base = () => {
     <div style={styles.baseContainer}>
         <div style={styles.contentContainer}>
             <div style={styles.topContainer}>
-                <img src={UscFullLogo} alt='USC Logo' style={styles.logo} />
+                <img src={UscLogo} alt='USC Logo' style={styles.logo} />
                 <div style={styles.linkContainer}>
                     <LinkList />
                 </div>

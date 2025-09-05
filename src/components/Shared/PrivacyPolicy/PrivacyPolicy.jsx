@@ -1,14 +1,14 @@
 import React from 'react';
 import styles from './PrivacyPolicy.css.js';
-import UscFullLogo from '../../../assets/Images/usc_full_logo.png';
+// import UscFullLogo from '../../../assets/Images/usc_full_logo.png';
 
 const domain = 'UnitedStatesCredit.com';
 
 const PrivacyPolicy = () => (
     <div style={styles.container}>
-        <div style={styles.logoBar}>
+        {/* <div style={styles.logoBar}>
             <img src={UscFullLogo} alt='footer-logo' style={styles.headerLogo}/>
-        </div>
+        </div> */}
         <div style={styles.infoContainer}>
 
             <h1>{domain} Privacy Policy</h1>

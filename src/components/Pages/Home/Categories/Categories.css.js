@@ -6,7 +6,8 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: '30px'
+        paddingTop: '30px',
+        backgroundColor: 'white',
     },
     categoriesContainer: {
         maxWidth: '1200px',

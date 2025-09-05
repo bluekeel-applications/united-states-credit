@@ -69,11 +69,20 @@
 		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11025885187"></script>
 		<script>
+			const mygURL = new URL(window.location.href);
+			const gtagtracking = {
+				ARTICLE: mygURL.searchParams.get('article') || 'unknown',
+				SID: mygURL.searchParams.get('sid') || '0000',
+				EID: mygURL.searchParams.get('eid') || '0000'
+			};
 			window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
-			gtag('config', 'AW-11025885187');
-			gtag('event', 'conversion', {'send_to': 'AW-11025885187/qisiCOT_9IIYEIPQxokp'});
+			gtag('config', 'AW-11025885187', {
+				'campaign_name': gtagtracking.EID,
+				'campaign_source': `${gtagtracking.ARTICLE}-${gtagtracking.SID}`,
+				'campaign_medium': 'redirect-aw',
+			});
 		</script>
 		<!-- Part of the Push pause -->
 		<!-- <script>
@@ -104,13 +113,32 @@
 	<!-- Global site tag (gtag.js) - Google Ads: 1062401053 -->
 		<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1062401053"></script> -->
 		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-49186805-1"></script>
+		<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-49186805-1"></script> -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-20MVF1Z2ML"></script>
 		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('Event', 'gtm.js');
-			gtag('config', 'UA-49186805-1');
+			const myURL = new URL(window.location.href);
+			const tracking = {
+				ARTICLE: myURL.searchParams.get('article') || 'unknown',
+				SID: myURL.searchParams.get('sid') || '0000',
+				EID: myURL.searchParams.get('eid') || '0000'
+			};
+			if(Number(tracking.SID)!== 10007) {
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+				gtag('config', 'G-20MVF1Z2ML', {
+					'campaign_name': tracking.EID,
+					'campaign_source': `${tracking.ARTICLE}-${tracking.SID}`,
+					'campaign_medium': 'redirect',
+				});
+				gtag('Event', 'gtm.js');
+			};
+			// gtag('config', 'UA-49186805-1', {
+				// 	'campaign_name': tracking.EID,
+				// 	'campaign_source': `${tracking.ARTICLE}-${tracking.SID}`,
+				// 	'campaign_medium': 'redirect',
+				// });
+			// gtag('event', 'conversion', {'send_to': 'AW-11025885187/qisiCOT_9IIYEIPQxokp'});
 		</script>
 		<!--BEGIN: Microsoft Advertising UET Javascript tag. -->
 		<script>(function (w, d, t, r, u) { var f, n, i; w[u] = w[u] || [], f = function () { var o = { ti: "5681707" }; o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad") }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () { var s = this.readyState; s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null) }, i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i) })(window, document, "script", "//bat.bing.com/bat.js", "uetq");</script>

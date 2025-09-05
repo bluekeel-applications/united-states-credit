@@ -11,7 +11,7 @@ const styles = {
         minWidth: '100vw',
     },
     peopleImage: {
-        maxWidth: '1400px',
+        maxWidth: '1200px',
     },
     contentContainer: {
         padding: '1rem',

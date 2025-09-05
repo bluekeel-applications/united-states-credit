@@ -6,6 +6,7 @@
   font-style: normal;
   color: #222;
   width: 100%;
+  background-color: #2F8DFA;
 }
 
 .header {
@@ -169,6 +170,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2.5rem 1rem 1.5rem 1rem;
+  background-color: #fff;
 }
 .trendingSection h2 {
   font-size: 1.4rem;

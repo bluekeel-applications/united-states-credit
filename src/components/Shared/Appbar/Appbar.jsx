@@ -1,8 +1,9 @@
 // import React, { cloneElement } from 'react';
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Appbar.css.js';
-import UscFullLogo from '../../../assets/Images/usc_full_logo.png';
+// import UscFullLogo from '../../../assets/Images/usc_full_logo.png';
+import UscLogo from '../../../assets/Images/usc_logo_white.png';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -40,13 +41,17 @@ function ElevationScroll(props) {
 };
 const Appbar = Radium((props) => {
     const { children } = props;
+
+    const handleLogoClick = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
     return (
         <React.Fragment>
         <CssBaseline />
         <ElevationScroll {...props}>
             <AppBar style={styles.appbar}>
                 <Toolbar variant="dense">
-                    <img src={UscFullLogo} alt='USC Logo' style={styles.logo} />
+                    <img onClick={handleLogoClick} src={UscLogo} alt='USC Logo' style={styles.logo} />
                 </Toolbar>
             </AppBar>
         </ElevationScroll>

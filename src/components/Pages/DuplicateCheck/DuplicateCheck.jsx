@@ -7,12 +7,14 @@ const DuplicateCheck = () => {
     const [ isDuplicate, setIsDuplicate ] = useState(null);
     const { trackingState, appState } = useContext(AppContext);
     // const AveI = `https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9523&pid=3389&eid=${trackingState.sid}&uid=${trackingState.eid}&subid2=${trackingState.hsid}`;
-    const AveI = `https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9884&pid=3623&eid=${trackingState.sid}&uid=${trackingState.eid}`;
+    // const AveI = `https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9884&pid=3623&eid=${trackingState.sid}&uid=${trackingState.eid}`;
+    const AveI = `https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=10030&pid=3674&eid=${trackingState.sid}&uid=${trackingState.eid}`;
     // const System1 = `https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=9445&pid=3349&eid=${trackingState.sid}&uid=${trackingState.eid}&kwd=${trackingState.kwd}&subid2=${trackingState.hsid}`;
-    const CCI = `https://www.bkoffers.com/hitstreet/redirect_one_step.cfm?oid=115&sid=9860&pid=3615&eid=${trackingState.sid}&uid=${trackingState.eid}&email=omit`;
+    // const CCI = `https://www.bkoffers.com/hitstreet/redirect_one_step.cfm?oid=115&sid=9860&pid=3615&eid=${trackingState.sid}&uid=${trackingState.eid}&email=omit`;
+    const CCI = `https://www.bkoffers.com/hitstreet/redirect_tp.cfm?oid=19&sid=10029&pid=3672&eid=${trackingState.sid}&uid=${trackingState.eid}&email=omit`;
 
     const checkForDuplicate = async() => {
-        if(!trackingState.email || trackingState.email === 'omit') {
+        if(!trackingState.email || trackingState.email === 'omit' || trackingState.email === 'test@test.com' || trackingState.email === '') {
             //No email, so we send to backup
             console.log('Missing email - Setting to duplicate');
             setIsDuplicate(true);

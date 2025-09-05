@@ -6,6 +6,7 @@ const styles = {
         flexWrap: 'nowrap',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'white',
     },
     swiper: {
         // padding: '10px 50px',
@@ -20,11 +21,14 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#EEEEEE',
-        padding: '0 15px'
+        padding: '0 25px',
+        textAlign: 'left',
     },
     headlineText: {
         fontSize: '1rem',
+        fontWeight: '400',
         color: '#000000',
+        lineHeight: '1.1',
     }
 }
 

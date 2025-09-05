@@ -95,7 +95,20 @@ const styles = {
         border: '1px solid rgba(15, 64, 107, 0.5)',
         borderRadius: '10px',
         backgroundColor: 'rgb(239,248,255)',
-        margin: '25px 5px'
+        margin: '25px 5px 50px 5px'
+    },
+    buttonBlockContainer: {
+        width: '100%',
+        maxWidth: '600px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        padding: '30px',
+        border: '1px solid rgba(15, 64, 107, 0.5)',
+        borderRadius: '10px',
+        backgroundColor: 'rgb(239,248,255)',
+        margin: '25px 5px 50px 5px'
     },
     blockTitle: {
         width: '100%',

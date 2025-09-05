@@ -11,7 +11,9 @@ const SearchBar = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(search);
+        if(search.length === 0) return;
+        const searchQuery = search.replace(/\s+/g, '%20');
+        window.location.href = 'https://blogs.unitedstatescredit.com/search?q=' + searchQuery;
     };
 
     const handleKeyDown = (e) => {

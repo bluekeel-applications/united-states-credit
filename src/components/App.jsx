@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useCallback, lazy, Suspense, useRef } from 'react';
+import React, { useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { AppContext } from '../context';
 import RouteContainer from '../RouteContainer';
 // import usePushProviders from '../utils/hooks/usePushProviders';
@@ -17,7 +17,7 @@ import firePixelBlueKeel from '../utils/pixels/bluekeelPixel.js';
 import { datadogRum } from '@datadog/browser-rum';
 import useAdSense from '../utils/hooks/useAdSense';
 
-const Feed = lazy(() => import('./Layout/Feed'));
+// const Feed = lazy(() => import('./Layout/Feed'));
 
 const App = ({ uri }) => {
 	const isMobile = useMediaQuery({ maxWidth: 1000 });
@@ -150,13 +150,15 @@ const App = ({ uri }) => {
 		<div key='app-key' style={Styles.app}>
 			{location.pathname !== '/' && <Navbar />}
 			<RouteContainer />
-			{location.pathname !== '/' &&
+			{/* {location.pathname !== '/' &&
 			location.pathname !== '/rsoc' && 
 			location.pathname !== '/duplicate_check' && 
 			location.pathname !== '/new_user' && 
+			location.pathname !== '/new_user' && 
+			location.pathname !== '/new_user' && 
 			<Suspense fallback={<Loading/>}>
 				<Feed />
-			</Suspense>}
+			</Suspense>} */}
 			{
 			location.pathname !== '/duplicate_check' && 
 			location.pathname !== '/' &&

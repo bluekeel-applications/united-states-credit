@@ -16,6 +16,10 @@ const styles = {
         width: '100%',
         height: '100%',
         textAlign: 'center',
+        '@media (max-width: 767px)': {
+            lineHeight: '1.1',
+            marginBottom: '10px',
+        },
     },
     landerTitleHighlight: {
         color: '#203EB7',
@@ -67,6 +71,10 @@ const styles = {
         borderRadius: '10px',
         padding: '10px',
         margin: '5px',
+    },
+    cardHover: {
+        backgroundColor: '#203EB7',
+        cursor: 'pointer',
     },
     popularCategoryCardTitle: {
         fontSize: '0.8rem',

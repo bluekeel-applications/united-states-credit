@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Radium from 'radium';
 import Loading from '../components/Shared/Loading';
 
-import Welcome from '../components/Pages/Welcome';
+// import Welcome from '../components/Pages/Welcome';
 // import PrivacyPolicy from '../components/Shared/PrivacyPolicy';
 // import TermConditions from '../components/Shared/TermsConditions';
 // import EndUserFlow from '../components/Pages/EndUserFlow';
@@ -21,8 +21,8 @@ const AdArticle = lazy(() => import('../components/Pages/AdArticle'));
 const UserCapture = lazy(() => import('../components/Pages/UserCapture'));
 const Home = lazy(() => import('../components/Pages/Home'));
 
-const WrappedRoute = ({ element, path }) => (
-    <Route path={path} element={<FlowWrapper>{element}</FlowWrapper>} />
+const WrappedRoute = ({ element }) => (
+    <FlowWrapper>{element}</FlowWrapper>
 );
 
 const RouteContainer = () => (
@@ -31,15 +31,22 @@ const RouteContainer = () => (
             <Suspense fallback={<Loading />}>
                 <Routes>
                     <Route path='/' element={<Home />}/>
-                    {/* <Route path='/' element={<Welcome />}/>
-                    <Route path='/privacy' element={<PrivacyPolicy />}/>
-                    <Route path='/terms' element={<TermConditions />}/>
-                    <Route path='/email_optin' element={<EndUserFlow />}/>
-                    <Route path='/duplicate_check' element={<DuplicateCheck />}/>
-                    <Route path='/rsoc' element={<System1 />}/>
-                    <Route path='/gas' element={<AdArticle />}/>
-                    <Route path='/loading' element={<LoadingRedirect />}/>
-                    <Route path='/new_user' element={<UserCapture />}/> */}
+                    {/* <Route path='/' element={<Welcome />}/> */}
+                    {/* <WrappedRoute path='/' element={<Home />}/>
+                    <WrappedRoute path='/privacy' element={<PrivacyPolicy />}/>
+                    <WrappedRoute path='/terms' element={<TermConditions />}/>
+                    <WrappedRoute path='/email_optin' element={<EndUserFlow />}/>
+                    <WrappedRoute path='/duplicate_check' element={<DuplicateCheck />}/>
+                    <WrappedRoute path='/rsoc' element={<System1 />}/>
+                    <WrappedRoute path='/gas' element={<AdArticle />}/> */}
+                    <Route path='/privacy' element={<WrappedRoute element={<PrivacyPolicy />}/>}/>
+                    <Route path='/terms' element={<WrappedRoute element={<TermConditions />}/>}/>
+                    <Route path='/email_optin' element={<WrappedRoute element={<EndUserFlow />}/>}/>
+                    <Route path='/duplicate_check' element={<WrappedRoute element={<DuplicateCheck />}/>}/>
+                    <Route path='/rsoc' element={<WrappedRoute element={<System1 />}/>}/>
+                    <Route path='/gas' element={<WrappedRoute element={<AdArticle />}/>}/>
+                    <Route path='/loading' element={<WrappedRoute element={<LoadingRedirect />}/>}/>
+                    <Route path='/new_user' element={<WrappedRoute element={<UserCapture />}/>}/>
                 </Routes>
             </Suspense>
         // </FlowWrapper> 

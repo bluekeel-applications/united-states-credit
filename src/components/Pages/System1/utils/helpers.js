@@ -56,7 +56,7 @@ export const buildFullURL = (buttonArr, trackingState, uri, headline='') => {
     const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`;
     // Build Inbound params for refresh;
     const inbound = `article=${trackingState.article}&headline=${headline}&pid=${trackingState.pid}&sid=${trackingState.sid}&oid=${trackingState.oid}&uid=${trackingState.uid}&eid=${trackingState.eid}&segment=${trackingState.segment}&email=${trackingState.email}&hsid=${trackingState.hsid}`;
-    const utm = `utm_source=${trackingState.article}-${trackingState.sid}`;
+    const utm = `utm_source=${trackingState.article}-${trackingState.sid}&utm_medium=affiliate&utm_campaign=${trackingState.eid}`;
 
     // Build priority URL
     const newTail = `${utm}&${inbound}&${forceKeys}&${encodedSearchTrack}&${encodedClickTrack}&${subId}&${taboola}&${facebookId}&${facebookClick}&${google}&${tiktok}&fired=true`;
@@ -78,11 +78,12 @@ export const setDefaultData = (trackingState, uri) => {
     const trackingVars = `email=omit&hsid=234820821&pid=3420&sid=9582&oid=40&uid=yourUID&eid=yourEID`;
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
     const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`;
-    return `${searchTrack}&${article}&${clickTrack}&${segment}&${subId}&${facebookId}&${facebookClick}&${google}&${forceKeys}&${taboola}&${trackingVars}&${tiktok}&fired=true`;
+    const utm = `utm_source=${article}-${trackingState.sid}&utm_medium=default&utm_campaign=${trackingState.eid}`;
+    return `${utm}&${searchTrack}&${article}&${clickTrack}&${segment}&${subId}&${facebookId}&${facebookClick}&${google}&${forceKeys}&${taboola}&${trackingVars}&${tiktok}&fired=true`;
 };
 
 export const resetUrl = (trackingState) => {
-    return`article=${trackingState.article}&pid=${trackingState.pid}&sid=${trackingState.sid}&oid=${trackingState.oid}&uid=${trackingState.uid}&eid=${trackingState.eid}&segment=${trackingState.segment}&email=${trackingState.email}&hsid=${trackingState.hsid}`;
+    return`utm_source=${trackingState.article}-${trackingState.sid}&utm_medium=reset&utm_campaign=${trackingState.eid}&article=${trackingState.article}&pid=${trackingState.pid}&sid=${trackingState.sid}&oid=${trackingState.oid}&uid=${trackingState.uid}&eid=${trackingState.eid}&segment=${trackingState.segment}&email=${trackingState.email}&hsid=${trackingState.hsid}`;
 };
 
 export const setPageComponent = (article, setArticle) => {

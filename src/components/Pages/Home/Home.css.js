@@ -33,7 +33,7 @@ const stylesheet = {
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
-        '@media (maxWidth: 767px)': {
+        '@media (max-width: 767px)': {
             width: '100%',
         },
     },
@@ -122,6 +122,7 @@ const stylesheet = {
         fontSize: '1.25rem',
         color: 'white',
         fontWeight: '400',
+        lineHeight: '1',
     },
     featuredArticleDesc: {
         width: '100%',
@@ -163,10 +164,11 @@ const stylesheet = {
         textAlign: 'left',
     },
     articleCardTitle: {
-        fontSize: '0.8rem',
+        fontSize: '0.9rem',
         color: 'black',
         width: '100%',
         textAlign: 'left',
+        lineHeight: '1',
     },
 };
 export default stylesheet;

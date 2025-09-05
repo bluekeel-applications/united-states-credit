@@ -10,6 +10,7 @@ import Headlines from './Headlines';
 import Categories from './Categories';
 import Base from '../../Shared/Base';
 import Search from './Search';
+import Loading from '../../Shared/Loading';
 
 const Home = () => {
     const [blogArticles, setBlogArticles] = useState([]);
@@ -95,14 +96,28 @@ const Home = () => {
     };
 
     const handleArticleClick = (url) => {
-        window.open(url, '_blank');
+        // window.open(url, '_blank');
+        window.location.href = url;
     };
 
     const FeaturedArticle = ({article}) => {
+        const [ isHovering, setHovering ] = useState(false);
+
+        const cardStyle = Object.assign({}, 
+            stylesheet['featuredArticleCard'],
+            {backgroundImage: `url(${article.image})`,
+            backgroundColor: 'transparent'},
+            isHovering && {
+                cursor: 'pointer',
+                opacity: '0.8'
+            },
+        );
         return (
-            <div onClick={() => handleArticleClick(article.url)} style={{...stylesheet.featuredArticleCard, 
-                backgroundImage: `url(${article.image})`,
-                backgroundColor: 'transparent'}}
+            <div 
+            onClick={() => handleArticleClick(article.url)} 
+            style={cardStyle}
+            onMouseEnter={() => setHovering(true)}
+            onMouseLeave={() => setHovering(false)}
             >
                 <div style={stylesheet.featuredArticleCardTopRow}>
                     <div style={stylesheet.dateBadgeContainer}>
@@ -125,8 +140,22 @@ const Home = () => {
     };
 
     const ArticleCard = ({article}) => {
+        const [ isHovering, setHovering ] = useState(false);
+
+        const cardStyle = Object.assign({}, 
+            stylesheet['articleCard'],
+            isHovering && {
+                cursor: 'pointer',
+                opacity: '0.8'
+            },
+        );
         return (
-            <div style={stylesheet.articleCard}>
+            <div 
+                onClick={() => handleArticleClick(article.url)} 
+                style={cardStyle}
+                onMouseEnter={() => setHovering(true)}
+                onMouseLeave={() => setHovering(false)}
+            >
                 <div style={{...stylesheet.articleCardTopRow, backgroundImage: `url(${article.thumbnail})`, backgroundColor: 'transparent'}}>
                     <div style={stylesheet.dateBadgeContainer}>
                         <DateBadge date={article.date} />
@@ -140,7 +169,11 @@ const Home = () => {
         )
     };
 
-    if(trendingArticles.length === 0) return <div>Loading...</div>;
+    if(trendingArticles.length === 0) return (
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+            <Loading />
+        </div>
+    );
   return (
     <div className={styles.homeWrapper}>
         <Appbar>
@@ -151,24 +184,26 @@ const Home = () => {
         <Headlines headlines={headlines} />
 
         {/* Trending Articles */}
-        <section className={styles.trendingSection}>
-            <TitleSection title="Trending Articles" />
-            <div style={stylesheet.trendingGrid}>
-                <div style={stylesheet.featuredArticleContainer}>
-                    <FeaturedArticle article={trendingArticles[0]} />
-                </div>
-                <div style={stylesheet.articleCardContainer}>
-                    <div style={{...stylesheet.articleCardContainerRow, marginBottom: '10px'}}>
-                        <ArticleCard article={trendingArticles[1]} />
-                        <ArticleCard article={trendingArticles[2]} />
+        <div style={{backgroundColor: 'white', width: '100%'}}>
+            <section className={styles.trendingSection}>
+                <TitleSection title="Trending Articles" />
+                <div style={stylesheet.trendingGrid}>
+                    <div style={stylesheet.featuredArticleContainer}>
+                        <FeaturedArticle article={trendingArticles[0]} />
                     </div>
-                    <div style={{...stylesheet.articleCardContainerRow, marginTop: '10px'}}>
-                        <ArticleCard article={trendingArticles[3]} />
-                        <ArticleCard article={trendingArticles[4]} />  
+                    <div style={stylesheet.articleCardContainer}>
+                        <div style={{...stylesheet.articleCardContainerRow, marginBottom: '10px'}}>
+                            <ArticleCard article={trendingArticles[1]} />
+                            <ArticleCard article={trendingArticles[2]} />
+                        </div>
+                        <div style={{...stylesheet.articleCardContainerRow, marginTop: '10px'}}>
+                            <ArticleCard article={trendingArticles[3]} />
+                            <ArticleCard article={trendingArticles[4]} />  
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
         {/* Categories */}
         <Categories />

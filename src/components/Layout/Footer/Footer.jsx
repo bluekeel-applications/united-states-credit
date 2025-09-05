@@ -44,7 +44,7 @@ const Footer = () => {
                 Federal Government.`}
             </div>
             <div style={styles.messageContainer} key='footer-message-2'>
-                &copy; 2022 ALL RIGHTS RESERVED
+                &copy; 2025 ALL RIGHTS RESERVED
             </div>
         </div>
     )

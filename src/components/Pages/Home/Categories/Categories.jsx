@@ -45,13 +45,19 @@ const Categories = () => {
         'Financial Literacy & Education'
     ];
 
+    const handleCategoryClick = (category) => {
+        const searchQuery = category.replace(/\s+/g, '%20');
+        // window.open(`https://blogs.unitedstatescredit.com/search?q=${searchQuery}`, '_blank');
+        window.location.href = 'https://blogs.unitedstatescredit.com/search?q=' + searchQuery;
+    };
+
     return (
         <div style={styles.mainContainer}>
             <div style={styles.categoriesContainer}>
                 <TitleSection title="More Topics" />
                 <div style={styles.categoriesList}>
                     {categories.map((category, index) => (
-                        <div key={index} style={styles.categoryItem}>
+                        <div key={index} onClick={() => handleCategoryClick(category)} style={styles.categoryItem}>
                             {category}
                         </div>
                     ))}
