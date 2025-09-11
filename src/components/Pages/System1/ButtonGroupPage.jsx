@@ -38,6 +38,7 @@ const ButtonGroupPage = () => {
     const findOfferUrl = (offer_array) => {
         let count = 0;
         let offerUrl = null;
+        let linkShape = null;
         const randomNumber = Math.floor(Math.random() * 100) + 1;
         console.log('randomNumber', randomNumber);
         // Loop the offer array and set the offer url
@@ -54,6 +55,7 @@ const ButtonGroupPage = () => {
             // If the random number is less than or equal to the count, set the offer url
             if(randomNumber <= count && !offerUrl) {
                 offerUrl = offer_obj.offer_url;
+                linkShape = offer_obj.link_shape;
             };
             // Increment the count
             // if(idx !== 0) {
@@ -62,18 +64,21 @@ const ButtonGroupPage = () => {
             // If this is the last offer and no offer url is set, set the offer url
             if(idx === offer_array.length - 1 && !offerUrl) {
                 offerUrl = offer_obj.offer_url;
+                linkShape = offer_obj.link_shape;
             };
         });
         console.log('offerUrl', offerUrl);
-        return offerUrl;
+        console.log('linkShape', linkShape);
+        return {offerUrl, linkShape};
     };
     const SelectOffers = (data) => {
         const offerArray = data.map((offer_obj) => {
             let text = offer_obj.button_text;
-            let url = findOfferUrl(offer_obj.offers);
+            let {offerUrl, linkShape} = findOfferUrl(offer_obj.offers);
             return {
                 text,
-                url
+                url: offerUrl,
+                linkShape
             }
         });
         return offerArray;
@@ -99,15 +104,49 @@ const ButtonGroupPage = () => {
         isMobile && styles.headerTextMobile
     );
 
+    const buildLinkout = (url, shape) => {
+
+        const buildDefault = () => {
+            var url_base = new URL(url);
+            var search_params = url_base.searchParams;
+            search_params.set('eid', `block-${trackingState.sid}-${trackingState.eid}`);
+            url.search = search_params.toString();
+            var new_url = url.toString()
+            return new_url;
+        };
+
+        const buildTapstone = () => {
+            const subId = `subid=${trackingState.sid}-${trackingState.eid}`;
+            const facebook = `src=${!!trackingState.fbid ? trackingState.fbid : '202255056230822'}`;
+            const clickid = `clickid=${trackingState.hsid}`;
+            return `${url}?dpco=1&${subId}&${facebook}&${clickid}`;
+        };
+    
+        const buildPeak = () => {
+            const s1 = `s1=${trackingState.sid}`;
+            const s2 = `s2=${trackingState.eid}`;
+            const s3 = `s3=${trackingState.hsid}`;
+            const pidPeak = `pid=${!!trackingState.fbid ? trackingState.fbid : '202255056230822'}`;
+            const pclid = `pclid=${trackingState.uid}`;
+            const pec = `pec=Search`;
+            return `${url}&${s1}&${s2}&${s3}&${pidPeak}&${pclid}&${pec}`;
+        };
+
+        switch(shape) {
+            case 'tapstone':
+                return buildTapstone();
+            case 'peak':
+                return buildPeak();
+            default:
+                return buildDefault();
+        };
+
+    };
     const BlockOffer = ({ offerItem }) => {
         const [ isHovering, setHovering ] = useState(false);
         const handleOfferClick = () => {
             setExecute(true);
-            var url = new URL(offerItem.url);
-            var search_params = url.searchParams;
-            search_params.set('eid', `block-${trackingState.sid}-${trackingState.eid}`);
-            url.search = search_params.toString();
-            var new_url = url.toString();
+            const new_url = buildLinkout(offerItem.url, offerItem.linkShape);
             let newTab = window.open();
             newTab.location = new_url;
         };

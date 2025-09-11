@@ -209,7 +209,7 @@ export const setPageComponent = (article, setArticle) => {
             setArticle(<LoanRecArticle />);
             break;
         case 'loanflow3':
-            setArticle(<LoanRecArticle />);
+            setArticle(<CheckingArticle />);
             break;
         
         default:

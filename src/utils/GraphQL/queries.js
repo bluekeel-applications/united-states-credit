@@ -214,6 +214,7 @@ const FETCH_ARTICLE_BY_KEY = gql `
                     offers {
                         offer_url
                         usage
+                        link_shape
                     }
                 }
                 mobile {
@@ -250,6 +251,7 @@ const FETCH_ARTICLE_BY_KEY = gql `
                         offers {
                             offer_url
                             usage
+                            link_shape
                         }
                     }
                 }

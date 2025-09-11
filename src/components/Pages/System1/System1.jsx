@@ -86,18 +86,35 @@ const System1 = () => {
         // const newURL = `/rsoc${myURL.search}${tail}`;
         const newURL = `/rsoc?${tail}`;
         navigate(newURL, { replace: true });
-        if(!!fetchedData.button_group && fetchedData.button_group.length > 1 && !isMobile) {
+        if(trackingState.display === 'block' && !!fetchedData.offer_block) {
+            setPageType('block');
+            console.log('Showing Offer Block Desktop');
+            setPageReady(true);
+            return;
+        }
+        // The new way just checks to see if there is an offer block
+        if((!!fetchedData.offer_block && !isMobile) || (!!fetchedData.mobile.offer_block && isMobile)) {
+                // Show Offer Block
+                console.log('Showing Offer Block Mobile');
+                setPageType('block');
+                setPageReady(true);
+                return;
+        };
+        if(!!fetchedData.button_group[0].button_text && fetchedData.button_group.length >= 1 && !isMobile) {
+            console.log('Showing Button Group Desktop');
             setPageType('button_group');
             setPageReady(true);
             return;
         };
-        if(!!fetchedData.mobile.button_group && fetchedData.mobile.button_group.length > 1 && isMobile) {
+        if(!!fetchedData.mobile.button_group[0].button_text && fetchedData.mobile.button_group.length >= 1 && isMobile) {
+            console.log('Showing Button Group Mobile');
             setPageType('button_group');
             setPageReady(true);
             return;
         };
         // If set RSOC desktop is true and its not mobile now send to RSOC
         if(fetchedData.rsoc_desktop && !isMobile) {
+            console.log('Showing RSOC Dynamic Desktop');
             window._rampJs();
             setPageType('dynamic');
             setPageReady(true);
@@ -124,18 +141,6 @@ const System1 = () => {
         //     setPageType('dynamic');
         //     setPageReady(true);
         // };
-        if(trackingState.display === 'block' && !!fetchedData.offer_block) {
-            setPageType('block');
-            setPageReady(true);
-            return;
-        }
-        // The new way just checks to see if there is an offer block
-        if((!!fetchedData.offer_block && !isMobile) || (!!fetchedData.mobile.offer_block && isMobile)) {
-                // Show Offer Block
-                setPageType('block');
-                setPageReady(true);
-                return;
-        };
         // Since no offer block is found, this must be a dynamic page
         window._rampJs();
         setPageType('dynamic');
