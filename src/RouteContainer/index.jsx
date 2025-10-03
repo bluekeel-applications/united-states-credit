@@ -20,6 +20,7 @@ const System1 = lazy(() => import('../components/Pages/System1'));
 const AdArticle = lazy(() => import('../components/Pages/AdArticle'));
 const UserCapture = lazy(() => import('../components/Pages/UserCapture'));
 const Home = lazy(() => import('../components/Pages/Home'));
+const CBiframe = lazy(() => import('../components/Pages/CBiframe'));
 
 const WrappedRoute = ({ element }) => (
     <FlowWrapper>{element}</FlowWrapper>
@@ -47,6 +48,7 @@ const RouteContainer = () => (
                     <Route path='/gas' element={<WrappedRoute element={<AdArticle />}/>}/>
                     <Route path='/loading' element={<WrappedRoute element={<LoadingRedirect />}/>}/>
                     <Route path='/new_user' element={<WrappedRoute element={<UserCapture />}/>}/>
+                    <Route path='/cbiframe' element={<WrappedRoute element={<CBiframe />}/>}/>
                 </Routes>
             </Suspense>
         // </FlowWrapper> 
