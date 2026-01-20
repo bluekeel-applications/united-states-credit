@@ -105,31 +105,31 @@ const ButtonGroupPage = () => {
     );
 
     const buildLinkout = (url, shape) => {
-
+        var url_base = new URL(url);
+        var search_params = url_base.searchParams;
+        search_params.set('eid', `${trackingState.pid}-${trackingState.sid}-${trackingState.eid}`);
+        var new_url = url_base.toString();
+        
         const buildDefault = () => {
-            var url_base = new URL(url);
-            var search_params = url_base.searchParams;
-            search_params.set('eid', `block-${trackingState.sid}-${trackingState.eid}`);
-            url.search = search_params.toString();
-            var new_url = url.toString()
-            return new_url;
+            return `${new_url}&subid2=${trackingState.hsid}`;
         };
 
         const buildTapstone = () => {
             const subId = `subid=${trackingState.sid}-${trackingState.eid}`;
             const facebook = `src=${!!trackingState.fbid ? trackingState.fbid : '202255056230822'}`;
             const clickid = `clickid=${trackingState.hsid}`;
-            return `${url}?dpco=1&${subId}&${facebook}&${clickid}`;
+            return `${new_url}?dpco=1&${subId}&${facebook}&${clickid}&subid2=${trackingState.hsid}`;
         };
     
         const buildPeak = () => {
             const s1 = `s1=${trackingState.sid}`;
             const s2 = `s2=${trackingState.eid}`;
             const s3 = `s3=${trackingState.hsid}`;
-            const pidPeak = `pid=${!!trackingState.fbid ? trackingState.fbid : '202255056230822'}`;
+            // const pidPeak = `pid=${!!trackingState.fbid ? trackingState.fbid : '202255056230822'}`;
             const pclid = `pclid=${trackingState.uid}`;
-            const pec = `pec=Search`;
-            return `${url}&${s1}&${s2}&${s3}&${pidPeak}&${pclid}&${pec}`;
+            const subid2 = `subid2=${trackingState.hsid}`;
+            // const pec = `pec=Search`;
+            return `${new_url}&${s1}&${s2}&${s3}&${pclid}&${subid2}`;
         };
 
         switch(shape) {
@@ -146,6 +146,9 @@ const ButtonGroupPage = () => {
         const [ isHovering, setHovering ] = useState(false);
         const handleOfferClick = () => {
             setExecute(true);
+            // Add fbpixel fire
+            window.fbq('init', '1129397548111416');
+            window.fbq('track', 'Search');
             const new_url = buildLinkout(offerItem.url, offerItem.linkShape);
             let newTab = window.open();
             newTab.location = new_url;

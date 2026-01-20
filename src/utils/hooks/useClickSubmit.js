@@ -74,8 +74,12 @@ const useClickSubmit = (tracking, email, shouldExecute) => {
     };
 
 	useEffect(() => {
+        const excludedPids = [3655, 3560];
         if(shouldExecute) {
-            firePixelBlueKeel(hsid);
+            // Don't fire BlueKeel pixel for excluded PIDs
+            if(!excludedPids.includes(tracking.pid)) {
+                firePixelBlueKeel(hsid);
+            };
             fireBingPixel(vertical);
             fireTiktokPixel();
             fireAdwordsEvent();

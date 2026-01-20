@@ -43,7 +43,7 @@ export const buildFullURL = (buttonArr, trackingState, uri, headline='') => {
     // Build encoded Tracking links
     const searchTrack = `${uri}/optin/${trackingState.hsid}`;
     const encodedSearchTrack = `search_track_url=${encodeURIComponent(searchTrack)}`;
-    const clickTrack = `http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${trackingState.hsid}`;
+    const clickTrack = `https://bkroute.com/pixel_fire_inbound?hsid=${trackingState.hsid}`;
     const encodedClickTrack = `click_track_url=${encodeURIComponent(clickTrack)}`;
     // Build Required Params
     const subId = `subid=${trackingState.sid}-${trackingState.eid}`;
@@ -70,7 +70,7 @@ export const setDefaultData = (trackingState, uri) => {
     const searchTrack = `search_track_url=${uri}/optin/${trackingState.hsid}`;
     const article = 'article=credit';
     const segment = 'segment=c2sunitedstatescredit0005';
-    const clickTrack = `click_track_url=http://www.bkoffers.com/hitstreet/pixel_fire.cfm?hsid=${trackingState.hsid}`;
+    const clickTrack = `click_track_url=https://bkroute.com/pixel_fire_inbound?hsid=${trackingState.hsid}`;
     const subId = `subid=${trackingState.sid}-${trackingState.eid}`;
     const taboola = `tbid=1648456&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
     const facebookId = !!trackingState.fbid ? `fbid=${trackingState.fbid}` : `fbid=531202445442265`;
