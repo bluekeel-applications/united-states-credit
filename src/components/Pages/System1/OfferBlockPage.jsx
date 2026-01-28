@@ -62,7 +62,8 @@ const OfferBlockPage = () => {
             var search_params = url.searchParams;
             search_params.set('eid', `block-${trackingState.sid}-${trackingState.eid}`);
             url.search = search_params.toString();
-            var new_url = url.toString();
+            let new_url = url.toString();
+            new_url = new_url + `&subid2=${trackingState.hsid}`;
             let newTab = window.open();
             newTab.location = new_url;
         };

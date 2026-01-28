@@ -74,7 +74,7 @@ const useClickSubmit = (tracking, email, shouldExecute) => {
     };
 
 	useEffect(() => {
-        const excludedPids = [3655, 3560];
+        const excludedPids = [3655, 3560, 3647, 3654];
         if(shouldExecute) {
             // Don't fire BlueKeel pixel for excluded PIDs
             if(!excludedPids.includes(tracking.pid)) {
