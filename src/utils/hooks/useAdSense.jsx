@@ -4,10 +4,20 @@ const useAdSense = (tracking) => {
 
 	const { SID } = tracking;
     const sid = Number(SID);
-
+    // const setLive = useRef(false);
     const badSids = [
         10007
     ];
+
+    // const setLiveTimeout = () => {
+    //     setTimeout(() => {
+    //         setLive.current = true;
+    //     }, 4000);
+    // };
+
+    // useEffect(() => {
+    //     setLiveTimeout();
+    // }, []);
 
 	useEffect(() => {
    

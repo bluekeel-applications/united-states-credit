@@ -56,20 +56,24 @@ const Home = () => {
 
         const cleanedTrending = trending.map((article, index) => ({
             date: getDate(article.publishedAt),
-            image: !!article.heroImage ? `https://blogs.unitedstatescredit.com${article.heroImage}` : "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+            // image: !!article.heroImage ? `https://blogs.topsavingstips.com${article.heroImage}` : "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
             thumbnail: !!article.thumbnail ? `https://blogs.unitedstatescredit.com${article.thumbnail}` : "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+            // thumbnail: !!article.thumbnail ? `https://blogs.topsavingstips.com${article.thumbnail}` : "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+            image: !!article.heroImage ? `https://blogs.unitedstatescredit.com${article.heroImage}` : "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
             category: article.categories?.[0]?.title || "General",
             title: article.title || "Sample Article",
             desc: chopDescription(article.description) || "",
             author: article.author,
             featured: index === 0,
             url: `https://blogs.unitedstatescredit.com/posts/${article.slug}`
+            // url: `https://blogs.topsavingstips.com/posts/${article.slug}`
         }));
         setTrendingArticles(cleanedTrending);
 
         const cleanedHeadlines = blogs.map((article, index) => ({
             text: article.title,
             url: `https://blogs.unitedstatescredit.com/posts/${article.slug}`
+            // url: `https://blogs.topsavingstips.com/posts/${article.slug}`
         }));
         setHeadlines(cleanedHeadlines);
     };

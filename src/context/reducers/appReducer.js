@@ -18,7 +18,9 @@ const initialAppState = {
     redirection: false,
     em_sub: false,
     offer: null,
-    system1: null
+    system1: {
+        
+    }
 };
 
 const appStateReducer = (state, action) => {

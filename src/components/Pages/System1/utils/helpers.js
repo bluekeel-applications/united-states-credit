@@ -48,18 +48,18 @@ export const buildFullURL = (buttonArr, trackingState, uri, headline='') => {
     // Build Required Params
     const subId = `subid=${trackingState.sid}-${trackingState.eid}`;
     // Build Marketing Params
-    const taboola = `tbid=1648456&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
+    // const taboola = `tbid=1648456&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
     // const facebook = !!trackingState.fbid ? 'fbclick=Search' : `fbid=531202445442265&fbclick=Search`;
     const facebookId = !!trackingState.fbid ? `fbid=${trackingState.fbid}` : `fbid=531202445442265`;
     const facebookClick = !!trackingState.fbclickid ? `fbclick=${trackingState.fbclickid}` : 'fbclick=Search';
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
-    const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`;
+    // const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`;
     // Build Inbound params for refresh;
     const inbound = `article=${trackingState.article}&headline=${headline}&pid=${trackingState.pid}&sid=${trackingState.sid}&oid=${trackingState.oid}&uid=${trackingState.uid}&eid=${trackingState.eid}&segment=${trackingState.segment}&email=${trackingState.email}&hsid=${trackingState.hsid}`;
     const utm = `utm_source=${trackingState.article}-${trackingState.sid}&utm_medium=affiliate&utm_campaign=${trackingState.eid}`;
 
     // Build priority URL
-    const newTail = `${utm}&${inbound}&${forceKeys}&${encodedSearchTrack}&${encodedClickTrack}&${subId}&${taboola}&${facebookId}&${facebookClick}&${google}&${tiktok}&fired=true`;
+    const newTail = `${utm}&${inbound}&${forceKeys}&${encodedSearchTrack}&${encodedClickTrack}&${subId}&${google}&fired=true${!!trackingState.fbid ? `&${facebookId}&${facebookClick}` : ''}`;
 
     // return `${utm}&${inbound}&${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebookId}&${facebookClick}&${google}&${tiktok}&fired=true`;
     return newTail;
@@ -72,14 +72,14 @@ export const setDefaultData = (trackingState, uri) => {
     const segment = 'segment=c2sunitedstatescredit0005';
     const clickTrack = `click_track_url=https://bkroute.com/pixel_fire_inbound?hsid=${trackingState.hsid}`;
     const subId = `subid=${trackingState.sid}-${trackingState.eid}`;
-    const taboola = `tbid=1648456&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
+    // const taboola = `tbid=1648456&tbclickid=${trackingState.uid}&tbland=PageView&tbserp=add_to_wishlist&tbclick=Purchase`;
     const facebookId = !!trackingState.fbid ? `fbid=${trackingState.fbid}` : `fbid=531202445442265`;
     const facebookClick = !!trackingState.fbclickid ? `fbclick=${trackingState.fbclickid}` : 'fbclick=Search';
     const trackingVars = `email=omit&hsid=234820821&pid=3420&sid=9582&oid=40&uid=yourUID&eid=yourEID`;
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
-    const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`;
+    // const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`;
     const utm = `utm_source=${article}-${trackingState.sid}&utm_medium=default&utm_campaign=${trackingState.eid}`;
-    return `${utm}&${searchTrack}&${article}&${clickTrack}&${segment}&${subId}&${facebookId}&${facebookClick}&${google}&${forceKeys}&${taboola}&${trackingVars}&${tiktok}&fired=true`;
+    return `${utm}&${searchTrack}&${article}&${clickTrack}&${segment}&${subId}&${google}&${forceKeys}&${trackingVars}&fired=true${!!trackingState.fbid ? `&${facebookId}&${facebookClick}` : ''}`;
 };
 
 export const resetUrl = (trackingState) => {
@@ -209,7 +209,10 @@ export const setPageComponent = (article, setArticle) => {
             setArticle(<LoanRecArticle />);
             break;
         case 'loanflow3':
-            setArticle(<CheckingArticle />);
+            setArticle(<LoanRecArticle />);
+            break;
+        case 'rsocloans':
+            setArticle(<LoanRecArticle />);
             break;
         
         default:
