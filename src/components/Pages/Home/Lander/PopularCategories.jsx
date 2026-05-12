@@ -4,32 +4,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const CatArray = [
     {
         title: 'Credit & Credit Scores',
-        url: 'https://blogs.unitedstatescredit.com/search?q=credit',
+        url: 'https://blogs.unitedstatescredit.com/search?q=Credit%20%26%20Credit%20Scores',
         icon: 'fa-credit-card'
     },
     {
         title: 'Loans & Lending',
-        url: 'https://blogs.unitedstatescredit.com/search?q=loans',
+        url: 'https://blogs.unitedstatescredit.com/search?q=Loans%20%26%20Lending',
         icon: 'hand-holding-usd'
     },
     {
         title: 'Debt & Recovery',
-        url: 'https://blogs.unitedstatescredit.com/search?q=debt',
+        url: 'https://blogs.unitedstatescredit.com/search?q=Debt%20%26%20Recovery',
         icon: 'triangle-person-digging'
     },
     {
         title: 'Banking & Saving',
-        url: 'https://blogs.unitedstatescredit.com/search?q=saving',
+        url: 'https://blogs.unitedstatescredit.com/search?q=Banking%20%26%20Saving',
         icon: 'piggy-bank'
     },
     {
         title: 'Budgeting & Finance',
-        url: 'https://blogs.unitedstatescredit.com/search?q=finance',
+        url: 'https://blogs.unitedstatescredit.com/search?q=Budgeting%20%26%20Personal%20Finance%20Tools',
         icon: 'money-bill-trend-up'
     },
     {
         title: 'Trends & Technology',
-        url: 'https://blogs.unitedstatescredit.com/search?q=tech',
+        url: 'https://blogs.unitedstatescredit.com/search?q=Trends%2C%20Tech%20%26%20Consumer%20Insights',
         icon: 'computer'
     },
 ]

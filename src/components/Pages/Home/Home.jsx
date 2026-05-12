@@ -36,7 +36,7 @@ const Home = () => {
         if (!blogs || blogs.length === 0) return;
         
         let trending = [];
-        const trendingIndexes = [2, 4, 6, 8, 10];
+        const trendingIndexes = [2, 4, 6, 8, 10, 12, 14, 1, 3, 5, 7, 9, 11, 13, 15];
 
         blogs.forEach((blog, i) => {
             if(trendingIndexes.includes(i)) {
@@ -203,6 +203,36 @@ const Home = () => {
                         <div style={{...stylesheet.articleCardContainerRow, marginTop: '10px'}}>
                             <ArticleCard article={trendingArticles[3]} />
                             <ArticleCard article={trendingArticles[4]} />  
+                        </div>
+                    </div>
+                </div>
+                <div style={stylesheet.trendingGrid}>
+                    <div style={stylesheet.articleCardContainer}>
+                        <div style={{...stylesheet.articleCardContainerRow, marginBottom: '10px'}}>
+                            <ArticleCard article={trendingArticles[5]} />
+                            <ArticleCard article={trendingArticles[6]} />
+                        </div>
+                        <div style={{...stylesheet.articleCardContainerRow, marginTop: '10px'}}>
+                            <ArticleCard article={trendingArticles[7]} />
+                            <ArticleCard article={trendingArticles[8]} />  
+                        </div>
+                    </div>
+                    <div style={stylesheet.featuredArticleContainer}>
+                        <FeaturedArticle article={trendingArticles[9]} />
+                    </div>
+                </div>
+                <div style={stylesheet.trendingGrid}>
+                    <div style={stylesheet.featuredArticleContainer}>
+                        <FeaturedArticle article={trendingArticles[10]} />
+                    </div>
+                    <div style={stylesheet.articleCardContainer}>
+                        <div style={{...stylesheet.articleCardContainerRow, marginBottom: '10px'}}>
+                            <ArticleCard article={trendingArticles[11]} />
+                            <ArticleCard article={trendingArticles[12]} />
+                        </div>
+                        <div style={{...stylesheet.articleCardContainerRow, marginTop: '10px'}}>
+                            <ArticleCard article={trendingArticles[13]} />
+                            <ArticleCard article={trendingArticles[14]} />  
                         </div>
                     </div>
                 </div>

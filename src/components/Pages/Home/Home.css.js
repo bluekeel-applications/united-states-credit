@@ -16,6 +16,7 @@ const stylesheet = {
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
+        margin:'0 0 50px 0',
         '@media (max-width: 767px)': {
             flexDirection: 'column',
         },
