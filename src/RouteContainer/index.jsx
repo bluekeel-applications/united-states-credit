@@ -21,6 +21,8 @@ const AdArticle = lazy(() => import('../components/Pages/AdArticle'));
 const UserCapture = lazy(() => import('../components/Pages/UserCapture'));
 const Home = lazy(() => import('../components/Pages/Home'));
 const CBiframe = lazy(() => import('../components/Pages/CBiframe'));
+const OfferFinder = lazy(() => import('../components/Pages/OfferFinder'));
+const OfferWall = lazy(() => import('../components/Pages/OfferWall'));
 
 const WrappedRoute = ({ element }) => (
     <FlowWrapper>{element}</FlowWrapper>
@@ -32,6 +34,8 @@ const RouteContainer = () => (
             <Suspense fallback={<Loading />}>
                 <Routes>
                     <Route path='/' element={<Home />}/>
+                    <Route path='/finder' element={<OfferFinder />}/>
+                    <Route path='/offers' element={<OfferWall />}/>
                     {/* <Route path='/' element={<Welcome />}/> */}
                     {/* <WrappedRoute path='/' element={<Home />}/>
                     <WrappedRoute path='/privacy' element={<PrivacyPolicy />}/>

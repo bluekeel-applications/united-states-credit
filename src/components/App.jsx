@@ -146,9 +146,13 @@ const App = ({ uri }) => {
 		)
 	};
 
+	// Self-contained full-page routes that ship their own header/footer and
+	// must not receive the app's Navbar/Footer chrome (Home + the offer funnel).
+	const bareRoutes = [ '/', '/finder', '/offers' ];
+
 	return (
 		<div key='app-key' style={Styles.app}>
-			{location.pathname !== '/' && <Navbar />}
+			{!bareRoutes.includes(location.pathname) && <Navbar />}
 			<RouteContainer />
 			{/* {location.pathname !== '/' &&
 			location.pathname !== '/rsoc' && 
@@ -160,8 +164,8 @@ const App = ({ uri }) => {
 				<Feed />
 			</Suspense>} */}
 			{
-			location.pathname !== '/duplicate_check' && 
-			location.pathname !== '/' &&
+			location.pathname !== '/duplicate_check' &&
+			!bareRoutes.includes(location.pathname) &&
 			<Footer />
 			}
 			<DrawerMenu />

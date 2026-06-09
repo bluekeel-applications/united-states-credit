@@ -260,6 +260,48 @@ const FETCH_ARTICLE_BY_KEY = gql `
 	}
 `;
 
+export const COREG_PATH = gql`
+  query fetchCoRegPathByKey($key: String!) {
+    fetchCoRegPathByKey(key: $key) {
+      success
+      message
+      body {
+        id
+        name
+        path_key
+        path_items {
+            item_name
+            item_question_text
+            offers {
+                usage
+                base_offer {
+                name
+                description
+                offer_url
+                link_shape
+                }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const COREG_PATH_VALUES = gql`
+    query getCoRegPathValues {
+        getCoRegPathValues {
+            success
+            status
+            message
+            body {
+                loans
+                cred_improvement
+                savings
+                passive
+        }
+    }
+}`
+
 export {
     PCH_USER,
     PUSH_PROVIDERS,

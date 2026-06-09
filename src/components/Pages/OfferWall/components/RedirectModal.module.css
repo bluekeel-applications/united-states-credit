@@ -1,0 +1,89 @@
+/* Redirect handoff modal — ported from the approved prototype (Page2_with_modal.html).
+   Shown for 2s on offer click, then the partner URL opens in the pre-opened tab. */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    z-index: 100;
+}
+
+.modalBox {
+    background: #fff;
+    border-radius: 24px;
+    padding: 24px;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, .25);
+    overflow: hidden;
+}
+.modalBox h3 { margin: 0 0 8px; color: #003a8c; font-size: 24px; }
+.modalBox p { color: #667085; line-height: 1.45; max-width: 310px; margin: 0 auto; }
+
+.motionWrap {
+    position: relative;
+    width: 78px;
+    height: 78px;
+    margin: 0 auto 14px;
+    display: grid;
+    place-items: center;
+}
+.motionRing {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 4px solid #eaf4ff;
+    border-top-color: #003a8c;
+    animation: spin 1s linear infinite;
+}
+.motionArrow {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #003a8c;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 27px;
+    font-weight: 950;
+    animation: pulseGo 1.1s ease-in-out infinite;
+}
+
+.progressTrack {
+    height: 7px;
+    border-radius: 999px;
+    background: #eef6ff;
+    overflow: hidden;
+    margin-top: 16px;
+}
+.progressBar {
+    height: 100%;
+    width: 0%;
+    background: #003a8c;
+    border-radius: 999px;
+    animation: loadBar 2s ease forwards;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulseGo {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-2px) scale(1.04); }
+}
+@keyframes loadBar { from { width: 0%; } to { width: 100%; } }
+
+@media (max-width: 900px) {
+    .modalBox { padding: 22px 18px; border-radius: 24px; }
+    .modalBox h3 { font-size: 22px; line-height: 1.15; }
+    .modalBox p { font-size: 13px; line-height: 1.4; }
+    .motionWrap { width: 66px; height: 66px; margin-bottom: 12px; }
+    .motionArrow { width: 46px; height: 46px; font-size: 23px; }
+    .motionRing { border-width: 3px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .motionRing, .motionArrow { animation: none; }
+}
