@@ -1,7 +1,9 @@
-import React, { lazy, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Radium from 'radium';
 import Loading from '../components/Shared/Loading';
+import ErrorBoundary from '../components/Shared/ErrorBoundary';
+import lazyWithRetry from '../utils/lazyWithRetry';
 
 // import Welcome from '../components/Pages/Welcome';
 // import PrivacyPolicy from '../components/Shared/PrivacyPolicy';
@@ -10,19 +12,18 @@ import Loading from '../components/Shared/Loading';
 import FlowWrapper from './FlowWrapper';
 // import DuplicateCheck from '../components/Pages/DuplicateCheck';
 // import System1 from '../components/Pages/System1';
-const PrivacyPolicy = lazy(() => import('../components/Shared/PrivacyPolicy'));
-const TermConditions = lazy(() => import('../components/Shared/TermsConditions'));
-const EndUserFlow = lazy(() => import('../components/Pages/EndUserFlow'));
-// const FlowWrapper = lazy(() => import('./FlowWrapper'));
-const LoadingRedirect = lazy(() => import('../components/Shared/LoadingRedirect'));
-const DuplicateCheck = lazy(() => import('../components/Pages/DuplicateCheck'));
-const System1 = lazy(() => import('../components/Pages/System1'));
-const AdArticle = lazy(() => import('../components/Pages/AdArticle'));
-const UserCapture = lazy(() => import('../components/Pages/UserCapture'));
-const Home = lazy(() => import('../components/Pages/Home'));
-const CBiframe = lazy(() => import('../components/Pages/CBiframe'));
-const OfferFinder = lazy(() => import('../components/Pages/OfferFinder'));
-const OfferWall = lazy(() => import('../components/Pages/OfferWall'));
+const PrivacyPolicy = lazyWithRetry(() => import('../components/Shared/PrivacyPolicy'), 'PrivacyPolicy');
+const TermConditions = lazyWithRetry(() => import('../components/Shared/TermsConditions'), 'TermConditions');
+const EndUserFlow = lazyWithRetry(() => import('../components/Pages/EndUserFlow'), 'EndUserFlow');
+const LoadingRedirect = lazyWithRetry(() => import('../components/Shared/LoadingRedirect'), 'LoadingRedirect');
+const DuplicateCheck = lazyWithRetry(() => import('../components/Pages/DuplicateCheck'), 'DuplicateCheck');
+const System1 = lazyWithRetry(() => import('../components/Pages/System1'), 'System1');
+const AdArticle = lazyWithRetry(() => import('../components/Pages/AdArticle'), 'AdArticle');
+const UserCapture = lazyWithRetry(() => import('../components/Pages/UserCapture'), 'UserCapture');
+const Home = lazyWithRetry(() => import('../components/Pages/Home'), 'Home');
+const CBiframe = lazyWithRetry(() => import('../components/Pages/CBiframe'), 'CBiframe');
+const OfferFinder = lazyWithRetry(() => import('../components/Pages/OfferFinder'), 'OfferFinder');
+const OfferWall = lazyWithRetry(() => import('../components/Pages/OfferWall'), 'OfferWall');
 
 const WrappedRoute = ({ element }) => (
     <FlowWrapper>{element}</FlowWrapper>
@@ -30,7 +31,7 @@ const WrappedRoute = ({ element }) => (
 
 const RouteContainer = () => (
 
-        // <FlowWrapper>
+        <ErrorBoundary>
             <Suspense fallback={<Loading />}>
                 <Routes>
                     <Route path='/' element={<Home />}/>
@@ -55,7 +56,7 @@ const RouteContainer = () => (
                     <Route path='/cbiframe' element={<WrappedRoute element={<CBiframe />}/>}/>
                 </Routes>
             </Suspense>
-        // </FlowWrapper> 
+        </ErrorBoundary>
 );
 
 export default Radium(RouteContainer);

@@ -19,6 +19,7 @@ const useSetNewSession = ({ tracking, turnOffLoading, animationComplete }) => {
 		oid: Number(tracking.OID),
 		uid: tracking.UID,
 		eid: tracking.EID,
+		gclid: tracking.GCLID
 	};
 
 	const hsid = useHitStreet(topProps);

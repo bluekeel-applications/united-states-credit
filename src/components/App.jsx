@@ -104,19 +104,19 @@ const App = ({ uri }) => {
 	const turnOffLoading = useCallback(() => {setLoading(false)},[]);
 	const redirectTo = useSetNewSession({ tracking, turnOffLoading, animationComplete });
 	
-	useEffect(() => {
-		// Fire a pixel for load event of these SIDs
-		if(!hasFiredPerClick.current) {
-			const sidList = [ 5102, 9113, 9371, 9419, 9474, 9560, 9568, 9879 ];
-			const inboundSid = Number(tracking.SID);
-			if(sidList.includes(inboundSid)) {
-				console.log('BK pixel fire - per Click');
-				firePixelBlueKeel(tracking.HSID);
-			};
-			hasFiredPerClick.current = true;
-		};
-        // eslint-disable-next-line
-	}, [hasFiredPerClick.current]);
+	// useEffect(() => {
+	// 	// Fire a pixel for load event of these SIDs
+	// 	if(!hasFiredPerClick.current) {
+	// 		const sidList = [ 5102, 9113, 9371, 9419, 9474, 9560, 9879 ];
+	// 		const inboundSid = Number(tracking.SID);
+	// 		if(sidList.includes(inboundSid)) {
+	// 			console.log('BK pixel fire - per Click');
+	// 			firePixelBlueKeel(tracking.HSID);
+	// 		};
+	// 		hasFiredPerClick.current = true;
+	// 	};
+    //     // eslint-disable-next-line
+	// }, [hasFiredPerClick.current]);
 
 	useEffect(() => {
 		const isSplit = tracking.SPLIT === 'dynamic';

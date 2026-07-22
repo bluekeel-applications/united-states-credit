@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Radium from 'radium';
 import { AppContext } from '../../../context';
-import useClickSubmit from '../../../utils/hooks/useClickSubmit';
+// import useClickSubmit from '../../../utils/hooks/useClickSubmit';
 import useOffersByCategories from '../../../utils/hooks/useOffersByCategories';
 import useCoRegPathValues from '../../../utils/hooks/useCoRegPathValues';
 import useOtherOpportunities from '../../../utils/hooks/useOtherOpportunities';
@@ -14,7 +14,6 @@ import logo from '../../../assets/Images/usc_full_logo.png';
 import CategoryNav from './components/CategoryNav';
 import CategorySection from './components/CategorySection';
 import CrossSell from './components/CrossSell';
-import RedirectModal from './components/RedirectModal';
 import {
     CATEGORY_KEYS,
     CATEGORY_MAP,
@@ -29,15 +28,13 @@ const OfferWall = () => {
     const { trackingState } = useContext(AppContext);
     const [ sticky, setSticky ] = useState(false);
     const [ showBookmarkHint, setShowBookmarkHint ] = useState(false);
-    const [ modalOpen, setModalOpen ] = useState(false);
-    const [ shouldExecute, setExecute ] = useState(false);
+    // const [ shouldExecute, setExecute ] = useState(false);
     const inlineNavRef = useRef(null);
     const bookmarkTimer = useRef(null);
-    const redirectTimer = useRef(null);
 
     // Fires the pixel + Mongo pipeline once when the first offer is clicked
     // (mirrors System1's ButtonGroupPage behavior).
-    useClickSubmit(trackingState, trackingState.email, shouldExecute);
+    // useClickSubmit(trackingState, trackingState.email, shouldExecute);
 
     // Browsers expose no API to add a bookmark, so clicking the pill just tells
     // the user the keyboard shortcut for their platform (⌘+D Mac / Ctrl+D else).
@@ -89,22 +86,15 @@ const OfferWall = () => {
 
     const sourceMeta = () => ({ sid: trackingState.sid, pid: trackingState.pid, eid: trackingState.eid });
 
-    // Shared redirect: fire pixels, open a blank tab synchronously (so popup
-    // Match the reference: show the 2s handoff modal first (so it's actually
-    // visible), THEN open the shaped partner URL in a new tab. Opening the tab
-    // up front would steal focus and hide the modal.
+    // Open the shaped partner URL in a new tab immediately, in the click gesture
+    // (no delay, no about:blank) so popup blockers don't block it and the user
+    // reliably lands on the offer. Pixels fire on the first click.
     const openOffer = (offer) => {
         if (!offer || !offer.partner_url) return;
-        setExecute(true);
+        // setExecute(true);
         const url = buildLinkout(offer.partner_url, offer.link_shape || 'default', trackingState);
-        trackOfferEvent('redirect_modal_shown', { offer_id: offer.id });
-        setModalOpen(true);
-        clearTimeout(redirectTimer.current);
-        redirectTimer.current = setTimeout(() => {
-            window.open(url, '_blank');
-            trackOfferEvent('offer_redirect_opened', { offer_id: offer.id, ...sourceMeta() });
-            setModalOpen(false);
-        }, 2000);
+        window.open(url, '_blank');
+        trackOfferEvent('offer_redirect_opened', { offer_id: offer.id, ...sourceMeta() });
     };
 
     const handleOfferClick = (offer, meta = {}) => {
@@ -122,8 +112,6 @@ const OfferWall = () => {
         trackOfferEvent('other_opportunity_clicked', { offer_id: offer.id, title: offer.title, ...sourceMeta() });
         openOffer(offer);
     };
-
-    useEffect(() => () => clearTimeout(redirectTimer.current), []);
 
     // Fire once when the wall is viewed, after live counts resolve.
     const viewedRef = useRef(false);
@@ -212,8 +200,6 @@ const OfferWall = () => {
                     © 2026 United States Credit
                 </footer>
             </div>
-
-            <RedirectModal open={modalOpen} />
         </div>
     );
 };

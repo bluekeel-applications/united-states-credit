@@ -3,8 +3,20 @@ import axios from 'axios';
 const cancelToken = axios.CancelToken;
 const source = cancelToken.source();
 
+// const buildHitStreetLink = (payload) => (
+//     'https://bkoffers.com/hitstreet/hit_count_hsid2.cfm?' +
+//         'offer_id=' + payload.oid + '&' +
+//         'program_id=' + payload.pid + '&' +
+//         'hsid=' + payload.hsid + '&' +
+//         'eid=' + payload.eid + '&' +
+//         'oid=' + payload.oid + '&' +
+//         'pid=' + payload.pid + '&' +
+//         'sid=' + payload.sid + '&' +
+//         'uid=' + payload.uid
+// );
+
 const buildHitStreetLink = (payload) => (
-    'https://bkoffers.com/hitstreet/hit_count_hsid2.cfm?' +
+    'https://y0fskvo9th.execute-api.us-east-1.amazonaws.com/staging/hit_count_hsid?' +
         'offer_id=' + payload.oid + '&' +
         'program_id=' + payload.pid + '&' +
         'hsid=' + payload.hsid + '&' +
@@ -12,7 +24,8 @@ const buildHitStreetLink = (payload) => (
         'oid=' + payload.oid + '&' +
         'pid=' + payload.pid + '&' +
         'sid=' + payload.sid + '&' +
-        'uid=' + payload.uid
+        'uid=' + payload.uid + '&' +
+        'gclid' + payload.gclid
 );
 
 const useHitStreet = (payload) => {
