@@ -1,0 +1,278 @@
+/* Page 2 — Offer Wall. Ported from the approved prototype (Page2_with_modal.html),
+   minus the redirect-modal styles (Phase 2). Scoped under .page so element
+   selectors never leak. Mobile breakpoint kept at 900px to match the design. */
+
+.page {
+    --navy: #003a8c;
+    --blue: #2587f5;
+    --red: #ff1d25;
+    --line: #dce8f8;
+    --muted: #667085;
+    --sky: #eef6ff;
+    --ink: #162033;
+
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--ink);
+    scroll-behavior: smooth;
+    text-align: left; /* reset the app wrapper's global text-align:center */
+    font-weight: 400; /* reset the global body { font-weight:700 }; bold bits set their own */
+    width: 100%;
+    background:
+        radial-gradient(circle at 10% 0%, rgba(37, 135, 245, .12), transparent 26%),
+        linear-gradient(180deg, #fff, #f6f9fd);
+}
+.page *, .page *::before, .page *::after { box-sizing: border-box; }
+
+.topline { height: 6px; background: linear-gradient(90deg, var(--navy), var(--blue), var(--red)); }
+
+.wrap { max-width: 1100px; margin: 0 auto; padding: 18px 18px 40px; }
+
+.header { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo img { width: 280px; max-width: 75vw; display: block; }
+.bookmarkWrap { position: relative; }
+.bookmarkPill {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 10px 14px;
+    color: var(--navy);
+    font-weight: 900;
+    font-size: 13px;
+    box-shadow: 0 10px 28px rgba(0, 58, 140, .06);
+    white-space: nowrap;
+    cursor: pointer;
+    font-family: inherit;
+}
+.bookmarkPill:hover { border-color: rgba(37, 135, 245, .65); }
+
+.bookmarkHint {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    z-index: 60;
+    background: var(--navy);
+    color: #fff;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 12px 28px rgba(0, 58, 140, .22);
+    animation: hintIn .16s ease;
+}
+.bookmarkHint::before {
+    content: "";
+    position: absolute;
+    right: 20px;
+    top: -5px;
+    width: 10px;
+    height: 10px;
+    background: var(--navy);
+    transform: rotate(45deg);
+}
+.bookmarkHint kbd {
+    font-family: inherit;
+    background: rgba(255, 255, 255, .18);
+    border-radius: 5px;
+    padding: 1px 6px;
+    font-weight: 900;
+}
+@keyframes hintIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 24px;
+    margin-top: 16px;
+    box-shadow: 0 16px 40px rgba(0, 58, 140, .08);
+}
+.heroGrid { display: grid; grid-template-columns: 1fr 170px; gap: 24px; align-items: center; }
+.hero h1 { margin: 0; color: var(--navy); font-size: 42px; line-height: 1.02; letter-spacing: -1px; }
+.hero p { margin: 10px 0 0; color: #475467; line-height: 1.5; }
+.mobileHeroTitle { display: none; }
+.mobileProTip { display: none; }
+
+.score { background: #f4f9ff; border: 1px solid var(--line); border-radius: 22px; padding: 18px; text-align: center; }
+.score strong { display: block; font-size: 42px; color: var(--navy); line-height: 1; }
+.score span { font-size: 13px; color: var(--muted); font-weight: 900; }
+
+.navInline { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.navInline a, .stickyNav a {
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid var(--line);
+    color: var(--navy);
+    font-weight: 900;
+    font-size: 13px;
+    box-shadow: 0 8px 20px rgba(0, 58, 140, .04);
+}
+.navInline a:first-child, .stickyNav a:first-child { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+.stickyShell {
+    display: none;
+    position: fixed;
+    left: 0; right: 0; top: 0;
+    z-index: 50;
+    padding: 10px 16px;
+    background: rgba(246, 249, 253, .96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 8px 22px rgba(0, 58, 140, .06);
+}
+.stickyShell.show { display: block; }
+.stickyNav { max-width: 1100px; margin: 0 auto; display: flex; gap: 8px; overflow-x: auto; }
+.stickyNav a { white-space: nowrap; flex: 0 0 auto; }
+
+.section { margin-top: 24px; scroll-margin-top: 86px; }
+.sectionHead { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
+.sectionHead h2 { margin: 0; color: var(--navy); font-size: 25px; }
+.sectionHead p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+.count { padding: 8px 10px; border-radius: 999px; background: var(--sky); color: var(--navy); font-size: 13px; font-weight: 900; white-space: nowrap; }
+
+.card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 16px;
+    margin-top: 12px;
+    box-shadow: 0 10px 24px rgba(0, 58, 140, .05);
+    cursor: pointer;
+    position: relative;
+    transition: transform .14s ease, box-shadow .14s ease;
+}
+.card:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(0, 58, 140, .08); }
+.desktopCard { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; }
+
+.award { display: inline-flex; align-items: center; gap: 6px; padding: 7px 11px; border-radius: 999px; font-size: 12px; font-weight: 950; margin-bottom: 8px; }
+.editor { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+.trending { background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
+.best { background: #eef2ff; color: #4338ca; border: 1px solid #c7d2fe; }
+
+.card h3 { margin: 0 0 4px; font-size: 18px; }
+.card p { margin: 0; color: #667085; font-size: 14px; line-height: 1.4; }
+
+.pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.pills span { padding: 5px 7px; border-radius: 999px; font-size: 10px; font-weight: 800; border: 1px solid var(--line); }
+.g { background: #ecfdf5; color: #047857; border-color: #bbf7d0 !important; }
+.b { background: #eef6ff; color: #003a8c; border-color: #dce8f8 !important; }
+.y { background: #fffbeb; color: #92400e; border-color: #fde68a !important; }
+.p { background: #f5f3ff; color: #6d28d9; border-color: #ddd6fe !important; }
+
+.btn { background: var(--navy); color: #fff; border: none; border-radius: 999px; padding: 14px 18px; font-weight: 900; cursor: pointer; width: 140px; }
+.arrow { display: none; }
+
+.more {
+    width: 100%;
+    margin-top: 12px;
+    padding: 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--navy);
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.cross {
+    margin-top: 30px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 20px;
+    box-shadow: 0 12px 32px rgba(0, 58, 140, .05);
+    scroll-margin-top: 86px;
+}
+.cross h2 { margin: 0 0 6px; color: var(--navy); }
+.cross > p { margin: 0 0 16px; color: #667085; line-height: 1.45; }
+.crossgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.crosscard { border: 1px solid var(--line); border-radius: 18px; padding: 16px; background: #fafcff; }
+.crosscard h3 { margin: 0 0 6px; display: flex; align-items: center; gap: 6px; }
+.crosscard p { margin: 0; font-size: 13px; color: #667085; }
+.genericIcon { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 999px; background: var(--sky); color: var(--navy); font-weight: 900; }
+.crosscard button { width: 100%; padding: 12px; border: none; border-radius: 999px; background: var(--navy); color: #fff; font-weight: 900; cursor: pointer; margin-top: 12px; }
+
+.footer { margin-top: 30px; padding: 18px; text-align: center; border-top: 1px solid var(--line); font-size: 13px; color: #667085; }
+.footer a { color: var(--navy); text-decoration: none; font-weight: 700; margin: 0 8px; }
+
+@media (max-width: 900px) {
+    .wrap { padding: 12px; }
+    .header { display: block; text-align: center; }
+    .bookmarkPill { display: none; }
+    .logo img { width: 230px; margin: 0 auto; }
+
+    .hero { padding: 17px 18px 13px; border-radius: 22px; margin-top: 10px; }
+    .heroGrid { display: block; text-align: center; }
+    .hero h1 { font-size: 33px; line-height: 1.03; letter-spacing: -.8px; }
+    .desktopHeroTitle { display: none; }
+    .mobileHeroTitle { display: inline; }
+    .desktopHeroCopy { display: none; }
+    .mobileProTip {
+        display: block;
+        max-width: 340px;
+        margin: 7px auto 0;
+        text-align: center;
+        color: #667085;
+        font-size: 12px;
+        line-height: 1.3;
+        font-weight: 500;
+    }
+    .score { display: none; }
+
+    .navInline { justify-content: center; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 3px; }
+    .navInline a, .stickyNav a { font-size: 12px; padding: 8px 11px; white-space: nowrap; }
+    .otherNavLink { display: none; }
+    .stickyShell { padding: 9px 12px; }
+
+    .section { margin-top: 18px; scroll-margin-top: 76px; }
+    .sectionHead h2 { font-size: 20px; }
+    .sectionHead p { display: none; }
+    .count { font-size: 12px; }
+
+    .desktopCard { display: block; }
+    .card { padding: 13px 68px 13px 13px; border-radius: 18px; }
+    .card h3 { font-size: 16px; }
+    .card p { font-size: 12.5px; }
+    .award { font-size: 11px; padding: 6px 9px; margin-bottom: 8px; }
+    .pills { margin-top: 8px; gap: 5px; }
+    .pills span { font-size: 9px; padding: 4px 6px; }
+    .btn { display: none; }
+    .arrow {
+        display: flex;
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        /* rotate the → glyph 45° up (points to upper-right ↗) */
+        transform: translateY(-50%) rotate(-45deg);
+        width: 42px; height: 42px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        align-items: center;
+        justify-content: center;
+        color: var(--navy);
+        font-size: 22px;
+        font-weight: 900;
+        /* 900 is already the max weight; stroke thickens the glyph one step more */
+        -webkit-text-stroke: 0.6px currentColor;
+        background: #fff;
+    }
+
+    .cross { padding: 16px; border-radius: 22px; }
+    .crossgrid { grid-template-columns: 1fr; }
+    .crosscard { padding: 14px; }
+    .crosscard h3 { font-size: 16px; }
+    .crosscard p { font-size: 12.5px; line-height: 1.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page { scroll-behavior: auto; }
+    .card { transition: none; }
+    .card:hover { transform: none; }
+    .bookmarkHint { animation: none; }
+}

@@ -25,6 +25,7 @@ import {
     faShoppingCart,
     faHandsUsd,
     faSearchDollar,
+    faSearch,
     faLandmarkAlt,
     faGopuram,
     faSortSizeDown,
@@ -41,6 +42,12 @@ import {
     faBlog,
     faTimes,
     faChevronUp,
+    faTrophyStar,
+    faAngleDown,
+    faTrianglePersonDigging,
+    faMoneyBillTrendUp,
+    faPiggyBank,
+    faComputer,
 } from '@fortawesome/pro-light-svg-icons';
 
 function initFontAwesome() {
@@ -70,6 +77,7 @@ function initFontAwesome() {
         faShoppingCart,
         faHandsUsd,
         faSearchDollar,
+        faSearch,
         faLandmarkAlt,
         faGopuram,
         faDonate,
@@ -84,7 +92,13 @@ function initFontAwesome() {
         faThumbsUp,
         faBlog,
         faTimes,
-        faChevronUp
+        faChevronUp,
+        faTrophyStar,
+        faAngleDown,
+        faTrianglePersonDigging,
+        faMoneyBillTrendUp,
+        faPiggyBank,
+        faComputer,
     );
 }
 

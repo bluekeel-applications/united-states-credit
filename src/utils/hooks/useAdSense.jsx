@@ -1,0 +1,71 @@
+import { useEffect } from 'react';
+
+const useAdSense = (tracking) => {
+
+	const { SID } = tracking;
+    const sid = Number(SID);
+    // const setLive = useRef(false);
+    const badSids = [
+        10007
+    ];
+
+    // const setLiveTimeout = () => {
+    //     setTimeout(() => {
+    //         setLive.current = true;
+    //     }, 4000);
+    // };
+
+    // useEffect(() => {
+    //     setLiveTimeout();
+    // }, []);
+
+	useEffect(() => {
+   
+        if(!!sid && sid !== 'undefined' && !badSids.includes(sid)) {
+            // Check if script already exists to avoid duplicates
+            const existingScript = document.querySelector('script[src*="pagead2.googlesyndication.com"]');
+            
+            if (!existingScript) {
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5105418052368941';
+                script.crossOrigin = 'anonymous';
+                
+                document.head.appendChild(script);
+            }
+        };
+            // Check if script already exists to avoid duplicates
+        // const existingScript = document.querySelector('script[src*="pagead2.googlesyndication.com"]');
+        
+        // if (!existingScript) {
+        //     const script = document.createElement('script');
+        //     script.async = true;
+        //     script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5105418052368941';
+        //     script.crossOrigin = 'anonymous';
+            
+        //     document.head.appendChild(script);
+        // }
+        
+		// eslint-disable-next-line
+	}, []);
+	// useEffect(() => {
+    //     if(!!sid && sid !== 'undefined' && !badSids.includes(sid)) {
+    //         // Check if script already exists to avoid duplicates
+    //         const existingScript = document.querySelector('script[src*="pagead2.googlesyndication.com"]');
+            
+    //         if (!existingScript) {
+    //             const script = document.createElement('script');
+    //             script.async = true;
+    //             script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5105418052368941';
+    //             script.crossOrigin = 'anonymous';
+                
+    //             document.head.appendChild(script);
+    //         }
+    //     };
+	// 	// eslint-disable-next-line
+	// }, [sid]);
+
+	return;
+};
+
+export default useAdSense;
