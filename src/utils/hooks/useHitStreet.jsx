@@ -25,7 +25,7 @@ const buildHitStreetLink = (payload) => (
         'pid=' + payload.pid + '&' +
         'sid=' + payload.sid + '&' +
         'uid=' + payload.uid + '&' +
-        'gclid' + payload.gclid
+        'gclid=' + payload.gclid
 );
 
 const useHitStreet = (payload) => {
@@ -35,6 +35,7 @@ const useHitStreet = (payload) => {
     const pingHitStreet = async() => {
         try{
             const fetchLink = buildHitStreetLink(payload);
+            console.log('hitstreet url:', fetchLink)
             const res = await axios({
                 method: 'get',
                 headers: {
