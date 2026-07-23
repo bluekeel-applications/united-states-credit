@@ -5,6 +5,9 @@
 const buildLinkout = (url, shape, tracking) => {
     const url_base = new URL(url);
     url_base.searchParams.set('eid', `${tracking.pid}-${tracking.sid}-${tracking.eid}`);
+    if(!!tracking.gclid) {
+        url_base.searchParams.set('gclid', tracking.gclid);
+    };
     const new_url = url_base.toString();
 
     switch (shape) {

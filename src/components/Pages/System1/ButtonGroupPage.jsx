@@ -113,6 +113,7 @@ const ButtonGroupPage = () => {
             window.fbq('init', '1129397548111416');
             window.fbq('track', 'Search');
             const new_url = buildLinkout(offerItem.url, offerItem.linkShape, trackingState);
+            console.log('linkout:', new_url);
             let newTab = window.open();
             newTab.location = new_url;
         };

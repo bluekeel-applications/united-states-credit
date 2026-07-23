@@ -64,6 +64,9 @@ const OfferBlockPage = () => {
             url.search = search_params.toString();
             let new_url = url.toString();
             new_url = new_url + `&subid2=${trackingState.hsid}`;
+            if(!!trackingState.gclid) {
+                new_url = new_url + `&gclid=${trackingState.gclid}`;
+            }
             let newTab = window.open();
             newTab.location = new_url;
         };
