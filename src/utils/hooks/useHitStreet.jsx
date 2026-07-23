@@ -16,7 +16,7 @@ const source = cancelToken.source();
 // );
 
 const buildHitStreetLink = (payload) => (
-    'https://y0fskvo9th.execute-api.us-east-1.amazonaws.com/staging/hit_count_hsid?' +
+    'https://bkroute.com/hit_count_hsid?' +
         'offer_id=' + payload.oid + '&' +
         'program_id=' + payload.pid + '&' +
         'hsid=' + payload.hsid + '&' +
