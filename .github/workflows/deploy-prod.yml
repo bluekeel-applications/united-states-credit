@@ -1,0 +1,53 @@
+name: Deploy to prod
+
+on:
+  # Manual trigger from the Actions tab
+  workflow_dispatch:
+  # Auto-deploy whenever the master branch is pushed
+  push:
+    branches:
+      - master
+
+# Never run two prod deploys at once; a new push waits for the current one
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 16
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      # deploy-prod and postdeploy-prod pin --profile bluekeel, so create
+      # that profile here instead of relying on ambient env credentials
+      - name: Configure AWS profile
+        run: |
+          mkdir -p ~/.aws
+          cat > ~/.aws/credentials <<EOF
+          [bluekeel]
+          aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          EOF
+          cat > ~/.aws/config <<EOF
+          [profile bluekeel]
+          region=us-east-1
+          EOF
+
+      - name: Build
+        run: yarn build
+        env:
+          # CRA treats lint warnings as errors when CI=true; match local builds
+          CI: false
+
+      # yarn also runs postdeploy-prod (CloudFront invalidation) after this
+      - name: Deploy
+        run: yarn deploy-prod
