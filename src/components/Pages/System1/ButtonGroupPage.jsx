@@ -7,6 +7,7 @@ import MainTitle from './Articles/components/MainTitle';
 import { setPageComponent } from './utils/helpers';
 import useClickSubmit from '../../../utils/hooks/useClickSubmit';
 import buildLinkout from '../../../utils/buildLinkout';
+import fireAdwordsEvent from '../../../utils/pixels/adWords';
 
 const ButtonGroupPage = () => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -112,6 +113,7 @@ const ButtonGroupPage = () => {
             // Add fbpixel fire
             window.fbq('init', '1129397548111416');
             window.fbq('track', 'Search');
+            fireAdwordsEvent();
             const new_url = buildLinkout(offerItem.url, offerItem.linkShape, trackingState);
             console.log('linkout:', new_url);
             let newTab = window.open();
