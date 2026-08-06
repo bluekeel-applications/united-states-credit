@@ -5,7 +5,7 @@ export const LOANS_HOME = '/loans';
 export const pathFor = (slug) => `${LOANS_HOME}/${slug}`;
 
 export const HOME_META = {
-    documentTitle: 'Personal Loans from $500 to $25,000 | United States Credit',
+    documentTitle: 'Personal Loans from $500 to $35,000 | United States Credit',
     metaDescription: 'Explore personal loan options through United States Credit.',
 };
 

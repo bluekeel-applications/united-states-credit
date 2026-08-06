@@ -6,10 +6,11 @@ import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';
 import Breadcrumbs from './Breadcrumbs';
 import Toc from './Toc';
-import ReviewBanner from './ReviewBanner';
 
 // Shared template for the legal/info pages: hero (breadcrumbs, h1, lede) +
-// sticky TOC alongside the article of #s1..#sN sections + review banner.
+// sticky TOC alongside the article of #s1..#sN sections. The reference's
+// closing "Implementation note" draft banner is intentionally omitted
+// (user decision, 2026-08-06).
 const LegalPageLayout = ({ h1, lede, content }) => (
     <div className='lw-page' style={pageRoot}>
         <SiteHeader variant='legal' />
@@ -34,7 +35,6 @@ const LegalPageLayout = ({ h1, lede, content }) => (
                             {section.body}
                         </section>
                     ))}
-                    <ReviewBanner />
                 </article>
             </div>
         </main>

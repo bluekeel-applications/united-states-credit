@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Radium from 'radium';
 import Styles from './LoanLanding.css';
+import useLoanTrack from '../useLoanTrack';
 
 const ITEMS = [
     { q: 'Can I submit a request with less-than-perfect credit?', a: 'Participating providers may consider consumers across a range of credit profiles and may evaluate factors beyond a traditional credit score. Each provider uses its own eligibility criteria, and approval is not guaranteed.' },
-    { q: 'How much can I request?', a: 'The form may allow requests from $500 to $25,000. Any amount offered may differ from the amount requested and will depend on provider requirements, state availability, and applicant qualifications.' },
+    { q: 'How much can I request?', a: 'The form may allow requests from $500 to $35,000. Any amount offered may differ from the amount requested and will depend on provider requirements, state availability, and applicant qualifications.' },
     { q: 'How quickly could funds be available?', a: 'Decision and funding times vary. Verification requirements, bank processing times, weekends, and holidays can affect when approved funds become available.' },
     { q: 'Will submitting the form affect my credit?', a: 'A participating provider may obtain a consumer report or use other information to evaluate a request. The live form and provider disclosures should explain the authorization and whether an inquiry may affect your credit profile before you submit.' },
     { q: 'Does submitting the form guarantee a loan?', a: 'No. Submitting information does not guarantee that you will be matched, approved, offered a particular amount, or funded.' },
@@ -16,8 +17,16 @@ const ITEMS = [
 // content value byte-for-byte), flipped via the native toggle event.
 const FaqItem = ({ q, a }) => {
     const [open, setOpen] = useState(false);
+    const track = useLoanTrack();
+
+    const handleToggle = (event) => {
+        const isOpen = event.currentTarget.open;
+        setOpen(isOpen);
+        track(isOpen ? 'faq_opened' : 'faq_closed', { question: q });
+    };
+
     return (
-        <details style={Styles.details} onToggle={(event) => setOpen(event.currentTarget.open)}>
+        <details style={Styles.details} onToggle={handleToggle}>
             <summary style={Styles.summary}>{q}<span style={Styles.summaryMark} aria-hidden='true'>{open ? '−' : '+'}</span></summary>
             <p style={Styles.detailsP}>{a}</p>
         </details>

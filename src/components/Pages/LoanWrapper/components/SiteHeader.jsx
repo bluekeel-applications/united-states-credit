@@ -4,15 +4,19 @@ import RouteLink from './RouteLink';
 import Styles from './SiteHeader.css';
 import lwLogo from '../../../../assets/Images/usc_lw_logo.png';
 import { LOANS_HOME, pathFor } from '../loanPages';
+import useLoanTrack from '../useLoanTrack';
 
 // Header chrome shared by every /loans page. variant='home' shows the SSL
 // security badge (landing page); variant='legal' shows the Legal Center link.
-const SiteHeader = ({ variant = 'legal' }) => (
+const SiteHeader = ({ variant = 'legal' }) => {
+    const track = useLoanTrack();
+
+    return (
     <>
         <a className='skip' href='#main' style={Styles.skip}>Skip to content</a>
         <header className='site-header' style={Styles.siteHeader}>
             <div className='header-inner' style={Styles.headerInner}>
-                <RouteLink to={LOANS_HOME}>
+                <RouteLink to={LOANS_HOME} onClick={() => track('header_link_clicked', { label: 'logo', to_slug: 'home' })}>
                     <img className='logo' style={Styles.logo} src={lwLogo} alt='United States Credit' />
                 </RouteLink>
                 {variant === 'home' ? (
@@ -30,11 +34,12 @@ const SiteHeader = ({ variant = 'legal' }) => (
                         </span>
                     </div>
                 ) : (
-                    <RouteLink className='header-link' style={Styles.headerLink} to={pathFor('legal-center')}>Legal Center</RouteLink>
+                    <RouteLink className='header-link' style={Styles.headerLink} to={pathFor('legal-center')} onClick={() => track('header_link_clicked', { label: 'Legal Center', to_slug: 'legal-center' })}>Legal Center</RouteLink>
                 )}
             </div>
         </header>
     </>
-);
+    );
+};
 
 export default Radium(SiteHeader);

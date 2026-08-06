@@ -24,7 +24,7 @@ const ratesAndFees = {
         {
             id: 's4',
             heading: 'Loan amount and term',
-            body: <P>The site may permit requests from $500 to $25,000, but the amount offered may be different or no offer may be made. Terms may range from months to years depending on provider, product, state law, and qualifications.</P>,
+            body: <P>The site may permit requests from $500 to $35,000, but the amount offered may be different or no offer may be made. Terms may range from months to years depending on provider, product, state law, and qualifications.</P>,
         },
         {
             id: 's5',

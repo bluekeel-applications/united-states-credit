@@ -3,6 +3,7 @@ import Radium from 'radium';
 import Styles from './LoanLanding.css';
 import MockFormBody from './MockFormBody';
 import { COLORS } from '../theme';
+import useLoanTrack from '../useLoanTrack';
 
 const SCRIPT_ID = 'mbjs-lender-form-loader';
 const STYLE_ID = 'mbjs-lender-form-overrides';
@@ -36,26 +37,82 @@ const VENDOR_OVERRIDE_CSS = `
 }
 `;
 
-// The hero form card. The reference ships a static mock in this slot; in
-// production the mbjsform vendor form renders into #r-form. The mock stays
-// visible until the vendor paints (and permanently if the script fails or
-// mockOnly is set), so the card never appears empty.
+// The hero form card. In production the mbjsform vendor form renders into
+// #r-form; while it loads the card shows only its chrome (no mock flash),
+// with the form area's height reserved so content below doesn't jump. The
+// reference's static mock renders only with ?mockform=1 (snapshot
+// verification) or as a fallback when the vendor script fails to load.
 const LenderFormEmbed = ({ mockOnly = false }) => {
     const containerRef = useRef(null);
     const [formReady, setFormReady] = useState(false);
+    const [failed, setFailed] = useState(false);
+
+    // Latest-ref pattern: the embed effect must not re-run when track's
+    // identity changes (that would re-inject the vendor script), but events
+    // should always carry the current sid/pid/eid/page.
+    const track = useLoanTrack();
+    const trackRef = useRef(track);
+    trackRef.current = track;
 
     useEffect(() => {
         if (mockOnly) return undefined;
         const container = containerRef.current;
 
-        // swap mock -> live the moment the vendor renders anything
+        // Vendor DOM readers. Selectors verified against the live wizard;
+        // every read degrades to '' if the vendor markup drifts. Labels and
+        // headings only — NEVER read input values (PII).
+        const readProgress = () =>
+            container.querySelector('.f-wizard-progressbar--value')?.textContent?.trim() ?? '';
+        const readStepTitle = () => {
+            const heading = container.querySelector('h1, h2, h3, h4, [role="heading"]')
+                ?? container.querySelector('[class*="title" i], [class*="question" i]');
+            return heading?.textContent?.replace(/\s+/g, ' ').trim().slice(0, 100) ?? '';
+        };
+
+        let ready = false;      // one-shot: unlock reserved height + form_loaded
+        let lastStepKey = null; // (progress|title) pair — dedupes mutation noise
+        let frame = null;       // single pending rAF coalesces mutation batches
+
+        const readStep = () => {
+            frame = null;
+            const progress = readProgress();
+            const stepTitle = readStepTitle();
+            if (!stepTitle) return; // vendor mid-render (paints a bare 0% bar before the step content)
+            const key = `${progress}|${stepTitle}`;
+            if (key === lastStepKey) return;
+            lastStepKey = key;
+            trackRef.current('lender_form_step_viewed', { progress, step_title: stepTitle });
+        };
+
+        // Persistent observer: flips formReady once, then tracks wizard step
+        // changes for the form funnel. No `attributes` (the progress fill
+        // animates via style attrs — that would be an event storm); typing in
+        // inputs mutates no text nodes, so keystrokes generate zero mutations.
         const observer = new MutationObserver(() => {
-            if (container.childElementCount > 0) {
+            if (!ready && container.childElementCount > 0) {
+                ready = true;
                 setFormReady(true);
-                observer.disconnect();
+                trackRef.current('lender_form_loaded', {});
             }
+            if (ready && frame === null) frame = window.requestAnimationFrame(readStep);
         });
-        observer.observe(container, { childList: true });
+        observer.observe(container, { childList: true, subtree: true, characterData: true });
+
+        // Delegated capture-phase clicks: vendor handlers can't stopPropagation
+        // past us. Buttons only.
+        const onClickCapture = (event) => {
+            const target = event.target instanceof Element ? event.target : null;
+            const button = target?.closest('button, .f-button');
+            if (!button || !container.contains(button)) return;
+            // strip decorative icon glyphs the vendor appends (e.g. '›')
+            let label = button.textContent.replace(/\s+/g, ' ').replace(/[›‹»«><]+\s*$/, '').trim();
+            if (!label) {
+                label = button.getAttribute('aria-label')?.trim()
+                    || (/back/i.test(button.className) ? 'back' : 'unlabeled');
+            }
+            trackRef.current('lender_form_button_clicked', { label, progress: readProgress() });
+        };
+        container.addEventListener('click', onClickCapture, true);
 
         document.getElementById(STYLE_ID)?.remove();
         const style = document.createElement('style');
@@ -71,17 +128,23 @@ const LenderFormEmbed = ({ mockOnly = false }) => {
         script.id = SCRIPT_ID;
         Object.entries(VENDOR_ATTRS).forEach(([key, value]) => script.setAttribute(key, value));
         script.defer = true;
+        script.onerror = () => {
+            setFailed(true);
+            trackRef.current('lender_form_failed', {});
+        };
         script.src = VENDOR_SRC;
         document.body.appendChild(script);
 
         return () => {
             observer.disconnect();
+            container.removeEventListener('click', onClickCapture, true);
+            if (frame !== null) window.cancelAnimationFrame(frame);
             script.remove();
             style.remove();
         };
     }, [mockOnly]);
 
-    const showMock = mockOnly || !formReady;
+    const showMock = mockOnly || failed;
 
     return (
         <section
@@ -94,7 +157,9 @@ const LenderFormEmbed = ({ mockOnly = false }) => {
                 <h2 style={Styles.formHeadH2}>See your available options</h2>
                 {showMock && <p style={Styles.formHeadP}>Static preview of the lender-controlled form area</p>}
             </div>
-            {!mockOnly && <div id='r-form' ref={containerRef} style={formReady ? Styles.rFormLive : undefined} />}
+            {!mockOnly && !failed && (
+                <div id='r-form' ref={containerRef} style={formReady ? Styles.rFormLive : Styles.rFormLoading} />
+            )}
             {showMock && <MockFormBody />}
             {showMock && <div className='form-note' style={Styles.formNote}>Visualization only — no external script or data collection is active on this preview.</div>}
         </section>

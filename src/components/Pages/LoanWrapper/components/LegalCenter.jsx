@@ -10,11 +10,13 @@ import SiteFooter from './SiteFooter';
 import Breadcrumbs from './Breadcrumbs';
 import ReviewBanner from './ReviewBanner';
 import { LEGAL_PAGES, LEGAL_CENTER_META, pathFor } from '../loanPages';
+import useLoanTrack from '../useLoanTrack';
 
 // The Legal Center hub — hero + "Important" banner + card grid linking every
 // legal page, in registry order.
 const LegalCenter = () => {
     useDocumentMeta(LEGAL_CENTER_META.documentTitle, LEGAL_CENTER_META.metaDescription);
+    const track = useLoanTrack();
 
     return (
         <div className='lw-page' style={pageRoot}>
@@ -31,8 +33,8 @@ const LegalCenter = () => {
                     <div className='container' style={Styles.container}>
                         <ReviewBanner><strong>Important:</strong> UnitedStatesCredit.com is a marketing and referral service operated by BlueKeel LLC. It is not a lender and does not make credit decisions.</ReviewBanner>
                         <div className='legal-grid' style={Styles.legalGrid}>
-                            {LEGAL_PAGES.map((page) => (
-                                <RouteLink key={page.slug} className='legal-card' style={Styles.legalCard} to={pathFor(page.slug)}>
+                            {LEGAL_PAGES.map((page, index) => (
+                                <RouteLink key={page.slug} className='legal-card' style={Styles.legalCard} to={pathFor(page.slug)} onClick={() => track('legal_card_clicked', { slug: page.slug, position: index + 1 })}>
                                     <small style={Styles.cardKicker}>{page.card.kicker}</small>
                                     <h2 style={Styles.cardTitle}>{page.card.title}</h2>
                                     <p style={Styles.cardBlurb}>{page.card.blurb}</p>

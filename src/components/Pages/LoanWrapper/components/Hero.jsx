@@ -11,7 +11,7 @@ const Hero = ({ mockOnly }) => (
         <div className='container hero-grid' style={Styles.heroGrid}>
             <div className='hero-copy' style={Styles.heroCopy}>
                 <div className='eyebrow' style={Styles.eyebrow}><span style={Styles.eyebrowBar} aria-hidden='true' />Personal loan options</div>
-                <h1 style={Styles.heroH1}><span className='headline-lead' style={Styles.headlineSpan}>Loans from</span>{' '}<span className='headline-amount' style={Styles.headlineSpan}>$500 to $25,000</span></h1>
+                <h1 style={Styles.heroH1}><span className='headline-lead' style={Styles.headlineSpan}>Loans from</span>{' '}<span className='headline-amount' style={Styles.headlineSpan}>$500 to $35,000</span></h1>
                 <p style={Styles.heroLede}>Complete one simple online form to see whether you may be connected with a participating provider.</p>
                 <ul className='benefits' style={Styles.benefits}>
                     <li style={Styles.benefitsLi}><span className='check' style={Styles.check}>✓</span>Options for a range of credit profiles</li>

@@ -250,6 +250,13 @@ const Styles = {
         padding: 18,
         [DESKTOP]: { padding: 24 },
     },
+    // while the vendor script loads: blank, with the live form's approximate
+    // height reserved so content below the hero doesn't jump on arrival
+    rFormLoading: {
+        padding: 18,
+        minHeight: 470,
+        [DESKTOP]: { padding: 24 },
+    },
 
     // ---- trust strip ----
     trust: {

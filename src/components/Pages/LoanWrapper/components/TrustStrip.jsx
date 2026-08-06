@@ -4,7 +4,7 @@ import Styles from './LoanLanding.css';
 
 const CELLS = [
     { title: 'Online Process', caption: 'Complete from anywhere' },
-    { title: '$500–$25,000', caption: 'Amounts vary by provider' },
+    { title: '$500–$35,000', caption: 'Amounts vary by provider' },
     { title: 'Multiple Factors', caption: 'Credit is not the only consideration' },
     { title: 'No Guarantee', caption: 'Approval is not assured' },
 ];

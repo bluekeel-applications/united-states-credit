@@ -18,7 +18,7 @@ const MockFormBody = () => (
         <div className='fake-range' style={Styles.fakeRange}>
             <div style={Styles.fakeRangeThumb} aria-hidden='true' />
         </div>
-        <div className='range-labels' style={Styles.rangeLabels}><span>$500</span><span>$25,000</span></div>
+        <div className='range-labels' style={Styles.rangeLabels}><span>$500</span><span>$35,000</span></div>
         <div className='field-label' style={Styles.fieldLabel}>What is the loan for?</div>
         <div className='fake-select' style={Styles.fakeSelect}><span>Select a purpose</span><span>⌄</span></div>
         <div className='primary-btn' style={Styles.primaryBtn}>Continue</div>
