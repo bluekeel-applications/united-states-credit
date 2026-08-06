@@ -24,6 +24,7 @@ const Home = lazyWithRetry(() => import('../components/Pages/Home'), 'Home');
 const CBiframe = lazyWithRetry(() => import('../components/Pages/CBiframe'), 'CBiframe');
 const OfferFinder = lazyWithRetry(() => import('../components/Pages/OfferFinder'), 'OfferFinder');
 const OfferWall = lazyWithRetry(() => import('../components/Pages/OfferWall'), 'OfferWall');
+const LoanWrapper = lazyWithRetry(() => import('../components/Pages/LoanWrapper'), 'LoanWrapper');
 
 const WrappedRoute = ({ element }) => (
     <FlowWrapper>{element}</FlowWrapper>
@@ -37,6 +38,7 @@ const RouteContainer = () => (
                     <Route path='/' element={<Home />}/>
                     <Route path='/finder' element={<OfferFinder />}/>
                     <Route path='/offers' element={<OfferWall />}/>
+                    <Route path='/loans/*' element={<LoanWrapper />}/>
                     {/* <Route path='/' element={<Welcome />}/> */}
                     {/* <WrappedRoute path='/' element={<Home />}/>
                     <WrappedRoute path='/privacy' element={<PrivacyPolicy />}/>

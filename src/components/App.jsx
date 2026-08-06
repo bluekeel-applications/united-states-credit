@@ -147,12 +147,16 @@ const App = ({ uri }) => {
 	};
 
 	// Self-contained full-page routes that ship their own header/footer and
-	// must not receive the app's Navbar/Footer chrome (Home + the offer funnel).
+	// must not receive the app's Navbar/Footer chrome (Home, the offer funnel,
+	// and the entire /loans landing + legal-center set).
 	const bareRoutes = [ '/', '/finder', '/offers' ];
+	const isBareRoute = bareRoutes.includes(location.pathname)
+		|| location.pathname === '/loans'
+		|| location.pathname.startsWith('/loans/');
 
 	return (
 		<div key='app-key' style={Styles.app}>
-			{!bareRoutes.includes(location.pathname) && <Navbar />}
+			{!isBareRoute && <Navbar />}
 			<RouteContainer />
 			{/* {location.pathname !== '/' &&
 			location.pathname !== '/rsoc' && 
@@ -165,7 +169,7 @@ const App = ({ uri }) => {
 			</Suspense>} */}
 			{
 			location.pathname !== '/duplicate_check' &&
-			!bareRoutes.includes(location.pathname) &&
+			!isBareRoute &&
 			<Footer />
 			}
 			<DrawerMenu />
