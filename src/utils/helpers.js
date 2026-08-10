@@ -155,6 +155,9 @@ export const setCookies = (tracking) => {
     if(!!tracking.email && tracking.email !== 'omit') {
         setCookie('email', tracking.email, 3);
     };
+    if(!!tracking.ads) {
+        setCookie('ads', tracking.ads, 3);
+    };
 };
 export const setPchCookies = (user) => {
     setCookie('email', user.email, 3);

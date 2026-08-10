@@ -31,7 +31,8 @@ const initialTrackingState = {
     ttclid: null,
     fbid: null,
     fbclickid: null,
-    display: null
+    display: null,
+    ads: Helpers.checkCookie('ads') ? Helpers.getCookie('ads') : null
 };
 
 const trackingStateReducer = (state, action) => {
@@ -65,7 +66,8 @@ const trackingStateReducer = (state, action) => {
                 ttclid: action.payload.ttclid,
                 fbid: action.payload.fbid,
                 fbclickid: action.payload.fbclickid,
-                display: action.payload.display
+                display: action.payload.display,
+                ads: action.payload.ads
             };
             Helpers.setCookies(tracking);
             return {

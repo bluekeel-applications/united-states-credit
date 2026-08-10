@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 const useAdSense = (tracking) => {
 
-	const { SID, PID } = tracking;
+	const { SID, PID, ADS } = tracking;
     const sid = Number(SID);
     const pid = Number(PID);
     // const setLive = useRef(false);
@@ -14,7 +14,7 @@ const useAdSense = (tracking) => {
     ];
 
 	useEffect(() => {
-        if(!!sid && sid !== 'undefined' && !badSids.includes(sid) && !badPids.includes(pid)) {
+        if(!!sid && sid !== 'undefined' && !badSids.includes(sid) && !badPids.includes(pid) && ADS !== 'no') {
             // Check if script already exists to avoid duplicates
             const existingScript = document.querySelector('script[src*="pagead2.googlesyndication.com"]');
             

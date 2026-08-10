@@ -59,7 +59,8 @@ const App = ({ uri }) => {
 		TTCLID: myURL.searchParams.get('ttclid') || '',
 		FBID: myURL.searchParams.get('fbid') || null,
 		FBCLICKID: myURL.searchParams.get('fbclickid') || null,
-		DISPLAY: myURL.searchParams.get('display') || 'rsoc'
+		DISPLAY: myURL.searchParams.get('display') || 'rsoc',
+		ADS: myURL.searchParams.get('ads') || getCookie('ads') || ''
     };
 
 	useAdSense(tracking);
