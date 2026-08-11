@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Radium from 'radium';
 import Styles from './LoanLanding.css';
 import MockFormBody from './MockFormBody';
 import { COLORS } from '../theme';
 import useLoanTrack from '../useLoanTrack';
+import { AppContext } from '../../../../context';
 
 const SCRIPT_ID = 'mbjs-lender-form-loader';
 const STYLE_ID = 'mbjs-lender-form-overrides';
@@ -47,6 +48,12 @@ const LenderFormEmbed = ({ mockOnly = false }) => {
     const [formReady, setFormReady] = useState(false);
     const [failed, setFailed] = useState(false);
 
+    // Session ids for the URL enrichment below. hsid is guaranteed committed
+    // before /loans can render (App's loading gate clears only after
+    // USER_ARRIVED, which requires a truthy hsid) and is write-once.
+    const { trackingState } = useContext(AppContext);
+    const { hsid, sid, eid } = trackingState;
+
     // Latest-ref pattern: the embed effect must not re-run when track's
     // identity changes (that would re-inject the vendor script), but events
     // should always carry the current sid/pid/eid/page.
@@ -57,6 +64,19 @@ const LenderFormEmbed = ({ mockOnly = false }) => {
     useEffect(() => {
         if (mockOnly) return undefined;
         const container = containerRef.current;
+
+        // The vendor form reads sub-ids from the page URL. Only when the
+        // visitor arrived WITHOUT ?hsid (user decision — hsid-carrying URLs
+        // are left completely untouched): enrich the URL with the session's
+        // hitstreet click id + source ids before the script executes,
+        // preserving all existing params and the hash.
+        const search = new URLSearchParams(window.location.search);
+        if (!search.get('hsid') && hsid) {
+            search.set('cid1', hsid);
+            search.set('sub1', sid);
+            search.set('sub2', eid);
+            window.history.replaceState(null, '', `${window.location.pathname}?${search}${window.location.hash}`);
+        }
 
         // Vendor DOM readers. Selectors verified against the live wizard;
         // every read degrades to '' if the vendor markup drifts. Labels and

@@ -1,10 +1,10 @@
 import React from 'react';
-import { P, Ul, Li, A, Callout } from '../components/Copy';
+import { P, Ul, Li, A } from '../components/Copy';
 
 // Verbatim port of reference/california-privacy(1).html — do not edit copy.
+// (The reference's red draft callout was removed by user decision.)
 const californiaPrivacy = {
     effectiveDate: 'August 4, 2026',
-    intro: <Callout><Callout.Strong>A functional “Do Not Sell or Share My Personal Information” mechanism—not only a policy page—may be required depending on BlueKeel’s thresholds and data practices.</Callout.Strong></Callout>,
     sections: [
         {
             id: 's1',

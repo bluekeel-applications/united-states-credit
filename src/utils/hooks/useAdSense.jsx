@@ -14,7 +14,15 @@ const useAdSense = (tracking) => {
     ];
 
 	useEffect(() => {
-        if(!!sid && sid !== 'undefined' && !badSids.includes(sid) && !badPids.includes(pid) && ADS !== 'no') {
+        // /loans is opt-in: ads only load there when ads=yes (URL param or
+        // its 3-day cookie), default off. Everywhere else stays opt-out
+        // (ads=no suppresses). Decided once per document load — /loans
+        // internal links stay in-tree and its footer links open new tabs,
+        // so there is no cross-navigation leakage.
+        const onLoansPage = window.location.pathname === '/loans'
+            || window.location.pathname.startsWith('/loans/');
+        const adsAllowed = onLoansPage ? ADS === 'yes' : ADS !== 'no';
+        if(!!sid && sid !== 'undefined' && !badSids.includes(sid) && !badPids.includes(pid) && adsAllowed) {
             // Check if script already exists to avoid duplicates
             const existingScript = document.querySelector('script[src*="pagead2.googlesyndication.com"]');
             

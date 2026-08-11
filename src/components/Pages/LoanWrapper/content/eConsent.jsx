@@ -1,10 +1,10 @@
 import React from 'react';
-import { P, A, Callout } from '../components/Copy';
+import { P, A } from '../components/Copy';
 
 // Verbatim port of reference/e-consent.html — do not edit copy.
+// (The reference's red draft callout was removed by user decision.)
 const eConsent = {
     effectiveDate: 'August 4, 2026',
-    intro: <Callout><Callout.Strong>Do not publish this page as a substitute for the exact E-SIGN consent embedded by the lender or platform. The live transaction consent should be approved by the party delivering the records.</Callout.Strong></Callout>,
     sections: [
         {
             id: 's1',

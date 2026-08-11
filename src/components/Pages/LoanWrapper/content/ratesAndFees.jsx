@@ -1,10 +1,10 @@
 import React from 'react';
-import { P, Ul, Li, Callout } from '../components/Copy';
+import { P, Ul, Li } from '../components/Copy';
 
 // Verbatim port of reference/rates-and-fees(1).html — do not edit copy.
+// (The reference's red draft callout was removed by user decision.)
 const ratesAndFees = {
     effectiveDate: 'August 4, 2026',
-    intro: <Callout><Callout.Strong>The final page should include the lender network’s approved APR range and representative example if your partner contract or applicable advertising rules require them.</Callout.Strong></Callout>,
     sections: [
         {
             id: 's1',
