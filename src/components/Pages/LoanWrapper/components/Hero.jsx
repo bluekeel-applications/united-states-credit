@@ -2,11 +2,15 @@ import React from 'react';
 import Radium from 'radium';
 import Styles from './LoanLanding.css';
 import LenderFormEmbed from './LenderFormEmbed';
+import BkFormEmbed from './BkFormEmbed';
 
 // Hero: copy column + the lender form card. The {' '} between the h1 spans
 // replaces .headline-lead:after{content:" "} — rendered when the spans are
 // inline (>=760px), trimmed when they stack as blocks on mobile.
-const Hero = ({ mockOnly }) => (
+// `formVariant` picks the card's form: 'bk' is Bluekeel's own form (opt-in via
+// ?form=bk on allowed hosts, see ../bkform.config.js), anything else the
+// third-party embed.
+const Hero = ({ mockOnly, formVariant = 'mbjs' }) => (
     <section className='hero' style={Styles.hero}>
         <div className='container hero-grid' style={Styles.heroGrid}>
             <div className='hero-copy' style={Styles.heroCopy}>
@@ -20,7 +24,9 @@ const Hero = ({ mockOnly }) => (
                     <li className='desktop-benefit' style={Styles.benefitsLiDesktop}><span className='check' style={Styles.check}>✓</span>Fast responses from participating providers</li>
                 </ul>
             </div>
-            <LenderFormEmbed mockOnly={mockOnly} />
+            {formVariant === 'bk'
+                ? <BkFormEmbed mockOnly={mockOnly} />
+                : <LenderFormEmbed mockOnly={mockOnly} />}
         </div>
     </section>
 );

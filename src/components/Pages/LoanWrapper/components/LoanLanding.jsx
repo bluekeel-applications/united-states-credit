@@ -12,19 +12,24 @@ import Notice from './Notice';
 import Faq from './Faq';
 import LegalCenterCta from './LegalCenterCta';
 import { HOME_META } from '../loanPages';
+import { bkFormEnabled } from '../bkform.config';
 
 // Landing page (reference home.html). ?mockform=1 forces the static form
 // visualization instead of the vendor embed (used by snapshot verification).
-// LegalCenterCta and the footer sit outside <main>, matching the reference.
+// ?form=bk swaps the third-party form for Bluekeel's own (allowed hosts only —
+// see ../bkform.config.js). LegalCenterCta and the footer sit outside <main>,
+// matching the reference.
 const LoanLanding = () => {
     useDocumentMeta(HOME_META.documentTitle, HOME_META.metaDescription);
-    const mockOnly = new URLSearchParams(useLocation().search).get('mockform') === '1';
+    const { search } = useLocation();
+    const mockOnly = new URLSearchParams(search).get('mockform') === '1';
+    const formVariant = bkFormEnabled(search, window.location.hostname) ? 'bk' : 'mbjs';
 
     return (
         <div className='lw-page' style={pageRoot}>
             <SiteHeader variant='home' />
             <main id='main'>
-                <Hero mockOnly={mockOnly} />
+                <Hero mockOnly={mockOnly} formVariant={formVariant} />
                 <TrustStrip />
                 <HowItWorks />
                 <Notice />

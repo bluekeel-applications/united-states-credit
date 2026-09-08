@@ -117,6 +117,16 @@ const Styles = {
         boxShadow: SHADOW,
         overflow: 'hidden',
     },
+    // Same card, but overflow:clip — clips the rounded corners without making
+    // the card a scroll container, so bkform's sticky Continue bar (mobile)
+    // sticks to the viewport rather than to the card.
+    formShellClip: {
+        background: '#fff',
+        border: '1px solid #d6e1e9',
+        borderRadius: 20,
+        boxShadow: SHADOW,
+        overflow: 'clip',
+    },
     brandRule: {
         height: 5,
         background: `linear-gradient(90deg,${COLORS.blue} 0 58%,#fff 58% 65%,${COLORS.red} 65%)`,
@@ -256,6 +266,17 @@ const Styles = {
         padding: 18,
         minHeight: 470,
         [DESKTOP]: { padding: 24 },
+    },
+    // bkform (?form=bk) draws its own card padding, so the container only adds
+    // a small gutter; its own border/shadow are switched off via CSS tokens.
+    bkFormLive: {
+        padding: '6px 8px 10px',
+        [DESKTOP]: { padding: '10px 12px 14px' },
+    },
+    bkFormLoading: {
+        padding: '6px 8px 10px',
+        minHeight: 470,
+        [DESKTOP]: { padding: '10px 12px 14px' },
     },
 
     // ---- trust strip ----

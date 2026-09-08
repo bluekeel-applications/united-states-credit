@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import Radium from 'radium';
 import Styles from './LoanLanding.css';
+import FormShell from './FormShell';
 import MockFormBody from './MockFormBody';
+import { enrichUrlWithSession } from './sessionParams';
 import { COLORS } from '../theme';
 import useLoanTrack from '../useLoanTrack';
 import { AppContext } from '../../../../context';
@@ -38,11 +40,16 @@ const VENDOR_OVERRIDE_CSS = `
 }
 `;
 
+// Every funnel event says which form produced it, so GA4 can compare this
+// embed with BkFormEmbed (?form=bk) like for like.
+const VENDOR = { form_vendor: 'mbjs' };
+
 // The hero form card. In production the mbjsform vendor form renders into
 // #r-form; while it loads the card shows only its chrome (no mock flash),
 // with the form area's height reserved so content below doesn't jump. The
 // reference's static mock renders only with ?mockform=1 (snapshot
 // verification) or as a fallback when the vendor script fails to load.
+// Bluekeel's own form takes this card's place with ?form=bk — see BkFormEmbed.
 const LenderFormEmbed = ({ mockOnly = false }) => {
     const containerRef = useRef(null);
     const [formReady, setFormReady] = useState(false);
@@ -65,18 +72,9 @@ const LenderFormEmbed = ({ mockOnly = false }) => {
         if (mockOnly) return undefined;
         const container = containerRef.current;
 
-        // The vendor form reads sub-ids from the page URL. Only when the
-        // visitor arrived WITHOUT ?hsid (user decision — hsid-carrying URLs
-        // are left completely untouched): enrich the URL with the session's
-        // hitstreet click id + source ids before the script executes,
-        // preserving all existing params and the hash.
-        const search = new URLSearchParams(window.location.search);
-        if (!search.get('hsid') && hsid) {
-            search.set('cid1', hsid);
-            search.set('sub1', sid);
-            search.set('sub2', eid);
-            window.history.replaceState(null, '', `${window.location.pathname}?${search}${window.location.hash}`);
-        }
+        // The vendor form reads sub-ids from the page URL; write them before
+        // the script executes (see sessionParams.js for the hsid rule).
+        enrichUrlWithSession({ hsid, sid, eid });
 
         // Vendor DOM readers. Selectors verified against the live wizard;
         // every read degrades to '' if the vendor markup drifts. Labels and
@@ -101,7 +99,7 @@ const LenderFormEmbed = ({ mockOnly = false }) => {
             const key = `${progress}|${stepTitle}`;
             if (key === lastStepKey) return;
             lastStepKey = key;
-            trackRef.current('lender_form_step_viewed', { progress, step_title: stepTitle });
+            trackRef.current('lender_form_step_viewed', { ...VENDOR, progress, step_title: stepTitle });
         };
 
         // Persistent observer: flips formReady once, then tracks wizard step
@@ -112,7 +110,7 @@ const LenderFormEmbed = ({ mockOnly = false }) => {
             if (!ready && container.childElementCount > 0) {
                 ready = true;
                 setFormReady(true);
-                trackRef.current('lender_form_loaded', {});
+                trackRef.current('lender_form_loaded', { ...VENDOR });
             }
             if (ready && frame === null) frame = window.requestAnimationFrame(readStep);
         });
@@ -130,7 +128,7 @@ const LenderFormEmbed = ({ mockOnly = false }) => {
                 label = button.getAttribute('aria-label')?.trim()
                     || (/back/i.test(button.className) ? 'back' : 'unlabeled');
             }
-            trackRef.current('lender_form_button_clicked', { label, progress: readProgress() });
+            trackRef.current('lender_form_button_clicked', { ...VENDOR, label, progress: readProgress() });
         };
         container.addEventListener('click', onClickCapture, true);
 
@@ -150,7 +148,7 @@ const LenderFormEmbed = ({ mockOnly = false }) => {
         script.defer = true;
         script.onerror = () => {
             setFailed(true);
-            trackRef.current('lender_form_failed', {});
+            trackRef.current('lender_form_failed', { ...VENDOR });
         };
         script.src = VENDOR_SRC;
         document.body.appendChild(script);
@@ -162,27 +160,20 @@ const LenderFormEmbed = ({ mockOnly = false }) => {
             script.remove();
             style.remove();
         };
+        // hsid/sid/eid are read once, at injection time, on purpose: re-running
+        // this effect would re-inject the vendor script and restart the applicant.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mockOnly]);
 
     const showMock = mockOnly || failed;
 
     return (
-        <section
-            className='form-shell'
-            style={Styles.formShell}
-            aria-label={showMock ? 'Static form visualization' : 'Loan request form'}
-        >
-            <div className='brand-rule' style={Styles.brandRule} />
-            <div className='form-head' style={Styles.formHead}>
-                <h2 style={Styles.formHeadH2}>See your available options</h2>
-                {showMock && <p style={Styles.formHeadP}>Static preview of the lender-controlled form area</p>}
-            </div>
-            {!mockOnly && !failed && (
+        <FormShell showMock={showMock}>
+            {!showMock && (
                 <div id='r-form' ref={containerRef} style={formReady ? Styles.rFormLive : Styles.rFormLoading} />
             )}
             {showMock && <MockFormBody />}
-            {showMock && <div className='form-note' style={Styles.formNote}>Visualization only — no external script or data collection is active on this preview.</div>}
-        </section>
+        </FormShell>
     );
 };
 
