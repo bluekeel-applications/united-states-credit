@@ -7,7 +7,7 @@ import { enrichUrlWithSession } from './sessionParams';
 import { COLORS, FONT_STACK } from '../theme';
 import useLoanTrack from '../useLoanTrack';
 import { AppContext } from '../../../../context';
-import { BKFORM_API_BASE, BKFORM_CONTAINER_ID, BKFORM_SITE_KEY, BKFORM_SRC } from '../bkform.config';
+import { BKFORM_API_BASE, BKFORM_CONSOLE_BASE, BKFORM_CONTAINER_ID, BKFORM_SITE_KEY, BKFORM_SRC } from '../bkform.config';
 
 const SCRIPT_ID = 'bkform-loader';
 
@@ -50,7 +50,10 @@ const BkFormEmbed = ({ mockOnly = false }) => {
     useEffect(() => {
         if (mockOnly) return undefined;
         const container = containerRef.current;
-        const emit = (name, params = {}) => trackRef.current(name, { form_vendor: 'bk', ...params });
+        // bkform's single-lender test mode (?test=<lender>) is read from the same
+        // URL; tag those sessions so they can be excluded from funnel analytics.
+        const testLender = new URLSearchParams(window.location.search).get('test') || null;
+        const emit = (name, params = {}) => trackRef.current(name, { form_vendor: 'bk', ...(testLender ? { test_lender: testLender } : {}), ...params });
 
         // bkform reads cid1/sub1/sub2 from the URL when it mounts — before the
         // script tag goes in.
@@ -138,6 +141,7 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             'data-container-id': BKFORM_CONTAINER_ID,
             'data-posting': 'live',
             'data-api-base': BKFORM_API_BASE,
+            'data-console-base': BKFORM_CONSOLE_BASE,
             'data-primary-color': COLORS.blue,
             'data-secondary-color': COLORS.navy2,
             'data-mode': 'rounded',
