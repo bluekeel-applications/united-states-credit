@@ -1,30 +1,41 @@
 // Where Bluekeel's own form (bkform, ../../APIS/bluekeel-tools/bkform) loads
-// from and posts to, and where the `?form=bk` switch on /loans is honoured.
+// from and posts to, decided per host. /loans always renders bkform; there is
+// no longer a third-party form or a URL switch.
 //
-// TEST CONFIGURATION (2026-09-08). Everything here points at the routing
-// engine's dev stage, which is the certification environment: every buyer is
-// called on its test endpoint (Round Sky forces the outcome by first name —
-// `approved` / `declined` / `pricereject`). Because of that the switch is
-// host-gated: on any host not listed below `?form=bk` is ignored and the page
-// shows the usual third-party form, so a prod visitor can never post a
-// certification lead. Going live means changing all four constants together:
-//   - BKFORM_SRC        → the prod CDN URL (bkform's deploy-prod runbook)
-//   - BKFORM_API_BASE   → the prod routing-engine API
-//   - BKFORM_CONSOLE_BASE → the prod console
-//   - BKFORM_HOSTS      → add www.unitedstatescredit.com / unitedstatescredit.com
-//   - the site key stays: it is registered per stage in the engine's config
-//     (`yarn bootstrap-config --site unitedstatescredit.com --origin …`) and is
-//     what the Bluekeel console shows as the lead's source.
-export const BKFORM_SRC = 'https://bkform-dev.s3.amazonaws.com/v1/form.js';
-export const BKFORM_API_BASE = process.env.REACT_APP_BKFORM_API_BASE
-    || 'https://lq97621kpg.execute-api.us-east-1.amazonaws.com/dev';
-export const BKFORM_SITE_KEY = 'unitedstatescredit.com';
-// The Bluekeel console for this engine — bkform's single-lender test mode
-// (?form=bk&test=<lender>) prints a link to the lead there.
-export const BKFORM_CONSOLE_BASE = 'https://d17du2okjziban.cloudfront.net';
-export const BKFORM_CONTAINER_ID = 'bk-form';
-export const BKFORM_HOSTS = ['staging.unitedstatescredit.com', 'localhost', '127.0.0.1'];
+// Two target sets. The routing engine's dev stage is the certification
+// environment (every buyer is called on its test endpoint), so a real visitor
+// must never reach it: only the hosts listed in DEV_HOSTS get the dev targets,
+// and every other host — www, the apex, and the white-label buckets that ship
+// this same build — gets production. Unknown host → production is the
+// fail-safe direction.
+//
+// The site key is the same on both stages; it is registered per stage in the
+// engine (`yarn bootstrap-config --stage <stage> --site unitedstatescredit.com
+// --origin …`) and is what the Bluekeel console shows as the lead's source.
+const DEV_HOSTS = ['staging.unitedstatescredit.com', 'localhost', '127.0.0.1'];
 
-// `?form=bk` on an allowed host. Anything else → the third-party form.
-export const bkFormEnabled = (search, hostname) =>
-    new URLSearchParams(search).get('form') === 'bk' && BKFORM_HOSTS.includes(hostname);
+const DEV = {
+    dev: true,
+    src: 'https://bkform-dev.s3.amazonaws.com/v1/form.js',
+    apiBase: 'https://lq97621kpg.execute-api.us-east-1.amazonaws.com/dev',
+    consoleBase: 'https://d17du2okjziban.cloudfront.net',
+};
+
+const PROD = {
+    dev: false,
+    src: 'https://form-sdk.unitedstatescredit.com/v1/form.js',
+    apiBase: 'https://16s3asw7j0.execute-api.us-east-1.amazonaws.com/prod',
+    consoleBase: 'https://d1bg0h8m65e3si.cloudfront.net',
+};
+
+export const BKFORM_SITE_KEY = 'unitedstatescredit.com';
+export const BKFORM_CONTAINER_ID = 'bk-form';
+
+// The SDK URL, lead API and Bluekeel console for the host the page is served
+// from. REACT_APP_BKFORM_API_BASE overrides the API for local development
+// (e.g. an engine running on `sls offline`).
+export const bkformTargets = (hostname) => {
+    const targets = DEV_HOSTS.includes(hostname) ? DEV : PROD;
+    const apiBase = process.env.REACT_APP_BKFORM_API_BASE || targets.apiBase;
+    return { ...targets, apiBase };
+};

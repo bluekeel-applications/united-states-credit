@@ -3,33 +3,36 @@ import Radium from 'radium';
 import Styles from './LoanLanding.css';
 import FormShell from './FormShell';
 import MockFormBody from './MockFormBody';
-import { enrichUrlWithSession } from './sessionParams';
+import { enrichUrlWithSession, stripTestParam } from './sessionParams';
 import { COLORS, FONT_STACK } from '../theme';
 import useLoanTrack from '../useLoanTrack';
 import { AppContext } from '../../../../context';
-import { BKFORM_API_BASE, BKFORM_CONSOLE_BASE, BKFORM_CONTAINER_ID, BKFORM_SITE_KEY, BKFORM_SRC } from '../bkform.config';
+import { BKFORM_CONTAINER_ID, BKFORM_SITE_KEY, bkformTargets } from '../bkform.config';
 
 const SCRIPT_ID = 'bkform-loader';
 
 // bkform:error codes that mean the form will not render at all — fall back to
-// the static mock. Everything else (a ZIP city lookup failing, a duplicate tag
-// from a fast back/forward) is cosmetic and only worth an analytics event.
+// the static mock. A failed ZIP city lookup is cosmetic (the field stays
+// editable) but is the one symptom of the SDK host losing its CORS headers, so
+// it is reported as a warning rather than dropped. A duplicate tag from a fast
+// back/forward and a failed IP fetch are noise.
 const FATAL_CODES = new Set(['missing-key', 'invalid-config', 'container-timeout']);
-const IGNORED_CODES = new Set(['duplicate-mount', 'zip-lookup-failed', 'ip-fetch-failed']);
+const WARNING_CODES = new Set(['zip-lookup-failed']);
+const IGNORED_CODES = new Set(['duplicate-mount', 'ip-fetch-failed']);
 
 const pct = (p) => `${Math.round((Number(p) || 0) * 100)}%`;
 
-// The hero form card with Bluekeel's own form (bkform) in it — rendered when
-// the page URL carries ?form=bk on an allowed host (see ../bkform.config.js).
+// The hero form card with Bluekeel's own form (bkform) in it. Which SDK build,
+// lead API and console it talks to is decided per host in ../bkform.config.js.
 //
-// Same shape as LenderFormEmbed, but the funnel analytics come from bkform's
-// documented `bkform:*` CustomEvents (they bubble out of its shadow root with
-// composed:true), not from watching the vendor's DOM. Event names match the
-// third-party embed's so the GA4 funnel reads the same, plus `form_vendor`
-// so the two can be compared; bkform's two-phase waterfall adds phase/result
-// events the vendor never exposed. Payloads are structurally PII-free — bkform
-// allow-lists its detail keys — and button labels are read from `.bkf-button`
-// only, never from the segmented answer buttons.
+// The funnel analytics come from bkform's documented `bkform:*` CustomEvents
+// (they bubble out of its shadow root with composed:true). Event names are the
+// ones the third-party embed used to emit, so the GA4 funnel reads continuously
+// across the switch, plus `form_vendor` so the eras can be told apart; bkform's
+// two-phase waterfall adds phase/result events the vendor never exposed.
+// Payloads are structurally PII-free — bkform allow-lists its detail keys — and
+// button labels are read from `.bkf-button` only, never from the segmented
+// answer buttons.
 const BkFormEmbed = ({ mockOnly = false }) => {
     const containerRef = useRef(null);
     const [formReady, setFormReady] = useState(false);
@@ -50,9 +53,14 @@ const BkFormEmbed = ({ mockOnly = false }) => {
     useEffect(() => {
         if (mockOnly) return undefined;
         const container = containerRef.current;
+        const targets = bkformTargets(window.location.hostname);
         // bkform's single-lender test mode (?test=<lender>) is read from the same
-        // URL; tag those sessions so they can be excluded from funnel analytics.
-        const testLender = new URLSearchParams(window.location.search).get('test') || null;
+        // URL. It only exists against the certification engine: a selling stage
+        // refuses it (403) and the applicant would see a dead form, so on a
+        // production host the parameter is dropped before bkform reads the URL.
+        // On dev hosts those sessions are tagged so analytics can exclude them.
+        if (!targets.dev) stripTestParam();
+        const testLender = targets.dev ? (new URLSearchParams(window.location.search).get('test') || null) : null;
         const emit = (name, params = {}) => trackRef.current(name, { form_vendor: 'bk', ...(testLender ? { test_lender: testLender } : {}), ...params });
 
         // bkform reads cid1/sub1/sub2 from the URL when it mounts — before the
@@ -114,6 +122,7 @@ const BkFormEmbed = ({ mockOnly = false }) => {
         const onError = (e) => {
             const code = (e.detail && e.detail.code) || 'unknown';
             if (IGNORED_CODES.has(code)) return;
+            if (WARNING_CODES.has(code)) { emit('lender_form_warning', { code }); return; }
             emit('lender_form_failed', { code });
             if (FATAL_CODES.has(code)) setFailed(true);
         };
@@ -140,8 +149,8 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             'data-k': BKFORM_SITE_KEY,
             'data-container-id': BKFORM_CONTAINER_ID,
             'data-posting': 'live',
-            'data-api-base': BKFORM_API_BASE,
-            'data-console-base': BKFORM_CONSOLE_BASE,
+            'data-api-base': targets.apiBase,
+            'data-console-base': targets.consoleBase,
             'data-primary-color': COLORS.blue,
             'data-secondary-color': COLORS.navy2,
             'data-mode': 'rounded',
@@ -151,7 +160,7 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             setFailed(true);
             emit('lender_form_failed', { code: 'script-load' });
         };
-        script.src = BKFORM_SRC;
+        script.src = targets.src;
         document.body.appendChild(script);
 
         return () => {
@@ -170,7 +179,7 @@ const BkFormEmbed = ({ mockOnly = false }) => {
     const showMock = mockOnly || failed;
 
     return (
-        <FormShell showMock={showMock} clip>
+        <FormShell showMock={showMock}>
             {!showMock && (
                 <div id={BKFORM_CONTAINER_ID} ref={containerRef} style={formReady ? Styles.bkFormLive : Styles.bkFormLoading} />
             )}

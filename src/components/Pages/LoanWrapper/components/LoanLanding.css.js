@@ -110,17 +110,10 @@ const Styles = {
     },
 
     // ---- form shell ----
+    // overflow:clip — clips the rounded corners without making the card a
+    // scroll container, so bkform's sticky Continue bar (mobile) sticks to the
+    // viewport rather than to the card.
     formShell: {
-        background: '#fff',
-        border: '1px solid #d6e1e9',
-        borderRadius: 20,
-        boxShadow: SHADOW,
-        overflow: 'hidden',
-    },
-    // Same card, but overflow:clip — clips the rounded corners without making
-    // the card a scroll container, so bkform's sticky Continue bar (mobile)
-    // sticks to the viewport rather than to the card.
-    formShellClip: {
         background: '#fff',
         border: '1px solid #d6e1e9',
         borderRadius: 20,
@@ -254,21 +247,8 @@ const Styles = {
         color: COLORS.muted,
         textAlign: 'center',
     },
-    // vendor embed container gets the mock-form's padding so the live form
-    // sits inside the card like the mock did
-    rFormLive: {
-        padding: 18,
-        [DESKTOP]: { padding: 24 },
-    },
-    // while the vendor script loads: blank, with the live form's approximate
-    // height reserved so content below the hero doesn't jump on arrival
-    rFormLoading: {
-        padding: 18,
-        minHeight: 470,
-        [DESKTOP]: { padding: 24 },
-    },
-    // bkform (?form=bk) draws its own card padding, so the container only adds
-    // a small gutter; its own border/shadow are switched off via CSS tokens.
+    // bkform draws its own card padding, so the container only adds a small
+    // gutter; its own border/shadow are switched off via CSS tokens.
     bkFormLive: {
         padding: '6px 8px 10px',
         [DESKTOP]: { padding: '10px 12px 14px' },
