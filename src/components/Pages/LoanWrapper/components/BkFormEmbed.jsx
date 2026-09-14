@@ -113,6 +113,12 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             'bkform:redirect': (e) => {
                 emit('lender_form_redirect', { market: (e.detail || {}).market, transport_type: 'beacon' });
             },
+            // No lender took the lead: the form is sending the applicant to one
+            // of Bluekeel's decline offers (BKFORM.md § Decline offers). The
+            // offer id is the console's own label id — no applicant data.
+            'bkform:decline': (e) => {
+                emit('lender_form_decline', { offer_id: (e.detail || {}).offerId || null, transport_type: 'beacon' });
+            },
         };
         Object.entries(onEvent).forEach(([name, fn]) => container.addEventListener(name, fn));
 
