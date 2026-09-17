@@ -9,6 +9,12 @@
 // this same build — gets production. Unknown host → production is the
 // fail-safe direction.
 //
+// `firstOfferCheck` is bkform's data-first-offer-check: 'on' posts the short
+// form to the first-look buyer (Search ROI) before the remaining questions,
+// 'off' runs one continuous form. On for staging since 2026-09-17, when Search
+// ROI's account values arrived and certification began; off on production
+// until they approve the account for live leads.
+//
 // The site key is the same on both stages; it is registered per stage in the
 // engine (`yarn bootstrap-config --stage <stage> --site unitedstatescredit.com
 // --origin …`) and is what the Bluekeel console shows as the lead's source.
@@ -19,6 +25,7 @@ const DEV = {
     src: 'https://bkform-dev.s3.amazonaws.com/v1/form.js',
     apiBase: 'https://lq97621kpg.execute-api.us-east-1.amazonaws.com/dev',
     consoleBase: 'https://d17du2okjziban.cloudfront.net',
+    firstOfferCheck: 'on',
 };
 
 const PROD = {
@@ -26,6 +33,7 @@ const PROD = {
     src: 'https://form-sdk.unitedstatescredit.com/v1/form.js',
     apiBase: 'https://16s3asw7j0.execute-api.us-east-1.amazonaws.com/prod',
     consoleBase: 'https://d1bg0h8m65e3si.cloudfront.net',
+    firstOfferCheck: 'off',
 };
 
 export const BKFORM_SITE_KEY = 'unitedstatescredit.com';

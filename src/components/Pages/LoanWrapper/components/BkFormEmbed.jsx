@@ -157,6 +157,7 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             'data-posting': 'live',
             'data-api-base': targets.apiBase,
             'data-console-base': targets.consoleBase,
+            'data-first-offer-check': targets.firstOfferCheck,
             'data-primary-color': COLORS.blue,
             'data-secondary-color': COLORS.navy2,
             'data-mode': 'rounded',
