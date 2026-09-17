@@ -47,6 +47,9 @@ jobs:
         env:
           # CRA treats lint warnings as errors when CI=true; match local builds
           CI: false
+          # build/ is synced to a public-read bucket: source maps would publish
+          # the original source, comments included
+          GENERATE_SOURCEMAP: false
 
       # yarn also runs postdeploy-prod (CloudFront invalidation) after this
       - name: Deploy

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { isPrivacySuppressed } from '../privacy';
 
 const useAdSense = (tracking) => {
 
@@ -22,7 +23,9 @@ const useAdSense = (tracking) => {
         const onLoansPage = window.location.pathname === '/loans'
             || window.location.pathname.startsWith('/loans/');
         const adsAllowed = onLoansPage ? ADS === 'yes' : ADS !== 'no';
-        if(!!sid && sid !== 'undefined' && !badSids.includes(sid) && !badPids.includes(pid) && adsAllowed) {
+        // A browser that opted out of sale / sharing gets no ad tag on /loans,
+        // ads=yes or not (src/utils/privacy.js).
+        if(!!sid && sid !== 'undefined' && !badSids.includes(sid) && !badPids.includes(pid) && adsAllowed && !isPrivacySuppressed()) {
             // Check if script already exists to avoid duplicates
             const existingScript = document.querySelector('script[src*="pagead2.googlesyndication.com"]');
             

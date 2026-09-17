@@ -30,7 +30,8 @@ export const CopyLink = ({ to, children, ...props }) => {
             to={to}
             onClick={() => track('copy_link_clicked', {
                 label: typeof children === 'string' ? children : undefined,
-                to_slug: slugFromPathname(to),
+                // `to` may carry a #section; the slug is the page alone
+                to_slug: slugFromPathname(to.split('#')[0]),
             })}
             {...props}
         >

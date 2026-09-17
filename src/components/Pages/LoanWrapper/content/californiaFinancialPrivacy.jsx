@@ -1,13 +1,15 @@
 import React from 'react';
-import { P, Ul, Li, A, CopyLink, Warning, ContactBlock } from '../components/Copy';
-import { pathFor, LEGAL_EFFECTIVE_DATE } from '../loanPages';
+import { P, A, CopyLink, Callout, ContactBlock } from '../components/Copy';
+import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED } from '../loanPages';
 
 // Verbatim port of reference/usc-legal-center-deploy/california-financial-privacy.html — do not edit copy.
+// Revised by reference/USC_Legal_Center_Final_Updates_Claude.md (revision 2.0) — the spec's PUBLIC COPY is verbatim too.
 // This page is a notice. The California consent acknowledgment itself is a
 // separate point-of-collection document and must not be folded into it.
 const californiaFinancialPrivacy = {
     effectiveDate: LEGAL_EFFECTIVE_DATE,
-    intro: <Warning><Warning.Strong>This page is a notice, not the separate California authorization.</Warning.Strong> If California law requires your explicit prior consent for a particular disclosure of nonpublic personal information, the consent acknowledgment will be presented separately at the point of collection or before that disclosure and will include the required signature/date and revocation information.</Warning>,
+    lastUpdated: LEGAL_LAST_UPDATED,
+    intro: <Callout><Callout.Strong>This page explains California financial privacy; it is not a consent form.</Callout.Strong> This supplemental notice does not replace any Important Privacy Choices for Consumers notice or separate consent acknowledgment that applicable California law requires us to provide directly to you. Where your affirmative authorization is required, we will obtain it before making the covered disclosure. Reading this page, submitting a loan request, or accepting general website terms does not by itself provide that separate authorization.</Callout>,
     sections: [
         {
             id: 's1',
@@ -30,7 +32,7 @@ const californiaFinancialPrivacy = {
             body: (
                 <>
                     <P>For marketing activities, UnitedStatesCredit limits the first-party record supplied to contracted list-management or marketing companies to information such as name, mailing address, email address, mobile or telephone number, source information, and consent or suppression information reasonably necessary for the authorized activity.</P>
-                    <P>Social Security numbers, bank-account numbers, routing numbers, and similar sensitive lender-application information are not included in the marketing dataset.</P>
+                    <P>Our marketing and list-management records do not include Social Security numbers, bank-account or routing numbers, driver's-license numbers, consumer-report information, or other sensitive lender-application identifiers. We do not provide those fields to list managers, advertisers, email marketers, or SMS marketers for marketing purposes.</P>
                 </>
             ),
         },
@@ -39,8 +41,9 @@ const californiaFinancialPrivacy = {
             heading: '4. Contracted List Managers and Revenue Sharing',
             body: (
                 <>
-                    <P>UnitedStatesCredit may contract with list-management companies that store and actively manage UnitedStatesCredit's first-party records, deploy marketing campaigns and third-party offers, and compensate UnitedStatesCredit under contractual revenue-sharing arrangements after agreed campaign or mailing costs.</P>
-                    <P>Our agreements are intended to provide that the underlying UnitedStatesCredit records remain UnitedStatesCredit's records and are not available for unrestricted sale or independent use by the list manager.</P>
+                    <P>We may provide limited first-party contact records to contracted list-management and marketing companies. These companies may store the records in their own systems, actively manage the UnitedStatesCredit audience, select and deploy offers from multiple advertisers, administer authorized email or SMS campaigns, and measure campaign performance. Under our revenue-sharing arrangements, a manager may deduct agreed mailing or campaign expenses and pay UnitedStatesCredit a contractual share of the resulting revenue.</P>
+                    <P>Under our list-management agreements, UnitedStatesCredit retains ownership or control of its underlying first-party marketing records. Our list managers are prohibited from selling, transferring, or independently using those records outside the services authorized by their agreements with UnitedStatesCredit and applicable law. A permitted subcontractor may process records only under applicable contractual restrictions. These arrangements do not limit consumers' privacy rights.</P>
+                    <P>We provide records for these activities only where permitted by law and after obtaining any required authorization and honoring applicable privacy choices. Disclosing our marketing practices in this notice does not itself supply a consent that must be obtained separately.</P>
                 </>
             ),
         },
@@ -49,16 +52,9 @@ const californiaFinancialPrivacy = {
             heading: '5. Separate Authorization Where Required',
             body: (
                 <>
-                    <P>California law generally restricts disclosure of covered nonpublic personal information to nonaffiliated third parties unless an exception applies or the consumer has provided the legally required consent.</P>
-                    <P>Where UnitedStatesCredit determines that explicit prior consent is required for a disclosure, the California consumer will receive a separate consent acknowledgment designed to:</P>
-                    <Ul>
-                        <Li>be separate from other documents or consents;</Li>
-                        <Li>identify that the consumer is consenting to disclosure of nonpublic personal information to nonaffiliated third parties;</Li>
-                        <Li>be dated and signed or electronically signed in a legally recognized manner;</Li>
-                        <Li>state that the consent remains effective until revoked or modified;</Li>
-                        <Li>explain how the consumer may revoke or modify the authorization; and</Li>
-                        <Li>inform the consumer that a copy is available upon request and should be retained for the consumer's records.</Li>
-                    </Ul>
+                    <P>Where California financial-privacy law requires your consent before we disclose nonpublic personal information to a nonaffiliated third party, we will obtain a separate authorization before the disclosure. The authorization will identify the information and purpose of the disclosure and explain how to revoke or modify your permission.</P>
+                    <P>When the consent acknowledgment required by California Financial Code Section 4053(a) applies, it will be a separate document, dated and signed by you, including by a legally valid electronic signature where permitted. It will clearly explain that you are authorizing disclosure to nonaffiliated third parties, that your consent remains effective until revoked or modified, and how you may revoke it at any time. We will maintain the acknowledgment or a true and correct copy, provide a copy on request, and advise you to keep a copy for your records.</P>
+                    <P>Where California law requires a separate Important Privacy Choices for Consumers notice concerning applicable affiliate or joint-marketing disclosures, we will provide that notice and the required opportunity to exercise the relevant choices. This page does not replace that notice.</P>
                 </>
             ),
         },
@@ -70,12 +66,17 @@ const californiaFinancialPrivacy = {
         {
             id: 's7',
             heading: '7. Revoking a California Financial Privacy Authorization',
-            body: <P>If you have provided a California financial-privacy authorization, you may revoke or modify it for future disclosures using the method specified in that authorization. You may also contact <A href='mailto:info@bluekeel.com'>info@bluekeel.com</A> for assistance. A revocation does not retroactively invalidate disclosures lawfully made before the revocation became effective.</P>,
+            body: <P>If you have provided a California financial-privacy authorization, you may revoke or modify it for future disclosures using the method specified in that authorization. You may also submit the request through <CopyLink to={`${pathFor('privacy-choices')}#privacy-request`}>Your Privacy Choices</CopyLink> or contact <A href='mailto:info@bluekeel.com'>info@bluekeel.com</A> for assistance. A revocation does not retroactively invalidate disclosures lawfully made before the revocation became effective.</P>,
         },
         {
             id: 's8',
             heading: '8. Marketing Without Transfer of the Underlying Record',
-            body: <P>Where permitted by law, UnitedStatesCredit may market its own products or the products or services of nonaffiliated third parties to its consumers without giving the advertiser the underlying UnitedStatesCredit record. If you choose to respond to an advertiser and provide information directly to that advertiser, the advertiser's own privacy practices apply.</P>,
+            body: (
+                <>
+                    <P>Where permitted by law, UnitedStatesCredit may market its own products or the products or services of nonaffiliated third parties to its consumers without giving the advertiser the underlying UnitedStatesCredit record. If you choose to respond to an advertiser and provide information directly to that advertiser, the advertiser's own privacy practices apply.</P>
+                    <P>Promoting an advertiser's offer does not give the advertiser unrestricted access to our underlying marketing records. Any disclosure we make remains subject to the applicable privacy requirements and your choices. A click or response does not by itself authorize us to disclose all information from your loan request.</P>
+                </>
+            ),
         },
         {
             id: 's9',

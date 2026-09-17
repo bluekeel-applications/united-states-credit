@@ -1,10 +1,12 @@
 import React from 'react';
 import { P, Ul, Li, A, H3, CopyLink, Callout, ContactBlock } from '../components/Copy';
-import { pathFor, LEGAL_EFFECTIVE_DATE } from '../loanPages';
+import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED } from '../loanPages';
 
 // Verbatim port of reference/usc-legal-center-deploy/privacy-policy.html — do not edit copy.
+// Revised by reference/USC_Legal_Center_Final_Updates_Claude.md (revision 2.0) — the spec's PUBLIC COPY is verbatim too.
 const privacyPolicy = {
     effectiveDate: LEGAL_EFFECTIVE_DATE,
+    lastUpdated: LEGAL_LAST_UPDATED,
     intro: <Callout><Callout.Strong>Important:</Callout.Strong> UnitedStatesCredit is not a lender. We collect information directly from consumers to operate our loan-matching service. Certain sensitive application information may be processed for secure transmission to participating lenders, but UnitedStatesCredit does not persistently store Social Security numbers or bank-account information after transmission.</Callout>,
     sections: [
         {
@@ -32,7 +34,8 @@ const privacyPolicy = {
                     <H3>Information collected automatically</H3>
                     <P>We may collect IP address, browser and device information, operating system, referring source, pages viewed, timestamps, campaign and affiliate identifiers, cookies or similar identifiers, fraud-prevention signals, and information about interactions with our website and advertising.</P>
                     <H3>Information from service providers and partners</H3>
-                    <P>We may receive transaction status, fraud-prevention data, attribution data, lender-routing results, campaign information, and other information from companies that help us operate the service. We do not purchase third-party loan-application lists for resale through the loan-matching service described in this Policy.</P>
+                    <P>We may receive transaction status, fraud-prevention data, attribution data, lender-routing results, campaign information, and other information from companies that help us operate the service.</P>
+                    <P>UnitedStatesCredit does not purchase consumer records or third-party consumer lists for inclusion in our loan-matching or first-party marketing databases. The underlying marketing contact records described in this notice are collected directly from consumers interacting with UnitedStatesCredit.</P>
                 </>
             ),
         },
@@ -41,13 +44,9 @@ const privacyPolicy = {
             heading: '3. Sensitive Application Data',
             body: (
                 <>
-                    <P>UnitedStatesCredit may process Social Security numbers, bank-account details, routing information, or similar sensitive information only as needed to securely transmit a consumer's requested loan application to participating lenders or financial-service providers.</P>
-                    <Ul>
-                        <Li>We do not use this sensitive information for unrelated marketing.</Li>
-                        <Li>We do not provide it to list-management companies, email marketers, SMS marketers, advertisers, or unrelated marketing companies for marketing purposes.</Li>
-                        <Li>We do not persistently store Social Security numbers or bank-account information after the loan request has been transmitted.</Li>
-                    </Ul>
-                    <P>Limited transaction, consent, routing, security, and audit records that do not contain the full sensitive identifier may be retained where reasonably necessary for compliance, fraud prevention, dispute resolution, or security.</P>
+                    <P>UnitedStatesCredit processes Social Security numbers and bank-account information only as needed to transmit your requested loan application to participating lenders and financial-service providers involved in that request. We do not persistently retain those identifiers after transmission. We may retain limited contact, transaction, routing, consent, security, and suppression records for the purposes described in our notices, but those retained records do not include your Social Security number or bank-account information.</P>
+                    <P>We do not use this sensitive information for unrelated marketing.</P>
+                    <P>Our marketing and list-management records do not include Social Security numbers, bank-account or routing numbers, driver's-license numbers, consumer-report information, or other sensitive lender-application identifiers. We do not provide those fields to list managers, advertisers, email marketers, or SMS marketers for marketing purposes.</P>
                 </>
             ),
         },
@@ -84,9 +83,10 @@ const privacyPolicy = {
             body: (
                 <>
                     <P>UnitedStatesCredit may retain limited first-party contact information collected directly from consumers, including name, mailing address, email address, mobile or telephone number, source information, communication preferences, and consent or suppression records.</P>
-                    <P>We may provide those limited records to contracted list-management or marketing companies that store and actively manage UnitedStatesCredit's first-party marketing records, select or deploy third-party offers, administer campaigns, and provide related marketing services. Those companies may be compensated through management fees, campaign economics, revenue-sharing arrangements, or a combination of those structures.</P>
-                    <P>Our agreements are intended to preserve UnitedStatesCredit's ownership or control of the underlying records and restrict unauthorized sale, transfer, or independent use of the records outside the agreed services. Where applicable law requires affirmative authorization before a record may be disclosed for these activities, we will obtain that authorization before the disclosure.</P>
-                    <P>The marketing dataset supplied for these activities does not include Social Security numbers, bank-account numbers, routing numbers, or similar sensitive lender-application information.</P>
+                    <P>We may provide limited first-party contact records to contracted list-management and marketing companies. These companies may store the records in their own systems, actively manage the UnitedStatesCredit audience, select and deploy offers from multiple advertisers, administer authorized email or SMS campaigns, and measure campaign performance. Under our revenue-sharing arrangements, a manager may deduct agreed mailing or campaign expenses and pay UnitedStatesCredit a contractual share of the resulting revenue.</P>
+                    <P>Under our list-management agreements, UnitedStatesCredit retains ownership or control of its underlying first-party marketing records. Our list managers are prohibited from selling, transferring, or independently using those records outside the services authorized by their agreements with UnitedStatesCredit and applicable law. A permitted subcontractor may process records only under applicable contractual restrictions. These arrangements do not limit consumers' privacy rights.</P>
+                    <P>Our marketing and list-management records do not include Social Security numbers, bank-account or routing numbers, driver's-license numbers, consumer-report information, or other sensitive lender-application identifiers. We do not provide those fields to list managers, advertisers, email marketers, or SMS marketers for marketing purposes.</P>
+                    <P>We provide records for these activities only where permitted by law and after obtaining any required authorization and honoring applicable privacy choices. Disclosing our marketing practices in this notice does not itself supply a consent that must be obtained separately.</P>
                 </>
             ),
         },
@@ -102,6 +102,9 @@ const privacyPolicy = {
                 <>
                     <P>We and our providers may use cookies, pixels, tags, local storage, and similar technology to operate the site, remember preferences, measure traffic, prevent fraud, attribute advertising, and support advertising or analytics. Certain activities may be treated as a "sale," "sharing," or targeted advertising under some state privacy laws even where money is not paid for the specific disclosure.</P>
                     <P>See our <CopyLink to={pathFor('cookies-tracking')}>Cookie & Tracking Technologies Notice</CopyLink> and <CopyLink to={pathFor('privacy-choices')}>Your Privacy Choices</CopyLink> page for more information.</P>
+                    <H3>Do Not Track and Other Browser Privacy Signals</H3>
+                    <P>Some browsers offer a legacy Do Not Track, or DNT, setting. We do not currently treat a legacy DNT signal by itself as an opt-out request. We do process qualifying legally required opt-out preference signals, including Global Privacy Control, as described in <CopyLink to={`${pathFor('privacy-choices')}#sale-sharing`}>Your Privacy Choices</CopyLink>. DNT and Global Privacy Control are different signals.</P>
+                    <P>Third-party advertising and analytics providers may collect information about your online activity over time and across different websites or online services when their technologies operate on our site, subject to applicable law and your privacy choices.</P>
                 </>
             ),
         },

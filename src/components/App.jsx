@@ -16,6 +16,7 @@ import { useMediaQuery } from 'react-responsive';
 import firePixelBlueKeel from '../utils/pixels/bluekeelPixel.js';
 import { datadogRum } from '@datadog/browser-rum';
 import useAdSense from '../utils/hooks/useAdSense';
+import { isPrivacySuppressed } from '../utils/privacy';
 
 // const Feed = lazy(() => import('./Layout/Feed'));
 
@@ -74,6 +75,8 @@ const App = ({ uri }) => {
 	},[]);
 
 	useEffect(() => {
+		// No monitoring vendor for a browser that opted out on /loans (src/utils/privacy.js).
+		if(isPrivacySuppressed()) return;
 		datadogRum.init({
 			applicationId: '99b0fdda-b808-4506-ad53-7aa417661bdc',
 			clientToken: 'pubcbe8b67a7273f6bbf184345029e031aa',

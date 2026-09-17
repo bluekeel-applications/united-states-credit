@@ -1,13 +1,15 @@
 import React from 'react';
 import { P, Ul, Li, A, CopyLink, Callout, ContactBlock } from '../components/Copy';
-import { pathFor, LEGAL_EFFECTIVE_DATE } from '../loanPages';
+import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED } from '../loanPages';
 
 // Verbatim port of reference/usc-legal-center-deploy/marketing-communications.html — do not edit copy.
+// Revised by reference/USC_Legal_Center_Final_Updates_Claude.md (revision 2.0) — the spec's PUBLIC COPY is verbatim too.
 // This notice explains the practice. The operative TCPA / SMS / telephone
 // consent language belongs at the point of collection, not here.
 const marketingCommunications = {
     effectiveDate: LEGAL_EFFECTIVE_DATE,
-    intro: <Callout><Callout.Strong>Our marketing model:</Callout.Strong> UnitedStatesCredit collects the underlying records directly from consumers. Contracted list managers may store and actively manage those UnitedStatesCredit records, select and deploy offers, and share campaign revenue with UnitedStatesCredit. The records are not intended to become unrestricted property of the list manager.</Callout>,
+    lastUpdated: LEGAL_LAST_UPDATED,
+    intro: <Callout><Callout.Strong>Our marketing model:</Callout.Strong> UnitedStatesCredit collects the underlying records directly from consumers. Contracted list managers may store and actively manage those UnitedStatesCredit records, select and deploy offers, and share campaign revenue with UnitedStatesCredit. Under our list-management agreements, UnitedStatesCredit retains ownership or control of those records, and list managers are prohibited from selling, transferring, or independently using them outside the services authorized by their agreements and applicable law.</Callout>,
     sections: [
         {
             id: 's1',
@@ -15,7 +17,8 @@ const marketingCommunications = {
             body: (
                 <>
                     <P>Our marketing database may include first name, last name, postal address, email address, telephone or mobile number, source information, communication preferences, consent records, and suppression or opt-out status.</P>
-                    <P>It does not include Social Security numbers, bank-account numbers, routing numbers, or similar sensitive lender-application information.</P>
+                    <P>Our marketing and list-management records do not include Social Security numbers, bank-account or routing numbers, driver's-license numbers, consumer-report information, or other sensitive lender-application identifiers. We do not provide those fields to list managers, advertisers, email marketers, or SMS marketers for marketing purposes.</P>
+                    <P>UnitedStatesCredit does not purchase consumer records or third-party consumer lists for inclusion in our loan-matching or first-party marketing databases. The underlying marketing contact records described in this notice are collected directly from consumers interacting with UnitedStatesCredit.</P>
                 </>
             ),
         },
@@ -24,8 +27,9 @@ const marketingCommunications = {
             heading: '2. List Managers',
             body: (
                 <>
-                    <P>UnitedStatesCredit may provide limited first-party contact records to contracted list-management companies. The list manager may store the records in its own systems, actively manage the audience, select or deploy offers from multiple advertisers, administer email or SMS campaigns where authorized, measure campaign performance, deduct agreed campaign or mailing costs, and pay UnitedStatesCredit a contractual share of campaign revenue.</P>
-                    <P>Our agreements are intended to preserve UnitedStatesCredit's ownership or control of the records and restrict the list manager from selling, transferring, or independently using the underlying records outside the services and permissions authorized by contract and law.</P>
+                    <P>We may provide limited first-party contact records to contracted list-management and marketing companies. These companies may store the records in their own systems, actively manage the UnitedStatesCredit audience, select and deploy offers from multiple advertisers, administer authorized email or SMS campaigns, and measure campaign performance. Under our revenue-sharing arrangements, a manager may deduct agreed mailing or campaign expenses and pay UnitedStatesCredit a contractual share of the resulting revenue.</P>
+                    <P>Under our list-management agreements, UnitedStatesCredit retains ownership or control of its underlying first-party marketing records. Our list managers are prohibited from selling, transferring, or independently using those records outside the services authorized by their agreements with UnitedStatesCredit and applicable law. A permitted subcontractor may process records only under applicable contractual restrictions. These arrangements do not limit consumers' privacy rights.</P>
+                    <P>We provide records for these activities only where permitted by law and after obtaining any required authorization and honoring applicable privacy choices. Disclosing our marketing practices in this notice does not itself supply a consent that must be obtained separately.</P>
                 </>
             ),
         },
@@ -37,12 +41,7 @@ const marketingCommunications = {
         {
             id: 's4',
             heading: '4. Email Marketing',
-            body: (
-                <>
-                    <P>Commercial email sent by or on behalf of UnitedStatesCredit will be managed in accordance with applicable law. Marketing email should use accurate routing and sender information, avoid deceptive subject lines, include required advertising identification, include a valid physical postal address, and provide a functioning method to unsubscribe.</P>
-                    <P>We honor legally valid unsubscribe requests within the period required by law and may retain a limited suppression record so that the request continues to be honored. UnitedStatesCredit remains responsible for monitoring email marketing conducted on its behalf.</P>
-                </>
-            ),
+            body: <P>Commercial email sent by or on behalf of UnitedStatesCredit uses accurate sender and routing information, avoids deceptive subject lines, includes a valid physical postal address and any required advertising identification, and provides a functioning unsubscribe method. We honor applicable unsubscribe requests within 10 business days, or sooner where required, and retain only the suppression information needed to continue honoring the request. We monitor marketing conducted on our behalf.</P>,
         },
         {
             id: 's5',

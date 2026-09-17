@@ -18,8 +18,51 @@
 		<link rel='preconnect' href='%PUBLIC_URL%/ads.txt' crossorigin='use-credentials'/>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 		<title>United States Credit</title>
+		<!-- Privacy preference. Must stay the FIRST script on the page: every
+			advertising, analytics and monitoring tag below asks it before loading.
+			A browser has opted out when it sends Global Privacy Control or carries
+			the usc_privacy_optout marker (set here for GPC, or by the button on
+			/loans/privacy-choices). An absent signal never clears a stored opt-out.
+			Enforcement covers /loans and everything under it; the app reads the
+			same state through src/utils/privacy.js. -->
+		<script>
+			(function (w, d) {
+				var MARKER = 'usc_privacy_optout';
+				var read = function () {
+					try { if (w.localStorage.getItem(MARKER) === '1') return true; } catch (e) {}
+					return /(?:^|;\s*)usc_privacy_optout=1(?:;|$)/.test(d.cookie);
+				};
+				var persist = function () {
+					try { w.localStorage.setItem(MARKER, '1'); } catch (e) {}
+					d.cookie = MARKER + '=1; Max-Age=31536000; Path=/; SameSite=Lax' + (w.location.protocol === 'https:' ? '; Secure' : '');
+				};
+				var gpc = w.navigator.globalPrivacyControl === true;
+				var optedOut = gpc || read();
+				if (optedOut) persist();
+				var path = w.location.pathname;
+				var onLoans = path === '/loans' || path.indexOf('/loans/') === 0;
+				w.__uscPrivacy = {
+					gpc: gpc,
+					optedOut: optedOut,
+					suppress: optedOut && onLoans,
+					// Records the opt-out for this browser; true only when it can be read back.
+					optOut: function () { persist(); return read(); }
+				};
+				// An async third-party tag, skipped for an opted-out browser.
+				w.__uscAsyncTag = function (src, attrs) {
+					if (w.__uscPrivacy.suppress) return;
+					var s = d.createElement('script');
+					s.async = true;
+					for (var k in attrs || {}) s.setAttribute(k, attrs[k]);
+					s.src = src;
+					(d.head || d.documentElement).appendChild(s);
+				};
+				if (w.__uscPrivacy.suppress) w['ga-disable-G-20MVF1Z2ML'] = true;
+			})(window, document);
+		</script>
 		<!-- System1 RSOC Start -->
-		<script defer src="https://rampjs-cdn.system1.com/ramp.js"></script>
+		<!-- Written by the parser so it keeps a static tag's defer ordering ahead of the app bundle. -->
+		<script>if (!window.__uscPrivacy.suppress) document.write('<script defer src="https://rampjs-cdn.system1.com/ramp.js"><\/script>');</script>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
@@ -48,7 +91,7 @@
 		crossOrigin="anonymous"></script> -->
 		<!-- Ad Sense End -->
 		<!-- LiveConnectTag for advertisers --> 
-		<script type="text/javascript" src="//b-code.liadm.com/b-00en.min.js" async="true" charset="utf-8"></script> 
+		<script>__uscAsyncTag('//b-code.liadm.com/b-00en.min.js', { type: 'text/javascript', charset: 'utf-8' });</script>
 		<!-- LiveConnectTag for advertisers -->
 		<!-- Most recent push -->
 		<!-- <script> (function(document, window) {
@@ -67,7 +110,7 @@
 		<div id='root'></div>
 		<!-- Adwords -->
 		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11025885187"></script>
+		<script>__uscAsyncTag('https://www.googletagmanager.com/gtag/js?id=AW-11025885187');</script>
 		<script>
 			const mygURL = new URL(window.location.href);
 			const gtagtracking = {
@@ -77,12 +120,14 @@
 			};
 			window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'AW-11025885187', {
-				'campaign_name': gtagtracking.EID,
-				'campaign_source': `${gtagtracking.ARTICLE}-${gtagtracking.SID}`,
-				'campaign_medium': 'redirect-aw',
-			});
+			if (!window.__uscPrivacy.suppress) {
+				gtag('js', new Date());
+				gtag('config', 'AW-11025885187', {
+					'campaign_name': gtagtracking.EID,
+					'campaign_source': `${gtagtracking.ARTICLE}-${gtagtracking.SID}`,
+					'campaign_medium': 'redirect-aw',
+				});
+			}
 		</script>
 		<!-- Part of the Push pause -->
 		<!-- <script>
@@ -114,7 +159,7 @@
 		<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1062401053"></script> -->
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-49186805-1"></script> -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-20MVF1Z2ML"></script>
+		<script>__uscAsyncTag('https://www.googletagmanager.com/gtag/js?id=G-20MVF1Z2ML');</script>
 		<script>
 			const myURL = new URL(window.location.href);
 			const tracking = {
@@ -122,7 +167,9 @@
 				SID: myURL.searchParams.get('sid') || '0000',
 				EID: myURL.searchParams.get('eid') || '0000'
 			};
-			if(Number(tracking.SID)!== 10007) {
+			// Opted out: no tag was loaded, so events must not queue up behind one either.
+			if (window.__uscPrivacy.suppress) window.gtag = function () {};
+			if(Number(tracking.SID)!== 10007 && !window.__uscPrivacy.suppress) {
 				window.dataLayer = window.dataLayer || [];
 				function gtag(){dataLayer.push(arguments);}
 				gtag('js', new Date());
@@ -141,7 +188,7 @@
 			// gtag('event', 'conversion', {'send_to': 'AW-11025885187/qisiCOT_9IIYEIPQxokp'});
 		</script>
 		<!--BEGIN: Microsoft Advertising UET Javascript tag. -->
-		<script>(function (w, d, t, r, u) { var f, n, i; w[u] = w[u] || [], f = function () { var o = { ti: "5681707" }; o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad") }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () { var s = this.readyState; s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null) }, i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i) })(window, document, "script", "//bat.bing.com/bat.js", "uetq");</script>
+		<script>if (!window.__uscPrivacy.suppress) (function (w, d, t, r, u) { var f, n, i; w[u] = w[u] || [], f = function () { var o = { ti: "5681707" }; o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad") }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () { var s = this.readyState; s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null) }, i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i) })(window, document, "script", "//bat.bing.com/bat.js", "uetq");</script>
 		<!--END: Microsoft Advertising UET Javascript tag-->
 		<script async src='https://kit.fontawesome.com/17e2865f40.js' crossorigin='anonymous'></script>
 		<!-- <script type='text/javascript'>
@@ -164,6 +211,7 @@
 		<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
 		<!-- Facebook Pixel Code -->
 		<script>
+			if (!window.__uscPrivacy.suppress)
 			!function(f,b,e,v,n,t,s)
 			{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 			n.callMethod.apply(n,arguments):n.queue.push(arguments)};

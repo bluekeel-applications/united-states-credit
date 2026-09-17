@@ -1,38 +1,15 @@
 import React from 'react';
-import { P, Ul, Li, A, Callout, ContactBlock } from '../components/Copy';
-import { GpcStatus, ChoiceGrid, Choice } from '../components/PrivacyChoices';
-import { CONTACT_EMAIL, LEGAL_EFFECTIVE_DATE } from '../loanPages';
+import { P, Callout, ContactBlock } from '../components/Copy';
+import { PrivacySignalStatus, BrowserOptOut, ContactRecordsRoute, ChoiceGrid, Choice, PrivacyRequest, CaliforniaAuthorizationRoute } from '../components/PrivacyChoices';
+import { LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED } from '../loanPages';
 
-// Port of reference/usc-legal-center-deploy/privacy-choices.html — do not edit copy.
-//
-// EMAIL-ONLY (user decision, 2026-09-17): the package's request form posts to
-// /api/privacy-request, which does not exist — this site is static. Until it
-// does, every request goes to CONTACT_EMAIL with a prefilled subject, so no
-// request can be silently dropped. Two passages therefore differ from the
-// package and are marked DEVIATION below; everything else is verbatim. When
-// the endpoint exists, restore the package's form (spec:
-// reference/usc-legal-center-deploy/privacy-request-api-spec.md) and wording.
-
-// The package form's request types, labels verbatim.
-const REQUEST_TYPES = [
-    'Do Not Sell or Share / Targeted Advertising',
-    'Access / Know',
-    'Correct',
-    'Delete',
-    'Portable Copy',
-    'Stop Marketing Email',
-    'Stop SMS / Telephone Marketing',
-    'Withdraw Marketing Consent',
-    'California Financial Privacy Authorization — Revoke/Modify',
-    'Appeal a Privacy Decision',
-    'Other Privacy Request',
-];
-
-const requestMailto = (requestType) =>
-    `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Privacy Request: ${requestType}`)}`;
-
+// Copy: reference/usc-legal-center-deploy/privacy-choices.html as revised by
+// reference/USC_Legal_Center_Final_Updates_Claude.md (C01, C02.3) — do not edit copy.
+// Section ids `sale-sharing` and `privacy-request` are linked from the footer
+// and from other documents; keep them.
 const privacyChoices = {
     effectiveDate: LEGAL_EFFECTIVE_DATE,
+    lastUpdated: LEGAL_LAST_UPDATED,
     intro: <Callout><Callout.Strong>This page is the consumer privacy hub.</Callout.Strong> Use the choices below to submit privacy requests, manage marketing preferences, and exercise sale/share or targeted-advertising rights where applicable. A separate California financial-privacy authorization, if you gave one, can also be revoked using the method stated in that authorization.</Callout>,
     sections: [
         {
@@ -40,55 +17,53 @@ const privacyChoices = {
             heading: 'Browser Privacy Signal',
             body: (
                 <>
-                    <GpcStatus />
-                    <P>If your browser transmits a legally recognized opt-out preference signal, UnitedStatesCredit will treat that signal as an opt-out request where required by applicable law. The production advertising and analytics configuration must be connected to this preference so covered sale/sharing activity is suppressed.</P>
+                    <PrivacySignalStatus />
+                    <P>Where applicable law requires, we process a qualifying opt-out preference signal, such as Global Privacy Control, as a request to opt out of the sale or sharing of personal information and applicable targeted advertising. The preference applies to this browser or device and, when we can associate the signal with you, to the related personal information as required by law. You do not need to create an account or provide additional information for us to process the browser signal.</P>
                 </>
             ),
         },
         {
-            id: 's2',
+            id: 'sale-sharing',
+            heading: 'Do Not Sell or Share My Personal Information',
+            body: (
+                <>
+                    <P>Use the button below to opt out of covered sale, sharing, and targeted advertising for this browser or device. No name, email address, account, or identity verification is required for this browser choice.</P>
+                    <BrowserOptOut />
+                    <ContactRecordsRoute />
+                </>
+            ),
+        },
+        {
+            id: 's3',
             heading: 'Common Privacy Choices',
             body: (
                 <ChoiceGrid>
-                    <Choice primary title='Do Not Sell or Share / Targeted Advertising' requestType={REQUEST_TYPES[0]} href={requestMailto(REQUEST_TYPES[0])}>Opt out of covered sale, sharing, or targeted advertising where state law gives you that right.</Choice>
-                    <Choice title='Access / Know' requestType={REQUEST_TYPES[1]} href={requestMailto(REQUEST_TYPES[1])}>Request information about personal information we maintain about you, subject to applicable law.</Choice>
-                    <Choice title='Correct' requestType={REQUEST_TYPES[2]} href={requestMailto(REQUEST_TYPES[2])}>Ask us to correct inaccurate personal information where the right applies.</Choice>
-                    <Choice title='Delete' requestType={REQUEST_TYPES[3]} href={requestMailto(REQUEST_TYPES[3])}>Ask us to delete personal information, subject to legal, fraud, security, transaction, and recordkeeping exceptions.</Choice>
-                    <Choice title='Marketing Email' requestType={REQUEST_TYPES[5]} href={requestMailto(REQUEST_TYPES[5])}>Use the unsubscribe link in the email or submit a request here. We may retain a suppression record after opt-out.</Choice>
-                    <Choice title='SMS / Telephone Marketing' requestType={REQUEST_TYPES[6]} href={requestMailto(REQUEST_TYPES[6])}>Reply STOP to supported text campaigns, tell a caller to stop, or submit a request here.</Choice>
+                    <Choice primary title='Do Not Sell or Share / Targeted Advertising' requestType='opt_out_sale_share'>Opt out of covered sale, sharing, or targeted advertising where state law gives you that right.</Choice>
+                    <Choice title='Access / Know' requestType='access'>Request information about personal information we maintain about you, subject to applicable law.</Choice>
+                    <Choice title='Correct' requestType='correct'>Ask us to correct inaccurate personal information where the right applies.</Choice>
+                    <Choice title='Delete' requestType='delete'>Ask us to delete personal information, subject to legal, fraud, security, transaction, and recordkeeping exceptions.</Choice>
+                    <Choice title='Marketing Email' requestType='marketing_email'>Use the unsubscribe link in the email or submit a request here. We may retain a suppression record after opt-out.</Choice>
+                    <Choice title='SMS / Telephone Marketing' requestType='marketing_sms_phone'>Reply STOP to supported text campaigns, tell a caller to stop, or submit a request here.</Choice>
                 </ChoiceGrid>
             ),
         },
         {
-            // the package's anchor id — its tiles and other documents point here
             id: 'privacy-request',
             heading: 'Submit a Privacy Request',
-            body: (
-                <>
-                    {/* DEVIATION — package: "The preferred production method is this web form. You may also email …" + <form>. */}
-                    <P>To submit a privacy request, email <A href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</A> using one of the request links below, or tell us in your own words which request you are making. Do not include a Social Security number, bank-account number, password, or other sensitive credential in a privacy request.</P>
-                    <Ul>
-                        {REQUEST_TYPES.map((requestType) => (
-                            <Li key={requestType}><A href={requestMailto(requestType)}>{requestType}</A></Li>
-                        ))}
-                    </Ul>
-                    <P>Please include the email address you used with UnitedStatesCredit, your full name, and your state of residence. For security, we may request additional information reasonably necessary to verify identity or authority after receiving the request.</P>
-                </>
-            ),
-        },
-        {
-            id: 's4',
-            heading: 'California Financial Privacy Authorization',
-            // DEVIATION — package: "You may also select the California financial-privacy option in the request form above."
-            body: <P>If you previously provided a separate California financial-privacy authorization, the authorization itself explains how to revoke or modify it. You may also use the California Financial Privacy Authorization request link above. This Legal Center page is not a substitute for the separate consent acknowledgment required when California law requires one.</P>,
+            body: <PrivacyRequest />,
         },
         {
             id: 's5',
-            heading: 'What Happens After a Request',
-            body: <P>We may verify your identity or authority as permitted by law. We will process the request within the period required by applicable law and will explain any material denial or limitation. Certain information may need to be retained for fraud prevention, security, transaction administration, legal compliance, dispute resolution, or to keep an opt-out or suppression request effective.</P>,
+            heading: 'California Financial Privacy Authorization',
+            body: <CaliforniaAuthorizationRoute />,
         },
         {
             id: 's6',
+            heading: 'What Happens After a Request',
+            body: <P>We will process your request within the time required by applicable law. Where verification is appropriate, we will request only information reasonably needed for that purpose. We will explain a denial or limitation and provide any applicable appeal instructions. Certain information may be retained where permitted or required for security, fraud prevention, legal compliance, transaction administration, dispute resolution, or maintaining an effective suppression record. A request to stop covered sale, sharing, or marketing is not delayed merely because a separate request to access information requires verification.</P>,
+        },
+        {
+            id: 's7',
             heading: 'Contact',
             body: <ContactBlock />,
         },

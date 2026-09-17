@@ -1,10 +1,12 @@
 import React from 'react';
 import { P, Callout, ContactBlock } from '../components/Copy';
-import { LEGAL_EFFECTIVE_DATE } from '../loanPages';
+import { LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED } from '../loanPages';
 
 // Verbatim port of reference/usc-legal-center-deploy/advertiser-disclosure.html — do not edit copy.
+// Revised by reference/USC_Legal_Center_Final_Updates_Claude.md (revision 2.0) — the spec's PUBLIC COPY is verbatim too.
 const advertiserDisclosure = {
     effectiveDate: LEGAL_EFFECTIVE_DATE,
+    lastUpdated: LEGAL_LAST_UPDATED,
     intro: <Callout><Callout.Strong>Compensation disclosure:</Callout.Strong> UnitedStatesCredit is a commercial service. We may receive compensation from lenders, advertisers, affiliates, list managers, or other partners, and that compensation may affect routing, placement, or which products are shown.</Callout>,
     sections: [
         {
@@ -37,8 +39,10 @@ const advertiserDisclosure = {
             heading: '5. Marketing Through First-Party Lists',
             body: (
                 <>
-                    <P>UnitedStatesCredit may work with contracted list-management companies to manage first-party contact records collected directly from consumers and to deploy third-party offers to that audience. The list manager may deduct agreed campaign or mailing costs and remit UnitedStatesCredit a contractual share of resulting campaign revenue.</P>
-                    <P>Our agreements are intended to preserve UnitedStatesCredit's ownership or control of the underlying records and restrict unauthorized independent sale or use. Where applicable law requires consumer authorization for the transfer or marketing use, the required authorization will be obtained separately.</P>
+                    <P>We may provide limited first-party contact records to contracted list-management and marketing companies. These companies may store the records in their own systems, actively manage the UnitedStatesCredit audience, select and deploy offers from multiple advertisers, administer authorized email or SMS campaigns, and measure campaign performance. Under our revenue-sharing arrangements, a manager may deduct agreed mailing or campaign expenses and pay UnitedStatesCredit a contractual share of the resulting revenue.</P>
+                    <P>Under our list-management agreements, UnitedStatesCredit retains ownership or control of its underlying first-party marketing records. Our list managers are prohibited from selling, transferring, or independently using those records outside the services authorized by their agreements with UnitedStatesCredit and applicable law. A permitted subcontractor may process records only under applicable contractual restrictions. These arrangements do not limit consumers' privacy rights.</P>
+                    <P>Our marketing and list-management records do not include Social Security numbers, bank-account or routing numbers, driver's-license numbers, consumer-report information, or other sensitive lender-application identifiers. We do not provide those fields to list managers, advertisers, email marketers, or SMS marketers for marketing purposes.</P>
+                    <P>We provide records for these activities only where permitted by law and after obtaining any required authorization and honoring applicable privacy choices. Disclosing our marketing practices in this notice does not itself supply a consent that must be obtained separately.</P>
                 </>
             ),
         },

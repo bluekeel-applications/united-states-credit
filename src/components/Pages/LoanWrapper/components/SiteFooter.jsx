@@ -36,6 +36,8 @@ const SiteFooter = () => {
                         {footerColumn('transparency').map((page) => (
                             <RouteLink key={page.slug} style={Styles.footerLink} to={pathFor(page.slug)} target='_blank' rel='noopener noreferrer' onClick={trackFooterLink(page.footer.label, page.slug, 'transparency')}>{page.footer.label}</RouteLink>
                         ))}
+                        {/* The opt-out link, under its statutory title — not folded into "Your Privacy Choices". */}
+                        <RouteLink key='do-not-sell' style={Styles.footerLink} to={`${pathFor('privacy-choices')}#sale-sharing`} target='_blank' rel='noopener noreferrer' onClick={trackFooterLink('Do Not Sell or Share My Personal Information', 'privacy-choices', 'transparency')}>Do Not Sell or Share My Personal Information</RouteLink>
                         <a key='contact' style={Styles.footerLink} href={`mailto:${CONTACT_EMAIL}`} onClick={() => track('contact_clicked', { source: 'footer' })}>Contact</a>
                     </nav>
                 </div>

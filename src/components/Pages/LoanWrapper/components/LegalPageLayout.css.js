@@ -1,4 +1,4 @@
-import { COLORS, container, DESKTOP, MOBILE } from '../theme';
+import { COLORS, container, DESKTOP, MOBILE, PRINT } from '../theme';
 
 const Styles = {
     container: {
@@ -27,6 +27,7 @@ const Styles = {
         marginBottom: '1em',
     },
     breadcrumbs: {
+        [PRINT]: { display: 'none' },
         fontSize: 12,
         color: COLORS.muted,
         marginBottom: 14,
@@ -53,6 +54,7 @@ const Styles = {
         padding: 18,
         height: 'max-content',
         [DESKTOP]: { position: 'sticky', top: 18 },
+        [PRINT]: { display: 'none' },
     },
     tocTitle: {
         display: 'block',
@@ -79,6 +81,12 @@ const Styles = {
         fontSize: 12,
         fontWeight: 800,
         marginBottom: 24,
+        [PRINT]: { display: 'none' },
+    },
+    // the print header: document, dates — shown on paper only
+    printNote: {
+        display: 'none',
+        [PRINT]: { display: 'block', fontSize: 13, color: '#444', marginBottom: 18 },
     },
     sectionH2: {
         color: COLORS.navy2,
@@ -209,12 +217,96 @@ const Styles = {
         fontWeight: 800,
         textDecoration: 'none',
         ':hover': { borderColor: COLORS.blue, color: COLORS.blue },
+        [PRINT]: { display: 'none' },
     },
     choiceButtonPrimary: {
         background: COLORS.navy,
         borderColor: COLORS.navy,
         color: '#fff',
         ':hover': { background: COLORS.navy2, borderColor: COLORS.navy2, color: '#fff' },
+    },
+    // a real <button> wearing the choice-button look
+    actionButton: {
+        font: 'inherit',
+        fontWeight: 800,
+        cursor: 'pointer',
+    },
+    actionButtonBusy: {
+        opacity: 0.6,
+        cursor: 'default',
+    },
+    // status lines announced to assistive tech (role=status)
+    statusLine: {
+        color: '#445669',
+        marginTop: 12,
+        marginBottom: '1em',
+        minHeight: '1.5em',
+    },
+    statusApplied: {
+        color: COLORS.green,
+        fontWeight: 700,
+    },
+    statusError: {
+        color: '#a61b26',
+        fontWeight: 700,
+    },
+    requestForm: {
+        display: 'grid',
+        gap: 14,
+        margin: '18px 0',
+        [PRINT]: { display: 'none' },
+    },
+    formLabel: {
+        display: 'block',
+        color: COLORS.navy,
+        fontWeight: 700,
+        fontSize: 14,
+    },
+    formControl: {
+        display: 'block',
+        boxSizing: 'border-box',
+        width: '100%',
+        marginTop: 5,
+        padding: '11px 12px',
+        border: '1px solid #c8d4da',
+        borderRadius: 8,
+        font: 'inherit',
+        fontWeight: 400,
+        background: '#fff',
+        color: COLORS.ink,
+    },
+    formTextarea: {
+        minHeight: 110,
+        resize: 'vertical',
+    },
+    formCheckRow: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: 9,
+        color: COLORS.navy,
+        fontWeight: 700,
+        fontSize: 14,
+    },
+    formSmall: {
+        display: 'block',
+        color: COLORS.muted,
+        fontSize: 13,
+    },
+    // kept out of sight and out of the tab order; a filled value marks a bot
+    formTrap: {
+        position: 'absolute',
+        left: -9999,
+        width: 1,
+        height: 1,
+        overflow: 'hidden',
+    },
+    formResult: {
+        borderRadius: 10,
+        padding: '14px 16px',
+        margin: '18px 0',
+        border: `1px solid ${COLORS.line}`,
+        background: COLORS.soft,
+        color: '#445669',
     },
     reviewBanner: {
         background: '#eaf4fa',

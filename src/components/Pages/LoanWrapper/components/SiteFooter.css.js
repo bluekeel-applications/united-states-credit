@@ -1,7 +1,8 @@
-import { container, DESKTOP, MOBILE } from '../theme';
+import { container, DESKTOP, MOBILE, PRINT } from '../theme';
 
 const Styles = {
     siteFooter: {
+        [PRINT]: { display: 'none' },
         background: '#081f35',
         color: 'rgba(255,255,255,.74)',
         padding: '38px 0 28px',

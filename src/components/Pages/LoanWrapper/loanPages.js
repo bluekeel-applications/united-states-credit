@@ -23,6 +23,15 @@ export const LEGAL_CENTER_META = {
 // info pages outside the package keep their own date.
 export const LEGAL_EFFECTIVE_DATE = 'September 16, 2026';
 
+// Revision 2.0 of the package (reference/USC_Legal_Center_Final_Updates_Claude.md).
+// A document the revision changed carries `lastUpdated`; the rest keep their
+// original line. This is the approved publication date — never a build date.
+export const LEGAL_LAST_UPDATED = 'September 17, 2026';
+
+// Identifies the legal text a visitor was shown (stamped on every legal
+// article as data-legal-version). 1.0 is git tag legal-v1.0.
+export const LEGAL_CONTENT_VERSION = '2.0';
+
 // `footer` is optional: a page without one is reached from the Legal Center
 // hub and from in-copy links only.
 export const LEGAL_PAGES = [

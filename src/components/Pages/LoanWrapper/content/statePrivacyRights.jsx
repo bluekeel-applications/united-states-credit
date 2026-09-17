@@ -1,12 +1,14 @@
 import React from 'react';
 import { P, Ul, Li, A, H3, CopyLink, Callout, ContactBlock } from '../components/Copy';
-import { pathFor, LEGAL_EFFECTIVE_DATE } from '../loanPages';
+import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED } from '../loanPages';
 
 // Verbatim port of reference/usc-legal-center-deploy/state-privacy-rights.html — do not edit copy.
+// Revised by reference/USC_Legal_Center_Final_Updates_Claude.md (revision 2.0) — the spec's PUBLIC COPY is verbatim too.
 // Replaces the CCPA-only California Privacy Notice; /loans/california-privacy
 // redirects here (LEGACY_SLUGS).
 const statePrivacyRights = {
     effectiveDate: LEGAL_EFFECTIVE_DATE,
+    lastUpdated: LEGAL_LAST_UPDATED,
     intro: <Callout><Callout.Strong>State privacy rights vary.</Callout.Strong> This notice provides a unified way to understand and exercise rights that may apply under U.S. state comprehensive privacy laws. Financial information may be governed by separate federal or state financial-privacy laws and may be exempt from some state comprehensive-privacy provisions.</Callout>,
     sections: [
         {
@@ -44,7 +46,12 @@ const statePrivacyRights = {
         {
             id: 's3',
             heading: '3. Sources',
-            body: <P>We collect information primarily directly from consumers. We also collect technical data automatically and may receive limited routing, transaction-status, attribution, analytics, or fraud-prevention information from lenders and service providers. We do not purchase third-party loan-application lists for resale through the loan-matching service described in our policies.</P>,
+            body: (
+                <>
+                    <P>We collect information primarily directly from consumers. We also collect technical data automatically and may receive limited routing, transaction-status, attribution, analytics, or fraud-prevention information from lenders and service providers.</P>
+                    <P>UnitedStatesCredit does not purchase consumer records or third-party consumer lists for inclusion in our loan-matching or first-party marketing databases. The underlying marketing contact records described in this notice are collected directly from consumers interacting with UnitedStatesCredit.</P>
+                </>
+            ),
         },
         {
             id: 's4',
@@ -62,7 +69,7 @@ const statePrivacyRights = {
             body: (
                 <>
                     <P>Some state laws define "sale" broadly to include certain transfers for valuable consideration and define "sharing" or targeted advertising to include certain advertising-related disclosures. Because UnitedStatesCredit uses advertising technology and contracted marketing/list-management arrangements, some activities may be treated as a sale, sharing, or targeted advertising under a particular state's law.</P>
-                    <P>Where an opt-out right applies, you may exercise it through <CopyLink to={pathFor('privacy-choices')}>Your Privacy Choices</CopyLink>. Transfers to service providers or processors acting only on our behalf under legally compliant contracts may be excluded from these definitions under applicable law.</P>
+                    <P>Where an opt-out right applies, you may exercise it through <CopyLink to={`${pathFor('privacy-choices')}#sale-sharing`}>Your Privacy Choices</CopyLink>. A browser sale or sharing opt-out does not require identity verification. Transfers to service providers or processors acting only on our behalf under legally compliant contracts may be excluded from these definitions under applicable law.</P>
                 </>
             ),
         },
@@ -71,7 +78,8 @@ const statePrivacyRights = {
             heading: '7. Sensitive Personal Information',
             body: (
                 <>
-                    <P>We may process sensitive lender-application information such as Social Security number or bank-account information solely as needed to transmit a requested loan application to participating lenders. UnitedStatesCredit does not use that information for unrelated marketing and does not persistently retain Social Security numbers or bank-account information after transmission.</P>
+                    <P>UnitedStatesCredit processes Social Security numbers and bank-account information only as needed to transmit your requested loan application to participating lenders and financial-service providers involved in that request. We do not persistently retain those identifiers after transmission. We may retain limited contact, transaction, routing, consent, security, and suppression records for the purposes described in our notices, but those retained records do not include your Social Security number or bank-account information.</P>
+                    <P>UnitedStatesCredit does not use that information for unrelated marketing.</P>
                     <P>Where a state law requires consent or provides a right to limit a sensitive-data use that is not otherwise exempt, we will provide the applicable choice.</P>
                 </>
             ),
@@ -92,7 +100,7 @@ const statePrivacyRights = {
         {
             id: 's9',
             heading: '9. Requests to Access, Correct, Delete, or Obtain a Copy',
-            body: <P>Submit a request through <CopyLink to={pathFor('privacy-choices')}>Your Privacy Choices</CopyLink> or email <A href='mailto:info@bluekeel.com'>info@bluekeel.com</A>. We may ask for information reasonably necessary to verify identity and authority. We will not request more information than reasonably necessary for verification.</P>,
+            body: <P>Submit a request through <CopyLink to={`${pathFor('privacy-choices')}#privacy-request`}>Your Privacy Choices</CopyLink> or email <A href='mailto:info@bluekeel.com'>info@bluekeel.com</A>. We may ask for information reasonably necessary to verify identity and authority. We will not request more information than reasonably necessary for verification.</P>,
         },
         {
             id: 's10',

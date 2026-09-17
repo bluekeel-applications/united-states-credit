@@ -1,4 +1,4 @@
-import { COLORS, container, MOBILE } from '../theme';
+import { COLORS, container, MOBILE, PRINT } from '../theme';
 
 const Styles = {
     skip: {
@@ -13,6 +13,7 @@ const Styles = {
         },
     },
     siteHeader: {
+        [PRINT]: { display: 'none' },
         background: '#fff',
         borderBottom: `1px solid ${COLORS.line}`,
     },

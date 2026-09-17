@@ -1,10 +1,12 @@
 import React from 'react';
-import { P, CopyLink, Callout, Table, ContactBlock } from '../components/Copy';
-import { pathFor, LEGAL_EFFECTIVE_DATE } from '../loanPages';
+import { P, H3, CopyLink, Callout, Table, ContactBlock } from '../components/Copy';
+import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED } from '../loanPages';
 
 // Verbatim port of reference/usc-legal-center-deploy/cookies-tracking.html — do not edit copy.
+// Revised by reference/USC_Legal_Center_Final_Updates_Claude.md (revision 2.0) — the spec's PUBLIC COPY is verbatim too.
 const cookiesTracking = {
     effectiveDate: LEGAL_EFFECTIVE_DATE,
+    lastUpdated: LEGAL_LAST_UPDATED,
     intro: <Callout><Callout.Strong>Tracking technologies:</Callout.Strong> UnitedStatesCredit uses cookies and similar technologies for site operation, security, measurement, attribution, and advertising. Some advertising-related activity may be subject to state opt-out rights.</Callout>,
     sections: [
         {
@@ -33,7 +35,7 @@ const cookiesTracking = {
             body: (
                 <>
                     <P>Cookie and tracking information may include IP address, browser and device information, page and referrer data, campaign or affiliate identifiers, event timestamps, conversion events, and cookie or device identifiers.</P>
-                    <P>UnitedStatesCredit does not intentionally store a consumer's full Social Security number or bank-account number in advertising cookies or marketing pixels.</P>
+                    <P>We do not place Social Security numbers, bank-account information, or other sensitive application identifiers in advertising cookies, marketing pixels, or advertising-event payloads.</P>
                 </>
             ),
         },
@@ -45,7 +47,14 @@ const cookiesTracking = {
         {
             id: 's5',
             heading: '5. Global Privacy Control and Other Signals',
-            body: <P>Where required by law, we honor qualifying browser-based opt-out preference signals such as Global Privacy Control. A preference signal is generally associated with the browser or device transmitting it unless the consumer provides information that enables us to associate the preference with a broader profile as required by law.</P>,
+            body: (
+                <>
+                    <P>Where required by law, we process qualifying browser-based opt-out preference signals, including Global Privacy Control. We apply the preference to the browser or device sending the signal and to associated personal information when we can identify the consumer as required by law. You are not required to provide additional information to have the browser signal honored. You may provide contact information voluntarily to help us apply a request to additional records.</P>
+                    <H3>Do Not Track and Other Browser Privacy Signals</H3>
+                    <P>Some browsers offer a legacy Do Not Track, or DNT, setting. We do not currently treat a legacy DNT signal by itself as an opt-out request. We do process qualifying legally required opt-out preference signals, including Global Privacy Control, as described in <CopyLink to={`${pathFor('privacy-choices')}#sale-sharing`}>Your Privacy Choices</CopyLink>. DNT and Global Privacy Control are different signals.</P>
+                    <P>Third-party advertising and analytics providers may collect information about your online activity over time and across different websites or online services when their technologies operate on our site, subject to applicable law and your privacy choices.</P>
+                </>
+            ),
         },
         {
             id: 's6',

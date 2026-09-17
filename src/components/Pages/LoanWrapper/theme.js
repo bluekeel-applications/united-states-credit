@@ -22,6 +22,8 @@ export const FONT_STACK = 'Inter, ui-sans-serif, system-ui, -apple-system, Blink
 // The reference has exactly two breakpoints.
 export const MOBILE = '@media (max-width: 520px)';
 export const DESKTOP = '@media (min-width: 760px)';
+// Printed, a legal page is the document alone: chrome and controls drop out.
+export const PRINT = '@media print';
 
 // .container{width:min(calc(100% - 28px),var(--max));margin:auto}
 export const container = {
