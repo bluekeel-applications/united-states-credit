@@ -1,17 +1,22 @@
 // bkform reads its tracking ids from the page URL — `cid1` / `sub1` / `sub2`
 // (→ the Bluekeel console's attribution: source = site key, subsource = sub1),
-// the same slots the third-party form used to read. Only when the visitor
-// arrived WITHOUT ?hsid (user decision — hsid-carrying URLs are left completely
-// untouched): enrich the URL with the session's hitstreet click id + source ids
-// before the form script executes, preserving every existing param, the hash
-// and react-router's history state (its location does not change, so no
-// re-render follows).
+// the same slots the third-party form used to read. Enrich the URL with the
+// session's hitstreet click id + source ids before the form script executes,
+// preserving every existing param, the hash and react-router's history state
+// (its location does not change, so no re-render follows).
+//
+// Every visitor, since 2026-09-17: the routing engine reports a sold lead to
+// bkroute's pixel_fire with `cid1` as the hsid, so a lead without it is a
+// conversion that is never counted. (The vendor-era rule that left
+// ?hsid-carrying URLs alone is superseded; the `hsid` param itself is still
+// never touched.) An id the session does not have is left out rather than
+// written as "null".
 export const enrichUrlWithSession = ({ hsid, sid, eid }) => {
+    if (!hsid) return false;
     const search = new URLSearchParams(window.location.search);
-    if (search.get('hsid') || !hsid) return false;
-    search.set('cid1', hsid);
-    search.set('sub1', sid);
-    search.set('sub2', eid);
+    Object.entries({ cid1: hsid, sub1: sid, sub2: eid }).forEach(([key, value]) => {
+        if (value !== null && value !== undefined && value !== '') search.set(key, value);
+    });
     window.history.replaceState(window.history.state, '', `${window.location.pathname}?${search}${window.location.hash}`);
     return true;
 };
