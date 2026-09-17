@@ -26,7 +26,7 @@ const LegalPageLayout = ({ h1, lede, content }) => (
                 <Toc sections={content.sections} />
                 <article className='legal-copy' style={Styles.legalCopy}>
                     {content.effectiveDate && (
-                        <span className='effective' style={Styles.effective}>Effective: {content.effectiveDate}</span>
+                        <span className='effective' style={Styles.effective}>Effective / Last Updated: {content.effectiveDate}</span>
                     )}
                     {content.intro}
                     {content.sections.map((section) => (

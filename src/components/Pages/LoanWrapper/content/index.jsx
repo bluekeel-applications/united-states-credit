@@ -2,9 +2,14 @@ import privacyPolicy from './privacyPolicy';
 import termsConditions from './termsConditions';
 import eConsent from './eConsent';
 import ratesAndFees from './ratesAndFees';
-import californiaPrivacy from './californiaPrivacy';
 import lendingPolicy from './lendingPolicy';
 import advertiserDisclosure from './advertiserDisclosure';
+import financialPrivacyNotice from './financialPrivacyNotice';
+import californiaFinancialPrivacy from './californiaFinancialPrivacy';
+import marketingCommunications from './marketingCommunications';
+import statePrivacyRights from './statePrivacyRights';
+import privacyChoices from './privacyChoices';
+import cookiesTracking from './cookiesTracking';
 import responsibleBorrowing from './responsibleBorrowing';
 import howItWorksPage from './howItWorksPage';
 
@@ -13,9 +18,14 @@ export const CONTENT_BY_SLUG = {
     'terms': termsConditions,
     'e-consent': eConsent,
     'rates-and-fees': ratesAndFees,
-    'california-privacy': californiaPrivacy,
     'lending-policy': lendingPolicy,
     'advertiser-disclosure': advertiserDisclosure,
+    'financial-privacy-notice': financialPrivacyNotice,
+    'california-financial-privacy': californiaFinancialPrivacy,
+    'marketing-communications': marketingCommunications,
+    'state-privacy-rights': statePrivacyRights,
+    'privacy-choices': privacyChoices,
+    'cookies-tracking': cookiesTracking,
     'responsible-borrowing': responsibleBorrowing,
     'how-it-works': howItWorksPage,
 };

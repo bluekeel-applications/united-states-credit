@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom';
 import LoanLanding from './components/LoanLanding';
 import LegalCenter from './components/LegalCenter';
 import LegalPage from './components/LegalPage';
-import { LEGAL_PAGES, LOANS_HOME } from './loanPages';
+import { LEGAL_PAGES, LEGAL_CENTER_META, LEGACY_SLUGS, LOANS_HOME, pathFor } from './loanPages';
 import { CONTENT_BY_SLUG } from './content';
 import useLoanTrack, { slugFromPathname, titleForSlug } from './useLoanTrack';
 
@@ -61,6 +61,18 @@ const useLoanScroll = () => {
     }, [pathname]);
 };
 
+// A retired slug, or a URL written against the legal package's route map
+// (/loans/legal-center/<slug>), → where that document lives now. The query
+// (tracking ids) and the #section survive; an unknown slug lands on the hub.
+const LegacyRedirect = ({ slug }) => {
+    const params = useParams();
+    const { search, hash } = useLocation();
+    const requested = slug ?? params.slug;
+    const target = LEGACY_SLUGS[requested] ?? requested;
+    const known = LEGAL_PAGES.some((page) => page.slug === target);
+    return <Navigate to={{ pathname: pathFor(known ? target : LEGAL_CENTER_META.slug), search, hash }} replace />;
+};
+
 const LoanWrapper = () => {
     useLoanScroll();
     useLoanPageview();
@@ -84,6 +96,10 @@ const LoanWrapper = () => {
                     element={<LegalPage page={page} content={CONTENT_BY_SLUG[page.slug]} />}
                 />
             ))}
+            {Object.keys(LEGACY_SLUGS).map((slug) => (
+                <Route key={slug} path={slug} element={<LegacyRedirect slug={slug} />} />
+            ))}
+            <Route path='legal-center/:slug' element={<LegacyRedirect />} />
             <Route path='*' element={<Navigate to={LOANS_HOME} replace />} />
         </Routes>
     );

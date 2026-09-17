@@ -12,8 +12,9 @@ import ReviewBanner from './ReviewBanner';
 import { LEGAL_PAGES, LEGAL_CENTER_META, pathFor } from '../loanPages';
 import useLoanTrack from '../useLoanTrack';
 
-// The Legal Center hub — hero + "Important" banner + card grid linking every
-// legal page, in registry order.
+// The Legal Center hub — hero + "Transparency matters." banner + card grid
+// linking every legal page, in registry order. Hero and banner copy are the
+// legal package's index.html.
 const LegalCenter = () => {
     useDocumentMeta(LEGAL_CENTER_META.documentTitle, LEGAL_CENTER_META.metaDescription);
     const track = useLoanTrack();
@@ -31,7 +32,7 @@ const LegalCenter = () => {
                 </section>
                 <section className='section' style={Styles.section}>
                     <div className='container' style={Styles.container}>
-                        <ReviewBanner><strong>Important:</strong> UnitedStatesCredit.com is a marketing and referral service operated by BlueKeel LLC. It is not a lender and does not make credit decisions.</ReviewBanner>
+                        <ReviewBanner><strong>Transparency matters.</strong> UnitedStatesCredit is a loan-matching and financial-information service, not a lender. Review the documents below to understand how the service works and how information is handled. Some legally required permissions are presented separately at the point where information is collected.</ReviewBanner>
                         <div className='legal-grid' style={Styles.legalGrid}>
                             {LEGAL_PAGES.map((page, index) => (
                                 <RouteLink key={page.slug} className='legal-card' style={Styles.legalCard} to={pathFor(page.slug)} onClick={() => track('legal_card_clicked', { slug: page.slug, position: index + 1 })}>

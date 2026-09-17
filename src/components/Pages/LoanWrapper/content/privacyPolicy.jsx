@@ -1,91 +1,164 @@
 import React from 'react';
-import { P, Ul, Li, A, CopyLink } from '../components/Copy';
-import { pathFor } from '../loanPages';
+import { P, Ul, Li, A, H3, CopyLink, Callout, ContactBlock } from '../components/Copy';
+import { pathFor, LEGAL_EFFECTIVE_DATE } from '../loanPages';
 
-// Verbatim port of reference/privacy-policy(1).html — do not edit copy.
+// Verbatim port of reference/usc-legal-center-deploy/privacy-policy.html — do not edit copy.
 const privacyPolicy = {
-    effectiveDate: 'August 4, 2026',
-    intro: <P>UnitedStatesCredit.com helps consumers explore potential personal loan options through participating third parties.</P>,
+    effectiveDate: LEGAL_EFFECTIVE_DATE,
+    intro: <Callout><Callout.Strong>Important:</Callout.Strong> UnitedStatesCredit is not a lender. We collect information directly from consumers to operate our loan-matching service. Certain sensitive application information may be processed for secure transmission to participating lenders, but UnitedStatesCredit does not persistently store Social Security numbers or bank-account information after transmission.</Callout>,
     sections: [
         {
             id: 's1',
-            heading: 'Scope and operator',
-            body: <P>This Privacy Policy applies to UnitedStatesCredit.com and related landing pages and services operated by BlueKeel LLC (“BlueKeel,” “we,” “our,” or “us”). It does not govern a lender or other third party after you leave our site or your information is provided to that party.</P>,
+            heading: '1. Scope and Who We Are',
+            body: (
+                <>
+                    <P>This Privacy Policy describes the privacy practices of UnitedStatesCredit.com ("UnitedStatesCredit," "USC," "we," "us," or "our"). UnitedStatesCredit.com is owned and operated by Bluekeel LLC. This Policy applies to our websites, loan-matching services, communications, and related online services that link to this Policy.</P>
+                    <P>It does not replace any privacy notice supplied by a lender, advertiser, or other third party. When you leave our service or provide information directly to another company, that company's terms and privacy practices apply.</P>
+                </>
+            ),
         },
         {
             id: 's2',
-            heading: 'Information we collect',
+            heading: '2. Information We Collect',
             body: (
                 <>
-                    <P>Depending on how you use the site and the fields presented by a participating form provider, information may include:</P>
+                    <H3>Information you provide directly</H3>
                     <Ul>
-                        <Li>Identifiers such as name, address, email address, phone number, date of birth, and IP address.</Li>
-                        <Li>Financial and application information such as requested loan amount, income, employment, housing, bank-account-related information, and credit profile indicators.</Li>
-                        <Li>Device, browser, cookie, advertising, referral, click, and interaction data.</Li>
-                        <Li>Consent records, timestamps, form interactions, and source information.</Li>
-                        <Li>Information received from service providers, publishers, affiliates, providers, and fraud-prevention partners.</Li>
+                        <Li><strong>Identification and contact information:</strong> first and last name, mailing address, email address, telephone or mobile number, and related contact details.</Li>
+                        <Li><strong>Loan-request information:</strong> requested loan amount and purpose, employment and income information, housing information, date-of-birth or age-related information, and other information used to route or evaluate a loan request.</Li>
+                        <Li><strong>Sensitive lender-application information:</strong> when required for the requested transaction, information may include Social Security number, bank-account or routing information, driver's-license information, or similar identifiers.</Li>
+                        <Li><strong>Communications and preferences:</strong> questions, complaints, marketing preferences, privacy requests, consent records, and opt-out or suppression status.</Li>
                     </Ul>
+                    <H3>Information collected automatically</H3>
+                    <P>We may collect IP address, browser and device information, operating system, referring source, pages viewed, timestamps, campaign and affiliate identifiers, cookies or similar identifiers, fraud-prevention signals, and information about interactions with our website and advertising.</P>
+                    <H3>Information from service providers and partners</H3>
+                    <P>We may receive transaction status, fraud-prevention data, attribution data, lender-routing results, campaign information, and other information from companies that help us operate the service. We do not purchase third-party loan-application lists for resale through the loan-matching service described in this Policy.</P>
                 </>
             ),
         },
         {
             id: 's3',
-            heading: 'How we use information',
-            body: (
-                <Ul>
-                    <Li>Operate, secure, maintain, and improve the site and forms.</Li>
-                    <Li>Process a request and connect or attempt to connect you with participating providers.</Li>
-                    <Li>Validate, route, measure, and report leads and applications.</Li>
-                    <Li>Prevent fraud, abuse, and security incidents.</Li>
-                    <Li>Comply with law, enforce agreements, and maintain consent and transaction records.</Li>
-                    <Li>Communicate with you as authorized by the consent language presented when information is submitted.</Li>
-                </Ul>
-            ),
-        },
-        {
-            id: 's4',
-            heading: 'How information may be disclosed',
+            heading: '3. Sensitive Application Data',
             body: (
                 <>
-                    <P>Information may be disclosed to participating lenders, lending platforms, networks, brokers, lead purchasers, service providers, analytics and advertising vendors, fraud-prevention vendors, legal authorities, and parties involved in a business transfer. A recipient may independently use information under its own privacy policy and legal obligations.</P>
-                    <P>Where applicable, disclosure for cross-context behavioral advertising, lead distribution, or other commercial purposes may be considered a “sale” or “sharing” under certain state privacy laws.</P>
+                    <P>UnitedStatesCredit may process Social Security numbers, bank-account details, routing information, or similar sensitive information only as needed to securely transmit a consumer's requested loan application to participating lenders or financial-service providers.</P>
+                    <Ul>
+                        <Li>We do not use this sensitive information for unrelated marketing.</Li>
+                        <Li>We do not provide it to list-management companies, email marketers, SMS marketers, advertisers, or unrelated marketing companies for marketing purposes.</Li>
+                        <Li>We do not persistently store Social Security numbers or bank-account information after the loan request has been transmitted.</Li>
+                    </Ul>
+                    <P>Limited transaction, consent, routing, security, and audit records that do not contain the full sensitive identifier may be retained where reasonably necessary for compliance, fraud prevention, dispute resolution, or security.</P>
                 </>
             ),
         },
         {
+            id: 's4',
+            heading: '4. How We Use Information',
+            body: (
+                <Ul>
+                    <Li>To receive, process, route, and administer a loan request.</Li>
+                    <Li>To identify participating lenders or financial-service providers that may consider the request.</Li>
+                    <Li>To securely transmit application information to participating lenders.</Li>
+                    <Li>To operate routing, fraud-prevention, security, analytics, and compliance systems.</Li>
+                    <Li>To communicate about the request and provide customer support.</Li>
+                    <Li>To maintain records of consent, disclosures, privacy choices, and suppression requests.</Li>
+                    <Li>To improve our services, user experience, and advertising attribution.</Li>
+                    <Li>To conduct email, SMS, telephone, direct-mail, or other marketing where permitted by law and where any legally required consent has been obtained.</Li>
+                    <Li>To comply with law, legal process, regulatory requests, and enforceable contractual obligations.</Li>
+                </Ul>
+            ),
+        },
+        {
             id: 's5',
-            heading: 'Consumer reports and verification',
-            body: <P>BlueKeel does not make credit decisions. A participating provider may request authorization to obtain a consumer report, alternative consumer report, bank-transaction data, employment or income verification, identity verification, or other information. Any authorization should appear in the live form or provider process and is governed by the party requesting it.</P>,
+            heading: '5. Loan-Matching Disclosures',
+            body: (
+                <>
+                    <P>When you ask us to connect you with a lender, we may disclose the information necessary to process your request to participating lenders and financial-service providers. This may include sensitive application information if required for the requested transaction.</P>
+                    <P>UnitedStatesCredit does not make the lender's credit decision and does not itself obtain a consumer credit report or conduct a hard or soft credit inquiry. A participating lender may obtain or use a consumer report where permitted by law and by the lender's applicable authorization and disclosures.</P>
+                </>
+            ),
         },
         {
             id: 's6',
-            heading: 'Cookies and analytics',
-            body: <P>We and our vendors may use cookies, pixels, local storage, and similar technologies to operate the site, remember settings, measure performance, attribute advertising, detect fraud, and understand interactions. Browser controls may allow you to block certain technologies, though parts of the site may not work correctly.</P>,
+            heading: '6. First-Party Marketing Records and List Management',
+            body: (
+                <>
+                    <P>UnitedStatesCredit may retain limited first-party contact information collected directly from consumers, including name, mailing address, email address, mobile or telephone number, source information, communication preferences, and consent or suppression records.</P>
+                    <P>We may provide those limited records to contracted list-management or marketing companies that store and actively manage UnitedStatesCredit's first-party marketing records, select or deploy third-party offers, administer campaigns, and provide related marketing services. Those companies may be compensated through management fees, campaign economics, revenue-sharing arrangements, or a combination of those structures.</P>
+                    <P>Our agreements are intended to preserve UnitedStatesCredit's ownership or control of the underlying records and restrict unauthorized sale, transfer, or independent use of the records outside the agreed services. Where applicable law requires affirmative authorization before a record may be disclosed for these activities, we will obtain that authorization before the disclosure.</P>
+                    <P>The marketing dataset supplied for these activities does not include Social Security numbers, bank-account numbers, routing numbers, or similar sensitive lender-application information.</P>
+                </>
+            ),
         },
         {
             id: 's7',
-            heading: 'Communications and choices',
-            body: <P>Calls, texts, or emails will be made only as described in the specific consent language associated with a submission. Consent is not a condition of purchasing a product or service unless expressly stated by applicable law. You may follow unsubscribe instructions, reply STOP to eligible texts, or ask a caller to place you on its internal do-not-call list. Opting out from BlueKeel does not automatically opt you out from third parties that previously received your information.</P>,
+            heading: '7. Other Service Providers',
+            body: <P>We may provide information to hosting providers, security and fraud-prevention vendors, analytics providers, communications vendors, compliance vendors, data processors, professional advisers, and other companies that perform services for us. We require appropriate contractual, privacy, confidentiality, and security restrictions when required by law.</P>,
         },
         {
             id: 's8',
-            heading: 'Data retention and security',
-            body: <P>We retain information for legitimate business, compliance, fraud-prevention, dispute, and recordkeeping purposes. We use commercially reasonable administrative, technical, and physical safeguards, but no transmission or storage system is guaranteed to be completely secure.</P>,
+            heading: '8. Advertising, Analytics, and Cookies',
+            body: (
+                <>
+                    <P>We and our providers may use cookies, pixels, tags, local storage, and similar technology to operate the site, remember preferences, measure traffic, prevent fraud, attribute advertising, and support advertising or analytics. Certain activities may be treated as a "sale," "sharing," or targeted advertising under some state privacy laws even where money is not paid for the specific disclosure.</P>
+                    <P>See our <CopyLink to={pathFor('cookies-tracking')}>Cookie & Tracking Technologies Notice</CopyLink> and <CopyLink to={pathFor('privacy-choices')}>Your Privacy Choices</CopyLink> page for more information.</P>
+                </>
+            ),
         },
         {
             id: 's9',
-            heading: 'Privacy rights',
-            body: <P>Depending on where you live, you may have rights to request access, correction, deletion, portability, or information about disclosure, and to opt out of certain sale, sharing, targeted advertising, or profiling. We may need to verify your identity. Submit requests to <A href='mailto:info@bluekeel.com'>info@bluekeel.com</A>. California residents should also review the <CopyLink to={pathFor('california-privacy')}>California Privacy Notice</CopyLink>.</P>,
+            heading: '9. Other Disclosures',
+            body: <P>We may disclose information as reasonably necessary to protect the security or integrity of our systems; prevent fraud, identity theft, abuse, or unauthorized transactions; respond to subpoenas, court orders, government or regulatory requests; protect our rights or the rights and safety of others; or complete a merger, acquisition, financing, restructuring, sale, or transfer of all or part of our business, subject to applicable law.</P>,
         },
         {
             id: 's10',
-            heading: 'Children and U.S. audience',
-            body: <P>The site is intended for adults age 18 or older and for use in the United States. We do not knowingly collect personal information from children under 13.</P>,
+            heading: '10. Financial Privacy',
+            body: <P>Information collected in connection with a request for a financial product or service may be subject to federal or state financial-privacy laws. Our <CopyLink to={pathFor('financial-privacy-notice')}>Financial Privacy Notice</CopyLink> describes these practices in more detail. California consumers should also review our <CopyLink to={pathFor('california-financial-privacy')}>California Financial Privacy Notice</CopyLink>.</P>,
         },
         {
             id: 's11',
-            heading: 'Changes and contact',
-            body: <P>We may update this policy by posting a revised version and effective date. Contact: BlueKeel LLC, 899 Skokie Blvd, Suite 340, Northbrook, IL 60062; <A href='mailto:info@bluekeel.com'>info@bluekeel.com</A>.</P>,
+            heading: '11. Your Privacy Rights',
+            body: (
+                <>
+                    <P>Depending on where you live and the law that applies to the information, you may have rights to access, correct, delete, or obtain a copy of personal information; opt out of certain sales, sharing, targeted advertising, or profiling; limit certain uses of sensitive information; withdraw consent; or appeal a privacy-request decision.</P>
+                    <P>See <CopyLink to={pathFor('state-privacy-rights')}>U.S. State Privacy Rights</CopyLink> and <CopyLink to={pathFor('privacy-choices')}>Your Privacy Choices</CopyLink>.</P>
+                </>
+            ),
+        },
+        {
+            id: 's12',
+            heading: '12. Marketing Choices',
+            body: <P>You may unsubscribe from commercial email using the unsubscribe link in the message. For supported SMS campaigns, you may reply STOP to stop future marketing texts from that sender or campaign. You may also contact us at <A href='mailto:info@bluekeel.com'>info@bluekeel.com</A>. We may retain limited suppression information to ensure that an opt-out continues to be honored.</P>,
+        },
+        {
+            id: 's13',
+            heading: '13. Data Retention',
+            body: (
+                <>
+                    <P>We retain personal information only for as long as reasonably necessary for the purpose for which it was collected, including transaction administration, fraud prevention, security, legal compliance, dispute resolution, consent evidence, suppression records, and legitimate business operations. Different categories may have different retention periods.</P>
+                    <P>Social Security numbers and bank-account information submitted for lender transmission are not persistently retained by UnitedStatesCredit after transmission of the request.</P>
+                </>
+            ),
+        },
+        {
+            id: 's14',
+            heading: '14. Security',
+            body: <P>We maintain administrative, technical, and physical safeguards designed to protect personal information against unauthorized access, use, alteration, or disclosure. No system can be guaranteed to be completely secure, and consumers should use appropriate care when transmitting information online.</P>,
+        },
+        {
+            id: 's15',
+            heading: '15. Children',
+            body: <P>Our loan-matching services are intended for adults who are legally able to enter into financial transactions. We do not knowingly offer the loan-matching service to children.</P>,
+        },
+        {
+            id: 's16',
+            heading: '16. Changes to this Policy',
+            body: <P>We may update this Policy to reflect changes in our services, practices, technology, or legal obligations. The date at the top identifies the current version. Where required by law, we will provide additional notice or obtain additional consent before materially changing how previously collected information is used or disclosed.</P>,
+        },
+        {
+            id: 's17',
+            heading: '17. Contact',
+            body: <ContactBlock />,
         },
     ],
 };
