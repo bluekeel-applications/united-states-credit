@@ -3,7 +3,7 @@ import Radium from 'radium';
 import Styles from './LoanLanding.css';
 
 const STEPS = [
-    { number: '1', title: 'Complete the form', copy: 'Provide the information requested through the lender-controlled secure form.' },
+    { number: '1', title: 'Complete the form', copy: "Provide the requested information through UnitedStatesCredit's secure online request form." },
     { number: '2', title: 'Receive a response', copy: 'A participating provider may respond based on its own eligibility criteria.' },
     { number: '3', title: 'Review before accepting', copy: 'Compare APR, fees, payment schedule, and all provider disclosures.' },
 ];

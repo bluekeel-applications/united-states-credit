@@ -42,7 +42,7 @@ const SiteFooter = () => {
                     </nav>
                 </div>
             </div>
-            <div className='footer-bottom' style={Styles.footerBottom}>© 2026 BlueKeel LLC. All rights reserved. United States Credit is a marketing and referral service, not a lender, creditor, broker, bank, or financial advisor. Availability and terms vary by provider, applicant qualifications, and state law.</div>
+            <div className='footer-bottom' style={Styles.footerBottom}>© 2026 BlueKeel LLC. All rights reserved. United States Credit is a marketing and referral service, not a lender, creditor, bank, or financial advisor. Availability and terms vary by provider, applicant qualifications, and state law.</div>
         </div>
     </footer>
     );

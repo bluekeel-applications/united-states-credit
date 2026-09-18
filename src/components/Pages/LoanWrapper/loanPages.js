@@ -29,8 +29,14 @@ export const LEGAL_EFFECTIVE_DATE = 'September 16, 2026';
 export const LEGAL_LAST_UPDATED = 'September 17, 2026';
 
 // Identifies the legal text a visitor was shown (stamped on every legal
-// article as data-legal-version). 1.0 is git tag legal-v1.0.
-export const LEGAL_CONTENT_VERSION = '2.0';
+// article as data-legal-version, and sent to the loan form). 1.0 is git tag
+// legal-v1.0; 2.0 is commit 43a5672.
+export const LEGAL_CONTENT_VERSION = '2.1';
+
+// The four documents the loan form links to (Notice at Collection, FCRA
+// Authorization & Disclosure, Marketplace Partners, Marketing Partners) were
+// added with the loan-form compliance patch. 2.1 = 2.0 plus those documents.
+export const LOAN_FORM_DOCS_EFFECTIVE_DATE = 'September 18, 2026';
 
 // `footer` is optional: a page without one is reached from the Legal Center
 // hub and from in-copy links only.
@@ -139,6 +145,42 @@ export const LEGAL_PAGES = [
         lede: 'How cookies, analytics, advertising, and browser privacy signals are handled.',
         card: { kicker: 'Cookies', title: 'Cookie & Tracking Technologies Notice', blurb: 'How cookies, analytics, advertising, and browser privacy signals are handled.' },
     },
+    // The loan form's own documents (the loan-form compliance patch, 2026-09-18):
+    // linked from the form's steps and consents, so their slugs are part of the
+    // SDK's contract (bkform `data-legal-base` + these slugs).
+    {
+        slug: 'notice-at-collection',
+        h1: 'Notice at Collection',
+        documentTitle: 'Notice at Collection | United States Credit Legal Center',
+        metaDescription: 'What personal information the loan request form collects, why, how long it is kept, and your choices.',
+        lede: 'What personal information the loan request form collects, why, how long it is kept, and your choices.',
+        card: { kicker: 'Before you start', title: 'Notice at Collection', blurb: 'What the loan request form collects, why, how long it is kept, and your choices.' },
+        footer: { column: 'legal', label: 'Notice at Collection' },
+    },
+    {
+        slug: 'fcra-authorization',
+        h1: 'FCRA Authorization & Disclosure',
+        documentTitle: 'FCRA Authorization & Disclosure | United States Credit Legal Center',
+        metaDescription: 'The consumer-report authorization you give when you submit a loan request.',
+        lede: 'The consumer-report authorization you give when you submit a loan request.',
+        card: { kicker: 'Credit reports', title: 'FCRA Authorization & Disclosure', blurb: 'The consumer-report authorization you give when you submit a loan request.' },
+    },
+    {
+        slug: 'marketplace-partners',
+        h1: 'Marketplace Partners',
+        documentTitle: 'Marketplace Partners | United States Credit',
+        metaDescription: 'The companies that may participate in evaluating, matching, or responding to a loan request.',
+        lede: 'The companies that may participate in evaluating, matching, or responding to a loan request.',
+        card: { kicker: 'Who receives a request', title: 'Marketplace Partners', blurb: 'The companies that may participate in evaluating, matching, or responding to a loan request.' },
+    },
+    {
+        slug: 'marketing-partners',
+        h1: 'Marketing Partners',
+        documentTitle: 'Marketing Partners | United States Credit',
+        metaDescription: 'The companies and brands that may send promotional communications under the optional marketing consent.',
+        lede: 'The companies and brands that may send promotional communications under the optional marketing consent.',
+        card: { kicker: 'Marketing', title: 'Marketing Partners', blurb: 'The companies and brands that may send promotional communications under the optional marketing consent.' },
+    },
     {
         slug: 'responsible-borrowing',
         h1: 'Responsible Borrowing',
@@ -171,3 +213,15 @@ export const LEGACY_SLUGS = {
 };
 
 export const CONTACT_EMAIL = 'info@bluekeel.com';
+
+// The Marketing Partners list: the list managers and sender brands that may
+// send promotional communications under the form's optional marketing consent.
+// Versioned because a consent is tied to the list in force when it was given
+// (the form sends the version with its consent evidence). Owner's statement,
+// 2026-09-18: no marketing partner is active. Add entries here, bump the
+// version, and the page and the form pick both up.
+export const MARKETING_PARTNERS = {
+    version: '2026-09-18.1',
+    updated: 'September 18, 2026',
+    partners: [],
+};

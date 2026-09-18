@@ -10,6 +10,10 @@ import marketingCommunications from './marketingCommunications';
 import statePrivacyRights from './statePrivacyRights';
 import privacyChoices from './privacyChoices';
 import cookiesTracking from './cookiesTracking';
+import noticeAtCollection from './noticeAtCollection';
+import fcraAuthorization from './fcraAuthorization';
+import marketplacePartners from './marketplacePartners';
+import marketingPartners from './marketingPartners';
 import responsibleBorrowing from './responsibleBorrowing';
 import howItWorksPage from './howItWorksPage';
 
@@ -26,6 +30,10 @@ export const CONTENT_BY_SLUG = {
     'state-privacy-rights': statePrivacyRights,
     'privacy-choices': privacyChoices,
     'cookies-tracking': cookiesTracking,
+    'notice-at-collection': noticeAtCollection,
+    'fcra-authorization': fcraAuthorization,
+    'marketplace-partners': marketplacePartners,
+    'marketing-partners': marketingPartners,
     'responsible-borrowing': responsibleBorrowing,
     'how-it-works': howItWorksPage,
 };

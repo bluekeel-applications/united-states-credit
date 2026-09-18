@@ -3,7 +3,7 @@ import Radium from 'radium';
 import Styles from './LegalPageLayout.css';
 import { P, Ul, Li } from './Copy';
 import { CONTACT_EMAIL } from '../loanPages';
-import { privacyRequestEndpoint } from '../privacy.config';
+import { privacyRequestEndpoint } from '../services.config';
 import { privacyState, optOutThisBrowser } from '../../../../utils/privacy';
 
 // The working parts of the Your Privacy Choices page. Nothing here is

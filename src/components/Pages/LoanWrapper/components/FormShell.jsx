@@ -16,7 +16,7 @@ const FormShell = ({ showMock = false, children }) => (
         <div className='brand-rule' style={Styles.brandRule} />
         <div className='form-head' style={Styles.formHead}>
             <h2 style={Styles.formHeadH2}>See your available options</h2>
-            {showMock && <p style={Styles.formHeadP}>Static preview of the lender-controlled form area</p>}
+            {showMock && <p style={Styles.formHeadP}>Static preview of the request form area</p>}
         </div>
         {children}
         {showMock && <div className='form-note' style={Styles.formNote}>Visualization only — no external script or data collection is active on this preview.</div>}

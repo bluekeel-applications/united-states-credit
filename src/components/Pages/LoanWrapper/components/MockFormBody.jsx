@@ -22,7 +22,7 @@ const MockFormBody = () => (
         <div className='field-label' style={Styles.fieldLabel}>What is the loan for?</div>
         <div className='fake-select' style={Styles.fakeSelect}><span>Select a purpose</span><span>⌄</span></div>
         <div className='primary-btn' style={Styles.primaryBtn}>Continue</div>
-        <p className='consent-preview' style={Styles.consentPreview}>The live lender form will display required consent, data-sharing, contact, and consumer-report authorization language here before submission.</p>
+        <p className='consent-preview' style={Styles.consentPreview}>The live request form displays the required consent, data-sharing, contact, and consumer-report authorization language here before submission.</p>
     </div>
 );
 

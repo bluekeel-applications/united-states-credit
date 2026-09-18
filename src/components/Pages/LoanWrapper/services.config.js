@@ -1,0 +1,33 @@
+// The Bluekeel services the /loans pages talk to, per host — the same split as
+// bkform.config.js. Both live in APIS/bluekeel-tools:
+//
+//   privacy-requests     the Your Privacy Choices form posts here
+//                        (contract: its src/reference/PRIVACY_REQUESTS.md)
+//   marketplace-partners the Marketplace Partners page reads the current list
+//                        here (src/reference/MARKETPLACE_PARTNERS.md)
+//
+// A host with no endpoint degrades honestly: the privacy page shows the email
+// route instead of the form, the partners page says the list is unavailable.
+// Production stays empty until each service's prod stage is deployed and its
+// URL is set here.
+const DEV_HOSTS = ['staging.unitedstatescredit.com', 'localhost', '127.0.0.1'];
+
+const DEV = {
+    // privacy-requests dev stage (deployed 2026-09-17). Answers only to the DEV_HOSTS origins.
+    privacyRequest: 'https://n928g1nsuc.execute-api.us-east-1.amazonaws.com/dev/privacy-request',
+    // marketplace-partners dev stage (deployed 2026-09-18; first pull the same day).
+    marketplacePartners: 'https://b35i57ojg0.execute-api.us-east-1.amazonaws.com/dev/marketplace-partners',
+};
+
+const PROD = {
+    privacyRequest: null,
+    marketplacePartners: null,
+};
+
+const targets = (hostname) => (DEV_HOSTS.includes(hostname) ? DEV : PROD);
+
+export const privacyRequestEndpoint = (hostname = window.location.hostname) =>
+    process.env.REACT_APP_PRIVACY_REQUEST_ENDPOINT || targets(hostname).privacyRequest;
+
+export const marketplacePartnersEndpoint = (hostname = window.location.hostname) =>
+    process.env.REACT_APP_MARKETPLACE_PARTNERS_ENDPOINT || targets(hostname).marketplacePartners;
