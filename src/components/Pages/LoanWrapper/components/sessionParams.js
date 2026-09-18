@@ -11,10 +11,18 @@
 // ?hsid-carrying URLs alone is superseded; the `hsid` param itself is still
 // never touched.) An id the session does not have is left out rather than
 // written as "null".
-export const enrichUrlWithSession = ({ hsid, sid, eid }) => {
+//
+// `gclid` too (2026-09-18), under Google's own name: when no lender takes the
+// lead, bkform sends the applicant to a decline offer stamped the way this
+// site's own offer pages stamp their partner links (OfferBlockPage.jsx) —
+// `eid=block-<sid>-<eid>&subid2=<hsid>&gclid=…` — and the engine can only add
+// a gclid it was given. The session's value is what the landing URL carried
+// (App.jsx); nothing cookies it, so a visitor who reloads without it has none,
+// exactly as on the offer-block page.
+export const enrichUrlWithSession = ({ hsid, sid, eid, gclid }) => {
     if (!hsid) return false;
     const search = new URLSearchParams(window.location.search);
-    Object.entries({ cid1: hsid, sub1: sid, sub2: eid }).forEach(([key, value]) => {
+    Object.entries({ cid1: hsid, sub1: sid, sub2: eid, gclid }).forEach(([key, value]) => {
         if (value !== null && value !== undefined && value !== '') search.set(key, value);
     });
     window.history.replaceState(window.history.state, '', `${window.location.pathname}?${search}${window.location.hash}`);

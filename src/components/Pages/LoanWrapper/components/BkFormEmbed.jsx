@@ -40,9 +40,10 @@ const BkFormEmbed = ({ mockOnly = false }) => {
     const [failed, setFailed] = useState(false);
 
     // Session ids for the URL enrichment. hsid is committed before /loans can
-    // render (App's loading gate) and is write-once.
+    // render (App's loading gate) and is write-once. gclid is whatever the
+    // landing URL carried (null otherwise) — it rides bkform's decline offer.
     const { trackingState } = useContext(AppContext);
-    const { hsid, sid, eid } = trackingState;
+    const { hsid, sid, eid, gclid } = trackingState;
 
     // Latest-ref pattern: the embed effect must not re-run when track's
     // identity changes (that would re-inject the script), but events should
@@ -64,9 +65,9 @@ const BkFormEmbed = ({ mockOnly = false }) => {
         const testLender = targets.dev ? (new URLSearchParams(window.location.search).get('test') || null) : null;
         const emit = (name, params = {}) => trackRef.current(name, { form_vendor: 'bk', ...(testLender ? { test_lender: testLender } : {}), ...params });
 
-        // bkform reads cid1/sub1/sub2 from the URL when it mounts — before the
-        // script tag goes in.
-        enrichUrlWithSession({ hsid, sid, eid });
+        // bkform reads cid1/sub1/sub2 (and gclid) from the URL when it mounts —
+        // before the script tag goes in.
+        enrichUrlWithSession({ hsid, sid, eid, gclid });
 
         // This card already draws the frame, so switch bkform's own border and
         // shadow off and hand it the page's font. Set imperatively (bkform's
