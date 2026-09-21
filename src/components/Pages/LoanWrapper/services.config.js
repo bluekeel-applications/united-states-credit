@@ -19,9 +19,10 @@ const DEV = {
     marketplacePartners: 'https://b35i57ojg0.execute-api.us-east-1.amazonaws.com/dev/marketplace-partners',
 };
 
+// Both prod stages deployed 2026-09-21; they answer only to the www and apex origins.
 const PROD = {
-    privacyRequest: null,
-    marketplacePartners: null,
+    privacyRequest: 'https://m9ard1uzaa.execute-api.us-east-1.amazonaws.com/prod/privacy-request',
+    marketplacePartners: 'https://luyu5pvptg.execute-api.us-east-1.amazonaws.com/prod/marketplace-partners',
 };
 
 const targets = (hostname) => (DEV_HOSTS.includes(hostname) ? DEV : PROD);
