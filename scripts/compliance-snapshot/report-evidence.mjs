@@ -104,7 +104,11 @@ if (args.screenshots && existsSync(CHROME)) {
             put(`network-${name}.txt`, `${requests.join('\n')}\n`, `every request the page made while loading (CDP Network.requestWillBeSent) — expected: the document only`);
         }
         ws.close();
-    } finally { chrome.kill(); rmSync(profile, { recursive: true, force: true }); }
+    } finally {
+        chrome.kill();
+        await new Promise((r) => setTimeout(r, 800));
+        try { rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 300 }); } catch (e) { console.warn(`  (temp profile ${profile} left behind: ${e.message})`); }
+    }
 }
 
 writeFileSync(join(OUT, 'INDEX.md'), `# Compliance snapshot evidence — ${ORIGIN} — build ${liveJson.build.git_sha}\n\nCollected ${new Date().toISOString()} by scripts/compliance-snapshot/report-evidence.mjs.\n\n| File | sha256 | Produced by |\n|---|---|---|\n${index.map((i) => `| ${i.name} | ${i.sha256} | \`${i.how.replace(/\|/g, '\\|')}\` |`).join('\n')}\n`);

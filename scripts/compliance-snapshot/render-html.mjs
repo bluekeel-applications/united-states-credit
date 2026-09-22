@@ -324,6 +324,7 @@ const shell = ({ m, kind, title, subtitle, body, tocItems }) => `<!DOCTYPE html>
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="usc-build" content="${esc(m.build.git_sha || '')}">
 <meta name="usc-snapshot" content="${esc(`${m.environment} ${m.generated_at}`)}">
+<link rel="icon" href="data:,">
 <title>${esc(title)}</title>
 <style id="snap-css">${CSS}</style>
 </head>
