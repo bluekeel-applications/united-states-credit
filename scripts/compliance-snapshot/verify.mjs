@@ -203,11 +203,13 @@ async function verifyLive() {
         const url = `${origin}${route}`;
         let out = null;
         try {
-            out = execFileSync('curl', ['-sSL', '-D', '-', '-o', '-', '-w', '\n__CURLW__ %{http_code} %{content_type} %{num_redirects} %{url_effective}', url], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: 60000 });
+            // Tab-separated: the content type carries a space ("text/html; charset=utf-8").
+            out = execFileSync('curl', ['-sSL', '-D', '-', '-o', '-', '-w', '\n__CURLW__\t%{http_code}\t%{content_type}\t%{num_redirects}\t%{url_effective}', url], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: 60000 });
         } catch (e) { curls[route] = { error: e.message }; continue; }
-        const m = out.match(/__CURLW__ (\d+) (\S+) (\d+) (\S+)\s*$/);
+        const m = out.match(/__CURLW__\t(\d+)\t([^\t]*)\t(\d+)\t(\S*)\s*$/);
+        if (!m) { curls[route] = { error: `could not parse curl output: ${out.slice(-160).replace(/\s+/g, ' ')}` }; continue; }
         const headerEnd = out.indexOf('\r\n\r\n');
-        curls[route] = { status: Number(m?.[1]), type: m?.[2], redirects: Number(m?.[3]), effective: m?.[4], headers: out.slice(0, headerEnd).toLowerCase(), body: out.slice(headerEnd + 4, out.lastIndexOf('__CURLW__')) };
+        curls[route] = { status: Number(m[1]), type: m[2], redirects: Number(m[3]), effective: m[4], headers: out.slice(0, headerEnd).toLowerCase(), body: out.slice(headerEnd + 4, out.lastIndexOf('__CURLW__')) };
     }
     const l01 = ROUTES.filter((r) => { const c = curls[r]; if (!c || c.error) return true; const typeOk = r.endsWith('.json') ? /application\/json/.test(c.type) : /text\/html/.test(c.type); const hostOk = c.effective.startsWith(origin); return !(c.status === 200 && typeOk && (args['allow-redirects'] || c.redirects === 0) && hostOk); });
     expect('L01', 'curl -L: 200, right content type, no redirect, same host, for all four routes', !l01.length, l01.map((r) => `${r}: ${JSON.stringify({ status: curls[r]?.status, type: curls[r]?.type, redirects: curls[r]?.redirects, effective: curls[r]?.effective, error: curls[r]?.error })}`).join('; ') || ROUTES.map((r) => `${r} ${curls[r].status}`).join(', '));
