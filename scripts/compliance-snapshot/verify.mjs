@@ -134,7 +134,8 @@ async function verifyBuild() {
     // Scanned as markup, not collapsed text: tags keep "info@bluekeel.com" and
     // the next word apart. Partner blocks are exempt (license numbers).
     const scrubbed = Object.fromEntries(Object.entries(docs).map(([k, d]) => { const c = d.body.cloneNode(true); for (const el of c.querySelectorAll('[data-snapshot-partners], [data-snapshot-page="marketplace-partners"], [data-sha256], .snap-hash')) { if (el.matches('[data-sha256]') && !el.matches('[data-snapshot-partners], [data-snapshot-page="marketplace-partners"]')) el.removeAttribute('data-sha256'); else el.remove(); } return [k, c.innerHTML]; }));
-    const jsonScrub = JSON.parse(JSON.stringify(json)); delete jsonScrub.partner_lists; if (jsonScrub.legal_center?.pages) jsonScrub.legal_center.pages = jsonScrub.legal_center.pages.filter((p) => p.slug !== 'marketplace-partners'); delete jsonScrub.hashes;
+    // Build metadata (commit ids, the GitHub run id) and hashes are digit runs by nature; partner license numbers are public.
+    const jsonScrub = JSON.parse(JSON.stringify(json)); delete jsonScrub.partner_lists; delete jsonScrub.build; delete jsonScrub.production; delete jsonScrub.hashes; if (jsonScrub.legal_center?.pages) jsonScrub.legal_center.pages = jsonScrub.legal_center.pages.filter((p) => p.slug !== 'marketplace-partners');
     scrubbed.json = JSON.stringify(jsonScrub);
     for (const [name, text] of Object.entries(scrubbed)) {
         for (const [label, re] of APPLICANT) { const m = text.match(re); if (m) applicantProblems.push(`${name}: ${label} "${m[0]}"`); }
