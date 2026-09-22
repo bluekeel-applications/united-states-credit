@@ -1,6 +1,5 @@
 import React from 'react';
 import Radium from 'radium';
-import RouteLink from './RouteLink';
 import Styles from './LegalCenter.css';
 import LayoutStyles from './LegalPageLayout.css';
 import { pageRoot } from '../theme';
@@ -8,16 +7,14 @@ import useDocumentMeta from '../../../../utils/hooks/useDocumentMeta';
 import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';
 import Breadcrumbs from './Breadcrumbs';
-import ReviewBanner from './ReviewBanner';
-import { LEGAL_PAGES, LEGAL_CENTER_META, pathFor } from '../loanPages';
-import useLoanTrack from '../useLoanTrack';
+import LegalCenterBody from './LegalCenterBody';
+import { LEGAL_CENTER_META } from '../loanPages';
 
-// The Legal Center hub — hero + "Transparency matters." banner + card grid
-// linking every legal page, in registry order. Hero and banner copy are the
-// legal package's index.html.
+// The Legal Center hub — hero + the body (LegalCenterBody: the "Transparency
+// matters." banner and the card grid linking every legal page, in registry
+// order). Hero copy is the legal package's index.html.
 const LegalCenter = () => {
     useDocumentMeta(LEGAL_CENTER_META.documentTitle, LEGAL_CENTER_META.metaDescription);
-    const track = useLoanTrack();
 
     return (
         <div className='lw-page' style={pageRoot}>
@@ -32,16 +29,7 @@ const LegalCenter = () => {
                 </section>
                 <section className='section' style={Styles.section}>
                     <div className='container' style={Styles.container}>
-                        <ReviewBanner><strong>Transparency matters.</strong> UnitedStatesCredit is a loan-matching and financial-information service, not a lender. Review the documents below to understand how the service works and how information is handled. Some legally required permissions are presented separately at the point where information is collected.</ReviewBanner>
-                        <div className='legal-grid' style={Styles.legalGrid}>
-                            {LEGAL_PAGES.map((page, index) => (
-                                <RouteLink key={page.slug} className='legal-card' style={Styles.legalCard} to={pathFor(page.slug)} onClick={() => track('legal_card_clicked', { slug: page.slug, position: index + 1 })}>
-                                    <small style={Styles.cardKicker}>{page.card.kicker}</small>
-                                    <h2 style={Styles.cardTitle}>{page.card.title}</h2>
-                                    <p style={Styles.cardBlurb}>{page.card.blurb}</p>
-                                </RouteLink>
-                            ))}
-                        </div>
+                        <LegalCenterBody />
                     </div>
                 </section>
             </main>

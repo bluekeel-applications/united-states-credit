@@ -6,7 +6,7 @@ import MockFormBody from './MockFormBody';
 import { enrichUrlWithSession, stripTestParam } from './sessionParams';
 import { COLORS, FONT_STACK } from '../theme';
 import useLoanTrack from '../useLoanTrack';
-import { AppContext } from '../../../../context';
+import { AppContext } from '../../../../context/AppContext';
 import { BKFORM_CONTAINER_ID, BKFORM_SITE_KEY, bkformTargets } from '../bkform.config';
 import { LOANS_HOME, LEGAL_CONTENT_VERSION, MARKETING_PARTNERS } from '../loanPages';
 

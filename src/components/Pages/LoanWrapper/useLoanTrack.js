@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import { AppContext } from '../../../context';
+import { AppContext } from '../../../context/AppContext';
 import trackOfferEvent from '../../../utils/trackOfferEvent';
 import { LOANS_HOME, HOME_META, LEGAL_CENTER_META, LEGAL_PAGES } from './loanPages';
 

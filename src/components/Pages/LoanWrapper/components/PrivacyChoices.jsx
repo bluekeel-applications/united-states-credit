@@ -38,20 +38,38 @@ const EITHER_NOTE = 'an email address or a phone number is required for this req
 const OPT_OUT_APPLIED ='Your opt-out preference is applied to this browser.';
 const OPT_OUT_ERROR = `We could not confirm that your preference was applied. Please try again or contact ${CONTACT_EMAIL}.`;
 
+// Every status line the page can show, so the compliance snapshot can list
+// them all; the components below are what shows them.
+export const STATUS_COPY = Object.freeze({
+    success: SUCCESS,
+    successExample: SUCCESS('[reference number]'),
+    failure: FAILURE,
+    eitherNote: EITHER_NOTE,
+    optOutApplied: OPT_OUT_APPLIED,
+    optOutError: OPT_OUT_ERROR,
+});
+
 // Untracked on purpose (Copy's <A> reports mailto clicks to analytics).
 const A = ({ href, children }) => <a style={Styles.copyLink} href={href}>{children}</a>;
 
-const requestMailto = (label) =>
+export const requestMailto = (label) =>
     `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Privacy Request: ${label}`)}`;
 
-// What this browser's preference actually is — read from the state the page
-// was loaded under, so "applied" is only ever said when it was.
-export const PrivacySignalStatus = () => {
-    const { gpc, optedOut } = privacyState();
-    let message = 'No Global Privacy Control signal was detected. You can still use the privacy choices below.';
-    if (optedOut) message = gpc ? `Global Privacy Control is on. ${OPT_OUT_APPLIED}` : OPT_OUT_APPLIED;
-    return <div className='gpc-status' style={Styles.gpcStatus} role='status'>{message}</div>;
-};
+// The three things the signal line can say, by the state the page was loaded
+// under — so "applied" is only ever said when it was.
+export const SIGNAL_COPY = Object.freeze({
+    none: 'No Global Privacy Control signal was detected. You can still use the privacy choices below.',
+    optedOut: OPT_OUT_APPLIED,
+    gpcOptedOut: `Global Privacy Control is on. ${OPT_OUT_APPLIED}`,
+});
+
+export const signalMessage = ({ gpc, optedOut }) => (optedOut ? (gpc ? SIGNAL_COPY.gpcOptedOut : SIGNAL_COPY.optedOut) : SIGNAL_COPY.none);
+
+// What this browser's preference actually is. A render for a named state
+// (the compliance snapshot's variants) passes it; the page reads its own.
+export const PrivacySignalStatus = ({ state = privacyState() }) => (
+    <div className='gpc-status' style={Styles.gpcStatus} role='status'>{signalMessage(state)}</div>
+);
 
 // The browser-level opt-out: no name, email or verification. The page reloads
 // once the choice is stored, so it comes back with every covered tag never
@@ -83,10 +101,10 @@ export const ChoiceGrid = Radium(({ children }) => (
 
 // One request tile. With the form on the page its button jumps there with the
 // request type chosen (a plain anchor if scripting is off); without it, the
-// button is the prefilled email.
-export const Choice = Radium(({ title, requestType, primary, children }) => {
+// button is the prefilled email. `hasForm` is this host's answer unless a
+// render for a named variant (the compliance snapshot) says otherwise.
+export const Choice = Radium(({ title, requestType, primary, children, hasForm = !!privacyRequestEndpoint() }) => {
     const type = REQUEST_TYPES.find((entry) => entry.value === requestType);
-    const hasForm = !!privacyRequestEndpoint();
     const preselect = () => document.dispatchEvent(new CustomEvent(PRESELECT_EVENT, { detail: requestType }));
 
     return (
@@ -228,10 +246,9 @@ const RequestForm = Radium(({ endpoint }) => {
 });
 
 // "Submit a Privacy Request": the form where this host has an intake to post
-// to, otherwise the same request types as prefilled emails.
-export const PrivacyRequest = () => {
-    const endpoint = privacyRequestEndpoint();
-
+// to, otherwise the same request types as prefilled emails. The endpoint is
+// this host's unless a render for a named variant passes one (or none).
+export const PrivacyRequest = ({ endpoint = privacyRequestEndpoint() }) => {
     if (endpoint) {
         return (
             <>
@@ -256,14 +273,14 @@ export const PrivacyRequest = () => {
 
 // Under the browser opt-out: where to send an email address or number so the
 // request also reaches contact records — the form, or the request links.
-export const ContactRecordsRoute = () => (
-    <P>To help us apply a request to contact records associated with you, you may also submit the relevant email address or telephone number {privacyRequestEndpoint() ? 'in the form below' : 'using the request links below'}. Providing that information is not required for the browser opt-out.</P>
+export const ContactRecordsRoute = ({ hasForm = !!privacyRequestEndpoint() }) => (
+    <P>To help us apply a request to contact records associated with you, you may also submit the relevant email address or telephone number {hasForm ? 'in the form below' : 'using the request links below'}. Providing that information is not required for the browser opt-out.</P>
 );
 
 // The California authorization paragraph points at whichever request route
 // this host offers.
-export const CaliforniaAuthorizationRoute = () => (
-    <P>If you previously provided a separate California financial-privacy authorization, the authorization itself explains how to revoke or modify it. {privacyRequestEndpoint()
+export const CaliforniaAuthorizationRoute = ({ hasForm = !!privacyRequestEndpoint() }) => (
+    <P>If you previously provided a separate California financial-privacy authorization, the authorization itself explains how to revoke or modify it. {hasForm
         ? 'You may also select the California financial-privacy option in the request form above.'
         : 'You may also use the California Financial Privacy Authorization request link above.'} This Legal Center page is not a substitute for the separate consent acknowledgment required when California law requires one.</P>
 );

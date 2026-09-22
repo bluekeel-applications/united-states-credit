@@ -25,10 +25,19 @@ const PROD = {
     marketplacePartners: 'https://luyu5pvptg.execute-api.us-east-1.amazonaws.com/prod/marketplace-partners',
 };
 
-const targets = (hostname) => (DEV_HOSTS.includes(hostname) ? DEV : PROD);
+export const isDevHost = (hostname) => DEV_HOSTS.includes(hostname);
 
-export const privacyRequestEndpoint = (hostname = window.location.hostname) =>
+const targets = (hostname) => (isDevHost(hostname) ? DEV : PROD);
+
+// In the browser the host is the page's own. A render with no browser — the
+// compliance snapshot, built for one named host — says which host it is for
+// before it renders anything; nothing in the live app calls this.
+let hostnameOverride = null;
+export const configureServicesHost = (hostname) => { hostnameOverride = hostname || null; };
+const currentHostname = () => hostnameOverride ?? window.location.hostname;
+
+export const privacyRequestEndpoint = (hostname = currentHostname()) =>
     process.env.REACT_APP_PRIVACY_REQUEST_ENDPOINT || targets(hostname).privacyRequest;
 
-export const marketplacePartnersEndpoint = (hostname = window.location.hostname) =>
+export const marketplacePartnersEndpoint = (hostname = currentHostname()) =>
     process.env.REACT_APP_MARKETPLACE_PARTNERS_ENDPOINT || targets(hostname).marketplacePartners;

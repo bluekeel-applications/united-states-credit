@@ -3,6 +3,12 @@ name: Deploy to staging
 on:
   # Manual trigger from the Actions tab — pick any branch to deploy
   workflow_dispatch:
+    inputs:
+      snapshot_gate:
+        description: 'Compliance snapshot gate: "fail" blocks the deploy on a verification failure, "warn" only reports it (emergency lever)'
+        type: choice
+        options: [fail, warn]
+        default: fail
   # Auto-deploy whenever the staging branch is pushed
   push:
     branches:
@@ -13,22 +19,40 @@ concurrency:
   group: deploy-staging
   cancel-in-progress: false
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # The compliance snapshot (scripts/compliance-snapshot/): a read-only,
+      # prerendered mirror of the Legal Center, the loan form and the partner
+      # lists at /loans/compliance-snapshot, built for this host and verified
+      # before the sync and again after the invalidation. Staging only.
+      SNAPSHOT_HOST: staging.unitedstatescredit.com
+      SNAPSHOT_PROD_ORIGIN: https://unitedstatescredit.com
+      SNAPSHOT_BKFORM_MANIFEST_URL: https://bkform-dev.s3.amazonaws.com/v1/compliance-manifest.json
+      SNAPSHOT_GATE: ${{ github.event.inputs.snapshot_gate || 'fail' }}
+      # '1' since the /loans/compliance-snapshot* CloudFront behavior with the
+      # X-Robots-Tag policy was applied (scripts/compliance-snapshot/cloudfront-robots.mjs)
+      SNAPSHOT_REQUIRE_ROBOTS_HEADER: '1'
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          # Node 20 since 2026-09-21 (the snapshot prerender needs it; prod
+          # builds with the same Node — deploy-prod.yml)
+          node-version: 20
           cache: yarn
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      # deploy-staging and postdeploy-staging pin --profile bluekeel, so
-      # create that profile here instead of relying on ambient env credentials
+      # The deploy scripts pin --profile bluekeel, so create that profile
+      # here instead of relying on ambient env credentials
       - name: Configure AWS profile
         run: |
           mkdir -p ~/.aws
@@ -50,7 +74,54 @@ jobs:
           # build/ is synced to a public-read bucket: source maps would publish
           # the original source, comments included
           GENERATE_SOURCEMAP: false
+          # Stamped into public/index.html (<meta name="usc-build">) so the
+          # snapshot can tie its findings to this commit
+          REACT_APP_GIT_SHA: ${{ github.sha }}
 
-      # yarn also runs postdeploy-staging (CloudFront invalidation) after this
-      - name: Deploy
-        run: yarn deploy-staging
+      - name: Build compliance snapshot
+        run: yarn build:compliance-snapshot
+
+      # Fails the deploy before anything reaches S3: missing files, a checked
+      # consent, an unresolved legal link, a hash that does not recompute,
+      # a secret, applicant-shaped data, a script or a form in the pages.
+      - name: Verify compliance snapshot (build output)
+        run: yarn verify:compliance-snapshot --build --expect-sha "$GITHUB_SHA" --environment staging --gate "$SNAPSHOT_GATE" --summary "$GITHUB_STEP_SUMMARY" --out artifacts/compliance-snapshot
+
+      # What compliance content changed since the snapshot currently live;
+      # written to the run summary. Never blocks a deploy.
+      - name: Compliance content change detection
+        continue-on-error: true
+        run: yarn diff:compliance-snapshot --previous-url "https://$SNAPSHOT_HOST/loans/compliance-snapshot.json" --next build/loans/compliance-snapshot.json --summary "$GITHUB_STEP_SUMMARY" --out artifacts/compliance-snapshot
+
+      - name: Deploy (sync)
+        run: yarn sync-staging
+
+      # Cache-Control: no-cache on the snapshot objects, and the extensionless
+      # keys the spec's URLs name (the sync removes them: no local file)
+      - name: Publish snapshot objects
+        run: yarn publish:compliance-snapshot --bucket staging-united-states-credit --profile bluekeel
+
+      - name: Invalidate CloudFront and wait
+        timeout-minutes: 12
+        run: |
+          id=$(aws cloudfront create-invalidation --profile bluekeel --distribution-id ENT3GX44KR3US --paths "/*" --query Invalidation.Id --output text)
+          echo "invalidation $id"
+          aws cloudfront wait invalidation-completed --profile bluekeel --distribution-id ENT3GX44KR3US --id "$id"
+
+      # The spec's own curl -L on the four routes, plus the header, the build
+      # sha, the hashes, every inventory link and the manifest staleness guard
+      - name: Verify compliance snapshot (live)
+        timeout-minutes: 10
+        run: yarn verify:compliance-snapshot --live "https://$SNAPSHOT_HOST" --expect-sha "$GITHUB_SHA" --expect-json build/loans/compliance-snapshot.json --retries 6 --retry-delay 15 --gate "$SNAPSHOT_GATE" --summary "$GITHUB_STEP_SUMMARY" --out artifacts/compliance-snapshot
+
+      - name: Upload snapshot artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-snapshot-${{ github.sha }}
+          path: |
+            build/loans/compliance-snapshot/
+            build/loans/compliance-snapshot.json
+            artifacts/compliance-snapshot/
+          retention-days: 90
+          if-no-files-found: ignore

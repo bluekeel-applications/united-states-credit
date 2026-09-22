@@ -33,12 +33,20 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy-staging": "aws s3 sync build/ s3://staging-united-states-credit --profile bluekeel --acl public-read --delete",
-    "deploy-pch": "aws s3 sync build/ s3://pch-united-states-credit --profile bluekeel --acl public-read --delete",
-    "deploy-hsw": "aws s3 sync build/ s3://how-stuff-works-usc --profile bluekeel --acl public-read --delete",
-    "deploy-prod": "aws s3 sync build/ s3://united-states-credit-prod --profile bluekeel --acl public-read --delete",
+    "build:compliance-snapshot": "node scripts/compliance-snapshot/build.mjs",
+    "verify:compliance-snapshot": "node scripts/compliance-snapshot/verify.mjs",
+    "diff:compliance-snapshot": "node scripts/compliance-snapshot/diff.mjs",
+    "publish:compliance-snapshot": "node scripts/compliance-snapshot/publish.mjs",
+    "cloudfront:compliance-snapshot": "node scripts/compliance-snapshot/cloudfront-robots.mjs",
+    "evidence:compliance-snapshot": "node scripts/compliance-snapshot/report-evidence.mjs",
+    "sync-staging": "aws s3 sync build/ s3://staging-united-states-credit --profile bluekeel --acl public-read --delete --exclude \".DS_Store\" --exclude \"*/.DS_Store\"",
+    "invalidate-staging": "aws cloudfront create-invalidation --profile bluekeel --distribution-id ENT3GX44KR3US --paths \"/*\"",
+    "predeploy-staging": "node scripts/compliance-snapshot/verify.mjs --build --quick",
+    "deploy-staging": "yarn sync-staging && yarn publish:compliance-snapshot --bucket staging-united-states-credit && yarn invalidate-staging",
+    "deploy-pch": "aws s3 sync build/ s3://pch-united-states-credit --profile bluekeel --acl public-read --delete --exclude \".DS_Store\" --exclude \"*/.DS_Store\" --exclude \"loans/compliance-snapshot*\"",
+    "deploy-hsw": "aws s3 sync build/ s3://how-stuff-works-usc --profile bluekeel --acl public-read --delete --exclude \".DS_Store\" --exclude \"*/.DS_Store\" --exclude \"loans/compliance-snapshot*\"",
+    "deploy-prod": "aws s3 sync build/ s3://united-states-credit-prod --profile bluekeel --acl public-read --delete --exclude \".DS_Store\" --exclude \"*/.DS_Store\" --exclude \"loans/compliance-snapshot*\"",
     "postdeploy-prod": "aws cloudfront create-invalidation --profile bluekeel --distribution-id E33TUN398AQB4X --paths \"/*\"",
-    "postdeploy-staging": "aws cloudfront create-invalidation --profile bluekeel --distribution-id ENT3GX44KR3US --paths \"/*\"",
     "postdeploy-pch": "aws cloudfront create-invalidation --profile bluekeel --distribution-id EQ3SHRX8H40TA --paths \"/*\"",
     "postdeploy-hsw": "aws cloudfront create-invalidation --profile bluekeel --distribution-id E3JGHR1Y4GHPXL --paths \"/*\"",
     "test": "react-scripts test",
@@ -63,6 +71,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "esbuild": "^0.25"
   }
 }

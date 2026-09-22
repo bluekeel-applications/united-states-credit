@@ -21,7 +21,10 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          # In lockstep with deploy-staging.yml (2026-09-21): the staging
+          # build's compliance snapshot needs Node 20, and production must
+          # build with the same Node staging was verified on.
+          node-version: 20
           cache: yarn
 
       - name: Install dependencies
@@ -50,6 +53,9 @@ jobs:
           # build/ is synced to a public-read bucket: source maps would publish
           # the original source, comments included
           GENERATE_SOURCEMAP: false
+          # Stamped into public/index.html (<meta name="usc-build">) so the
+          # staging compliance snapshot can say which commit production runs
+          REACT_APP_GIT_SHA: ${{ github.sha }}
 
       # yarn also runs postdeploy-prod (CloudFront invalidation) after this
       - name: Deploy

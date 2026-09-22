@@ -1,9 +1,8 @@
-import React, { createContext, useReducer } from 'react';
+import React, { useReducer } from 'react';
 
+import { AppContext } from './AppContext';
 import { initialAppState, appStateReducer } from './reducers/appReducer';
 import { initialTrackingState, trackingStateReducer } from './reducers/trackingReducer';
-
-const AppContext = createContext();
 
 function AppContextProvider({ children }) {
     // Application State Management
