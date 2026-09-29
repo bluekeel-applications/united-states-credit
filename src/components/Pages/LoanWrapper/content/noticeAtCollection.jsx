@@ -1,6 +1,6 @@
 import React from 'react';
 import { P, Ul, Li, H3, CopyLink, Callout, ContactBlock } from '../components/Copy';
-import { pathFor, LOAN_FORM_DOCS_EFFECTIVE_DATE } from '../loanPages';
+import { pathFor, LOAN_FORM_DOCS_EFFECTIVE_DATE, LEGAL_LAST_UPDATED_2_2 } from '../loanPages';
 
 // DRAFTED, not verbatim: reference/USC_Loan_Form_Final_Compliance_Patch_Claude.md
 // § 14 lists what this notice must cover but supplies no copy. Built from that
@@ -9,8 +9,11 @@ import { pathFor, LOAN_FORM_DOCS_EFFECTIVE_DATE } from '../loanPages';
 // and bank numbers not retained after transmission). Flagged for counsel in
 // LOAN_FORM_COMPLIANCE_CHANGE_REPORT.md. The loan form links here from its
 // first step.
+// "Related notices": the partner item is verbatim from
+// reference/USC_Final_Compliance_Cleanup_Claude_2026-09-29.md § 3.5.
 const noticeAtCollection = {
     effectiveDate: LOAN_FORM_DOCS_EFFECTIVE_DATE,
+    lastUpdated: LEGAL_LAST_UPDATED_2_2,
     intro: <Callout><Callout.Strong>Read this before you start a loan request.</Callout.Strong> This notice tells you what personal information the UnitedStatesCredit loan request form collects, why, how long it is kept, and the choices you have. It supplements our <CopyLink to={pathFor('privacy-policy')}>Privacy Policy</CopyLink>, which applies in full.</Callout>,
     sections: [
         {
@@ -98,7 +101,7 @@ const noticeAtCollection = {
                         <Li><CopyLink to={pathFor('privacy-policy')}>Privacy Policy</CopyLink> — our full privacy practices and your rights.</Li>
                         <Li><CopyLink to={pathFor('financial-privacy-notice')}>Financial Privacy Notice</CopyLink> — how financial information is handled.</Li>
                         <Li><CopyLink to={pathFor('fcra-authorization')}>FCRA Authorization & Disclosure</CopyLink> — the consumer-report authorization on the form.</Li>
-                        <Li><CopyLink to={pathFor('marketplace-partners')}>Marketplace Partners</CopyLink> and <CopyLink to={pathFor('marketing-partners')}>Marketing Partners</CopyLink> — who may receive a request and who may send marketing.</Li>
+                        <Li><CopyLink to={pathFor('marketplace-partners')}>Marketplace Partners</CopyLink> describes the companies that may participate in evaluating or responding to your loan request. Our <CopyLink to={pathFor('marketing-communications')}>Marketing & Communications Privacy Notice</CopyLink> explains how limited first-party contact records may be used for marketing and managed by contracted service providers.</Li>
                         <Li><CopyLink to={pathFor('privacy-choices')}>Your Privacy Choices</CopyLink> — access, deletion, correction, opt-outs, and appeals.</Li>
                     </Ul>
                     <ContactBlock />

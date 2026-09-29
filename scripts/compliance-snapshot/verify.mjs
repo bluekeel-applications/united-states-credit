@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Verifies the compliance snapshot — the built files (--build) before a
 // deploy, and the published pages (--live <origin>) after one. Every check
-// has an id (B01–B17, L01–L13) and a result: PASS, WARN or FAIL. A FAIL
+// has an id (B01–B20, L01–L13) and a result: PASS, WARN or FAIL. A FAIL
 // exits 1 unless --gate warn; the deploy workflow runs --build ahead of the
 // sync and --live after the invalidation.
 //
@@ -14,7 +14,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { APPLICANT, EMAIL, EMAIL_ALLOWED, TIER1, TIER2, UNFINISHED } from './lib/forbidden.mjs';
+import { APPLICANT, CONSENT_WORDING, EMAIL, EMAIL_ALLOWED, RETIRED_DIRECTORY, TIER1, TIER2, UNFINISHED } from './lib/forbidden.mjs';
 import { fetchWithRetry } from './lib/http.mjs';
 import { SPEC_MINIMUM, readRegistry } from './lib/registry.mjs';
 import { dom, normalizeString, normalizeText, sha256 } from './lib/text.mjs';
@@ -25,7 +25,8 @@ const mode = args.build ? 'build' : args.live ? 'live' : null;
 if (!mode) { console.error('usage: verify.mjs --build | --live <origin>'); process.exit(2); }
 
 const ROUTES = ['/loans/compliance-snapshot', '/loans/compliance-snapshot/legal-center', '/loans/compliance-snapshot/form', '/loans/compliance-snapshot.json'];
-const MARKERS = ['Privacy Policy', 'Verify your identity', 'FCRA', 'Marketplace Partners', 'Marketing Partners'];
+// Words every snapshot index carries, as plain text and in the raw markup alike (no character an entity would stand for).
+const MARKERS = ['Privacy Policy', 'Verify your identity', 'FCRA', 'Marketplace Partners', 'Communications Privacy Notice'];
 const results = [];
 const record = (id, status, title, detail = '') => { results.push({ id, status, title, detail }); };
 const pass = (id, title, detail) => record(id, 'PASS', title, detail);
@@ -110,7 +111,6 @@ async function verifyBuild() {
             if (rule === 'text' && target) actual = sha256(normalizeText(target.innerHTML));
             else if (rule === 'paragraphs' && target) actual = sha256([...target.querySelectorAll(':scope > p')].map((p) => normalizeString(p.textContent)).join('\n\n'));
             else if (rule === 'marketplace-list') actual = sha256(`${json.partner_lists?.marketplace?.version}\n${(json.partner_lists?.marketplace?.partners || []).map((p) => p.name).join('\n')}`);
-            else if (rule === 'marketing-list') actual = sha256(`${json.partner_lists?.marketing?.version}\n${json.partner_lists?.marketing?.updated}\n${(json.partner_lists?.marketing?.partners || []).map((p) => p.name).join('\n')}`);
             else if (rule === 'json') actual = expected;
             if (actual !== null) { hashChecked++; if (actual !== expected) hashProblems.push(`${name}: ${el.id || el.getAttribute('data-snapshot-block') || el.getAttribute('data-snapshot-consent') || el.getAttribute('data-snapshot-tooltip') || rule} (${rule})`); }
             if (!jsonText.includes(expected)) hashProblems.push(`${name}: hash ${expected.slice(0, 12)} not in JSON`);
@@ -177,16 +177,72 @@ async function verifyBuild() {
     expect('B15', 'read-only: no script, form, image, embedded media or external asset', !unsafe.length, unsafe.join('; '));
 
     const mp = json.partner_lists?.marketplace || {};
-    const mkVersionOk = json.partner_lists?.marketing?.version === registry.marketingVersion;
-    if (mp.status === 'loaded' && mp.count > 0 && mkVersionOk) pass('B16', 'partner lists: marketplace list loaded, marketing version is the registry\'s', `marketplace ${mp.version} (${mp.count}), marketing ${json.partner_lists.marketing.version}`);
-    else if (mp.status !== 'loaded' && mkVersionOk) (process.env.SNAPSHOT_STRICT_PARTNERS === '1' ? fail : warn)('B16', 'Marketplace Partners list unavailable at build; the live page\'s unavailable notice was rendered', mp.error || mp.status);
-    else fail('B16', 'partner lists', `marketplace status=${mp.status} count=${mp.count}; marketing version ${json.partner_lists?.marketing?.version} vs registry ${registry.marketingVersion}`);
+    if (mp.status === 'loaded' && mp.count > 0) pass('B16', 'partner list: the Marketplace Partners list is loaded', `marketplace ${mp.version} (${mp.count})`);
+    else if (mp.status !== 'loaded') (process.env.SNAPSHOT_STRICT_PARTNERS === '1' ? fail : warn)('B16', 'Marketplace Partners list unavailable at build; the live page\'s unavailable notice was rendered', mp.error || mp.status);
+    else fail('B16', 'partner list', `marketplace status=${mp.status} count=${mp.count}`);
 
     const stray = walk(dir).map((f) => relative(dir, f)).filter((f) => /\.map$/.test(f) || /(^|\/)reference(\/|$)/.test(f));
     const dsStore = walk(dir).map((f) => relative(dir, f)).filter((f) => /(^|\/)\.DS_Store$/.test(f));
     if (stray.length) (process.env.CI || stray.some((f) => /reference/.test(f)) ? fail : warn)('B17', 'no source maps or reference material under build/', `${stray.slice(0, 5).join(', ')}${process.env.CI ? '' : ' (local build without GENERATE_SOURCEMAP=false; CI sets it)'}`);
     else if (dsStore.length) warn('B17', 'no source maps under build/; .DS_Store present (local only)', dsStore.join(', '));
     else pass('B17', 'no source maps, reference material or .DS_Store under build/', '');
+
+    // ---- the final compliance cleanup (2026-09-29) ------------------------
+    // B18: the separate directory of promotional senders is retired — no page,
+    // no list, no version, no link; the old URL is a redirect and nothing else.
+    const gone = [];
+    const { slug: oldSlug, redirectsTo, name: oldName, field: oldField } = RETIRED_DIRECTORY;
+    if (registry.slugs.includes(oldSlug)) gone.push('the registry still has the page');
+    if ((json.legal_center?.pages || []).some((p) => p.slug === oldSlug)) gone.push('the snapshot still renders the page');
+    if (registry.legacy[oldSlug] !== redirectsTo) gone.push(`the registry does not redirect ${oldSlug} to ${redirectsTo} (${registry.legacy[oldSlug] || 'no entry'})`);
+    if (json.legal?.legacy_slugs?.[oldSlug] !== redirectsTo) gone.push('the snapshot does not record the redirect');
+    const lists = Object.keys(json.partner_lists || {});
+    if (lists.join() !== 'marketplace') gone.push(`partner lists: ${lists.join(', ') || 'none'} (expected marketplace only)`);
+    const toRetired = (json.links || []).filter((l) => l.resolves === 'legacy-redirect');
+    if (toRetired.length || (json.retired_links || []).length) gone.push(`${toRetired.length} link(s) to a retired URL: ${toRetired.slice(0, 4).map((l) => `${l.source} → ${l.href}`).join(', ')}`);
+    const retiredRows = [...docs.index.querySelectorAll('table[data-snapshot-links] tr[data-resolution="legacy-redirect"]')];
+    if (retiredRows.length) gone.push(`${retiredRows.length} link-table row(s) to a retired URL`);
+    const slugInForm = (json.form?.legal_slugs || []).filter((l) => l.slug === oldSlug).length;
+    if (slugInForm) gone.push('the form\'s manifest still lists the slug');
+    // The words themselves, anywhere: the one place the old slug may be read is
+    // the record of the redirect (the "Retired URLs" row; legal.legacy_slugs).
+    for (const [name, d] of Object.entries(docs)) {
+        const c = d.body.cloneNode(true);
+        for (const el of c.querySelectorAll('[data-snapshot-retired-routes]')) el.remove();
+        const markup = c.innerHTML;
+        for (const [label, re] of [['the directory\'s name', oldName], ['its slug', new RegExp(oldSlug)], ['its version field', oldField]]) { const m = markup.match(re); if (m) gone.push(`${name}: ${label} ("${m[0]}")`); }
+    }
+    const jsonRest = JSON.parse(JSON.stringify(json)); if (jsonRest.legal) delete jsonRest.legal.legacy_slugs;
+    for (const [label, re] of [['the directory\'s name', oldName], ['its slug', new RegExp(oldSlug)], ['its version field', oldField]]) { const m = JSON.stringify(jsonRest).match(re); if (m) gone.push(`json: ${label} ("${m[0]}")`); }
+    expect('B18', 'the retired partner directory is gone: no page, list, version or link; its URL is a redirect', !gone.length, gone.length ? [...new Set(gone)].slice(0, 8).join('; ') : `${oldSlug} → ${redirectsTo}; partner lists: ${lists.join()}`);
+
+    // B19: the two optional marketing consents say what counsel wrote — and
+    // every consent wording in force carries the version this site expects.
+    const wording = [];
+    const byKey = Object.fromEntries((json.form?.consents || []).map((c) => [c.key, c]));
+    for (const key of CONSENT_WORDING.marketingConsents) {
+        const c = byKey[key];
+        if (!c) { wording.push(`${key}: absent`); continue; }
+        const shown = [...docs.form.querySelectorAll(`[data-snapshot-consent="${key}"]`)].map((el) => normalizeText(el.innerHTML));
+        if (!shown.length) wording.push(`${key}: not rendered on the form page`);
+        for (const text of [c.text, ...shown]) for (const re of CONSENT_WORDING.excluded) { const m = String(text).match(re); if (m) wording.push(`${key}: says "${m[0]}"`); }
+        if (!String(c.text).includes(CONSENT_WORDING.identity)) wording.push(`${key}: does not name "${CONSENT_WORDING.identity}"`);
+        const slugs = (c.links || []).map((l) => l.slug).join();
+        if (slugs !== CONSENT_WORDING.links[key].join()) wording.push(`${key}: links ${slugs || 'none'} (expected ${CONSENT_WORDING.links[key].join()})`);
+        if (c.required || c.default !== 'unchecked') wording.push(`${key}: required=${c.required} default=${c.default} (must be optional and unchecked)`);
+    }
+    const versions = { ...(json.form?.consent_versions || {}) };
+    const versionDiffs = Object.entries(CONSENT_WORDING.versions).filter(([k, v]) => versions[k] !== v).map(([k, v]) => `${k}: ${versions[k]} (expected ${v})`);
+    const perConsent = Object.values(byKey).filter((c) => c.version !== CONSENT_WORDING.versions[c.key]).map((c) => `${c.key}: ${c.version}`);
+    expect('B19', 'the marketing consents carry counsel\'s wording (no artificial/prerecorded voice, no d/b/a, no retired directory), optional and unchecked; every consent version is the expected one',
+        !wording.length && !versionDiffs.length && !perConsent.length,
+        wording.length || versionDiffs.length || perConsent.length ? [...new Set([...wording, ...versionDiffs, ...perConsent])].slice(0, 8).join('; ') : Object.entries(versions).map(([k, v]) => `${k}=${v}`).join(', '));
+
+    // B20: the identity wording, everywhere — the fail-tier phrase B10 scans
+    // for, reported on its own line so the hand-back can cite it.
+    const dba = TIER1.find(([n]) => /d\/b\/a/.test(n))[1];
+    const dbaHits = Object.entries(raw).filter(([, text]) => dba.test(text)).map(([name, text]) => `${name}: "${text.match(dba)[0]}"`);
+    expect('B20', 'no "d/b/a" anywhere in the snapshot; Bluekeel LLC is named as the operator', !dbaHits.length && texts.index.includes('Bluekeel LLC'), dbaHits.join('; '));
 }
 
 // ----------------------------------------------------------------- live ----

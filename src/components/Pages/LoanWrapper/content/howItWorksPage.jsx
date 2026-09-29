@@ -1,10 +1,14 @@
 import React from 'react';
 import { P, CopyLink } from '../components/Copy';
-import { pathFor } from '../loanPages';
+import { pathFor, LEGAL_LAST_UPDATED_2_2 } from '../loanPages';
 
 // Verbatim port of reference/how-it-works.html — do not edit copy.
+// One correction since (the final compliance cleanup, 2026-09-29, § 5, on the
+// owner's decision): the company's name is written as its legal name,
+// "Bluekeel" — the Compensation section.
 const howItWorksPage = {
     effectiveDate: 'August 4, 2026',
+    lastUpdated: LEGAL_LAST_UPDATED_2_2,
     sections: [
         {
             id: 's1',
@@ -44,7 +48,7 @@ const howItWorksPage = {
         {
             id: 's8',
             heading: 'Compensation',
-            body: <P>BlueKeel may receive compensation for referrals or other consumer actions. See the <CopyLink to={pathFor('advertiser-disclosure')}>Advertiser Disclosure</CopyLink>.</P>,
+            body: <P>Bluekeel may receive compensation for referrals or other consumer actions. See the <CopyLink to={pathFor('advertiser-disclosure')}>Advertiser Disclosure</CopyLink>.</P>,
         },
     ],
 };

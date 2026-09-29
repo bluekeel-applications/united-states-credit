@@ -1,14 +1,16 @@
 import React from 'react';
 import { P, Ul, Li, A, H3, CopyLink, Callout, ContactBlock } from '../components/Copy';
-import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED } from '../loanPages';
+import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED_2_2 } from '../loanPages';
 
 // Verbatim port of reference/usc-legal-center-deploy/state-privacy-rights.html — do not edit copy.
 // Revised by reference/USC_Legal_Center_Final_Updates_Claude.md (revision 2.0) — the spec's PUBLIC COPY is verbatim too.
+// Revised by reference/USC_Final_Compliance_Cleanup_Claude_2026-09-29.md § 2.5 — verbatim:
+// the non-retained identifiers are named in full (Social Security, driver's-license, bank-account or routing).
 // Replaces the CCPA-only California Privacy Notice; /loans/california-privacy
 // redirects here (LEGACY_SLUGS).
 const statePrivacyRights = {
     effectiveDate: LEGAL_EFFECTIVE_DATE,
-    lastUpdated: LEGAL_LAST_UPDATED,
+    lastUpdated: LEGAL_LAST_UPDATED_2_2,
     intro: <Callout><Callout.Strong>State privacy rights vary.</Callout.Strong> This notice provides a unified way to understand and exercise rights that may apply under U.S. state comprehensive privacy laws. Financial information may be governed by separate federal or state financial-privacy laws and may be exempt from some state comprehensive-privacy provisions.</Callout>,
     sections: [
         {
@@ -78,7 +80,7 @@ const statePrivacyRights = {
             heading: '7. Sensitive Personal Information',
             body: (
                 <>
-                    <P>UnitedStatesCredit processes Social Security numbers and bank-account information only as needed to transmit your requested loan application to participating lenders and financial-service providers involved in that request. We do not persistently retain those identifiers after transmission. We may retain limited contact, transaction, routing, consent, security, and suppression records for the purposes described in our notices, but those retained records do not include your Social Security number or bank-account information.</P>
+                    <P>UnitedStatesCredit processes Social Security numbers, driver's-license numbers, and bank-account or routing information only as needed to transmit your requested loan application to participating lenders and financial-service providers involved in that request. We do not persistently retain those identifiers after transmission. We may retain limited contact, transaction, routing, consent, security, and suppression records for the purposes described in our notices, but those retained records do not include your Social Security number, driver's-license number, or bank-account or routing information.</P>
                     <P>UnitedStatesCredit does not use that information for unrelated marketing.</P>
                     <P>Where a state law requires consent or provides a right to limit a sensitive-data use that is not otherwise exempt, we will provide the applicable choice.</P>
                 </>

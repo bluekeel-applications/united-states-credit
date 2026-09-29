@@ -28,14 +28,21 @@ export const LEGAL_EFFECTIVE_DATE = 'September 16, 2026';
 // original line. This is the approved publication date — never a build date.
 export const LEGAL_LAST_UPDATED = 'September 17, 2026';
 
+// The final compliance cleanup (reference/USC_Final_Compliance_Cleanup_Claude_2026-09-29.md
+// § 7): the `lastUpdated` of the documents whose visible text that patch
+// changed, and of those only — a document it did not touch keeps the date above
+// or its own. Effective dates did not move.
+export const LEGAL_LAST_UPDATED_2_2 = 'September 29, 2026';
+
 // Identifies the legal text a visitor was shown (stamped on every legal
 // article as data-legal-version, and sent to the loan form). 1.0 is git tag
-// legal-v1.0; 2.0 is commit 43a5672.
-export const LEGAL_CONTENT_VERSION = '2.1';
+// legal-v1.0; 2.0 is commit 43a5672; 2.1 added the loan form's documents;
+// 2.2 is the final compliance cleanup of 2026-09-29.
+export const LEGAL_CONTENT_VERSION = '2.2';
 
-// The four documents the loan form links to (Notice at Collection, FCRA
-// Authorization & Disclosure, Marketplace Partners, Marketing Partners) were
-// added with the loan-form compliance patch. 2.1 = 2.0 plus those documents.
+// The documents the loan form links to (Notice at Collection, FCRA
+// Authorization & Disclosure, Marketplace Partners) were added with the
+// loan-form compliance patch. 2.1 = 2.0 plus those documents.
 export const LOAN_FORM_DOCS_EFFECTIVE_DATE = 'September 18, 2026';
 
 // `footer` is optional: a page without one is reached from the Legal Center
@@ -174,14 +181,6 @@ export const LEGAL_PAGES = [
         card: { kicker: 'Who receives a request', title: 'Marketplace Partners', blurb: 'The companies that may participate in evaluating, matching, or responding to a loan request.' },
     },
     {
-        slug: 'marketing-partners',
-        h1: 'Marketing Partners',
-        documentTitle: 'Marketing Partners | United States Credit',
-        metaDescription: 'The companies and brands that may send promotional communications under the optional marketing consent.',
-        lede: 'The companies and brands that may send promotional communications under the optional marketing consent.',
-        card: { kicker: 'Marketing', title: 'Marketing Partners', blurb: 'The companies and brands that may send promotional communications under the optional marketing consent.' },
-    },
-    {
         slug: 'responsible-borrowing',
         h1: 'Responsible Borrowing',
         documentTitle: 'Responsible Borrowing | United States Credit',
@@ -206,22 +205,18 @@ export const footerColumn = (column) => LEGAL_PAGES.filter((page) => page.footer
 // Retired slugs and the legal package's own file slugs (its routes.json puts
 // every document at /loans/legal-center/<slug>) → the slug the page lives at
 // here. Anything absent maps to itself.
+// The last entry is the separate directory of promotional senders, retired by
+// the final compliance cleanup (2026-09-29): an old link to it lands on the
+// Marketing & Communications Privacy Notice, which describes that model. No
+// page links to it any more and nothing may — the compliance snapshot's
+// verifier fails the deploy on a link to a retired slug.
+// (Plain pairs only in this block: scripts/compliance-snapshot/lib/registry.mjs
+// reads it from the source text.)
 export const LEGACY_SLUGS = {
     'california-privacy': 'state-privacy-rights',
     'terms-of-use': 'terms',
     'rates-fees': 'rates-and-fees',
+    'marketing-partners': 'marketing-communications',
 };
 
 export const CONTACT_EMAIL = 'info@bluekeel.com';
-
-// The Marketing Partners list: the list managers and sender brands that may
-// send promotional communications under the form's optional marketing consent.
-// Versioned because a consent is tied to the list in force when it was given
-// (the form sends the version with its consent evidence). Owner's statement,
-// 2026-09-18: no marketing partner is active. Add entries here, bump the
-// version, and the page and the form pick both up.
-export const MARKETING_PARTNERS = {
-    version: '2026-09-18.1',
-    updated: 'September 18, 2026',
-    partners: [],
-};

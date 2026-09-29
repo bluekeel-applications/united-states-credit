@@ -16,7 +16,7 @@ import { useMediaQuery } from 'react-responsive';
 import firePixelBlueKeel from '../utils/pixels/bluekeelPixel.js';
 import { datadogRum } from '@datadog/browser-rum';
 import useAdSense from '../utils/hooks/useAdSense';
-import { isPrivacySuppressed } from '../utils/privacy';
+import { isPrivacySuppressed, redactMonitoringEvent } from '../utils/privacy';
 
 // const Feed = lazy(() => import('./Layout/Feed'));
 
@@ -94,6 +94,9 @@ const App = ({ uri }) => {
 			trackResources: true,
 			trackLongTasks: true,
 			defaultPrivacyLevel: 'mask-user-input',
+			// The loan form's bank lookup has a routing number in its URL: it is
+			// taken out of every event before the event is sent (utils/privacy.js).
+			beforeSend: redactMonitoringEvent,
 		});
 		console.log('DataDog init');
 	},[]);

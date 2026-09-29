@@ -12,10 +12,9 @@ export const readRegistry = (root) => {
     const legacy = {};
     const legacyBlock = src.match(/LEGACY_SLUGS\s*=\s*\{([\s\S]*?)\}/);
     if (legacyBlock) for (const m of legacyBlock[1].matchAll(/'([a-z0-9-]+)'\s*:\s*'([a-z0-9-]+)'/g)) legacy[m[1]] = m[2];
-    const marketingVersion = src.match(/MARKETING_PARTNERS\s*=\s*\{[\s\S]*?version:\s*'([^']+)'/)?.[1] || null;
     const contentVersion = src.match(/LEGAL_CONTENT_VERSION\s*=\s*'([^']+)'/)?.[1] || null;
     const titles = Object.fromEntries([...src.matchAll(/slug:\s*'([a-z0-9-]+)'[\s\S]*?documentTitle:\s*'([^']+)'/g)].map((m) => [m[1], m[2]]));
-    return { slugs, legacy, marketingVersion, contentVersion, titles };
+    return { slugs, legacy, contentVersion, titles };
 };
 
 // The documents the spec (§6) names as the minimum, by the slugs the site

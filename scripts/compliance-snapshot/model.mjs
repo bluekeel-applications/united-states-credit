@@ -35,7 +35,7 @@ export const buildModel = async ({ root, hostname, site, pkg, manifestUrl, prodO
     } = site;
     const {
         LEGAL_PAGES, LEGAL_CENTER_META, HOME_META, LEGACY_SLUGS, LOANS_HOME, pathFor, LEGAL_CONTENT_VERSION,
-        LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED, LOAN_FORM_DOCS_EFFECTIVE_DATE, MARKETING_PARTNERS, CONTACT_EMAIL,
+        LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED, LOAN_FORM_DOCS_EFFECTIVE_DATE, CONTACT_EMAIL,
     } = registry;
 
     const environment = environmentFor({ hostname, isDevHost });
@@ -127,16 +127,17 @@ export const buildModel = async ({ root, hostname, site, pkg, manifestUrl, prodO
     form.embed = {
         legal_base: LOANS_HOME,
         legal_version: LEGAL_CONTENT_VERSION,
-        marketing_partners_version: MARKETING_PARTNERS.version,
         first_offer_check: targets.firstOfferCheck,
         site_key: site.BKFORM_SITE_KEY,
-        source: 'src/components/Pages/LoanWrapper/components/BkFormEmbed.jsx (data-legal-base, data-legal-version, data-marketing-partners-version, data-first-offer-check)',
+        source: 'src/components/Pages/LoanWrapper/components/BkFormEmbed.jsx (data-legal-base, data-legal-version, data-first-offer-check)',
     };
 
-    // ---- partner lists ----------------------------------------------------
+    // ---- the partner list ------------------------------------------------
+    // One list: Marketplace Partners. (A second, the separate directory of
+    // promotional senders, was retired with its page on 2026-09-29; the
+    // verifier fails a build that shows one — B18.)
     const referencedBy = (slug) => form.consents.filter((c) => c.links.some((l) => l.slug === slug)).map((c) => ({ key: c.key, step_number: c.step_number, required: c.required }));
     const mpPage = pages.find((p) => p.slug === 'marketplace-partners');
-    const mkPage = pages.find((p) => p.slug === 'marketing-partners');
     const list = partners.list;
     const marketplaceHtml = list ? render.partnersList(list) : render.partnersUnavailable();
     const marketplaceBlock = block({ id: 'partners-marketplace', source: 'partners:marketplace', title: 'Marketplace Partners (current list)', html: marketplaceHtml, prefix: 'partners-marketplace' });
@@ -146,6 +147,7 @@ export const buildModel = async ({ root, hostname, site, pkg, manifestUrl, prodO
             route: mpPage.route,
             document_title: mpPage.document_title,
             page_effective_date: mpPage.effective_date,
+            page_last_updated: mpPage.last_updated,
             source: 'marketplace-partners service (same endpoint the live page reads, per host)',
             status: partners.status,
             error: partners.error,
@@ -162,21 +164,6 @@ export const buildModel = async ({ root, hostname, site, pkg, manifestUrl, prodO
             hash_rule: list ? 'sha256(version + names in API order)' : 'sha256(the unavailable notice as rendered)',
             direct_sha256: list?.direct ? sha256(`${list.direct.version || ''}\n${(list.direct.partners || []).map((p) => p.name).join('\n')}`) : null,
         },
-        marketing: {
-            title: mkPage.title,
-            route: mkPage.route,
-            document_title: mkPage.document_title,
-            page_effective_date: mkPage.effective_date,
-            source: 'src/components/Pages/LoanWrapper/loanPages.js MARKETING_PARTNERS',
-            version: MARKETING_PARTNERS.version,
-            updated: MARKETING_PARTNERS.updated,
-            count: MARKETING_PARTNERS.partners.length,
-            partners: MARKETING_PARTNERS.partners.map((p) => ({ name: p.name, role: p.role || null })),
-            referenced_by: { fcra: referencedBy('marketing-partners').filter((c) => c.key === 'consentFcra').length > 0, marketing: referencedBy('marketing-partners').filter((c) => c.key !== 'consentFcra').length > 0, consents: referencedBy('marketing-partners') },
-            rendered_page_sha256: mkPage.sha256,
-            sha256: sha256(`${MARKETING_PARTNERS.version}\n${MARKETING_PARTNERS.updated}\n${MARKETING_PARTNERS.partners.map((p) => p.name).join('\n')}`),
-            hash_rule: 'sha256(version + updated + names)',
-        },
     };
 
     // ---- the link inventory ---------------------------------------------
@@ -185,6 +172,16 @@ export const buildModel = async ({ root, hostname, site, pkg, manifestUrl, prodO
     const siteLinks = inventory(blocks.flatMap((b) => b.links), { ...linkCtx, idsBySource });
     const links = [...siteLinks, ...form.links];
     const unresolved = links.filter((l) => l.resolves === 'UNRESOLVED' || l.resolves === 'anchor-missing');
+    // A link to a retired URL still resolves (the app redirects it), which is
+    // why it is listed apart: no current page or consent may carry one (B18).
+    const retiredLinks = links.filter((l) => l.resolves === 'legacy-redirect');
+
+    // ---- the documents' dates --------------------------------------------
+    // "Last Updated" is per document: a revision dates the documents it
+    // changed and no others. Newest first, each date with its documents.
+    const byDate = new Map();
+    for (const p of pages) if (p.last_updated) byDate.set(p.last_updated, [...(byDate.get(p.last_updated) || []), p.slug]);
+    const lastUpdatedByDate = [...byDate.entries()].map(([date, slugs]) => ({ date, slugs })).sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
     // ---- hashes ----------------------------------------------------------
     const hashes = {};
@@ -201,7 +198,6 @@ export const buildModel = async ({ root, hostname, site, pkg, manifestUrl, prodO
     put('variant:california-financial-privacy-authorization', 'California Financial Privacy Authorization', form.variants[0].text_hash);
     for (const v of form.variants.slice(1)) put(`variant:${v.id}`, `Conditional rule ${v.id}`, sha256(JSON.stringify({ visible_in: v.visible_in, truth_table: v.truth_table, fields: v.fields?.map((f) => f.label) })));
     put('partners:marketplace', 'Marketplace Partners list', partnerLists.marketplace.sha256);
-    put('partners:marketing', 'Marketing Partners list', partnerLists.marketing.sha256);
     for (const s of privacy.signal) put(`privacy-variant:signal:${s.id}`, `Privacy signal line (${s.label})`, s.sha256);
     for (const r of privacy.request_route) put(`privacy-variant:request-route:${r.id}`, `Privacy request route (${r.id})`, r.sha256);
     put('form:manifest', 'bkform compliance manifest (raw file)', rawSha256);
@@ -217,7 +213,11 @@ export const buildModel = async ({ root, hostname, site, pkg, manifestUrl, prodO
         legal: {
             content_version: LEGAL_CONTENT_VERSION,
             effective_date: LEGAL_EFFECTIVE_DATE,
+            // The date revision 2.0 gave the documents it changed; a later
+            // revision dates its own documents — see last_updated_by_date.
             last_updated: LEGAL_LAST_UPDATED,
+            latest_last_updated: lastUpdatedByDate[0]?.date ?? null,
+            last_updated_by_date: lastUpdatedByDate,
             loan_form_docs_effective_date: LOAN_FORM_DOCS_EFFECTIVE_DATE,
             contact_email: CONTACT_EMAIL,
             loans_home: LOANS_HOME,
@@ -233,6 +233,7 @@ export const buildModel = async ({ root, hostname, site, pkg, manifestUrl, prodO
         partner_lists: partnerLists,
         links,
         unresolved_links: unresolved,
+        retired_links: retiredLinks,
         hashes: { normalization: NORMALIZATION, items: hashes, labels },
         _partners_ctx: partnersCtx,
     };

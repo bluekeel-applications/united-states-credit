@@ -1,12 +1,14 @@
 import React from 'react';
 import { P, Ul, Li, A, CopyLink, Callout, ContactBlock } from '../components/Copy';
-import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED } from '../loanPages';
+import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED_2_2 } from '../loanPages';
 
 // Verbatim port of reference/usc-legal-center-deploy/financial-privacy-notice.html — do not edit copy.
 // Revised by reference/USC_Legal_Center_Final_Updates_Claude.md (revision 2.0) — the spec's PUBLIC COPY is verbatim too.
+// Revised by reference/USC_Final_Compliance_Cleanup_Claude_2026-09-29.md § 2.3, § 2.4 — verbatim:
+// the non-retained identifiers are named in full (Social Security, driver's-license, bank-account or routing).
 const financialPrivacyNotice = {
     effectiveDate: LEGAL_EFFECTIVE_DATE,
-    lastUpdated: LEGAL_LAST_UPDATED,
+    lastUpdated: LEGAL_LAST_UPDATED_2_2,
     intro: <Callout><Callout.Strong>Financial privacy:</Callout.Strong> Information supplied in connection with a loan request can be treated as nonpublic personal information under financial-privacy laws even when the information—such as a name, email address, or telephone number—would not ordinarily seem financial.</Callout>,
     sections: [
         {
@@ -23,7 +25,7 @@ const financialPrivacyNotice = {
                     <Ul>
                         <Li>name, address, email address, and telephone or mobile number;</Li>
                         <Li>loan amount and purpose, income, employment, housing, and other application information;</Li>
-                        <Li>Social Security number, bank-account or routing information, or similar identifiers when needed for lender transmission;</Li>
+                        <Li>Social Security number, driver's-license number, bank-account or routing information, or similar identifiers when needed for lender transmission;</Li>
                         <Li>transaction, routing, fraud-prevention, and request-status information; and</Li>
                         <Li>the fact that an individual sought or obtained a financial service through UnitedStatesCredit.</Li>
                     </Ul>
@@ -33,7 +35,7 @@ const financialPrivacyNotice = {
         {
             id: 's3',
             heading: '3. Sensitive Information Handling',
-            body: <P>UnitedStatesCredit processes Social Security numbers and bank-account information only as needed to transmit your requested loan application to participating lenders and financial-service providers involved in that request. We do not persistently retain those identifiers after transmission. We may retain limited contact, transaction, routing, consent, security, and suppression records for the purposes described in our notices, but those retained records do not include your Social Security number or bank-account information.</P>,
+            body: <P>UnitedStatesCredit processes Social Security numbers, driver's-license numbers, and bank-account or routing information only as needed to transmit your requested loan application to participating lenders and financial-service providers involved in that request. We do not persistently retain those identifiers after transmission. We may retain limited contact, transaction, routing, consent, security, and suppression records for the purposes described in our notices, but those retained records do not include your Social Security number, driver's-license number, or bank-account or routing information.</P>,
         },
         {
             id: 's4',

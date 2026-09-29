@@ -1,13 +1,17 @@
 import React from 'react';
 import { P, Ul, Li, A, H3, CopyLink, Callout, ContactBlock } from '../components/Copy';
-import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED } from '../loanPages';
+import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED_2_2 } from '../loanPages';
 
 // Verbatim port of reference/usc-legal-center-deploy/privacy-policy.html — do not edit copy.
 // Revised by reference/USC_Legal_Center_Final_Updates_Claude.md (revision 2.0) — the spec's PUBLIC COPY is verbatim too.
+// Revised by reference/USC_Final_Compliance_Cleanup_Claude_2026-09-29.md § 2.1, § 2.2 — verbatim:
+// the non-retained identifiers are named in full (Social Security, driver's-license, bank-account or routing).
+// The opening callout carries the same correction (§ 2.6, the stale-copy search); its wording is drafted — the
+// spec supplies none — and is flagged for counsel in FINAL_COMPLIANCE_CLEANUP_CHANGE_REPORT.md.
 const privacyPolicy = {
     effectiveDate: LEGAL_EFFECTIVE_DATE,
-    lastUpdated: LEGAL_LAST_UPDATED,
-    intro: <Callout><Callout.Strong>Important:</Callout.Strong> UnitedStatesCredit is not a lender. We collect information directly from consumers to operate our loan-matching service. Certain sensitive application information may be processed for secure transmission to participating lenders, but UnitedStatesCredit does not persistently store Social Security numbers or bank-account information after transmission.</Callout>,
+    lastUpdated: LEGAL_LAST_UPDATED_2_2,
+    intro: <Callout><Callout.Strong>Important:</Callout.Strong> UnitedStatesCredit is not a lender. We collect information directly from consumers to operate our loan-matching service. Certain sensitive application information may be processed for secure transmission to participating lenders, but UnitedStatesCredit does not persistently store Social Security numbers, driver's-license numbers, or bank-account or routing information after transmission.</Callout>,
     sections: [
         {
             id: 's1',
@@ -44,7 +48,7 @@ const privacyPolicy = {
             heading: '3. Sensitive Application Data',
             body: (
                 <>
-                    <P>UnitedStatesCredit processes Social Security numbers and bank-account information only as needed to transmit your requested loan application to participating lenders and financial-service providers involved in that request. We do not persistently retain those identifiers after transmission. We may retain limited contact, transaction, routing, consent, security, and suppression records for the purposes described in our notices, but those retained records do not include your Social Security number or bank-account information.</P>
+                    <P>UnitedStatesCredit processes Social Security numbers, driver's-license numbers, and bank-account or routing information only as needed to transmit your requested loan application to participating lenders and financial-service providers involved in that request. We do not persistently retain those identifiers after transmission. We may retain limited contact, transaction, routing, consent, security, and suppression records for the purposes described in our notices, but those retained records do not include your Social Security number, driver's-license number, or bank-account or routing information.</P>
                     <P>We do not use this sensitive information for unrelated marketing.</P>
                     <P>Our marketing and list-management records do not include Social Security numbers, bank-account or routing numbers, driver's-license numbers, consumer-report information, or other sensitive lender-application identifiers. We do not provide those fields to list managers, advertisers, email marketers, or SMS marketers for marketing purposes.</P>
                 </>
@@ -139,7 +143,7 @@ const privacyPolicy = {
             body: (
                 <>
                     <P>We retain personal information only for as long as reasonably necessary for the purpose for which it was collected, including transaction administration, fraud prevention, security, legal compliance, dispute resolution, consent evidence, suppression records, and legitimate business operations. Different categories may have different retention periods.</P>
-                    <P>Social Security numbers and bank-account information submitted for lender transmission are not persistently retained by UnitedStatesCredit after transmission of the request.</P>
+                    <P>Social Security numbers, driver's-license numbers, and bank-account or routing information submitted for lender transmission are not persistently retained by UnitedStatesCredit after transmission of the request.</P>
                 </>
             ),
         },

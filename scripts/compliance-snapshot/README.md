@@ -2,7 +2,7 @@
 
 `/loans/compliance-snapshot` on **staging** — a read-only, statically prerendered mirror of
 everything a consumer can read on `/loans`: the complete Legal Center, every loan-form step
-with its consents, tooltips and conditional variants, the partner lists, the site chrome and
+with its consents, tooltips and conditional variants, the Marketplace Partners list, the site chrome and
 the landing disclosures — plus a link inventory, a consent-state inventory, build metadata
 and sha256 hashes for change detection. Three pages and a JSON:
 
@@ -27,14 +27,37 @@ The snapshot never carries its own copy of legal, consent, tooltip or disclosure
 | Header, footer, landing disclosures | `components/SiteHeader`, `SiteFooter`, `Hero`, `TrustStrip`, `HowItWorks`, `Notice`, `Faq`, `LegalCenterCta` | the same components |
 | Your Privacy Choices variants | `components/PrivacyChoices.jsx` (`SIGNAL_COPY`, `signalMessage`, `hasForm`/`endpoint` props) | the same components, one render per state |
 | Marketplace Partners list | `components/MarketplacePartnersList.jsx` `PartnersListView`, fed by `services.config.js` `marketplacePartnersEndpoint()` | the same view, fed by the same endpoint fetched at build |
-| Marketing Partners list | `loanPages.js` `MARKETING_PARTNERS` | the same constant |
-| Page registry, routes, versions, dates | `loanPages.js` | the same module |
+| Page registry, routes, versions, dates, retired URLs (`LEGACY_SLUGS`) | `loanPages.js` | the same module |
 | The loan form: steps, fields, help, tooltips, consents, assent lines, the California authorization, the visibility rules, modal copy | bkform's `src/form/*`, `src/consent/*`, `src/app/modalCopy.js` → `form.js` | bkform's `dist/compliance-manifest.json`, generated at bkform's build from those same modules and published beside `form.js` (`APIS/bluekeel-tools/bkform/scripts/compliance-manifest.mjs`) |
 
 `site-entry.jsx` is the only file that imports `src/`; `manifest.mjs` only lays the manifest's
 words out. `grep -r "Drift-test" scripts/compliance-snapshot` should always find nothing: the
 CS20 drift test edits one word in bkform's registry (or one content module) and expects both
 the live artifact and the snapshot to change with no edit here.
+
+## What the verifier holds from the final compliance cleanup (2026-09-29)
+
+Counsel's patch (`reference/USC_Final_Compliance_Cleanup_Claude_2026-09-29.md`) retired the
+separate Marketing Partners directory, reworded the two optional marketing consents and took
+"d/b/a" out of every current text. Three build gates keep it that way; their rules are data
+in `lib/forbidden.mjs` (`RETIRED_DIRECTORY`, `CONSENT_WORDING`, the `"d/b/a"` tier-1 entry):
+
+| Gate | Fails the deploy when |
+|---|---|
+| B18 | the registry or the snapshot has the retired page; `LEGACY_SLUGS` does not send `marketing-partners` to `marketing-communications`; there is any partner list but Marketplace; **any** link in the inventory (site or form) goes to a retired URL; the directory's name, slug or version field appears anywhere but the record of the redirect |
+| B19 | either marketing consent says *artificial*, *prerecorded*, *d/b/a* or names the retired directory, does not name "Bluekeel LLC, operator of UnitedStatesCredit.com", links anywhere but Marketplace Partners (and Communication Terms), is required or pre-checked; or any consent version differs from `CONSENT_WORDING.versions` |
+| B20 | the three pages or the JSON call UnitedStatesCredit a "d/b/a" of Bluekeel LLC in any spelling (our own name only — a Marketplace Partner's name may carry that company's trade name and is published as given) |
+
+**A consent wording change in bkform therefore needs a change here**: the new version in
+`CONSENT_WORDING.versions`, in the same commit series as the bkform release. That is the
+point — the site cannot silently publish a consent wording nobody reviewed. **Order of a
+release that changes the form's words:** publish bkform to `bkform-dev` first, then push the
+site's `staging` (the snapshot is built from the published manifest; the other order fails
+B18/B19 and blocks the deploy).
+
+The redirect itself is client-side (the app's `LegacyRedirect`; S3 answers 200 with the page
+shell to any path), so no HTTP check can see it: `reference/final-compliance-cleanup-report/scripts/redirect-check.mjs`
+opens the old URL in headless Chrome and reads where it lands.
 
 ## Building
 
@@ -72,7 +95,7 @@ page would use on that host (`services.config.js`, `bkform.config.js`), never gu
 | `links.mjs` | anchors with their source, classified against the registry (`registered`, `legacy-redirect`, `anchor-ok`, `mailto`, `external`, `UNRESOLVED`) |
 | `partners.mjs`, `metadata.mjs` | the build-time fetches |
 | `lib/text.mjs` | the one normalization + sha256 the prerender and the verifier share (`usc-text-v1`) |
-| `verify.mjs` | `--build` (B01–B17) before the sync, `--live <origin>` (L01–L13) after the invalidation |
+| `verify.mjs` | `--build` (B01–B20) before the sync, `--live <origin>` (L01–L13) after the invalidation |
 | `diff.mjs` | what changed vs the snapshot currently live, into the run summary; never blocks |
 | `publish.mjs` | `Cache-Control: no-cache` and the extensionless keys, after the sync, before the invalidation |
 | `cloudfront-robots.mjs` | one-time: the `/loans/compliance-snapshot*` behavior with the `X-Robots-Tag` response-headers policy (applied to `ENT3GX44KR3US` 2026-09-21) |

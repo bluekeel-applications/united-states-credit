@@ -13,7 +13,34 @@ export const TIER1 = [
     ['credential assignment', /(api[_-]?key|apikey|secret|password|token)\s*[:=]\s*['"][^'"]{8,}['"]/i],
     ['source map reference', /sourceMappingURL/],
     ['retired internal phrase', /must be connected to this preference|preferred production method|pending legal review|Developer preview|wire this form|backend needs connecting|\bDEVIATION\b|Implementation note/],
+    // UnitedStatesCredit.com is a site Bluekeel LLC operates, not a registered
+    // assumed name (final compliance cleanup, 2026-09-29, § 5): nothing current
+    // may call it a "d/b/a" — B10 scans every page and the JSON for it (B20).
+    // About our own name only: a Marketplace Partner's name may carry a trade
+    // name of its own ("… dba …"), and that list is published as it is given.
+    ['"d/b/a" identity wording', /(\bd\/b\/a|\bdba|\bdoing business as)\s+(the\s+)?United\s?States\s?Credit|Bluekeel,? LLC,?\s+(d\/b\/a|dba|doing business as)\b/i],
 ];
+
+// The final compliance cleanup (2026-09-29), as the verifier holds it.
+// RETIRED_DIRECTORY: the separate directory of promotional senders — its page,
+// its list, its version and every link to it are gone; the old URL redirects
+// (loanPages.js LEGACY_SLUGS). CONSENT_WORDING: what the two optional marketing
+// consents must not say (§ 1, "Explicit exclusions"), what they must say, and
+// the version of every consent wording in force — a changed wording in bkform
+// has to be met by a changed version here, deliberately.
+export const RETIRED_DIRECTORY = {
+    slug: 'marketing-partners',
+    redirectsTo: 'marketing-communications',
+    name: /Marketing Partners/,
+    field: /marketingPartners|marketing_partners|marketing-partners-version/i,
+};
+export const CONSENT_WORDING = {
+    marketingConsents: ['consentContact', 'consentMobile'],
+    excluded: [/artificial/i, /prerecorded/i, /\bd\/b\/a\b/i, /\bdba\b/i, /Marketing Partners/i],
+    identity: 'Bluekeel LLC, operator of UnitedStatesCredit.com',
+    links: { consentContact: ['marketplace-partners', 'marketing-communications'], consentMobile: ['marketplace-partners'] },
+    versions: { consentContact: 'contact-2026-09-29', consentFcra: 'fcra-2026-09-18', consentMobile: 'mobile-2026-09-29', caAuthorization: 'ca-auth-2026-09-18' },
+};
 
 export const UNFINISHED = /\b(TBD|TODO|FIXME)\b|\[PLACEHOLDER\]|lorem ipsum/i;
 

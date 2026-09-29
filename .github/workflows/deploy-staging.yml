@@ -28,8 +28,8 @@ jobs:
     timeout-minutes: 30
     env:
       # The compliance snapshot (scripts/compliance-snapshot/): a read-only,
-      # prerendered mirror of the Legal Center, the loan form and the partner
-      # lists at /loans/compliance-snapshot, built for this host and verified
+      # prerendered mirror of the Legal Center, the loan form and the
+      # Marketplace Partners list at /loans/compliance-snapshot, built for this host and verified
       # before the sync and again after the invalidation. Staging only.
       SNAPSHOT_HOST: staging.unitedstatescredit.com
       SNAPSHOT_PROD_ORIGIN: https://unitedstatescredit.com

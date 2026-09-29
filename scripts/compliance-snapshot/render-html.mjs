@@ -101,13 +101,14 @@ ${dl([
         ['Build stamp in index.html', m.build.bundle_sha_check],
         ['Production currently reflects', prod],
         ['Legal Center content version', m.legal.content_version],
-        ['Legal Center effective / last updated', `${m.legal.effective_date} / ${m.legal.last_updated}`],
+        ['Legal Center effective', m.legal.effective_date],
+        ['Legal Center last updated, by document', m.legal.last_updated_by_date.map((d) => `${d.date}: ${d.slugs.join(', ')}`).join(' · ')],
+        ['Retired URLs (the app redirects each; none is linked from a current page)', `<span data-snapshot-retired-routes>${Object.entries(m.legal.legacy_slugs).map(([from, to]) => `<code>${esc(`${m.legal.loans_home}/${from}`)}</code> → <code>${esc(`${m.legal.loans_home}/${to}`)}</code>`).join(' · ')}</span>`, true],
         ['Loan-form documents effective', m.legal.loan_form_docs_effective_date],
         ['Loan form (bkform)', `${f.sdk_name} ${f.sdk_version}, manifest from ${f.manifest.source}, manifest content hash ${f.manifest.content_hash}, file sha256 ${f.manifest.sha256}, generated ${f.manifest.generated_at}`],
         ['Form evidence version', `${f.evidence_version} (consent versions: ${Object.entries(f.consent_versions).map(([k, v]) => `${k}=${v}`).join(', ')})`],
         ['First-offer check on this host', `${f.mode.environment} (${f.mode.meaning[f.mode.environment]})`],
         ['Marketplace Partners list', mp.status === 'loaded' ? `version ${mp.version} · updated ${mp.updated_at} · ${mp.count} partners${mp.stale ? ' · STALE per the service' : ''}` : `UNAVAILABLE AT BUILD (${mp.error})`],
-        ['Marketing Partners list', `version ${m.partner_lists.marketing.version} · updated ${m.partner_lists.marketing.updated} · ${m.partner_lists.marketing.count} partners`],
         ['Text normalization for hashes', m.hashes.normalization],
         ['Machine-readable copy', '<a href="/loans/compliance-snapshot.json">/loans/compliance-snapshot.json</a>', true],
         ['Subroutes', '<a href="/loans/compliance-snapshot/legal-center">/loans/compliance-snapshot/legal-center</a> · <a href="/loans/compliance-snapshot/form">/loans/compliance-snapshot/form</a>', true],
@@ -201,7 +202,7 @@ const formSection = (m, { heading = 'Loan form' } = {}) => {
     return `<section class="snap-section" id="loan-form"><h2>${esc(heading)}</h2>
 ${dl([
         ['Source', `bkform ${f.sdk_version} — compliance manifest ${f.manifest.content_hash} (from ${f.manifest.source}, generated ${f.manifest.generated_at})`],
-        ['Embedded with', `data-legal-base=${f.embed.legal_base} · data-legal-version=${f.embed.legal_version} · data-marketing-partners-version=${f.embed.marketing_partners_version} · data-first-offer-check=${f.embed.first_offer_check} · site key ${f.embed.site_key}`],
+        ['Embedded with', `data-legal-base=${f.embed.legal_base} · data-legal-version=${f.embed.legal_version} · data-first-offer-check=${f.embed.first_offer_check} · site key ${f.embed.site_key}`],
         ['Legal link rule', `${f.legal_url_rule.pattern} with legalBase ${f.embed.legal_base} (${f.legal_url_rule.source}); the site's own route for a slug is ${m.legal.loans_home}/<slug>`],
         ['This host\'s mode', `first-offer check ${f.mode.environment}: ${f.mode.meaning[f.mode.environment]}`],
         ['Other mode', `first-offer check ${f.mode.other}: ${f.mode.meaning[f.mode.other]}`],
@@ -266,15 +267,12 @@ ${caHtml}${f.variants.slice(1).map(ruleHtml).join('')}${privacyHtml}
 };
 
 const partnersSection = (m) => {
-    const mp = m.partner_lists.marketplace; const mk = m.partner_lists.marketing;
+    const mp = m.partner_lists.marketplace;
     const refs = (r) => `referenced by the FCRA authorization: ${yesNo(r.fcra)} · by the contact/marketing consent: ${yesNo(r.marketing)} (${r.consents.map((c) => `${c.key}, step ${c.step_number}`).join('; ') || 'none'})`;
-    return `<section class="snap-section" id="partner-lists"><h2>Partner lists</h2>
+    return `<section class="snap-section" id="partner-lists"><h2>Partner list</h2>
 <div class="snap-block" id="partners-marketplace-block" data-snapshot-partners="marketplace" data-version="${esc(mp.version || '')}" data-status="${esc(mp.status)}" data-hash-rule="${mp.status === 'loaded' ? 'marketplace-list' : 'text'}" data-sha256="${esc(mp.sha256)}"><h3>${esc(mp.title)}</h3>
 ${dl([['Canonical route', `<a href="${esc(mp.route)}">${esc(mp.route)}</a>`, true], ['Source', mp.source], ['Status at build', mp.status + (mp.error ? ` (${mp.error})` : '')], ['Version', mp.version], ['Updated', mp.updated_at], ['Last confirmed', mp.last_confirmed_at], ['Stale', mp.stale == null ? null : yesNo(mp.stale)], ['Count', mp.count == null ? null : String(mp.count)], ['Referenced by consents', refs(mp.referenced_by)], ['Hash rule', mp.hash_rule]])}
 <h4>Exactly as displayed to consumers</h4>${rendered(mp.rendered)}${hash(mp.sha256)}</div>
-<div class="snap-block" id="partners-marketing-block" data-snapshot-partners="marketing" data-version="${esc(mk.version)}" data-hash-rule="marketing-list" data-sha256="${esc(mk.sha256)}"><h3>${esc(mk.title)}</h3>
-${dl([['Canonical route', `<a href="${esc(mk.route)}">${esc(mk.route)}</a>`, true], ['Source', mk.source], ['Version', mk.version], ['Updated', mk.updated], ['Count', String(mk.count)], ['Names', mk.count ? mk.partners.map((p) => p.name).join(', ') : 'none — the page states that no list-management company or sender brand is currently authorized'], ['Referenced by consents', refs(mk.referenced_by)], ['Rendered page', `see the Legal Center page “${mk.title}” above (sha256 ${mk.rendered_page_sha256})`], ['Hash rule', mk.hash_rule]])}
-${hash(mk.sha256)}</div>
 </section>`;
 };
 
@@ -345,7 +343,7 @@ export const renderPages = (m) => {
     const subtitle = `${m.environment} · build ${m.build.git_sha ? m.build.git_sha.slice(0, 12) : 'unknown'} · generated ${m.generated_at} · Legal Center ${m.legal.content_version} · bkform ${m.form.sdk_version}`;
     const index = shell({
         m, kind: 'index', title: 'UnitedStatesCredit Compliance Snapshot', subtitle,
-        tocItems: [['build-information', 'Build information'], ['site-chrome', 'Site chrome and landing disclosures'], ['legal-center', 'Legal Center'], ['loan-form', 'Loan form'], ['conditional-variants', 'Conditional / state-specific variants'], ['partner-lists', 'Partner lists'], ['tooltip-inventory', 'Tooltip inventory'], ['consent-state-inventory', 'Consent-state inventory'], ['modal-and-screens', 'Modal and screen copy'], ['link-inventory', 'Link inventory'], ['compliance-metadata', 'Compliance metadata']],
+        tocItems: [['build-information', 'Build information'], ['site-chrome', 'Site chrome and landing disclosures'], ['legal-center', 'Legal Center'], ['loan-form', 'Loan form'], ['conditional-variants', 'Conditional / state-specific variants'], ['partner-lists', 'Partner list'], ['tooltip-inventory', 'Tooltip inventory'], ['consent-state-inventory', 'Consent-state inventory'], ['modal-and-screens', 'Modal and screen copy'], ['link-inventory', 'Link inventory'], ['compliance-metadata', 'Compliance metadata']],
         body: [buildInfo(m), siteChrome(m), legalCenter(m), formSection(m), variantsSection(m), partnersSection(m), tooltipsSection(m), consentsSection(m), modalSection(m), linksSection(m), metadataSection(m)].join('\n'),
     });
     const legalCenterPage = shell({
@@ -355,7 +353,7 @@ export const renderPages = (m) => {
     });
     const form = shell({
         m, kind: 'form', title: 'Compliance Snapshot — Loan Form', subtitle,
-        tocItems: [['build-information', 'Build information'], ['loan-form', 'Loan form, step by step'], ['conditional-variants', 'Conditional / state-specific variants'], ['tooltip-inventory', 'Tooltip inventory'], ['consent-state-inventory', 'Consent-state inventory'], ['modal-and-screens', 'Modal and screen copy'], ['partner-lists', 'Partner lists'], ['link-inventory', 'Link inventory'], ['compliance-metadata', 'Hashes']],
+        tocItems: [['build-information', 'Build information'], ['loan-form', 'Loan form, step by step'], ['conditional-variants', 'Conditional / state-specific variants'], ['tooltip-inventory', 'Tooltip inventory'], ['consent-state-inventory', 'Consent-state inventory'], ['modal-and-screens', 'Modal and screen copy'], ['partner-lists', 'Partner list'], ['link-inventory', 'Link inventory'], ['compliance-metadata', 'Hashes']],
         body: [buildInfo(m), formSection(m, { heading: 'Loan form, step by step' }), variantsSection(m), tooltipsSection(m), consentsSection(m), modalSection(m), partnersSection(m), linksSection(m), metadataSection(m)].join('\n'),
     });
     return { index, legalCenter: legalCenterPage, form };

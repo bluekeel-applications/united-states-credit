@@ -34,3 +34,34 @@ const quietRunningVendors = () => {
         // best effort: the reload that follows is what enforces the choice
     }
 };
+
+// What monitoring may never learn: a bank routing number. The loan form's
+// bank-name lookup calls `<lead API>/banks/<routing number>`, and the
+// monitoring vendor records the URL of every request a page makes. This is
+// the vendor SDK's `beforeSend` (App.jsx): it rewrites that path segment
+// before an event leaves the browser, in every place an event can carry a URL
+// — the request itself, an error's request, message or stack, the view. It
+// changes nothing else and never drops an event. (Final compliance cleanup,
+// 2026-09-29: the Legal Center says routing numbers are not retained after
+// transmission; a third party's request log is not an exception to that.)
+const ROUTING_NUMBER_IN_PATH = /(\/banks\/)\d+/g;
+
+export const redactRoutingNumber = (text) => (typeof text === 'string' ? text.replace(ROUTING_NUMBER_IN_PATH, '$1[redacted]') : text);
+
+export const redactMonitoringEvent = (event) => {
+    try {
+        if (event?.resource?.url) event.resource.url = redactRoutingNumber(event.resource.url);
+        if (event?.error) {
+            if (event.error.resource?.url) event.error.resource.url = redactRoutingNumber(event.error.resource.url);
+            if (event.error.message) event.error.message = redactRoutingNumber(event.error.message);
+            if (event.error.stack) event.error.stack = redactRoutingNumber(event.error.stack);
+        }
+        if (event?.view) {
+            if (event.view.url) event.view.url = redactRoutingNumber(event.view.url);
+            if (event.view.referrer) event.view.referrer = redactRoutingNumber(event.view.referrer);
+        }
+    } catch (e) {
+        // an event the SDK will not let us edit is sent as it is — monitoring is never broken from here
+    }
+    return true;
+};

@@ -8,7 +8,7 @@ import { COLORS, FONT_STACK } from '../theme';
 import useLoanTrack from '../useLoanTrack';
 import { AppContext } from '../../../../context/AppContext';
 import { BKFORM_CONTAINER_ID, BKFORM_SITE_KEY, bkformTargets } from '../bkform.config';
-import { LOANS_HOME, LEGAL_CONTENT_VERSION, MARKETING_PARTNERS } from '../loanPages';
+import { LOANS_HOME, LEGAL_CONTENT_VERSION } from '../loanPages';
 
 const SCRIPT_ID = 'bkform-loader';
 
@@ -164,11 +164,10 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             'data-secondary-color': COLORS.navy2,
             'data-mode': 'rounded',
             // Where the form's legal links resolve (its consent copy names these
-            // pages by slug), and the document versions it records with each
-            // consent (bkform ≥ 1.4.0; older builds warn and ignore them).
+            // pages by slug), and the version of the legal pages it records with
+            // each consent (bkform ≥ 1.4.0; older builds warn and ignore them).
             'data-legal-base': LOANS_HOME,
             'data-legal-version': LEGAL_CONTENT_VERSION,
-            'data-marketing-partners-version': MARKETING_PARTNERS.version,
         }).forEach(([key, value]) => script.setAttribute(key, value));
         script.async = true;
         script.onerror = () => {
