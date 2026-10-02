@@ -8,7 +8,7 @@ import DrawerMenu from './Layout/DrawerMenu';
 import Navbar from '../components/Shared/Navbar';
 import Footer from './Layout/Footer';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { getCookie, isPch } from '../utils/helpers';
+import { getCookie, fromGclCookie, isPch } from '../utils/helpers';
 import useSetNewSession from '../utils/hooks/useSetNewSession';
 import Radium from 'radium';
 import Styles from './Styles.css.js';
@@ -48,7 +48,15 @@ const App = ({ uri }) => {
         PACID: myURL.searchParams.get('pacid') || getCookie('pacid') || null,
         PT1: myURL.searchParams.get('pt1') || 'N/A',
         PT2: myURL.searchParams.get('pt2') || 'N/A',
-        GCLID: myURL.searchParams.get('gclid') || getCookie('gclid') || null,
+        // Google's click ids: the landing URL first, then our own 90-day cookie
+        // (helpers.js setCookies), then the Google tag's own first-party cookie
+        // from an earlier page on this site. gbraid / wbraid are what Google
+        // sends in place of gclid from iOS; the loan form reports a sale against
+        // whichever one the session has (routing-engine ENGINE.md § Google Ads
+        // conversions).
+        GCLID: myURL.searchParams.get('gclid') || getCookie('gclid') || fromGclCookie('_gcl_aw') || null,
+        GBRAID: myURL.searchParams.get('gbraid') || getCookie('gbraid') || fromGclCookie('_gcl_gb') || null,
+        WBRAID: myURL.searchParams.get('wbraid') || getCookie('wbraid') || null,
         EMAIL: myURL.searchParams.get('email') || getCookie('email') || '',
         VERTICAL: myURL.searchParams.get('vertical') || 'N/A',
         TYPE: myURL.searchParams.get('type') || 'N/A',

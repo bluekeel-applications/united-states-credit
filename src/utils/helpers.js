@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { isPrivacySuppressed } from './privacy';
 
 export const convertRegion = (input, to) => {
     const states = [
@@ -145,6 +146,28 @@ export const checkCookie = (cname) => {
     return false;
 };
 
+// Google's click ids (gclid, and gbraid / wbraid from iOS) are kept for 90
+// days — the window Google accepts a conversion for that click — so a visitor
+// who reloads /loans, or comes back to it, still carries the click the loan
+// form reports a sale against (routing-engine ENGINE.md § Google Ads
+// conversions). Only when the URL had one, and never for a browser that opted
+// out of sale/sharing: the Google tag is not loaded for it and nothing about
+// its click is kept either.
+export const CLICK_ID_COOKIE_DAYS = 90;
+export const CLICK_ID_NAMES = ['gclid', 'gbraid', 'wbraid'];
+
+// The Google tag's own first-party cookie for a click id (`_gcl_aw` for gclid,
+// `_gcl_gb` for gbraid) holds `GCL.<timestamp>.<id>`; the id is what follows
+// the second dot. Null when the cookie is absent or not in that shape.
+export const fromGclCookie = (name) => {
+    const raw = getCookie(name);
+    if (!raw) return null;
+    const parts = raw.split('.');
+    if (parts.length < 3 || parts[0] !== 'GCL') return null;
+    const id = parts.slice(2).join('.');
+    return id || null;
+};
+
 export const setCookies = (tracking) => {
     setCookie('oid', tracking.oid, 3);
     setCookie('pid', tracking.pid, 3);
@@ -157,6 +180,11 @@ export const setCookies = (tracking) => {
     };
     if(!!tracking.ads) {
         setCookie('ads', tracking.ads, 3);
+    };
+    if(!isPrivacySuppressed()) {
+        CLICK_ID_NAMES.forEach((name) => {
+            if(!!tracking[name]) setCookie(name, tracking[name], CLICK_ID_COOKIE_DAYS);
+        });
     };
 };
 export const setPchCookies = (user) => {

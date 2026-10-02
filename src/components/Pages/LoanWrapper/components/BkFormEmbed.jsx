@@ -9,6 +9,7 @@ import useLoanTrack from '../useLoanTrack';
 import { AppContext } from '../../../../context/AppContext';
 import { BKFORM_CONTAINER_ID, BKFORM_SITE_KEY, bkformTargets } from '../bkform.config';
 import { LOANS_HOME, LEGAL_CONTENT_VERSION } from '../loanPages';
+import { isPrivacySuppressed } from '../../../../utils/privacy';
 
 const SCRIPT_ID = 'bkform-loader';
 
@@ -40,10 +41,12 @@ const BkFormEmbed = ({ mockOnly = false }) => {
     const [failed, setFailed] = useState(false);
 
     // Session ids for the URL enrichment. hsid is committed before /loans can
-    // render (App's loading gate) and is write-once. gclid is whatever the
-    // landing URL carried (null otherwise) — it rides bkform's decline offer.
+    // render (App's loading gate) and is write-once. gclid / gbraid / wbraid
+    // are whatever the landing URL carried, or the 90-day cookie from an
+    // earlier visit (null otherwise) — they ride bkform's decline offer and the
+    // engine's Google Ads conversion report.
     const { trackingState } = useContext(AppContext);
-    const { hsid, sid, eid, gclid } = trackingState;
+    const { hsid, sid, eid, gclid, gbraid, wbraid } = trackingState;
 
     // Latest-ref pattern: the embed effect must not re-run when track's
     // identity changes (that would re-inject the script), but events should
@@ -65,9 +68,9 @@ const BkFormEmbed = ({ mockOnly = false }) => {
         const testLender = targets.dev ? (new URLSearchParams(window.location.search).get('test') || null) : null;
         const emit = (name, params = {}) => trackRef.current(name, { form_vendor: 'bk', ...(testLender ? { test_lender: testLender } : {}), ...params });
 
-        // bkform reads cid1/sub1/sub2 (and gclid) from the URL when it mounts —
-        // before the script tag goes in.
-        enrichUrlWithSession({ hsid, sid, eid, gclid });
+        // bkform reads cid1/sub1/sub2 (and the Google click ids) from the URL
+        // when it mounts — before the script tag goes in.
+        enrichUrlWithSession({ hsid, sid, eid, gclid, gbraid, wbraid });
 
         // This card already draws the frame, so switch bkform's own border and
         // shadow off and hand it the page's font. Set imperatively (bkform's
@@ -168,6 +171,11 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             // each consent (bkform ≥ 1.4.0; older builds warn and ignore them).
             'data-legal-base': LOANS_HOME,
             'data-legal-version': LEGAL_CONTENT_VERSION,
+            // An opted-out browser (GPC or the stored marker, utils/privacy.js):
+            // the form tells the engine, and the engine reports nothing about
+            // this applicant to Google Ads (bkform ≥ 1.7.0; older builds warn
+            // about the attribute and ignore it).
+            ...(isPrivacySuppressed() ? { 'data-ads-opt-out': 'true' } : {}),
         }).forEach(([key, value]) => script.setAttribute(key, value));
         script.async = true;
         script.onerror = () => {

@@ -16,13 +16,15 @@
 // lead, bkform sends the applicant to a decline offer stamped the way this
 // site's own offer pages stamp their partner links (OfferBlockPage.jsx) —
 // `eid=block-<sid>-<eid>&subid2=<hsid>&gclid=…` — and the engine can only add
-// a gclid it was given. The session's value is what the landing URL carried
-// (App.jsx); nothing cookies it, so a visitor who reloads without it has none,
-// exactly as on the offer-block page.
-export const enrichUrlWithSession = ({ hsid, sid, eid, gclid }) => {
+// a gclid it was given. Since 2026-10-01 the same engine reports a sold lead's
+// conversion to Google Ads against the click id, so `gbraid` and `wbraid` —
+// what Google sends in place of gclid from iOS — ride along under their own
+// names, and all three now survive a reload: the landing URL's value is kept
+// in a 90-day cookie (helpers.js setCookies) and read back by App.jsx.
+export const enrichUrlWithSession = ({ hsid, sid, eid, gclid, gbraid, wbraid }) => {
     if (!hsid) return false;
     const search = new URLSearchParams(window.location.search);
-    Object.entries({ cid1: hsid, sub1: sid, sub2: eid, gclid }).forEach(([key, value]) => {
+    Object.entries({ cid1: hsid, sub1: sid, sub2: eid, gclid, gbraid, wbraid }).forEach(([key, value]) => {
         if (value !== null && value !== undefined && value !== '') search.set(key, value);
     });
     window.history.replaceState(window.history.state, '', `${window.location.pathname}?${search}${window.location.hash}`);

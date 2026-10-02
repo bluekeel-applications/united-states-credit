@@ -19,7 +19,11 @@ const useSetNewSession = ({ tracking, turnOffLoading, animationComplete }) => {
 		oid: Number(tracking.OID),
 		uid: tracking.UID,
 		eid: tracking.EID,
-		gclid: tracking.GCLID
+		gclid: tracking.GCLID,
+		// Google's iOS click ids, kept beside gclid for the loan form's
+		// conversion report (routing-engine ENGINE.md § Google Ads conversions).
+		gbraid: tracking.GBRAID,
+		wbraid: tracking.WBRAID
 	};
 
 	const hsid = useHitStreet(topProps);
@@ -38,6 +42,8 @@ const useSetNewSession = ({ tracking, turnOffLoading, animationComplete }) => {
 			pt1: tracking.PT1,
 			pt2: tracking.PT2,
 			gclid: tracking.GCLID,
+			gbraid: tracking.GBRAID,
+			wbraid: tracking.WBRAID,
 			email: tracking.EMAIL,
 			article: tracking.ARTICLE,
 			segment: tracking.SEGMENT,
