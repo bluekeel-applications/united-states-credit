@@ -1,4 +1,5 @@
 import { normalizeAdSource, inferAdSourceFromClickIds } from '../adSource';
+import { fillTrackingTemplate } from '../fillTrackingTemplate';
 
 // Offerbucks (All Day Long Media) landing-URL contract — reference/Offerbucks_Integration_Guide.pdf:
 //   https://abouttopic.com/lander/{slug}?utm_source=&channelid=&adcreative=&utm_term=[&kw=&rs=]
@@ -11,7 +12,9 @@ import { normalizeAdSource, inferAdSourceFromClickIds } from '../adSource';
 //
 // Every value is resolved inbound-first (what the ad network put on our landing URL,
 // now in trackingState), then from the base offer's admin-entered fallback
-// (`offer.offerbucks`, set in bluekeel-services' Base Offer dialog).
+// (`offer.offerbucks`, set in bluekeel-services' Base Offer dialog). Either side may
+// use ${name} placeholders — channelid=${eid}-${sid} — filled from trackingState
+// (utils/fillTrackingTemplate.js); a candidate that fills to nothing falls through.
 
 export const OFFERBUCKS_CLICK_IDS = ['gclid', 'fbclid', 'ttclid', 'ob_click_id', 'tblci'];
 
@@ -28,14 +31,16 @@ const relatedSearches = (rs) => {
 export const resolveOfferbucksParams = (tracking = {}, config = {}) => {
     const t = tracking || {};
     const c = config || {};
+    const fill = (v) => fillTrackingTemplate(v, t);
+    const pick = (...values) => first(...values.map(fill));
     return {
-        utm_source: normalizeAdSource(t.utm_source) || inferAdSourceFromClickIds(t) || normalizeAdSource(c.utm_source),
-        // A String passed through verbatim, never range-checked: the owner may
-        // concatenate an eid onto the channel number.
-        channelid: first(t.channelid, c.channelid),
-        adcreative: first(t.adcreative, t.utm_content, c.adcreative),
-        utm_term: first(t.utm_term, t.placement, c.utm_term, t.sid),
-        kw: first(c.kw),
+        utm_source: normalizeAdSource(fill(t.utm_source)) || inferAdSourceFromClickIds(t) || normalizeAdSource(fill(c.utm_source)),
+        // A String passed through as given (templates filled), never range-checked:
+        // the owner may concatenate an eid onto the channel number.
+        channelid: pick(t.channelid, c.channelid),
+        adcreative: pick(t.adcreative, t.utm_content, c.adcreative),
+        utm_term: pick(t.utm_term, t.placement, c.utm_term, t.sid),
+        kw: pick(c.kw),
         rs: relatedSearches(c.rs)
     };
 };

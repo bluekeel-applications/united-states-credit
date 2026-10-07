@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string -- the ${name} placeholders under test are literal strings */
 import buildLinkout from './buildLinkout';
 
 const tracking = {
@@ -75,6 +76,28 @@ describe('buildLinkout — offerbucks', () => {
         expect(params(buildLinkout(lander, 'offerbucks', tracking, { offerbucks: { rs: 25 } })).has('rs')).toBe(false);
         expect(() => buildLinkout(lander, 'offerbucks', tracking)).not.toThrow();
         expect(params(buildLinkout(lander, 'offerbucks', tracking)).get('eid')).toBe('1234-7572-camp1');
+    });
+});
+
+describe('buildLinkout — offerbucks ${name} templates', () => {
+    test('an inbound channelid template is filled from tracking state', () => {
+        const p = params(buildLinkout(lander, 'offerbucks', { ...tracking, channelid: '${eid}-${sid}' }));
+        expect(p.get('channelid')).toBe('camp1-7572');
+    });
+    test('an admin fallback template is filled too', () => {
+        const p = params(buildLinkout(lander, 'offerbucks', tracking, { offerbucks: { channelid: '${eid}-37103', adcreative: 'Loans for ${article}', utm_term: 'hs${hsid}' } }));
+        expect(p.get('channelid')).toBe('camp1-37103');
+        expect(p.get('utm_term')).toBe('hs555');
+        expect(params(buildLinkout(lander, 'offerbucks', { ...tracking, article: 'loan' }, { offerbucks: { adcreative: 'Loans for ${article}' } })).get('adcreative')).toBe('Loans for loan');
+    });
+    test('a template that fills to nothing falls through to the next source', () => {
+        const p = params(buildLinkout(lander, 'offerbucks', { ...tracking, utm_term: '${placement}', channelid: '${nope}' }, { offerbucks: { channelid: '37103' } }));
+        expect(p.get('utm_term')).toBe('7572');
+        expect(p.get('channelid')).toBe('37103');
+    });
+    test('visitor PII is never substituted', () => {
+        const p = params(buildLinkout(lander, 'offerbucks', { ...tracking, email: 'person@example.com', channelid: '${email}-${sid}' }));
+        expect(p.get('channelid')).toBe('-7572');
     });
 });
 
