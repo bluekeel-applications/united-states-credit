@@ -215,6 +215,14 @@ const FETCH_ARTICLE_BY_KEY = gql `
                         offer_url
                         usage
                         link_shape
+                        offerbucks {
+                            channelid
+                            utm_source
+                            adcreative
+                            utm_term
+                            kw
+                            rs
+                        }
                     }
                 }
                 mobile {
@@ -252,6 +260,14 @@ const FETCH_ARTICLE_BY_KEY = gql `
                             offer_url
                             usage
                             link_shape
+                            offerbucks {
+                                channelid
+                                utm_source
+                                adcreative
+                                utm_term
+                                kw
+                                rs
+                            }
                         }
                     }
                 }
@@ -279,6 +295,14 @@ export const COREG_PATH = gql`
                 description
                 offer_url
                 link_shape
+                offerbucks {
+                    channelid
+                    utm_source
+                    adcreative
+                    utm_term
+                    kw
+                    rs
+                }
                 }
           }
         }

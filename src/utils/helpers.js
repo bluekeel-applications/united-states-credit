@@ -153,8 +153,17 @@ export const checkCookie = (cname) => {
 // conversions). Only when the URL had one, and never for a browser that opted
 // out of sale/sharing: the Google tag is not loaded for it and nothing about
 // its click is kept either.
+// Facebook, TikTok, Outbrain and Taboola click ids ride along under the same
+// window and the same opt-out gate: a search partner (Offerbucks) reads them off
+// the landing URL we send it to attribute its conversions to the right network.
 export const CLICK_ID_COOKIE_DAYS = 90;
-export const CLICK_ID_NAMES = ['gclid', 'gbraid', 'wbraid'];
+export const CLICK_ID_NAMES = ['gclid', 'gbraid', 'wbraid', 'fbclid', 'ttclid', 'ob_click_id', 'tblci'];
+
+// Ad-network campaign metadata (not identifiers) that partner link-outs forward —
+// Offerbucks requires utm_source, adcreative, utm_term and channelid on its URL.
+// Kept 3 days like pid/sid so a /rsoc reload, which rewrites the URL, keeps them.
+// adcreative is free text, so values are URI-encoded (getCookie decodes).
+export const AD_PARAM_NAMES = ['utm_source', 'utm_term', 'utm_content', 'adcreative', 'placement', 'channelid'];
 
 // The Google tag's own first-party cookie for a click id (`_gcl_aw` for gclid,
 // `_gcl_gb` for gbraid) holds `GCL.<timestamp>.<id>`; the id is what follows
@@ -181,6 +190,9 @@ export const setCookies = (tracking) => {
     if(!!tracking.ads) {
         setCookie('ads', tracking.ads, 3);
     };
+    AD_PARAM_NAMES.forEach((name) => {
+        if(!!tracking[name]) setCookie(name, encodeURIComponent(tracking[name]), 3);
+    });
     if(!isPrivacySuppressed()) {
         CLICK_ID_NAMES.forEach((name) => {
             if(!!tracking[name]) setCookie(name, tracking[name], CLICK_ID_COOKIE_DAYS);

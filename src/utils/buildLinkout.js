@@ -1,12 +1,23 @@
+import { applyOfferbucksParams } from './partners/offerbucks';
+
 // Builds the partner redirect URL with tracking params injected, shaped by the
 // offer's link_shape. Extracted verbatim from ButtonGroupPage so the offer wall,
 // the redirect modal, and System1 all share one implementation.
-// `tracking` is the trackingState object (pid, sid, eid, hsid, uid, fbid).
-const buildLinkout = (url, shape, tracking) => {
+// `tracking` is the trackingState object (pid, sid, eid, hsid, uid, fbid, gclid —
+// and, for Offerbucks, the inbound ad params utm_source / adcreative / utm_term /
+// utm_content / placement / channelid plus the networks' click ids).
+// `offer` is optional per-offer config carried on the base offer; today only
+// `offer.offerbucks` is read (utils/partners/offerbucks.js).
+const buildLinkout = (url, shape, tracking, offer = {}) => {
     const url_base = new URL(url);
     url_base.searchParams.set('eid', `${tracking.pid}-${tracking.sid}-${tracking.eid}`);
     if(!!tracking.gclid) {
         url_base.searchParams.set('gclid', tracking.gclid);
+    };
+    if(shape === 'offerbucks') {
+        // Stays on the URL object so every value is encoded: adcreative is free text.
+        applyOfferbucksParams(url_base, tracking, (offer && offer.offerbucks) || {});
+        return url_base.toString();
     };
     const new_url = url_base.toString();
 

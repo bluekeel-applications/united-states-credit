@@ -53,7 +53,18 @@ const useSetNewSession = ({ tracking, turnOffLoading, animationComplete }) => {
 			fbid: tracking.FBID,
 			fbclickid: tracking.FBCLICKID,
 			display: tracking.DISPLAY,
-			ads: tracking.ADS
+			ads: tracking.ADS,
+			// Ad-network params + click ids for partner link-outs (Offerbucks). Every new
+			// landing-URL param has to be mapped here or it never reaches trackingState.
+			utm_source: tracking.UTM_SOURCE,
+			utm_term: tracking.UTM_TERM,
+			utm_content: tracking.UTM_CONTENT,
+			adcreative: tracking.ADCREATIVE,
+			placement: tracking.PLACEMENT,
+			channelid: tracking.CHANNELID,
+			fbclid: tracking.FBCLID,
+			ob_click_id: tracking.OB_CLICK_ID,
+			tblci: tracking.TBLCI
 		};
 		dispatchTracking({ type: 'USER_ARRIVED', payload });
 		setUserContext(payload);

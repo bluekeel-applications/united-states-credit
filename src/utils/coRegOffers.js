@@ -45,6 +45,7 @@ export const normalizeCoRegPathItems = (pathItems, categoryKey) =>
                 description: item.item_question_text || base.description || (cat && cat.sectionSub) || '',
                 partner_url: base.offer_url,
                 link_shape: base.link_shape || 'default',
+                offerbucks: base.offerbucks || null,
                 category: categoryKey,
             };
         })

@@ -30,11 +30,22 @@ const initialTrackingState = {
     article: null,
     record: null,
     ttid: null,
-    ttclid: null,
+    ttclid: Helpers.checkCookie('ttclid') ? Helpers.getCookie('ttclid') : null,
     fbid: null,
     fbclickid: null,
     display: null,
-    ads: Helpers.checkCookie('ads') ? Helpers.getCookie('ads') : null
+    ads: Helpers.checkCookie('ads') ? Helpers.getCookie('ads') : null,
+    // Ad-network params + click ids for partner link-outs (Offerbucks), restored from
+    // their cookies so a /rsoc reload — which rewrites the URL — keeps them.
+    utm_source: Helpers.checkCookie('utm_source') ? Helpers.getCookie('utm_source') : null,
+    utm_term: Helpers.checkCookie('utm_term') ? Helpers.getCookie('utm_term') : null,
+    utm_content: Helpers.checkCookie('utm_content') ? Helpers.getCookie('utm_content') : null,
+    adcreative: Helpers.checkCookie('adcreative') ? Helpers.getCookie('adcreative') : null,
+    placement: Helpers.checkCookie('placement') ? Helpers.getCookie('placement') : null,
+    channelid: Helpers.checkCookie('channelid') ? Helpers.getCookie('channelid') : null,
+    fbclid: Helpers.checkCookie('fbclid') ? Helpers.getCookie('fbclid') : null,
+    ob_click_id: Helpers.checkCookie('ob_click_id') ? Helpers.getCookie('ob_click_id') : null,
+    tblci: Helpers.checkCookie('tblci') ? Helpers.getCookie('tblci') : null
 };
 
 const trackingStateReducer = (state, action) => {
@@ -71,7 +82,16 @@ const trackingStateReducer = (state, action) => {
                 fbid: action.payload.fbid,
                 fbclickid: action.payload.fbclickid,
                 display: action.payload.display,
-                ads: action.payload.ads
+                ads: action.payload.ads,
+                utm_source: action.payload.utm_source,
+                utm_term: action.payload.utm_term,
+                utm_content: action.payload.utm_content,
+                adcreative: action.payload.adcreative,
+                placement: action.payload.placement,
+                channelid: action.payload.channelid,
+                fbclid: action.payload.fbclid,
+                ob_click_id: action.payload.ob_click_id,
+                tblci: action.payload.tblci
             };
             Helpers.setCookies(tracking);
             return {

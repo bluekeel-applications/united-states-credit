@@ -9,6 +9,7 @@ import Navbar from '../components/Shared/Navbar';
 import Footer from './Layout/Footer';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getCookie, fromGclCookie, isPch } from '../utils/helpers';
+import { normalizeAdSource } from '../utils/adSource';
 import useSetNewSession from '../utils/hooks/useSetNewSession';
 import Radium from 'radium';
 import Styles from './Styles.css.js';
@@ -65,11 +66,25 @@ const App = ({ uri }) => {
 		SPLIT: myURL.searchParams.get('split') || '',
 		RECORD: myURL.searchParams.get('record') || '',
 		TTID: myURL.searchParams.get('ttid') || 'CO5VQT3C77U2IBEA8QH0',
-		TTCLID: myURL.searchParams.get('ttclid') || '',
+		TTCLID: myURL.searchParams.get('ttclid') || getCookie('ttclid') || '',
 		FBID: myURL.searchParams.get('fbid') || null,
 		FBCLICKID: myURL.searchParams.get('fbclickid') || null,
 		DISPLAY: myURL.searchParams.get('display') || 'rsoc',
-		ADS: myURL.searchParams.get('ads') || getCookie('ads') || ''
+		ADS: myURL.searchParams.get('ads') || getCookie('ads') || '',
+		// Ad-network params a search partner needs on its landing URL (Offerbucks:
+		// utils/partners/offerbucks.js). URL first, then our 3-day cookie. A /rsoc reload
+		// rewrites utm_source to `${article}-${sid}`, so normalizeAdSource() turns anything
+		// outside the five networks into null and the real network comes back from the cookie.
+		UTM_SOURCE: normalizeAdSource(myURL.searchParams.get('utm_source')) || getCookie('utm_source') || null,
+		UTM_TERM: myURL.searchParams.get('utm_term') || getCookie('utm_term') || null,
+		UTM_CONTENT: myURL.searchParams.get('utm_content') || getCookie('utm_content') || null,
+		ADCREATIVE: myURL.searchParams.get('adcreative') || getCookie('adcreative') || null,
+		PLACEMENT: myURL.searchParams.get('placement') || getCookie('placement') || null,
+		CHANNELID: myURL.searchParams.get('channelid') || getCookie('channelid') || null,
+		// The other networks' click ids, kept 90 days like gclid (helpers.js CLICK_ID_NAMES).
+		FBCLID: myURL.searchParams.get('fbclid') || getCookie('fbclid') || null,
+		OB_CLICK_ID: myURL.searchParams.get('ob_click_id') || getCookie('ob_click_id') || null,
+		TBLCI: myURL.searchParams.get('tblci') || getCookie('tblci') || null
     };
 
 	useAdSense(tracking);

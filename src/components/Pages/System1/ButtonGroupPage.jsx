@@ -41,6 +41,7 @@ const ButtonGroupPage = () => {
         let count = 0;
         let offerUrl = null;
         let linkShape = null;
+        let offerbucks = null;
         const randomNumber = Math.floor(Math.random() * 100) + 1;
         console.log('randomNumber', randomNumber);
         // Loop the offer array and set the offer url
@@ -58,6 +59,7 @@ const ButtonGroupPage = () => {
             if(randomNumber <= count && !offerUrl) {
                 offerUrl = offer_obj.offer_url;
                 linkShape = offer_obj.link_shape;
+                offerbucks = offer_obj.offerbucks || null;
             };
             // Increment the count
             // if(idx !== 0) {
@@ -67,20 +69,22 @@ const ButtonGroupPage = () => {
             if(idx === offer_array.length - 1 && !offerUrl) {
                 offerUrl = offer_obj.offer_url;
                 linkShape = offer_obj.link_shape;
+                offerbucks = offer_obj.offerbucks || null;
             };
         });
         console.log('offerUrl', offerUrl);
         console.log('linkShape', linkShape);
-        return {offerUrl, linkShape};
+        return {offerUrl, linkShape, offerbucks};
     };
     const SelectOffers = (data) => {
         const offerArray = data.map((offer_obj) => {
             let text = offer_obj.button_text;
-            let {offerUrl, linkShape} = findOfferUrl(offer_obj.offers);
+            let {offerUrl, linkShape, offerbucks} = findOfferUrl(offer_obj.offers);
             return {
                 text,
                 url: offerUrl,
-                linkShape
+                linkShape,
+                offerbucks
             }
         });
         return offerArray;
@@ -88,7 +92,7 @@ const ButtonGroupPage = () => {
 
     useEffect(() => {
         let rawData = null;
-        if(isMobile && !!mobile.button_group) {
+        if(isMobile && !!mobile?.button_group) {
             rawData = mobile.button_group;
         } else {
             rawData = button_group;
@@ -114,7 +118,7 @@ const ButtonGroupPage = () => {
             window.fbq('init', '1129397548111416');
             window.fbq('track', 'Search');
             fireAdwordsEvent();
-            const new_url = buildLinkout(offerItem.url, offerItem.linkShape, trackingState);
+            const new_url = buildLinkout(offerItem.url, offerItem.linkShape, trackingState, { offerbucks: offerItem.offerbucks });
             console.log('linkout:', new_url);
             let newTab = window.open();
             newTab.location = new_url;

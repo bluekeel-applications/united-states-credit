@@ -92,7 +92,7 @@ const OfferWall = () => {
     const openOffer = (offer) => {
         if (!offer || !offer.partner_url) return;
         // setExecute(true);
-        const url = buildLinkout(offer.partner_url, offer.link_shape || 'default', trackingState);
+        const url = buildLinkout(offer.partner_url, offer.link_shape || 'default', trackingState, { offerbucks: offer.offerbucks });
         window.open(url, '_blank');
         trackOfferEvent('offer_redirect_opened', { offer_id: offer.id, ...sourceMeta() });
     };
