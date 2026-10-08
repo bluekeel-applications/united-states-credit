@@ -22,6 +22,12 @@ export const titleForSlug = (slug) => {
 // GA4 tracking for the /loans page set. Wraps trackOfferEvent (device_type,
 // safe no-op) and stamps every event with the funnel source ids — same shape
 // as OfferWall's sourceMeta() — plus the current /loans page slug.
+//
+// `sub_id` repeats `sid` (2026-10-08): GA4 reserves the parameter name `sid`
+// ("Parameter name is not allowed for this scope"), so it can never be a
+// custom dimension; `sub_id` is the registered one the ads-insights tool
+// reads to tell paid traffic (10337) from the rest. `sid` stays for the
+// existing explorations.
 const useLoanTrack = () => {
     const { trackingState } = useContext(AppContext);
     const { pathname } = useLocation();
@@ -30,6 +36,7 @@ const useLoanTrack = () => {
         (name, params = {}) => trackOfferEvent(name, {
             page: slugFromPathname(pathname),
             sid,
+            sub_id: sid,
             pid,
             eid,
             ...params,

@@ -31,7 +31,9 @@ const pct = (p) => `${Math.round((Number(p) || 0) * 100)}%`;
 // (they bubble out of its shadow root with composed:true). Event names are the
 // ones the third-party embed used to emit, so the GA4 funnel reads continuously
 // across the switch, plus `form_vendor` so the eras can be told apart; bkform's
-// two-phase waterfall adds phase/result events the vendor never exposed.
+// two-phase waterfall adds phase/result events the vendor never exposed, and
+// bkform 1.8.0 adds `lender_form_step_invalid` (a Continue or submit its
+// validation blocked: the step and the NAME of the first failing field).
 // Payloads are structurally PII-free — bkform allow-lists its detail keys — and
 // button labels are read from `.bkf-button` only, never from the segmented
 // answer buttons.
@@ -109,6 +111,15 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             'bkform:submit': (e) => {
                 const d = e.detail || {};
                 emit('lender_form_submitted', { valid: !!d.valid, error_count: (d.errorFields || []).length });
+            },
+            // A Continue or submit that bkform's validation blocked (bkform >= 1.8.0): the step and
+            // the NAME of the first failing field — registry identifiers like 'ssn' or
+            // 'bankRoutingNumber', never a value. Built from named keys on purpose: nothing
+            // else in e.detail is forwarded.
+            'bkform:invalid': (e) => {
+                const d = e.detail || {};
+                const fields = Array.isArray(d.errorFields) ? d.errorFields : [];
+                emit('lender_form_step_invalid', { step_id: d.stepId, step_index: d.stepIndex, phase_id: d.phaseId, error_count: fields.length, first_error_field: fields[0] || null });
             },
             // These two fire moments before the applicant is sent to the buyer.
             'bkform:result': (e) => {
