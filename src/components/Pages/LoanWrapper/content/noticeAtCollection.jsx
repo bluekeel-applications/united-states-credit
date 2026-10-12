@@ -1,6 +1,6 @@
 import React from 'react';
 import { P, Ul, Li, H3, CopyLink, Callout, ContactBlock } from '../components/Copy';
-import { pathFor, LOAN_FORM_DOCS_EFFECTIVE_DATE, LEGAL_LAST_UPDATED_2_2 } from '../loanPages';
+import { pathFor, LOAN_FORM_DOCS_EFFECTIVE_DATE, LEGAL_LAST_UPDATED_2_3 } from '../loanPages';
 
 // DRAFTED, not verbatim: reference/USC_Loan_Form_Final_Compliance_Patch_Claude.md
 // § 14 lists what this notice must cover but supplies no copy. Built from that
@@ -11,9 +11,12 @@ import { pathFor, LOAN_FORM_DOCS_EFFECTIVE_DATE, LEGAL_LAST_UPDATED_2_2 } from '
 // first step.
 // "Related notices": the partner item is verbatim from
 // reference/USC_Final_Compliance_Cleanup_Claude_2026-09-29.md § 3.5.
+// Revised 2026-10-12 — DRAFTED, flagged for counsel: § 6 names the enhanced-conversions
+// sharing (hashed email, phone, name and ZIP to the advertising platform for measurement)
+// as an example of what may count as a sale or sharing, with the opt-out that stops it.
 const noticeAtCollection = {
     effectiveDate: LOAN_FORM_DOCS_EFFECTIVE_DATE,
-    lastUpdated: LEGAL_LAST_UPDATED_2_2,
+    lastUpdated: LEGAL_LAST_UPDATED_2_3,
     intro: <Callout><Callout.Strong>Read this before you start a loan request.</Callout.Strong> This notice tells you what personal information the UnitedStatesCredit loan request form collects, why, how long it is kept, and the choices you have. It supplements our <CopyLink to={pathFor('privacy-policy')}>Privacy Policy</CopyLink>, which applies in full.</Callout>,
     sections: [
         {
@@ -70,7 +73,7 @@ const noticeAtCollection = {
             heading: '6. Sale, Sharing, and Your Choices',
             body: (
                 <>
-                    <P>Some of our advertising, analytics, and contracted marketing or list-management activity may be treated as a "sale," "sharing," or targeted advertising under California and other state privacy laws, even where no money changes hands for a specific disclosure. Where an opt-out right applies, you can exercise it at <CopyLink to={`${pathFor('privacy-choices')}#sale-sharing`}>Your Privacy Choices</CopyLink>, and we process qualifying browser opt-out preference signals such as Global Privacy Control as described there.</P>
+                    <P>Some of our advertising, analytics, and contracted marketing or list-management activity may be treated as a "sale," "sharing," or targeted advertising under California and other state privacy laws, even where no money changes hands for a specific disclosure. Where an opt-out right applies, you can exercise it at <CopyLink to={`${pathFor('privacy-choices')}#sale-sharing`}>Your Privacy Choices</CopyLink>, and we process qualifying browser opt-out preference signals such as Global Privacy Control as described there. One example: if you arrived from one of our online advertisements and submit a loan request, your email address, telephone number, name, and ZIP code may be shared with the advertising platform that showed you the advertisement (currently Google) in a one-way hashed form, hashed in your browser before it is sent, so the platform can measure whether its advertising led to the request or a completed match — never your Social Security number, date of birth, driver's-license number, bank numbers, income, employer information, or any other application answer, and never when you have opted out. The <CopyLink to={pathFor('privacy-policy')}>Privacy Policy</CopyLink> describes this in its advertising section.</P>
                     <P>Information needed to process the loan request you asked for is disclosed to the lenders and Marketplace Partners involved in that request; that is the service itself, not marketing. California consumers should also read our <CopyLink to={pathFor('california-financial-privacy')}>California Financial Privacy Notice</CopyLink>.</P>
                 </>
             ),

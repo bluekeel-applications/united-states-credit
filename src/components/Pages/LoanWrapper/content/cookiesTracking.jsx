@@ -1,12 +1,15 @@
 import React from 'react';
 import { P, H3, CopyLink, Callout, Table, ContactBlock } from '../components/Copy';
-import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED } from '../loanPages';
+import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED_2_3 } from '../loanPages';
 
 // Verbatim port of reference/usc-legal-center-deploy/cookies-tracking.html — do not edit copy.
 // Revised by reference/USC_Legal_Center_Final_Updates_Claude.md (revision 2.0) — the spec's PUBLIC COPY is verbatim too.
+// Revised 2026-10-12 — DRAFTED, flagged for counsel: § 3 gains one paragraph on the
+// advertising-measurement tag receiving hashed contact details after an advertising click
+// (enhanced conversions); nothing else in the copy changed.
 const cookiesTracking = {
     effectiveDate: LEGAL_EFFECTIVE_DATE,
-    lastUpdated: LEGAL_LAST_UPDATED,
+    lastUpdated: LEGAL_LAST_UPDATED_2_3,
     intro: <Callout><Callout.Strong>Tracking technologies:</Callout.Strong> UnitedStatesCredit uses cookies and similar technologies for site operation, security, measurement, attribution, and advertising. Some advertising-related activity may be subject to state opt-out rights.</Callout>,
     sections: [
         {
@@ -36,6 +39,7 @@ const cookiesTracking = {
                 <>
                     <P>Cookie and tracking information may include IP address, browser and device information, page and referrer data, campaign or affiliate identifiers, event timestamps, conversion events, and cookie or device identifiers.</P>
                     <P>We do not place Social Security numbers, bank-account information, or other sensitive application identifiers in advertising cookies, marketing pixels, or advertising-event payloads.</P>
+                    <P>When a loan request is submitted after an advertising click, our advertising-measurement tag (currently Google's) may receive the applicant's email address, telephone number, name, and ZIP code in a one-way hashed form, hashed in the browser before it is sent, so the advertising platform can match the request to the advertisement that led to it ("enhanced conversions"). No such tag is loaded, and nothing is sent, for a browser that has opted out through <CopyLink to={pathFor('privacy-choices')}>Your Privacy Choices</CopyLink> or a Global Privacy Control signal.</P>
                 </>
             ),
         },

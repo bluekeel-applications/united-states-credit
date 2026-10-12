@@ -1,6 +1,6 @@
 import React from 'react';
 import { P, Ul, Li, A, H3, CopyLink, Callout, ContactBlock } from '../components/Copy';
-import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED_2_2 } from '../loanPages';
+import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED_2_3 } from '../loanPages';
 
 // Verbatim port of reference/usc-legal-center-deploy/privacy-policy.html — do not edit copy.
 // Revised by reference/USC_Legal_Center_Final_Updates_Claude.md (revision 2.0) — the spec's PUBLIC COPY is verbatim too.
@@ -8,9 +8,14 @@ import { pathFor, LEGAL_EFFECTIVE_DATE, LEGAL_LAST_UPDATED_2_2 } from '../loanPa
 // the non-retained identifiers are named in full (Social Security, driver's-license, bank-account or routing).
 // The opening callout carries the same correction (§ 2.6, the stale-copy search); its wording is drafted — the
 // spec supplies none — and is flagged for counsel in FINAL_COMPLIANCE_CLEANUP_CHANGE_REPORT.md.
+// Revised 2026-10-12 — DRAFTED, flagged for counsel: § 8 gains the enhanced-conversions
+// disclosure (hashed email, phone, name and ZIP shared with the advertising platform for
+// measurement; nothing sensitive; nothing for an opted-out browser). Wording drafted by
+// Bluekeel, no spec; the mechanism is documented in bluekeel-tools
+// routing-engine/src/reference/ENGINE.md § Google Ads conversions.
 const privacyPolicy = {
     effectiveDate: LEGAL_EFFECTIVE_DATE,
-    lastUpdated: LEGAL_LAST_UPDATED_2_2,
+    lastUpdated: LEGAL_LAST_UPDATED_2_3,
     intro: <Callout><Callout.Strong>Important:</Callout.Strong> UnitedStatesCredit is not a lender. We collect information directly from consumers to operate our loan-matching service. Certain sensitive application information may be processed for secure transmission to participating lenders, but UnitedStatesCredit does not persistently store Social Security numbers, driver's-license numbers, or bank-account or routing information after transmission.</Callout>,
     sections: [
         {
@@ -105,6 +110,7 @@ const privacyPolicy = {
             body: (
                 <>
                     <P>We and our providers may use cookies, pixels, tags, local storage, and similar technology to operate the site, remember preferences, measure traffic, prevent fraud, attribute advertising, and support advertising or analytics. Certain activities may be treated as a "sale," "sharing," or targeted advertising under some state privacy laws even where money is not paid for the specific disclosure.</P>
+                    <P>If you submit a loan request after arriving from one of our online advertisements, we may share your email address, telephone number, name, and ZIP code with the advertising platform that showed you the advertisement (currently Google) so it can measure whether its advertising led to a loan request or a completed match. These details are converted in your browser into a one-way hashed form before they are sent, and the platform cannot read your contact details back out of the hash. We never share your Social Security number, date of birth, driver's-license number, bank-account or routing numbers, income, employer information, or any other loan-application answer this way, and we share nothing this way when your browser sends a qualifying opt-out preference signal such as Global Privacy Control or you have opted out on <CopyLink to={pathFor('privacy-choices')}>Your Privacy Choices</CopyLink>.</P>
                     <P>See our <CopyLink to={pathFor('cookies-tracking')}>Cookie & Tracking Technologies Notice</CopyLink> and <CopyLink to={pathFor('privacy-choices')}>Your Privacy Choices</CopyLink> page for more information.</P>
                     <H3>Do Not Track and Other Browser Privacy Signals</H3>
                     <P>Some browsers offer a legacy Do Not Track, or DNT, setting. We do not currently treat a legacy DNT signal by itself as an opt-out request. We do process qualifying legally required opt-out preference signals, including Global Privacy Control, as described in <CopyLink to={`${pathFor('privacy-choices')}#sale-sharing`}>Your Privacy Choices</CopyLink>. DNT and Global Privacy Control are different signals.</P>

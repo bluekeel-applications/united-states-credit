@@ -10,6 +10,7 @@ import { AppContext } from '../../../../context/AppContext';
 import { BKFORM_CONTAINER_ID, BKFORM_SITE_KEY, bkformTargets } from '../bkform.config';
 import { LOANS_HOME, LEGAL_CONTENT_VERSION } from '../loanPages';
 import { isPrivacySuppressed } from '../../../../utils/privacy';
+import { fireLoansLeadConversion } from '../../../../utils/pixels/adWords';
 
 const SCRIPT_ID = 'bkform-loader';
 
@@ -36,7 +37,10 @@ const pct = (p) => `${Math.round((Number(p) || 0) * 100)}%`;
 // validation blocked: the step and the NAME of the first failing field).
 // Payloads are structurally PII-free — bkform allow-lists its detail keys — and
 // button labels are read from `.bkf-button` only, never from the segmented
-// answer buttons.
+// answer buttons. The one opt-in exception is `bkform:user-data` (bkform 1.9.0,
+// asked for with `data-ads-user-data`): the applicant's contact details already
+// SHA-256 hashed, for the Google Ads tag's enhanced conversions — handed to
+// gtag, never to GA4 (which gets booleans), never for an opted-out browser.
 const BkFormEmbed = ({ mockOnly = false }) => {
     const containerRef = useRef(null);
     const [formReady, setFormReady] = useState(false);
@@ -135,6 +139,20 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             'bkform:decline': (e) => {
                 emit('lender_form_decline', { offer_id: (e.detail || {}).offerId || null, transport_type: 'beacon' });
             },
+            // Enhanced conversions for leads (bkform >= 1.9.0): right before each
+            // posting stage the form hands over the applicant's email, phone(s),
+            // name and ZIP, hashed with the routing engine's own rules. The Google
+            // Ads tag sends them with the "Loan form submitted (tag)" conversion
+            // (adWords.js), so Google keeps them beside this click and can match
+            // the engine's later upload of the sale even without a click id.
+            // Never for an opted-out browser (no attribute, no tag); GA4 gets
+            // booleans only, never a hash.
+            'bkform:user-data': (e) => {
+                const d = e.detail || {};
+                if (!d.userData || isPrivacySuppressed()) return;
+                const fired = fireLoansLeadConversion({ userData: d.userData, transactionId: d.applicationId });
+                emit('lender_form_user_data_sent', { phase_id: d.phaseId, tag_fired: fired, has_email: !!d.userData.sha256_email_address, has_phone: !!d.userData.sha256_phone_number, has_address: !!d.userData.address });
+            },
         };
         Object.entries(onEvent).forEach(([name, fn]) => container.addEventListener(name, fn));
 
@@ -185,8 +203,11 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             // An opted-out browser (GPC or the stored marker, utils/privacy.js):
             // the form tells the engine, and the engine reports nothing about
             // this applicant to Google Ads (bkform ≥ 1.7.0; older builds warn
-            // about the attribute and ignore it).
-            ...(isPrivacySuppressed() ? { 'data-ads-opt-out': 'true' } : {}),
+            // about the attribute and ignore it). Every other browser: the form
+            // hands this page the applicant's hashed contact details for the
+            // Google Ads tag (bkform ≥ 1.9.0, `bkform:user-data` above; 1.8.0
+            // warns about the attribute and ignores it).
+            ...(isPrivacySuppressed() ? { 'data-ads-opt-out': 'true' } : { 'data-ads-user-data': 'on' }),
         }).forEach(([key, value]) => script.setAttribute(key, value));
         script.async = true;
         script.onerror = () => {

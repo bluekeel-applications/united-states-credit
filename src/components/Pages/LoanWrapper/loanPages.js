@@ -34,11 +34,20 @@ export const LEGAL_LAST_UPDATED = 'September 17, 2026';
 // or its own. Effective dates did not move.
 export const LEGAL_LAST_UPDATED_2_2 = 'September 29, 2026';
 
+// Enhanced conversions for leads (2026-10-12): the `lastUpdated` of the three
+// documents that gained the hashed-contact-details disclosure — Privacy Policy
+// § 8, Notice at Collection § 6, Cookie & Tracking Notice § 3 — and of those
+// only. DRAFTED wording, flagged for counsel in each file; set this to the
+// approved publication date before the change reaches `master`.
+export const LEGAL_LAST_UPDATED_2_3 = 'October 12, 2026';
+
 // Identifies the legal text a visitor was shown (stamped on every legal
 // article as data-legal-version, and sent to the loan form). 1.0 is git tag
 // legal-v1.0; 2.0 is commit 43a5672; 2.1 added the loan form's documents;
-// 2.2 is the final compliance cleanup of 2026-09-29.
-export const LEGAL_CONTENT_VERSION = '2.2';
+// 2.2 is the final compliance cleanup of 2026-09-29; 2.3 adds the Google
+// advertising-measurement (enhanced conversions) disclosure of 2026-10-12 to
+// the Privacy Policy, the Notice at Collection and the Cookie Notice.
+export const LEGAL_CONTENT_VERSION = '2.3';
 
 // The documents the loan form links to (Notice at Collection, FCRA
 // Authorization & Disclosure, Marketplace Partners) were added with the

@@ -130,6 +130,11 @@
 					'campaign_name': gtagtracking.EID,
 					'campaign_source': `${gtagtracking.ARTICLE}-${gtagtracking.SID}`,
 					'campaign_medium': 'redirect-aw',
+					// Enhanced conversions: the /loans form hands this tag the
+					// applicant's contact details already hashed (bkform:user-data →
+					// src/utils/pixels/adWords.js); never for an opted-out browser,
+					// which loads no tag at all (above).
+					'allow_enhanced_conversions': true,
 				});
 			}
 		</script>
