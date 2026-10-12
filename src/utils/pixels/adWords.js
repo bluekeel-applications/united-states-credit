@@ -6,9 +6,11 @@ export const AW_CONVERSION_ID = 'AW-11025885187';
 // the applicant's hashed contact details with — Google keeps them beside the
 // click, and when the routing engine later uploads the sale hashed the same
 // way (routing-engine/src/core/user-data.js, which bkform shares) Google
-// matches the two: "enhanced conversions for leads". The label is minted in
-// the Google Ads UI; while it is empty nothing fires and nothing is set.
-export const LOANS_LEAD_FORM_LABEL = '';
+// matches the two: "enhanced conversions for leads". The label was minted in
+// the Google Ads UI on 2026-10-12 (the account's conversion setup wizard,
+// "Submit lead form" category, secondary, count one, value 0); while it is
+// empty nothing fires and nothing is set.
+export const LOANS_LEAD_FORM_LABEL = 'WTyhCJOgz5odEIPQxokp';
 
 // bkform:user-data → gtag. `userData` is already gtag's user_data shape with
 // pre-hashed fields (sha256_email_address, sha256_phone_number[],
