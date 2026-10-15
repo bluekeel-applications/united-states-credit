@@ -15,8 +15,12 @@
 // ROI's account values arrived and certification began; on for production
 // from 2026-09-29, when they approved the account for live leads; off from
 // 2026-10-02, when the owner paused Search ROI for an EPC VIP-only data run
-// (www was one continuous form again); on again since 2026-10-07, Search ROI
-// unpaused on the engine that morning ("to grab top dollar amount leads").
+// (www was one continuous form again); on again from 2026-10-07, Search ROI
+// unpaused on the engine that morning ("to grab top dollar amount leads"); off
+// again since 2026-10-15, Search ROI paused on the engine that morning ("bad
+// pricing") — with it paused the check calls nobody and only costs the
+// applicant a "Searching…" modal and a click. The engine never tells the form
+// a buyer is paused: this value follows the pause by hand, both ways.
 //
 // The site key is the same on both stages; it is registered per stage in the
 // engine (`yarn bootstrap-config --stage <stage> --site unitedstatescredit.com
@@ -36,7 +40,7 @@ const PROD = {
     src: 'https://form-sdk.unitedstatescredit.com/v1/form.js',
     apiBase: 'https://16s3asw7j0.execute-api.us-east-1.amazonaws.com/prod',
     consoleBase: 'https://d1bg0h8m65e3si.cloudfront.net',
-    firstOfferCheck: 'on',
+    firstOfferCheck: 'off',
 };
 
 export const BKFORM_SITE_KEY = 'unitedstatescredit.com';
