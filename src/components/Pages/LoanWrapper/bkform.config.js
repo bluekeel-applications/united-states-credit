@@ -24,6 +24,18 @@
 // form, the four others in the ping tree). The engine never tells the form a
 // buyer is paused: this value follows the pause by hand, both ways.
 //
+// `consentWitness` / `witnessApiBase` are bkform 1.10.0's data-consent-witness
+// and data-witness-api-base: 'on' makes the form fetch its second script,
+// witness.js, and record how every consent disclosure was shown and acted on
+// (words as rendered, links, prominence, visibility, the applicant's own act
+// on each box, scrubbed snapshots — never a typed value) and stream it to the
+// consent-witness service, which seals a signed, locked certificate per
+// application for the Bluekeel console (Bluekeel's own Jornaya / TrustedForm;
+// APIS/bluekeel-tools/consent-witness/src/reference/CONSENT_WITNESS.md). On
+// for staging since 2026-10-21 against the service's dev stage; off for
+// production until the service's prod stage exists, counsel's privacy
+// sentence on the recording is live, and the owner says go.
+//
 // The site key is the same on both stages; it is registered per stage in the
 // engine (`yarn bootstrap-config --stage <stage> --site unitedstatescredit.com
 // --origin …`) and is what the Bluekeel console shows as the lead's source.
@@ -35,6 +47,8 @@ const DEV = {
     apiBase: 'https://lq97621kpg.execute-api.us-east-1.amazonaws.com/dev',
     consoleBase: 'https://d17du2okjziban.cloudfront.net',
     firstOfferCheck: 'on',
+    consentWitness: 'on',
+    witnessApiBase: 'https://35smve4n6c.execute-api.us-east-1.amazonaws.com/dev',
 };
 
 const PROD = {
@@ -43,6 +57,8 @@ const PROD = {
     apiBase: 'https://16s3asw7j0.execute-api.us-east-1.amazonaws.com/prod',
     consoleBase: 'https://d1bg0h8m65e3si.cloudfront.net',
     firstOfferCheck: 'on',
+    consentWitness: 'off',
+    witnessApiBase: '',
 };
 
 export const BKFORM_SITE_KEY = 'unitedstatescredit.com';

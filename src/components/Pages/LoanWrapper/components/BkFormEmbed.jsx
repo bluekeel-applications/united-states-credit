@@ -20,7 +20,7 @@ const SCRIPT_ID = 'bkform-loader';
 // it is reported as a warning rather than dropped. A duplicate tag from a fast
 // back/forward and a failed IP fetch are noise.
 const FATAL_CODES = new Set(['missing-key', 'invalid-config', 'container-timeout']);
-const WARNING_CODES = new Set(['zip-lookup-failed']);
+const WARNING_CODES = new Set(['zip-lookup-failed', 'witness-load-failed']);
 const IGNORED_CODES = new Set(['duplicate-mount', 'ip-fetch-failed']);
 
 const pct = (p) => `${Math.round((Number(p) || 0) * 100)}%`;
@@ -192,6 +192,11 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             'data-api-base': targets.apiBase,
             'data-console-base': targets.consoleBase,
             'data-first-offer-check': targets.firstOfferCheck,
+            // bkform 1.10.0: the consent witness, per host (bkform.config.js); the
+            // base is sent only when one is configured, so an 'off' host sends no
+            // half-config and the form never warns.
+            'data-consent-witness': targets.consentWitness,
+            ...(targets.witnessApiBase ? { 'data-witness-api-base': targets.witnessApiBase } : {}),
             'data-primary-color': COLORS.blue,
             'data-secondary-color': COLORS.navy2,
             'data-mode': 'rounded',
