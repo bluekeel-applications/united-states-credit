@@ -52,7 +52,9 @@ const BkFormEmbed = ({ mockOnly = false }) => {
     // earlier visit (null otherwise) — they ride bkform's decline offer and the
     // engine's Google Ads conversion report.
     const { trackingState } = useContext(AppContext);
-    const { hsid, sid, eid, gclid, gbraid, wbraid } = trackingState;
+    // oid / uid (2026-10-23): HitStreet's offer and user ids, for the engine's
+    // common_info opt-in export (sessionParams.js).
+    const { hsid, sid, eid, gclid, gbraid, wbraid, oid, uid } = trackingState;
 
     // Latest-ref pattern: the embed effect must not re-run when track's
     // identity changes (that would re-inject the script), but events should
@@ -76,7 +78,7 @@ const BkFormEmbed = ({ mockOnly = false }) => {
 
         // bkform reads cid1/sub1/sub2 (and the Google click ids) from the URL
         // when it mounts — before the script tag goes in.
-        enrichUrlWithSession({ hsid, sid, eid, gclid, gbraid, wbraid });
+        enrichUrlWithSession({ hsid, sid, eid, gclid, gbraid, wbraid, oid, uid });
 
         // This card already draws the frame, so switch bkform's own border and
         // shadow off and hand it the page's font. Set imperatively (bkform's

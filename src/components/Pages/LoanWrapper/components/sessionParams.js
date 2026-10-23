@@ -21,10 +21,17 @@
 // what Google sends in place of gclid from iOS — ride along under their own
 // names, and all three now survive a reload: the landing URL's value is kept
 // in a 90-day cookie (helpers.js setCookies) and read back by App.jsx.
-export const enrichUrlWithSession = ({ hsid, sid, eid, gclid, gbraid, wbraid }) => {
+//
+// `oid` and `uid` too (2026-10-23), under HitStreet's own names: the routing
+// engine posts an applicant who ticked the marketing consent to Bluekeel's
+// common_info table through bkroute's insert_common, whose offer_id and uid
+// columns are these two ids (bkform 1.12.0 reads them; the engine's ENGINE.md
+// § Common info). Both come from the landing URL via the 3-day cookies, like
+// sid and eid, and are left out when the session has none.
+export const enrichUrlWithSession = ({ hsid, sid, eid, gclid, gbraid, wbraid, oid, uid }) => {
     if (!hsid) return false;
     const search = new URLSearchParams(window.location.search);
-    Object.entries({ cid1: hsid, sub1: sid, sub2: eid, gclid, gbraid, wbraid }).forEach(([key, value]) => {
+    Object.entries({ cid1: hsid, sub1: sid, sub2: eid, gclid, gbraid, wbraid, oid, uid }).forEach(([key, value]) => {
         if (value !== null && value !== undefined && value !== '') search.set(key, value);
     });
     window.history.replaceState(window.history.state, '', `${window.location.pathname}?${search}${window.location.hash}`);
