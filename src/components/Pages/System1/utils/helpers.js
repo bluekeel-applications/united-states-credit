@@ -41,8 +41,6 @@ export const buildFullURL = (buttonArr, trackingState, uri, headline='') => {
     });
     const forceKeys = keyArr.join("");
     // Build encoded Tracking links
-    const searchTrack = `${uri}/optin/${trackingState.hsid}`;
-    const encodedSearchTrack = `search_track_url=${encodeURIComponent(searchTrack)}`;
     const clickTrack = `https://bkroute.com/pixel_fire_inbound?hsid=${trackingState.hsid}`;
     const encodedClickTrack = `click_track_url=${encodeURIComponent(clickTrack)}`;
     // Build Required Params
@@ -59,15 +57,13 @@ export const buildFullURL = (buttonArr, trackingState, uri, headline='') => {
     const utm = `utm_source=${trackingState.article}-${trackingState.sid}&utm_medium=affiliate&utm_campaign=${trackingState.eid}`;
 
     // Build priority URL
-    const newTail = `${utm}&${inbound}&${forceKeys}&${encodedSearchTrack}&${encodedClickTrack}&${subId}&${google}&fired=true${!!trackingState.fbid ? `&${facebookId}&${facebookClick}` : ''}`;
+    const newTail = `${utm}&${inbound}&${forceKeys}&${encodedClickTrack}&${subId}&${google}&fired=true${!!trackingState.fbid ? `&${facebookId}&${facebookClick}` : ''}`;
 
-    // return `${utm}&${inbound}&${forceKeys}&${searchTrack}&${clickTrack}&${subId}&${taboola}&${facebookId}&${facebookClick}&${google}&${tiktok}&fired=true`;
     return newTail;
 };
 
 export const setDefaultData = (trackingState, uri) => {
     const forceKeys = '&forceKeyA=Credit+Cards+No+Credit&forceKeyB=Credit+Cards+for+Fair+Credit+Instant+Approval&forceKeyC=Best+Credit+Cards+for+Fair+Credit&forceKeyD=Best+Credit+Cards+to+Build+Credit&forceKeyE=Cash+Back+Credit+Cards&forceKeyF=Best+Rewards+Credit+Card+for+Travel';
-    const searchTrack = `search_track_url=${uri}/optin/${trackingState.hsid}`;
     const article = 'article=credit';
     const segment = 'segment=c2sunitedstatescredit0005';
     const clickTrack = `click_track_url=https://bkroute.com/pixel_fire_inbound?hsid=${trackingState.hsid}`;
@@ -79,7 +75,7 @@ export const setDefaultData = (trackingState, uri) => {
     const google = `gamid=AW-11025885187&gclcid=AW-11025885187/kAMpCK_99IIYEIPQxokp`;
     // const tiktok = `ttid=${trackingState.ttid}&ttland=ViewContent&ttserp=AddToWishlist&ttclick=CompletePayment&ttclid=${trackingState.ttclid}`;
     const utm = `utm_source=${article}-${trackingState.sid}&utm_medium=default&utm_campaign=${trackingState.eid}`;
-    return `${utm}&${searchTrack}&${article}&${clickTrack}&${segment}&${subId}&${google}&${forceKeys}&${trackingVars}&fired=true${!!trackingState.fbid ? `&${facebookId}&${facebookClick}` : ''}`;
+    return `${utm}&${article}&${clickTrack}&${segment}&${subId}&${google}&${forceKeys}&${trackingVars}&fired=true${!!trackingState.fbid ? `&${facebookId}&${facebookClick}` : ''}`;
 };
 
 export const resetUrl = (trackingState) => {
