@@ -10,10 +10,14 @@ import trackOfferEvent from '../trackOfferEvent';
 // stage where the levels are switched off all leave the site as it was.
 //
 // Levels: 0 no tag; 1 the tag without the publisher id (so Google places no
-// Auto ads) and the layout's own AdUnit; 2 the tag with the publisher id,
-// every link opted out of vignettes, no anchor; 3 the tag with the bottom
-// anchor forced on (data-overlays="bottom" — Google's documented override)
-// and links untouched. `data-ad-level` on <html> says what was applied.
+// in-page Auto ads) and the layout's own AdUnit; 2 the tag with the publisher
+// id, no anchor; 3 the tag with the bottom anchor forced on
+// (data-overlays="bottom" — Google's documented override) and links
+// untouched. At 1 and 2 every link opts out of vignettes: on staging
+// (2026-11-04) Google preloaded a vignette for a page whose links were not
+// marked even when the tag carried no publisher id — the unit's own
+// data-ad-client names it — and preloaded none when every link was marked.
+// `data-ad-level` on <html> says what was applied.
 //
 // Kept whatever the engine says: /loans is opt-in (ads=yes), ads=no is a
 // manual off everywhere, a browser that opted out of sale / sharing gets no
@@ -34,7 +38,7 @@ const injectTag = ({ client = true, overlays = null } = {}) => {
     document.head.appendChild(script);
 };
 
-// Level 2: every link opts out of vignettes — the ones on the page now and
+// Levels 1 and 2: every link opts out of vignettes — the ones on the page now and
 // every one the app or System1's RAMP renders later. Both attribute names
 // Google has used, so the older and the current tag read it.
 const NO_VIGNETTE = ['data-google-vignette', 'data-google-interstitial'];
@@ -74,7 +78,7 @@ const useAdSense = (tracking) => {
                 return;
             }
             const level = r.level;
-            if (level === 1) injectTag({ client: false });
+            if (level === 1) { injectTag({ client: false }); markLinksNoVignette(); }
             else if (level === 2) { injectTag({ client: true }); markLinksNoVignette(); }
             else if (level === 3) injectTag({ client: true, overlays: 'bottom' });
             mark(level);

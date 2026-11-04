@@ -11,7 +11,7 @@
 //
 // The levels, as the page applies them (useAdSense.jsx):
 //   0  off         no AdSense tag at all
-//   1  units only  the tag without the publisher id (no Auto ads) + AdUnit
+//   1  units only  the tag without the publisher id (no in-page Auto ads) + AdUnit; links opted out of vignettes
 //   2  standard    Auto ads in-page; links opted out of vignettes; no anchor
 //   3  everything  Auto ads + the bottom anchor forced on + vignettes on clicks
 import { bkformTargets, BKFORM_SITE_KEY } from '../components/Pages/LoanWrapper/bkform.config';
