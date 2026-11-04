@@ -3,6 +3,7 @@ import { AppContext } from '../../../context';
 import styles from './System1.css';
 import { useMediaQuery } from 'react-responsive';
 import LegalTerms from './Articles/components/LegalTerms';
+import AdUnit from '../../Ads/AdUnit';
 import MainTitle from './Articles/components/MainTitle';
 import { setPageComponent } from './utils/helpers';
 import useClickSubmit from '../../../utils/hooks/useClickSubmit';
@@ -107,6 +108,7 @@ const OfferBlockPage = () => {
                 </div>
                 <LegalTerms email={trackingState.email} />
             </div>
+            <AdUnit slot='rsoc-block' />
             {useArticle}
         </div>
     );

@@ -1,47 +1,91 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { isPrivacySuppressed } from '../privacy';
+import { AD_CLIENT, forcedAdLevel, resolveAdLevel } from '../adLevel';
+import trackOfferEvent from '../trackOfferEvent';
+
+// The AdSense tag, decided once per document load — by the per-source level
+// the Bluekeel console sets (utils/adLevel.js; routing-engine ENGINE.md
+// § AdSense levels) when the engine answers one, and by this file's legacy
+// gates when it does not: an engine that is down, a blocked request, or a
+// stage where the levels are switched off all leave the site as it was.
+//
+// Levels: 0 no tag; 1 the tag without the publisher id (so Google places no
+// Auto ads) and the layout's own AdUnit; 2 the tag with the publisher id,
+// every link opted out of vignettes, no anchor; 3 the tag with the bottom
+// anchor forced on (data-overlays="bottom" — Google's documented override)
+// and links untouched. `data-ad-level` on <html> says what was applied.
+//
+// Kept whatever the engine says: /loans is opt-in (ads=yes), ads=no is a
+// manual off everywhere, a browser that opted out of sale / sharing gets no
+// ad tag at all — none of those makes a request.
+const SCRIPT = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+const badSids = [10007];
+const badPids = [3655];
+
+const mark = (v) => { try { document.documentElement.dataset.adLevel = String(v); } catch (e) { /* no document */ } };
+
+const injectTag = ({ client = true, overlays = null } = {}) => {
+    if (document.querySelector('script[src*="pagead2.googlesyndication.com"]')) return;
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = client ? `${SCRIPT}?client=${AD_CLIENT}` : SCRIPT;
+    script.crossOrigin = 'anonymous';
+    if (overlays) script.dataset.overlays = overlays;
+    document.head.appendChild(script);
+};
+
+// Level 2: every link opts out of vignettes — the ones on the page now and
+// every one the app or System1's RAMP renders later. Both attribute names
+// Google has used, so the older and the current tag read it.
+const NO_VIGNETTE = ['data-google-vignette', 'data-google-interstitial'];
+const markLink = (a) => { for (const attr of NO_VIGNETTE) if (!a.hasAttribute(attr)) a.setAttribute(attr, 'false'); };
+const markLinksNoVignette = () => {
+    const markAll = (root) => { if (root?.querySelectorAll) root.querySelectorAll('a[href]').forEach(markLink); if (root?.matches?.('a[href]')) markLink(root); };
+    markAll(document.body);
+    if (typeof MutationObserver !== 'function' || !document.body) return;
+    const observer = new MutationObserver((records) => { for (const r of records) r.addedNodes.forEach(markAll); });
+    observer.observe(document.body, { childList: true, subtree: true });
+};
+
+const report = (level, match) => {
+    try { window.gtag?.('set', 'user_properties', { ad_level: String(level ?? 'legacy') }); } catch (e) { /* analytics is best-effort */ }
+    trackOfferEvent('ad_level', { ad_level: String(level ?? 'legacy'), ad_match: match || 'legacy' });
+};
 
 const useAdSense = (tracking) => {
-
-	const { SID, PID, ADS } = tracking;
+    const { SID, PID, EID, ADS } = tracking;
     const sid = Number(SID);
     const pid = Number(PID);
-    // const setLive = useRef(false);
-    const badSids = [
-        10007
-    ];
-    const badPids = [
-        3655
-    ];
+    const [adLevel, setAdLevel] = useState(null);
 
-	useEffect(() => {
-        // /loans is opt-in: ads only load there when ads=yes (URL param or
-        // its 3-day cookie), default off. Everywhere else stays opt-out
-        // (ads=no suppresses). Decided once per document load — /loans
-        // internal links stay in-tree and its footer links open new tabs,
-        // so there is no cross-navigation leakage.
-        const onLoansPage = window.location.pathname === '/loans'
-            || window.location.pathname.startsWith('/loans/');
-        const adsAllowed = onLoansPage ? ADS === 'yes' : ADS !== 'no';
-        // A browser that opted out of sale / sharing gets no ad tag on /loans,
-        // ads=yes or not (src/utils/privacy.js).
-        if(!!sid && sid !== 'undefined' && !badSids.includes(sid) && !badPids.includes(pid) && adsAllowed && !isPrivacySuppressed()) {
-            // Check if script already exists to avoid duplicates
-            const existingScript = document.querySelector('script[src*="pagead2.googlesyndication.com"]');
-            
-            if (!existingScript) {
-                const script = document.createElement('script');
-                script.async = true;
-                script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5105418052368941';
-                script.crossOrigin = 'anonymous';
-                
-                document.head.appendChild(script);
+    useEffect(() => {
+        let cancelled = false;
+        const legacyAllowed = !!sid && sid !== 'undefined' && !badSids.includes(sid) && !badPids.includes(pid);
+        const forced = forcedAdLevel({ pathname: window.location.pathname, ads: ADS, privacySuppressed: isPrivacySuppressed() });
+        if (forced === 0) { mark(0); return undefined; }
+
+        resolveAdLevel({ sid: String(SID ?? ''), eid: String(EID ?? '') }).then((r) => {
+            if (cancelled) return;
+            if (!r || r.level === null || r.level === undefined) {
+                // Legacy: today's gates, the tag with the publisher id.
+                if (legacyAllowed) injectTag({ client: true });
+                mark('legacy');
+                report(null, r?.match);
+                return;
             }
-        };
-		// eslint-disable-next-line
-	}, []);
+            const level = r.level;
+            if (level === 1) injectTag({ client: false });
+            else if (level === 2) { injectTag({ client: true }); markLinksNoVignette(); }
+            else if (level === 3) injectTag({ client: true, overlays: 'bottom' });
+            mark(level);
+            setAdLevel(level);
+            report(level, r.match);
+        });
+        return () => { cancelled = true; };
+        // eslint-disable-next-line
+    }, []);
 
-	return;
+    return adLevel;
 };
 
 export default useAdSense;

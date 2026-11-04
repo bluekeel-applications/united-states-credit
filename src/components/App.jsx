@@ -17,6 +17,7 @@ import { useMediaQuery } from 'react-responsive';
 import firePixelBlueKeel from '../utils/pixels/bluekeelPixel.js';
 import { datadogRum } from '@datadog/browser-rum';
 import useAdSense from '../utils/hooks/useAdSense';
+import { AdLevelContext } from '../utils/ads/AdLevelContext';
 import { isPrivacySuppressed, redactMonitoringEvent } from '../utils/privacy';
 
 // const Feed = lazy(() => import('./Layout/Feed'));
@@ -87,7 +88,9 @@ const App = ({ uri }) => {
 		TBLCI: myURL.searchParams.get('tblci') || getCookie('tblci') || null
     };
 
-	useAdSense(tracking);
+	// The AdSense level for this visitor's source (utils/adLevel.js): decided once
+	// per document load, null on the legacy path; AdUnit renders at level 1.
+	const adLevel = useAdSense(tracking);
 
 	useEffect(() => {
 		if(!appState.uri) {
@@ -185,6 +188,7 @@ const App = ({ uri }) => {
 		|| location.pathname.startsWith('/loans/');
 
 	return (
+		<AdLevelContext.Provider value={adLevel}>
 		<div key='app-key' style={Styles.app}>
 			{!isBareRoute && <Navbar />}
 			<RouteContainer />
@@ -204,6 +208,7 @@ const App = ({ uri }) => {
 			}
 			<DrawerMenu />
 		</div>
+		</AdLevelContext.Provider>
 	);
 };
 

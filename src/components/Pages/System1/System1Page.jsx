@@ -5,6 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 import ButtonContainer from './ButtonContainer';
 import MainTitle from './Articles/components/MainTitle';
 import { setPageComponent } from './utils/helpers';
+import AdUnit from '../../Ads/AdUnit';
 
 const System1Page = () => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -50,6 +51,7 @@ const System1Page = () => {
                 email={trackingState['email']} 
                 title={button_title}
             />
+            <AdUnit slot='rsoc-dynamic' />
             {useArticle}
         </div>
     );

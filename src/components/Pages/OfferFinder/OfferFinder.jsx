@@ -6,6 +6,7 @@ import logo from '../../../assets/Images/usc_full_logo.png';
 import trackOfferEvent from '../../../utils/trackOfferEvent';
 import useCoRegPathValues from '../../../utils/hooks/useCoRegPathValues';
 import Loading from '../../Shared/Loading';
+import AdUnit from '../../Ads/AdUnit';
 import {
     FINDER_OPTIONS,
     CATEGORY_KEYS,
@@ -187,6 +188,7 @@ const OfferFinder = () => {
                         )}
                     </div>
                 </section>
+                <AdUnit slot='finder' />
             </main>
 
             <footer className={styles.footer}>
