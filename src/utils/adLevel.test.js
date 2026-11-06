@@ -1,4 +1,4 @@
-import { forcedAdLevel, readCachedLevel, writeCachedLevel, fetchAdLevel, resolveAdLevel, AD_LEVEL_TTL_MS, adLevelEndpoint } from './adLevel';
+import { forcedAdLevel, isLoansPath, readCachedLevel, writeCachedLevel, fetchAdLevel, resolveAdLevel, AD_LEVEL_TTL_MS, adLevelEndpoint } from './adLevel';
 
 const ok = (body) => ({ ok: true, json: async () => body });
 const fetchWith = (body) => jest.fn(async () => ok(body));
@@ -6,10 +6,15 @@ const fetchWith = (body) => jest.fn(async () => ok(body));
 beforeEach(() => { window.sessionStorage.clear(); });
 
 describe('forcedAdLevel — the gates the page keeps whatever the engine says', () => {
-    test('/loans is opt-in: no ads without ads=yes, and no request', () => {
-        expect(forcedAdLevel({ pathname: '/loans' })).toBe(0);
-        expect(forcedAdLevel({ pathname: '/loans/privacy-choices', ads: '' })).toBe(0);
+    test('/loans asks the engine like every page (the owner, 2026-11-06); ads=no still wins there', () => {
+        expect(forcedAdLevel({ pathname: '/loans' })).toBeNull();
+        expect(forcedAdLevel({ pathname: '/loans/privacy-choices', ads: '' })).toBeNull();
         expect(forcedAdLevel({ pathname: '/loans', ads: 'yes' })).toBeNull();
+        expect(forcedAdLevel({ pathname: '/loans', ads: 'no' })).toBe(0);
+        expect(isLoansPath('/loans')).toBe(true);
+        expect(isLoansPath('/loans/privacy-choices')).toBe(true);
+        expect(isLoansPath('/loansx')).toBe(false);
+        expect(isLoansPath('/finder')).toBe(false);
     });
     test('everywhere else ads=no is a manual off', () => {
         expect(forcedAdLevel({ pathname: '/rsoc', ads: 'no' })).toBe(0);

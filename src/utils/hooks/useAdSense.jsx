@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { isPrivacySuppressed } from '../privacy';
-import { AD_CLIENT, forcedAdLevel, resolveAdLevel } from '../adLevel';
+import { AD_CLIENT, forcedAdLevel, isLoansPath, resolveAdLevel } from '../adLevel';
 import trackOfferEvent from '../trackOfferEvent';
 
 // The AdSense tag, decided once per document load — by the per-source level
@@ -19,9 +19,12 @@ import trackOfferEvent from '../trackOfferEvent';
 // data-ad-client names it — and preloaded none when every link was marked.
 // `data-ad-level` on <html> says what was applied.
 //
-// Kept whatever the engine says: /loans is opt-in (ads=yes), ads=no is a
-// manual off everywhere, a browser that opted out of sale / sharing gets no
-// ad tag at all — none of those makes a request.
+// Kept whatever the engine says: ads=no is a manual off everywhere and a
+// browser that opted out of sale / sharing gets no ad tag at all — neither
+// makes a request. The loan pages follow the console's rules like every other
+// page (the owner, 2026-11-06); their old opt-in (ads only with ads=yes) holds
+// only in the legacy branch, so a stage with the levels switched off reads as
+// it always did.
 const SCRIPT = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
 const badSids = [10007];
 const badPids = [3655];
@@ -64,7 +67,8 @@ const useAdSense = (tracking) => {
 
     useEffect(() => {
         let cancelled = false;
-        const legacyAllowed = !!sid && sid !== 'undefined' && !badSids.includes(sid) && !badPids.includes(pid);
+        const legacyOptIn = isLoansPath(window.location.pathname) ? ADS === 'yes' : true;
+        const legacyAllowed = !!sid && sid !== 'undefined' && !badSids.includes(sid) && !badPids.includes(pid) && legacyOptIn;
         const forced = forcedAdLevel({ pathname: window.location.pathname, ads: ADS, privacySuppressed: isPrivacySuppressed() });
         if (forced === 0) { mark(0); return undefined; }
 

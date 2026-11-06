@@ -27,16 +27,19 @@ export const adLevelEndpoint = (hostname = (typeof window !== 'undefined' ? wind
     process.env.REACT_APP_AD_LEVEL_ENDPOINT || `${bkformTargets(hostname).apiBase}/ad-level`;
 
 // The gates the page keeps whatever the engine says. 0 = forced off, with no
-// request made; null = ask the engine. /loans is opt-in (ads=yes) — the loan
-// pages stay ad-free by default, a compliance choice — and ads=no is a manual
-// override everywhere; a browser that opted out of sale / sharing gets no ad
-// tag at all (src/utils/privacy.js).
+// request made; null = ask the engine. ads=no is a manual override everywhere
+// and a browser that opted out of sale / sharing gets no ad tag at all
+// (src/utils/privacy.js). The loan pages are governed by the console's rules
+// like every other page (the owner, 2026-11-06); their old opt-in — ads only
+// with ads=yes — survives only in the hook's legacy branch, for a stage where
+// the levels are switched off.
 export const forcedAdLevel = ({ pathname = '', ads = '', privacySuppressed = false } = {}) => {
     if (privacySuppressed) return 0;
-    const onLoans = pathname === '/loans' || pathname.startsWith('/loans/');
-    if (onLoans ? ads !== 'yes' : ads === 'no') return 0;
+    if (ads === 'no') return 0;
     return null;
 };
+
+export const isLoansPath = (pathname = '') => pathname === '/loans' || pathname.startsWith('/loans/');
 
 const storage = () => { try { return typeof window !== 'undefined' ? window.sessionStorage : null; } catch (e) { return null; } };
 
