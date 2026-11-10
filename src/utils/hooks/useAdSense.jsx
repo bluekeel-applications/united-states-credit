@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { isPrivacySuppressed } from '../privacy';
-import { AD_CLIENT, forcedAdLevel, isLoansPath, resolveAdLevel, visitorIdFor, reportAppliedLevel, writeLevelToUrl } from '../adLevel';
+import { AD_CLIENT, forcedAdLevel, isLoansPath, resolveAdLevel, visitorIdFor, reportAppliedLevel, writeLevelToUrl, readAnswerRaise, writeAnswerRaise, levelWithRaise, raisePlan } from '../adLevel';
 import { getCookie } from '../helpers';
 import trackOfferEvent from '../trackOfferEvent';
 
@@ -77,6 +77,34 @@ const reportWhenIdArrives = ({ sid, eid, level }) => {
     setTimeout(tick, 500);
 };
 
+// An answer on the loan form matched one of the console's answer rules
+// (utils/adLevel.js § Answer rules; BkFormEmbed hears `bkform:ad-level`): raise
+// this page to the level the rule grants. The raise is kept for the session
+// first, so a page that has not decided yet applies it when it does and a
+// reload keeps it; a page that has decided and carries no ad tag gets one now.
+// Returns what was done (raisePlan's word, or 'pending').
+const adsParam = () => { try { return new URLSearchParams(window.location.search).get('ads') || getCookie('ads') || ''; } catch (e) { return ''; } };
+const tagOnPage = () => {
+    const el = document.querySelector('script[src*="pagead2.googlesyndication.com"]');
+    return !el ? null : /[?&]client=/.test(el.getAttribute('src') || '') ? 'client' : 'plain';
+};
+export const raiseAdLevel = (target) => {
+    const level = Number(target);
+    const forced = forcedAdLevel({ pathname: window.location.pathname, ads: adsParam(), privacySuppressed: isPrivacySuppressed() }) === 0;
+    const applied = document.documentElement.dataset.adLevel;
+    const plan = raisePlan({ target: level, forced, applied: applied === undefined ? null : applied, tag: tagOnPage() });
+    if (plan === 'blocked' || plan === 'ignored') return plan;
+    writeAnswerRaise(level);
+    if (applied === undefined) return 'pending';
+    if (plan !== 'inject') return plan;
+    writeLevelToUrl({ level });
+    if (level === 2) { injectTag({ client: true }); markLinksNoVignette(); }
+    else injectTag({ client: true, overlays: 'bottom' });
+    mark(level);
+    report(level, 'answer');
+    return plan;
+};
+
 const useAdSense = (tracking) => {
     const { SID, PID, EID, ADS } = tracking;
     const sid = Number(SID);
@@ -104,14 +132,16 @@ const useAdSense = (tracking) => {
                 report(null, r?.match);
                 return;
             }
-            const level = r.level;
+            // A raise an answer earned earlier in this session (loan pages only).
+            const lifted = levelWithRaise({ level: r.level, raise: readAnswerRaise(), pathname: window.location.pathname });
+            const level = lifted.level;
             if (loans) { writeLevelToUrl({ level, experimentId: r.experimentId, arm: r.arm }); if (!vid) reportWhenIdArrives({ sid: sidText, eid: eidText, level }); }
             if (level === 1) { injectTag({ client: false }); markLinksNoVignette(); }
             else if (level === 2) { injectTag({ client: true }); markLinksNoVignette(); }
             else if (level === 3) injectTag({ client: true, overlays: 'bottom' });
             mark(level);
             setAdLevel(level);
-            report(level, r.match, r);
+            report(level, lifted.raised ? 'answer' : r.match, r);
         });
         return () => { cancelled = true; };
         // eslint-disable-next-line

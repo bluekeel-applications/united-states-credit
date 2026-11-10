@@ -137,3 +137,52 @@ export const writeLevelToUrl = ({ level, experimentId = null, arm = null } = {})
         return true;
     } catch (e) { return false; }
 };
+
+// Answer rules (bkform 1.18.0, engine v7.23-js — ENGINE.md § AdSense levels ›
+// Answer rules): the loan form judged an answer against the console's rules —
+// "asked for less than $2,500" — and named the level that rule grants
+// (`bkform:ad-level`). The page raises to it, whatever the source's own level,
+// a lock, an experiment or the emergency switch said (the owner, 2026-11-10).
+// The answer itself never reaches the page. A raise is only ever to level 2
+// or 3, is kept for the session so a reload of the loan pages does not drop
+// back, and is stopped by exactly the two gates above: ads=no and a privacy
+// opt-out.
+export const ANSWER_LEVELS = [2, 3];
+const RAISE_KEY = 'adlevel-answer';
+export const isAnswerLevel = (n) => ANSWER_LEVELS.includes(n);
+
+export const readAnswerRaise = () => {
+    try { const n = Number(storage()?.getItem(RAISE_KEY)); return isAnswerLevel(n) ? n : null; } catch (e) { return null; }
+};
+// Never lowers what the session already holds.
+export const writeAnswerRaise = (level) => {
+    if (!isAnswerLevel(level)) return false;
+    try { if ((readAnswerRaise() || 0) < level) storage()?.setItem(RAISE_KEY, String(level)); } catch (e) { /* storage may be blocked */ }
+    return true;
+};
+
+// The level a loan page applies at load: the engine's answer, lifted by a
+// raise this session already earned. Nothing is lifted off the loan pages or
+// while the levels are switched off (a null level: the legacy gates).
+export const levelWithRaise = ({ level, raise, pathname = '' } = {}) => {
+    if (level === null || level === undefined) return { level: level ?? null, raised: false };
+    if (!isLoansPath(pathname) || !isAnswerLevel(raise) || raise <= level) return { level, raised: false };
+    return { level: raise, raised: true };
+};
+
+// What a raise can do to a page that has already decided. `tag` is the ad tag
+// on the page: null (none), 'plain' (no publisher id — level 1) or 'client'.
+//   blocked    ads=no or a privacy opt-out: nothing, and nothing is kept
+//   ignored    not a level a rule may grant, or the levels are switched off
+//   inject     no tag yet: place it now for the target level
+//   next-load  a tag is already on the page and cannot be changed in place
+//              (level 1 has no publisher id; level 2 cannot gain the anchor):
+//              the raise is kept and applies when the page next loads
+//   none       already at or above the target
+export const raisePlan = ({ target, forced = false, applied = null, tag = null } = {}) => {
+    if (forced) return 'blocked';
+    if (!isAnswerLevel(target) || applied === 'legacy') return 'ignored';
+    if (!tag) return 'inject';
+    if (tag === 'plain') return 'next-load';
+    return Number(applied) >= target ? 'none' : 'next-load';
+};

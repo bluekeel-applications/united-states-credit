@@ -1,4 +1,4 @@
-import { forcedAdLevel, isLoansPath, readCachedLevel, writeCachedLevel, fetchAdLevel, resolveAdLevel, AD_LEVEL_TTL_MS, adLevelEndpoint } from './adLevel';
+import { readAnswerRaise, writeAnswerRaise, levelWithRaise, raisePlan, isAnswerLevel, forcedAdLevel, isLoansPath, readCachedLevel, writeCachedLevel, fetchAdLevel, resolveAdLevel, AD_LEVEL_TTL_MS, adLevelEndpoint } from './adLevel';
 
 const ok = (body) => ({ ok: true, json: async () => body });
 const fetchWith = (body) => jest.fn(async () => ok(body));
@@ -147,5 +147,50 @@ describe('the visitor id — /loans only', () => {
         window.history.replaceState(null, '', '/rsoc?sid=1');
         expect(writeLevelToUrl({ level: 3 })).toBe(false);
         expect(window.location.search).toBe('?sid=1');
+    });
+});
+
+describe('answer rules — a raise the loan form earned', () => {
+    test('only levels 2 and 3 can be granted', () => {
+        expect([0, 1, 2, 3, 4, '2', null].map(isAnswerLevel)).toEqual([false, false, true, true, false, false, false]);
+    });
+    test('the raise is kept for the session and never lowered', () => {
+        expect(readAnswerRaise()).toBeNull();
+        expect(writeAnswerRaise(1)).toBe(false);
+        expect(readAnswerRaise()).toBeNull();
+        expect(writeAnswerRaise(3)).toBe(true);
+        expect(readAnswerRaise()).toBe(3);
+        writeAnswerRaise(2);
+        expect(readAnswerRaise()).toBe(3);
+        window.sessionStorage.setItem('adlevel-answer', 'x');
+        expect(readAnswerRaise()).toBeNull();
+    });
+    test('at load a loan page lifts the engine\'s level to the raise', () => {
+        expect(levelWithRaise({ level: 0, raise: 2, pathname: '/loans' })).toEqual({ level: 2, raised: true });
+        expect(levelWithRaise({ level: 1, raise: 3, pathname: '/loans/request' })).toEqual({ level: 3, raised: true });
+        expect(levelWithRaise({ level: 3, raise: 2, pathname: '/loans' })).toEqual({ level: 3, raised: false });
+        expect(levelWithRaise({ level: 2, raise: 2, pathname: '/loans' })).toEqual({ level: 2, raised: false });
+        expect(levelWithRaise({ level: 0, raise: null, pathname: '/loans' })).toEqual({ level: 0, raised: false });
+    });
+    test('never off the loan pages, never while the levels are switched off', () => {
+        expect(levelWithRaise({ level: 0, raise: 3, pathname: '/finder' })).toEqual({ level: 0, raised: false });
+        expect(levelWithRaise({ level: null, raise: 3, pathname: '/loans' })).toEqual({ level: null, raised: false });
+    });
+    test('what a raise does to a page that has decided', () => {
+        expect(raisePlan({ target: 2, applied: '0', tag: null })).toBe('inject');
+        expect(raisePlan({ target: 3, applied: '0', tag: null })).toBe('inject');
+        expect(raisePlan({ target: 2, applied: '1', tag: 'plain' })).toBe('next-load');
+        expect(raisePlan({ target: 3, applied: '2', tag: 'client' })).toBe('next-load');
+        expect(raisePlan({ target: 2, applied: '2', tag: 'client' })).toBe('none');
+        expect(raisePlan({ target: 2, applied: '3', tag: 'client' })).toBe('none');
+    });
+    test('ads=no and a privacy opt-out stop it; so do the legacy gates and a bad level', () => {
+        expect(raisePlan({ target: 2, forced: true, applied: '0', tag: null })).toBe('blocked');
+        expect(raisePlan({ target: 2, applied: 'legacy', tag: null })).toBe('ignored');
+        expect(raisePlan({ target: 1, applied: '0', tag: null })).toBe('ignored');
+        expect(raisePlan({ target: NaN, applied: '0', tag: null })).toBe('ignored');
+    });
+    test('the emergency switch reads 0 like any source: the raise still injects', () => {
+        expect(raisePlan({ target: 2, applied: '0', tag: null })).toBe('inject');
     });
 });

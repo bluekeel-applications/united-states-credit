@@ -10,6 +10,7 @@ import { AppContext } from '../../../../context/AppContext';
 import { BKFORM_CONTAINER_ID, BKFORM_SITE_KEY, bkformTargets } from '../bkform.config';
 import { LOANS_HOME, LEGAL_CONTENT_VERSION } from '../loanPages';
 import { isPrivacySuppressed } from '../../../../utils/privacy';
+import { raiseAdLevel } from '../../../../utils/hooks/useAdSense';
 import { fireLoansLeadConversion } from '../../../../utils/pixels/adWords';
 
 const SCRIPT_ID = 'bkform-loader';
@@ -140,6 +141,13 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             // offer id is the console's own label id — no applicant data.
             'bkform:decline': (e) => {
                 emit('lender_form_decline', { offer_id: (e.detail || {}).offerId || null, transport_type: 'beacon' });
+            },
+            // An answer matched one of the console's AdSense answer rules (bkform
+            // >= 1.18.0): the form names the rule's level, never the answer, and
+            // the page raises its AdSense level to it (useAdSense raiseAdLevel).
+            // ads=no and a privacy opt-out still win there.
+            'bkform:ad-level': (e) => {
+                raiseAdLevel((e.detail || {}).adLevel);
             },
             // Enhanced conversions for leads (bkform >= 1.9.0): right before each
             // posting stage the form hands over the applicant's email, phone(s),
