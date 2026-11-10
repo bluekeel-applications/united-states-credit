@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { isPrivacySuppressed } from '../privacy';
-import { AD_CLIENT, forcedAdLevel, isLoansPath, resolveAdLevel } from '../adLevel';
+import { AD_CLIENT, forcedAdLevel, isLoansPath, resolveAdLevel, visitorIdFor, reportAppliedLevel, writeLevelToUrl } from '../adLevel';
+import { getCookie } from '../helpers';
 import trackOfferEvent from '../trackOfferEvent';
 
 // The AdSense tag, decided once per document load — by the per-source level
@@ -54,9 +55,26 @@ const markLinksNoVignette = () => {
     observer.observe(document.body, { childList: true, subtree: true });
 };
 
-const report = (level, match) => {
+const report = (level, match, r = null) => {
     try { window.gtag?.('set', 'user_properties', { ad_level: String(level ?? 'legacy') }); } catch (e) { /* analytics is best-effort */ }
-    trackOfferEvent('ad_level', { ad_level: String(level ?? 'legacy'), ad_match: match || 'legacy' });
+    trackOfferEvent('ad_level', { ad_level: String(level ?? 'legacy'), ad_match: match || 'legacy', ...(r?.reason ? { ad_reason: r.reason } : {}), ...(r?.experimentId ? { ad_experiment: `${r.experimentId}.${r.arm}` } : {}) });
+};
+
+// The loan pages only (2026-11-10): the visitor's hsid rides the question when
+// the page already has one — the landing URL's, or the cookie of an earlier
+// page — and the level applied is written into the URL before the tag loads.
+// A first visit has no hsid yet when the tag is placed; the decision is NOT
+// delayed for it — the page applies the rules' level as always and reports the
+// arrival once the hsid cookie appears (helpers.js sendHitStreetHSID).
+const HSID_WAIT_MS = 10000;
+const reportWhenIdArrives = ({ sid, eid, level }) => {
+    const started = Date.now();
+    const tick = () => {
+        const vid = visitorIdFor({ pathname: window.location.pathname, hsid: getCookie('hsid') });
+        if (vid) { reportAppliedLevel({ sid, eid, vid, level }); return; }
+        if (Date.now() - started < HSID_WAIT_MS) setTimeout(tick, 500);
+    };
+    setTimeout(tick, 500);
 };
 
 const useAdSense = (tracking) => {
@@ -72,22 +90,28 @@ const useAdSense = (tracking) => {
         const forced = forcedAdLevel({ pathname: window.location.pathname, ads: ADS, privacySuppressed: isPrivacySuppressed() });
         if (forced === 0) { mark(0); return undefined; }
 
-        resolveAdLevel({ sid: String(SID ?? ''), eid: String(EID ?? '') }).then((r) => {
+        const loans = isLoansPath(window.location.pathname);
+        const vid = visitorIdFor({ pathname: window.location.pathname, hsid: Number(tracking.HSID) ? tracking.HSID : getCookie('hsid') });
+        const sidText = String(SID ?? '');
+        const eidText = String(EID ?? '');
+        resolveAdLevel({ sid: sidText, eid: eidText, vid }).then((r) => {
             if (cancelled) return;
             if (!r || r.level === null || r.level === undefined) {
                 // Legacy: today's gates, the tag with the publisher id.
+                if (loans) { writeLevelToUrl({ level: null }); if (!vid) reportWhenIdArrives({ sid: sidText, eid: eidText, level: null }); }
                 if (legacyAllowed) injectTag({ client: true });
                 mark('legacy');
                 report(null, r?.match);
                 return;
             }
             const level = r.level;
+            if (loans) { writeLevelToUrl({ level, experimentId: r.experimentId, arm: r.arm }); if (!vid) reportWhenIdArrives({ sid: sidText, eid: eidText, level }); }
             if (level === 1) { injectTag({ client: false }); markLinksNoVignette(); }
             else if (level === 2) { injectTag({ client: true }); markLinksNoVignette(); }
             else if (level === 3) injectTag({ client: true, overlays: 'bottom' });
             mark(level);
             setAdLevel(level);
-            report(level, r.match);
+            report(level, r.match, r);
         });
         return () => { cancelled = true; };
         // eslint-disable-next-line

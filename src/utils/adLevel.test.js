@@ -91,3 +91,61 @@ describe('adLevelEndpoint — the engine stage for the host', () => {
         expect(adLevelEndpoint('www.unitedstatescredit.com')).toBe('https://16s3asw7j0.execute-api.us-east-1.amazonaws.com/prod/ad-level');
     });
 });
+
+// The loan pages' visitor id (2026-11-10; routing-engine ENGINE.md § Visit assignment).
+describe('the visitor id — /loans only', () => {
+    const { visitorIdFor, reportAppliedLevel, writeLevelToUrl } = require('./adLevel');
+
+    test('an hsid is a visitor id on the loan pages and nowhere else', () => {
+        expect(visitorIdFor({ pathname: '/loans', hsid: '123456' })).toBe('123456');
+        expect(visitorIdFor({ pathname: '/loans/privacy-choices', hsid: 123456 })).toBe('123456');
+        expect(visitorIdFor({ pathname: '/rsoc', hsid: '123456' })).toBeNull();
+        expect(visitorIdFor({ pathname: '/', hsid: '123456' })).toBeNull();
+    });
+    test('zero, nothing and anything malformed is no id', () => {
+        for (const hsid of [0, '0', '', null, undefined, 'a b', 'x'.repeat(65), '<script>']) expect(visitorIdFor({ pathname: '/loans', hsid })).toBeNull();
+    });
+    test('without an id the request and the answer are exactly as before', async () => {
+        const f = fetchWith({ enabled: true, level: 2, match: 'sid' });
+        expect(await fetchAdLevel({ sid: '1', eid: 'x', fetchImpl: f, endpoint: 'https://e/ad-level' })).toEqual({ level: 2, match: 'sid' });
+        expect(f.mock.calls[0][0]).not.toMatch(/vid=|applied=/);
+    });
+    test('with one, the id rides the question and the answer says why', async () => {
+        const f = fetchWith({ enabled: true, level: 0, match: 'sid', reason: 'experiment', experiment_id: 'x1', arm: 0 });
+        expect(await fetchAdLevel({ sid: '1', eid: 'x', vid: '777', fetchImpl: f, endpoint: 'https://e/ad-level' })).toEqual({ level: 0, match: 'sid', reason: 'experiment', experimentId: 'x1', arm: 0 });
+        expect(f.mock.calls[0][0]).toMatch(/&vid=777$/);
+    });
+    test('an answer for one visitor is never served to another from the cache', async () => {
+        const a = fetchWith({ enabled: true, level: 0, match: 'sid', reason: 'experiment', experiment_id: 'x1', arm: 0 });
+        const b = fetchWith({ enabled: true, level: 2, match: 'sid', reason: 'experiment', experiment_id: 'x1', arm: 1 });
+        expect((await resolveAdLevel({ sid: '1', eid: 'x', vid: 'a', fetchImpl: a })).level).toBe(0);
+        expect((await resolveAdLevel({ sid: '1', eid: 'x', vid: 'b', fetchImpl: b })).level).toBe(2);
+        expect((await resolveAdLevel({ sid: '1', eid: 'x', vid: 'a', fetchImpl: b }))).toEqual({ level: 0, match: 'sid', reason: 'experiment', experimentId: 'x1', arm: 0, cached: true });
+        expect(b).toHaveBeenCalledTimes(1);
+    });
+    test('a level applied before the id existed is reported once', async () => {
+        const f = fetchWith({ enabled: true, level: 2, match: 'sid' });
+        expect(await reportAppliedLevel({ sid: '1', eid: 'x', vid: '888', level: 3, fetchImpl: f, endpoint: 'https://e/ad-level' })).toBe(true);
+        expect(f.mock.calls[0][0]).toMatch(/&vid=888&applied=3$/);
+        expect(await reportAppliedLevel({ sid: '1', eid: 'x', vid: '888', level: 3, fetchImpl: f })).toBe(false);
+        expect(f).toHaveBeenCalledTimes(1);
+        const g = fetchWith({ enabled: false });
+        await reportAppliedLevel({ sid: '1', eid: 'x', vid: '889', level: null, fetchImpl: g, endpoint: 'https://e/ad-level' });
+        expect(g.mock.calls[0][0]).toMatch(/&applied=legacy$/);
+        expect(await reportAppliedLevel({ sid: '1', eid: 'x', vid: null, level: 1, fetchImpl: g })).toBe(false);
+    });
+    test('the level is written into the loan page URL, every other param kept', () => {
+        window.history.replaceState({ k: 1 }, '', '/loans?sid=10337&eid=GoogleNew&cid1=55#top');
+        expect(writeLevelToUrl({ level: 2, experimentId: 'x1', arm: 1 })).toBe(true);
+        expect(window.location.search).toBe('?sid=10337&eid=GoogleNew&cid1=55&adl=2&axp=x1.1');
+        expect(window.location.hash).toBe('#top');
+        expect(window.history.state).toEqual({ k: 1 });
+        writeLevelToUrl({ level: null });
+        expect(window.location.search).toBe('?sid=10337&eid=GoogleNew&cid1=55&adl=legacy');
+    });
+    test('and never on another page', () => {
+        window.history.replaceState(null, '', '/rsoc?sid=1');
+        expect(writeLevelToUrl({ level: 3 })).toBe(false);
+        expect(window.location.search).toBe('?sid=1');
+    });
+});
