@@ -6,6 +6,8 @@ import LegalPage from './components/LegalPage';
 import { LEGAL_PAGES, LEGAL_CENTER_META, LEGACY_SLUGS, LOANS_HOME, pathFor } from './loanPages';
 import { CONTENT_BY_SLUG } from './content';
 import useLoanTrack, { slugFromPathname, titleForSlug } from './useLoanTrack';
+import { reportCpcClick } from '../../../utils/cpcClick';
+import { isPrivacySuppressed } from '../../../utils/privacy';
 
 const normalize = (path) => path.replace(/\/+$/, '') || '/';
 
@@ -46,6 +48,15 @@ const useLoanPageview = () => {
     }, [pathname]);
 };
 
+// A landing from a partner's link: its click id goes to the routing engine
+// once, which decides whether the click is one the partner is paid for
+// (src/utils/cpcClick.js). On mount only — the click id is the landing URL's.
+const useCpcClick = () => {
+    useEffect(() => {
+        reportCpcClick({ privacySuppressed: isPrivacySuppressed() });
+    }, []);
+};
+
 // Scroll to top when navigating between /loans pages, but stay hash-aware so
 // #sN TOC anchors and the #main skip link keep native fragment behavior.
 const useLoanScroll = () => {
@@ -76,6 +87,7 @@ const LegacyRedirect = ({ slug }) => {
 const LoanWrapper = () => {
     useLoanScroll();
     useLoanPageview();
+    useCpcClick();
 
     // The reference sets html{scroll-behavior:smooth}; inline styles can't
     // reach <html>, so opt in while mounted and restore on unmount.
