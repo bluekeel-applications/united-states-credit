@@ -41,8 +41,9 @@
 // applicant's lender opens in a new tab and this page shows the named
 // article's offer buttons behind it (components/AfterSaleModal.jsx). 'off'
 // keeps the applicant's own tab going to the lender whatever the console says.
-// Auto for staging; off for production until the tab path's redirect rate has
-// been read on staging, counsel has looked at the modal, and the owner says go.
+// Auto on both stages since 2026-11-16 (the owner's go-ahead): the console's
+// switch for the stage is the one control, and it is off until an operator
+// turns it on there. Set 'off' here to stop it whatever the console says.
 //
 // The site key is the same on both stages; it is registered per stage in the
 // engine (`yarn bootstrap-config --stage <stage> --site unitedstatescredit.com
@@ -68,7 +69,7 @@ const PROD = {
     firstOfferCheck: 'on',
     consentWitness: 'off',
     witnessApiBase: '',
-    lenderTab: 'off',
+    lenderTab: 'auto',
 };
 
 export const BKFORM_SITE_KEY = 'unitedstatescredit.com';
