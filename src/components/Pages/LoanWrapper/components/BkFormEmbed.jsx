@@ -47,10 +47,12 @@ const BkFormEmbed = ({ mockOnly = false }) => {
     const containerRef = useRef(null);
     const [formReady, setFormReady] = useState(false);
     const [failed, setFailed] = useState(false);
-    // The article whose offers go up behind the lender's tab after a sale
-    // (bkform >= 1.20.0, AfterSaleModal.jsx); null until a sale says so, and
-    // again once the applicant closes the modal.
-    const [afterSaleArticle, setAfterSaleArticle] = useState(null);
+    // The offers that go up on this page once the form has opened the
+    // applicant's next step in a new tab (bkform >= 1.20.0, AfterSaleModal.jsx):
+    // `{ article, kind }`, kind 'sale' (the lender opened there) or 'decline'
+    // (nobody bought and the decline offer opened there). Null until the form
+    // says so, and again once the applicant closes the modal.
+    const [afterSale, setAfterSale] = useState(null);
 
     // Session ids for the URL enrichment. hsid is committed before /loans can
     // render (App's loading gate) and is write-once. gclid / gbraid / wbraid
@@ -145,13 +147,18 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             'bkform:redirect': (e) => {
                 const d = e.detail || {};
                 emit('lender_form_redirect', { market: d.market, transport_type: 'beacon', new_tab: d.newTab === true });
-                if (d.newTab === true && typeof d.article === 'string' && d.article) setAfterSaleArticle(d.article);
+                if (d.newTab === true && typeof d.article === 'string' && d.article) setAfterSale({ article: d.article, kind: 'sale' });
             },
             // No lender took the lead: the form is sending the applicant to one
             // of Bluekeel's decline offers (BKFORM.md § Decline offers). The
             // offer id is the console's own label id — no applicant data.
+            // With `newTab` (bkform >= 1.20.0) the offer opened in the tab the
+            // Submit click made and this page stays, so it shows the console's
+            // article here too, under words that fit a no-match.
             'bkform:decline': (e) => {
-                emit('lender_form_decline', { offer_id: (e.detail || {}).offerId || null, transport_type: 'beacon' });
+                const d = e.detail || {};
+                emit('lender_form_decline', { offer_id: d.offerId || null, transport_type: 'beacon', new_tab: d.newTab === true });
+                if (d.newTab === true && typeof d.article === 'string' && d.article) setAfterSale({ article: d.article, kind: 'decline' });
             },
             // An answer matched one of the console's AdSense answer rules (bkform
             // >= 1.18.0): the form names the rule's level, never the answer, and
@@ -265,7 +272,7 @@ const BkFormEmbed = ({ mockOnly = false }) => {
     const trackForm = useCallback((name, params = {}) => trackRef.current(name, { form_vendor: 'bk', ...params }), []);
     const closeAfterSale = useCallback((how) => {
         trackRef.current('lender_form_offers_closed', { form_vendor: 'bk', how });
-        setAfterSaleArticle(null);
+        setAfterSale(null);
     }, []);
 
     return (
@@ -274,7 +281,7 @@ const BkFormEmbed = ({ mockOnly = false }) => {
                 <div id={BKFORM_CONTAINER_ID} ref={containerRef} style={formReady ? Styles.bkFormLive : Styles.bkFormLoading} />
             )}
             {showMock && <MockFormBody />}
-            {!showMock && <AfterSaleModal article={afterSaleArticle} onClose={closeAfterSale} track={trackForm} />}
+            {!showMock && <AfterSaleModal article={afterSale?.article || null} kind={afterSale?.kind || 'sale'} onClose={closeAfterSale} track={trackForm} />}
         </FormShell>
     );
 };

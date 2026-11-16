@@ -7,11 +7,14 @@ import { FETCH_ARTICLE_BY_KEY } from '../../../../utils/GraphQL/queries';
 import buildLinkout from '../../../../utils/buildLinkout';
 import { buttonGroupOf, selectButtons, usableButtons } from '../../../../utils/buttonGroup';
 
-// The offers shown on /loans after an applicant's request is sold.
+// The offers shown on /loans once the form has finished and opened the
+// applicant's next step in a new tab.
 //
-// bkform (>= 1.20.0) opens the lender in a new tab and leaves this page where
-// it is; its `bkform:redirect` event then says `newTab` and names the article
-// the operator set in the Bluekeel console (Websites › After-sale offers).
+// bkform (>= 1.20.0) opens the lender in a new tab after a sale — or, when
+// nobody bought, the decline offer — and leaves this page where it is. Its
+// `bkform:redirect` / `bkform:decline` event then says `newTab` and names the
+// article the operator set in the Bluekeel console (Websites › After-sale
+// offers). `kind` picks the words: 'sale' or 'decline'.
 // This modal shows that article's button group — the same data, the same
 // per-button choice and the same link-out as the /rsoc button-group page
 // (utils/buttonGroup.js, utils/buildLinkout.js).
@@ -27,7 +30,19 @@ import { buttonGroupOf, selectButtons, usableButtons } from '../../../../utils/b
 // It never opens a window by itself and never navigates this page: an offer
 // opens in a new tab on the applicant's own click. No article, a failed fetch
 // or an article without buttons shows nothing at all.
-const AfterSaleModal = ({ article, onClose, track }) => {
+const COPY = {
+    sale: {
+        title: 'Your lender opened in a new tab',
+        lede: 'Finish your request with them there. While you are here, these may also help.',
+    },
+    decline: {
+        title: 'No lender matched today',
+        lede: 'We opened an option that may help in a new tab. These may help too.',
+    },
+};
+
+const AfterSaleModal = ({ article, kind = 'sale', onClose, track }) => {
+    const copy = COPY[kind] || COPY.sale;
     const { trackingState } = useContext(AppContext);
     const isMobile = useMediaQuery({ maxWidth: 767 });
     const closeRef = useRef(null);
@@ -44,7 +59,7 @@ const AfterSaleModal = ({ article, onClose, track }) => {
     useEffect(() => {
         if (!open || shownFor.current === article) return;
         shownFor.current = article;
-        track('lender_form_offers_shown', { article, button_count: buttons.length });
+        track('lender_form_offers_shown', { article, after: kind, button_count: buttons.length });
         closeRef.current?.focus();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open, article]);
@@ -61,16 +76,16 @@ const AfterSaleModal = ({ article, onClose, track }) => {
     const follow = (button, index) => {
         let url = null;
         try { url = buildLinkout(button.url, button.linkShape, trackingState, { offerbucks: button.offerbucks }); } catch (e) { url = null; }
-        track('lender_form_offer_click', { article, button_index: index, link_shape: button.linkShape || 'default', opened: !!url });
+        track('lender_form_offer_click', { article, after: kind, button_index: index, link_shape: button.linkShape || 'default', opened: !!url });
         if (url) window.open(url, '_blank', 'noopener');
     };
 
     return (
-        <div className={styles.backdrop} onMouseDown={(e) => { if (e.target === e.currentTarget) onClose('backdrop'); }} data-after-sale-modal={article}>
+        <div className={styles.backdrop} onMouseDown={(e) => { if (e.target === e.currentTarget) onClose('backdrop'); }} data-after-sale-modal={article} data-after-sale-kind={kind}>
             <div className={styles.box} role="dialog" aria-modal="true" aria-labelledby="after-sale-title">
                 <button type="button" className={styles.close} ref={closeRef} onClick={() => onClose('close')} aria-label="Close">×</button>
-                <h3 id="after-sale-title" className={styles.title}>Your lender opened in a new tab</h3>
-                <p className={styles.lede}>Finish your request with them there. While you are here, these may also help.</p>
+                <h3 id="after-sale-title" className={styles.title}>{copy.title}</h3>
+                <p className={styles.lede}>{copy.lede}</p>
                 <p className={styles.heading}>More offers</p>
                 <ul className={styles.list}>
                     {buttons.map((button, index) => (
