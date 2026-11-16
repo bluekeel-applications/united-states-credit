@@ -9,6 +9,7 @@ import { setPageComponent } from './utils/helpers';
 import useClickSubmit from '../../../utils/hooks/useClickSubmit';
 import buildLinkout from '../../../utils/buildLinkout';
 import fireAdwordsEvent from '../../../utils/pixels/adWords';
+import { selectButtons, buttonGroupOf } from '../../../utils/buttonGroup';
 
 const ButtonGroupPage = () => {
     const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -38,67 +39,10 @@ const ButtonGroupPage = () => {
         // eslint-disable-next-line
     },[]);
 
-    const findOfferUrl = (offer_array) => {
-        let count = 0;
-        let offerUrl = null;
-        let linkShape = null;
-        let offerbucks = null;
-        const randomNumber = Math.floor(Math.random() * 100) + 1;
-        console.log('randomNumber', randomNumber);
-        // Loop the offer array and set the offer url
-        offer_array.forEach((offer_obj, idx) => {
-            // If an offer is already set, return
-            if(!!offerUrl) {
-                return;
-            };
-            // start count
-            count += Number(offer_obj.usage);
-            // if(idx === 0) {
-            //     count = Number(offer_obj.usage);
-            // };
-            // If the random number is less than or equal to the count, set the offer url
-            if(randomNumber <= count && !offerUrl) {
-                offerUrl = offer_obj.offer_url;
-                linkShape = offer_obj.link_shape;
-                offerbucks = offer_obj.offerbucks || null;
-            };
-            // Increment the count
-            // if(idx !== 0) {
-            //     count += Number(offer_obj.usage);
-            // };
-            // If this is the last offer and no offer url is set, set the offer url
-            if(idx === offer_array.length - 1 && !offerUrl) {
-                offerUrl = offer_obj.offer_url;
-                linkShape = offer_obj.link_shape;
-                offerbucks = offer_obj.offerbucks || null;
-            };
-        });
-        console.log('offerUrl', offerUrl);
-        console.log('linkShape', linkShape);
-        return {offerUrl, linkShape, offerbucks};
-    };
-    const SelectOffers = (data) => {
-        const offerArray = data.map((offer_obj) => {
-            let text = offer_obj.button_text;
-            let {offerUrl, linkShape, offerbucks} = findOfferUrl(offer_obj.offers);
-            return {
-                text,
-                url: offerUrl,
-                linkShape,
-                offerbucks
-            }
-        });
-        return offerArray;
-    };
-
+    // One offer per button, rolled once per page view (utils/buttonGroup.js —
+    // shared with the /loans after-sale modal).
     useEffect(() => {
-        let rawData = null;
-        if(isMobile && !!mobile?.button_group) {
-            rawData = mobile.button_group;
-        } else {
-            rawData = button_group;
-        };
-        setActiveData(SelectOffers(rawData));
+        setActiveData(selectButtons(buttonGroupOf({ button_group, mobile }, isMobile)));
         // eslint-disable-next-line
     },[]);
 

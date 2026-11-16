@@ -36,6 +36,14 @@
 // production until the service's prod stage exists, counsel's privacy
 // sentence on the recording is live, and the owner says go.
 //
+// `lenderTab` is bkform 1.20.0's data-lender-tab. 'auto' follows the Bluekeel
+// console's After-sale offers switch for the stage: switched on there, a sold
+// applicant's lender opens in a new tab and this page shows the named
+// article's offer buttons behind it (components/AfterSaleModal.jsx). 'off'
+// keeps the applicant's own tab going to the lender whatever the console says.
+// Auto for staging; off for production until the tab path's redirect rate has
+// been read on staging, counsel has looked at the modal, and the owner says go.
+//
 // The site key is the same on both stages; it is registered per stage in the
 // engine (`yarn bootstrap-config --stage <stage> --site unitedstatescredit.com
 // --origin …`) and is what the Bluekeel console shows as the lead's source.
@@ -49,6 +57,7 @@ const DEV = {
     firstOfferCheck: 'on',
     consentWitness: 'on',
     witnessApiBase: 'https://35smve4n6c.execute-api.us-east-1.amazonaws.com/dev',
+    lenderTab: 'auto',
 };
 
 const PROD = {
@@ -59,6 +68,7 @@ const PROD = {
     firstOfferCheck: 'on',
     consentWitness: 'off',
     witnessApiBase: '',
+    lenderTab: 'off',
 };
 
 export const BKFORM_SITE_KEY = 'unitedstatescredit.com';

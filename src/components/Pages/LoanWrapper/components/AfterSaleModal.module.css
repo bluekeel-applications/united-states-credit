@@ -1,0 +1,85 @@
+/* The after-sale offers modal on /loans (AfterSaleModal.jsx).
+
+   Two rules come from Google's ad policies and are deliberate:
+   - it must be easy to leave: a close button, a "No thanks" link, Escape and a
+     click on the backdrop all close it;
+   - it must never sit on a Google ad. The bottom anchor (AdSense level 3) is
+     drawn above everything on the page, so the backdrop stays under it; the
+     box keeps clear of that strip with the bottom padding below and scrolls
+     inside itself rather than growing into it. */
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 47, 89, .45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 16px max(132px, 16vh);
+    z-index: 100;
+}
+
+.box {
+    position: relative;
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px 24px 20px;
+    width: 100%;
+    max-width: 440px;
+    max-height: 100%;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, .25);
+}
+
+.close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #475467;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+.close:hover, .close:focus-visible { background: #f2f4f7; color: #101828; }
+
+.title { margin: 0 28px 6px; color: #0b2f59; font-size: 22px; line-height: 1.25; }
+.lede { margin: 0 auto 18px; max-width: 340px; color: #475467; font-size: 15px; line-height: 1.45; }
+.heading { margin: 0 0 12px; color: #0b2f59; font-size: 16px; font-weight: 700; }
+
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+
+/* The site's own button, in the loan pages' colours — not styled after an ad unit. */
+.offer {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 999px;
+    background: #0b2f59;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.25;
+    cursor: pointer;
+}
+.offer:hover, .offer:focus-visible { background: #079dd4; }
+
+.dismiss {
+    margin-top: 14px;
+    border: 0;
+    background: transparent;
+    color: #475467;
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+    min-height: 44px;
+    padding: 0 12px;
+}
+
+.note { margin: 6px 0 0; color: #667085; font-size: 12px; line-height: 1.4; }

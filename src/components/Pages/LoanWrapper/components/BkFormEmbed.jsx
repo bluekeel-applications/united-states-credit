@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import Radium from 'radium';
 import Styles from './LoanLanding.css';
 import FormShell from './FormShell';
 import MockFormBody from './MockFormBody';
+import AfterSaleModal from './AfterSaleModal';
 import { enrichUrlWithSession, stripTestParam } from './sessionParams';
 import { COLORS, FONT_STACK } from '../theme';
 import useLoanTrack from '../useLoanTrack';
@@ -46,6 +47,10 @@ const BkFormEmbed = ({ mockOnly = false }) => {
     const containerRef = useRef(null);
     const [formReady, setFormReady] = useState(false);
     const [failed, setFailed] = useState(false);
+    // The article whose offers go up behind the lender's tab after a sale
+    // (bkform >= 1.20.0, AfterSaleModal.jsx); null until a sale says so, and
+    // again once the applicant closes the modal.
+    const [afterSaleArticle, setAfterSaleArticle] = useState(null);
 
     // Session ids for the URL enrichment. hsid is committed before /loans can
     // render (App's loading gate) and is write-once. gclid / gbraid / wbraid
@@ -133,8 +138,14 @@ const BkFormEmbed = ({ mockOnly = false }) => {
                 const d = e.detail || {};
                 emit('lender_form_result', { status: d.status, has_redirect: !!d.hasRedirect, offer_count: d.offerCount, transport_type: 'beacon' });
             },
+            // bkform >= 1.20.0 with the console's after-sale offers on: the lender
+            // opened in a NEW tab (`newTab`) and this page stays, so it can show
+            // the offers of the article the console named. Without `newTab` the
+            // applicant's own tab is leaving for the lender, as before.
             'bkform:redirect': (e) => {
-                emit('lender_form_redirect', { market: (e.detail || {}).market, transport_type: 'beacon' });
+                const d = e.detail || {};
+                emit('lender_form_redirect', { market: d.market, transport_type: 'beacon', new_tab: d.newTab === true });
+                if (d.newTab === true && typeof d.article === 'string' && d.article) setAfterSaleArticle(d.article);
             },
             // No lender took the lead: the form is sending the applicant to one
             // of Bluekeel's decline offers (BKFORM.md § Decline offers). The
@@ -206,6 +217,10 @@ const BkFormEmbed = ({ mockOnly = false }) => {
             // base is sent only when one is configured, so an 'off' host sends no
             // half-config and the form never warns.
             'data-consent-witness': targets.consentWitness,
+            // bkform 1.20.0: 'off' keeps a sold applicant's own tab going to the
+            // lender whatever the console says (bkform.config.js). Only 'off'
+            // is sent — the form's default already follows the console.
+            ...(targets.lenderTab === 'off' ? { 'data-lender-tab': 'off' } : {}),
             ...(targets.witnessApiBase ? { 'data-witness-api-base': targets.witnessApiBase } : {}),
             'data-primary-color': COLORS.blue,
             'data-secondary-color': COLORS.navy2,
@@ -247,12 +262,19 @@ const BkFormEmbed = ({ mockOnly = false }) => {
 
     const showMock = mockOnly || failed;
 
+    const trackForm = useCallback((name, params = {}) => trackRef.current(name, { form_vendor: 'bk', ...params }), []);
+    const closeAfterSale = useCallback((how) => {
+        trackRef.current('lender_form_offers_closed', { form_vendor: 'bk', how });
+        setAfterSaleArticle(null);
+    }, []);
+
     return (
         <FormShell showMock={showMock}>
             {!showMock && (
                 <div id={BKFORM_CONTAINER_ID} ref={containerRef} style={formReady ? Styles.bkFormLive : Styles.bkFormLoading} />
             )}
             {showMock && <MockFormBody />}
+            {!showMock && <AfterSaleModal article={afterSaleArticle} onClose={closeAfterSale} track={trackForm} />}
         </FormShell>
     );
 };
